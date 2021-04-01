@@ -1,43 +1,24 @@
 <?php
-// $Id: xoops_version.php,v 1.8 2011/11/12 11:05:02 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package XCL
+ * @subpackage Webphoto
+ * @version 2.3
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// class/inc/xoops_config.php
-// 2010-04-27 K.OHWADA
-// class/inc/catlist.php
-// 2009-11-11 K.OHWADA
-// class/inc/ini.php
-// 2008-12-12 K.OHWADA
-// getInstance() -> getSingleton()
-// 2008-11-08 K.OHWADA
-// workdir.php
-// 2008-08-01 K.OHWADA
-// use WEBPHOTO_TRUST_DIRNAME
-// 2008-07-01 K.OHWADA
-// remove class/xoops/base.php
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
-//---------------------------------------------------------
-
-if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//---------------------------------------------------------
 // xoops system files
-//---------------------------------------------------------
 include_once XOOPS_ROOT_PATH.'/class/xoopstree.php' ;
 
-//---------------------------------------------------------
 // webphoto files
-//---------------------------------------------------------
 include_once WEBPHOTO_TRUST_PATH.'/class/d3/optional.php';
 include_once WEBPHOTO_TRUST_PATH.'/include/optional.php';
 
@@ -56,11 +37,8 @@ webphoto_include_once( 'class/inc/catlist.php',          $MY_DIRNAME );
 webphoto_include_once( 'class/inc/xoops_version.php',    $MY_DIRNAME );
 webphoto_include_language( 'modinfo.php',                $MY_DIRNAME );
 
-//---------------------------------------------------------
 // main
-//---------------------------------------------------------
-$webphoto_inc_xoops_version =& webphoto_inc_xoops_version::getSingleton( 
+$webphoto_inc_xoops_version =& webphoto_inc_xoops_version::getSingleton(
 	$MY_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $modversion = $webphoto_inc_xoops_version->build_modversion();
 
-?>

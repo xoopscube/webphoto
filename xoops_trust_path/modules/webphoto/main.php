@@ -1,28 +1,19 @@
 <?php
-// $Id: main.php,v 1.3 2010/01/26 08:25:45 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-01-10 K.OHWADA
-// $FCT_UNUSE
-// 2008-07-01 K.OHWADA
-// $fct -> $WEBPHOTO_FCT
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package XCL
+ * @subpackage Webphoto
+ * @version 2.3
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
 
-//---------------------------------------------------------
 // webphoto
-//---------------------------------------------------------
 if( !defined("WEBPHOTO_DIRNAME") ) {
 	  define("WEBPHOTO_DIRNAME", $MY_DIRNAME );
 }
@@ -66,5 +57,3 @@ if ( file_exists( $file_root_fct ) ) {
 } else {
 	die( 'wrong request' ) ;
 }
-
-?>

@@ -175,7 +175,7 @@ http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1167&forum=13
 (8) link with the page that doesn't exist in playlist
 
 5. Database structure
-(1) flashvar table : support "JW Player 5.6"
+(1) flashpublic table : support "JW Player 5.6"
 
 6. PEAR library
 enclose the following
@@ -1834,7 +1834,7 @@ when there is GPS information in the image or this message body.
 1.2 View for the mobile phone
 (1) Show "Send URL to the mobile phone"
 (2) Show QR code with URL
-(3) Creat and show the small image (480Å~480) for the mobile phone
+(3) Creat and show the small image (480ÔøΩ~480) for the mobile phone
 
 1.3 Command for retrieveing mails
 The user sends email, 
@@ -1970,7 +1970,7 @@ This is the album module which manages photos and videos.
 (3) show the explanation to the user in "Help".
 
 1.2 View for the mobile phone
-(1) prepared about 240Å~320 pixel web page. i.php
+(1) prepared about 240ÔøΩ~320 pixel web page. i.php
 (2) the operation depends on the model of the mobile phone.
 refer "Notice for usage"
 

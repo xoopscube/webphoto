@@ -1,26 +1,21 @@
 <?php
-// $Id: admin.php,v 1.2 2008/08/25 19:28:05 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package XCL
+ * @subpackage Webphoto
+ * @version 2.3
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2008-08-24 K.OHWADA
-// use $mydirname
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
-//---------------------------------------------------------
-
-if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//---------------------------------------------------------
 // check permission
-//---------------------------------------------------------
 global $xoopsUser;
 
 // environment
@@ -39,10 +34,8 @@ if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_adm
 $xoopsOption['pagetype'] = 'admin' ;
 require_once XOOPS_ROOT_PATH.'/include/cp_functions.php' ;
 
-//---------------------------------------------------------
 // altsys
-//---------------------------------------------------------
-$mytrustdirname = basename( dirname( __FILE__ ) ) ;
+$mytrustdirname = basename( __DIR__ ) ;
 $mytrustdirpath = XOOPS_TRUST_PATH.'/modules/'.$mytrustdirname ;
 $mydirname      = $MY_DIRNAME;
 $mydirpath      = XOOPS_ROOT_PATH.'/modules/'.$MY_DIRNAME ;
@@ -56,7 +49,7 @@ if( ! empty( $_GET['lib'] ) ) {
 	}
 
 	require_once( $langmanpath ) ;
-	$langman =& D3LanguageManager::getInstance() ;
+	$langman = D3LanguageManager::getInstance() ;
 
 	// common libs (eg. altsys)
 	$lib  = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
@@ -85,10 +78,7 @@ if( ! empty( $_GET['lib'] ) ) {
 // load language files (main.php & admin.php)
 //	$langman->read( 'admin.php' , $mydirname , $mytrustdirname ) ;
 //	$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
-
-//---------------------------------------------------------
 // webphoto
-//---------------------------------------------------------
 if ( !defined("WEBPHOTO_DIRNAME") ) {
 	  define("WEBPHOTO_DIRNAME", $MY_DIRNAME );
 }
@@ -100,7 +90,7 @@ include_once WEBPHOTO_TRUST_PATH.'/class/d3/optional.php';
 include_once WEBPHOTO_TRUST_PATH.'/include/optional.php';
 webphoto_include_once( 'preload/debug.php' );
 
-// fork each pages
+// fork each page
 $get_fct  = isset($_GET['fct'])  ? $_GET['fct']  : null;
 $post_fct = isset($_POST['fct']) ? $_POST['fct'] : $get_fct;
 $fct = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $post_fct ) ;
@@ -134,5 +124,3 @@ if ( file_exists( $file_root_fct ) ) {
 } else {
 	die( 'wrong request' ) ;
 }
-
-?>
