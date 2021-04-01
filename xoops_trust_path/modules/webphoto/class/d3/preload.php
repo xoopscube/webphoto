@@ -19,23 +19,23 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_d3_preload
 {
-	var $_dh;
-	var $_opened_path = null;
+	public $_dh;
+	public $_opened_path = null;
 
-	var $_errors = array();
+	public $_errors = array();
 
-	var $_TRUST_DIRNAME;
-	var $_TRUST_DIR;
-	var $_DIRNAME;
-	var $_MODULE_DIR;
-	var $_MODULE_URL;
+	public $_TRUST_DIRNAME;
+	public $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_MODULE_DIR;
+	public $_MODULE_URL;
 
-	var $_DEBUG = false ;
+	public $_DEBUG = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_d3_preload()
+public function __construct()
 {
 	// dummy
 }
@@ -49,7 +49,7 @@ public static function &getInstance()
 	return $instance;
 }
 
-function init( $dirname , $trust_dirname )
+public function init( $dirname , $trust_dirname )
 {
 	$this->init_trust( $trust_dirname );
 
@@ -58,7 +58,7 @@ function init( $dirname , $trust_dirname )
 	$this->_MODULE_URL = XOOPS_URL       .'/modules/'. $dirname;
 }
 
-function init_trust( $trust_dirname )
+public function init_trust( $trust_dirname )
 {
 	$this->_TRUST_DIRNAME = $trust_dirname;
 	$this->_TRUST_DIR     = XOOPS_TRUST_PATH .'/modules/'. $trust_dirname;
@@ -67,7 +67,7 @@ function init_trust( $trust_dirname )
 //---------------------------------------------------------
 // public
 //---------------------------------------------------------
-function include_once_preload_trust_files()
+public function include_once_preload_trust_files()
 {
 	$path = $this->_TRUST_DIR .'/preload';
 	$ext  = 'php';
@@ -75,7 +75,7 @@ function include_once_preload_trust_files()
 	return $this->include_once_files_in_dir( $path, $ext );
 }
 
-function include_once_preload_files()
+public function include_once_preload_files()
 {
 	$path = $this->_MODULE_DIR .'/preload';
 	$ext  = 'php';
@@ -83,7 +83,7 @@ function include_once_preload_files()
 	return $this->include_once_files_in_dir( $path, $ext );
 }
 
-function &get_class_instance( $name )
+public function &get_class_instance( $name )
 {
 	$name_extend = $this->build_class_name( $name );
 	$name_basic  = strtolower( $this->_TRUST_DIRNAME .'_'. $name );
@@ -100,7 +100,7 @@ function &get_class_instance( $name )
 	return $false;
 }
 
-function exists_class( $name )
+public function exists_class( $name )
 {
 	if ( class_exists( $this->build_class_name( $name ) ) ) {
 		return true;
@@ -108,7 +108,7 @@ function exists_class( $name )
 	return false;
 }
 
-function exists_function( $name )
+public function exists_function( $name )
 {
 	if ( function_exists( $this->build_function_name( $name ) ) ) {
 		return true;
@@ -194,7 +194,7 @@ function include_once_files_in_dir( $path, $ext )
 		$path_file = $path .'/'. $file;
 		include_once $path_file;
 		if ( $this->_DEBUG ) {
-			echo "include_once $path_file <br />\n";
+			echo "include_once $path_file <br>\n";
 		}
 	}
 

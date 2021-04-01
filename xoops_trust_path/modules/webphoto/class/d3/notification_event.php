@@ -6,7 +6,9 @@
 // 2008-04-02 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_d3_notification
@@ -17,22 +19,22 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 class webphoto_d3_notification_event
 {
 // xoops param
-	var $_MODULE_ID      = 0;
-	var $_MODULE_DIRNAME = null;
-	var $_MODULE_NAME    = null;
-	var $_xoops_language = null;
-	var $_xoops_uid      = 0;
-	var $_xoops_uname    = null;
+	public $_MODULE_ID      = 0;
+	public $_MODULE_DIRNAME = null;
+	public $_MODULE_NAME    = null;
+	public $_xoops_language = null;
+	public $_xoops_uid      = 0;
+	public $_xoops_uname    = null;
 
-	var $_DIRNAME;
-	var $_MODULE_DIR;
-	var $_MODULE_URL;
-	var $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_MODULE_DIR;
+	public $_MODULE_URL;
+	public $_TRUST_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_d3_notification_event()
+public function __construct()
 {
 	$this->_init_xoops_param();
 }
@@ -46,7 +48,7 @@ public static function &getInstance()
 	return $instance;
 }
 
-function init( $dirname , $trust_dirname )
+public function init( $dirname , $trust_dirname )
 {
 	$this->_DIRNAME    = $dirname;
 	$this->_MODULE_DIR = XOOPS_ROOT_PATH  .'/modules/'.$dirname;
@@ -58,7 +60,7 @@ function init( $dirname , $trust_dirname )
 //---------------------------------------------------------
 // public
 //---------------------------------------------------------
-function trigger_event( $category , $item_id , $event , $extra_tags=array() , $user_list=array() , $omit_user_id=null )
+public function trigger_event( $category , $item_id , $event , $extra_tags=array() , $user_list=array() , $omit_user_id=null )
 {
 	$notification_handler =& xoops_gethandler('notification') ;
 
@@ -80,9 +82,9 @@ function trigger_event( $category , $item_id , $event , $extra_tags=array() , $u
 	}
 
 	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('not_modid', intval($this->_MODULE_ID)));
+	$criteria->add(new Criteria('not_modid', (int) $this->_MODULE_ID ));
 	$criteria->add(new Criteria('not_category', $category));
-	$criteria->add(new Criteria('not_itemid', intval($item_id)));
+	$criteria->add(new Criteria('not_itemid', (int) $item_id ));
 	$criteria->add(new Criteria('not_event', $event));
 	$mode_criteria = new CriteriaCompo();
 	$mode_criteria->add (new Criteria('not_mode', XOOPS_NOTIFICATION_MODE_SENDALWAYS), 'OR');
@@ -135,7 +137,7 @@ function trigger_event( $category , $item_id , $event , $extra_tags=array() , $u
 //---------------------------------------------------------
 // private
 //---------------------------------------------------------
-function _get_mail_template_dir( $template )
+public function _get_mail_template_dir( $template )
 {
 // mail template dir
 	$dir_trust_lang = $this->_TRUST_DIR  .'/language/'. $this->_xoops_language .'/mail_template/';
@@ -159,7 +161,7 @@ function _get_mail_template_dir( $template )
 //---------------------------------------------------------
 // xoops param
 //---------------------------------------------------------
-function _init_xoops_param()
+public function _init_xoops_param()
 {
 	global $xoopsConfig, $xoopsUser, $xoopsModule;
 
@@ -177,8 +179,4 @@ function _init_xoops_param()
 	}
 
 }
-
-// --- class end ---
 }
-
-?>

@@ -26,16 +26,16 @@ include_once XOOPS_ROOT_PATH.'/include/notification_functions.php';
 //=========================================================
 class webphoto_d3_notification_select
 {
-	var $_notification_handler;
+	public $_notification_handler;
 
-	var $_DIRNAME;
-	var $_MODULE_DIR;
-	var $_MODULE_URL;
+	public $_DIRNAME;
+	public $_MODULE_DIR;
+	public $_MODULE_URL;
 
-	var $_MODULE_ID      = 0;
-	var $_xoops_uid      = 0;
-	var $_xoops_notify_method = 0;
-	var $_is_module_admin = false;
+	public $_MODULE_ID      = 0;
+	public $_xoops_uid      = 0;
+	public $_xoops_notify_method = 0;
+	public $_is_module_admin = false;
 
 //---------------------------------------------------------
 // constructor

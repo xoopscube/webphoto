@@ -19,17 +19,17 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_d3_language
 {
-	var $_DIRNAME;
-	var $_TRUST_DIRNAME;
-	var $_MODULE_DIR;
-	var $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_TRUST_DIRNAME;
+	public $_MODULE_DIR;
+	public $_TRUST_DIR;
 
-	var $_DEBUG_ERROR = false;
+	public $_DEBUG_ERROR = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_d3_language()
+public function __construct()
 {
 	// dummy
 }
@@ -111,7 +111,7 @@ function get_constant( $name )
 	}
 
 	if ( $this->_DEBUG_ERROR ) {
-		echo $this->_highlight( 'CANNOT get constant '. $name )."<br />\n";
+		echo $this->_highlight( 'CANNOT get constant '. $name )."<br>\n";
 	}
 	return $cont_name_4;
 }

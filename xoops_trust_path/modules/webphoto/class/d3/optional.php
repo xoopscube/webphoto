@@ -28,15 +28,15 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_d3_optional
 {
-	var $_DIRNAME;
-	var $_TRUST_DIRNAME;
-	var $_MODULE_DIR;
-	var $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_TRUST_DIRNAME;
+	public $_MODULE_DIR;
+	public $_TRUST_DIR;
 
-	var $_xoops_language = null;
+	public $_xoops_language = null;
 
-	var $_DEBUG_INCLUDE = false;
-	var $_DEBUG_ERROR   = false;
+	public $_DEBUG_INCLUDE = false;
+	public $_DEBUG_ERROR   = false;
 
 //---------------------------------------------------------
 // constructor
@@ -254,14 +254,14 @@ function debug_msg_include_file( $file, $debug=true )
 	if ( $this->_DEBUG_INCLUDE && $debug &&
 	     ! in_array( $file,     get_included_files() ) &&
 	     ! in_array( $file_win, get_included_files() ) ) {
-		echo 'include '. $file ."<br />\n";
+		echo 'include '. $file ."<br>\n";
 	}
 }
 
 function debug_msg_error( $str )
 {
 	if ( $this->_DEBUG_ERROR ) {
-		echo  $this->_highlight( $str )."<br />\n";
+		echo  $this->_highlight( $str )."<br>\n";
 	}
 }
 

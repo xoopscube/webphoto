@@ -39,29 +39,29 @@ if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 //=========================================================
 class webphoto_d3_comment_view
 {
-	var $_comment_handler;
-	var $_groupperm_class;
+	public $_comment_handler;
+	public $_groupperm_class;
 
-	var $_DIRNAME;
-	var $_MODULE_DIR;
-	var $_MODULE_URL;
+	public $_DIRNAME;
+	public $_MODULE_DIR;
+	public $_MODULE_URL;
 
-	var $_SYSTEM_COMMENT;
+	public $_SYSTEM_COMMENT;
 
-	var $_MODULE_ID      = 0;
-	var $_xoops_uid      = 0;
-	var $_is_module_admin = false;
+	public $_MODULE_ID      = 0;
+	public $_xoops_uid      = 0;
+	public $_is_module_admin = false;
 
-	var $_xoops_com_mode  = null;
-	var $_xoops_com_order = null;
-	var $_xoops_module_comments = null;
-	var $_xoops_module_config_com_rule     = null;
-	var $_xoops_module_config_com_anonpost = false;
+	public $_xoops_com_mode  = null;
+	public $_xoops_com_order = null;
+	public $_xoops_module_comments = null;
+	public $_xoops_module_config_com_rule     = null;
+	public $_xoops_module_config_com_anonpost = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_d3_comment_view()
+public function __construct()
 {
 	$this->_comment_handler =& xoops_gethandler('comment');
 	$this->_groupperm_class =& webphoto_xoops_groupperm::getInstance();
