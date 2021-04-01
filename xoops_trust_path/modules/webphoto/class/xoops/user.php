@@ -11,10 +11,10 @@
 //=========================================================
 class webphoto_xoops_user
 {
-	var $_user_handler;
+	public $_user_handler;
 
-	var $_MODULE_MID = 0;
-	var $_USER_UID   = 0;
+	public $_MODULE_MID = 0;
+	public $_USER_UID   = 0;
 
 //---------------------------------------------------------
 // constructor

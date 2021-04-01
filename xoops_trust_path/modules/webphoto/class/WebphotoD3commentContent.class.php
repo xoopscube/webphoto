@@ -6,7 +6,9 @@
 // 2008-09-01 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // WebphotoD3commentContent
@@ -15,10 +17,12 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 class WebphotoD3commentContent extends D3commentAbstract 
 {
 
-function fetchSummary( $link_id )
+public function fetchSummary( $link_id )
 {
 	$mydirname = $this->mydirname ;
-	if ( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+	if ( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) {
+		die( 'Invalid mydirname' );
+	}
 
 	$db =& Database::getInstance() ;
 	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextsanitizer::getInstance() ;
@@ -36,7 +40,7 @@ function fetchSummary( $link_id )
 	}
 
 	// dare to convert it irregularly
-	$summary = str_replace( '&amp;' , '&' , htmlspecialchars( xoops_substr( strip_tags( $item_row['item_description'] ) , 0 , 255 ) , ENT_QUOTES ) ) ;
+	$summary = str_replace( '&amp;' , '&' , htmlspecialchars( xoops_substr( strip_tags( $item_row['item_description'] ) , 0 , 191 ) , ENT_QUOTES ) ) ;
 
 	$ret = array(
 		'dirname'     => $mydirname ,
@@ -49,13 +53,13 @@ function fetchSummary( $link_id )
 	return $ret;
 }
 
-function validate_id( $link_id )
+public function validate_id( $link_id )
 {
 	$db =& Database::getInstance() ;
 
 	// query
 	$sql  = 'SELECT COUNT(*) FROM '. $db->prefix( $this->mydirname.'_item' );
-	$sql .= ' WHERE item_id='. intval( $link_id ) ;
+	$sql .= ' WHERE item_id=' . (int) $link_id;
 	$sql .= ' AND item_status > 0 ';
 
 	list( $count ) = $db->fetchRow( $db->query( $sql ) ) ;
@@ -65,7 +69,7 @@ function validate_id( $link_id )
 	return $link_id ;
 }
 
-function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
+public function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
 {
 	$db =& Database::getInstance() ;
 
@@ -74,19 +78,15 @@ function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
 	$sql1 .= ' LEFT JOIN ';
 	$sql1 .= $db->prefix( $this->d3forum_dirname.'_topics' ) .' t ';
 	$sql1 .= ' ON t.topic_id=p.topic_id ';
-	$sql1 .= ' WHERE t.forum_id='. intval( $forum_id );
-	$sql1 .= ' AND t.topic_external_link_id='. intval( $link_id );
+	$sql1 .= ' WHERE t.forum_id=' . (int) $forum_id;
+	$sql1 .= ' AND t.topic_external_link_id=' . (int) $link_id;
 
 	list( $count ) = $db->fetchRow( $db->query( $sql1 ) ) ;
 
 	$sql2  = 'UPDATE '. $db->prefix( $this->mydirname.'_item' );
-	$sql2 .= ' SET item_comments='. intval( $count );
-	$sql2 .= ' WHERE item_id='. intval( $link_id );
+	$sql2 .= ' SET item_comments=' . (int) $count;
+	$sql2 .= ' WHERE item_id=' . (int) $link_id;
 
 	return $db->queryF( $sql2 ) ;
 }
-
-// --- class end ---
 }
-
-?>

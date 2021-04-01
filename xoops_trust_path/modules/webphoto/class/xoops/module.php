@@ -11,7 +11,7 @@
 //=========================================================
 class webphoto_xoops_module
 {
-	var $_module_handler;
+	public $_module_handler;
 
 //---------------------------------------------------------
 // constructor

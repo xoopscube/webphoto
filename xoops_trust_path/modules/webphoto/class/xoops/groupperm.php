@@ -22,7 +22,7 @@ if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 //=========================================================
 class webphoto_xoops_groupperm
 {
-	var $_groupperm_handler;
+	public $_groupperm_handler;
 
 //---------------------------------------------------------
 // constructor
