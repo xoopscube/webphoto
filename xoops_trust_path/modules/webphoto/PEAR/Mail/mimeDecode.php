@@ -93,68 +93,68 @@ class Mail_mimeDecode extends PEAR
     /**
      * The raw email to decode
      *
-     * @var    string
+     * @string
      * @access private
      */
-    var $_input;
+	private $_input;
 
     /**
      * The header part of the input
      *
-     * @var    string
+     * @string
      * @access private
      */
-    var $_header;
+	private $_header;
 
     /**
      * The body part of the input
      *
-     * @var    string
+     * @string
      * @access private
      */
-    var $_body;
+	private $_body;
 
     /**
      * If an error occurs, this is used to store the message
      *
-     * @var    string
+     * @string
      * @access private
      */
-    var $_error;
+	private $_error;
 
     /**
      * Flag to determine whether to include bodies in the
      * returned object.
      *
-     * @var    boolean
+     * @boolean
      * @access private
      */
-    var $_include_bodies;
+	private $_include_bodies;
 
     /**
      * Flag to determine whether to decode bodies
      *
-     * @var    boolean
+     * @boolean
      * @access private
      */
-    var $_decode_bodies;
+	private $_decode_bodies;
 
     /**
      * Flag to determine whether to decode headers
      *
-     * @var    boolean
+     * @boolean
      * @access private
      */
-    var $_decode_headers;
+	private $_decode_headers;
 
     /**
      * Flag to determine whether to include attached messages
      * as body in the returned object. Depends on $_include_bodies
      *
-     * @var    boolean
+     * @boolean
      * @access private
      */
-    var $_rfc822_bodies;
+	private $_rfc822_bodies;
 
     /**
      * Constructor.
@@ -162,7 +162,7 @@ class Mail_mimeDecode extends PEAR
      * Sets up the object, initialise the variables, and splits and
      * stores the header and body of the input.
      *
-     * @param string The input to decode
+     * @pstring The input to decode
      * @access public
      */
     function Mail_mimeDecode($input)
