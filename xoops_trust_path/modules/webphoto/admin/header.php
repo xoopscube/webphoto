@@ -1,50 +1,12 @@
 <?php
-// $Id: header.php,v 1.14 2011/12/28 16:16:15 ohwada Exp $
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// class/lib/mysql_utility.php
-// 2011-11-11 K.OHWAD
-// class/inc/xoops_config.php
-// 2010-09-17 K.OHWADA
-// class/lib/readfile.php
-// 2010-03-31 K.OHWADA
-// class/edit/item_create.php
-// 2009-11-11 K.OHWADA
-// class/inc/ini.php
-// 2008-01-25 K.OHWADA
-// webphoto_include_once_preload_trust()
-// 2008-01-10 K.OHWADA
-// class/edit/xxx
-// 2008-12-12 K.OHWADA
-// catlist.php
-// 2008-11-29 K.OHWADA
-// class/inc/uri.php
-// 2008-10-01 K.OHWADA
-// kind.php
-// 2008-08-24 K.OHWADA
-// added item_handler.php
-// 2008-07-01 K.OHWADA
-// added uri.php
-//---------------------------------------------------------
+include_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
+include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//---------------------------------------------------------
-// xoops system files
-//---------------------------------------------------------
-include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
-include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'include/constants.php' );
 
 webphoto_include_once( 'class/xoops/base.php' );
@@ -106,5 +68,3 @@ webphoto_include_language( 'admin.php' );
 
 webphoto_include_once_preload_trust();
 webphoto_include_once_preload();
-
-?>

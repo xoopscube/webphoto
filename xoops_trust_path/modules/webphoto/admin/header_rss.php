@@ -1,16 +1,9 @@
 <?php
-// $Id: header_rss.php,v 1.1 2010/11/04 02:24:16 ohwada Exp $
 
-//=========================================================
-// webphoto module
-// 2010-11-03 K.OHWADA
-//=========================================================
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'admin/header.php' );
 webphoto_include_once( 'class/lib/highlight.php' );
 webphoto_include_once( 'class/lib/search.php' );
@@ -35,5 +28,3 @@ webphoto_include_once( 'class/webphoto/tag.php' );
 webphoto_include_once( 'class/webphoto/search.php' );
 webphoto_include_once( 'class/webphoto/rss.php' );
 webphoto_include_once( 'class/admin/rss_form.php' );
-
-?>

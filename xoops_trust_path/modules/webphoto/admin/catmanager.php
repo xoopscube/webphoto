@@ -1,30 +1,9 @@
 <?php
-// $Id: catmanager.php,v 1.7 2011/12/28 16:16:15 ohwada Exp $
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// class/webphoto/timeline_init.php
-// 2009-12-06 K.OHWADA
-// class/inc/group.php
-// 2008-01-10 K.OHWADA
-// class/edit/xxx
-// 2008-11-08 K.OHWADA
-// imagemagick.php
-// 2008-08-24 K.OHWADA
-// added maillog_handler.php
-//---------------------------------------------------------
-
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'admin/header.php' );
 webphoto_include_once( 'class/inc/gperm_def.php' );
 webphoto_include_once( 'class/inc/group.php' );
@@ -52,11 +31,6 @@ webphoto_include_once( 'class/admin/groupperm_form.php' );
 webphoto_include_once( 'class/admin/cat_form.php' );
 webphoto_include_once( 'class/admin/catmanager.php' );
 
-//=========================================================
-// main
-//=========================================================
-$manager =& webphoto_admin_catmanager::getInstance( WEBPHOTO_DIRNAME , WEBPHOTO_TRUST_DIRNAME );
+$manager =& webphoto_admin_catmanager::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $manager->main();
 exit();
-
-?>

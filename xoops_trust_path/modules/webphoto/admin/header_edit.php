@@ -1,29 +1,12 @@
 <?php
-// $Id: header_edit.php,v 1.18 2011/11/13 05:24:37 ohwada Exp $
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// main/include_submit_base.php
-// main/include_submit.php
-//---------------------------------------------------------
+include_once XOOPS_ROOT_PATH . '/class/template.php';
+include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//---------------------------------------------------------
-// xoops system files
-//---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/template.php';
-include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'main/include_submit_base.php' );
 webphoto_include_once( 'main/include_submit.php' );
 
@@ -57,5 +40,3 @@ webphoto_include_language( 'admin.php' );
 
 webphoto_include_once_preload_trust();
 webphoto_include_once_preload();
-
-?>
