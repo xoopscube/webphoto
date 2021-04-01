@@ -12,21 +12,23 @@
 // not use webphoto_edit_base()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_external_build
 //=========================================================
 class webphoto_edit_external_build
 {
-	var $_item_row = null;
+	public $_item_row = null;
 
-	var $_THUMB_EXT_DEFAULT = 'external';
+	public $_THUMB_EXT_DEFAULT = 'external';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_external_build( $dirname )
+public function __construct( $dirname )
 {
 	$this->_utility_class    =& webphoto_lib_utility::getInstance();
 	$this->_kind_class       =& webphoto_kind::getInstance();
@@ -45,7 +47,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // public 
 //---------------------------------------------------------
-function is_type( $row )
+public function is_type( $row )
 {
 	if ( $row['item_external_url'] ) {
 		return true ;
@@ -53,7 +55,7 @@ function is_type( $row )
 	return false;
 }
 
-function build( $row )
+public function build( $row )
 {
 	$this->_item_row = $row ;
 
@@ -89,14 +91,14 @@ function build( $row )
 	return 0 ;	// OK
 }
 
-function build_title( $row )
+public function build_title( $row )
 {
 	$file  = $this->parse_url_to_filename( $row['item_external_url'] );
 	$title = $this->strip_ext( $file );
 	return $title;
 }
 
-function get_item_row()
+public function get_item_row()
 {
 	return $this->_item_row ;
 }
@@ -104,7 +106,7 @@ function get_item_row()
 //---------------------------------------------------------
 // icon
 //---------------------------------------------------------
-function build_row_icon_if_empty( $row, $ext=null )
+public function build_row_icon_if_empty( $row, $ext=null )
 {
 	return $this->_icon_build_class->build_row_icon_if_empty( $row, $ext );
 }
@@ -112,7 +114,7 @@ function build_row_icon_if_empty( $row, $ext=null )
 //---------------------------------------------------------
 // kind class
 //---------------------------------------------------------
-function is_image_ext( $ext )
+public function is_image_ext( $ext )
 {
 	return $this->_kind_class->is_image_ext( $ext ) ;
 }
@@ -120,22 +122,20 @@ function is_image_ext( $ext )
 //---------------------------------------------------------
 // utility
 //---------------------------------------------------------
-function parse_ext( $file )
+public function parse_ext( $file )
 {
 	return $this->_utility_class->parse_ext( $file );
 }
 
-function strip_ext( $file )
+public function strip_ext( $file )
 {
 	return $this->_utility_class->strip_ext( $file );
 }
 
-function parse_url_to_filename( $url )
+public function parse_url_to_filename( $url )
 {
 	return $this->_utility_class->parse_url_to_filename( $url );
 }
 
-// --- class end ---
 }
 
-?>

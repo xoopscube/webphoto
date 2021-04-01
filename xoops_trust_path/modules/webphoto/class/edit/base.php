@@ -29,16 +29,17 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_base extends webphoto_base_this
 {
-	var $_item_create_class;
-	var $_mime_class ;
-	var $_icon_build_class ;
+	public $_item_create_class;
+	public $_mime_class ;
+	public $_icon_build_class ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_base( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_item_create_class  
 		=& webphoto_edit_item_create::getInstance( $dirname , $trust_dirname  );

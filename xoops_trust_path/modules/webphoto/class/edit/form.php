@@ -72,92 +72,93 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_form extends webphoto_lib_form
 {
-	var $_cat_handler;
-	var $_item_handler;
-	var $_file_handler;
-	var $_config_class;
-	var $_preload_class;
-	var $_perm_class;
-	var $_embed_class ;
-	var $_ini_class;
-	var $_mysql_utility_class ;
+	public $_cat_handler;
+	public $_item_handler;
+	public $_file_handler;
+	public $_config_class;
+	public $_preload_class;
+	public $_perm_class;
+	public $_embed_class ;
+	public $_ini_class;
+	public $_mysql_utility_class ;
 
-	var $_cfg_gmap_apikey ;
-	var $_cfg_width ;
-	var $_cfg_height ;
-	var $_cfg_fsize ;
-	var $_cfg_makethumb ;
-	var $_cfg_file_size ;
-	var $_cfg_perm_item_read ;
-	var $_cfg_perm_cat_read ;
-	var $_cfg_use_pathinfo ;
-	var $_cfg_cat_width ;
+	public $_cfg_gmap_apikey ;
+	public $_cfg_width ;
+	public $_cfg_height ;
+	public $_cfg_fsize ;
+	public $_cfg_makethumb ;
+	public $_cfg_file_size ;
+	public $_cfg_perm_item_read ;
+	public $_cfg_perm_cat_read ;
+	public $_cfg_use_pathinfo ;
+	public $_cfg_cat_width ;
 
-	var $_has_deletable ;
+	public $_has_deletable ;
 
 // post
-	var $_post_form_editor   = 0;
-	var $_post_form_embed    = 0;
-	var $_post_form_playlist = 0;
+	public $_post_form_editor   = 0;
+	public $_post_form_embed    = 0;
+	public $_post_form_playlist = 0;
 
-	var $_is_japanese    = false;
-	var $_checkbox_array = array();
+	public $_is_japanese    = false;
+	public $_checkbox_array = array();
 
-	var $_FILED_COUNTER_1  = 1;
-	var $_FILED_COUNTER_2  = 2;
-	var $_FILED_COUNTER_4  = 4;
+	public $_FILED_COUNTER_1  = 1;
+	public $_FILED_COUNTER_2  = 2;
+	public $_FILED_COUNTER_4  = 4;
 
-	var $_UPLOADS_PATH ;
-	var $_MEDIAS_PATH ;
-	var $_WORK_DIR ;
-	var $_FILE_DIR ;
-	var $_PHOTOS_PATH;
-	var $_PHOTOS_DIR ;
-	var $_PHOTOS_URL ;
-	var $_THUMBS_PATH;
-	var $_THUMBS_DIR;
-	var $_THUMBS_URL;
-	var $_CATS_PATH;
-	var $_CATS_DIR;
-	var $_CATS_URL;
-	var $_MEDIAS_DIR;
-	var $_MEDIAS_URL;
-	var $_PLAYLISTS_DIR ;
-	var $_PLAYLISTS_URL ;
-	var $_TMP_DIR;
-	var $_MAIL_DIR;
-	var $_LOG_DIR;
+	public $_UPLOADS_PATH ;
+	public $_MEDIAS_PATH ;
+	public $_WORK_DIR ;
+	public $_FILE_DIR ;
+	public $_PHOTOS_PATH;
+	public $_PHOTOS_DIR ;
+	public $_PHOTOS_URL ;
+	public $_THUMBS_PATH;
+	public $_THUMBS_DIR;
+	public $_THUMBS_URL;
+	public $_CATS_PATH;
+	public $_CATS_DIR;
+	public $_CATS_URL;
+	public $_MEDIAS_DIR;
+	public $_MEDIAS_URL;
+	public $_PLAYLISTS_DIR ;
+	public $_PLAYLISTS_URL ;
+	public $_TMP_DIR;
+	public $_MAIL_DIR;
+	public $_LOG_DIR;
 
-	var $_ICONS_URL;
-	var $_ICON_ROTATE_URL;
-	var $_ROOT_EXTS_DIR;
-	var $_ROOT_EXTS_URL;
-	var $_LIBS_URL;
+	public $_ICONS_URL;
+	public $_ICON_ROTATE_URL;
+	public $_ROOT_EXTS_DIR;
+	public $_ROOT_EXTS_URL;
+	public $_LIBS_URL;
 
-	var $_PHOTO_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
-	var $_THUMB_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
-	var $_MIDDLE_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
-	var $_SMALL_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_SMALL ;
+	public $_PHOTO_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
+	public $_THUMB_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
+	public $_MIDDLE_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
+	public $_SMALL_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_SMALL ;
 
-	var $_THIS_FCT_IMAGEMANEGER = 'submit_imagemanager';
-	var $_THIS_FCT_SUBMIT = 'submit';
-	var $_THIS_FCT_EDIT   = 'edit';
-	var $_THIS_FCT_ADMIN  = 'item_manager';
-	var $_THIS_FCT_ADMIN_BATCH = 'batch';
+	public $_THIS_FCT_IMAGEMANEGER = 'submit_imagemanager';
+	public $_THIS_FCT_SUBMIT = 'submit';
+	public $_THIS_FCT_EDIT   = 'edit';
+	public $_THIS_FCT_ADMIN  = 'item_manager';
+	public $_THIS_FCT_ADMIN_BATCH = 'batch';
 
-	var $_FLAG_PERM_ADMIN = true;
+	public $_FLAG_PERM_ADMIN = true;
 
-	var $_FORM_ACTION = null;
-	var $_THIS_FCT    = null;
+	public $_FORM_ACTION = null;
+	public $_THIS_FCT    = null;
 
-	var $_USER_LIMIT = 200;
+	public $_USER_LIMIT = 200;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_form( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_lib_form( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_lib_form( $dirname , $trust_dirname );
 
 	$this->_config_class =& webphoto_config::getInstance( $dirname );
 
@@ -250,7 +251,7 @@ function set_default_item_row( $item_row )
 
 function ele_maxpixel( $has_resize )
 {
-	$text = $this->_cfg_width .' x '. $this->_cfg_height ."<br />\n" ;
+	$text = $this->_cfg_width .' x '. $this->_cfg_height ."<br>\n" ;
 	if ( $has_resize ) {
 		$text .= $this->get_constant('DSC_PIXCEL_RESIZE');
 	} else {
@@ -425,7 +426,7 @@ function build_ele_group_perms_by_key( $name )
 {
 	$text  = $this->build_group_perms_check_all_by_key( $name );
 	$text .= $this->get_constant('GROUP_PERM_ALL') ;
-	$text .= "<br />\n";
+	$text .= "<br>\n";
 	$text .= $this->build_group_perms_checkboxs_by_key( $name );
 	return $text;
 }
@@ -527,7 +528,7 @@ function get_group_perms_array( $val )
 	return $this->str_to_array( $val, $this->_PERM_SEPARATOR );
 }
 
-function build_list_select_multi( $options, $del='<br />' )
+function build_list_select_multi( $options, $del='<br>' )
 {
 	if ( !is_array($options) || !count($options) ) {
 		return null;

@@ -18,7 +18,9 @@
 // added print_user_form()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_mail_register_form
@@ -29,9 +31,10 @@ class webphoto_edit_mail_register_form extends webphoto_edit_form
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_mail_register_form( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_edit_form( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_form( $dirname, $trust_dirname );
 }
 
 public static function &getInstance( $dirname = null, $trust_dirname = null )

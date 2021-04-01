@@ -18,29 +18,32 @@
 // _C_WEBPHOTO_UPLOAD_FIELD_PLOGO
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_flashvar_form
 //=========================================================
 class webphoto_edit_flashvar_form extends webphoto_edit_form
 {
-	var $_flashvar_handler;
+	public $_flashvar_handler;
 
-	var $_cfg_captcha = null;
+	public $_cfg_captcha = null;
 
-	var $_LOGOS_PATH ;
-	var $_LOGOS_DIR ;
-	var $_LOGOS_URL ;
+	public $_LOGOS_PATH ;
+	public $_LOGOS_DIR ;
+	public $_LOGOS_URL ;
 
-	var $_CAPTCHA_API_FILE = null;
+	public $_CAPTCHA_API_FILE = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_flashvar_form( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_form( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_form( $dirname , $trust_dirname );
 
 	$this->_flashvar_handler  
 		=& webphoto_flashvar_handler::getInstance( $dirname , $trust_dirname );

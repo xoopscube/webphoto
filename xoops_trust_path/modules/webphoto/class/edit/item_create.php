@@ -6,28 +6,31 @@
 // 2010-03-18 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_item_create
 //=========================================================
 class webphoto_edit_item_create extends webphoto_item_handler
 {
-	var $_xoops_class;
-	var $_multibyte_class;
+	public $_xoops_class;
+	public $_multibyte_class;
 
-	var $_is_japanese;
-	var $_ini_item_datetime_default;
-	var $_ini_item_exif_length;
-	var $_ini_item_content_length;
-	var $_ini_item_search_length;
+	public $_is_japanese;
+	public $_ini_item_datetime_default;
+	public $_ini_item_exif_length;
+	public $_ini_item_content_length;
+	public $_ini_item_search_length;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_item_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_item_handler( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_item_handler( $dirname, $trust_dirname );
 
 	$this->_xoops_class     =& webphoto_xoops_base::getInstance();
 	$this->_multibyte_class =& webphoto_lib_multibyte::getInstance();
@@ -52,19 +55,19 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // item handler
 //---------------------------------------------------------
-function format_and_insert( $row, $flag_force=false )
+public function format_and_insert( $row, $flag_force=false )
 {
 	return $this->insert( 
 		$this->format_row( $row ), $flag_force );
 }
 
-function format_and_update( $row, $flag_force=false )
+public function format_and_update( $row, $flag_force=false )
 {
 	return $this->update( 
 		$this->format_row( $row ), $flag_force );
 }
 
-function format_row( $row )
+public function format_row( $row )
 {
 	$row['item_datetime'] = $this->format_datetime( $row['item_datetime'] );
 	$row['item_exif']     = $this->format_exif( $row['item_exif'] );
@@ -73,7 +76,7 @@ function format_row( $row )
 	return $row;
 }
 
-function format_datetime( $str )
+public function format_datetime( $str )
 {
 	if ( $str ) {
 		return $str;
@@ -81,7 +84,7 @@ function format_datetime( $str )
 	return $this->_ini_item_datetime_default ;
 }
 
-function format_exif( $str )
+public function format_exif( $str )
 {
 	if ( strlen($str) < $this->_ini_item_exif_length ) {
 		return $str;
@@ -92,12 +95,12 @@ function format_exif( $str )
 	return $str;
 }
 
-function format_content( $str )
+public function format_content( $str )
 {
 	return $this->format_text_common( $str, $this->_ini_item_content_length );
 }
 
-function format_search( $str )
+public function format_search( $str )
 {
 	return $this->format_text_common( $str, $this->_ini_item_search_length );
 }

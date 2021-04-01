@@ -18,40 +18,43 @@
 // create_small_param()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_video_middle_thumb_create
 //=========================================================
 class webphoto_edit_video_middle_thumb_create extends webphoto_edit_base_create
 {
-	var $_ffmpeg_class;
+	public $_ffmpeg_class;
 
-//	var $_middle_thumb_create_class;
+//	public $_middle_thumb_create_class;
 
-	var $_item_build_class;
-	var $_item_create_class ;
-	var $_file_action_class;
+	public $_item_build_class;
+	public $_item_create_class ;
+	public $_file_action_class;
 
 // config
-	var $_cfg_makethumb;
-	var $_cfg_use_ffmpeg;
+	public $_cfg_makethumb;
+	public $_cfg_use_ffmpeg;
 
-	var $_item_row     = null;
-	var $_item_cat_id  = 0 ;
-	var $_flag_created = false ;
-	var $_flag_failed  = false ;
-	var $_file_jpeg    = null;
+	public $_item_row     = null;
+	public $_item_cat_id  = 0 ;
+	public $_flag_created = false ;
+	public $_flag_failed  = false ;
+	public $_file_jpeg    = null;
 
-	var $_VIDEO_THUMB_MAX = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
-	var $_SUB_DIR_JPEGS   = 'jpegs';
+	public $_VIDEO_THUMB_MAX = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
+	public $_SUB_DIR_JPEGS   = 'jpegs';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_video_middle_thumb_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_ffmpeg_class     
 		=& webphoto_ffmpeg::getInstance( $dirname , $trust_dirname );
@@ -78,7 +81,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // video thumb
 //---------------------------------------------------------
-function video_thumb( $item_row )
+public function video_thumb( $item_row )
 {
 	$num = $this->_post_class->get_post_text('num') ;
 	$ret = $this->video_thumb_exec( $item_row, $num );

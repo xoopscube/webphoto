@@ -13,21 +13,22 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_gicon_create extends webphoto_edit_base_create
 {
-	var $_image_create_class ;
+	public $_image_create_class ;
 
-	var $_cfg_gicon_width ;
-	var $_cfg_gicon_height ;
+	public $_cfg_gicon_width ;
+	public $_cfg_gicon_height ;
 
-	var $_SUB_DIR_GICONS   = 'gicons';
-	var $_SUB_DIR_GSHADOWS = 'gshadows';
-	var $_INFO_Y_DEFAULT   = 3;
+	public $_SUB_DIR_GICONS   = 'gicons';
+	public $_SUB_DIR_GSHADOWS = 'gshadows';
+	public $_INFO_Y_DEFAULT   = 3;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_gicon_create( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname, $trust_dirname );
 
 	$this->_image_create_class =& webphoto_image_create::getInstance( $dirname );
 
@@ -47,7 +48,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create main image
 //---------------------------------------------------------
-function create_main_row( $row, $tmp_name )
+public function create_main_row( $row, $tmp_name )
 {
 	if ( empty($tmp_name) ) {
 		return $row;
@@ -79,7 +80,7 @@ function create_main_row( $row, $tmp_name )
 //---------------------------------------------------------
 // create shadow image
 //---------------------------------------------------------
-function create_shadow_row( $row, $tmp_name )
+public function create_shadow_row( $row, $tmp_name )
 {
 	if ( empty($tmp_name) ) {
 		return $row;
@@ -104,7 +105,7 @@ function create_shadow_row( $row, $tmp_name )
 //---------------------------------------------------------
 // common
 //---------------------------------------------------------
-function resize_image( $gicon_id, $tmp_name, $sub_dir )
+public function resize_image( $gicon_id, $tmp_name, $sub_dir )
 {
 	$width    = 0;
 	$height   = 0;
@@ -152,4 +153,4 @@ function resize_image( $gicon_id, $tmp_name, $sub_dir )
 // --- class end ---
 }
 
-?>
+

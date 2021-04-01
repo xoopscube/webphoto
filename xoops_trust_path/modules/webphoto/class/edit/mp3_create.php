@@ -21,22 +21,23 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_mp3_create extends webphoto_edit_base_create
 {
-	var $_lame_class;
+	public $_lame_class;
 
-	var $_param_ext    = 'mp3' ;
-	var $_param_dir    = 'mp3s';
+	public $_param_ext    = 'mp3' ;
+	public $_param_dir    = 'mp3s';
 	var	$_param_mime   = 'audio/mpeg' ;
-	var $_param_medium = 'audio' ;
-	var $_param_kind   = _C_WEBPHOTO_FILE_KIND_MP3 ;
-	var $_msg_created  = 'create mp3' ;
-	var $_msg_failed   = 'fail to create mp3' ;
+	public $_param_medium = 'audio' ;
+	public $_param_kind   = _C_WEBPHOTO_FILE_KIND_MP3 ;
+	public $_msg_created  = 'create mp3' ;
+	public $_msg_failed   = 'fail to create mp3' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_mp3_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_lame_class   =& webphoto_lame::getInstance(   $dirname, $trust_dirname  );
 }

@@ -12,26 +12,29 @@
 // set_flag_force_db()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_file_action
 //=========================================================
 class webphoto_edit_file_action extends webphoto_edit_base_create
 {
-	var $_jpeg_create_class;
-	var $_middle_thumb_create_class;
+	public $_jpeg_create_class;
+	public $_middle_thumb_create_class;
 
-	var $_FILE_LIST;
+	public $_FILE_LIST;
 
-	var $_flag_force_db = false ;
+	public $_flag_force_db = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_file_action( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_jpeg_create_class 
 		=& webphoto_edit_jpeg_create::getInstance( $dirname , $trust_dirname );
@@ -54,7 +57,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // set & get param
 //---------------------------------------------------------
-function set_flag_force_db( $val )
+public function set_flag_force_db( $val )
 {
 	$this->_flag_force_db = (bool)$val;
 }
@@ -62,7 +65,7 @@ function set_flag_force_db( $val )
 //---------------------------------------------------------
 // get
 //---------------------------------------------------------
-function get_file_row_by_item_name( $item_row, $item_name )
+public function get_file_row_by_item_name( $item_row, $item_name )
 {
 	$file_id = $this->get_file_id_by_item_name( $item_row, $item_name );
 	if ( $file_id > 0 ) {
@@ -72,7 +75,7 @@ function get_file_row_by_item_name( $item_row, $item_name )
 	return null;
 }
 
-function get_file_id_by_item_name( $item_row, $item_name )
+public function get_file_id_by_item_name( $item_row, $item_name )
 {
 	$id = isset( $item_row[ $item_name ] ) ? $item_row[ $item_name ] : 0 ;
 	return $id;
@@ -82,7 +85,7 @@ function get_file_id_by_item_name( $item_row, $item_name )
 // insert
 //---------------------------------------------------------
 // factory.php
-function insert_files_from_params( $item_id, $params )
+public function insert_files_from_params( $item_id, $params )
 {
 	if ( !is_array($params) ) {
 		return false;
@@ -95,7 +98,7 @@ function insert_files_from_params( $item_id, $params )
 	return $arr ;
 }
 
-function insert_file_by_file_params( $item_id, $params, $name )
+public function insert_file_by_file_params( $item_id, $params, $name )
 {
 	if ( isset( $params[ $name ] ) && is_array( $params[ $name ] ) ) {
 		return $this->insert_file_by_param( $item_id,  $params[ $name ] );
@@ -103,7 +106,7 @@ function insert_file_by_file_params( $item_id, $params, $name )
 	return 0;
 }
 
-function insert_file_by_param( $item_id, $param )
+public function insert_file_by_param( $item_id, $param )
 {
 	$param['item_id'] = $item_id ;
 
@@ -123,7 +126,7 @@ function insert_file_by_param( $item_id, $param )
 // update
 //---------------------------------------------------------
 // factory.php
-function update_files_from_params( $row, $params )
+public function update_files_from_params( $row, $params )
 {
 	if ( !is_array($params) ) {
 		return false;
@@ -136,7 +139,7 @@ function update_files_from_params( $row, $params )
 	return $arr ;
 }
 
-function update_file_by_file_params( $row, $params, $name )
+public function update_file_by_file_params( $row, $params, $name )
 {
 	$item_id = $row['item_id'] ;
 
@@ -154,7 +157,7 @@ function update_file_by_file_params( $row, $params, $name )
 	return $this->insert_update_file_by_param( $item_id, $file_row, $param );
 }
 
-function insert_update_file_by_param( $item_id, $file_row, $param )
+public function insert_update_file_by_param( $item_id, $file_row, $param )
 {
 // update if exists
 	if ( is_array($file_row) ) {
@@ -176,7 +179,7 @@ function insert_update_file_by_param( $item_id, $file_row, $param )
 	}
 }
 
-function update_file_by_param( $row, $param )
+public function update_file_by_param( $row, $param )
 {
 	$param['time_update'] = time();
 
@@ -193,7 +196,7 @@ function update_file_by_param( $row, $param )
 }
 
 // action.php
-function update_duration( $item_row, $duration, $item_name )
+public function update_duration( $item_row, $duration, $item_name )
 {
 	$file_row = $this->get_file_row_by_item_name( $item_row, $item_name );
 	if ( !is_array($file_row ) ) {
@@ -214,7 +217,7 @@ function update_duration( $item_row, $duration, $item_name )
 // create or update
 //---------------------------------------------------------
 // video_middle_thumb_create.php
-function create_update_file_for_video_thumb( $item_row, $src_file, $item_name )
+public function create_update_file_for_video_thumb( $item_row, $src_file, $item_name )
 {
 	if ( !is_file( $src_file) ) {
 		return 0 ;	// no action
@@ -231,7 +234,7 @@ function create_update_file_for_video_thumb( $item_row, $src_file, $item_name )
 	return $this->insert_update_file_by_param( $item_id, $file_row, $param );
 }
 
-function create_param( $item_id, $src_file, $icon_name, $item_name )
+public function create_param( $item_id, $src_file, $icon_name, $item_name )
 {
 	$param_in = array(
 		'item_id'   => $item_id ,
@@ -271,7 +274,7 @@ function create_param( $item_id, $src_file, $icon_name, $item_name )
 // delete
 //---------------------------------------------------------
 // action.php
-function delete_file( $item_row, $item_name )
+public function delete_file( $item_row, $item_name )
 {
 	$file_row = $this->get_file_row_by_item_name( $item_row, $item_name );
 	if ( ! is_array($file_row ) ) {
@@ -295,14 +298,10 @@ function delete_file( $item_row, $item_name )
 //---------------------------------------------------------
 // unlink
 //---------------------------------------------------------
-function unlink_current_file( $file_path, $param_path )
+public function unlink_current_file( $file_path, $param_path )
 {
 	if ( $file_path && ( $file_path != $param_path ) ) {
 		$this->unlink_path($file_path);
 	}
 }
-
-// --- class end ---
 }
-
-?>

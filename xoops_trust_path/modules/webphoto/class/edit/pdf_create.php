@@ -23,22 +23,23 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_pdf_create extends webphoto_edit_base_create
 {
-	var $_ext_class ;
+	public $_ext_class ;
 
-	var $_param_ext    = 'pdf' ;
-	var $_param_dir    = 'pdfs';
+	public $_param_ext    = 'pdf' ;
+	public $_param_dir    = 'pdfs';
 	var	$_param_mime   = 'application/pdf' ;
-	var $_param_medium = '' ;
-	var $_param_kind   = _C_WEBPHOTO_FILE_KIND_PDF ;
-	var $_msg_created  = 'create pdf' ;
-	var $_msg_failed   = 'fail to create pdf' ;
+	public $_param_medium = '' ;
+	public $_param_kind   = _C_WEBPHOTO_FILE_KIND_PDF ;
+	public $_msg_created  = 'create pdf' ;
+	public $_msg_failed   = 'fail to create pdf' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_pdf_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_ext_class =& webphoto_ext::getInstance( $dirname , $trust_dirname );
 }

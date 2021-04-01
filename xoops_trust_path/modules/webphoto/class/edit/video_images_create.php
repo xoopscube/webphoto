@@ -13,14 +13,15 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_video_images_create extends webphoto_edit_base_create
 {
-	var $_ext_class ;
+	public $_ext_class ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_video_images_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_ext_class 
 		=& webphoto_ext::getInstance( $dirname , $trust_dirname );
@@ -39,7 +40,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create
 //---------------------------------------------------------
-function create( $param )
+public function create( $param )
 {
 	$this->clear_flags() ;
 

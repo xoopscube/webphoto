@@ -23,39 +23,42 @@
 // supported gps
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_mail_photo
 //=========================================================
 class webphoto_edit_mail_photo extends webphoto_edit_base
 {
-	var $_user_handler ;
-	var $_maillog_handler ;
-	var $_parse_class ;
-	var $_check_class ;
-	var $_unlink_class ;
-	var $_factory_create_class;
+	public $_user_handler ;
+	public $_maillog_handler ;
+	public $_parse_class ;
+	public $_check_class ;
+	public $_unlink_class ;
+	public $_factory_create_class;
 
-	var $_cfg_allownoimage = false;
+	public $_cfg_allownoimage = false;
 
-	var $_flag_mail_chmod  = true;
-	var $_msg_level = 0 ;
-	var $_flag_force_db = false;
+	public $_flag_mail_chmod  = true;
+	public $_msg_level = 0 ;
+	public $_flag_force_db = false;
 
-	var $_SUBJECT_DEFAULT = 'No Subject';
-	var $_TIME_FORMAT = 'Y/m/d H:i';
-	var $_MAX_BODY    = 250;
+	public $_SUBJECT_DEFAULT = 'No Subject';
+	public $_TIME_FORMAT = 'Y/m/d H:i';
+	public $_MAX_BODY    = 250;
 
-	var $_FLAG_STRICT = true;
-	var $_FLAG_UNLINK_FILE = true;
+	public $_FLAG_STRICT = true;
+	public $_FLAG_UNLINK_FILE = true;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_mail_photo( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_factory_create_class 
 		=& webphoto_edit_factory_create::getInstance( $dirname , $trust_dirname );

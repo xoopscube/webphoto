@@ -18,39 +18,42 @@
 // create_small_param()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_middle_thumb_create
 //=========================================================
 class webphoto_edit_middle_thumb_create extends webphoto_edit_base_create
 {
-	var $_image_create_class;
+	public $_image_create_class;
 
-	var $_cfg_makethumb;
-	var $_cfg_width ;
-	var $_cfg_height ;
-	var $_cfg_middle_width ;
-	var $_cfg_middle_height ;
-	var $_cfg_thumb_width ;
-	var $_cfg_thumb_height ;
-	var $_cfg_small_width ;
-	var $_cfg_small_height ;
+	public $_cfg_makethumb;
+	public $_cfg_width ;
+	public $_cfg_height ;
+	public $_cfg_middle_width ;
+	public $_cfg_middle_height ;
+	public $_cfg_thumb_width ;
+	public $_cfg_thumb_height ;
+	public $_cfg_small_width ;
+	public $_cfg_small_height ;
 
-	var $_icon_tmp_file = null ;
+	public $_icon_tmp_file = null ;
 
-	var $_SUB_DIR_LARGES  = 'larges';
-	var $_SUB_DIR_MIDDLES = 'middles';
-	var $_SUB_DIR_THUMBS  = 'thumbs';
-	var $_SUB_DIR_SMALLS  = 'smalls';
-	var $_BORDER_OPTION   = ' -border 1 ';
+	public $_SUB_DIR_LARGES  = 'larges';
+	public $_SUB_DIR_MIDDLES = 'middles';
+	public $_SUB_DIR_THUMBS  = 'thumbs';
+	public $_SUB_DIR_SMALLS  = 'smalls';
+	public $_BORDER_OPTION   = ' -border 1 ';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_middle_thumb_create( $dirname , $trust_dirname  )
+public function __construct( $dirname , $trust_dirname  )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname  );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname  );
 
 	$this->_image_create_class =& webphoto_image_create::getInstance( $dirname );
 
@@ -78,7 +81,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create image
 //---------------------------------------------------------
-function create_image_params( $param )
+public function create_image_params( $param )
 {
 	$this->clear_msg_array();
 
@@ -141,7 +144,7 @@ function create_image_params( $param )
 //---------------------------------------------------------
 // create copy param
 //---------------------------------------------------------
-function create_copy_param( $param )
+public function create_copy_param( $param )
 {
 	$this->clear_msg_array();
 
@@ -172,7 +175,7 @@ function create_copy_param( $param )
 //---------------------------------------------------------
 // create large image
 //---------------------------------------------------------
-function create_large_param( $param )
+public function create_large_param( $param )
 {
 	$param['sub_dir']    = $this->_SUB_DIR_LARGES ;
 	$param['file_kind']  = _C_WEBPHOTO_FILE_KIND_LARGE ;
@@ -186,7 +189,7 @@ function create_large_param( $param )
 //---------------------------------------------------------
 // create middle image
 //---------------------------------------------------------
-function create_middle_param( $param )
+public function create_middle_param( $param )
 {
 	$param['sub_dir']    = $this->_SUB_DIR_MIDDLES ;
 	$param['file_kind']  = _C_WEBPHOTO_FILE_KIND_MIDDLE ;
@@ -200,7 +203,7 @@ function create_middle_param( $param )
 //---------------------------------------------------------
 // create thumb image
 //---------------------------------------------------------
-function create_thumb_param( $param )
+public function create_thumb_param( $param )
 {
 	$param['sub_dir']    = $this->_SUB_DIR_THUMBS ;
 	$param['file_kind']  = _C_WEBPHOTO_FILE_KIND_THUMB ;
@@ -214,7 +217,7 @@ function create_thumb_param( $param )
 //---------------------------------------------------------
 // create small image
 //---------------------------------------------------------
-function create_small_param( $param )
+public function create_small_param( $param )
 {
 	$param['sub_dir']    = $this->_SUB_DIR_SMALLS ;
 	$param['file_kind']  = _C_WEBPHOTO_FILE_KIND_SMALL ;
@@ -228,7 +231,7 @@ function create_small_param( $param )
 //---------------------------------------------------------
 // common
 //---------------------------------------------------------
-function create_image_common( $param )
+public function create_image_common( $param )
 {
 	$name = $param['msg_name'] ;
 
@@ -242,7 +245,7 @@ function create_image_common( $param )
 	return $param_out;
 }
 
-function create_image_common_2( $param )
+public function create_image_common_2( $param )
 {
 	$item_id    = $param['item_id'];
 	$src_file   = $param['src_file'];
@@ -277,7 +280,7 @@ function create_image_common_2( $param )
 	return $image_param ;
 }
 
-function add_icon( $thumb_file, $src_ext, $icon_name )
+public function add_icon( $thumb_file, $src_ext, $icon_name )
 {
 	$icon_file = $this->build_icon_file( $icon_name, true );
 	if ( ! is_file($icon_file) ) {
@@ -309,7 +312,7 @@ function add_icon( $thumb_file, $src_ext, $icon_name )
 	return true ;
 }
 
-function resize_icon( $thumb_file , $icon_file )
+public function resize_icon( $thumb_file , $icon_file )
 {
 	$this->_icon_tmp_file = null;
 
@@ -348,7 +351,7 @@ function resize_icon( $thumb_file , $icon_file )
 	return $icon_file ;
 }
 
-function build_icon_file( $icon_name, $flag_ext )
+public function build_icon_file( $icon_name, $flag_ext )
 {
 	$file = $this->_ROOT_EXTS_DIR .'/'. $icon_name ;
 	if ( $flag_ext ) {
@@ -357,7 +360,7 @@ function build_icon_file( $icon_name, $flag_ext )
 	return $file;
 }
 
-function build_tmp_file( $ext )
+public function build_tmp_file( $ext )
 {
 	$file = $this->_TMP_DIR .'/'. uniqid( _C_WEBPHOTO_UPLOADER_PREFIX ) .'.'. $ext;
 	return $file;

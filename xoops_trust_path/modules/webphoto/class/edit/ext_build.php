@@ -12,21 +12,24 @@
 // get_extend_row_by_id()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_ext_build
 //=========================================================
 class webphoto_edit_ext_build extends webphoto_edit_base_create
 {
-	var $_ext_class;
+	public $_ext_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_ext_build( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_ext_class  
 		=& webphoto_ext::getInstance( $dirname , $trust_dirname );

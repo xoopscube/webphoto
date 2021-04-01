@@ -28,36 +28,36 @@
 //=========================================================
 class webphoto_edit_mail_check
 {
-	var $_config_class;
-	var $_user_handler;
-	var $_mime_class;
-	var $_utility_class;
-	var $_mail_class;
+	public $_config_class;
+	public $_user_handler;
+	public $_mime_class;
+	public $_utility_class;
+	public $_mail_class;
 
-	var $_reject_msg_arr = array();
-	var $_result;
+	public $_reject_msg_arr = array();
+	public $_result;
 
-	var $_BODY_REJECT_MAXBYTE = 200; 	// 200 char
-	var $_BODY_MAXBYTE   = 1000;	// 1000 char
-	var $_ATTACH_MAXBYTE = 1049000;	// 1 MB
+	public $_BODY_REJECT_MAXBYTE = 200; 	// 200 char
+	public $_BODY_MAXBYTE   = 1000;	// 1000 char
+	public $_ATTACH_MAXBYTE = 1049000;	// 1 MB
 
-	var $_DENY_MAILER_PREG = '/(Oshirase|Microsoft\s*CDO|Mail\s*Magic|Easy\s*DM|Friend\s*Mailer|Extra\s*Japan|The\s*Bat|BSMTP|magmag|Blat|Douhou|DM\s*Mailer|IM2001|=\?ISO\-2202\-JP\?Q\?Q`dsV!0Ji;]Id9\?=)/i';
+	public $_DENY_MAILER_PREG = '/(Oshirase|Microsoft\s*CDO|Mail\s*Magic|Easy\s*DM|Friend\s*Mailer|Extra\s*Japan|The\s*Bat|BSMTP|magmag|Blat|Douhou|DM\s*Mailer|IM2001|=\?ISO\-2202\-JP\?Q\?Q`dsV!0Ji;]Id9\?=)/i';
 
-	var $_DENY_MAIL_FROM_ARRAY = array('163.com','bigfoot.com','boss.com','mine.nu','51444.tv','nyan_nyan_cat_2004@yahoo.co.jp','motto.zapto.org','i-towns.net','ori-g.net','jewelry.polty.cc','birabira4u.com','wecl-online.com');
+	public $_DENY_MAIL_FROM_ARRAY = array('163.com','bigfoot.com','boss.com','mine.nu','51444.tv','nyan_nyan_cat_2004@yahoo.co.jp','motto.zapto.org','i-towns.net','ori-g.net','jewelry.polty.cc','birabira4u.com','wecl-online.com');
 
 // Function ereg() is deprecated
 // the underlinea are continued 25 or more 
-	var $_PREG_UNDERLINE_25 = "/[_]{25,}/";
+	public $_PREG_UNDERLINE_25 = "/[_]{25,}/";
 
 // 03-5321-1111
-	var $_PREG_TEL_FORMAT_1 = "/[\d\-]{12,13}/";
+	public $_PREG_TEL_FORMAT_1 = "/[\d\-]{12,13}/";
 
 // 0353211111
-	var $_PREG_TEL_FORMAT_2 = "/\d{10,11}/";
+	public $_PREG_TEL_FORMAT_2 = "/\d{10,11}/";
 
-	var $_MARK_ASTERISK_10 = "**********";
+	public $_MARK_ASTERISK_10 = "**********";
 
-	var $_AD_WORD_ARRAY = array(
+	public $_AD_WORD_ARRAY = array(
 		"http://auction.msn.co.jp/" ,
 		"Do You Yahoo!?" ,
 		"Yahoo! BB is Broadband by Yahoo!" ,
@@ -66,24 +66,24 @@ class webphoto_edit_mail_check
 	);
 
 // for i-phone
-	var $_ALLOW_BODY_US_ASCII = true;
-	var $_US_ASCII = 'us-ascii';
+	public $_ALLOW_BODY_US_ASCII = true;
+	public $_US_ASCII = 'us-ascii';
 
-	var $_FLAG_STRICT       = true;
+	public $_FLAG_STRICT       = true;
 
-	var $_MAILTO            = null;
-	var $_DENY_TITLE_PREG   = null;
-	var $_DENY_BODY_PREG    = null;
-	var $_REMOVE_WORD_ARRAY = null;
+	public $_MAILTO            = null;
+	public $_DENY_TITLE_PREG   = null;
+	public $_DENY_BODY_PREG    = null;
+	public $_REMOVE_WORD_ARRAY = null;
 
-	var $_allowed_mimes    = null;
-	var $_allowed_exts     = null;
-	var $_allowed_charsets = null;
+	public $_allowed_mimes    = null;
+	public $_allowed_exts     = null;
+	public $_allowed_charsets = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_mail_check( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->set_deny_title_preg( _WEBPHOTO_MAIL_DENY_TITLE_PREG );
 	$this->set_deny_body_preg(  _WEBPHOTO_MAIL_DENY_TITLE_PREG );

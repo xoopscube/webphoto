@@ -22,75 +22,78 @@
 // webphoto_imagemanager_submit -> webphoto_edit_imagemanager_submit
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_imagemanager_submit
 //=========================================================
 class webphoto_edit_imagemanager_submit extends webphoto_edit_base
 {
-	var $_factory_create_class;
-	var $_upload_class;
-	var $_redirect_class;
+	public $_factory_create_class;
+	public $_upload_class;
+	public $_redirect_class;
 
-	var $_has_insertable     = false;
-	var $_has_superinsert    = false;
-	var $_has_editable       = false;
-	var $_has_deletable      = false;
-	var $_has_html           = false;
-	var $_has_file           = false;
-	var $_has_image_resize   = false;
-	var $_has_image_rotate   = false;
+	public $_has_insertable     = false;
+	public $_has_superinsert    = false;
+	public $_has_editable       = false;
+	public $_has_deletable      = false;
+	public $_has_html           = false;
+	public $_has_file           = false;
+	public $_has_image_resize   = false;
+	public $_has_image_rotate   = false;
 
 // post
-	var $_post_item_id   = 0;
-	var $_item_cat_id    = 0;
-	var $_preview_name   = null;
-	var $_tag_name_array = null;
-	var $_rotate_angle   = 0;
+	public $_post_item_id   = 0;
+	public $_item_cat_id    = 0;
+	public $_preview_name   = null;
+	public $_tag_name_array = null;
+	public $_rotate_angle   = 0;
 
 // upload
-	var $_photo_tmp_name   = null;
-	var $_photo_media_type = null;
-	var $_photo_media_name = null;
-	var $_jpeg_tmp_name    = null;
-	var $_jpeg_media_type  = null;
-	var $_file_tmp_name_array   = array();
-	var $_file_media_type_array = array();
+	public $_photo_tmp_name   = null;
+	public $_photo_media_type = null;
+	public $_photo_media_name = null;
+	public $_jpeg_tmp_name    = null;
+	public $_jpeg_media_type  = null;
+	public $_file_tmp_name_array   = array();
+	public $_file_media_type_array = array();
 
-	var $_image_tmp_file      = null;
-	var $_photo_param         = null ;
-	var $_media_file_params   = null;
-	var $_is_video_thumb_form = false;
+	public $_image_tmp_file      = null;
+	public $_photo_param         = null ;
+	public $_media_file_params   = null;
+	public $_is_video_thumb_form = false;
 
-	var $_row_fetch    = null;
-	var $_row_create   = null ;
+	public $_row_fetch    = null;
+	public $_row_create   = null ;
 
-	var $_redirect_time = 0 ;
-	var $_redirect_url  = null ;
-	var $_redirect_msg  = null ;
+	public $_redirect_time = 0 ;
+	public $_redirect_url  = null ;
+	public $_redirect_msg  = null ;
 
-	var $_REDIRECT_MSG_ERROR = 'ERROR not set message';
+	public $_REDIRECT_MSG_ERROR = 'ERROR not set message';
 
-	var $_MSG_LEVEL   = 0;
-	var $_MSG_FIRST   = false;
-	var $_TIME_FAILED = 5;
+	public $_MSG_LEVEL   = 0;
+	public $_MSG_FIRST   = false;
+	public $_TIME_FAILED = 5;
 
-	var $_PHOTO_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
-	var $_JPEG_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_JPEG ;
+	public $_PHOTO_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
+	public $_JPEG_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_JPEG ;
 
 // for submit_imagemanager
-	var $_FLAG_FETCH_ALLOW_ALL = false ;
+	public $_FLAG_FETCH_ALLOW_ALL = false ;
 
 // for admin
-	var $_FLAG_ADMIN = false;
+	public $_FLAG_ADMIN = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_imagemanager_submit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_factory_create_class =& webphoto_edit_factory_create::getInstance( 
 		$dirname , $trust_dirname );
@@ -195,7 +198,7 @@ function submit_check_redirect( $ret )
 			$url = $this->_MODULE_URL ;
 			$msg = 'Directory Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_format_error();
+				$msg .= '<br>'.$this->get_format_error();
 			}
 			break;
 

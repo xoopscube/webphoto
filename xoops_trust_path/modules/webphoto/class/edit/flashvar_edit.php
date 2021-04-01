@@ -20,34 +20,37 @@
 // _C_WEBPHOTO_UPLOAD_FIELD_PLOGO
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_flashvar_edit
 //=========================================================
 class webphoto_edit_flashvar_edit extends webphoto_edit_base
 {
-	var $_config_class;
-	var $_flashvar_handler;
-	var $_upload_class;
-	var $_image_cmd_class;
+	public $_config_class;
+	public $_flashvar_handler;
+	public $_upload_class;
+	public $_image_cmd_class;
 
-	var $_cfg_logo_width ;
+	public $_cfg_logo_width ;
 
-	var $_newid = 0 ;
-	var $_error_upload = false;
+	public $_newid = 0 ;
+	public $_error_upload = false;
 
-	var $_PLAYERLOGO_SIZE       = _C_WEBPHOTO_PLAYERLOGO_SIZE ;	// 30 KB
-	var $_PLAYERLOGO_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_PLOGO ;
+	public $_PLAYERLOGO_SIZE       = _C_WEBPHOTO_PLAYERLOGO_SIZE ;	// 30 KB
+	public $_PLAYERLOGO_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_PLOGO ;
 
-	var $_NORMAL_EXTS = null;
+	public $_NORMAL_EXTS = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_flashvar_edit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_flashvar_handler 
 		=& webphoto_flashvar_handler::getInstance( $dirname , $trust_dirname );

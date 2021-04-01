@@ -25,20 +25,21 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_playlist_build extends webphoto_base_ini
 {
-	var $_playlist_class ;
-	var $_icon_build_class;
-	var $_msg_class;
+	public $_playlist_class ;
+	public $_icon_build_class;
+	public $_msg_class;
 
-	var $_item_row = null;
+	public $_item_row = null;
 
-	var $_THUMB_EXT_DEFAULT = 'playlist';
+	public $_THUMB_EXT_DEFAULT = 'playlist';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_playlist_build( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_playlist_class   =& webphoto_playlist::getInstance( 
 		$dirname , $trust_dirname );
@@ -57,7 +58,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // public 
 //---------------------------------------------------------
-function is_type( $row )
+public function is_type( $row )
 {
 	if ( $row['item_playlist_type'] ) {
 		return true ;
@@ -66,7 +67,7 @@ function is_type( $row )
 }
 
 // called before crete item
-function build_row( $row )
+public function build_row( $row )
 {
 	if ( ! $this->is_type( $row ) ) {
 		return 1 ;	// no action
@@ -116,7 +117,7 @@ function build_row( $row )
 }
 
 // called after crete item
-function create_cache( $row )
+public function create_cache( $row )
 {
 	if ( ! $this->is_type( $row ) ) {
 		return 1 ;	// no action
@@ -138,7 +139,7 @@ function create_cache( $row )
 	return 0 ;	// OK
 }
 
-function build_title( $row )
+public function build_title( $row )
 {
 	$playlist_dir  = $row['item_playlist_dir'];
 	$playlist_feed = $row['item_playlist_feed'];
@@ -167,7 +168,7 @@ function build_title( $row )
 	return $title ;
 }
 
-function get_item_row()
+public function get_item_row()
 {
 	return $this->_item_row ;
 }
@@ -175,7 +176,7 @@ function get_item_row()
 //---------------------------------------------------------
 // icon
 //---------------------------------------------------------
-function build_row_icon_if_empty( $row, $ext=null )
+public function build_row_icon_if_empty( $row, $ext=null )
 {
 	return $this->_icon_build_class->build_row_icon_if_empty( $row, $ext );
 }

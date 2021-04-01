@@ -23,19 +23,20 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_flash_create extends webphoto_edit_base_create
 {
-	var $_ext_class ;
+	public $_ext_class ;
 
-	var $_SUB_DIR_FLASHS = 'flashs';
-	var $_FLASH_EXT      = 'flv';
-	var $_FLASH_MIME     = 'video/x-flv';
-	var $_FLASH_MEDIUM   = 'video';
+	public $_SUB_DIR_FLASHS = 'flashs';
+	public $_FLASH_EXT      = 'flv';
+	public $_FLASH_MIME     = 'video/x-flv';
+	public $_FLASH_MEDIUM   = 'video';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_flash_create( $dirname , $trust_dirname  )
+public function __construct( $dirname , $trust_dirname  )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname  );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname  );
 
 	$this->_ext_class 
 		=& webphoto_ext::getInstance( $dirname , $trust_dirname );

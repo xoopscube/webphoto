@@ -65,17 +65,18 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_action extends webphoto_edit_submit
 {
-	var $_delete_class;
-	var $_file_action_class;
+	public $_delete_class;
+	public $_file_action_class;
 
-	var $_delete_error = '';
+	public $_delete_error = '';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_action( $dirname , $trust_dirname )
+function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_submit( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_submit( $dirname , $trust_dirname );
 
 	$this->_delete_class 
 		=& webphoto_edit_item_delete::getInstance( $dirname , $trust_dirname );
@@ -578,7 +579,7 @@ function video_flash_delete( $item_row )
 	if ( !$ret ) {
 		$this->_delete_error  = "DB Error";
 		if ( $this->_FLAG_ADMIN ) {
-			$this->_delete_error .= "<br />\n".$this->get_format_error() ;
+			$this->_delete_error .= "<br>\n".$this->get_format_error() ;
 		}
 		return false;
 	}
@@ -615,7 +616,7 @@ function jpeg_thumb_delete( $item_row, $flag_thmub=true )
 	if ( !$ret ) {
 		$this->_delete_error  = "DB Error";
 		if ( $this->_FLAG_ADMIN ) {
-			$this->_delete_error .= "<br />\n".$this->get_format_error() ;
+			$this->_delete_error .= "<br>\n".$this->get_format_error() ;
 		}
 		return false;
 	}
@@ -646,7 +647,7 @@ function file_delete_common( $item_row, $item_name )
 	if ( !$ret ) {
 		$this->_delete_error  = "DB Error";
 		if ( $this->_FLAG_ADMIN ) {
-			$this->_delete_error .= "<br />\n".$this->get_format_error() ;
+			$this->_delete_error .= "<br>\n".$this->get_format_error() ;
 		}
 		return false;
 	}
@@ -660,7 +661,7 @@ function delete_file( $item_row, $item_name )
 	if ( $ret == -2 ) {
 		$this->_delete_error  = "DB Error";
 		if ( $this->_FLAG_ADMIN ) {
-			$this->_delete_error .= "<br />\n".$this->_file_action_class->get_format_error() ;
+			$this->_delete_error .= "<br>\n".$this->_file_action_class->get_format_error() ;
 		}
 	}
 	return $ret;

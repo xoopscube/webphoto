@@ -50,64 +50,65 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_submit extends webphoto_edit_imagemanager_submit
 {
-	var $_page_class ;
-	var $_editor_class ;
-	var $_tag_build_class;
-	var $_show_image_class;
-	var $_external_build_class ;
-	var $_embed_build_class ;
-	var $_playlist_build_class ;
-	var $_photo_form_class ;
-	var $_misc_form_class ;
-	var $_mail_send_class ;
+	public $_page_class ;
+	public $_editor_class ;
+	public $_tag_build_class;
+	public $_show_image_class;
+	public $_external_build_class ;
+	public $_embed_build_class ;
+	public $_playlist_build_class ;
+	public $_photo_form_class ;
+	public $_misc_form_class ;
+	public $_mail_send_class ;
 
-	var $_cfg_addposts ;
-	var $_cfg_makethumb ;
-	var $_cfg_thumb_width ;
-	var $_cfg_thumb_height ;
-	var $_cfg_allownoimage ;
-	var $_cfg_file_dir ;
-	var $_cfg_file_size ;
+	public $_cfg_addposts ;
+	public $_cfg_makethumb ;
+	public $_cfg_thumb_width ;
+	public $_cfg_thumb_height ;
+	public $_cfg_allownoimage ;
+	public $_cfg_file_dir ;
+	public $_cfg_file_size ;
 
-	var $_ini_file_jpeg;
+	public $_ini_file_jpeg;
 
 // post
-	var $_post_form_embed    = 0;
-	var $_post_form_playlist = 0;
-	var $_post_form_editor   = 0;
-	var $_checkbox_array = array();
-	var $_form_action    = null;
-	var $_post_rotate    = null;
+	public $_post_form_embed    = 0;
+	public $_post_form_playlist = 0;
+	public $_post_form_editor   = 0;
+	public $_checkbox_array = array();
+	public $_form_action    = null;
+	public $_post_rotate    = null;
 
-	var $_is_video_thumb_form = false;
+	public $_is_video_thumb_form = false;
 
-	var $_row_current  = null;
-	var $_row_update   = null ;
-	var $_row_fetch    = null;
+	public $_row_current  = null;
+	public $_row_update   = null ;
+	public $_row_fetch    = null;
 
-	var $_URL_DAFAULT_IMAGE;
-	var $_URL_PREVIEW_IMAGE;
-	var $_URL_PIXEL_IMAGE ;
-	var $_PREVIEW_IMAGE_WIDTH  = 64;
-	var $_PREVIEW_IMAGE_HEIGHT = 64;
+	public $_URL_DAFAULT_IMAGE;
+	public $_URL_PREVIEW_IMAGE;
+	public $_URL_PIXEL_IMAGE ;
+	public $_PREVIEW_IMAGE_WIDTH  = 64;
+	public $_PREVIEW_IMAGE_HEIGHT = 64;
 
-	var $_THIS_FCT    = null;
-	var $_THIS_URL    = null;
-	var $_FROM_ACTION = null;
-	var $_FORM_MODE   = null;
-	var $_FLAG_ADMIN  = false;
+	public $_THIS_FCT    = null;
+	public $_THIS_URL    = null;
+	public $_FROM_ACTION = null;
+	public $_FORM_MODE   = null;
+	public $_FLAG_ADMIN  = false;
 
-	var $_MAX_PHOTO_FILE = _C_WEBPHOTO_MAX_PHOTO_FILE ;
+	public $_MAX_PHOTO_FILE = _C_WEBPHOTO_MAX_PHOTO_FILE ;
 
-	var $_FILE_LIST;
-	var $_FILE_KIND_NAME_LIST;
+	public $_FILE_LIST;
+	public $_FILE_KIND_NAME_LIST;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_submit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_imagemanager_submit( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_imagemanager_submit( $dirname , $trust_dirname );
 
 	$this->_page_class       
 		=& webphoto_page::getInstance( $dirname , $trust_dirname );

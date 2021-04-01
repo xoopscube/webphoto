@@ -18,33 +18,36 @@
 // _C_WEBPHOTO_UPLOAD_FIELD_PLOGO
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_redirect
 //=========================================================
 class webphoto_edit_redirect extends webphoto_edit_base
 {
-	var $_redirect_time = 0 ;
-	var $_redirect_url  = null ;
-	var $_redirect_msg  = null ;
+	public $_redirect_time = 0 ;
+	public $_redirect_url  = null ;
+	public $_redirect_msg  = null ;
 
-	var $_TIME_SUCCESS = 1;
-	var $_TIME_PENDING = 3;
-	var $_TIME_FAILED  = 5;
-	var $_URL_SUCCESS  = null ;
-	var $_URL_PENDING  = null ;
-	var $_URL_FAILED   = null ;
-	var $_MSG_SUCCESS  = 'success' ;
-	var $_MSG_PENDING  = 'pending' ;
-	var $_MSG_FAILED   = 'failed' ;
+	public $_TIME_SUCCESS = 1;
+	public $_TIME_PENDING = 3;
+	public $_TIME_FAILED  = 5;
+	public $_URL_SUCCESS  = null ;
+	public $_URL_PENDING  = null ;
+	public $_URL_FAILED   = null ;
+	public $_MSG_SUCCESS  = 'success' ;
+	public $_MSG_PENDING  = 'pending' ;
+	public $_MSG_FAILED   = 'failed' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_redirect( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_base( $dirname, $trust_dirname );
 
 	$this->preload_init();
 	$this->preload_constant();
@@ -185,7 +188,7 @@ function build_redirect( $param )
 	}
 
 	$msg_extra = isset($param['msg_extra']) ? 
-		$param['msg_extra'] : $this->get_format_msg_array().'<br />'.$msg_success ;
+		$param['msg_extra'] : $this->get_format_msg_array().'<br>'.$msg_success ;
 
 // pending
 	if ( $is_failed ) {

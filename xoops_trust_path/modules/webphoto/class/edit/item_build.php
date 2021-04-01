@@ -38,30 +38,31 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_item_build extends webphoto_edit_base_create
 {
-	var $_xoops_class;
-	var $_post_class;
-	var $_item_handler;
-	var $_cat_handler;
-	var $_perm_class;
-	var $_use_item_class;
+	public $_xoops_class;
+	public $_post_class;
+	public $_item_handler;
+	public $_cat_handler;
+	public $_perm_class;
+	public $_use_item_class;
 
-	var $_xoops_uid;
-	var $_cfg_perm_item_read ;
-	var $_has_superinsert ;
-	var $_has_html ;
+	public $_xoops_uid;
+	public $_cfg_perm_item_read ;
+	public $_has_superinsert ;
+	public $_has_html ;
 
-	var $_flag_admin = false;
+	public $_flag_admin = false;
 
-	var $_FILE_LIST;
-	var $_NO_TITLE   = 'no title' ;
-	var $_PLAYER_ID_FLASH_DEFAULT = 1;
+	public $_FILE_LIST;
+	public $_NO_TITLE   = 'no title' ;
+	public $_PLAYER_ID_FLASH_DEFAULT = 1;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_item_build( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_xoops_class   =& webphoto_xoops_base::getInstance();
 	$this->_post_class    =& webphoto_lib_post::getInstance();

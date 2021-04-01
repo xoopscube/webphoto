@@ -21,22 +21,23 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_swf_create extends webphoto_edit_base_create
 {
-	var $_ext_class ;
+	public $_ext_class ;
 
-	var $_param_ext    = 'swf' ;
-	var $_param_dir    = 'swfs';
+	public $_param_ext    = 'swf' ;
+	public $_param_dir    = 'swfs';
 	var	$_param_mime   = 'application/x-shockwave-flash' ;
-	var $_param_medium = '' ;
-	var $_param_kind   = _C_WEBPHOTO_FILE_KIND_SWF ;
-	var $_msg_created  = 'create swf' ;
-	var $_msg_failed   = 'fail to create swf' ;
+	public $_param_medium = '' ;
+	public $_param_kind   = _C_WEBPHOTO_FILE_KIND_SWF ;
+	public $_msg_created  = 'create swf' ;
+	public $_msg_failed   = 'fail to create swf' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_swf_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_ext_class =& webphoto_ext::getInstance( $dirname , $trust_dirname );
 }

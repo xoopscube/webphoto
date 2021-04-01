@@ -19,21 +19,22 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_use_item extends webphoto_base_this
 {
-	var $_cfg_gmap_apikey;
-	var $_cfg_perm_item_read;
+	public $_cfg_gmap_apikey;
+	public $_cfg_perm_item_read;
 
-	var $_item_array;
-	var $_show_array;
-	var $_edit_array;
+	public $_item_array;
+	public $_show_array;
+	public $_edit_array;
 
-	var $_flag_admin = false;
+	public $_flag_admin = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_use_item( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_cfg_gmap_apikey    = $this->get_config_by_name( 'gmap_apikey' );
 	$this->_cfg_perm_item_read = $this->get_config_by_name( 'perm_item_read' );

@@ -26,29 +26,32 @@
 // webphoto_ffmpeg
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_misc_form
 //=========================================================
 class webphoto_edit_misc_form extends webphoto_edit_form
 {
-	var $_editor_class ;
-	var $_ffmpeg_class;
-	var $_icon_build_class ;
-	var $_kind_class;
+	public $_editor_class ;
+	public $_ffmpeg_class;
+	public $_icon_build_class ;
+	public $_kind_class;
 
-	var $_ini_kind_list_video = null;
+	public $_ini_kind_list_video = null;
 
-	var $_VIDEO_THUMB_WIDTH = 120;
-	var $_VIDEO_THUMB_MAX   = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
+	public $_VIDEO_THUMB_WIDTH = 120;
+	public $_VIDEO_THUMB_MAX   = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_misc_form( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_edit_form( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_form( $dirname, $trust_dirname );
 
 	$this->_editor_class 
 		=& webphoto_editor::getInstance( $dirname, $trust_dirname );
@@ -73,11 +76,11 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // editor
 //---------------------------------------------------------
-function build_form_editor_with_template( $mode, $item_row )
+public function build_form_editor_with_template( $mode, $item_row )
 {
 	$template = 'db:'. $this->_DIRNAME .'_form_editor.html';
 
-	list( $show_editor, $param_editor ) =
+	[ $show_editor, $param_editor ] =
 		$this->build_form_editor( $item_row, $mode );
 
 	if ( ! $show_editor ) {
@@ -96,7 +99,7 @@ function build_form_editor_with_template( $mode, $item_row )
 	return $tpl->fetch( $template ) ;
 }
 
-function build_form_editor( $item_row, $mode=null )
+public function build_form_editor( $item_row, $mode=null )
 {
 	$options  = $this->_editor_class->build_list_options( true );
 
@@ -116,7 +119,7 @@ function build_form_editor( $item_row, $mode=null )
 	return $arr; 
 }
 
-function build_form_editor_with_param( $row, $param )
+public function build_form_editor_with_param( $row, $param )
 {
 	$mode    = $param['mode'] ;
 	$options = $param['options'] ;
@@ -153,7 +156,7 @@ function build_form_editor_with_param( $row, $param )
 	return $arr;
 }
 
-function item_editor_select_options( $options )
+public function item_editor_select_options( $options )
 {
 	$value = $this->get_item_editor( true );
 	return $this->build_form_options( $value, $options );
@@ -162,7 +165,7 @@ function item_editor_select_options( $options )
 //---------------------------------------------------------
 // embed
 //---------------------------------------------------------
-function build_form_embed_with_template( $mode, $item_row )
+public function build_form_embed_with_template( $mode, $item_row )
 {
 	$template = 'db:'. $this->_DIRNAME .'_form_embed.html';
 
@@ -182,7 +185,7 @@ function build_form_embed_with_template( $mode, $item_row )
 	return $tpl->fetch( $template ) ;
 }
 
-function build_form_embed( $item_row )
+public function build_form_embed( $item_row )
 {
 	if ( ! $this->is_show_form_embed() ) {
 		return array( false, array() );
@@ -195,7 +198,7 @@ function build_form_embed( $item_row )
 	return $arr; 
 }
 
-function build_form_embed_with_row( $item_row )
+public function build_form_embed_with_row( $item_row )
 {
 	$this->set_row( $item_row );
 
@@ -208,7 +211,7 @@ function build_form_embed_with_row( $item_row )
 //---------------------------------------------------------
 // video thumb
 //---------------------------------------------------------
-function build_form_video_thumb_with_template( $mode, $row )
+public function build_form_video_thumb_with_template( $mode, $row )
 {
 	$template = 'db:'. $this->_DIRNAME .'_form_video_thumb.html';
 
@@ -223,7 +226,7 @@ function build_form_video_thumb_with_template( $mode, $row )
 	return $tpl->fetch( $template ) ;
 }
 
-function build_form_video_thumb( $row, $flag_row )
+public function build_form_video_thumb( $row, $flag_row )
 {
 	$param = array(
 		'video_thumb_array'    => $this->build_video_thumb_array( $row ) ,
@@ -239,7 +242,7 @@ function build_form_video_thumb( $row, $flag_row )
 	return $arr;
 }
 
-function build_video_thumb_array( $row )
+public function build_video_thumb_array( $row )
 {
 	$item_id = $row['item_id'];
 	$ext     = $row['item_ext'];
@@ -282,7 +285,7 @@ function build_video_thumb_array( $row )
 //---------------------------------------------------------
 // redo
 //---------------------------------------------------------
-function build_form_redo_with_template( $mode, $item_row, $flash_row )
+public function build_form_redo_with_template( $mode, $item_row, $flash_row )
 {
 	$template = 'db:'. $this->_DIRNAME .'_form_redo.html';
 
@@ -302,7 +305,7 @@ function build_form_redo_with_template( $mode, $item_row, $flash_row )
 	return $tpl->fetch( $template ) ;
 }
 
-function build_form_redo_by_item_row( $item_row )
+public function build_form_redo_by_item_row( $item_row )
 {
 	if ( ! $this->is_show_form_redo( $item_row ) ) {
 		return array( false, array() ) ;
@@ -319,7 +322,7 @@ function build_form_redo_by_item_row( $item_row )
 	return $arr;
 }
 
-function build_form_redo_by_flash_row( $flash_row )
+public function build_form_redo_by_flash_row( $flash_row )
 {
 	$arr = array(
 		'flash_url_s' => $this->build_flash_url_s( $flash_row )
@@ -327,13 +330,13 @@ function build_form_redo_by_flash_row( $flash_row )
 	return $arr;
 }
 
-function build_flash_url_s( $flash_row )
+public function build_flash_url_s( $flash_row )
 {
 	return $this->sanitize( 
 		$this->build_file_url_by_file_row( $flash_row ) );
 }
 
-function is_show_form_redo( $item_row )
+public function is_show_form_redo( $item_row )
 {
 	if ( $this->is_video_kind( $item_row['item_kind'] ) ) {
 		return true;
@@ -341,7 +344,7 @@ function is_show_form_redo( $item_row )
 	return false ;
 }
 
-function is_video_kind( $kind )
+public function is_video_kind( $kind )
 {
 	if ( in_array( $kind, $this->_ini_kind_list_video ) ) {
 		return true;
@@ -352,4 +355,4 @@ function is_video_kind( $kind )
 // --- class end ---
 }
 
-?>
+

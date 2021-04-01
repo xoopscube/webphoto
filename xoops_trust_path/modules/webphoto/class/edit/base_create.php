@@ -28,30 +28,31 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_base_create extends webphoto_base_this
 {
-	var $_msg_class;
-	var $_mime_class;
+	public $_msg_class;
+	public $_mime_class;
 
-	var $_result       = null;
-	var $_flag_created = false ;
-	var $_flag_failed  = false ;
+	public $_result       = null;
+	public $_flag_created = false ;
+	public $_flag_failed  = false ;
 
-	var $_IMAGE_MEDIUM = 'image';
-	var $_EXT_PNG      = 'png';
+	public $_IMAGE_MEDIUM = 'image';
+	public $_EXT_PNG      = 'png';
 
-	var $_param_ext    = null ;
-	var	$_param_mime   = null ;
-	var $_param_medium = null ;
-	var $_param_kind   = null ;
-	var $_param_dir    = null;
-	var $_msg_created  = null ;
-	var $_msg_failed   = null ;
+	public $_param_ext    = null ;
+	public $_param_mime   = null ;
+	public $_param_medium = null ;
+	public $_param_kind   = null ;
+	public $_param_dir    = null;
+	public $_msg_created  = null ;
+	public $_msg_failed   = null ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_base_create( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_mime_class  =& webphoto_mime::getInstance( $dirname, $trust_dirname );
 
@@ -63,7 +64,7 @@ function webphoto_edit_base_create( $dirname, $trust_dirname )
 //---------------------------------------------------------
 // create copy param
 //---------------------------------------------------------
-function create_copy_param( $param )
+public function create_copy_param( $param )
 {
 	$item_id  = $param['item_id'];
 	$src_file = $param['src_file'];
@@ -79,13 +80,13 @@ function create_copy_param( $param )
 //---------------------------------------------------------
 // file
 //---------------------------------------------------------
-function build_name_param( $item_id )
+public function build_name_param( $item_id )
 {
 	return $this->build_random_name_param( 
 		$item_id, $this->_param_ext, $this->_param_dir );
 }
 
-function build_random_name_param( $item_id, $src_ext, $sub_dir )
+public function build_random_name_param( $item_id, $src_ext, $sub_dir )
 {
 	$name = $this->build_random_file_name( $item_id, $src_ext );
 	$path = $this->_UPLOADS_PATH .'/'. $sub_dir .'/'. $name ;
@@ -101,7 +102,7 @@ function build_random_name_param( $item_id, $src_ext, $sub_dir )
 	return $arr ;
 }
 
-function build_image_file_param( $path, $name, $ext, $kind )
+public function build_image_file_param( $path, $name, $ext, $kind )
 {
 	$info = $this->build_image_info( $path, $ext );
 
@@ -122,7 +123,7 @@ function build_image_file_param( $path, $name, $ext, $kind )
 	return $arr;
 }
 
-function build_image_info( $path, $ext )
+public function build_image_info( $path, $ext )
 {
 	$size     = 0;
 	$width    = 0;
@@ -161,7 +162,7 @@ function build_image_info( $path, $ext )
 	return $arr;
 }
 
-function build_file_param_by_name_param( $name_param )
+public function build_file_param_by_name_param( $name_param )
 {
 	$name  = $name_param['name'] ;
 	$path  = $name_param['path'] ;
@@ -186,7 +187,7 @@ function build_file_param_by_name_param( $name_param )
 	return $param;
 }
 
-function build_result( $ret, $name_param )
+public function build_result( $ret, $name_param )
 {
 	$file_param = null;
 	$this->_flag_created = false ;
@@ -207,7 +208,7 @@ function build_result( $ret, $name_param )
 	return $file_param ;
 }
 
-function build_copy_result( $name_param )
+public function build_copy_result( $name_param )
 {
 	if ( file_exists( $name_param['file'] ) ) {
 		$ret = 1;
@@ -221,17 +222,17 @@ function build_copy_result( $name_param )
 //---------------------------------------------------------
 // msg class
 //---------------------------------------------------------
-function clear_msg_array()
+public function clear_msg_array()
 {
 	$this->_msg_class->clear_msg_array() ;
 }
 
-function get_msg_array()
+public function get_msg_array()
 {
 	return $this->_msg_class->get_msg_array() ;
 }
 
-function set_msg( $msg, $flag_highlight=false )
+public function set_msg( $msg, $flag_highlight=false )
 {
 	return $this->_msg_class->set_msg( $msg, $flag_highlight ) ;
 }
@@ -239,17 +240,17 @@ function set_msg( $msg, $flag_highlight=false )
 //---------------------------------------------------------
 // error class
 //---------------------------------------------------------
-function clear_errors()
+public function clear_errors()
 {
 	$this->_error_class->clear_errors() ;
 }
 
-function get_errors()
+public function get_errors()
 {
 	return $this->_error_class->get_errors() ;
 }
 
-function set_error( $msg )
+public function set_error( $msg )
 {
 	return $this->_error_class->set_error( $msg ) ;
 }
@@ -257,38 +258,38 @@ function set_error( $msg )
 //---------------------------------------------------------
 // get param
 //---------------------------------------------------------
-function set_result( $v )
+public function set_result( $v )
 {
 	$this->_result = $v;
 }
 
-function set_flag_created()
+public function set_flag_created()
 {
 	$this->_flag_created = true;
 }
 
-function set_flag_failed()
+public function set_flag_failed()
 {
 	$this->_flag_failed = true ;
 }
 
-function clear_flags()
+public function clear_flags()
 {
 	$this->_flag_created = false;
 	$this->_flag_failed  = false;
 }
 
-function get_result()
+public function get_result()
 {
 	return $this->_result;
 }
 
-function get_flag_created()
+public function get_flag_created()
 {
 	return $this->_flag_created ;
 }
 
-function get_flag_failed()
+public function get_flag_failed()
 {
 	return $this->_flag_failed ;
 }

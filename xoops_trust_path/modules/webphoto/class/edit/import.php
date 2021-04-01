@@ -40,42 +40,43 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_import extends webphoto_edit_base
 {
-	var $_vote_handler;
-	var $_myalbum_handler;
-	var $_xoops_comments_handler;
-	var $_factory_create_class;
+	public $_vote_handler;
+	public $_myalbum_handler;
+	public $_xoops_comments_handler;
+	public $_factory_create_class;
 
 // post
-	var $_post_op;
-	var $_post_offset;
-	var $_next;
+	public $_post_op;
+	public $_post_offset;
+	public $_next;
 
-	var $_cfg_makethumb;
-	var $_cfg_use_ffmpeg;
-	var $_cfg_cat_width ;
-	var $_cfg_csub_width ;
+	public $_cfg_makethumb;
+	public $_cfg_use_ffmpeg;
+	public $_cfg_cat_width ;
+	public $_cfg_csub_width ;
 
-	var $_myalbum_dirname;
-	var $_myalbum_mid;
-	var $_myalbum_photos_dir;
-	var $_myalbum_thumbs_dir;
+	public $_myalbum_dirname;
+	public $_myalbum_mid;
+	public $_myalbum_photos_dir;
+	public $_myalbum_thumbs_dir;
 
-	var $_video_param = null ;
+	public $_video_param = null ;
 
-	var $_FLAG_RESIZE = false;
+	public $_FLAG_RESIZE = false;
 
-	var $_LIMIT = 100;
+	public $_LIMIT = 100;
 
-	var $_CONST_DEBUG_SQL;
+	public $_CONST_DEBUG_SQL;
 
-	var $_EXT_GIF = 'gif';
+	public $_EXT_GIF = 'gif';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_import( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_cat_handler->set_debug_error( 1 );
 	$this->_item_create_class->set_debug_error( 1 );
@@ -247,13 +248,13 @@ function add_photo_from_myalbum( $myalbum_id, $new_cid, $myalbum_row )
 	$src_file = $param['src_file'];
 	if ( ! $this->is_readable_file( $src_file ) ) {
 		echo $this->highlight( ' fail to read file : '.$src_file ) ;
-		echo "<br />\n";
+		echo "<br>\n";
 		return false ;
 	}
 
 	$this->_factory_create_class->create_item_from_param( $item_row, $param );
 	echo $this->_factory_create_class->get_main_msg();
-	echo "<br />\n";
+	echo "<br>\n";
 	return false ;
 }
 
@@ -365,7 +366,7 @@ function insert_comments_from_src( $itemid, $src_rows )
 		$com_pid     = $src_row['com_pid'];
 		$com_title_s = $this->sanitize( $src_row['com_title'] );
 
-		echo "comment: $com_id $com_title_s <br />\n";
+		echo "comment: $com_id $com_title_s <br>\n";
 
 		$row = $src_row;
 		$row['com_modid']  = $this->_MODULE_ID ;
@@ -385,7 +386,7 @@ function insert_comments_from_src( $itemid, $src_rows )
 				$com_rootid_new = $com_id_arr[$com_pid]['com_rootid_new'];
 				$com_pid_new    = $com_id_arr[$com_pid]['com_id_new'];
 			} else {
-				echo $this->highlight( "pid convert error: $com_id" )."<br />\n";
+				echo $this->highlight( "pid convert error: $com_id" )."<br>\n";
 			}
 		}
 
@@ -402,17 +403,17 @@ function insert_comments_from_src( $itemid, $src_rows )
 //---------------------------------------------------------
 function print_import_count( $count )
 {
-	echo "<br />\n";
+	echo "<br>\n";
 	echo "<b>";
 	echo sprintf( _AM_WEBPHOTO_FMT_IMPORTSUCCESS , $count ) ;
-	echo "</b><br />\n";
+	echo "</b><br>\n";
 }
 
 function print_finish()
 {
-	echo "<br /><hr />\n";
+	echo "<br><hr />\n";
 	echo "<h4>FINISHED</h4>\n";
-	echo '<a href="index.php">GOTO Admin Menu</a>'."<br />\n";
+	echo '<a href="index.php">GOTO Admin Menu</a>'."<br>\n";
 }
 
 // --- class end ---

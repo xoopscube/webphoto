@@ -21,36 +21,39 @@
 // added set_flag_chmod()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_mail_retrieve
 //=========================================================
 class webphoto_edit_mail_retrieve extends webphoto_edit_mail_photo
 {
-	var $_pop_class ;
+	public $_pop_class ;
 
-	var $_flag_retrive_chmod = true ;
+	public $_flag_retrive_chmod = true ;
 
-	var $_is_set_mail = false;
-	var $_has_mail    = false;
+	public $_is_set_mail = false;
+	public $_has_mail    = false;
 
-	var $_mail_count = 0;
-	var $_mail_array = null;
+	public $_mail_count = 0;
+	public $_mail_array = null;
 
-	var $_MAX_MAILLOG = 1000;
+	public $_MAX_MAILLOG = 1000;
 
-	var $_FILE_ACCESS = null;
-	var $_TIME_ACCESS = 60; // 60 sec ( 1 min )
+	public $_FILE_ACCESS = null;
+	public $_TIME_ACCESS = 60; // 60 sec ( 1 min )
 
-	var $_DEBUG_MAIL_FILE = null;
+	public $_DEBUG_MAIL_FILE = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_mail_retrieve( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_mail_photo( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_mail_photo( $dirname , $trust_dirname );
 	$this->set_mail_groups( XOOPS_GROUP_USERS );
 
 	$this->_pop_class =& webphoto_pear_mail_pop3::getInstance();
@@ -256,7 +259,7 @@ function add_photos( $file_arr )
 
 	$count = $this->add_photos_from_mail( $file_arr );
 
-	$msg  = "<br />\n";
+	$msg  = "<br>\n";
 	$msg .= sprintf( $this->get_constant('TEXT_MAIL_SUBMITED_FMT'), $count );
 	$this->set_msg_level_user( $msg, false, true );
 

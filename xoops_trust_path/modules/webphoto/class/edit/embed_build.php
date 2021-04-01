@@ -19,25 +19,26 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_embed_build extends webphoto_edit_base
 {
-	var $_embed_class ;
+	public $_embed_class ;
 
-	var $_item_row    = null;
-	var $_title       = null ;
-	var $_description = null ;
-	var $_url         = null ;
-	var $_thumb       = null ;
-	var $_duration    = null ;
-	var $_tags        = null ;
-	var $_script      = null ;
+	public $_item_row    = null;
+	public $_title       = null ;
+	public $_description = null ;
+	public $_url         = null ;
+	public $_thumb       = null ;
+	public $_duration    = null ;
+	public $_tags        = null ;
+	public $_script      = null ;
 
-	var $_THUMB_EXT_DEFAULT = 'embed';
+	public $_THUMB_EXT_DEFAULT = 'embed';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_embed_build( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_embed_class  =& webphoto_embed::getInstance( $dirname, $trust_dirname );
 }

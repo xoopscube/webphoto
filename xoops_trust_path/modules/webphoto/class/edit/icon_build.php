@@ -6,26 +6,28 @@
 // 2009-01-10 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_icon_build
 //=========================================================
 class webphoto_edit_icon_build
 {
-	var $_DIRNAME ;
-	var $_MODULE_URL ;
-	var $_MODULE_DIR ;
-	var $_ROOT_EXTS_DIR ;
-	var $_ROOT_EXTS_URL ;
+	public $_DIRNAME ;
+	public $_MODULE_URL ;
+	public $_MODULE_DIR ;
+	public $_ROOT_EXTS_DIR ;
+	public $_ROOT_EXTS_URL ;
 
-	var $_EXT_PNG = 'png';
-	var $_ICON_NAME_DEFAULT = 'default.png';
+	public $_EXT_PNG = 'png';
+	public $_ICON_NAME_DEFAULT = 'default.png';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_icon_build( $dirname )
+public function __construct( $dirname )
 {
 	$this->_DIRNAME    = $dirname ;
 	$this->_MODULE_URL = XOOPS_URL       .'/modules/'. $dirname;
@@ -47,7 +49,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // icon
 //---------------------------------------------------------
-function build_row_icon_if_empty( $row, $ext=null )
+public function build_row_icon_if_empty( $row, $ext=null )
 {
 	if ( $row[ _C_WEBPHOTO_ITEM_FILE_THUMB ] ) {
 		return $row;
@@ -61,7 +63,7 @@ function build_row_icon_if_empty( $row, $ext=null )
 	return $this->build_row_icon( $row, $ext ) ;
 }
 
-function build_row_icon( $row, $ext=null )
+public function build_row_icon( $row, $ext=null )
 {
 	if ( empty($ext) ) {
 		$ext = $row['item_ext'] ;
@@ -77,7 +79,7 @@ function build_row_icon( $row, $ext=null )
 	return $row;
 }
 
-function build_icon_image( $ext )
+public function build_icon_image( $ext )
 {
 	$name  = null ;
 	$width  = 0 ;
@@ -103,4 +105,3 @@ function build_icon_image( $ext )
 // --- class end ---
 }
 
-?>

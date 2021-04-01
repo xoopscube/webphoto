@@ -23,16 +23,17 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_edit_cont_create extends webphoto_edit_base_create
 {
-	var $_cont_param   = null;
+	public $_cont_param   = null;
 
-	var $_SUB_DIR_PHOTOS = 'photos';
+	public $_SUB_DIR_PHOTOS = 'photos';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_cont_create( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname, $trust_dirname );
 }
 
 public static function &getInstance( $dirname = null, $trust_dirname = null )
@@ -47,7 +48,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create image file
 //---------------------------------------------------------
-function create_param( $p )
+public function create_param( $p )
 {
 	$this->clear_msg_array();
 
@@ -107,12 +108,8 @@ function create_param( $p )
 //---------------------------------------------------------
 // get param
 //---------------------------------------------------------
-function get_param()
+public function get_param()
 {
 	return $this->_cont_param ;
 }
-
-// --- class end ---
 }
-
-?>

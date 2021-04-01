@@ -71,54 +71,57 @@
 // added print_form_video()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_photo_form
 //=========================================================
 class webphoto_edit_photo_form extends webphoto_edit_form
 {
-	var $_gicon_handler;
-	var $_player_handler;
-	var $_embed_class;
-	var $_editor_class;
-	var $_kind_class;
-	var $_tag_build_class;
-	var $_mime_class;
-	var $_image_create_class;
-	var $_use_item_class;
+	public $_gicon_handler;
+	public $_player_handler;
+	public $_embed_class;
+	public $_editor_class;
+	public $_kind_class;
+	public $_tag_build_class;
+	public $_mime_class;
+	public $_image_create_class;
+	public $_use_item_class;
 
-	var $_has_image_resize;
-	var $_has_image_rotate;
-	var $_allowed_exts;
-	var $_has_html;
+	public $_has_image_resize;
+	public $_has_image_rotate;
+	public $_allowed_exts;
+	public $_has_html;
 
-	var $_ini_file_list = null;
+	public $_ini_file_list = null;
 
-	var $_xoops_db_groups  = null;
+	public $_xoops_db_groups  = null;
 
-	var $_editor_show = false ;
-	var $_editor_js   = null ;
-	var $_editor_desc = null ;
+	public $_editor_show = false ;
+	public $_editor_js   = null ;
+	public $_editor_desc = null ;
 
-	var $_flag_admin     = false;
+	public $_flag_admin     = false;
 
-	var $_support_embed_params = array();
+	public $_support_embed_params = [];
 
 // constant
-	var $_FLAG_ITEM_ROW  = true ;
-	var $_MAX_PHOTO_FILE = _C_WEBPHOTO_MAX_PHOTO_FILE ;
+	public $_FLAG_ITEM_ROW  = true ;
+	public $_MAX_PHOTO_FILE = _C_WEBPHOTO_MAX_PHOTO_FILE ;
 
-	var $_ARRAY_FILE_ID = array(
+	public $_ARRAY_FILE_ID = [
 		_C_WEBPHOTO_FILE_KIND_VIDEO_FLASH, _C_WEBPHOTO_FILE_KIND_PDF, _C_WEBPHOTO_FILE_KIND_SWF
-	);
+	];
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_photo_form( $dirname, $trust_dirname )
+function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_edit_form( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_form( $dirname, $trust_dirname );
 
 	$this->_gicon_handler  
 		=& webphoto_gicon_handler::getInstance( $dirname, $trust_dirname );
@@ -998,7 +1001,7 @@ function build_allowed_exts()
 		$str .= $this->_mime_class->get_item_kind_group_name( $k );
 		$str .= ' : ';
 		$str .= $this->_mime_class->get_item_kind_group_value( $v );
-		$str .= "<br />\n";
+		$str .= "<br>\n";
 	}
 	return $str;
 }

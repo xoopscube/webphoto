@@ -16,24 +16,26 @@
 // added unlink_attaches()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_mail_unlink
 //=========================================================
 class webphoto_edit_mail_unlink
 {
-	var $_config_class;
-	var $_utility_class;
+	public $_config_class;
+	public $_utility_class;
 
-	var $_WORK_DIR;
-	var $_MAIL_DIR;
-	var $_SEPARATOR = '|';
+	public $_WORK_DIR;
+	public $_MAIL_DIR;
+	public $_SEPARATOR = '|';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_mail_unlink( $dirname )
+public function __construct( $dirname )
 {
 	$this->_config_class  =& webphoto_config::getInstance( $dirname );
 	$this->_utility_class =& webphoto_lib_utility::getInstance();
@@ -55,18 +57,18 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // unlink
 //---------------------------------------------------------
-function unlink_by_maillog_row( $row )
+public function unlink_by_maillog_row( $row )
 {
 	$this->unlink_file( $row );
 	$this->unlink_attaches( $row );
 }
 
-function unlink_file( $row )
+public function unlink_file( $row )
 {
 	$this->unlink_by_filename( $row['maillog_file'] );
 }
 
-function unlink_attaches( $row )
+public function unlink_attaches( $row )
 {
 	$attach_array = $this->_utility_class->str_to_array( $row['maillog_attach'], $this->_SEPARATOR );
 	if ( !is_array($attach_array) ) {
@@ -77,7 +79,7 @@ function unlink_attaches( $row )
 	}
 }
 
-function unlink_by_filename( $file )
+public function unlink_by_filename( $file )
 {
 	if ( $file ) {
 		$this->_utility_class->unlink_file( $this->_MAIL_DIR.'/'.$file );
@@ -87,4 +89,4 @@ function unlink_by_filename( $file )
 // --- class end ---
 }
 
-?>
+

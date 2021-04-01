@@ -16,33 +16,36 @@
 // $trust_dirname
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_jpeg_create
 //=========================================================
 class webphoto_edit_jpeg_create extends webphoto_edit_base_create
 {
-	var $_ext_class ;
-	var $_image_create_class;
+	public $_ext_class ;
+	public $_image_create_class;
 
-	var $_is_cmyk = false;
-	var $_rotate  = 0;
+	public $_is_cmyk = false;
+	public $_rotate  = 0;
 
-	var $_param_ext    = 'jpg' ;
-	var $_param_dir    = 'jpegs';
+	public $_param_ext    = 'jpg' ;
+	public $_param_dir    = 'jpegs';
 	var	$_param_mime   = 'image/jpeg' ;
-	var $_param_medium = 'image' ;
-	var $_param_kind   = _C_WEBPHOTO_FILE_KIND_JPEG ;
-	var $_msg_created  = 'create jpeg' ;
-	var $_msg_failed   = 'fail to create jpeg' ;
+	public $_param_medium = 'image' ;
+	public $_param_kind   = _C_WEBPHOTO_FILE_KIND_JPEG ;
+	public $_msg_created  = 'create jpeg' ;
+	public $_msg_failed   = 'fail to create jpeg' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_edit_jpeg_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_edit_base_create( $dirname , $trust_dirname );
 
 	$this->_ext_class 
 		=& webphoto_ext::getInstance( $dirname , $trust_dirname );
