@@ -19,13 +19,13 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_bin_retrieve extends webphoto_bin_base
 {
-	var $_config_class;
-	var $_retrieve_class;
+	public $_config_class;
+	public $_retrieve_class;
 
-	var $_TITLE = 'webphoto mail retrieve';
+	public $_TITLE = 'webphoto mail retrieve';
 
-	var $_FLAG_MAIL_SEND = true;
-	var $_DEBUG_BIN_RETRIVE = false;
+	public $_FLAG_MAIL_SEND = true;
+	public $_DEBUG_BIN_RETRIVE = false;
 
 //---------------------------------------------------------
 // constructor

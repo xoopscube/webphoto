@@ -20,21 +20,21 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_permission
 {
-	var $_has_insertable       = true ;
-	var $_has_superinsert      = true ;
-	var $_has_editable         = true ;
-	var $_has_supereditable    = true ;
-	var $_has_deletable        = true ;
-	var $_has_superdeletable   = true ;
-	var $_has_touchothers      = true ;
-	var $_has_supertouchothers = true ;
-	var $_has_rateview         = true ;
-	var $_has_ratevote         = true ;
-	var $_has_tellafriend      = true ;
-	var $_has_tagedit          = true ;
-	var $_has_mail             = true ;
-	var $_has_file             = true ;
-	var $_has_html             = true ;
+	public $_has_insertable       = true ;
+	public $_has_superinsert      = true ;
+	public $_has_editable         = true ;
+	public $_has_supereditable    = true ;
+	public $_has_deletable        = true ;
+	public $_has_superdeletable   = true ;
+	public $_has_touchothers      = true ;
+	public $_has_supertouchothers = true ;
+	public $_has_rateview         = true ;
+	public $_has_ratevote         = true ;
+	public $_has_tellafriend      = true ;
+	public $_has_tagedit          = true ;
+	public $_has_mail             = true ;
+	public $_has_file             = true ;
+	public $_has_html             = true ;
 
 //---------------------------------------------------------
 // constructor

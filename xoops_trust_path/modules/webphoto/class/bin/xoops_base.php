@@ -14,7 +14,9 @@
 // _include_once_file() -> _include_global_php()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_xoops_base
@@ -22,22 +24,23 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_xoops_base extends webphoto_lib_handler
 {
-	var $_cached_config_search_array = null;
-	var $_cached_group_objs = null;
+	public $_cached_config_search_array = null;
+	public $_cached_group_objs = null;
 
-	var $_MY_MODULE_ID  = 0;
-	var $_LANGUAGE;
+	public $_MY_MODULE_ID  = 0;
+	public $_LANGUAGE;
 
-	var $_STR_JPAPANESE   = 'japanese|japaneseutf|ja_utf8';
+	public $_STR_JPAPANESE   = 'japanese|japaneseutf|ja_utf8';
 
-	var $_xoops_config = null;
+	public $_xoops_config = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_xoops_base()
+public function __construct()
 {
-	$this->webphoto_lib_handler();
+	parent::__construct();
+	//$this->webphoto_lib_handler();
 
 	$this->_init();
 }

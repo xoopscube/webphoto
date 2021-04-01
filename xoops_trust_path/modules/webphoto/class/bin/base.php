@@ -19,55 +19,55 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_bin_base
 {
-	var $_preload_class ;
+	public $_preload_class ;
 
-	var $_DIRNAME;
-	var $_TRUST_DIRNAME;
+	public $_DIRNAME;
+	public $_TRUST_DIRNAME;
 
 // constant
-	var $_X_MAILER = 'XOOPS';
+	public $_X_MAILER = 'XOOPS';
 
 // test parameter
-	var $_mode       = '';
-	var $_flag_print = false;
-	var $_flag_write = true;
-	var $_flag_chmod = false;
+	public $_mode       = '';
+	public $_flag_print = false;
+	public $_flag_write = true;
+	public $_flag_chmod = false;
 
 // command option
-	var $_pass   = null;
-	var $_limit  = 10;
-	var $_offset = 0;
+	public $_pass   = null;
+	public $_limit  = 10;
+	public $_offset = 0;
 
-	var $_FLAG_PRINT_WEB = true;
-	var $_FLAG_WRITE_WEB = true;
-	var $_FLAG_CHMOD_WEB = true;
-	var $_LIMIT_WEB      = 10;
+	public $_FLAG_PRINT_WEB = true;
+	public $_FLAG_WRITE_WEB = true;
+	public $_FLAG_CHMOD_WEB = true;
+	public $_LIMIT_WEB      = 10;
 
-	var $_FLAG_PRINT_COMMAND = false;
-	var $_FLAG_WRITE_COMMAND = true;
-	var $_FLAG_CHMOD_COMMAND = false;
-	var $_LIMIT_COMMAND      = 0;	// unlimited
+	public $_FLAG_PRINT_COMMAND = false;
+	public $_FLAG_WRITE_COMMAND = true;
+	public $_FLAG_CHMOD_COMMAND = false;
+	public $_LIMIT_COMMAND      = 0;	// unlimited
 
 // xoops parameter
-	var $_sitename  = null;
-	var $_adminmail = null;
-	var $_CHARSET   = null ;
+	public $_sitename  = null;
+	public $_adminmail = null;
+	public $_CHARSET   = null ;
 
 // command parameter
-	var $_opt_arr = null;
+	public $_opt_arr = null;
 
 // result file
-	var $_SUB_DIR    = 'cache';
-	var $_GOTO_ADMIN = 'goto admin index';
+	public $_SUB_DIR    = 'cache';
+	public $_GOTO_ADMIN = 'goto admin index';
 
-	var $_filename = null;
-	var $_file_admin_index;
+	public $_filename = null;
+	public $_file_admin_index;
 
-	var $_mail_to    = null;
-	var $_mail_title = null;
-	var $_mail_level = 0;
+	public $_mail_to    = null;
+	public $_mail_title = null;
+	public $_mail_level = 0;
 
-	var $_DEBUG_D3 = false ;
+	public $_DEBUG_D3 = false ;
 
 //---------------------------------------------------------
 // constructor
@@ -315,9 +315,9 @@ function get_html_footer()
 	$url_admin = XOOPS_URL.'/'.$this->_file_admin_index;
 
 	$text = <<<END_OF_TEXT
-<br />
+<br>
 <hr />
-<a href="$url_admin">$this->_GOTO_ADMIN</a><br />
+<a href="$url_admin">$this->_GOTO_ADMIN</a><br>
 </head></html>
 END_OF_TEXT;
 

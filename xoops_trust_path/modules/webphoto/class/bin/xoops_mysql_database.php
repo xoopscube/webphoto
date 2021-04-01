@@ -168,10 +168,10 @@ function _print_error($sql='')
 	if ( !$this->flag_print_error )  return;
 
 	if ($sql) {
-		echo "sql: $sql <br />\n";
+		echo "sql: $sql <br>\n";
 	}
 
-	echo "<font color='red'>".$this->error()."</font><br />\n";	
+	echo "<font color='red'>".$this->error()."</font><br>\n";
 }
 
 //---------------------------------------------------------

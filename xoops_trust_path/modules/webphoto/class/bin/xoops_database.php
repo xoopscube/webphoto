@@ -33,7 +33,7 @@ public static function &getInstance()
 		$instance = new mysql_database();
 		if ( !$instance->connect() ) 
 		{
-			echo "<font color='red'>Unable to connect to database.</font><br />\n";
+			echo "<font color='red'>Unable to connect to database.</font><br>\n";
 			die();
 		}
 	}
