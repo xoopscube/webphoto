@@ -150,5 +150,3 @@ webphoto_include_language( 'main.php' );
 
 webphoto_include_once_preload_trust();
 webphoto_include_once_preload();
-
-?>

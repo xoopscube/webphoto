@@ -152,5 +152,3 @@ webphoto_include_once( 'class/edit/redirect.php' );
 webphoto_include_once( 'class/edit/item_delete.php' );
 webphoto_include_once( 'class/edit/mail_unlink.php' );
 webphoto_include_once( 'class/edit/imagemanager_submit.php' );
-
-?>
