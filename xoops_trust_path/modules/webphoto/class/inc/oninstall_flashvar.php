@@ -6,21 +6,25 @@
 // 2011-05-01 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_oninstall_flashvar
 //=========================================================
 class webphoto_inc_oninstall_flashvar extends webphoto_inc_base_ini
 {
-	var $_table_flashvar ;
+	public $_table_flashvar ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_oninstall_flashvar( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler(  $dirname );
 
@@ -39,12 +43,12 @@ public static function &getSingleton( $dirname , $trust_dirname )
 //---------------------------------------------------------
 // flashvar table
 //---------------------------------------------------------
-function update()
+public function update()
 {
 	$this->_flashvar_add_column_240();
 }
 
-function _flashvar_add_column_240()
+public function _flashvar_add_column_240()
 {
 
 // return if already exists
@@ -68,22 +72,22 @@ function _flashvar_add_column_240()
 	$sql  .= "flashvar_logo_timeout  INT(3)  NOT NULL DEFAULT '0', " ;
 	$sql  .= "flashvar_logo_over     FLOAT(5,4) NOT NULL DEFAULT '0', " ;
 	$sql  .= "flashvar_logo_out      FLOAT(5,4) NOT NULL DEFAULT '0', " ;
-	$sql  .= "flashvar_playlistfile VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_mediaid      VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_provider     VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_streamer     VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_netstreambasepath VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_skin          VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_player_repeat VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_playerready   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_plugins       VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_stretching    VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_controlbar_position VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_playlist_position   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_logo_file       VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_logo_link       VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_logo_linktarget VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "flashvar_logo_position   VARCHAR(255) NOT NULL DEFAULT '' " ;
+	$sql  .= "flashvar_playlistfile VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_mediaid      VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_provider     VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_streamer     VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_netstreambasepath VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_skin          VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_player_repeat VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_playerready   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_plugins       VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_stretching    VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_controlbar_position VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_playlist_position   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_logo_file       VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_logo_link       VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_logo_linktarget VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "flashvar_logo_position   VARCHAR(191) NOT NULL DEFAULT '' " ;
 
 	$sql .= " )";
 	$ret = $this->query( $sql );

@@ -18,33 +18,37 @@
 // _init_config( $dirname )
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_tagcloud
 //=========================================================
 class webphoto_inc_tagcloud extends webphoto_inc_base_ini
 {
-	var $_uri_class;
+	public $_uri_class;
 
-	var $_item_table;
-	var $_cat_table;
-	var $_tag_table;
-	var $_p2t_table;
+	public $_item_table;
+	public $_cat_table;
+	public $_tag_table;
+	public $_p2t_table;
 
-	var $_cfg_perm_cat_read  = 0 ;
-	var $_cfg_perm_item_read = 0 ;
+	public $_cfg_perm_cat_read  = 0 ;
+	public $_cfg_perm_item_read = 0 ;
 
-	var $_PERM_ALLOW_ALL = _C_WEBPHOTO_PERM_ALLOW_ALL;
-	var $_PERM_DENOY_ALL = _C_WEBPHOTO_PERM_DENOY_ALL;
-	var $_PERM_SEPARATOR = _C_WEBPHOTO_PERM_SEPARATOR;
+	public $_PERM_ALLOW_ALL = _C_WEBPHOTO_PERM_ALLOW_ALL;
+	public $_PERM_DENOY_ALL = _C_WEBPHOTO_PERM_DENOY_ALL;
+	public $_PERM_SEPARATOR = _C_WEBPHOTO_PERM_SEPARATOR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_tagcloud( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 
@@ -70,7 +74,7 @@ public static function &getSingleton( $dirname , $trust_dirname )
 //---------------------------------------------------------
 // tagcloud
 //---------------------------------------------------------
-function build_tagcloud( $limit )
+public function build_tagcloud( $limit )
 {
 	$rows = $this->get_tag_rows( $limit );
 	if ( !is_array($rows) || !count($rows) ) {
@@ -79,7 +83,7 @@ function build_tagcloud( $limit )
 	return $this->build_tagcloud_by_rows( $rows );
 }
 
-function build_tagcloud_by_rows( $rows )
+public function build_tagcloud_by_rows( $rows )
 {
 // Assigning the return value of new by reference is deprecated
 	$cloud_class = new webphoto_lib_cloud();
@@ -100,7 +104,7 @@ function build_tagcloud_by_rows( $rows )
 //---------------------------------------------------------
 // get tag rows
 //---------------------------------------------------------
-function get_tag_rows( $limit=0, $offset=0 )
+public function get_tag_rows( $limit=0, $offset=0 )
 {
 	if (( $this->_cfg_perm_cat_read  == _C_WEBPHOTO_OPT_PERM_READ_ALL )&&
 	    ( $this->_cfg_perm_item_read == _C_WEBPHOTO_OPT_PERM_READ_ALL )) {
@@ -117,7 +121,7 @@ function get_tag_rows( $limit=0, $offset=0 )
 //---------------------------------------------------------
 // get item count
 //---------------------------------------------------------
-function get_item_count_by_tag( $tag )
+public function get_item_count_by_tag( $tag )
 {
 	if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 		return $this->_get_item_count_by_tag( $tag );
@@ -130,7 +134,7 @@ function get_item_count_by_tag( $tag )
 //---------------------------------------------------------
 // get item rows
 //---------------------------------------------------------
-function get_item_id_array_by_tag( $tag, $orderby, $limit=0, $offset=0 )
+public function get_item_id_array_by_tag( $tag, $orderby, $limit=0, $offset=0 )
 {
 	$orderby = $this->convert_item_field( $orderby ) ;
 
@@ -147,7 +151,7 @@ function get_item_id_array_by_tag( $tag, $orderby, $limit=0, $offset=0 )
 //---------------------------------------------------------
 // where
 //---------------------------------------------------------
-function _build_where_by_tag_for_cat( $tag )
+public function _build_where_by_tag_for_cat( $tag )
 {
 	$where  = $this->_build_where_by_tag( $tag );
 	$where .= ' AND ';
@@ -155,7 +159,7 @@ function _build_where_by_tag_for_cat( $tag )
 	return $where;
 }
 
-function _build_where_by_tag( $tag )
+public function _build_where_by_tag( $tag )
 {
 	$where  = $this->convert_item_field( 
 		$this->build_where_public_with_item() ) ;
@@ -166,7 +170,7 @@ function _build_where_by_tag( $tag )
 //---------------------------------------------------------
 // sql
 //---------------------------------------------------------
-function _get_item_count_by_tag_for_cat( $tag )
+public function _get_item_count_by_tag_for_cat( $tag )
 {
 	$sql  = 'SELECT COUNT(DISTINCT i.item_id) ';
 	$sql .= ' FROM '. $this->_p2t_table .' p2t ';
@@ -180,7 +184,7 @@ function _get_item_count_by_tag_for_cat( $tag )
 	return $this->get_count_by_sql( $sql );
 }
 
-function _get_item_count_by_tag( $tag )
+public function _get_item_count_by_tag( $tag )
 {
 	$sql  = 'SELECT COUNT(DISTINCT i.item_id) ';
 	$sql .= ' FROM '. $this->_p2t_table .' p2t ';
@@ -192,7 +196,7 @@ function _get_item_count_by_tag( $tag )
 	return $this->get_count_by_sql( $sql );
 }
 
-function _get_item_id_array_by_tag_for_cat( $tag, $orderby, $limit=0, $offset=0 )
+public function _get_item_id_array_by_tag_for_cat( $tag, $orderby, $limit=0, $offset=0 )
 {
 	$sql  = 'SELECT DISTINCT i.item_id ';
 	$sql .= ' FROM '. $this->_p2t_table .' p2t ';
@@ -208,7 +212,7 @@ function _get_item_id_array_by_tag_for_cat( $tag, $orderby, $limit=0, $offset=0 
 	return $this->get_first_rows_by_sql( $sql, $limit, $offset );
 }
 
-function _get_item_id_array_by_tag( $tag, $orderby, $limit=0, $offset=0 )
+public function _get_item_id_array_by_tag( $tag, $orderby, $limit=0, $offset=0 )
 {
 	$sql  = 'SELECT DISTINCT i.item_id ';
 	$sql .= ' FROM '. $this->_p2t_table .' p2t ';
@@ -222,7 +226,7 @@ function _get_item_id_array_by_tag( $tag, $orderby, $limit=0, $offset=0 )
 	return $this->get_first_rows_by_sql( $sql, $limit, $offset );
 }
 
-function _get_tag_rows_with_count_cat( $key, $limit=0, $offset=0 )
+public function _get_tag_rows_with_count_cat( $key, $limit=0, $offset=0 )
 {
 	$sql  = 'SELECT t.*, COUNT(*) AS photo_count ';
 	$sql .= ' FROM '. $this->_tag_table.' t ';
@@ -238,7 +242,7 @@ function _get_tag_rows_with_count_cat( $key, $limit=0, $offset=0 )
 	return $this->get_rows_by_sql( $sql, $limit, $offset, $key );
 }
 
-function _get_tag_rows_with_count( $key, $limit=0, $offset=0 )
+public function _get_tag_rows_with_count( $key, $limit=0, $offset=0 )
 {
 	$sql  = 'SELECT t.*, COUNT(*) AS photo_count ';
 	$sql .= ' FROM '. $this->_tag_table.' t ';
@@ -252,7 +256,7 @@ function _get_tag_rows_with_count( $key, $limit=0, $offset=0 )
 //---------------------------------------------------------
 // config
 //---------------------------------------------------------
-function _init_config( $dirname )
+public function _init_config( $dirname )
 {
 	$config_handler =& webphoto_inc_config::getSingleton( $dirname );
 

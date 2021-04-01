@@ -6,21 +6,25 @@
 // 2011-12-25 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_oninstall_cat
 //=========================================================
 class webphoto_inc_oninstall_cat extends webphoto_inc_base_ini
 {
-	var $_table_cat ;
+	public $_table_cat ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_oninstall_cat( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler(  $dirname );
 
@@ -39,14 +43,14 @@ public static function &getSingleton( $dirname , $trust_dirname )
 //---------------------------------------------------------
 // cat table
 //---------------------------------------------------------
-function update()
+public function update()
 {
 	$this->_cat_add_column_260();
 	$this->_cat_add_column_060();
 	$this->_cat_add_column_200();
 }
 
-function _cat_add_column_260()
+public function _cat_add_column_260()
 {
 
 // return if already exists
@@ -70,7 +74,7 @@ function _cat_add_column_260()
 
 }
 
-function _cat_add_column_060()
+public function _cat_add_column_060()
 {
 
 // return if already exists
@@ -79,7 +83,7 @@ function _cat_add_column_060()
 	}
 
 	$sql  = "ALTER TABLE ". $this->_table_cat ." ADD ( " ;
-	$sql  .= "cat_img_name VARCHAR(255) NOT NULL DEFAULT '' " ;
+	$sql  .= "cat_img_name VARCHAR(191) NOT NULL DEFAULT '' " ;
 	$sql .= " )";
 
 	$ret = $this->query( $sql );
@@ -93,7 +97,7 @@ function _cat_add_column_060()
 
 }
 
-function _cat_add_column_200()
+public function _cat_add_column_200()
 {
 
 // return if already exists

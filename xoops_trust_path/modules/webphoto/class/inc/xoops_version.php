@@ -72,42 +72,44 @@
 // typo
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_xoops_version
 //=========================================================
 class webphoto_inc_xoops_version extends webphoto_inc_base_ini
 {
-	var $_cfg_catonsubmenu  = false;
-	var $_cfg_use_pathinfo  = false;
-	var $_has_insertable    = false;
-	var $_has_rateview      = false;
-	var $_is_module_admin   = false;
+	public $_cfg_catonsubmenu  = false;
+	public $_cfg_use_pathinfo  = false;
+	public $_has_insertable    = false;
+	public $_has_rateview      = false;
+	public $_is_module_admin   = false;
 
-	var $_ini_cfg_groupid_admin = false;
-	var $_ini_cfg_groupid_user  = false;
-	var $_ini_sub_myphoto    = true;
-	var $_ini_sub_popular    = true;
-	var $_ini_sub_highrate   = true;
-	var $_ini_sub_search     = false;
-	var $_ini_sub_cat_prefix = null;
+	public $_ini_cfg_groupid_admin = false;
+	public $_ini_cfg_groupid_user  = false;
+	public $_ini_sub_myphoto    = true;
+	public $_ini_sub_popular    = true;
+	public $_ini_sub_highrate   = true;
+	public $_ini_sub_search     = false;
+	public $_ini_sub_cat_prefix = null;
 
-	var $_config_workdir_default = null;
+	public $_config_workdir_default = null;
 
-	var $_TRUST_DIRNAME = null ;
-	var $_MODULE_ID     = 0;
-	var $_PATH_UPLOADS_MOD      = null;
-	var $_PATH_MOD_MEDIAS       = null;
-	var $_DIR_TRUST_MOD_UPLOADS = null;
-	var $_DIR_TRUST_UPLOADS     = null;
+	public $_TRUST_DIRNAME = null ;
+	public $_MODULE_ID     = 0;
+	public $_PATH_UPLOADS_MOD      = null;
+	public $_PATH_MOD_MEDIAS       = null;
+	public $_DIR_TRUST_MOD_UPLOADS = null;
+	public $_DIR_TRUST_UPLOADS     = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_xoops_version( $dirname, $trust_dirname )
+function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 
@@ -175,7 +177,7 @@ function _build_basic()
 	$arr['name']        = $this->_constant( 'NAME' ) . '('.$this->_DIRNAME.')';
 	$arr['description'] = $this->_constant( 'DESC' );
 	$arr['author']   = "Kenichi Ohwada" ;
-	$arr['credits']  = "Kenichi Ohwada<br />\n(http://linux2.ohwada.net/)<br />\nGIJOE<br />\n(http://www.peak.ne.jp/)<br />\nDaniel Branco<br />\n(http://bluetopia.homeip.net)<br />\n" ;
+	$arr['credits']  = "Kenichi Ohwada<br>\n(http://linux2.ohwada.net/)<br>\nGIJOE<br>\n(http://www.peak.ne.jp/)<br>\nDaniel Branco<br>\n(http://bluetopia.homeip.net)<br>\n" ;
 	$arr['help']     = "" ;
 	$arr['license']  = "GPL see LICENSE" ;
 	$arr['official'] = 0;
@@ -1382,7 +1384,7 @@ function _build_config_index_desc()
 {
 	$str  = '<span style="color: #0000ff">';
 	$str .= $this->_constant( 'DESC' );
-	$str .= '<br />';
+	$str .= '<br>';
 	$str .= $this->_constant( 'CFG_INDEX_DESC_DEFAULT' );
 	$str .= '</span>';
 	return $str;

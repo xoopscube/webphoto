@@ -33,17 +33,17 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_whatsnew extends webphoto_inc_public
 {
-	var $_uri_class;
+	public $_uri_class;
 
-	var $_SHOW_IMAGE = true ;
-	var $_SHOW_ICON  = false ;
+	public $_SHOW_IMAGE = true ;
+	public $_SHOW_ICON  = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_whatsnew( $dirname, $trust_dirname  )
+public function __construct( $dirname, $trust_dirname  )
 {
-	$this->webphoto_inc_public();
+	parent::__construct();
 	$this->init_public( $dirname, $trust_dirname );
 	$this->auto_publish();
 

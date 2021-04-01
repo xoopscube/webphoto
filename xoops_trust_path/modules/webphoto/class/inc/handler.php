@@ -42,39 +42,39 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_handler
 {
-	var $_db;
-	var $_db_error;
+	public $_db;
+	public $_db_error;
 
-	var $_xoops_groups = null ;
+	public $_xoops_groups = null ;
 
-	var $_DIRNAME;
-	var $_MODULE_URL;
-	var $_MODULE_DIR;
+	public $_DIRNAME;
+	public $_MODULE_URL;
+	public $_MODULE_DIR;
 
-	var $_ROOT_EXTS_URL ;
-	var $_DEFAULT_ICON_SRC;
-	var $_PIXEL_ICON_SRC;
+	public $_ROOT_EXTS_URL ;
+	public $_DEFAULT_ICON_SRC;
+	public $_PIXEL_ICON_SRC;
 
-	var $_NORMAL_EXTS;
+	public $_NORMAL_EXTS;
 
-	var $_PERM_ALLOW_ALL = '*' ;
-	var $_PERM_DENOY_ALL = 'x' ;
-	var $_PERM_SEPARATOR = '&' ;
+	public $_PERM_ALLOW_ALL = '*' ;
+	public $_PERM_DENOY_ALL = 'x' ;
+	public $_PERM_SEPARATOR = '&' ;
 
-	var $_DEBUG_SQL   = false;
-	var $_DEBUG_ERROR = 0 ;
+	public $_DEBUG_SQL   = false;
+	public $_DEBUG_ERROR = 0 ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_handler()
+public function __construct()
 {
 	$this->_db =& Database::getInstance();
 
 	$this->_init_xoops_groups();
 }
 
-function init_handler( $dirname )
+public function init_handler( $dirname )
 {
 	$this->_DIRNAME = $dirname;
 	$this->_MODULE_URL = XOOPS_URL       .'/modules/'.$dirname;
@@ -92,7 +92,7 @@ function init_handler( $dirname )
 //---------------------------------------------------------
 // xoops config table
 //---------------------------------------------------------
-function update_xoops_config()
+public function update_xoops_config()
 {
 	// configs (Though I know it is not a recommended way...)
 	$table_config = $this->_db->prefix("config");
@@ -111,8 +111,8 @@ function update_xoops_config()
 	}
 
 	$sql  = "ALTER TABLE ". $table_config;
-	$sql .= " MODIFY `conf_title` varchar(255) NOT NULL default '', ";
-	$sql .= " MODIFY `conf_desc`  varchar(255) NOT NULL default '' ";
+	$sql .= " MODIFY `conf_title` varchar(191) NOT NULL default '', ";
+	$sql .= " MODIFY `conf_desc`  varchar(191) NOT NULL default '' ";
 
 	return $this->query( $sql );
 }
@@ -120,14 +120,14 @@ function update_xoops_config()
 //---------------------------------------------------------
 // xoops config item table
 //---------------------------------------------------------
-function get_xoops_config_mod_objs( $mid )
+public function get_xoops_config_mod_objs( $mid )
 {
 	$config_item_handler =& xoops_gethandler('ConfigItem');
 	$criteria = new CriteriaCompo( new Criteria('conf_modid', $mid) );
 	return $config_item_handler->getObjects($criteria);
 }
 
-function get_xoops_config_mod_obj( $mid, $name )
+public function get_xoops_config_mod_obj( $mid, $name )
 {
 	$objs = $this->get_xoops_config_mod_objs( $mid );
 	if ( isset($objs[ $name ] ) ) {
@@ -136,7 +136,7 @@ function get_xoops_config_mod_obj( $mid, $name )
 	return false;
 }
 
-function get_xoops_config_mod_val( $mid, $name )
+public function get_xoops_config_mod_val( $mid, $name )
 {
 	$obj = $this->get_xoops_config_mod_obj( $mid, $name );
 	if ( is_object($obj) ) {
@@ -145,7 +145,7 @@ function get_xoops_config_mod_val( $mid, $name )
 	return false;
 }
 
-function save_xoops_config_mod( $mid, $name, $val )
+public function save_xoops_config_mod( $mid, $name, $val )
 {
 	$config_item_handler =& xoops_gethandler('ConfigItem');
 	$obj = intval( $this->get_xoops_config_mod_obj( $mid, $name ) );
@@ -159,7 +159,7 @@ function save_xoops_config_mod( $mid, $name, $val )
 //---------------------------------------------------------
 // cat handler
 //---------------------------------------------------------
-function get_cat_row_by_id( $cat_id )
+public function get_cat_row_by_id( $cat_id )
 {
 	$sql  = 'SELECT * FROM '. $this->prefix_dirname( 'cat' );
 	$sql .= ' WHERE cat_id='.intval($cat_id);
@@ -169,7 +169,7 @@ function get_cat_row_by_id( $cat_id )
 //---------------------------------------------------------
 // item handler
 //---------------------------------------------------------
-function get_item_row_by_id( $item_id )
+public function get_item_row_by_id( $item_id )
 {
 	$sql  = 'SELECT * FROM '. $this->prefix_dirname( 'item' );
 	$sql .= ' WHERE item_id='. intval($item_id);
@@ -368,7 +368,7 @@ function query( $sql, $limit=0, $offset=0, $force=false )
 
 	if ( $this->_DEBUG_SQL ) {
 		$flag_echo_sql = true;
-		echo $this->sanitize( $sql_full )."<br />\n";
+		echo $this->sanitize( $sql_full )."<br>\n";
 	}
 
 	$res = $this->_db->query( $sql, intval($limit), intval($offset) );
@@ -378,10 +378,10 @@ function query( $sql, $limit=0, $offset=0, $force=false )
 			$error = 'Database update not allowed during processing of a GET request';
 		}
 		if ( $this->_DEBUG_SQL && !$flag_echo_sql ) {
-			echo $this->sanitize( $sql_full )."<br />\n";
+			echo $this->sanitize( $sql_full )."<br>\n";
 		}
 		if ( $this->_DEBUG_ERROR ) {
-			echo $this->highlight( $this->_db_error )."<br />\n";
+			echo $this->highlight( $this->_db_error )."<br>\n";
 		}
 		if ( $this->_DEBUG_ERROR > 1 ) {
 			debug_print_backtrace() ;
@@ -394,14 +394,14 @@ function query( $sql, $limit=0, $offset=0, $force=false )
 function queryF( $sql, $limit=0, $offset=0 )
 {
 	if ( $this->_DEBUG_SQL ) {
-		echo $this->sanitize( $sql ) .': limit='. $limit .' :offset='. $offset. "<br />\n";
+		echo $this->sanitize( $sql ) .': limit='. $limit .' :offset='. $offset. "<br>\n";
 	}
 
 	$res = $this->_db->queryF( $sql, intval($limit), intval($offset) );
 	if ( !$res ) {
 		$this->_db_error = $this->_db->error();
 		if ( $this->_DEBUG_ERROR ) {
-			echo $this->highlight( $this->_db_error )."<br />\n";
+			echo $this->highlight( $this->_db_error )."<br>\n";
 		}
 	}
 

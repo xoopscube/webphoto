@@ -25,25 +25,25 @@ if( !class_exists('webphoto_inc_timeline') )
 //=========================================================
 class webphoto_inc_timeline
 {
-	var $_timeline_class ;
-	var $_mysql_utility_class ;
+	public $_timeline_class ;
+	public $_mysql_utility_class ;
 
-	var $_init_timeline = false;
+	public $_init_timeline = false;
 
-	var $_show_onload   = false;
-	var $_show_onresize = false;
-	var $_show_timeout  = false;
-	var $_timeout = 1000;	// 1 sec
+	public $_show_onload   = false;
+	public $_show_onresize = false;
+	public $_show_timeout  = false;
+	public $_timeout = 1000;	// 1 sec
 
-	var $_DIRNAME    ;
-	var $_MODULE_URL ;
-	var $_MODULE_DIR ;
-	var $_IMAGE_EXTS ;
+	public $_DIRNAME    ;
+	public $_MODULE_URL ;
+	public $_MODULE_DIR ;
+	public $_IMAGE_EXTS ;
 
-	var $_UNIT_DEFAULT = 'month';
-	var $_DATE_DEFAULT = '';
+	public $_UNIT_DEFAULT = 'month';
+	public $_DATE_DEFAULT = '';
 
-	var $_UNIT_ARRAY = array('day','week','month','year','decade','century');
+	public $_UNIT_ARRAY = array('day','week','month','year','decade','century');
 
 //---------------------------------------------------------
 // constructor

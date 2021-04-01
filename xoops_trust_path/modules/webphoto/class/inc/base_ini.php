@@ -12,31 +12,35 @@
 // set_msg()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_base_ini
 //=========================================================
 class webphoto_inc_base_ini extends webphoto_inc_handler
 {
-	var $_ini_class;
+	public $_ini_class;
 
-	var $_msg_array = array();
+	public $_msg_array = array();
 
-	var $_DIRNAME;
-	var $_TRUST_DIRNAME;
-	var $_MODULE_DIR;
-	var $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_TRUST_DIRNAME;
+	public $_MODULE_DIR;
+	public $_TRUST_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_base_ini()
+public function __construct()
 {
-	$this->webphoto_inc_handler();
+	parent::__construct();
+//	$wp = new webphoto_inc_handler();
+//	$this->$wp;
 }
 
-function init_base_ini( $dirname , $trust_dirname )
+public function init_base_ini( $dirname , $trust_dirname )
 {
 	$this->_DIRNAME       = $dirname;
 	$this->_MODULE_DIR    = XOOPS_ROOT_PATH  .'/modules/'. $dirname;

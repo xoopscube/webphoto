@@ -27,34 +27,36 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_catlist extends webphoto_inc_base_ini
 {
-	var $_xoops_tree_handler;
-	var $_table_cat ;
-	var $_table_item ;
+	public $_xoops_tree_handler;
+	public $_table_cat ;
+	public $_table_item ;
 
-	var $_myts;
-	var $_multibyte_class;
+	public $_myts;
+	public $_multibyte_class;
 
-	var $_cfg_uploadspath ;
-	var $_cfg_perm_cat_read ;
-	var $_cfg_perm_item_read ;
-	var $_cfg_cat_summary ;
+	public $_cfg_uploadspath ;
+	public $_cfg_perm_cat_read ;
+	public $_cfg_perm_item_read ;
+	public $_cfg_cat_summary ;
 
-	var $_CATS_URL = null ;
+	public $_CATS_URL = null ;
 
-	var $_CAT_ORDER   = 'cat_weight ASC, cat_title ASC, cat_id ASC';
-	var $_PREFIX_NAME = 'prefix' ;
-	var $_PREFIX_MARK = '.' ;
-	var $_PREFIX_BAR  = '--' ;
+	public $_CAT_ORDER   = 'cat_weight ASC, cat_title ASC, cat_id ASC';
+	public $_PREFIX_NAME = 'prefix' ;
+	public $_PREFIX_MARK = '.' ;
+	public $_PREFIX_BAR  = '--' ;
 
-	var $_CAT_ID_NAME  = 'cat_id';
-	var $_SUMMARY_TAIL = '';
+	public $_CAT_ID_NAME  = 'cat_id';
+	public $_SUMMARY_TAIL = '';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_catlist( $dirname , $trust_dirname )
+public function webphoto_inc_catlist( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 	$this->_init_xoops_config( $dirname );
@@ -85,14 +87,14 @@ public static function &getSingleton( $dirname , $trust_dirname )
 // top category
 // webphoto_inc_xoops_version
 //---------------------------------------------------------
-function get_top_cat_rows( $limit=0, $offset=0 )
+public function get_top_cat_rows( $limit=0, $offset=0 )
 {
 	$name_perm = $this->_get_name_perm();
 	return $this->_get_cat_rows_by_pid_order_perm( 
 		0, $this->_CAT_ORDER, $name_perm, $limit, $offset );
 }
 
-function _get_name_perm()
+public function _get_name_perm()
 {
 	$str = '';
 	if ( $this->_is_perm_cat_read_no_cat() ) {
@@ -101,7 +103,7 @@ function _get_name_perm()
 	return $str;
 }
 
-function _is_perm_cat_read_all()
+public function _is_perm_cat_read_all()
 {
 	if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 		return true;

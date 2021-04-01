@@ -18,7 +18,9 @@
 // webphoto_xoops_base -> xoops_gethandler()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_group_permission
@@ -26,19 +28,21 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_group_permission extends webphoto_inc_base_ini
 {
-	var $_cached_perms = array();
+	public $_cached_perms = array();
 
-	var $_xoops_mid = 0;
-	var $_xoops_uid = 0;
-	var $_xoops_groups = null;
-	var $_is_module_adimin = false;
+	public $_xoops_mid = 0;
+	public $_xoops_uid = 0;
+	public $_xoops_groups = null;
+	public $_is_module_adimin = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_group_permission( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 
@@ -58,7 +62,7 @@ public static function &getSingleton( $dirname , $trust_dirname )
 //---------------------------------------------------------
 // has permit
 //---------------------------------------------------------
-function has_perm( $name, $flag_admin=false )
+public function has_perm( $name, $flag_admin=false )
 {
 	if ( $flag_admin && $this->_is_module_adimin ) {
 		return true;
@@ -70,7 +74,7 @@ function has_perm( $name, $flag_admin=false )
 //---------------------------------------------------------
 // cache
 //---------------------------------------------------------
-function _has_perm_by_bit( $bit )
+public function _has_perm_by_bit( $bit )
 {
 	if ( $this->_cached_perms & $bit ) {
 		return true; 
@@ -81,7 +85,7 @@ function _has_perm_by_bit( $bit )
 //---------------------------------------------------------
 // xoops_group_permission
 //---------------------------------------------------------
-function _init_permission( $dirname )
+public function _init_permission( $dirname )
 {
 	$perms = 0 ;
 
@@ -108,7 +112,7 @@ function _init_permission( $dirname )
 	$this->_cached_perms = $perms ;
 }
 
-function _build_where_groupid()
+public function _build_where_groupid()
 {
 	if( is_array($this->_xoops_groups) && count($this->_xoops_groups) ) {
 		$where = "gperm_groupid IN (" ;
@@ -127,7 +131,7 @@ function _build_where_groupid()
 //---------------------------------------------------------
 // xoops class
 //---------------------------------------------------------
-function _init_xoops( $dirname )
+public function _init_xoops( $dirname )
 {
 	$module_handler =& xoops_gethandler('module');
 	$module = $module_handler->getByDirname( $dirname );

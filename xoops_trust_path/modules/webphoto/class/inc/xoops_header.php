@@ -32,19 +32,19 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 
 class webphoto_inc_xoops_header
 {
-	var $_DIRNAME    ;
-	var $_MODULE_URL ;
-	var $_LIBS_URL   ;
-	var $_POPBOX_URL ;
+	public $_DIRNAME    ;
+	public $_MODULE_URL ;
+	public $_LIBS_URL   ;
+	public $_POPBOX_URL ;
 
-	var $_XOOPS_MODULE_HADER = 'xoops_module_header';
-	var $_BLOCK_POPBOX_JS    = false;
-	var $_LANG_POPBOX_REVERT = 'Click the image to shrink it.';
+	public $_XOOPS_MODULE_HADER = 'xoops_module_header';
+	public $_BLOCK_POPBOX_JS    = false;
+	public $_LANG_POPBOX_REVERT = 'Click the image to shrink it.';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_xoops_header( $dirname )
+function __construct( $dirname )
 {
 	$this->_DIRNAME    = $dirname;
 	$this->_MODULE_URL = XOOPS_URL.'/modules/'.$dirname;

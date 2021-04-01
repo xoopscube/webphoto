@@ -27,21 +27,23 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_auto_publish extends webphoto_inc_base_ini
 {
-	var $_table_item ;
+	public $_table_item ;
 
-	var $_ini_safe_mode ;
+	public $_ini_safe_mode ;
 
-	var $_FILE_AUTO_PUBLISH ;
-	var $_TIME_AUTO_PUBLISH = 3600 ; // 1 hour
-	var $_FLAG_AUTO_PUBLISH_CHMOD = true ;
-	var $_CHMOD_MODE = 0777;
+	public $_FILE_AUTO_PUBLISH ;
+	public $_TIME_AUTO_PUBLISH = 3600 ; // 1 hour
+	public $_FLAG_AUTO_PUBLISH_CHMOD = true ;
+	public $_CHMOD_MODE = 0777;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_auto_publish( $dirname, $trust_dirname )
+function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+/*	$wp = new webphoto_inc_base_ini();
+	$this->$wp;*/
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 

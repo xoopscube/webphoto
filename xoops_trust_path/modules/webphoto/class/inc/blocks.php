@@ -47,59 +47,59 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_blocks extends webphoto_inc_public
 {
-	var $_TRUST_DIRNAME ;
+	public $_TRUST_DIRNAME ;
 
-	var $_utility_class ;
-	var $_multibyte_class ;
-	var $_catlist_class ;
-	var $_header_class;
-	var $_tagcloud_class ;
-	var $_timeline_class ;
-	var $_gmap_block_class ;
-	var $_gmap_info_class  ;
-	var $_uri_class;
+	public $_utility_class ;
+	public $_multibyte_class ;
+	public $_catlist_class ;
+	public $_header_class;
+	public $_tagcloud_class ;
+	public $_timeline_class ;
+	public $_gmap_block_class ;
+	public $_gmap_info_class  ;
+	public $_uri_class;
 
-	var $_cfg_use_pathinfo   = false;
-	var $_cfg_use_popbox     = false;
-	var $_cfg_thumb_width    = 0 ;
-	var $_cfg_thumb_height   = 0 ;
-	var $_cfg_cat_main_width = 0 ;
-	var $_cfg_cat_sub_width  = 0 ;
-	var $_cfg_gmap_apikey    = null ;
-	var $_cfg_gmap_latitude  = 0 ;
-	var $_cfg_gmap_longitude = 0 ;
-	var $_cfg_gmap_zoom      = 0 ;
-	var $_cfg_timeline_dirname = null ;
+	public $_cfg_use_pathinfo   = false;
+	public $_cfg_use_popbox     = false;
+	public $_cfg_thumb_width    = 0 ;
+	public $_cfg_thumb_height   = 0 ;
+	public $_cfg_cat_main_width = 0 ;
+	public $_cfg_cat_sub_width  = 0 ;
+	public $_cfg_gmap_apikey    = null ;
+	public $_cfg_gmap_latitude  = 0 ;
+	public $_cfg_gmap_longitude = 0 ;
+	public $_cfg_gmap_zoom      = 0 ;
+	public $_cfg_timeline_dirname = null ;
 
-	var $_block_id = 0;
-	var $_init_timeline = false;
+	public $_block_id = 0;
+	public $_init_timeline = false;
 
-	var $_CHECKED  = 'checked="checked"';
-	var $_SELECTED = 'selected="selected"';
+	public $_CHECKED  = 'checked="checked"';
+	public $_SELECTED = 'selected="selected"';
 
-	var $_YESNO_OPTIONS = null;
-	var $_CACHE_OPTIONS    = null;
+	public $_YESNO_OPTIONS = null;
+	public $_CACHE_OPTIONS    = null;
 
-	var $_TOP_CATLIST_DELMITA = '<br />';
-	var $_SHOW_SUBCAT_IMG     = true;
-	var $_lang_catlist_total  = 'Total:';
-	var $_lang_iframe_not_support = 'Do not use iframe in your web browser';
+	public $_TOP_CATLIST_DELMITA = '<br>';
+	public $_SHOW_SUBCAT_IMG     = true;
+	public $_lang_catlist_total  = 'Total:';
+	public $_lang_iframe_not_support = 'Do not use iframe in your web browser';
 
-	var $_GMAP_WIDTH      = '100%';
-	var $_GMAP_HEIGHT     = '650px';
+	public $_GMAP_WIDTH      = '100%';
+	public $_GMAP_HEIGHT     = '650px';
 
-	var $_ORDERBY_RANDOM = 'rand()';
-	var $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
-	var $_TIMELINE_DATE  = null;
+	public $_ORDERBY_RANDOM = 'rand()';
+	public $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
+	public $_TIMELINE_DATE  = null;
 
-	var $_OFFSET_ZERO = 0 ;
-	var $_KEY_TRUE    = true ;
-	var $_KEY_NAME    = 'item_id' ;
+	public $_OFFSET_ZERO = 0 ;
+	public $_KEY_TRUE    = true ;
+	public $_KEY_NAME    = 'item_id' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_blocks( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
 	$this->webphoto_inc_public();
 	$this->init_public( $dirname , $trust_dirname );
@@ -175,22 +175,22 @@ public static function &getSingleton( $dirname , $trust_dirname )
 // [13] google map zoom      (0)
 // [14] google map height  (300) px
 //---------------------------------------------------------
-function topnews_show( $options )
+public function topnews_show( $options )
 {
 	return $this->_top_show_common( 'topnews', $options );
 }
 
-function topnews_p_show( $options )
+public function topnews_p_show( $options )
 {
 	return $this->_top_show_common( 'topnews_p', $options );
 }
 
-function topnews_edit( $options )
+public function topnews_edit( $options )
 {
 	return $this->_top_edit_common( 'topnews', $options ) ;
 }
 
-function topnews_p_edit( $options )
+public function topnews_p_edit( $options )
 {
 	return $this->_top_edit_common( 'topnews_p', $options ) ;
 }
@@ -198,22 +198,22 @@ function topnews_p_edit( $options )
 //---------------------------------------------------------
 // tophits
 //---------------------------------------------------------
-function tophits_show( $options )
+public function tophits_show( $options )
 {
 	return $this->_top_show_common( 'tophits', $options );
 }
 
-function tophits_p_show( $options )
+public function tophits_p_show( $options )
 {
 	return $this->_top_show_common( 'tophits_p', $options );
 }
 
-function tophits_edit( $options )
+public function tophits_edit( $options )
 {
 	return $this->_top_edit_common('tophits', $options ) ;
 }
 
-function tophits_p_edit( $options )
+public function tophits_p_edit( $options )
 {
 	return $this->_top_edit_common( 'tophits_p', $options ) ;
 }

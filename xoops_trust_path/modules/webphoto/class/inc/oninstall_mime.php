@@ -13,7 +13,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_oninstall_mime extends webphoto_inc_base_ini
 {
-	var $_table_mime ;
+	public $_table_mime ;
 
 //---------------------------------------------------------
 // constructor
@@ -63,7 +63,7 @@ function _mime_add_column_ffmpeg()
 	}
 
 	$sql  = "ALTER TABLE ". $this->_table_mime ;
-	$sql .= " ADD mime_ffmpeg varchar(255) NOT NULL default '' ";
+	$sql .= " ADD mime_ffmpeg varchar(191) NOT NULL default '' ";
 	$ret = $this->query( $sql );
 
 	if ( $ret ) {
@@ -86,7 +86,7 @@ function _mime_add_column_kind_etc()
 
 	$sql  = "ALTER TABLE ". $this->_table_mime ." ADD ( ";
 	$sql .= "mime_kind int(4) NOT NULL default '0', ";
-	$sql .= "mime_option varchar(255) NOT NULL default '' ";
+	$sql .= "mime_option varchar(191) NOT NULL default '' ";
 	$sql .= " )";
 
 	$ret = $this->query( $sql );

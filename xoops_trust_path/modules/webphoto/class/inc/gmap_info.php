@@ -18,30 +18,32 @@
 // $trust_dirname
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_gmap_info
 //=========================================================
 class webphoto_inc_gmap_info
 {
-	var $_uri_class;
-	var $_mysql_utility_class ;
+	public $_uri_class;
+	public $_mysql_utility_class ;
 
-	var $_has_editable     = false ;
+	public $_has_editable     = false ;
 
-	var $_xoops_uid       = 0 ;
-	var $_module_id       = 0 ;
-	var $_is_module_admin = false ;
+	public $_xoops_uid       = 0 ;
+	public $_module_id       = 0 ;
+	public $_is_module_admin = false ;
 
-	var $_lang_title_edit = 'edit';
+	public $_lang_title_edit = 'edit';
 
-	var $_DIRNAME    ;
-	var $_MODULE_URL ;
-	var $_MODULE_DIR ;
-	var $_ICONS_URL  ;
-	var $_IMG_EDIT   ;
-	var $_IMAGE_EXTS ;
+	public $_DIRNAME    ;
+	public $_MODULE_URL ;
+	public $_MODULE_DIR ;
+	public $_ICONS_URL  ;
+	public $_IMG_EDIT   ;
+	public $_IMAGE_EXTS ;
 
 //---------------------------------------------------------
 // constructor
@@ -100,9 +102,9 @@ function build_info_thumb( $param )
 
 	$str = null;
 	if ( $img_thumb && $a_photo ) {
-		$str = $a_photo . $img_thumb .'</a><br />';
+		$str = $a_photo . $img_thumb .'</a><br>';
 	} elseif ( $img_thumb ) {
-		$str = $img_thumb .'<br />';
+		$str = $img_thumb .'<br>';
 	}
 	return $str;
 }
@@ -122,9 +124,9 @@ function build_info_title( $param )
 	}
 
 	if ( $title_s && $a_photo ) {
-		$str .= $a_photo . $title_s .'</a><br />';
+		$str .= $a_photo . $title_s .'</a><br>';
 	} elseif ( $title_s ) {
-		$str .= $title_s .'<br />';
+		$str .= $title_s .'<br>';
 	}
 	return $str;
 }
@@ -136,9 +138,9 @@ function build_info_author( $param )
 	$uname = $this->get_xoops_uname_by_uid( $uid );
 	if ( $uid > 0 ) {
 		$str  = '<a href="'. $href .'">';
-		$str .= $uname .'</a><br />';
+		$str .= $uname .'</a><br>';
 	} else {
-		$str = $uname .'<br />';
+		$str = $uname .'<br>';
 	}
 	return $str;
 }
@@ -147,7 +149,7 @@ function build_info_datetime( $param )
 {
 	$datetime_disp = $this->mysql_datetime_to_str( $param['item_datetime'] );
 	if ( $datetime_disp ) {
-		$str = $datetime_disp .'<br />';
+		$str = $datetime_disp .'<br>';
 		return $str;
 	}
 	return null;
@@ -157,7 +159,7 @@ function build_info_place( $param )
 {
 	$place_s = $this->sanitize( $param['item_place'] );
 	if ( $place_s ) {
-		$str = $place_s .'<br />';
+		$str = $place_s .'<br>';
 		return $str;
 	}
 	return null;

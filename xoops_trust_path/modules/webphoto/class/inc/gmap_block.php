@@ -13,18 +13,18 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_gmap_block
 {
-	var $_header_class ;
+	public $_header_class ;
 
-	var $_DIRNAME ;
+	public $_DIRNAME ;
 
-	var $_TIMEOUT = 1000;	// 1000 msec
-	var $_GMAP_CONTROL      = 1 ;
-	var $_GMAP_TYPE_CONTROL = 0 ;
+	public $_TIMEOUT = 1000;	// 1000 msec
+	public $_GMAP_CONTROL      = 1 ;
+	public $_GMAP_TYPE_CONTROL = 0 ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_gmap_block( $dirname )
+function __construct( $dirname )
 {
 	$this->_DIRNAME = $dirname ;
 

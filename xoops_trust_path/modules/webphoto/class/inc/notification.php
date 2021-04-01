@@ -30,16 +30,18 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 // Fatal error: Call to undefined method webphoto_inc_base_ini()
 class webphoto_inc_notification extends webphoto_inc_base_ini
 {
-	var $_uri_class;
+	public $_uri_class;
 
-	var $_INDEX_URL ;
+	public $_INDEX_URL ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
 function webphoto_inc_notification( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 

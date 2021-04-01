@@ -27,7 +27,9 @@
 // added maillog_manager
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_admin_menu
@@ -35,15 +37,15 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_admin_menu
 {
-	var $_ini_class ;
+	public $_ini_class ;
 
-	var $_DIRNAME;
-	var $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_TRUST_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_admin_menu( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->_DIRNAME = $dirname;
 	$this->_TRUST_DIR = XOOPS_TRUST_PATH .'/modules/'. $trust_dirname;

@@ -28,24 +28,28 @@
 // used is_video_mime()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_search
 //=========================================================
 class webphoto_inc_search extends webphoto_inc_public
 {
-	var $_uri_class;
+	public $_uri_class;
 
-	var $_SHOW_IMAGE = true ;
-	var $_SHOW_ICON  = false ;
+	public $_SHOW_IMAGE = true ;
+	public $_SHOW_ICON  = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_search( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_inc_public();
+
+	parent::__construct();
+	//$this->webphoto_inc_public();
 	$this->init_public( $dirname , $trust_dirname );
 	$this->auto_publish();
 

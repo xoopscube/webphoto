@@ -29,8 +29,8 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 
 class webphoto_inc_config
 {
-	var $_cached_config = array();
-	var $_DIRNAME ;
+	public $_cached_config = array();
+	public $_DIRNAME ;
 
 //---------------------------------------------------------
 // constructor

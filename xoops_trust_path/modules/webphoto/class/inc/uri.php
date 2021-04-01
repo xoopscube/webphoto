@@ -18,7 +18,9 @@
 // getInstance() -> getSingleton()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_uri
@@ -26,23 +28,23 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_uri
 {
-	var $_cfg_use_pathinfo = false ;
+	public $_cfg_use_pathinfo = false ;
 
-	var $_DIRNAME ;
-	var $_MODULE_URL ;
-	var $_MODULE_DIR ;
+	public $_DIRNAME ;
+	public $_MODULE_URL ;
+	public $_MODULE_DIR ;
 
-	var $_SEPARATOR  = '&amp;';
-	var $_MARK_SLASH = '/' ;
-	var $_MARK_COLON = ':' ;
-	var $_HTML_AMP   = '&amp;' ;
-	var $_HTML_SLASH = '&#047;' ;
-	var $_HTML_COLON = '&#058;' ;
+	public $_SEPARATOR  = '&amp;';
+	public $_MARK_SLASH = '/' ;
+	public $_MARK_COLON = ':' ;
+	public $_HTML_AMP   = '&amp;' ;
+	public $_HTML_SLASH = '&#047;' ;
+	public $_HTML_COLON = '&#058;' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_uri( $dirname )
+public function __construct( $dirname )
 {
 	$this->_DIRNAME    = $dirname;
 	$this->_MODULE_URL = XOOPS_URL       .'/modules/'.$dirname;

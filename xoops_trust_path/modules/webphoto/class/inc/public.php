@@ -21,31 +21,36 @@
 // FLAG_IMAGEMANAGER_IMAGE_ONLY
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_public
 //=========================================================
 class webphoto_inc_public extends webphoto_inc_base_ini
 {
-	var $_cfg_workdir        = null;
-	var $_cfg_perm_cat_read  = false ;
-	var $_cfg_perm_item_read = false ;
+	public $_cfg_workdir        = null;
+	public $_cfg_perm_cat_read  = false ;
+	public $_cfg_perm_item_read = false ;
 
-	var $_cat_cached = array();
+	public $_cat_cached = array();
 
-	var $_ITEM_ORDERBY = 'item_time_update DESC, item_id DESC';
-	var $_FLAG_IMAGEMANAGER_IMAGE_ONLY = false;
+	public $_ITEM_ORDERBY = 'item_time_update DESC, item_id DESC';
+	public $_FLAG_IMAGEMANAGER_IMAGE_ONLY = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_public()
+public function __construct()
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+/*	$wp = new webphoto_inc_base_ini();
+
+	$this->$wp;*/
 }
 
-function init_public( $dirname , $trust_dirname )
+public function init_public( $dirname , $trust_dirname )
 {
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler(  $dirname );

@@ -23,19 +23,19 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_workdir
 {
-	var $_ini_safe_mode ;
+	public $_ini_safe_mode ;
 
-	var $_DIRNAME ;
-	var $_TRUST_DIRNAME ;
-	var $_DIR_TRUST_UPLOADS ;
-	var $_FILE_WORKDIR ;
+	public $_DIRNAME ;
+	public $_TRUST_DIRNAME ;
+	public $_DIR_TRUST_UPLOADS ;
+	public $_FILE_WORKDIR ;
 
-	var $_CHMOD_MODE = 0777;
+	public $_CHMOD_MODE = 0777;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_workdir( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->_DIRNAME       = $dirname;
 	$this->_TRUST_DIRNAME = $trust_dirname ;

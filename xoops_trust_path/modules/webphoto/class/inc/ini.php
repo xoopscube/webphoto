@@ -19,19 +19,19 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_ini
 {
-	var $_DIRNAME;
-	var $_TRUST_DIRNAME;
-	var $_MODULE_DIR;
-	var $_TRUST_DIR;
+	public $_DIRNAME;
+	public $_TRUST_DIRNAME;
+	public $_MODULE_DIR;
+	public $_TRUST_DIR;
 
-	var $_array_ini = null;
+	public $_array_ini = null;
 
-	var $_DEBUG_READ = false;
+	public $_DEBUG_READ = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_ini( $dirname , $trust_dirname )
+function __construct( $dirname , $trust_dirname )
 {
 	$this->_DIRNAME       = $dirname;
 	$this->_MODULE_DIR    = XOOPS_ROOT_PATH  .'/modules/'. $dirname;
@@ -169,7 +169,7 @@ function debug_msg_read_file( $file, $debug=true )
 	$file_win = str_replace( '/', '\\', $file );
 
 	if ( $this->_DEBUG_READ && $debug ) {
-		echo 'read '. $file ."<br />\n";
+		echo 'read '. $file ."<br>\n";
 	}
 }
 

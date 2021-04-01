@@ -13,14 +13,16 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_oninstall_item extends webphoto_inc_base_ini
 {
-	var $_table_item ;
+	public $_table_item ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
 function webphoto_inc_oninstall_item( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler(  $dirname );
 
@@ -74,21 +76,21 @@ function _item_add_column_050()
 	$sql  .= "item_onclick     INT(11) UNSIGNED NOT NULL DEFAULT '0', " ; 
 	$sql  .= "item_views INT(11) NOT NULL DEFAULT '0', " ;
 	$sql  .= "item_chain INT(11) NOT NULL DEFAULT '0', " ;
-	$sql  .= "item_siteurl VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_artist  VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_album   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_label   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_perm_down VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_external_url   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_external_thumb VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_embed_type  VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_embed_src   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_playlist_feed  VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_playlist_dir   VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_playlist_cache VARCHAR(255) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_siteurl VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_artist  VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_album   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_label   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_perm_down VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_external_url   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_external_thumb VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_embed_type  VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_embed_src   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_playlist_feed  VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_playlist_dir   VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_playlist_cache VARCHAR(191) NOT NULL DEFAULT '', " ;
 	$sql  .= "item_playlist_type INT(11) UNSIGNED NOT NULL DEFAULT '0', " ;
 	$sql  .= "item_playlist_time INT(11) UNSIGNED NOT NULL DEFAULT '0', " ;
-	$sql  .= "item_showinfo  VARCHAR(255) NOT NULL DEFAULT '' " ;
+	$sql  .= "item_showinfo  VARCHAR(191) NOT NULL DEFAULT '' " ;
 
 	$sql .= " )";
 	$ret = $this->query( $sql );
@@ -113,8 +115,8 @@ function _item_add_column_060()
 
 	$sql  = "ALTER TABLE ". $this->_table_item ." ADD ( " ;
 
-	$sql  .= "item_external_middle VARCHAR(255) NOT NULL DEFAULT '', " ;
-	$sql  .= "item_icon_name VARCHAR(255) NOT NULL DEFAULT '' " ;
+	$sql  .= "item_external_middle VARCHAR(191) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_icon_name VARCHAR(191) NOT NULL DEFAULT '' " ;
 
 	$sql .= " )";
 	$ret = $this->query( $sql );
@@ -139,7 +141,7 @@ function _item_add_column_070()
 
 	$sql  = "ALTER TABLE ". $this->_table_item ." ADD ( " ;
 
-	$sql  .= "item_codeinfo VARCHAR(255) NOT NULL DEFAULT '', " ;
+	$sql  .= "item_codeinfo VARCHAR(191) NOT NULL DEFAULT '', " ;
 	$sql  .= "item_page_width  INT(11) NOT NULL DEFAULT '0', " ;
 	$sql  .= "item_page_height INT(11) NOT NULL DEFAULT '0', " ;
 	$sql  .= "item_embed_text  TEXT NOT NULL " ;
@@ -211,7 +213,7 @@ function _item_chang_column_080()
 	}
 
 	$sql  = "ALTER TABLE ". $this->_table_item ." CHANGE " ;
-	$sql .= "item_icon item_icon_name VARCHAR(255) NOT NULL DEFAULT '' " ;
+	$sql .= "item_icon item_icon_name VARCHAR(191) NOT NULL DEFAULT '' " ;
 
 	$ret = $this->query( $sql );
 
@@ -233,7 +235,7 @@ function _item_add_column_100()
 	}
 
 	$sql  = "ALTER TABLE ". $this->_table_item ." ADD ( " ;
-	$sql .= "item_editor VARCHAR(255) NOT NULL DEFAULT '', " ;
+	$sql .= "item_editor VARCHAR(191) NOT NULL DEFAULT '', " ;
 	$sql .= "item_description_html   TINYINT(2) NOT NULL DEFAULT '0', " ;
 	$sql .= "item_description_smiley TINYINT(2) NOT NULL DEFAULT '0', " ;
 	$sql .= "item_description_xcode  TINYINT(2) NOT NULL DEFAULT '0', " ;

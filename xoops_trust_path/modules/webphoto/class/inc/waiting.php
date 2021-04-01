@@ -27,9 +27,11 @@ class webphoto_inc_waiting extends webphoto_inc_base_ini
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_waiting( $dirname , $trust_dirname )
+function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 }

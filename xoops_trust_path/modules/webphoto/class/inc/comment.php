@@ -29,7 +29,9 @@ class webphoto_inc_comment extends webphoto_inc_base_ini
 //---------------------------------------------------------
 function webphoto_inc_comment( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler( $dirname );
 }

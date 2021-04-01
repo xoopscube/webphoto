@@ -61,41 +61,43 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_inc_oninstall extends webphoto_inc_base_ini
 {
-	var $_group_class;
-	var $_gperm_def_class;
-	var $_oninstall_item_class;
-	var $_oninstall_cat_class;
-	var $_oninstall_mime_class;
-	var $_oninstall_flashvar_class;
-	var $_log_class;
+	public $_group_class;
+	public $_gperm_def_class;
+	public $_oninstall_item_class;
+	public $_oninstall_cat_class;
+	public $_oninstall_mime_class;
+	public $_oninstall_flashvar_class;
+	public $_log_class;
 
-	var $_table_item ;
-	var $_table_mime ;
-	var $_table_player;
+	public $_table_item ;
+	public $_table_mime ;
+	public $_table_player;
 
-	var $_IS_XOOPS_2018 = false;
+	public $_IS_XOOPS_2018 = false;
 
-	var $_use_groupperm_webphoto_users = false;
-	var $_use_groupperm_module_read_anonymous = false;
-	var $_use_cfg_groupid_admin = false;
-	var $_use_cfg_groupid_user  = false;
-	var $_use_group_create      = false;
-	var $_use_group_delete      = false;
+	public $_use_groupperm_webphoto_users = false;
+	public $_use_groupperm_module_read_anonymous = false;
+	public $_use_cfg_groupid_admin = false;
+	public $_use_cfg_groupid_user  = false;
+	public $_use_group_create      = false;
+	public $_use_group_delete      = false;
 
-//	var $_msg_array = array();
+//	public $_msg_array = array();
 
-//	var $_TRUST_DIRNAME ;
-//	var $_TRUST_DIR;
-	var $_MODULE_ID = 0;
+//	public $_TRUST_DIRNAME ;
+//	public $_TRUST_DIR;
+	public $_MODULE_ID = 0;
 
-	var $_flag_debug = false;
+	public $_flag_debug = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
 function webphoto_inc_oninstall( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_base_ini();
+	parent::__construct();
+//	$wp = new webphoto_inc_base_ini();
+//	$this->$wp;
 	$this->init_base_ini( $dirname , $trust_dirname );
 	$this->init_handler(  $dirname );
 
@@ -162,7 +164,7 @@ function install( &$module )
 	$msg_arr = $this->get_msg_array();
 	if ( is_array($msg_arr) && count($msg_arr) ) {
 		foreach ( $msg_arr as $msg ) {
-			$ret[] = $msg."<br />\n";
+			$ret[] = $msg."<br>\n";
 			$this->_write_log( $msg );
 		}
 	}
@@ -206,7 +208,7 @@ function uninstall( &$module )
 	$msg_arr = $this->get_msg_array();
 	if ( is_array($msg_arr) && count($msg_arr) ) {
 		foreach ( $msg_arr as $msg ) {
-			$ret[] = $msg."<br />";
+			$ret[] = $msg."<br>";
 			$this->_write_log( $msg );
 		}
 	}
@@ -718,7 +720,7 @@ function _mime_update()
 }
 
 //---------------------------------------------------------
-// flashvar table
+// flashpublic table
 //---------------------------------------------------------
 function _flashvar_update()
 {

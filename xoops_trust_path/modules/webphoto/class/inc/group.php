@@ -6,26 +6,28 @@
 // 2009-12-06 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_inc_group
 //=========================================================
 class webphoto_inc_group
 {
-	var $_member_handler;
-	var $_groupperm_handler;
+	public $_member_handler;
+	public $_groupperm_handler;
 
-	var $_DIRNAME;
-	var $_MODULE_ID = 0;
+	public $_DIRNAME;
+	public $_MODULE_ID = 0;
 
-	var $_SYSTEM_GROUPS = 
+	public $_SYSTEM_GROUPS =
 		array( XOOPS_GROUP_ADMIN, XOOPS_GROUP_USERS, XOOPS_GROUP_ANONYMOUS );
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_inc_group( $dirname )
+public function __construct( $dirname )
 {
 	$this->_DIRNAME = $dirname;
 
@@ -47,7 +49,7 @@ public static function &getSingleton( $dirname )
 //---------------------------------------------------------
 // group
 //---------------------------------------------------------
-function delete_group( $group_id )
+public function delete_group( $group_id )
 {
 	$group_id = intval($group_id);
 	if ( $group_id <= 0 ) {
@@ -64,7 +66,7 @@ function delete_group( $group_id )
 //---------------------------------------------------------
 // member handler
 //---------------------------------------------------------
-function create_member_group( $name, $desc )
+public function create_member_group( $name, $desc )
 {
 	$group = $this->_member_handler->createGroup();
 	$group->setVar( 'name',        $name );
@@ -78,7 +80,7 @@ function create_member_group( $name, $desc )
 	return $group->getVar('groupid');
 }
 
-function delete_member_group( $group_id )
+public function delete_member_group( $group_id )
 {
 	$group = $this->_member_handler->getGroup( $group_id );
 	$this->_member_handler->deleteGroup( $group ); 
@@ -87,14 +89,14 @@ function delete_member_group( $group_id )
 //---------------------------------------------------------
 // groupperm handler
 //---------------------------------------------------------
-function create_gperm_webphoto_groupid( $groupid, $perms )
+public function create_gperm_webphoto_groupid( $groupid, $perms )
 {
 	foreach( $perms as $id ) {
 		$this->create_gperm_webphoto_itemid( $groupid, $id );
 	}
 }
 
-function create_gperm_module_admin( $groupid )
+public function create_gperm_module_admin( $groupid )
 {
 	$gperm = $this->_groupperm_handler->create();
 	$gperm->setVar('gperm_name',    'module_admin');
@@ -105,7 +107,7 @@ function create_gperm_module_admin( $groupid )
 	unset($gperm);
 }
 
-function create_gperm_module_read( $groupid )
+public function create_gperm_module_read( $groupid )
 {
 	$gperm = $this->_groupperm_handler->create();
 	$gperm->setVar("gperm_name",    'module_read' );
@@ -116,7 +118,7 @@ function create_gperm_module_read( $groupid )
 	unset($gperm);
 }
 
-function create_gperm_webphoto_itemid( $groupid, $itemid )
+public function create_gperm_webphoto_itemid( $groupid, $itemid )
 {
 	$gperm =& $this->_groupperm_handler->create();
 	$gperm->setVar("gperm_name",    _C_WEBPHOTO_GPERM_NAME );
@@ -127,7 +129,7 @@ function create_gperm_webphoto_itemid( $groupid, $itemid )
 	unset($gperm);
 }
 
-function delete_gperm_by_group( $group_id, $mod_id=null )
+public function delete_gperm_by_group( $group_id, $mod_id=null )
 {
 	$this->_groupperm_handler->deleteByGroup( $group_id, $mod_id );
 }
@@ -135,7 +137,7 @@ function delete_gperm_by_group( $group_id, $mod_id=null )
 //---------------------------------------------------------
 // xoops_module
 //---------------------------------------------------------
-function _init_xoops_module( $dirname )
+public function _init_xoops_module( $dirname )
 {
 	$module_handler =& xoops_gethandler('module');
 	$module = $module_handler->getByDirname( $dirname );
