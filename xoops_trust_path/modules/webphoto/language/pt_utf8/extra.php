@@ -1,5 +1,5 @@
 <?php
-// $Id: extra.php,v 1.1 2009/03/07 07:34:24 ohwada Exp $
+// $Id: extra.php,v 1.1 2008/10/13 10:16:04 ohwada Exp $
 
 //=========================================================
 // webphoto module
@@ -27,5 +27,3 @@ function webphoto_mobile_carrier_array()
 
 // === define end ===
 }
-
-?>

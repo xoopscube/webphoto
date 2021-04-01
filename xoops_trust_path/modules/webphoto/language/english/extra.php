@@ -27,5 +27,3 @@ function webphoto_mobile_carrier_array()
 
 // === define end ===
 }
-
-?>

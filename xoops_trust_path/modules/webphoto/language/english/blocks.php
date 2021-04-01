@@ -52,7 +52,7 @@ define($constpref."TEXT_STRLENGTH","Max length of photo's title");
 define($constpref."TEXT_CATLIMITATION","Limit by category");
 
 // v2.30
-define($constpref."TEXT_CATLIMITRECURSIVE","with Sub-categories<br />Valid when set 'Limit by category' ");
+define($constpref."TEXT_CATLIMITRECURSIVE","with Sub-categories<br>Valid when set 'Limit by category' ");
 
 define($constpref."TEXT_BLOCK_WIDTH","Displays max");
 define($constpref."TEXT_BLOCK_WIDTH_NOTES","(if you set this to 0, the thumbnail image displays in its original size.)");
@@ -106,5 +106,3 @@ define($constpref."TIMELINE_SCALE_DECADE", "10 years") ;
 
 // === define end ===
 }
-
-?>

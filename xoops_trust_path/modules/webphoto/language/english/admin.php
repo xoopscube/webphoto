@@ -109,7 +109,7 @@ define( "_AM_WEBPHOTO_ERR_READORWRITE" , "Error: This directory is not writable 
 define( "_AM_WEBPHOTO_ERR_SAMEDIR" , "Error: Photo Video Media Path should not be the same as Thumbs Path" ) ;
 define( "_AM_WEBPHOTO_LNK_CHECKGD2" , "Check that 'GD2'is working correctly under your GD bundled with PHP" ) ;
 define( "_AM_WEBPHOTO_CHECKGD2" , "If the page linked to from here doesn't display correctly, you should not use your GD in truecolor mode." ) ;
-define( "_AM_WEBPHOTO_GD2SUCCESS" , "Success!<br />Perhaps, you can use GD2 (truecolor) in this environment." ) ;
+define( "_AM_WEBPHOTO_GD2SUCCESS" , "Success!<br>Perhaps, you can use GD2 (truecolor) in this environment." ) ;
 
 define( "_AM_WEBPHOTO_H4_PHOTOLINK" , "Photo Video Media & Thumbs Link Check" ) ;
 define( "_AM_WEBPHOTO_NOWCHECKING" , "Now, checking ." ) ;
@@ -340,13 +340,13 @@ define("_AM_WEBPHOTO_NUMBEROFRECORED", "Number of recoeds");
 //---------------------------------------------------------
 // manage
 //---------------------------------------------------------
-define("_AM_WEBPHOTO_MANAGE_DESC","<b>Caution</b><br />The management of this table only<br />Do not change related tables");
+define("_AM_WEBPHOTO_MANAGE_DESC","<b>Caution</b><br>The management of this table only<br>Do not change related tables");
 define("_AM_WEBPHOTO_ERR_NO_RECORD", "There are no record");
 
 //---------------------------------------------------------
 // cat manager
 //---------------------------------------------------------
-//define("_AM_WEBPHOTO_DSC_CAT_IMGPATH" , "Please upload the desired category image file<br />and set Path from the directory installed XOOPS.<br />(The first character must be '/'.)<br />Show folder icon if not set" ) ;
+//define("_AM_WEBPHOTO_DSC_CAT_IMGPATH" , "Please upload the desired category image file<br>and set Path from the directory installed XOOPS.<br>(The first character must be '/'.)<br>Show folder icon if not set" ) ;
 //define("_AM_WEBPHOTO_OPT_CAT_PERM_POST_ALL" , "All Groups" ) ;
 
 //---------------------------------------------------------
@@ -361,7 +361,7 @@ define("_AM_WEBPHOTO_IMPORT_COMMENT_YES" , "Copy comments") ;
 //---------------------------------------------------------
 define("_AM_WEBPHOTO_PATHINFO_LINK" , "Check that 'Pathinfo' is working correctly in your server" ) ;
 define("_AM_WEBPHOTO_PATHINFO_DSC" , "If the page linked to from here doesn't display correctly, you should not use 'Pathinfo' " ) ;
-define("_AM_WEBPHOTO_PATHINFO_SUCCESS" , "Success!<br />Perhaps, you can use 'Pathinfo' in your server" ) ;
+define("_AM_WEBPHOTO_PATHINFO_SUCCESS" , "Success!<br>Perhaps, you can use 'Pathinfo' in your server" ) ;
 define("_AM_WEBPHOTO_CAP_REDO_EXIF" , "Get Exif" ) ;
 define("_AM_WEBPHOTO_RADIO_REDO_EXIF_TRY" , "Get when not set" ) ;
 define("_AM_WEBPHOTO_RADIO_REDO_EXIF_ALWAYS" , "Get always" ) ;
@@ -451,7 +451,7 @@ define("_AM_WEBPHOTO_PLAYER_PREVIEW","Preview");
 define("_AM_WEBPHOTO_PLAYER_PREVIEW_DSC","Save your changes first!");
 define("_AM_WEBPHOTO_PLAYER_PREVIEW_LINK","Preview Source");
 define("_AM_WEBPHOTO_PLAYER_NO_ITEM","Thers are no item to play");
-define("_AM_WEBPHOTO_PLAYER_WARNING","WARNING: Are you sure you want to delete this Player? <br />Manually edit all entries using this player before deleting it.");
+define("_AM_WEBPHOTO_PLAYER_WARNING","WARNING: Are you sure you want to delete this Player? <br>Manually edit all entries using this player before deleting it.");
 define("_AM_WEBPHOTO_PLAYER_ERR_EXIST","ERROR: The same title player you provided is already in the database!");
 define("_AM_WEBPHOTO_BUTTON_CLONE","Clone");
 
@@ -460,7 +460,7 @@ define("_AM_WEBPHOTO_BUTTON_CLONE","Clone");
 //---------------------------------------------------------
 // cat form
 define("_AM_WEBPHOTO_CAP_CAT_SELECT","Select the category image");
-define("_AM_WEBPHOTO_DSC_CAT_PATH" , "Set Path from the directory installed XOOPS.<br />(The first character must be '/'.)" ) ;
+define("_AM_WEBPHOTO_DSC_CAT_PATH" , "Set Path from the directory installed XOOPS.<br>(The first character must be '/'.)" ) ;
 define("_AM_WEBPHOTO_DSC_CAT_FOLDER" , "Show folder icon if not set" ) ;
 
 //---------------------------------------------------------
@@ -534,7 +534,7 @@ define("_AM_WEBPHOTO_INVITE_EMAIL", "Email address of the inviting person" ) ;
 define("_AM_WEBPHOTO_INVITE_NAME",   "Your Name" ) ;
 define("_AM_WEBPHOTO_INVITE_MESSAGE", "Message" ) ;
 define("_AM_WEBPHOTO_INVITE_SUBMIT", "Invite" ) ;
-define("_AM_WEBPHOTO_INVITE_EXAMPLE", "Exsample: Hello, I am John. I send an invitation at the site which was talked about. <br />Jane, too, attempt to register by all means. " ) ;
+define("_AM_WEBPHOTO_INVITE_EXAMPLE", "Exsample: Hello, I am John. I send an invitation at the site which was talked about. <br>Jane, too, attempt to register by all means. " ) ;
 define("_AM_WEBPHOTO_INVITE_SUBJECT", "You get the invitation email. from %s to %s " ) ;
 define("_AM_WEBPHOTO_INVITE_ERR_NO_NAME", "No Name" ) ;
 
@@ -572,4 +572,3 @@ define('_AM_WEBPHOTO_PLEASE_IMPORT_MYALBUM', "Please execute the batch import fr
 // === define end ===
 }
 
-?>

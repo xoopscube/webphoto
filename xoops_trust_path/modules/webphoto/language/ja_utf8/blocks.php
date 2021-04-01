@@ -53,7 +53,7 @@ define($constpref."TEXT_STRLENGTH","写真・動画・メディアのタイト�
 define($constpref."TEXT_CATLIMITATION","カテゴリ限定");
 
 // v2.30
-define($constpref."TEXT_CATLIMITRECURSIVE","サブカテゴリも対象<br />カテゴリ限定のとき有効");
+define($constpref."TEXT_CATLIMITRECURSIVE","サブカテゴリも対象<br>カテゴリ限定のとき有効");
 
 define($constpref."TEXT_BLOCK_WIDTH","最大表示サイズ");
 define($constpref."TEXT_BLOCK_WIDTH_NOTES","（※ ここを0にした場合、サムネイル画像をそのままのサイズで表示します）");
@@ -107,5 +107,3 @@ define($constpref."TIMELINE_SCALE_DECADE", "１０年") ;
 
 // === define end ===
 }
-
-?>

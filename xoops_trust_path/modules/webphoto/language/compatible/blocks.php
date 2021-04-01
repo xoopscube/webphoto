@@ -81,5 +81,3 @@ define($constpref."PIXEL", "Pixel");
 
 // === define end ===
 }
-
-?>
