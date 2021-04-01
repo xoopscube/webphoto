@@ -21,9 +21,9 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_mid extends webphoto_ext_base
 {
-	var $_timidity_class;
-	var $_lame_class;
-	var $_ffmpeg_class ;
+	public $_timidity_class;
+	public $_lame_class;
+	public $_ffmpeg_class ;
 
 //---------------------------------------------------------
 // constructor

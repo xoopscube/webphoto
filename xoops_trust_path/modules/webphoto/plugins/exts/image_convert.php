@@ -19,7 +19,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_image_convert extends webphoto_ext_base
 {
-	var $_imagemagick_class;
+	public $_imagemagick_class;
 
 //---------------------------------------------------------
 // constructor

@@ -13,7 +13,7 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_video_ffmpeg extends webphoto_ext_base
 {
-	var $_ffmpeg_class ;
+	public $_ffmpeg_class ;
 
 //---------------------------------------------------------
 // constructor

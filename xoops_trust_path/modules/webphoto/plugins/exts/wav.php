@@ -21,8 +21,8 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_wav extends webphoto_ext_base
 {
-	var $_lame_class;
-	var $_ffmpeg_class ;
+	public $_lame_class;
+	public $_ffmpeg_class ;
 
 //---------------------------------------------------------
 // constructor

@@ -14,7 +14,9 @@
 // width()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_embed_youtube
@@ -29,43 +31,43 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_embed_youtube extends webphoto_embed_base
 {
-	var $_URL_REMOVE = '&feature=.*';
+	public $_URL_REMOVE = '&feature=.*';
 
-function webphoto_embed_youtube()
+public function __construct()
 {
-	$this->webphoto_embed_base( 'youtube' );
-	$this->set_url( 'http://www.youtube.com/watch?v=' );
+	parent::__construct('youtube');
+	$this->set_url( 'https://www.youtube.com/watch?v=' );
 	$this->set_sample( 'xFnwzdKNtpI' );
 }
 
-function embed( $src, $width, $height )
+public function embed( $src, $width, $height, $extra = NULL )
 {
 	$str = $this->build_embed_script( $src, $width, $height );
 	return $str;
 }
 
-function link( $src )
+public function link( $src )
 {
 	return $this->build_link( $src );
 }
 
-function thumb( $src )
+public function thumb( $src )
 {
-	$str = 'http://img.youtube.com/vi/'.$src.'/2.jpg'; 
+	$str = 'https://img.youtube.com/vi/'.$src.'/mqdefault.jpg';
 	return $str;
 }
 
-function width()
+public function width()
 {
-	return 425;
+	return 640;
 }
 
-function height()
+public function height()
 {
-	return 344;
+	return 360;
 }
 
-function desc()
+public function desc()
 {
 	return $this->build_desc();
 }
@@ -73,20 +75,20 @@ function desc()
 //---------------------------------------------------------
 // xml
 //---------------------------------------------------------
-function support_params()
+public function support_params()
 {
 	return $this->build_support_params();
 }
 
-function get_xml_params( $src )
+public function get_xml_params( $src )
 {
-	if ( substr($src, 0, 1) == "-" ){
+	if ( 0 === strpos( $src, "-" ) ){
 		$d = substr( $src, 1 );
 	} else {
 		$id = $src;
 	}
 
-	$url  = 'http://gdata.youtube.com/feeds/api/videos?vq='.$id;
+	$url  = 'https://gdata.youtube.com/feeds/api/videos?vq='.$id;
 	$cont = $this->get_remote_file( $url );
 	if ( empty($cont) ) {
 		return false;
@@ -115,21 +117,21 @@ function get_xml_params( $src )
 	return $arr;
 }
 
-function get_xml_title( $entry )
+public function get_xml_title( $entry )
 {
 	$str = $this->get_xpath( $entry, '//media:title' );
-	$str = $this->convert_from_utf8( strval($str) );
+	$str = $this->convert_from_utf8( (string) $str );
 	return $str;
 }
 
-function get_xml_description( $entry )
+public function get_xml_description( $entry )
 {
 	$str = $this->get_xpath( $entry, '//media:description' );
-	$str = $this->convert_from_utf8( strval($str) );
+	$str = $this->convert_from_utf8( (string) $str );
 	return $str;
 }
 
-function get_xml_url( $entry )
+public function get_xml_url( $entry )
 {
 	$xpath = $this->get_xpath( $entry, '//media:player' );
 	$str   = $this->get_obj_attributes( $xpath, 'url' );
@@ -137,23 +139,22 @@ function get_xml_url( $entry )
 	return $str;
 }
 
-function get_xml_thumb( $entry )
-{
+public function get_xml_thumb( $entry ) {
 	$xpath = $this->get_xpath( $entry, '//media:thumbnail' );
 	$str   = $this->get_obj_attributes( $xpath, 'url' );
-	$str   = strval($str);
+	$str   = (string) $str;
 	return $str;
 }
 
-function get_xml_duration( $entry )
+public function get_xml_duration( $entry )
 {
 	$xpath = $this->get_xpath( $entry, '//yt:duration' );
 	$str   = $this->get_obj_attributes( $xpath, 'seconds' );
-	$str   = strval( $str );
+	$str   = (string) $str;
 	return $str;
 }
 
-function get_xml_tags( $entry )
+public function get_xml_tags( $entry )
 {
 	$str = $this->get_xpath( $entry, '//media:keywords' );
 	$arr = $this->str_to_array( $str, ',' );
@@ -161,15 +162,15 @@ function get_xml_tags( $entry )
 	return $arr;
 }
 
-function build_xml_script( $src )
+public function build_xml_script( $src )
 {
 	$str = $this->build_embed_script_with_repalce( $src );
 	return $str;
 }
 
-function build_embed_script( $src, $width, $height )
+public function build_embed_script( $src, $width, $height )
 {
-	$movie = 'http://www.youtube.com/v/'.$src.'&amp;rel=0&amp;border=0';
+	$movie = 'https://www.youtube.com/v/'.$src.'&amp;rel=0&amp;border=0';
 	$wmode = 'transparent';
 	$extra = 'wmode="'.$wmode.'"';
 
@@ -183,4 +184,3 @@ function build_embed_script( $src, $width, $height )
 
 // --- class end ---
 }
-?>

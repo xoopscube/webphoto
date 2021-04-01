@@ -6,7 +6,9 @@
 // 2010-02-01 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_editor_plain
@@ -14,9 +16,10 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 class webphoto_editor_plain extends webphoto_editor_base
 {
 
-function webphoto_editor_plain()
+public function __construct()
 {
-	$this->webphoto_editor_base();
+	parent::__construct();
+	//$this->webphoto_editor_base();
 
 	$this->set_display_smiley( 1 ) ;
 	$this->set_display_xcode(  1 ) ;

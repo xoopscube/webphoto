@@ -12,7 +12,9 @@
 // get_xml_params()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_embed_dailymotion
@@ -29,13 +31,13 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 class webphoto_embed_dailymotion extends webphoto_embed_base
 {
 
-function webphoto_embed_dailymotion()
+public function __construct()
 {
-	$this->webphoto_embed_base( 'dailymotion' );
+	parent::__construct( 'dailymotion' );
 	$this->set_url( 'http://www.dailymotion.com/cluster/tech/video/' );
 }
 
-function embed( $src, $width, $height )
+public function embed( $src, $width, $height, $extra = NULL )
 {
 	$movie = 'http://www.dailymotion.com/swf/'.$src;
 	$extra = 'allowFullScreen="true" allowScriptAccess="always"';
@@ -49,12 +51,12 @@ function embed( $src, $width, $height )
 	return $str;
 }
 
-function link( $src )
+public function link( $src )
 {
 	return $this->build_link( $src );
 }
 
-function desc()
+public function desc()
 {
 	return $this->build_desc_span( $this->_url_head, 'x3y6yk', '_no-more-keyboardsmicrosoft_tech' );
 }
@@ -62,15 +64,16 @@ function desc()
 //---------------------------------------------------------
 // xml
 //---------------------------------------------------------
-function support_params()
+public function support_params()
 {
 	return $this->build_support_params();
 }
 
-function get_xml_params( $src )
+public function get_xml_params( $src )
 {
-
-	$url  = 'http://www.dailymotion.com/rss/video/'.$src;
+	//!FIX test
+	//$url  = 'http://www.dailymotion.com/rss/video/'.$src;
+	$url  = 'https://www.dailymotion.com/video/'.$src;
 	$cont = $this->get_remote_file( $url );
 	if ( empty($cont) ) {
 		return false;
@@ -95,47 +98,47 @@ function get_xml_params( $src )
 	return $arr;
 }
 
-function get_xml_title( $item )
+public function get_xml_title( $item )
 {
 	$str = $this->get_obj_property( $item, 'title');
-	$str = $this->convert_from_utf8( strval($str) );
+	$str = $this->convert_from_utf8( (string) $str );
 	return $str;
 }
 
-function get_xml_description( $item )
+public function get_xml_description( $item )
 {
 	$xpath = $this->get_xpath( $item, '//itunes:summary' );
-	$str   = strval( $xpath );
+	$str   = (string) $xpath;
 	$str   = $this->convert_from_utf8( $str );
 	return $str;
 }
 
-function get_xml_url( $item )
+public function get_xml_url( $item )
 {
 	$str = $this->get_obj_property( $item, 'link');
-	$str = strval($str);
+	$str = (string) $str;
 	return $str;
 }
 
-function get_xml_thumb( $item )
+public function get_xml_thumb( $item )
 {
-	$xpath = $this->get_xpath( $item, '//media:thumbnail' );
+	$xpath = $this->get_xpath( $item, '//media:thumbnail_medium_url' );
 	$attr  = $this->get_obj_method(   $xpath, 'attributes' );
 	$str   = $this->get_obj_property( $attr,  'url' );
-	$str   = strval($str);
+	$str   = (string) $str;
 	return $str;
 }
 
-function get_xml_duration( $item )
+public function get_xml_duration( $item )
 {
 	$xpath = $this->get_xpath( $item, '//media:content' );
 	$attr  = $this->get_obj_method(   $xpath,  'attributes' );
 	$str   = $this->get_obj_property( $attr,   'duration' );
-	$str   = strval( $str );
+	$str   = (string) $str;
 	return $str;
 }
 
-function get_xml_tags( $item )
+public function get_xml_tags( $item )
 {
 	$str = $this->get_xpath( $item, '//itunes:keywords' );
 	$arr = $this->str_to_array( $str, ',' );
@@ -143,14 +146,10 @@ function get_xml_tags( $item )
 	return $arr;
 }
 
-function get_xml_script( $item )
+public function get_xml_script( $item )
 {
 	$str = $this->get_xpath( $item, '//media:player' );
 	$str = $this->replace_width_height( $str );
 	return $str;
 }
-
-// --- class end ---
 }
-
-?>

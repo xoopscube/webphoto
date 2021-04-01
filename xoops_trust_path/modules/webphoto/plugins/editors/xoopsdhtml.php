@@ -12,20 +12,23 @@
 // set_display_html()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_editor_xoopsdhtml
 //=========================================================
 class webphoto_editor_xoopsdhtml extends webphoto_editor_base
 {
-	var $_caption    = '';
-	var $_hiddentext = 'xoopsHiddenText' ;
+	public $_caption    = '';
+	public $_hiddentext = 'xoopsHiddenText' ;
 	private $isXCL22;
 
-function webphoto_editor_xoopsdhtml()
+public function __construct()
 {
-	$this->webphoto_editor_base();
+	parent::__construct();
+	//$this->webphoto_editor_base();
 
 	$this->set_allow_in_not_has_html( true );
 	$this->set_show_display_options(  true );

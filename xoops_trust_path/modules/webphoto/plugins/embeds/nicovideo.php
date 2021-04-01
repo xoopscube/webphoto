@@ -29,9 +29,9 @@ class webphoto_embed_nicovideo extends webphoto_embed_base
 {
 
 // this word is written by UTF-8
-	var $_DESCRIPTION_REMOVE = '前→.*';
+	public $_DESCRIPTION_REMOVE = '前→.*';
 
-function webphoto_embed_nicovideo()
+function __construct()
 {
 	$this->webphoto_embed_base( 'nicovideo' );
 	$this->set_url( 'http://www.nicovideo.jp/watch/' );

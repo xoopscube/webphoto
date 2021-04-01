@@ -6,19 +6,21 @@
 // 2010-10-01 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_audio_ffmpeg
 //=========================================================
 class webphoto_ext_audio_ffmpeg extends webphoto_ext_base
 {
-	var $_ffmpeg_class ;
+	public $_ffmpeg_class ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_audio_ffmpeg( $dirname, $trust_dirname )
+function __construct( $dirname, $trust_dirname )
 {
 	$this->webphoto_ext_base( $dirname, $trust_dirname );
 

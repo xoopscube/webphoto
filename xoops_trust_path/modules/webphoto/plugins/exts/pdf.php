@@ -21,14 +21,14 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_pdf extends webphoto_ext_base
 {
-	var $_pdf_class;
+	public $_pdf_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_pdf( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_ext_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
 
 	$this->_pdf_class 
 		=& webphoto_pdf::getInstance( $dirname, $trust_dirname );

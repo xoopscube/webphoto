@@ -12,14 +12,16 @@
 // $trust_dirname 
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_txt
 //=========================================================
 class webphoto_ext_txt extends webphoto_ext_base
 {
-	var $_TXT_EXTS = array('txt');
+	public $_TXT_EXTS = array('txt');
 
 //---------------------------------------------------------
 // constructor

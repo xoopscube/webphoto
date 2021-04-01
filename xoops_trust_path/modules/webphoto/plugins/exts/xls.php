@@ -21,8 +21,8 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_xls extends webphoto_ext_base
 {
-	var $_pdf_class;
-	var $_jod_class;
+	public $_pdf_class;
+	public $_jod_class;
 
 //---------------------------------------------------------
 // constructor

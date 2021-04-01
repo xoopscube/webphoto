@@ -28,15 +28,15 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 
 class webphoto_embed_myspace extends webphoto_embed_base
 {
-	var $_TITLE_REMOVE = "\s+ - MySpace Video";
-	var $_DESCRIPTION_REMOVE = "\r|\n";
+	public $_TITLE_REMOVE = "\s+ - MySpace Video";
+	public $_DESCRIPTION_REMOVE = "\r|\n";
 
 // this word is written by UTF-8
-	var $_TITLE_SPLIT  = "さんが投稿した動画";
+	public $_TITLE_SPLIT  = "さんが投稿した動画";
 
-function webphoto_embed_myspace()
+public function __construct()
 {
-	$this->webphoto_embed_base( 'myspace' );
+	parent::__construct( 'myspace' );
 	$this->set_url( 'http://vids.myspace.com/index.cfm?fuseaction=vids.individual&videoid=' );
 	$this->set_sample( '57094809' );
 }

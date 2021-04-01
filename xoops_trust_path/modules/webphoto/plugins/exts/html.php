@@ -19,7 +19,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext_html extends webphoto_ext_base
 {
-	var $_HTML_EXTS = array('html', 'htm');
+	public $_HTML_EXTS = array('html', 'htm');
 
 //---------------------------------------------------------
 // constructor

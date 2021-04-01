@@ -23,7 +23,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_embed_webphoto_sample extends webphoto_embed_base
 {
-	var $_SITE = '';
+	public $_SITE = '';
 
 function webphoto_embed_webphoto_sample()
 {

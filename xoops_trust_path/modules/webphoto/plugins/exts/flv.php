@@ -6,14 +6,16 @@
 // 2010-10-01 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_flv
 //=========================================================
 class webphoto_ext_flv extends webphoto_ext_base
 {
-	var $_ffmpeg_class ;
+	public $_ffmpeg_class ;
 
 //---------------------------------------------------------
 // constructor

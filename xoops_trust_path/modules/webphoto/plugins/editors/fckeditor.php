@@ -12,23 +12,26 @@
 // set_display_html()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_editor_fckeditor
 //=========================================================
 class webphoto_editor_fckeditor extends webphoto_editor_base
 {
-	var $_js_base = 'common/fckeditor' ;
-	var $_js_file = 'fckeditor.js' ;
-	var $_width   = '100%' ;
-	var $_height  = '500' ;
-	var $_toolbar = 'Default' ;
-	var $_value   = '' ;
+	public $_js_base = 'common/fckeditor' ;
+	public $_js_file = 'fckeditor.js' ;
+	public $_width   = '100%' ;
+	public $_height  = '500' ;
+	public $_toolbar = 'Default' ;
+	public $_value   = '' ;
 
-function webphoto_editor_fckeditor()
+public function __construct()
 {
-	$this->webphoto_editor_base();
+	parent::__construct();
+	//$this->webphoto_editor_base();
 
 	$this->set_display_html( 1 ) ;
 }

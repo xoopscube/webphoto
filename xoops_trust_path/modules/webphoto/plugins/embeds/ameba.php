@@ -24,11 +24,12 @@ class webphoto_embed_ameba extends webphoto_embed_base
 {
 
 // this word is written by UTF-8
-	var $_TAGS_REMOVE = array('動画');
+	public $_TAGS_REMOVE = array('動画');
 
-function webphoto_embed_ameba()
+public function __construct()
 {
-	$this->webphoto_embed_base( 'ameba' );
+	parent::__construct('ameba');
+	//$this->webphoto_embed_base( 'ameba' );
 	$this->set_url( 'http://vision.ameba.jp/watch.do?movie=' );
 	$this->set_sample( '1726761' );
 }
