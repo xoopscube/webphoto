@@ -19,7 +19,7 @@
   <{include file="db:`$mydirname`_inc_gmap_js.html" }>
 
 <{* -- gmap loop -- *}>
-  <{counter name="gmap_i" assign="gmap_i" start=0 print=false }><br />
+  <{counter name="gmap_i" assign="gmap_i" start=0 print=false }><br>
   <{foreach item=gmap from=$gmap_list}>
 
 <script type="text/javascript">
@@ -48,24 +48,24 @@
 <input type="text" id="webphoto_search" name="webphoto_search" value="<{$gmap_address}>" size="60" />
 <input type="submit" value="<{$lang_search}>" />
 </form>
-<br />
+<br>
 
-<b><{$lang_current_location}></b><br />
+<b><{$lang_current_location}></b><br>
 <div id="webphoto_gmap_current_location"></div>
-<br />
+<br>
 
 <{if $use_nishioka_inverse == 'true' }>
-	<b><{$lang_current_location}></b><br />
+	<b><{$lang_current_location}></b><br>
 	<div id="webphoto_gmap_current_address"></div>
-	<br />
+	<br>
 <{/if}>
 
-<b><{$lang_search_list}></b><br />
+<b><{$lang_search_list}></b><br>
 <div id="webphoto_gmap_list"></div>
-<br />
+<br>
 
 <div id="webphoto_gmap_map" style="width:95%; height:<{$gmap_height}>px; border:1px solid #909090; margin-bottom:6px;" >Loading ...</div>
-<br />
+<br>
 
 <input type="button" value="<{$lang_get_location}>" onclick="webphoto_gmap_setParentCenterLocation()" />
 
@@ -81,7 +81,7 @@
   <input type="button" value="<{$lang_disp_off}>" onclick="webphoto_gmap_dispOff()">
 <{/if}>
 
-<br /><br />
+<br><br>
 
 </body>
 </html>

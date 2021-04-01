@@ -14,17 +14,17 @@
   <b><{$lang_parent}></b> 
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php?fct=catmanager&amp;disp=edit&amp;cat_id=<{$parent_cat_id}>">
   <{$parent_cat_title_s}></a>
-  <br /><br />
+  <br><br>
 <{/if}>
 
 <{if $show_children}> 
-  <b><{$lang_cat_child_cap}></b><br />
+  <b><{$lang_cat_child_cap}></b><br>
   <{foreach item=ch from=$children_list}>
     &nbsp; <{$ch.prefix}>
     <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php?fct=catmanager&amp;disp=edit&amp;cat_id=<{$ch.cat_id}>">
-    <{$ch.cat_title_s}></a><br />
+    <{$ch.cat_title_s}></a><br>
   <{/foreach}>
-  <br />
+  <br>
 <{/if}>
 
 <{* --- form --- *}>
@@ -58,25 +58,25 @@
 <td class="odd"><{$cat_description_ele}></td></tr>
 
 <tr><td class="head">
-<{$lang_cap_cat_select}><br /><br />
+<{$lang_cap_cat_select}><br><br>
 <span style="font-size: 90%; font-weight: 500;"><{$lang_dsc_cat_folder}></span>
 </td><td class="odd">
-<{$lang_cap_maxpixel}> <{$cfg_cat_width}> x <{$cfg_cat_width}> px<br />
-<{$lang_dsc_pixcel_resize}><br />
+<{$lang_cap_maxpixel}> <{$cfg_cat_width}> x <{$cfg_cat_width}> px<br>
+<{$lang_dsc_pixcel_resize}><br>
 <input type="hidden" id="xoops_upload_file[]" name="xoops_upload_file[]" value="file_category" />
 <input type="file" id="file_category" name="file_category" size="50" />
-<br /><br />
-<{$lang_or}><br />
-<{$lang_cat_img_name}><br />
+<br><br>
+<{$lang_or}><br>
+<{$lang_cat_img_name}><br>
 <select id="cat_img_name" name="cat_img_name" size="1" onchange="showImgSelected('img_disp', 'cat_img_name', '<{$js_img_path}>', '', '<{$xoops_url}>')" >
 <{$cat_img_name_options}>
 </select>
-<br /><br />
-<{$lang_or}><br />
-<{$lang_cat_img_path}><br />
-<{$lang_dsc_cat_path}><br />
+<br><br>
+<{$lang_or}><br>
+<{$lang_cat_img_path}><br>
+<{$lang_dsc_cat_path}><br>
 <input type="text" id="cat_img_path" name="cat_img_path" value="<{$cat_img_path_s}>" size="80" />
-<br />
+<br>
 <{if $img_src_s != "" }>
   <a  href="<{$img_src_s}>" target="_blank">
   <img id="img_disp" src="<{$img_src_s}>" height="50" style="padding:3px; margin: 3px;" />
@@ -98,7 +98,7 @@
   <tr><td class="head"><{$lang_cat_perm_read}></td>
   <td class="odd">
   <input type="checkbox" name="cat_perm_read_all" id="cat_perm_read_all" value="1" onclick="webphoto_check_all(this, 'cat_perm_read_ids')" />
-  <{$lang_group_perm_all}><br />
+  <{$lang_group_perm_all}><br>
   <{$cat_perm_read_checkboxs}>
   </td></tr>
 <{/if}>
@@ -106,7 +106,7 @@
 <tr><td class="head"><{$lang_cat_perm_post}></td>
 <td class="odd">
 <input type="checkbox" name="cat_perm_post_all" id="cat_perm_post_all" value="1" onclick="webphoto_check_all(this, 'cat_perm_post_ids')" />
-<{$lang_group_perm_all}><br />
+<{$lang_group_perm_all}><br>
 <{$cat_perm_post_checkboxs}>
 </td></tr>
 
@@ -122,7 +122,7 @@
 <{if $show_child_num }>
   <tr><td class="head"><{$lang_cat_child_cap}></td>
   <td class="odd">
-  <{$lang_cat_child_num}> : <{$child_num}><br />
+  <{$lang_cat_child_num}> : <{$child_num}><br>
   <{if $show_perm_child}>
     <input type="checkbox" name="perm_child" id="perm_child" value="1" checked="checked" />
     <{$lang_cat_child_perm}>

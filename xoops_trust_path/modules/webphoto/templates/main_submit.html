@@ -7,7 +7,7 @@
 <{$lang_title_addphoto}></a> 
 &gt; 
 <b><{$lang_title_sub}></b>
-<br /><br />
+<br><br>
 
 <{if $show_uploading}>
   <div id="webphoto_uploading">
@@ -23,14 +23,14 @@
   <{* color: red;  background-color: lightyellow;  border: gray; *}>
   <div id="webphoto_submit_message" style="color:#ff0000; background-color:#ffffeo; border:1px dotted #808080; padding:3px;">
   <{$message}>
-  </div><br />
+  </div><br>
 <{/if}>
 
 <{if $error != '' }>
   <{* color: red;  background-color: lightyellow;  border: gray; *}>
   <div id="webphoto_submit_error" style="color:#ff0000; background-color:#ffffeo; border:1px dotted #808080; padding:3px;">
   <{$error}>
-  </div><br />
+  </div><br>
 <{/if}>
 
 <{if $show_preview }>
@@ -39,27 +39,27 @@
 
 <{if $show_submit_select }>
   <{include file="db:`$mydirname`_inc_submit_select.html"}>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_embed }>
   <{include file="db:`$mydirname`_form_embed.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_editor }>
   <{include file="db:`$mydirname`_form_editor.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_photo }>
   <{include file="db:`$mydirname`_form_photo.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_video_thumb }>
   <{include file="db:`$mydirname`_form_video_thumb.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <hr />
@@ -69,7 +69,7 @@
 <{/if}>
 
 <{if $is_module_admin }>
-  <br />
+  <br>
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php"><{$lang_goto_admin}></a>
 <{/if}>
 

@@ -36,7 +36,7 @@ table#imagenav td {vertical-align: bottom; padding: 5px;}
 table#imagemain td {border-right: 1px solid silver; border-bottom: 1px solid silver; padding: 5px; vertical-align: middle;}
 table#imagemain th {border: 0; background-color: #2F5376; color:white; font-size: 12px; padding: 5px; vertical-align: top; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif;}
 table#header td {width: 100%; background-color: #2F5376; vertical-align: middle;}
-table#header td#headerbar {border-bottom: 1px solid silver; background-color: #dddddd;}
+table#header td#headerbar {border-bottom: 1px solid silver;}
 div#pagenav {text-align:center;}
 div#footer {text-align:right; padding: 5px;}
 div.error  {background-color: #FFCCCC; text-align: center; border-top: 1px solid #DDDDFF; border-left: 1px solid #DDDDFF; border-right: 1px solid #AAAAAA; border-bottom: 1px solid #AAAAAA; font-weight: bold; padding: 10px; }
@@ -116,7 +116,7 @@ div.error  {background-color: #FFCCCC; text-align: center; border-top: 1px solid
     <img src="<{$photo.src}>" alt="<{$photo.nicename}>" title="<{$photo.nicename}>" />
   <{/if}>
   </td>
-  <td><{$photo.cont_width}> x <{$photo.cont_height}><br />(<{$photo.cont_ext}>)</td>
+  <td><{$photo.cont_width}> x <{$photo.cont_height}><br>(<{$photo.cont_ext}>)</td>
   <td nowrap="nowrap">
 
 <{* thumbnail or icon *}>
@@ -130,7 +130,7 @@ div.error  {background-color: #FFCCCC; text-align: center; border-top: 1px solid
     <a href="#" onclick="javascript:appendCode('<{$photo.xcoder}>');">
     <img src="<{$xoops_url}>/modules/<{$dirname}>/images/imagemanager/alignright.gif" alt="<{$lang_right}>" title="<{$lang_right}>" />
     </a>
-    <br /><br />
+    <br><br>
   <{/if}>
 
 <{* normal photo *}>

@@ -24,7 +24,7 @@
   </select>
 
   <{if $show_user_list }>
-    <br />
+    <br>
     <{foreach from=$user_list item=list }>
       <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php?fct=maillog_manager&amp;op=form&amp;id=<{$maillog_id}>&amp;userstart=<{$list.userstart}>"><{$list.page}></a> 
     <{/foreach}>

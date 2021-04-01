@@ -78,7 +78,7 @@ function webphoto_gmap_disp_on()
   <tr><td class="head" width="20%">
   <{$lang_cap_maxsize}>
   <{if $lang_submit_cap_dsc_maxsize != "" }>
-    <br /><br />
+    <br><br>
     <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_maxsize}></span>
   <{/if}>
   </td>
@@ -89,7 +89,7 @@ function webphoto_gmap_disp_on()
   <tr><td class="head" width="20%">
   <{$lang_cap_allowed_exts}>
   <{if $lang_submit_cap_dsc_allowed_exts != "" }>
-    <br /><br />
+    <br><br>
     <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_allowed_exts}></span>
   <{/if}> 
   </td>
@@ -101,7 +101,7 @@ function webphoto_gmap_disp_on()
   <tr><td class="head" width="20%">
   <{$lang_category}>
   <{if $lang_submit_cap_dsc_category != "" }>
-    <br /><br />
+    <br><br>
     <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_category}></span>
   <{/if}>
   </td>
@@ -116,7 +116,7 @@ function webphoto_gmap_disp_on()
 <{if $show_item_perm_level }>
   <tr><td class="head" width="20%"><{$lang_item_perm_level}>
   <{if $lang_submit_cap_dsc_perm_level != "" }>
-    <br /><br />
+    <br><br>
     <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_perm_level}></span>
   <{/if}>
   </td>
@@ -137,14 +137,14 @@ function webphoto_gmap_disp_on()
 <{$lang_item_title}>
 
 <{if $lang_submit_cap_dsc_title != "" }>
-  <br /><br />
+  <br><br>
   <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_title}></span>
 <{/if}>
 
 </td>
 <td class="odd">
 <input type="text" id="item_title" name="item_title" value="<{$item_title_s}>" size="50" />
-<br />
+<br>
 
 <{if $show_embed_support_title }>
   <{$lang_embed_support_title}>
@@ -164,7 +164,7 @@ function webphoto_gmap_disp_on()
 <tr><td class="head" width="20%">
 <{$lang_item_description}>
 <{if $lang_submit_cap_dsc_description != "" }>
-  <br /><br />
+  <br><br>
   <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_description}></span>
 <{/if}>
 </td>
@@ -172,7 +172,7 @@ function webphoto_gmap_disp_on()
 <{$ele_item_description}>
 
 <{if $show_embed_support_description }>
-  <br /><{$lang_embed_support_description}>
+  <br><{$lang_embed_support_description}>
 <{/if}>
 
 </td></tr>
@@ -181,15 +181,15 @@ function webphoto_gmap_disp_on()
 <{if $show_desc_options }>
   <tr><td class="head" width="20%"><{$lang_cap_description_option}></td><td class="odd">
   <{if $has_html}><input type="checkbox" id="item_description_html" name="item_description_html" value="1" <{$item_description_html_checked}> />
-  <{$lang_cap_html}><br /><{else}><input type="hidden" id="item_description_html" name="item_description_html" value="<{if $item_description_html_checked}>1<{else}>0<{/if}>" /><{/if}>
+  <{$lang_cap_html}><br><{else}><input type="hidden" id="item_description_html" name="item_description_html" value="<{if $item_description_html_checked}>1<{else}>0<{/if}>" /><{/if}>
   <input type="checkbox" id="item_description_smiley" name="item_description_smiley" value="1" <{$item_description_smiley_checked}> />
-  <{$lang_cap_smiley}><br />
+  <{$lang_cap_smiley}><br>
   <input type="checkbox" id="item_description_xcode" name="item_description_xcode" value="1" <{$item_description_xcode_checked}> />
-  <{$lang_cap_xcode}><br />
+  <{$lang_cap_xcode}><br>
   <input type="checkbox" id="item_description_image" name="item_description_image" value="1" <{$item_description_image_checked}> />
-  <{$lang_cap_image}><br />
+  <{$lang_cap_image}><br>
   <input type="checkbox" id="item_description_br" name="item_description_br" value="1" <{$item_description_br_checked}> />
-  <{$lang_cap_br}><br />
+  <{$lang_cap_br}><br>
   </td></tr>
 <{/if}>
 
@@ -197,7 +197,7 @@ function webphoto_gmap_disp_on()
 <{if $show_item_description_scroll }>
   <tr><td class="head" width="20%"><{$lang_item_description_scroll}></td><td class="odd">
   <input type="text" id="item_description_scroll" name="item_description_scroll" value="<{$item_description_scroll}>" />
-  <br />
+  <br>
   <{$lang_item_description_scroll_dsc}>
   </td></tr>
 <{/if}>
@@ -216,7 +216,7 @@ function webphoto_gmap_disp_on()
   <input type="text" id="item_embed_src" name="item_embed_src" value="<{$item_embed_src_s}>" size="50" />
 
 <{if $embed_src_dsc != '' }>
-  <br /><{$embed_src_dsc}>
+  <br><{$embed_src_dsc}>
 <{/if}>
 
   </td></tr>
@@ -227,7 +227,7 @@ function webphoto_gmap_disp_on()
   <input type="text" id="item_siteurl" name="item_siteurl" value="<{$item_siteurl_s}>" size="50" />
 
 <{if $show_embed_support_siteurl }>
-  <br /><{$lang_embed_support_siteurl}>
+  <br><{$lang_embed_support_siteurl}>
 <{/if}>
 
   </td></tr>
@@ -239,7 +239,7 @@ function webphoto_gmap_disp_on()
   <textarea id="item_embed_text" name="item_embed_text" rows="5" cols="80"><{$item_embed_text_s}></textarea>
 
 <{if $show_embed_support_embed_text }>
-  <br /><{$lang_embed_support_embed_text}>
+  <br><{$lang_embed_support_embed_text}>
 <{/if}>
 
   </td></tr>
@@ -249,28 +249,28 @@ function webphoto_gmap_disp_on()
 <{if $show_file_photo }>
   <tr><td class="head" width="20%"><{$lang_cap_photo_select}>
   <{if $lang_submit_cap_dsc_file_photo != "" }>
-    <br /><br />
+    <br><br>
     <span class="webphoto_submit_cap_dsc"><{$lang_submit_cap_dsc_file_photo}></span>
   <{/if}>
   </td><td class="odd">
   <input type="hidden" id="xoops_upload_file[]" name="xoops_upload_file[]" value="file_photo" />
   <input type="file" id="file_photo" name="file_photo" size="50" />
-  <br />
+  <br>
 
 <{if $lang_submit_dsc_file_photo != "" }>
-   <{$lang_submit_dsc_file_photo}><br />
+   <{$lang_submit_dsc_file_photo}><br>
 <{/if}>
 
-  <br />
+  <br>
 
 <{if $show_item_external_url }>
-  <{$lang_or}> <{$lang_item_external_url}><br />
+  <{$lang_or}> <{$lang_item_external_url}><br>
   <input type="text" id="item_external_url" name="item_external_url" value="<{$item_external_url_s}>" size="80" />
-  <br /><br />
+  <br><br>
 <{/if}>
 
 <{if $photo_url_s != '' }>  
-  <a href="<{$photo_url_s}>" title="photo" target="_blank"><{$photo_url_s}></a><br />
+  <a href="<{$photo_url_s}>" title="photo" target="_blank"><{$photo_url_s}></a><br>
 <{/if}>
 
 <{if $show_file_photo_delete }>
@@ -337,7 +337,7 @@ function webphoto_gmap_disp_on()
   <tr><td class="head" width="20%"><{$lang_text_directory}></td><td class="odd">
   <{$lang_photopath}> 
   <input type="text" id="batch_dir" name="batch_dir" value="<{$batch_dir_s}>" size="50" />
-  <br /><{$lang_desc_photopath}>
+  <br><{$lang_desc_photopath}>
   </td></tr>
 <{/if}>
 
@@ -363,7 +363,7 @@ function webphoto_gmap_disp_on()
 <{if $show_item_datetime }>
   <tr><td class="head" width="20%"><{$lang_item_datetime}></td><td class="odd">
   <input type="checkbox" name="item_datetime_checkbox" id="item_datetime_checkbox" value="1" <{$item_datetime_checkbox_checked}> />
-  <{$lang_dsc_set_datetime}><br />
+  <{$lang_dsc_set_datetime}><br>
   <input type="text" id="item_datetime" name="item_datetime" value="<{$item_datetime_val_s}>" size="50" />
   </td></tr>
 <{/if}>
@@ -385,7 +385,7 @@ function webphoto_gmap_disp_on()
   <input type="text" id="item_duration" name="item_duration" value="<{$item_duration_s}>" size="50" />
 
 <{if $show_embed_support_duration }>
-  <br /><{$lang_embed_support_duration}>
+  <br><{$lang_embed_support_duration}>
 <{/if}>
 
   </td></tr>
@@ -452,10 +452,10 @@ function webphoto_gmap_disp_on()
 <{if $show_tags }>
   <tr><td class="head" width="20%"><{$lang_tags}></td><td class="odd">
   <input type="text" id="tags" name="tags" value="<{$tags_val_s}>" size="80" />
-  <br /><{$lang_dsc_tag_divid}>
+  <br><{$lang_dsc_tag_divid}>
 
 <{if $show_embed_support_tags }>
-  <br /><{$lang_embed_support_tags}>
+  <br><{$lang_embed_support_tags}>
 <{/if}>
 
   </td></tr>
@@ -466,34 +466,34 @@ function webphoto_gmap_disp_on()
   <tr><td class="head" width="20%"><{$lang_cap_jpeg_select}></td><td class="odd">
   <input type="hidden" id="xoops_upload_file[]" name="xoops_upload_file[]" value="file_jpeg" />
   <input type="file" id="file_jpeg" name="file_jpeg" size="50" />
-  <br />
+  <br>
   <{$lang_file_jpeg_dsc}>
-  <br /><br />
+  <br><br>
 
 <{if $show_item_external_thumb }>
-  <{$lang_or}> <{$lang_item_external_thumb}><br />
+  <{$lang_or}> <{$lang_item_external_thumb}><br>
   <input type="text" id="item_external_thumb" name="item_external_thumb" value="<{$item_external_thumb_s}>" size="80" />
-  <br /><br />
+  <br><br>
 <{/if}>
 
 <{if $show_item_icon_name }>
-  <{$lang_or}> <{$lang_item_icon_name}><br />
+  <{$lang_or}> <{$lang_item_icon_name}><br>
   <div style="border: #808080 1px solid; padding: 1px; width:80%;">
   <{$item_icon_name_s}>
-  </div><br />
+  </div><br>
 <{/if}>
 
 <{if $show_thumb_dsc_select }>
-  <{$lang_dsc_thumb_select}><br />
+  <{$lang_dsc_thumb_select}><br>
 <{/if}>
 
 <{if $show_thumb_dsc_embed }>
-  <{$lang_embed_thumb}><br />
+  <{$lang_embed_thumb}><br>
 <{/if}>
 
 <{if $jpeg_url_s != '' }>
-  <br />  
-  <a href="<{$jpeg_url_s}>" title="jpeg" target="_blank"><{$jpeg_url_s}></a><br />
+  <br>
+  <a href="<{$jpeg_url_s}>" title="jpeg" target="_blank"><{$jpeg_url_s}></a><br>
 <{/if}>
 
 <{if $show_file_jpeg_delete }>
@@ -519,7 +519,7 @@ function webphoto_gmap_disp_on()
 
 <{if $show_input_item_perm_read }>
     <input type="checkbox" name="item_perm_read_all" id="item_perm_read_all" value="1" onclick="webphoto_check_all(this, 'item_perm_read_ids')" />
-    <{$lang_group_perm_all}><br />
+    <{$lang_group_perm_all}><br>
     <{$item_perm_read_input_checkboxs}>
 
 <{else}>
@@ -536,7 +536,7 @@ function webphoto_gmap_disp_on()
 
 <{if $show_input_item_perm_down }>
   <input type="checkbox" name="item_perm_down_all" id="item_perm_down_all" value="1" onclick="webphoto_check_all(this, 'item_perm_down_ids')" />
-  <{$lang_group_perm_all}><br />
+  <{$lang_group_perm_all}><br>
   <{$item_perm_down_input_checkboxs}>
 
 <{else}>
@@ -628,7 +628,7 @@ function webphoto_gmap_disp_on()
 <{/if}>
 
 <{if $show_button_preview && $lang_submit_dsc_preview }>
-  <br />
+  <br>
   <{$lang_submit_dsc_preview}>
 <{/if}>
 

@@ -25,18 +25,18 @@
 <{/if}>
 
 <{$g.group_name}>
-</a><br /><br />
+</a><br><br>
 
 <{if $g.mod_right_name != "" }>
-   ( <{$g.mod_right_name}> ) <br />
+   ( <{$g.mod_right_name}> ) <br>
 <{/if}>
 
 <{if $g.cat_id > 0}>
-  <{$lang_group_mod_category}> <br />
+  <{$lang_group_mod_category}> <br>
   (
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php?fct=catmanager&disp=edit&cat_id=<{$g.cat_id}>">
   <{$g.cat_title}>
-  </a> ) <br />
+  </a> ) <br>
 <{/if}>
 
 </td>
@@ -48,13 +48,13 @@
 <td class="odd">
 <input type="checkbox" name="perms[groups][<{$g.group_id}>][module_read][<{$modid}>]" id="perms[groups][<{$g.group_id}>][module_read][<{$modid}>]" value="1" <{$g.module_read_checked}>" ><{$lang_gperm_module_read}> 
 <input type="hidden" name="perms[parents][module_read][<{$modid}>]" value="" />
-<input type="hidden" name="perms[itemname][module_read][<{$modid}>]" value="<{$lang_gperm_module_read}>" /><br />
+<input type="hidden" name="perms[itemname][module_read][<{$modid}>]" value="<{$lang_gperm_module_read}>" /><br>
 </td>
 
 <td class="odd">
 <input type="checkbox" name="perms[groups][<{$g.group_id}>][module_admin][<{$modid}>]" id="perms[groups][<{$g.group_id}>][module_admin][<{$modid}>]" value="1" <{$g.module_admin_checked}>" ><{$lang_gperm_module_admin}> 
 <input type="hidden" name="perms[parents][module_admin][<{$modid}>]" value="" />
-<input type="hidden" name="perms[itemname][module_admin][<{$modid}>]" value="<{$lang_gperm_module_admin}>" /><br />
+<input type="hidden" name="perms[itemname][module_admin][<{$modid}>]" value="<{$lang_gperm_module_admin}>" /><br>
 </td>
 
 </table>
@@ -74,7 +74,7 @@
   <td class="odd">
   <input type="checkbox" name="perms[groups][<{$g.group_id}>][<{$g.perm_name}>][<{$i.item_id}>]" id="perms[groups][<{$g.group_id}>][<{$g.perm_name}>][<{$i.item_id}>]" value="1" <{$i.checked}>" ><{$i.item_name}> 
   <input type="hidden" name="perms[parents][<{$g.perm_name}>][<{$i.item_id}>]" value="" />
-  <input type="hidden" name="perms[itemname][<{$g.perm_name}>][<{$i.item_id}>]" value="<{$i.item_name}>" /><br />
+  <input type="hidden" name="perms[itemname][<{$g.perm_name}>][<{$i.item_id}>]" value="<{$i.item_name}>" /><br>
   </td>
 
 <{* -- table line end -- *}>

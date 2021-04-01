@@ -32,18 +32,18 @@
     <img src="<{$photo.img_middle_src_s}>" border="0" align="center" vspace="3" hspace="7" alt="<{$photo.title_s}>" title="<{$photo.title_s}>" width="<{$cfg_middle_width}>" />
   <{/if}>
 
-  </a> <br />
+  </a> <br>
   <span class="webphoto_photo_title"><{$photo.title_s}></span>
 
   <{if $photo.cont_size_disp}>
     ( <{$photo.cont_size_disp}> )
   <{/if}>
-  <br />
+  <br>
 
 <{* === ENBED === *}>
 <{elseif $photo.displaytype == $smarty.const._C_WEBPHOTO_DISPLAYTYPE_EMBED }>
   <{$photo.embed_embed}> 
-  <br /><br />
+  <br><br>
   <{if $photo.embed_link != '' }>
     <a href="<{$photo.embed_link}>" target="_blank">
     <{$photo.title_s}></a>
@@ -55,18 +55,18 @@
     ( <{$photo.cont_size_disp}> )
   <{/if}>
 
-  <br />
+  <br>
 
 <{* === FALSH PLAYER === *}>
 <{elseif $photo.displaytype >= $smarty.const._C_WEBPHOTO_DISPLAYTYPE_SWFOBJECT }>
   <{$photo.flash_player}>
-  <br />
+  <br>
   <span class="webphoto_photo_title"><{$photo.title_s}></span>
 
   <{if $photo.cont_size_disp}>
     ( <{$photo.cont_size_disp}> )
   <{/if}>
-  <br />
+  <br>
 
 <{* === GENERAL ==== *}>
 <{elseif $photo.media_url_s }>
@@ -94,8 +94,8 @@
     <img src="<{$photo.imgsrc_thumb}>" border="0" align="center" vspace="3" hspace="7" alt="<{$photo.title_s}>" title="<{$photo.title_s}>" width="<{$cfg_middle_width}>" />
   <{/if}>
 
-  </a> <br />
-  <span class="webphoto_photo_title"><{$photo.title_s}></span> <br />
+  </a> <br>
+  <span class="webphoto_photo_title"><{$photo.title_s}></span> <br>
 
   <{if $photo.is_video && $photo.cont_duration_disp }>
     ( <{$photo.cont_duration_disp}> ) 
@@ -105,9 +105,9 @@
     ( <{$photo.cont_size_disp}> )
   <{/if}>
 
-  <br />
+  <br>
 
 <{* === NO FILE TYPE === *}>
 <{else}>
-  <span class="webphoto_photo_title"><{$photo.title_s}></span> <br />
+  <span class="webphoto_photo_title"><{$photo.title_s}></span> <br>
 <{/if}>

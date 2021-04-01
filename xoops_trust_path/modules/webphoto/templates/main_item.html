@@ -5,20 +5,20 @@
 &gt;&gt; 
 <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?fct=edit&amp;photo_id=<{$item_id}>" >
 <{$lang_title_edit}></a>
-<br /><br />
+<br><br>
 
 <{if $message != '' }>
   <{* color: red;  background-color: lightyellow;  border: gray; *}>
   <div style="color:#ff0000; background-color:#ffffeo; border:1px dotted #808080; padding:3px;">
   <{$message}>
-  </div><br />
+  </div><br>
 <{/if}>
 
 <{if $error != '' }>
   <{* color: red;  background-color: lightyellow;  border: gray; *}>
   <div style="color:#ff0000; background-color:#ffffeo; border:1px dotted #808080; padding:3px;">
   <{$error}>
-  </div><br />
+  </div><br>
 <{/if}>
 
 <{if $show_preview }>
@@ -28,30 +28,30 @@
 <{if $show_admin_manager }>
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php?fct=item_manager&amp;op=modify_form&amp;item_id=<{$item_id}>">
   goto admin item manager: <{$item_id}></a>
-  <br /><br />
+  <br><br>
 <{/if}>
 
 <{if $show_form_edit }>
   <{include file="db:`$mydirname`_form_edit.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_redo }>
   <{include file="db:`$mydirname`_form_redo.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_video_thumb }>
   <{include file="db:`$mydirname`_form_video_thumb.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_form_confirm }>
   <{include file="db:`$mydirname`_form_confirm.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $is_module_admin }>
-  <br />
+  <br>
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php"><{$lang_goto_admin}></a>
 <{/if}>

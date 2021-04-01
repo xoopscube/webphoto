@@ -105,23 +105,23 @@
 <{* item_time_update *}>
   <tr><td style="<{$cap_style.item_time_update}>"><{$lang_item_time_update}></td><td class="odd">
   <input type="checkbox" name="item_time_update_checkbox" id="item_time_update_checkbox" value="1" <{$item_time_update_checkbox_checked}> />
-  <{$lang_dsc_set_item_time_update}><br />
+  <{$lang_dsc_set_item_time_update}><br>
   <input type="text" id="item_time_update" name="item_time_update" value="<{$item_time_update_disp}>" size="50" />
-  <br />
+  <br>
   <{$lang_time_now}> : <{$time_now}>
   </td></tr>
 
 <{* item_time_publish *}>
   <tr><td style="<{$cap_style.item_time_publish}>"><{$lang_item_time_publish}></td><td class="odd">
   <input type="checkbox" name="item_time_publish_checkbox" id="item_time_publish_checkbox" value="1" <{$item_time_publish_checkbox_checked}> />
-  <{$lang_dsc_set_item_time_publish}><br />
+  <{$lang_dsc_set_item_time_publish}><br>
   <input type="text" id="item_time_publish" name="item_time_publish" value="<{$item_time_publish_disp}>" size="50" />
   </td></tr>
 
 <{* item_time_expire *}>
   <tr><td style="<{$cap_style.item_time_expire}>"><{$lang_item_time_expire}></td><td class="odd">
   <input type="checkbox" name="item_time_expire_checkbox" id="item_time_expire_checkbox" value="1" <{$item_time_expire_checkbox_checked}> />
-  <{$lang_dsc_set_item_time_expire}><br />
+  <{$lang_dsc_set_item_time_expire}><br>
   <input type="text" id="item_time_expire" name="item_time_expire" value="<{$item_time_expire_disp}>" size="50" />
   </td></tr>
 
@@ -130,7 +130,7 @@
 
 <{if $show_valid }>
   <input type="checkbox" name="valid" id="valid" value="1" checked="checked" />
-  <{$lang_cap_validphoto}><br />
+  <{$lang_cap_validphoto}><br>
 <{/if}>
 
   <select id="item_status" name="item_status" size="1" >
@@ -160,7 +160,7 @@
 <{$item_cat_id_options}>
 </select>
 <{if $show_err_invalid_cat}>
-  <br />
+  <br>
   <span style="color: #ff0000;"><{$lang_err_invalid_cat}></span> : 
   <{$item_cat_id}>
 <{/if}>
@@ -169,7 +169,7 @@
 <{* item title *}>
 <tr><td style="<{$cap_style.item_title}>"><{$lang_item_title}></td><td class="odd">
 <input type="text" id="item_title" name="item_title" value="<{$item_title_s}>" size="50" />
-<br />
+<br>
 
 <{if $show_embed_support_title }>
    <{$lang_embed_support_title}>
@@ -189,7 +189,7 @@
 <{$ele_item_description}>
 
 <{if $show_embed_support_description }>
-  <br /><{$lang_embed_support_description}>
+  <br><{$lang_embed_support_description}>
 <{/if}>
 
 </td></tr>
@@ -198,22 +198,22 @@
 <{if $show_desc_options }>
   <tr><td style="<{$cap_style.desc_options}>"><{$lang_cap_description_option}></td><td class="odd">
   <input type="checkbox" id="item_description_html" name="item_description_html" value="1" <{$item_description_html_checked}> />
-  <{$lang_cap_html}><br />
+  <{$lang_cap_html}><br>
   <input type="checkbox" id="item_description_smiley" name="item_description_smiley" value="1" <{$item_description_smiley_checked}> />
-  <{$lang_cap_smiley}><br />
+  <{$lang_cap_smiley}><br>
   <input type="checkbox" id="item_description_xcode" name="item_description_xcode" value="1" <{$item_description_xcode_checked}> />
-  <{$lang_cap_xcode}><br />
+  <{$lang_cap_xcode}><br>
   <input type="checkbox" id="item_description_image" name="item_description_image" value="1" <{$item_description_image_checked}> />
-  <{$lang_cap_image}><br />
+  <{$lang_cap_image}><br>
   <input type="checkbox" id="item_description_br" name="item_description_br" value="1" <{$item_description_br_checked}> />
-  <{$lang_cap_br}><br />
+  <{$lang_cap_br}><br>
   </td></tr>
 <{/if}>
 
 <{* item description scroll *}>
 <tr><td style="<{$cap_style.item_description_scroll}>"><{$lang_item_description_scroll}></td><td class="odd">
 <input type="text" id="item_description_scroll" name="item_description_scroll" value="<{$item_description_scroll}>" />
-<br />
+<br>
 <{$lang_item_description_scroll_dsc}>
 </td></tr>
 
@@ -229,7 +229,7 @@
 <{* item_datetime *}>
 <tr><td style="<{$cap_style.item_datetime}>"><{$lang_item_datetime}></td><td class="odd">
 <input type="checkbox" name="item_datetime_checkbox" id="item_datetime_checkbox" value="1" <{$item_datetime_checkbox_checked}> />
-<{$lang_dsc_set_datetime}><br />
+<{$lang_dsc_set_datetime}><br>
 <input type="text" id="item_datetime" name="item_datetime" value="<{$item_datetime_val_s}>" size="50" />
 </td></tr>
 
@@ -244,7 +244,7 @@
 <input type="text" id="item_duration" name="item_duration" value="<{$item_duration_s}>" size="50" />
 
 <{if $show_embed_support_duration }>
-  <br /><{$lang_embed_support_duration}>
+  <br><{$lang_embed_support_duration}>
 <{/if}>
 
 </td></tr>
@@ -253,7 +253,7 @@
 <input type="text" id="item_siteurl" name="item_siteurl" value="<{$item_siteurl_s}>" size="50" />
 
 <{if $show_embed_support_siteurl }>
-  <br /><{$lang_embed_support_siteurl}>
+  <br><{$lang_embed_support_siteurl}>
 <{/if}>
 
 </td></tr>
@@ -287,10 +287,10 @@
 <{* tags *}>
 <tr><td style="<{$cap_style.tags}>"><{$lang_tags}></td><td class="odd">
 <input type="text" id="tags" name="tags" value="<{$tags_val_s}>" size="80" />
-<br /><{$lang_dsc_tag_divid}>
+<br><{$lang_dsc_tag_divid}>
 
 <{if $show_embed_support_tags }>
-  <br /><{$lang_embed_support_tags}>
+  <br><{$lang_embed_support_tags}>
 <{/if}>
 
 </td></tr>
@@ -374,7 +374,7 @@
   <input type="text" id="item_embed_src" name="item_embed_src" value="<{$item_embed_src_s}>" size="50" />
 
 <{if $embed_src_dsc != '' }>
-  <br /><{$embed_src_dsc}>
+  <br><{$embed_src_dsc}>
 <{/if}>
 
   </td></tr>
@@ -384,7 +384,7 @@
   <textarea id="item_embed_text" name="item_embed_text" rows="5" cols="80"><{$item_embed_text_s}></textarea>
 
 <{if $show_embed_support_embed_text }>
-  <br /><{$lang_embed_support_embed_text}>
+  <br><{$lang_embed_support_embed_text}>
 <{/if}>
 
   </td></tr>
@@ -403,10 +403,10 @@
 <{* item playlist feed *}>
   <tr><td style="<{$cap_style.item_playlist_feed}>"><{$lang_item_playlist_feed}></td><td class="odd">
   <input type="text" id="item_playlist_feed" name="item_playlist_feed" value="<{$item_playlist_feed_s}>" size="80" />
-  <br /><{$lang_playlist_feed_dsc}>
+  <br><{$lang_playlist_feed_dsc}>
 
 <{if $item_playlist_feed_s != '' }>
-  <br />
+  <br>
   <a href="<{$item_playlist_feed_s}>" target="_blank"><{$item_playlist_feed_s}></a>
 <{/if}>
 
@@ -417,7 +417,7 @@
 <{* item playlist time *}>
   <tr><td style="<{$cap_style.item_playlist_dir}>"><{$lang_item_playlist_dir}></td><td class="odd">
   <{if $item_playlist_dir_select_options != '' }>
-    <{$lang_playlist_dir_dsc}><br />
+    <{$lang_playlist_dir_dsc}><br>
     <select id="item_playlist_dir" name="item_playlist_dir" size="1">
     <{$item_playlist_dir_select_options}>
     </select>
@@ -441,13 +441,13 @@
   <tr><td style="<{$cap_style.file_photo}>"><{$lang_cap_photo_select}></td><td class="odd">
   <input type="hidden" id="xoops_upload_file[]" name="xoops_upload_file[]" value="file_photo" />
   <input type="file" id="file_photo" name="file_photo" size="50" />
-  <br /><br />
-  <{$lang_or}> <{$lang_item_external_url}><br />
+  <br><br>
+  <{$lang_or}> <{$lang_item_external_url}><br>
   <input type="text" id="item_external_url" name="item_external_url" value="<{$item_external_url_s}>" size="80" />
-  <br /><br />
+  <br><br>
 
 <{if $photo_url_s != '' }>  
-  <a href="<{$photo_url_s}>" target="_blank"><{$photo_url_s}></a><br />
+  <a href="<{$photo_url_s}>" target="_blank"><{$photo_url_s}></a><br>
 <{/if}>
 
 <{if $show_file_photo_delete }>
@@ -478,32 +478,32 @@
 
 <input type="hidden" id="xoops_upload_file[]" name="xoops_upload_file[]" value="file_jpeg" />
 <input type="file" id="file_jpeg" name="file_jpeg" size="50" />
-<br />
+<br>
 <{$lang_file_jpeg_dsc}>
-<br /><br />
+<br><br>
 
-<{$lang_or}> <{$lang_item_external_thumb}><br />
+<{$lang_or}> <{$lang_item_external_thumb}><br>
 <input type="text" id="item_external_thumb" name="item_external_thumb" value="<{$item_external_thumb_s}>" size="80" />
-<br /><br />
+<br><br>
 
 <{if $show_item_icon_name }>
-  <{$lang_or}> <{$lang_item_icon_name}><br />
+  <{$lang_or}> <{$lang_item_icon_name}><br>
   <div style="border: #808080 1px solid; padding: 1px; width:80%;">
   <{$item_icon_name_s}>
-  </div><br />
+  </div><br>
 <{/if}>
 
 <{if $show_thumb_dsc_select }>
-  <{$lang_dsc_thumb_select}><br />
+  <{$lang_dsc_thumb_select}><br>
 <{/if}>
 
 <{if $show_thumb_dsc_embed }>
-  <{$lang_embed_thumb}><br />
+  <{$lang_embed_thumb}><br>
 <{/if}>
 
 <{if $jpeg_url_s != '' }>  
-  <br />
-  <a href="<{$jpeg_url_s}>" target="_blank"><{$jpeg_url_s}></a><br />
+  <br>
+  <a href="<{$jpeg_url_s}>" target="_blank"><{$jpeg_url_s}></a><br>
 <{/if}>
 
 <{if $show_file_jpeg_delete }>
@@ -519,9 +519,9 @@
   <tr><td style="<{$cap_style.file}>"><{$item_file.title_s}></td><td class="odd">  
   <input type="hidden" id="xoops_upload_file[]" name="xoops_upload_file[]" value="<{$item_file.name}>" />
   <input type="file" id="<{$item_file.name}>" name="<{$item_file.name}>" size="50" />
-  <br /><br />
+  <br><br>
   <a href="<{$item_file.url_s}>" target="_blank"><{$item_file.url_s}></a>
-  <br />
+  <br>
   <input type="submit" id="<{$item_file.name_delete}>" name="<{$item_file.name_delete}>" value="<{$lang_delete}>" />
   </td></tr>
 <{/if}>
@@ -540,7 +540,7 @@
 
 <{if $show_input_item_perm_read }>
     <input type="checkbox" name="item_perm_read_all" id="item_perm_read_all" value="1" onclick="webphoto_check_all(this, 'item_perm_read_ids')" />
-    <{$lang_group_perm_all}><br />
+    <{$lang_group_perm_all}><br>
     <{$item_perm_read_input_checkboxs}>
 
 <{else}>
@@ -554,7 +554,7 @@
 <{* item_perm_down *}>
 <tr><td style="<{$cap_style.item_perm_down}>"><{$lang_item_perm_down}></td><td class="odd">
 <input type="checkbox" name="item_perm_down_all" id="item_perm_down_all" value="1" onclick="webphoto_check_all(this, 'item_perm_down_ids')" />
-<{$lang_group_perm_all}><br />
+<{$lang_group_perm_all}><br>
 <{$item_perm_down_input_checkboxs}>
 </td></tr>
 

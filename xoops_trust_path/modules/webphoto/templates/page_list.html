@@ -4,7 +4,7 @@
 <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php">
 <{$xoops_modulename}></a> &gt;&gt; 
 <b><{$title_bread_crumb}></b>
-<br /><br />
+<br><br>
 
 <{* === gmap js === *}>
 <{if $show_gmap }>
@@ -58,7 +58,7 @@
   <div id="webphoto_box_tagcloud_b">
   <a href="javascript:webphoto_box_visible_flip('webphoto_box_tagcloud', 0)">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_tagcloud_off}></a> <br />
+  <{$lang_tagcloud_off}></a> <br>
   <div class="webphoto_tagcloud" >
   <{foreach from=$tagcloud item=tagc }>
     <a href="<{$tagc.link}>" style="text-decoration:none;padding:2px;font-size:<{$tagc.size}>px;">
@@ -79,7 +79,7 @@
   <div id="webphoto_box_catlist_b">
   <a href="javascript:webphoto_box_visible_flip('webphoto_box_catlist', 0)">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_catlist_off}></a> <br />
+  <{$lang_catlist_off}></a> <br>
 
 <{* catlist *}>
   <div class="webphoto_categories" >
@@ -93,7 +93,7 @@
   <{$lang_catlist_on}></a>
   </div>
 
-  <br />
+  <br>
 <{/if}>
 
 <{* === timeline === *}>
@@ -101,7 +101,7 @@
   <div id="webphoto_box_timeline_b">
   <a href="javascript:webphoto_box_timeline_off()">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_timeline_off}></a> <br />
+  <{$lang_timeline_off}></a> <br>
 
   <{if $show_timeline_large }>
     <div class="webphoto_timeline_navi">
@@ -141,7 +141,7 @@
   <{$lang_timeline_on}></a> </a>
   </div>
 
-  <br />
+  <br>
 <{/if}>
 
 <{* === gmap === *}>
@@ -149,8 +149,8 @@
   <div id="webphoto_box_gmap_b">
   <a href="javascript:webphoto_box_gmap_off()">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_gmap_off}></a> <br />
-  <{$lang_gmap_desc}><br />
+  <{$lang_gmap_off}></a> <br>
+  <{$lang_gmap_desc}><br>
   <div id="webphoto_gmap_not_compatible" class="webphoto_error"></div>
   <div id="webphoto_gmap_map" class="<{$gmap_class}>">Loading ...</div>
   </div>
@@ -161,7 +161,7 @@
   <{$lang_gmap_on}></a> </a>
   </div>
 
-  <br />
+  <br>
 <{/if}>
 
 <{* === photo === *}>
@@ -195,7 +195,7 @@
 <{* link *}>
   <{assign var="catpath" value=$list.catpath }>
   <{include file="db:`$mydirname`_inc_catpath.html" }>
-  (<{$list.total}>) <br />
+  (<{$list.total}>) <br>
 
   <{if $list.cat_summary_disp != '' }>
     <div class="webphoto_cat_desc"><{$list.cat_summary_disp}></div>
@@ -216,6 +216,6 @@
 <{/if}>
 
 <{if $is_module_admin }>
-  <br />
+  <br>
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php"><{$lang_goto_admin}></a>
 <{/if}>

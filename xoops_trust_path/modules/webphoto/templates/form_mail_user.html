@@ -16,7 +16,7 @@
 </select>
 
 <{if $show_user_list }>
-  <br />
+  <br>
   <{foreach from=$user_list item=list }>
     <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?fct=mail_register&amp;userstart=<{$list.userstart}>"><{$list.page}></a> 
   <{/foreach}>

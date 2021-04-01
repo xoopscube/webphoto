@@ -16,7 +16,7 @@
   ( <{$total_bread_crumb}> )
 <{/if}>
 
-<br />
+<br>
 
 <{* === gmap js === *}>
 <{if $show_gmap }>
@@ -75,7 +75,7 @@
   <div id="webphoto_box_tagcloud_b">
   <a href="javascript:webphoto_box_visible_flip('webphoto_box_tagcloud', 0)">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_tagcloud_off}></a> <br />
+  <{$lang_tagcloud_off}></a> <br>
   <div class="webphoto_tagcloud" >
   <{foreach from=$tagcloud item=tagc }>
     <a href="<{$tagc.link}>" style="text-decoration:none;padding:2px;font-size:<{$tagc.size}>px;">
@@ -96,7 +96,7 @@
   <div id="webphoto_box_catlist_b">
   <a href="javascript:webphoto_box_visible_flip('webphoto_box_catlist', 0)">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_catlist_off}></a> <br />
+  <{$lang_catlist_off}></a> <br>
   <div class="webphoto_categories" >
   <{include file="db:`$mydirname`_inc_catlist.html"}>
   </div>
@@ -114,7 +114,7 @@
   <div id="webphoto_box_timeline_b">
   <a href="javascript:webphoto_box_timeline_off()">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_timeline_off}></a> <br />
+  <{$lang_timeline_off}></a> <br>
 
   <{if $show_timeline_large }>
     <div class="webphoto_timeline_navi">
@@ -154,7 +154,7 @@
   <{$lang_timeline_on}></a> </a>
   </div>
 
-  <br />
+  <br>
 <{/if}>
 
 <{* === gmap === *}>
@@ -162,8 +162,8 @@
   <div id="webphoto_box_gmap_b">
   <a href="javascript:webphoto_box_gmap_off()">
   <img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/box_minus.png" width="16" height="16" border="0" alt="minus" />
-  <{$lang_gmap_off}></a> <br />
-  <{$lang_gmap_desc}><br />
+  <{$lang_gmap_off}></a> <br>
+  <{$lang_gmap_desc}><br>
 
   <{if $show_map_large }>
     <div class="webphoto_gmap_navi">
@@ -182,7 +182,7 @@
   <{$lang_gmap_on}></a> </a>
   </div>
 
-  <br />
+  <br>
 <{/if}>
 
 <{* === title for normal === *}>
@@ -225,27 +225,27 @@
   <{foreach item=keyword from=$search_keywords}>
     <span class="webphoto_sr_keyword"><{$keyword}></span> 
   <{/foreach}>
-  <br />
+  <br>
 
   <{if $search_show_candidate }>
-    <br />
-    <{$lang_sr_candicate}>:<br />
+    <br>
+    <{$lang_sr_candicate}>:<br>
     <{foreach item=candidate from=$search_candidates}>
       <span class="webphoto_sr_keyword"><{$candidate.keyword}></span> 
       (<{$candidate.lang}>) 
     <{/foreach}>
-    <br />
+    <br>
   <{/if}>
 
   <{if $search_show_ignore }>
-    <br />
-    <{$search_lang_keyignore}><br />
+    <br>
+    <{$search_lang_keyignore}><br>
     <{foreach item=ignore from=$search_ignores}>
     <span class="webphoto_sr_keyword"><{$ignore}></span> 
     <{/foreach}>
-    <br />
+    <br>
   <{/if}>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_lang_keytooshort }>
@@ -271,7 +271,7 @@
   <ul>
   <li><{$lang_usage_photo}></li>
   <li><{$lang_usage_title}></li>
-  </ul><br />
+  </ul><br>
 <{/if}>
 
 <{if $show_photo_list }>
@@ -291,7 +291,7 @@
 
 <{if $show_sort }>
   <{include file="db:`$mydirname`_inc_sort.html" }>
-  <br />
+  <br>
 <{/if}>
 
 <{if $show_navi }>
@@ -320,8 +320,8 @@
 <{* === QR === *}>
 <{if $show_qr }>
   <div align="center">
-  <img src="<{$qrs_url}>/qr_index.png" border="0" alt="qr_index" /><br />
-  <a href="mailto:<{$mobile_email}>?subject=webphoto_url&amp;body=<{$mobile_url}>"><{$lang_mobile_mailto}></a><br />
+  <img src="<{$qrs_url}>/qr_index.png" border="0" alt="qr_index" /><br>
+  <a href="mailto:<{$mobile_email}>?subject=webphoto_url&amp;body=<{$mobile_url}>"><{$lang_mobile_mailto}></a><br>
   </div>
 <{/if}>
 
@@ -330,7 +330,7 @@
   <div align="center">
     <{include file="db:`$mydirname`_inc_notification_select.html"}>
   </div>
-  <br />
+  <br>
 <{/if}>
 
 <hr />
@@ -353,6 +353,6 @@
 <{/if}>
 
 <{if $is_module_admin }>
-  <br />
+  <br>
   <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php"><{$lang_goto_admin}></a>
 <{/if}>
