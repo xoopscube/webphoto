@@ -11,11 +11,13 @@ require "qrcode.php";
 
 class Qrcode_image extends Qrcode{
 
-    var $module_size;
-    var $quiet_zone;
+    public $module_size;
+    public $quiet_zone;
 
-    function Qrcode_image(){
-       $this->Qrcode();
+    public function __construct(){
+
+        parent::__construct();
+       //$this->Qrcode();
        $this->module_size=4;
        $this->quiet_zone=4;
     }

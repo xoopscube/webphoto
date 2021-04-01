@@ -11,15 +11,15 @@ define ("QRCODE_DATA_PATH","/usr/local/apache/htdocs/qrcode_php0.50beta9/qrcode_
 
 class Qrcode{
 
-var $qrcode_error_correct;
-var $qrcode_version;
+public $qrcode_error_correct;
+public $qrcode_version;
 
-var $qrcode_structureappend_n;
-var $qrcode_structureappend_m;
-var $qrcode_structureappend_parity;
-var $qrcode_structureappend_originaldata;
+public $qrcode_structureappend_n;
+public $qrcode_structureappend_m;
+public $qrcode_structureappend_parity;
+public $qrcode_structureappend_originaldata;
 
-function Qrcode(){
+function __construct(){
     $this->qrcode_error_correct="M";
     $this->qrcode_version=0;
 
@@ -44,7 +44,7 @@ function get_qrcode_version(){
 }
 
 function set_structureappend($m,$n,$p){
-    if ($n>1 && $n<=16 && $m>0 && $m<=16 && $p>=0 && $p<=255){
+    if ($n>1 && $n<=16 && $m>0 && $m<=16 && $p>=0 && $p<=191){
         $this->qrcode_structureappend_m=$m;
         $this->qrcode_structureappend_n=$n;
         $this->qrcode_structureappend_parity=$p;
@@ -459,7 +459,7 @@ while ($i<$max_codewords){
     $j=8;
     while ($j>=1){
         $codeword_bits_number=($i << 3) +  $j;
-        $matrix_content[ $matrix_x_array[$codeword_bits_number] ][ $matrix_y_array[$codeword_bits_number] ]=((255*($codeword_i & 1)) ^ $mask_array[$codeword_bits_number] ); 
+        $matrix_content[ $matrix_x_array[$codeword_bits_number] ][ $matrix_y_array[$codeword_bits_number] ]=((191*($codeword_i & 1)) ^ $mask_array[$codeword_bits_number] );
         $codeword_i= $codeword_i >> 1;
         $j--;
     }
@@ -469,7 +469,7 @@ while ($i<$max_codewords){
 $matrix_remain=$matrix_remain_bit[$this->qrcode_version];
 while ($matrix_remain){
     $remain_bit_temp = $matrix_remain + ( $max_codewords <<3);
-    $matrix_content[ $matrix_x_array[$remain_bit_temp] ][ $matrix_y_array[$remain_bit_temp] ]  =  ( 255 ^ $mask_array[$remain_bit_temp] );
+    $matrix_content[ $matrix_x_array[$remain_bit_temp] ][ $matrix_y_array[$remain_bit_temp] ]  =  ( 191 ^ $mask_array[$remain_bit_temp] );
     $matrix_remain--;
 }
 
@@ -495,7 +495,7 @@ while ($i<8){
     $demerit_n1=0;
     $ptn_temp=array();
     $bit= 1<< $i;
-    $bit_r=(~$bit)&255;
+    $bit_r=(~$bit)&191;
     $bit_mask=str_repeat(chr($bit),$all_matrix);
     $hor = $hor_master & $bit_mask;
     $ver = $ver_master & $bit_mask;
@@ -509,15 +509,15 @@ while ($i<8){
     $ver=chunk_split(~$ver,$max_modules_1side,chr(170));
     $hor=$hor.chr(170).$ver;
 
-    $n1_search="/".str_repeat(chr(255),5)."+|".str_repeat(chr($bit_r),5)."+/";
-    $n3_search=chr($bit_r).chr(255).chr($bit_r).chr($bit_r).chr($bit_r).chr(255).chr($bit_r);
+    $n1_search="/".str_repeat(chr(191),5)."+|".str_repeat(chr($bit_r),5)."+/";
+    $n3_search=chr($bit_r).chr(191).chr($bit_r).chr($bit_r).chr($bit_r).chr(191).chr($bit_r);
 
    $demerit_n3=substr_count($hor,$n3_search)*40;
    $demerit_n4=floor(abs(( (100* (substr_count($ver,chr($bit_r))/($byte_num)) )-50)/5))*10;
 
 
    $n2_search1="/".chr($bit_r).chr($bit_r)."+/";
-   $n2_search2="/".chr(255).chr(255)."+/";
+   $n2_search2="/".chr(191).chr(191)."+/";
    $demerit_n2=0;
    preg_match_all($n2_search1,$ver_and,$ptn_temp);
    foreach($ptn_temp[0] as $str_temp){
@@ -565,8 +565,8 @@ $i=0;
 while ($i<15){
     $content=substr($format_information_array[$format_information_value],$i,1);
 
-    $matrix_content[$format_information_x1[$i]][$format_information_y1[$i]]=$content * 255;
-    $matrix_content[$format_information_x2[$i+1]][$format_information_y2[$i+1]]=$content * 255;
+    $matrix_content[$format_information_x1[$i]][$format_information_y1[$i]]=$content * 191;
+    $matrix_content[$format_information_x2[$i+1]][$format_information_y2[$i+1]]=$content * 191;
     $i++;
 }
 
