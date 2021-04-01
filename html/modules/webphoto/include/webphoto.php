@@ -1,6 +1,4 @@
 <?php
-// $Id: webphoto.php,v 1.2 2008/06/21 18:25:12 ohwada Exp $
-
 //=========================================================
 // webphoto module
 // 2008-04-02 K.OHWADA
@@ -10,5 +8,3 @@
 // this is the file for identifying webphoto module
 // do NOT remove this file
 //---------------------------------------------------------
-
-?>
