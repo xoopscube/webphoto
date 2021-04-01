@@ -27,7 +27,9 @@
 // $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 include_once WEBPHOTO_TRUST_PATH.'/include/header.php';
 
@@ -40,14 +42,9 @@ webphoto_include_once( 'class/inc/whatsnew.php' ,    $MY_DIRNAME );
 // search functions
 //=========================================================
 // --- eval begin ---
-eval( '
-
-function '.$MY_DIRNAME.'_new( $limit=0 , $offset=0 )
-{
+eval( 'function '.$MY_DIRNAME.'_new( $limit=0 , $offset=0 ){
 	return webphoto_whatsnew_new_base( "'.$MY_DIRNAME.'" , $limit , $offset ) ;
-}
-
-' );
+}' );
 // --- eval end ---
 
 // === function begin ===
@@ -60,8 +57,4 @@ function webphoto_whatsnew_new_base( $dirname , $limit=0 , $offset=0 )
 		$dirname, WEBPHOTO_TRUST_DIRNAME );
 	return $inc_class->whatsnew( $limit , $offset );
 }
-
-// === function end ===
 }
-
-?>
