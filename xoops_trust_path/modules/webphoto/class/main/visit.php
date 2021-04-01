@@ -12,23 +12,26 @@
 // webphoto_item_public
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_visit
 //=========================================================
 class webphoto_main_visit extends webphoto_item_public
 {
-	var $_post_class;
+	public $_post_class;
 
-	var $_FLAG_REDIRECT = true;
+	public $_FLAG_REDIRECT = true;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_visit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_item_public( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_item_public( $dirname , $trust_dirname );
 
 	$this->_post_class =& webphoto_lib_post::getInstance();
 

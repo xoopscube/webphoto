@@ -14,27 +14,30 @@
 // webphoto_item_public
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_flash_config
 //=========================================================
 class webphoto_main_flash_config extends webphoto_item_public
 {
-	var $_file_handler;
-	var $_player_handler;
-	var $_flashvar_handler;
-	var $_player_clss;
-	var $_post_class;
-	var $_xml_class;
-	var $_multibyte_class;
+	public $_file_handler;
+	public $_player_handler;
+	public $_flashvar_handler;
+	public $_player_clss;
+	public $_post_class;
+	public $_xml_class;
+	public $_multibyte_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_flash_config( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_item_public( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_item_public( $dirname, $trust_dirname );
 
 	$this->_file_handler     
 		=& webphoto_file_handler::getInstance( $dirname, $trust_dirname );
@@ -65,7 +68,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$item_id  = $this->_post_class->get_get_int('item_id') ;
 	$item_row = $this->get_item_row( $item_id );
@@ -119,7 +122,7 @@ function main()
 
 }
 
-function _get_file_row_by_name( $item_row, $item_name )
+public function _get_file_row_by_name( $item_row, $item_name )
 {
 	if ( isset(    $item_row[ $item_name ] ) ) {
 		$file_id = $item_row[ $item_name ] ;
@@ -134,12 +137,12 @@ function _get_file_row_by_name( $item_row, $item_name )
 	return false ;
 }
 
-function _http_output( $encoding )
+public function _http_output( $encoding )
 {
 	return $this->_multibyte_class->m_mb_http_output( $encoding );
 }
 
-function _xml_utf8( $str )
+public function _xml_utf8( $str )
 {
 	return $this->_xml_class->xml_text( 
 		$this->_multibyte_class->convert_to_utf8( $str ) );

@@ -16,23 +16,25 @@
 // tmpdir -> workdir
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_image
 //=========================================================
 class webphoto_main_image_tmp
 {
-	var $_config_class;
-	var $_post_class;
-	var $_readfile_class;
+	public $_config_class;
+	public $_post_class;
+	public $_readfile_class;
 
-	var $_TMP_DIR;
+	public $_TMP_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_image_tmp( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->_config_class   =& webphoto_config::getInstance( $dirname );
 	$this->_post_class     =& webphoto_lib_post::getInstance();
@@ -54,7 +56,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // public
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$name = $this->_post_class->get_get_text('name');
 	$file = $this->_TMP_DIR .'/'. $name ;

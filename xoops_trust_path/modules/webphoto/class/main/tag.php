@@ -19,25 +19,28 @@
 // decode_tag() -> decode_uri_str()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_tag
 //=========================================================
 class webphoto_main_tag extends webphoto_show_list
 {
-	var $_LIST_LIMIT = 0;
-	var $_LIST_START = 0;
-	var $_LIST_PHOTO_LIMIT = 10;
+	public $_LIST_LIMIT = 0;
+	public $_LIST_START = 0;
+	public $_LIST_PHOTO_LIMIT = 10;
 
-	var $_list_rows = null;
+	public $_list_rows = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_tag( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_list( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_list( $dirname , $trust_dirname );
 	$this->set_mode( 'tag' );
 	$this->init_preload();
 }

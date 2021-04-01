@@ -23,40 +23,43 @@
 // photo_handler -> item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_submit_file
 //=========================================================
 class webphoto_main_submit_file extends webphoto_edit_base
 {
-	var $_factory_create_class;
-	var $_notification_class;
-	var $_xoops_user_class;
-	var $_redirect_class;
+	public $_factory_create_class;
+	public $_notification_class;
+	public $_xoops_user_class;
+	public $_redirect_class;
 
-	var $_post_item_cat_id;
-	var $_post_file;
+	public $_post_item_cat_id;
+	public $_post_file;
 
-	var $_cfg_file_size = 0;
-	var $_has_file      = false;
-	var $_has_resize    = false;
+	public $_cfg_file_size = 0;
+	public $_has_file      = false;
+	public $_has_resize    = false;
 
-	var $_created_row = null ;
-	var $_is_video_thumb_form = false;
+	public $_created_row = null ;
+	public $_is_video_thumb_form = false;
 
-	var $_THIS_FCT = 'submit_file';
-	var $_THIS_URL = null;
+	public $_THIS_FCT = 'submit_file';
+	public $_THIS_URL = null;
 
-	var $_TIME_SUCCESS = 1;
-	var $_TIME_FAILED  = 5;
+	public $_TIME_SUCCESS = 1;
+	public $_TIME_FAILED  = 5;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_submit_file( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_xoops_user_class =& webphoto_xoops_user::getInstance();
 	$this->_redirect_class   =& webphoto_edit_redirect::getInstance( 
@@ -132,7 +135,7 @@ function _check()
 		case _C_WEBPHOTO_ERR_CHECK_DIR:
 			$msg = 'Directory Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_format_error();
+				$msg .= '<br>'.$this->get_format_error();
 			}
 			redirect_header( $this->_INDEX_PHP, $this->_TIME_FAILED, $msg );
 			exit();

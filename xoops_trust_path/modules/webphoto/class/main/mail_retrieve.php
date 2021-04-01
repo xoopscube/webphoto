@@ -14,24 +14,27 @@
 // preload
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_mail_retrieve
 //=========================================================
 class webphoto_main_mail_retrieve extends webphoto_edit_mail_retrieve
 {
-	var $_TIME_FAIL     = 5;
-	var $_REDIRECT_THIS_URL;
+	public $_TIME_FAIL     = 5;
+	public $_REDIRECT_THIS_URL;
 
-	var $_DEBUG_MAIL_FILE = null ;
+	public $_DEBUG_MAIL_FILE = null ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_mail_retrieve( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_mail_retrieve( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	// $this->webphoto_edit_mail_retrieve( $dirname , $trust_dirname );
 
 // preload
 	$this->preload_init();
@@ -55,7 +58,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // check
 //---------------------------------------------------------
-function check()
+public function check()
 {
 	switch ( $this->check_perm() )
 	{
@@ -70,7 +73,7 @@ function check()
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$title = $this->get_constant('TITLE_MAIL_RETRIEVE');
 	$url   = $this->_MODULE_URL .'/index.php?fct=mail_retrieve';
@@ -88,7 +91,7 @@ function main()
 	}
 }
 
-function submit()
+public function submit()
 {
 	$this->set_flag_print_first_msg( true );
 
@@ -104,19 +107,19 @@ function submit()
 	$this->print_goto_index();
 }
 
-function print_goto_index()
+public function print_goto_index()
 {
-	echo "<br /><br />\n";
+	echo "<br><br>\n";
 	echo '<a href="index.php">';
 	echo $this->get_constant('GOTO_INDEX');
-	echo "</a><br />\n";
+	echo "</a><br>\n";
 }
 
-function print_form()
+public function print_form()
 {
 
 	echo $this->get_constant('DSC_MAIL_RETRIEVE');
-	echo "<br /><br />\n";
+	echo "<br><br>\n";
 
 	$param = array(
 		'title'        => $this->get_constant('TITLE_MAIL_RETRIEVE') ,

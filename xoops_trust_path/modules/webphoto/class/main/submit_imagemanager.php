@@ -30,25 +30,28 @@
 // used upload_fetch_photo()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_submit_imagemanager
 //=========================================================
 class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submit
 {
-	var $_THIS_CLOSE_FCT  = 'close';
-	var $_THIS_CLOSE_URL ;
+	public $_THIS_CLOSE_FCT  = 'close';
+	public $_THIS_CLOSE_URL ;
 
-	var $_TIME_SUCCESS = 3;
-	var $_TIME_FAILED  = 5;
+	public $_TIME_SUCCESS = 3;
+	public $_TIME_FAILED  = 5;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_submit_imagemanager( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_imagemanager_submit( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_imagemanager_submit( $dirname , $trust_dirname );
 
 	$this->_THIS_CLOSE_URL = $this->_MODULE_URL .'/index.php?fct='. $this->_THIS_CLOSE_FCT ;
 }

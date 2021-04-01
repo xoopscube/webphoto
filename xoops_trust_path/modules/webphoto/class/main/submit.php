@@ -50,24 +50,27 @@
 // used  build_uri_category()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_submit
 //=========================================================
 class webphoto_main_submit extends webphoto_edit_submit
 {
-	var $_header_class;
+	public $_header_class;
 
 // submit file
-	var $_post_file = null ;
+	public $_post_file = null ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_submit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_submit( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_submit( $dirname , $trust_dirname );
 	$this->set_fct( 'submit' );
 	$this->set_form_mode( 'submit' );
 

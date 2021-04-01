@@ -23,43 +23,46 @@
 // photo_handler -> item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_rate
 //=========================================================
 class webphoto_main_rate extends webphoto_base_this
 {
-	var $_vote_handler;
-	var $_rate_check_class;
-	var $_page_class;
+	public $_vote_handler;
+	public $_rate_check_class;
+	public $_page_class;
 
-	var $_photo_id = 0 ;
-	var $_item_row = null ;
+	public $_photo_id = 0 ;
+	public $_item_row = null ;
 
-	var $_RATE_SESSION_NAME = null ;
-	var $_RATE_MIN_RATING   = 1;
-	var $_RATE_MAX_RATING   = 10;
+	public $_RATE_SESSION_NAME = null ;
+	public $_RATE_MIN_RATING   = 1;
+	public $_RATE_MAX_RATING   = 10;
 
-	var $_TIME_SUCCESS = 1;
-	var $_TIME_FAIL    = 5;
+	public $_TIME_SUCCESS = 1;
+	public $_TIME_FAIL    = 5;
 
-	var $_INDEX_PHP ;
+	public $_INDEX_PHP ;
 
 // overwrite by preload
-	var $_ARRAY_RATING_OPTIONS = array(
+	public $_ARRAY_RATING_OPTIONS = array(
 		'10','9','8','7','6','5','4','3','2','1' ) ;
 
-	var $_RATE_SELECT_TYPE    = '';
-	var $_RATE_SELECT_DELMITA = ' ';
-	var $_RATE_RADIO_DELMITA  = '';
+	public $_RATE_SELECT_TYPE    = '';
+	public $_RATE_SELECT_DELMITA = ' ';
+	public $_RATE_RADIO_DELMITA  = '';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_rate( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_vote_handler     
 		=& webphoto_vote_handler::getInstance( $dirname, $trust_dirname );
@@ -153,7 +156,7 @@ function _rate()
 		case _C_WEBPHOTO_ERR_TOKEN:
 			$msg = 'Token Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_token_errors();
+				$msg .= '<br>'.$this->get_token_errors();
 			}
 			redirect_header( $url_rate, $this->_TIME_FAIL , $msg );
 			exit();
@@ -161,7 +164,7 @@ function _rate()
 		case _C_WEBPHOTO_ERR_DB:
 			$msg = 'DB Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_format_error();
+				$msg .= '<br>'.$this->get_format_error();
 			}
 			redirect_header( $url_rate, $this->_TIME_FAIL, $msg ) ;
 			exit();
@@ -172,7 +175,7 @@ function _rate()
 	}
 
 	$url  = $this->_INDEX_PHP;
-	$msg  = $this->get_constant( 'RATE_VOTEAPPRE') ."<br />\n";
+	$msg  = $this->get_constant( 'RATE_VOTEAPPRE') ."<br>\n";
 	$msg .= sprintf( $this->get_constant( 'RATE_S_THANKURATE') , $this->_xoops_sitename );
 
 	if ( isset( $_SESSION[ $this->_RATE_SESSION_NAME ] ) ) {

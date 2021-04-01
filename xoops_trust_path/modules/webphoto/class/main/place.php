@@ -21,29 +21,32 @@
 // decode_str() -> decode_uri_str()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_place
 //=========================================================
 class webphoto_main_place extends webphoto_show_list
 {
-	var $_search_class;
+	public $_search_class;
 
-	var $_list_rows = array();
+	public $_list_rows = array();
 
-	var $_GMAP_OFFSET   = 0 ;
-	var $_GMAP_KEY      = true ;
+	public $_GMAP_OFFSET   = 0 ;
+	public $_GMAP_KEY      = true ;
 
-	var $_GMAP_RSS = null ;
-	var $_GMAP_SHOW      = true ;
+	public $_GMAP_RSS = null ;
+	public $_GMAP_SHOW      = true ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_place( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_list( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_list( $dirname , $trust_dirname );
 	$this->set_mode( 'place' );
 
 	$this->_search_class =& webphoto_lib_search::getInstance();
@@ -66,7 +69,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 // list
 //---------------------------------------------------------
 // overwrite
-function list_build_list()
+public function list_build_list()
 {
 	$this->assign_xoops_header( $this->_mode, $this->_GMAP_RSS, $this->_GMAP_SHOW );
 

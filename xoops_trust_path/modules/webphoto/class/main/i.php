@@ -25,23 +25,26 @@
 // added _judge()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_i
 //=========================================================
 class webphoto_main_i extends webphoto_imode
 {
-	var $_staticmap_class;
+	public $_staticmap_class;
 
-	var $_cfg_gmap_apikey ;
+	public $_cfg_gmap_apikey ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_i( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_imode( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_imode( $dirname , $trust_dirname );
 
 	$this->_cfg_gmap_apikey = $this->get_config_by_name( 'gmap_apikey' );
 
@@ -67,7 +70,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$this->output_header();
 
@@ -88,7 +91,7 @@ function main()
 //---------------------------------------------------------
 // judge modle from user agent
 //---------------------------------------------------------
-function _judge()
+public function _judge()
 {
 	$text  = $this->build_html_head( $this->_TITLE_S, $this->_MOBILE_CHARSET_OUTPUT );
 	$text .= $this->build_html_body_begin();
@@ -99,7 +102,7 @@ function _judge()
 	echo $this->conv( $text );
 }
 
-function _judge_exec()
+public function _judge_exec()
 {
 	$ua      = $this->_agent_class->get_user_agent();
 	$carrier = $this->_agent_class->parse_mobile_carrier( $ua );
@@ -129,14 +132,14 @@ function _judge_exec()
 //---------------------------------------------------------
 // show
 //---------------------------------------------------------
-function _show()
+public function _show()
 {
 	$tpl = new XoopsTpl();
 	$tpl->assign( $this->_show_exec() ) ;
 	$tpl->display( $this->_MOBILE_TEMPLATE );
 }
 
-function _show_exec()
+public function _show_exec()
 {
 	$id   = $this->_post_class->get_get_int('id');
 	$size = $this->_post_class->get_get_int('s');
@@ -207,7 +210,7 @@ function _show_exec()
 	return $arr;
 }
 
-function _get_photo( $op, $id )
+public function _get_photo( $op, $id )
 {
 	$item_row = null;
 	$photo    = null;
@@ -245,7 +248,7 @@ function _get_photo( $op, $id )
 	return $photo;
 }
 
-function _get_photo_list( $page )
+public function _get_photo_list( $page )
 {
 	$this->_pagenavi_class->set_page( $page );
 	$start = $this->_pagenavi_class->calc_start( $page, $this->_MOBILE_LIST_LIMIT );
@@ -256,7 +259,7 @@ function _get_photo_list( $page )
 	return $this->build_show_conv_from_rows( $item_rows );
 }
 
-function _build_navi( $page )
+public function _build_navi( $page )
 {
 	$url   = $this->_MODULE_URL .'/i.php?';
 	$total = $this->_photo_public_class->get_count_imode();
@@ -268,7 +271,7 @@ function _build_navi( $page )
 //---------------------------------------------------------
 // build show
 //---------------------------------------------------------
-function build_show_conv( $item_row )
+public function build_show_conv( $item_row )
 {
 	$arr = $this->build_photo_show( $item_row );
 
@@ -292,7 +295,7 @@ function build_show_conv( $item_row )
 	return $arr;
 }
 
-function build_show_conv_from_rows( $item_rows )
+public function build_show_conv_from_rows( $item_rows )
 {
 	$arr = array();
 	foreach ( $item_rows as $item_row ) {
@@ -304,7 +307,7 @@ function build_show_conv_from_rows( $item_rows )
 //---------------------------------------------------------
 // map
 //---------------------------------------------------------
-function exist_gmap_item( $item_row )
+public function exist_gmap_item( $item_row )
 {
 	if ( empty($this->_cfg_gmap_apikey) ) {
 		return false;
@@ -317,7 +320,7 @@ function exist_gmap_item( $item_row )
 	
 }
 
-function exist_gmap( $latitude, $longitude, $zoom )
+public function exist_gmap( $latitude, $longitude, $zoom )
 {
 	if ( $latitude == 0 ) {
 		return false;
@@ -331,7 +334,7 @@ function exist_gmap( $latitude, $longitude, $zoom )
 	return true;
 }
 
-function build_map_src( $item_row )
+public function build_map_src( $item_row )
 {
 	$marker = array(
 		'latitude'  => $item_row['item_gmap_latitude'] ,

@@ -24,7 +24,9 @@
 // added _build_list_location()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // myself:     default
@@ -37,26 +39,27 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_main_gmap_location extends webphoto_base_this
 {
-	var $_gmap_class;
-	var $_public_class;
-	var $_multibyte_class;
+	public $_gmap_class;
+	public $_public_class;
+	public $_multibyte_class;
 
-	var $_TEMPLATE     = null;
-	var $_GMAP_HEIGHT  = 300;
-	var $_OPNER_MODE   = 'parent';
+	public $_TEMPLATE     = null;
+	public $_GMAP_HEIGHT  = 300;
+	public $_OPNER_MODE   = 'parent';
 
-	var $_AREA_NUM       = 10;
-	var $_AREA_WIDE_NS   = 0.1;	//  11km
-	var $_AREA_WIDE_EW   = 0.1;	//   9km
-	var $_AREA_NARROW_NS = 0.01;	// 1.1km
-	var $_AREA_NARROW_EW = 0.01;	// 0.9km
+	public $_AREA_NUM       = 10;
+	public $_AREA_WIDE_NS   = 0.1;	//  11km
+	public $_AREA_WIDE_EW   = 0.1;	//   9km
+	public $_AREA_NARROW_NS = 0.01;	// 1.1km
+	public $_AREA_NARROW_EW = 0.01;	// 0.9km
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_gmap_location( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+    //$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_TEMPLATE = 'db:'. $dirname .'_main_gmap_location.html';
 
@@ -79,7 +82,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$cfg_gmap_apikey = $this->get_config_by_name( 'gmap_apikey' );
 
@@ -90,7 +93,7 @@ function main()
 	}
 }
 
-function _assign_template( $cfg_gmap_apikey )
+public function _assign_template( $cfg_gmap_apikey )
 {
 	$flag_location = false;
 	$show_gmap = false;
@@ -149,7 +152,7 @@ function _assign_template( $cfg_gmap_apikey )
 	$tpl->display( $this->_TEMPLATE );
 }
 
-function _get_center()
+public function _get_center()
 {
 	$get_photo_id   = $this->_post_class->get_get_int('photo_id');
 	$get_cat_id     = $this->_post_class->get_get_int('cat_id');
@@ -160,9 +163,9 @@ function _get_center()
 	if ( $get_block_id > 0 ) {
 		$options = $this->_xoops_class->get_block_options_by_bid( $get_block_id );
 		if ( is_array($options) ) {
-			$latitude  = floatval($options[ $get_option_num ]) ;
-			$longitude = floatval($options[ $get_option_num + 1 ]) ;
-			$zoom      = intval(  $options[ $get_option_num + 2 ]) ;
+			$latitude  = (float) $options[ $get_option_num ];
+			$longitude = (float) $options[ $get_option_num + 1 ];
+			$zoom      = (int) $options[ $get_option_num + 2 ];
 			if ( $this->_gmap_class->exist_gmap( $latitude, $longitude, $zoom ) ) {
 				$param = array(
 					'code'      => 4, 	// block

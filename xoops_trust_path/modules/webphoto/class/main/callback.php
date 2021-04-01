@@ -16,7 +16,9 @@
 // http://code.jeroenwijering.com/trac/wiki/Flashvars3
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_callback
@@ -27,9 +29,10 @@ class webphoto_main_callback extends webphoto_flash_log
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_callback( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_flash_log( $dirname );
+	parent::__construct( $dirname);
+	//$this->webphoto_flash_log( $dirname );
 }
 
 public static function &getInstance( $dirname = null, $trust_dirname = null )

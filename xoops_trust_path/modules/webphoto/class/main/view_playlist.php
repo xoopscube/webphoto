@@ -12,25 +12,28 @@
 // webphoto_lib_readfile
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_view_playlist
 //=========================================================
 class webphoto_main_view_playlist extends webphoto_file_read
 {
-	var $_config_class ;
-	var $_kind_class ;
-	var $_readfile_class ;
+	public $_config_class ;
+	public $_kind_class ;
+	public $_readfile_class ;
 
-	var $_PLAYLISTS_DIR ;
+	public $_PLAYLISTS_DIR ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_view_playlist( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_file_read( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_file_read( $dirname, $trust_dirname );
 
 	$this->_config_class =& webphoto_config::getInstance( $dirname );
 	$this->_kind_class   =& webphoto_kind::getInstance();

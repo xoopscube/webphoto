@@ -22,39 +22,42 @@
 // added print_user_form()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_mail_register
 //=========================================================
 class webphoto_main_mail_register extends webphoto_edit_base
 {
-	var $_user_handler;
-	var $_mail_class;
-	var $_xoops_user_class;
+	public $_user_handler;
+	public $_mail_class;
+	public $_xoops_user_class;
 
-	var $_is_set_mail = false;
-	var $_has_mail    = false;
+	public $_is_set_mail = false;
+	public $_has_mail    = false;
 
-	var $_post_user_uid = 0;
+	public $_post_user_uid = 0;
 
-	var $_row_current = null;
-	var $_row_update  = null;
-	var $_is_new      = false;
+	public $_row_current = null;
+	public $_row_update  = null;
+	public $_is_new      = false;
 
-	var $_REDIRECT_THIS_URL = null;
+	public $_REDIRECT_THIS_URL = null;
 
-	var $_TIME_SUCCESS  = 1;
-	var $_TIME_FAIL     = 5;
+	public $_TIME_SUCCESS  = 1;
+	public $_TIME_FAIL     = 5;
 
-	var $_ERR_NOMATCH_USER = -1;
+	public $_ERR_NOMATCH_USER = -1;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_mail_register( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_base( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_base( $dirname , $trust_dirname );
 
 	$this->_user_handler     
 		=& webphoto_user_handler::getInstance( $dirname , $trust_dirname );
@@ -78,7 +81,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function check_action()
+public function check_action()
 {
 	$this->_check();
 
@@ -103,7 +106,7 @@ function check_action()
 //---------------------------------------------------------
 // check
 //---------------------------------------------------------
-function _check()
+public function _check()
 {
 	$this->clear_errors();
 
@@ -130,7 +133,7 @@ function _check()
 	return true;
 }
 
-function _exec_check( $user_uid )
+public function _exec_check( $user_uid )
 {
 	if ( ! $this->_is_set_mail ) {
 		return _C_WEBPHOTO_ERR_NO_PERM;
@@ -168,7 +171,7 @@ function _exec_check( $user_uid )
 	return 0;
 }
 
-function _check_perm( $row )
+public function _check_perm( $row )
 {
 // if admin
 	if ( $this->_is_module_admin ) {
@@ -184,17 +187,17 @@ function _check_perm( $row )
 	return false;
 }
 
-function _get_action()
+public function _get_action()
 {
 	return $this->_post_class->get_post_text('op' );
 }
 
-function _check_token_exit()
+public function _check_token_exit()
 {
 	if ( ! $this->check_token() )  {
 		$msg = 'Token Error';
 		if ( $this->_is_module_admin ) {
-			$msg .= '<br />'.$this->get_token_errors();
+			$msg .= '<br>'.$this->get_token_errors();
 		}
 		redirect_header( $this->_REDIRECT_THIS_URL, $this->_TIME_FAIL , $msg );
 		exit();
@@ -204,7 +207,7 @@ function _check_token_exit()
 //---------------------------------------------------------
 // modify
 //---------------------------------------------------------
-function _check_submit()
+public function _check_submit()
 {
 	$email = $this->_post_class->get_post_text( 'user_email' );
 	$text2 = $this->_post_class->get_post_text( 'user_text2' );
@@ -254,7 +257,7 @@ function _check_submit()
 	return true;
 }
 
-function _check_mail_addr( $mail )
+public function _check_mail_addr( $mail )
 {
 	$lang_error = $this->get_constant('ERR_MAIL_ILLEGAL');
 
@@ -269,7 +272,7 @@ function _check_mail_addr( $mail )
 	$this->set_error( $lang_error.' : '.$mail );
 }
 
-function _submit()
+public function _submit()
 {
 	$ret = $this->_exec_submit();
 
@@ -278,7 +281,7 @@ function _submit()
 		case _C_WEBPHOTO_ERR_DB:
 			$msg = 'DB Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_format_error();
+				$msg .= '<br>'.$this->get_format_error();
 			}
 			redirect_header( $this->_REDIRECT_THIS_URL, $this->_TIME_FAIL, $msg ) ;
 			exit();
@@ -292,7 +295,7 @@ function _submit()
 	exit();
 }
 
-function _exec_submit()
+public function _exec_submit()
 {
 
 // load
@@ -314,7 +317,7 @@ function _exec_submit()
 //---------------------------------------------------------
 // print_form
 //---------------------------------------------------------
-function print_form()
+public function print_form()
 {
 // load
 	$row = $this->_row_current;
@@ -323,17 +326,17 @@ function print_form()
 		$this->get_constant('TITLE_MAIL_REGISTER'), $this->_REDIRECT_THIS_URL );
 
 	echo $this->get_constant('HELP_MAIL_DSC');
-	echo "<br /><br />\n";
+	echo "<br><br>\n";
 
 	$url = $this->_uri_class->build_full_uri_mode( 'help' );
 	echo '<a href="'. $url .'" target="_blank">';
 	echo $this->get_constant('MAIL_HELP');
-	echo "</a><br /><br />\n";
+	echo "</a><br><br>\n";
 
 	if ( $this->has_error() ) {
 		echo $this->build_error_msg( 
 			$this->get_format_error( false, false ), null, false );
-		echo "<br />\n";
+		echo "<br>\n";
 	}
 
 	if ( $this->_is_new ) {
@@ -351,14 +354,14 @@ function print_form()
 
 	if ( $this->_check_user_form() ) {
 		$form->print_user_form( $row );
-		echo "<br />\n";
+		echo "<br>\n";
 	}
 
 	$form->print_submit_form( $row, $param );
 
 }
 
-function _check_user_form()
+public function _check_user_form()
 {
 	$action = $this->_get_action();
 	if ( $this->_is_module_admin && ( $action != 'submit' ) && ( $action != 'form' ) ) {

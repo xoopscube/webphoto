@@ -45,22 +45,25 @@
 // used build_uri_photo() build_photo_pagenavi()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_photo
 //=========================================================
 class webphoto_main_photo extends webphoto_factory
 {
-	var $_TIME_SUCCESS = 1;
-	var $_TIME_FAIL    = 5;
+	public $_TIME_SUCCESS = 1;
+	public $_TIME_FAIL    = 5;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_photo( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_factory( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_factory( $dirname , $trust_dirname );
 }
 
 public static function &getInstance( $dirname = null, $trust_dirname = null )
@@ -75,7 +78,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // init
 //---------------------------------------------------------
-function init()
+public function init()
 {
 	$this->init_factory();
 	$this->set_mode( 'photo' );
@@ -87,7 +90,7 @@ function init()
 //---------------------------------------------------------
 // check
 //---------------------------------------------------------
-function check_edittag()
+public function check_edittag()
 {
 	$this->_photo_class->check_photo_edittag();
 }
@@ -95,7 +98,7 @@ function check_edittag()
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$this->init();
 
@@ -164,7 +167,7 @@ function main()
 //---------------------------------------------------------
 // xoops comment
 //---------------------------------------------------------
-function comment_view()
+public function comment_view()
 {
 	$this->_photo_class->comment_view();
 }

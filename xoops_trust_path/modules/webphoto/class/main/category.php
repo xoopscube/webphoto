@@ -30,7 +30,9 @@
 // used set_mode()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_category
@@ -41,9 +43,10 @@ class webphoto_main_category extends webphoto_show_list
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_category( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_list( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_list( $dirname , $trust_dirname );
 	$this->set_mode( 'category' );
 
 	$this->set_navi_mode( $this->get_ini('navi_mode') );
@@ -66,7 +69,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 // list
 //---------------------------------------------------------
 // overwrite
-function list_build_list()
+public function list_build_list()
 {
 	$this->assign_xoops_header_default();
 
@@ -79,7 +82,7 @@ function list_build_list()
 }
 
 // overwrite
-function list_get_photo_list()
+public function list_get_photo_list()
 {
 	$cat_rows = $this->_public_class->get_cat_all_tree_array();
 	if ( !is_array($cat_rows) || !count($cat_rows) ) {
@@ -121,7 +124,7 @@ function list_get_photo_list()
 	return $arr;
 }
 
-function _get_photo_for_list( $cat_id )
+public function _get_photo_for_list( $cat_id )
 {
 	$photo = null;
 
@@ -136,7 +139,7 @@ function _get_photo_for_list( $cat_id )
 	return array( $photo, $total, $this_sum );
 }
 
-function _build_cat_summary_disp( $desc )
+public function _build_cat_summary_disp( $desc )
 {
 	return $this->_multibyte_class->build_summary( $desc, $this->_cfg_cat_summary );
 }
@@ -145,7 +148,7 @@ function _build_cat_summary_disp( $desc )
 // detail list
 //---------------------------------------------------------
 // overwrite
-function list_build_detail( $cat_id )
+public function list_build_detail( $cat_id )
 {
 // BUG : not show cat_id
 	$init_param = $this->list_build_init_param( true, $cat_id );

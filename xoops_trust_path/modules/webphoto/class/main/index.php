@@ -40,30 +40,33 @@
 // build_navi() -> build_main_navi()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_index
 //=========================================================
 class webphoto_main_index extends webphoto_factory
 {
-	var $_main_class; 
-	var $_date_class;
-	var $_place_class;
-	var $_tag_class;
-	var $_user_class;
-	var $_search_class;
+	public $_main_class;
+	public $_date_class;
+	public $_place_class;
+	public $_tag_class;
+	public $_user_class;
+	public $_search_class;
 
-	var $_ini_tagcloud_list_limit;
+	public $_ini_tagcloud_list_limit;
 
-	var $_ini_view_mode_default ;
+	public $_ini_view_mode_default ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_index( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_factory( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_factory( $dirname , $trust_dirname );
 
 	$this->_main_class 
 		=& webphoto_main::getInstance( $dirname , $trust_dirname );

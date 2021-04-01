@@ -27,42 +27,45 @@
 // photo_handler -> item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_imagemanager
 //=========================================================
 class webphoto_main_imagemanager extends webphoto_inc_public
 {
-	var $_xoops_sitename  = null ;
-	var $_xoops_mid       = 0 ;
-	var $_xoops_uid       = 0 ;
-	var $_is_module_admin = false;
+	public $_xoops_sitename  = null ;
+	public $_xoops_mid       = 0 ;
+	public $_xoops_uid       = 0 ;
+	public $_is_module_admin = false;
 
-	var $_cfg_makethumb ;
-	var $_cfg_usesiteimg ;
-	var $_cfg_uploadspath ;
+	public $_cfg_makethumb ;
+	public $_cfg_usesiteimg ;
+	public $_cfg_uploadspath ;
 
-	var $_has_insertable ;
-	var $_has_editable ;
+	public $_has_insertable ;
+	public $_has_editable ;
 
-	var $_DIRNAME;
+	public $_DIRNAME;
 
-	var $_XSIZE_SAMLL = 400;
-	var $_YSIZE_SAMLL = 200;
-	var $_XSIZE_LARGE = 600;
-	var $_YSIZE_LARGE = 450;
+	public $_XSIZE_SAMLL = 400;
+	public $_YSIZE_SAMLL = 200;
+	public $_XSIZE_LARGE = 600;
+	public $_YSIZE_LARGE = 450;
 
-	var $_LANG_NO_CATEGORY = 'There are no category';
+	public $_LANG_NO_CATEGORY = 'There are no category';
 
-//	var $_ITEM_ORDERBY = 'item_time_update DESC, item_id DESC';
+//	public $_ITEM_ORDERBY = 'item_time_update DESC, item_id DESC';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_imagemanager( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_public();
+	parent::__construct();
+	//$this->webphoto_inc_public();
 	$this->init_public( $dirname , $trust_dirname );
 
 	$this->set_normal_exts( _C_WEBPHOTO_IMAGE_EXTS );

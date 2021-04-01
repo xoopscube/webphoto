@@ -6,21 +6,24 @@
 // 2009-01-10 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_i_post
 //=========================================================
 class webphoto_main_i_post extends webphoto_imode
 {
-	var $_retrieve_class;
+	public $_retrieve_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_i_post( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_imode( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_imode( $dirname , $trust_dirname );
 
 	$this->_retrieve_class  =& webphoto_edit_mail_retrieve::getInstance(
 		$dirname , $trust_dirname );
@@ -106,11 +109,11 @@ function _post_exec()
 	}
 
 	if ( $this->_is_module_admin ) {
-		$text .= "<br /><br />\n";
-		$text .= "--- <br />\n";
+		$text .= "<br><br>\n";
+		$text .= "--- <br>\n";
 		$text .= $this->_retrieve_class->get_msg();
-		$text .= "<br />\n";
-		$text .= "--- <br />\n";
+		$text .= "<br>\n";
+		$text .= "--- <br>\n";
 	}
 
 	return $text;

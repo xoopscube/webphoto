@@ -21,24 +21,27 @@
 // decode_str() -> decode_uri_str()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_date
 //=========================================================
 class webphoto_main_date extends webphoto_show_list
 {
-	var $_list_rows = array();
+	public $_list_rows = array();
 
-	var $_TIMELINE_UNIT = null;
-	var $_TIMELINE_DATE = null;
+	public $_TIMELINE_UNIT = null;
+	public $_TIMELINE_DATE = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_date( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_list( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_list( $dirname , $trust_dirname );
 	$this->set_mode( 'date' );
 	$this->init_preload();
 }
@@ -56,7 +59,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 // list
 //---------------------------------------------------------
 // overwrite
-function list_build_list()
+public function list_build_list()
 {
 	$this->assign_xoops_header_default();
 
@@ -68,7 +71,7 @@ function list_build_list()
 }
 
 // overwrite
-function list_get_photo_list()
+public function list_get_photo_list()
 {
 	$groupby = 'item_datetime';
 	$orderby = 'item_datetime DESC, item_id DESC';
@@ -202,7 +205,7 @@ function list_get_photo_list()
 	return $ret_arr;
 }
 
-function _get_timeline_param( $rows )
+public function _get_timeline_param( $rows )
 {
 	return $this->build_timeline_param( $this->_TIMELINE_UNIT, $this->_TIMELINE_DATE, $rows );
 }
@@ -211,7 +214,7 @@ function _get_timeline_param( $rows )
 // detail list
 //---------------------------------------------------------
 // overwrite
-function list_build_detail( $datetime_in )
+public function list_build_detail( $datetime_in )
 {
 	$rows    = null ;
 	$limit   = $this->_MAX_PHOTOS;

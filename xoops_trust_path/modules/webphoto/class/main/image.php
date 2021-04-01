@@ -14,22 +14,25 @@
 // webphoto_lib_readfile
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_image
 //=========================================================
 class webphoto_main_image extends webphoto_file_read
 {
-	var $_readfile_class ;
-	var $_kind_class ;
+	public $_readfile_class ;
+	public $_kind_class ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_image( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_file_read( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_file_read( $dirname, $trust_dirname );
 
 	$this->_readfile_class =& webphoto_lib_readfile::getInstance();
 	$this->_kind_class =& webphoto_kind::getInstance();
@@ -47,7 +50,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // public
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$item_id   = $this->_post_class->get_post_get_int('item_id');
 	$file_kind = $this->_post_class->get_post_get_int('file_kind');

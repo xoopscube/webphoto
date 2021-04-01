@@ -51,23 +51,26 @@
 // added _exec_video()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_edit
 //=========================================================
 class webphoto_main_edit extends webphoto_edit_action
 {
-	var $_TIME_SUCCESS = 1;
-	var $_TIME_PENDING = 3;
-	var $_TIME_FAILED  = 5;
+	public $_TIME_SUCCESS = 1;
+	public $_TIME_PENDING = 3;
+	public $_TIME_FAILED  = 5;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_edit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_edit_action( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_edit_action( $dirname , $trust_dirname );
 
 	$this->set_fct( 'edit' );
 	$this->set_form_mode( 'edit' );

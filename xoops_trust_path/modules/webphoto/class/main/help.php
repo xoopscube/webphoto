@@ -21,22 +21,25 @@
 // added main()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_help
 //=========================================================
 class webphoto_main_help extends webphoto_base_this
 {
-	var $_show_menu_mail   = false ;
-	var $_show_menu_file   = false ;
+	public $_show_menu_mail   = false ;
+	public $_show_menu_file   = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_help( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_page_class =& webphoto_page::getInstance( $dirname , $trust_dirname );
 
@@ -57,7 +60,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // function
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$this->_assign_xoops_header();
 
@@ -84,14 +87,14 @@ function main()
 	return array_merge( $param, $main_param );
 }
 
-function _build_mobile_text()
+public function _build_mobile_text()
 {
 	$str = $this->get_constant('HELP_MOBILE_TEXT_FMT');
 	$str = str_replace('{MODULE_URL}', $this->_MODULE_URL, $str );
 	return $str;
 }
 
-function _build_show_mail_text()
+public function _build_show_mail_text()
 {
 	if ( $this->_show_menu_mail ) {
 		return true;
@@ -101,26 +104,26 @@ function _build_show_mail_text()
 	return false;
 }
 
-function _build_mail_perm()
+public function _build_mail_perm()
 {
 	return $this->_build_perm( $this->_show_menu_mail ) ;
 }
 
-function _build_mail_text()
+public function _build_mail_text()
 {
 	$text  = $this->_build_mail_post();
 	$text .= $this->_build_mail_retrieve();
 	return $text;
 }
 
-function _build_mail_post()
+public function _build_mail_post()
 {
 	if ( $this->_show_menu_mail ) {
 		$mail_addr  = $this->sanitize( $this->get_config_by_name('mail_addr') );
 		$mail_guest = null;
 	} else {
 		$mail_addr  = 'user@exsample.com';
-		$mail_guest = '<br />' . $this->get_constant('HELP_MAIL_GUEST');
+		$mail_guest = '<br>' . $this->get_constant('HELP_MAIL_GUEST');
 	}
 
 	$str = $this->get_constant('HELP_MAIL_POST_FMT');
@@ -130,7 +133,7 @@ function _build_mail_post()
 	return $str;
 }
 
-function _build_mail_retrieve()
+public function _build_mail_retrieve()
 {
 	$text = $this->get_constant('HELP_MAIL_SUBTITLE_RETRIEVE');
 	$auto_time = $this->get_ini('mail_retrieve_auto_time') ;
@@ -147,7 +150,7 @@ function _build_mail_retrieve()
 	return $text;
 }
 
-function _build_show_file_text()
+public function _build_show_file_text()
 {
 	if ( $this->_show_menu_file ) {
 		return true;
@@ -157,19 +160,19 @@ function _build_show_file_text()
 	return false;
 }
 
-function _build_file_perm()
+public function _build_file_perm()
 {
 	return $this->_build_perm( $this->_show_menu_file ) ;
 }
 
-function _build_file_text_1()
+public function _build_file_text_1()
 {
 	$str = $this->get_constant('HELP_FILE_TEXT_FMT');
 	$str = str_replace('{MODULE_URL}', $this->_MODULE_URL, $str );
 	return $str;
 }
 
-function _build_file_text_2()
+public function _build_file_text_2()
 {
 	if ( $this->_show_menu_file ) {
 		$str = $this->get_config_by_name('file_desc') ;
@@ -179,7 +182,7 @@ function _build_file_text_2()
 	return $str;
 }
 
-function _build_perm( $perm )
+public function _build_perm( $perm )
 {
 	if ( $perm ) {
 		$str = null ;
@@ -191,7 +194,7 @@ function _build_perm( $perm )
 	return $str;
 }
 
-function _assign_xoops_header()
+public function _assign_xoops_header()
 {
 // Fatal error: Call to undefined method webphoto_inc_xoops_header::assign_for_main() 
 	$header_class 

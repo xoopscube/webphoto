@@ -20,21 +20,24 @@
 // used set_mode()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_search
 //=========================================================
 class webphoto_main_search extends webphoto_show_list
 {
-	var $_search_class;
+	public $_search_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_search( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_list( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_list( $dirname , $trust_dirname );
 	$this->set_mode( 'search' );
 
 	$this->_search_class =& webphoto_lib_search::getInstance();

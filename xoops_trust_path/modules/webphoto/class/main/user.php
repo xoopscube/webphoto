@@ -18,7 +18,9 @@
 // used set_mode()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_user
@@ -29,9 +31,10 @@ class webphoto_main_user extends webphoto_show_list
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_user( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_list( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_list( $dirname , $trust_dirname );
 	$this->set_mode( 'user' ) ;
 	$this->init_preload();
 }

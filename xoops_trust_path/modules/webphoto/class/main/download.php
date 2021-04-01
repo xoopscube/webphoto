@@ -17,24 +17,27 @@
 // check_perm -> check_item_perm
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main_download
 //=========================================================
 class webphoto_main_download extends webphoto_file_read
 {
-	var $_readfile_class ;
-	var $_browser_class;
+	public $_readfile_class ;
+	public $_browser_class;
 
-	var $_TIME_FAIL = 5;
+	public $_TIME_FAIL = 5;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main_download( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_file_read( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_file_read( $dirname, $trust_dirname );
 
 	$this->_readfile_class =& webphoto_lib_readfile::getInstance();
 	$this->_browser_class  =& webphoto_lib_browser::getInstance();
@@ -52,7 +55,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
+public function main()
 {
 	$item_id   = $this->_post_class->get_post_get_int('item_id');
 	$file_kind = $this->_post_class->get_post_get_int('file_kind');
@@ -92,7 +95,7 @@ function main()
 	exit();
 }
 
-function build_filename_by_row( $item_row, $file_row )
+public function build_filename_by_row( $item_row, $file_row )
 {
 	$item_title = $item_row['item_title'] ;
 	$file_name  = $file_row['file_name'] ;
@@ -124,7 +127,7 @@ function build_filename_by_row( $item_row, $file_row )
 	return array($name, $file_name);
 }
 
-function build_filename_encode( $name, $name_alt )
+public function build_filename_encode( $name, $name_alt )
 {
 	$is_rfc2231 = false;
 
@@ -168,7 +171,7 @@ function build_filename_encode( $name, $name_alt )
 	return array( $name, $is_rfc2231 );
 }
 
-function get_convert_kind( $name )
+public function get_convert_kind( $name )
 {
 	$is_japanese = $this->_xoops_class->is_japanese( _C_WEBPHOTO_JPAPANESE ) ;
 
