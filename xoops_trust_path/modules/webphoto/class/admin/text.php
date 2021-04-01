@@ -14,49 +14,48 @@
 // TMP_DIR -> MAIL_DIR
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_admin_text
 //=========================================================
-class webphoto_admin_text extends webphoto_base_this
-{
-	var $_readfile_class ;
+class webphoto_admin_text extends webphoto_base_this {
+	public $_readfile_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_admin_text( $dirname , $trust_dirname )
-{
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	function webphoto_admin_text( $dirname, $trust_dirname ) {
+		$this->webphoto_base_this( $dirname, $trust_dirname );
 
-	$this->_readfile_class =& webphoto_lib_readfile::getInstance();
-}
-
-public static function &getInstance( $dirname = null, $trust_dirname = null )
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_admin_text( $dirname , $trust_dirname );
+		$this->_readfile_class =& webphoto_lib_readfile::getInstance();
 	}
-	return $instance;
-}
+
+	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_admin_text( $dirname, $trust_dirname );
+		}
+
+		return $instance;
+	}
 
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
-{
-	$name = $this->_post_class->get_get_text('name');
-	$file = $this->_MAIL_DIR .'/'. $name ;
+	function main() {
+		$name = $this->_post_class->get_get_text( 'name' );
+		$file = $this->_MAIL_DIR . '/' . $name;
 
-	if ( empty($name) || !is_file($file) ) {
+		if ( empty( $name ) || ! is_file( $file ) ) {
+			exit();
+		}
+
+		$this->_readfile_class->readfile_view( $file, 'text/plain' );
 		exit();
 	}
-
-	$this->_readfile_class->readfile_view( $file, 'text/plain' );
-	exit();
-}
 
 // --- class end ---
 }

@@ -6,38 +6,37 @@
 // 2009-03-01 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_admin_rss_view
 //=========================================================
-class webphoto_admin_rss_view extends webphoto_rss
-{
+class webphoto_admin_rss_view extends webphoto_rss {
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_admin_rss_view( $dirname , $trust_dirname )
-{
-	$this->webphoto_rss( $dirname , $trust_dirname );
-}
-
-public static function &getInstance( $dirname = null, $trust_dirname = null )
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_admin_rss_view( $dirname , $trust_dirname );
+	function webphoto_admin_rss_view( $dirname, $trust_dirname ) {
+		$this->webphoto_rss( $dirname, $trust_dirname );
 	}
-	return $instance;
-}
+
+	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_admin_rss_view( $dirname, $trust_dirname );
+		}
+
+		return $instance;
+	}
 
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function main()
-{
-	$this->view_rss();
-}
+	function main() {
+		$this->view_rss();
+	}
 
 // --- class end ---
 }
