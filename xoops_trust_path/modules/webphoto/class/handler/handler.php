@@ -26,52 +26,55 @@
 // added force in query()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_lib_handler
 //=========================================================
 class webphoto_lib_handler extends webphoto_lib_error
 {
-	var $_DIRNAME;
+	public $_DIRNAME;
 
-	var $_db;
-	var $_table;
-	var $_id_name;
-	var $_pid_name;
-	var $_title_name;
+	public $_db;
+	public $_table;
+	public $_id_name;
+	public $_pid_name;
+	public $_title_name;
 
-	var $_xoops_mid ;
-	var $_xoops_groups ;
-	var $_is_module_admin ;
+	public $_xoops_mid ;
+	public $_xoops_groups ;
+	public $_is_module_admin ;
 
-	var $_id           = 0;
-	var $_xoops_uid    = 0;
-	var $_cached       = array();
-	var $_flag_cached  = false;
+	public $_id           = 0;
+	public $_xoops_uid    = 0;
+	public $_cached       = array();
+	public $_flag_cached  = false;
 
-	var $_use_prefix  = false;
-	var $_NONE_VALUE  = '---' ;
-	var $_PREFIX_NAME = 'prefix' ;
-	var $_PREFIX_MARK = '.' ;
-	var $_PREFIX_BAR  = '--' ;
+	public $_use_prefix  = false;
+	public $_NONE_VALUE  = '---' ;
+	public $_PREFIX_NAME = 'prefix' ;
+	public $_PREFIX_MARK = '.' ;
+	public $_PREFIX_BAR  = '--' ;
 
-	var $_PERM_ALLOW_ALL = '*' ;
-	var $_PERM_DENOY_ALL = 'x' ;
-	var $_PERM_SEPARATOR = '&' ;
+	public $_PERM_ALLOW_ALL = '*' ;
+	public $_PERM_DENOY_ALL = 'x' ;
+	public $_PERM_SEPARATOR = '&' ;
 
-	var $_DEBUG_SQL   = false;
-	var $_DEBUG_ERROR = false;
+	public $_DEBUG_SQL   = false;
+	public $_DEBUG_ERROR = false;
 
-	var $_FORM_SELECTED = ' selected="selected" ';
-	var $_FORM_DISABLED = ' disabled="disabled" ';
+	public $_FORM_SELECTED = ' selected="selected" ';
+	public $_FORM_DISABLED = ' disabled="disabled" ';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_lib_handler( $dirname=null )
+public function __construct( $dirname=null )
 {
-	$this->webphoto_lib_error();
+	parent::__construct();
+	//$this->webphoto_lib_error();
 
 	$this->_db =& Database::getInstance();
 
@@ -82,77 +85,77 @@ function webphoto_lib_handler( $dirname=null )
 	$this->_DIRNAME = $dirname;
 }
 
-function set_table_prefix_dirname( $name )
+public function set_table_prefix_dirname( $name )
 {
 	$this->set_table( $this->prefix_dirname( $name ) );
 }
 
-function set_table_prefix( $name )
+public function set_table_prefix( $name )
 {
 	$this->set_table( $this->db_prefix( $name ) );
 }
 
-function set_table( $val )
+public function set_table( $val )
 {
 	$this->_table = $val;
 }
 
-function get_table()
+public function get_table()
 {
 	return $this->_table;
 }
 
-function set_id_name( $val )
+public function set_id_name( $val )
 {
 	$this->_id_name = $val;
 }
 
-function get_id_name()
+public function get_id_name()
 {
 	return $this->_id_name;
 }
 
-function set_pid_name( $val )
+public function set_pid_name( $val )
 {
 	$this->_pid_name = $val;
 }
 
-function get_pid_name()
+public function get_pid_name()
 {
 	return $this->_pid_name;
 }
 
-function set_title_name( $val )
+public function set_title_name( $val )
 {
 	$this->_title_name = $val;
 }
 
-function get_title_name()
+public function get_title_name()
 {
 	return $this->_title_name;
 }
 
-function get_id()
+public function get_id()
 {
 	return $this->_id;
 }
 
-function prefix_dirname( $name )
+public function prefix_dirname( $name )
 {
 	return $this->db_prefix( $this->_DIRNAME .'_'. $name );
 }
 
-function db_prefix( $name )
+public function db_prefix( $name )
 {
 	return $this->_db->prefix( $name );
 }
 
-function set_use_prefix( $val )
+public function set_use_prefix( $val )
 {
 	$this->_use_prefix = (bool)$val;
 }
 
-function set_debug_sql_by_const_name( $name )
+public function set_debug_sql_by_const_name( $name )
 {
 	$name = strtoupper( $name );
 	if ( defined($name) ) {
@@ -160,7 +163,7 @@ function set_debug_sql_by_const_name( $name )
 	}
 }
 
-function set_debug_error_by_const_name( $name )
+public function set_debug_error_by_const_name( $name )
 {
 	$name = strtoupper( $name );
 	if ( defined($name) ) {
@@ -168,12 +171,12 @@ function set_debug_error_by_const_name( $name )
 	}
 }
 
-function set_debug_sql( $val )
+public function set_debug_sql( $val )
 {
 	$this->_DEBUG_SQL = (bool)$val;
 }
 
-function set_debug_error( $val )
+public function set_debug_error( $val )
 {
 	$this->_DEBUG_ERROR = intval($val);
 }
@@ -181,7 +184,7 @@ function set_debug_error( $val )
 //---------------------------------------------------------
 // insert
 //---------------------------------------------------------
-function insert( $row, $force=false )
+public function insert( $row, $force=false )
 {
 	// dummy
 }
@@ -189,7 +192,7 @@ function insert( $row, $force=false )
 //---------------------------------------------------------
 // update
 //---------------------------------------------------------
-function update( $row, $force=false )
+public function update( $row, $force=false )
 {
 	// dummy
 }
@@ -197,7 +200,7 @@ function update( $row, $force=false )
 //---------------------------------------------------------
 // delete
 //---------------------------------------------------------
-function delete( $row, $force=false )
+public function delete( $row, $force=false )
 {
 	return $this->delete_by_id( $this->get_id_from_row( $row ), $force );
 }
@@ -458,7 +461,7 @@ function query( $sql, $limit=0, $offset=0, $force=false )
 	$sql_full = $sql .': limit='. $limit .' :offset='. $offset ;
 
 	if ( $this->_DEBUG_SQL ) {
-		echo $this->sanitize( $sql_full )."<br />\n";
+		echo $this->sanitize( $sql_full )."<br>\n";
 	}
 
 	$res = $this->_db->query( $sql, intval($limit), intval($offset) );
@@ -469,10 +472,10 @@ function query( $sql, $limit=0, $offset=0, $force=false )
 		}
 		$this->set_error( $error );
 		if ( ! $this->_DEBUG_SQL ) {
-			echo $this->sanitize( $sql_full )."<br />\n";
+			echo $this->sanitize( $sql_full )."<br>\n";
 		}
 		if ( $this->_DEBUG_ERROR ) {
-			echo $this->highlight( $this->sanitize( $error ) )."<br />\n";
+			echo $this->highlight( $this->sanitize( $error ) )."<br>\n";
 		}
 		if ( $this->_DEBUG_ERROR > 1 ) {
 			debug_print_backtrace() ;
@@ -484,7 +487,7 @@ function query( $sql, $limit=0, $offset=0, $force=false )
 function queryF( $sql, $limit=0, $offset=0 )
 {
 	if ( $this->_DEBUG_SQL ) {
-		echo $this->sanitize( $sql ) .': limit='. $limit .' :offset='. $offset. "<br />\n";
+		echo $this->sanitize( $sql ) .': limit='. $limit .' :offset='. $offset. "<br>\n";
 	}
 
 	$res = $this->_db->queryF( $sql, intval($limit), intval($offset) );
@@ -493,7 +496,7 @@ function queryF( $sql, $limit=0, $offset=0 )
 		$this->set_error( $error );
 
 		if ( $this->_DEBUG_ERROR ) {
-			echo $this->highlight( $this->sanitize( $error ) )."<br />\n";
+			echo $this->highlight( $this->sanitize( $error ) )."<br>\n";
 		}
 	}
 	return $res;

@@ -21,31 +21,34 @@
 // add key in get_rows_item_cat_by_where_orderby()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_item_cat_handler
 //=========================================================
 class webphoto_item_cat_handler extends webphoto_handler_base_ini
 {
-	var $_item_table;
-	var $_cat_table;
-	var $_tag_table;
-	var $_p2t_table;
+	public $_item_table;
+	public $_cat_table;
+	public $_tag_table;
+	public $_p2t_table;
 
-	var $_cfg_perm_item_read = false;
+	public $_cfg_perm_item_read = false;
 
 // Undefined property: $_cfg_perm_cat_read
-	var $_cfg_perm_cat_read  = false;
+	public $_cfg_perm_cat_read  = false;
 
-	var $_FLAG_PERM_ADMIN = false;
+	public $_FLAG_PERM_ADMIN = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_item_cat_handler( $dirname, $trust_dirname ) 
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 
 	$this->_item_table = $this->prefix_dirname( 'item' );
 	$this->_cat_table  = $this->prefix_dirname( 'cat' );

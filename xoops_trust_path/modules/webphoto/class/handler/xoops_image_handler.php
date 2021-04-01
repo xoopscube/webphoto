@@ -6,23 +6,26 @@
 // 2008-04-02 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class uploader_photo_handler
 //=========================================================
 class webphoto_xoops_image_handler extends webphoto_lib_handler
 {
-	var $_category_table ;
-	var $_image_table ;
-	var $_body_table ;
+	public $_category_table ;
+	public $_image_table ;
+	public $_body_table ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_xoops_image_handler()
+public function __construct()
 {
-	$this->webphoto_lib_handler();
+	parent::__construct();
+	//$this->webphoto_lib_handler();
 
 	$this->_category_table = $this->db_prefix( 'imagecategory' ) ;
 	$this->_image_table    = $this->db_prefix( 'image' ) ;
@@ -48,7 +51,7 @@ public static function &getInstance()
 //---------------------------------------------------------
 // image_id mediumint(8) unsigned NOT NULL auto_increment,
 // image_name varchar(30) NOT NULL default '',
-// image_nicename varchar(255) NOT NULL default '',
+// image_nicename varchar(191) NOT NULL default '',
 // image_mimetype varchar(30) NOT NULL default '',
 // image_created int(10) unsigned NOT NULL default '0',
 // image_display tinyint(1) unsigned NOT NULL default '0',

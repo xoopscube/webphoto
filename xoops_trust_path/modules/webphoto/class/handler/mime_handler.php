@@ -23,21 +23,24 @@
 // added mime_ffmpeg
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_mime_handler
 //=========================================================
 class webphoto_mime_handler extends webphoto_handler_base_ini
 {
-	var $_cached_ext_array = array();
+	public $_cached_ext_array = array();
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_mime_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 
 	$this->set_table_prefix_dirname( 'mime' );
 	$this->set_id_name( 'mime_id' );

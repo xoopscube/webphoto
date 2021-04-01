@@ -14,21 +14,24 @@
 // webphoto_lib_handler -> webphoto_handler_base_ini
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_user_handler
 //=========================================================
 class webphoto_user_handler extends webphoto_handler_base_ini
 {
-	var $_cached_email_array = array();
+	public $_cached_email_array = array();
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_user_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'user' );
 	$this->set_id_name( 'user_id' );
 
@@ -47,7 +50,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create
 //---------------------------------------------------------
-function create( $flag_new= false )
+public function create( $flag_new= false )
 {
 	$time_create = 0;
 	$time_update = 0;
@@ -77,7 +80,7 @@ function create( $flag_new= false )
 //---------------------------------------------------------
 // insert
 //---------------------------------------------------------
-function insert( $row, $force=false )
+public function insert( $row, $force=false )
 {
 	extract( $row ) ;
 
@@ -118,7 +121,7 @@ function insert( $row, $force=false )
 //---------------------------------------------------------
 // update
 //---------------------------------------------------------
-function update( $row, $force=false )
+public function update( $row, $force=false )
 {
 	extract( $row ) ;
 
@@ -144,14 +147,14 @@ function update( $row, $force=false )
 //---------------------------------------------------------
 // get row
 //---------------------------------------------------------
-function get_row_by_uid( $uid )
+public function get_row_by_uid( $uid )
 {
 	$sql  = 'SELECT * FROM '.$this->_table;
 	$sql .= ' WHERE user_uid='.intval($uid);
 	return $this->get_row_by_sql( $sql );
 }
 
-function get_row_by_email( $email )
+public function get_row_by_email( $email )
 {
 	$email = $this->quote($email);
 
@@ -165,7 +168,7 @@ function get_row_by_email( $email )
 	return $this->get_row_by_sql( $sql );
 }
 
-function get_cached_row_by_email( $email )
+public function get_cached_row_by_email( $email )
 {
 	if ( isset( $this->_cached_email_array[ $email ] ) ) {
 		return  $this->_cached_email_array[ $email ];

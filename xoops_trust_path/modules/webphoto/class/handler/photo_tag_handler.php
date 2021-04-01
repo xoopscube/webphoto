@@ -14,23 +14,26 @@
 // photo_table -> item_table
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_tag_handler
 //=========================================================
 class webphoto_photo_tag_handler extends webphoto_handler_base_ini
 {
-	var $_item_table;
-	var $_tag_table;
-	var $_p2t_table;
+	public $_item_table;
+	public $_tag_table;
+	public $_p2t_table;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_tag_handler( $dirname, $trust_dirname )
+function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->_item_table = $this->prefix_dirname( 'item' );
 	$this->_tag_table  = $this->prefix_dirname( 'tag' );
 	$this->_p2t_table  = $this->prefix_dirname( 'p2t' );

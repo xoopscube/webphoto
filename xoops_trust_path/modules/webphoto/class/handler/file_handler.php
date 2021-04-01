@@ -28,21 +28,24 @@
 // build_show_file_image()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_file_handler
 //=========================================================
 class webphoto_file_handler extends webphoto_handler_base_ini
 {
-	var $_cached_extend = array();
+	public $_cached_extend = array();
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_file_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'file' );
 	$this->set_id_name( 'file_id' );
 

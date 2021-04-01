@@ -14,7 +14,9 @@
 // _C_ -> _P_
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_syno_handler
@@ -25,9 +27,10 @@ class webphoto_syno_handler extends webphoto_handler_base_ini
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_syno_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'syno' );
 	$this->set_id_name( 'syno_id' );
 

@@ -21,9 +21,10 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_p2t_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'p2t' );
 	$this->set_id_name( 'p2t_id' );
 

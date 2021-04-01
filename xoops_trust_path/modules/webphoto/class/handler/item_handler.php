@@ -53,23 +53,26 @@
 // error in mysql 5 if datetime is null
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_item_handler
 //=========================================================
 class webphoto_item_handler extends webphoto_handler_base_ini
 {
-	var $_BUILD_SEARCH_ARRAY ;
-	var $_TEXT_ARRAY ;
-	var $_ENCODE_ARRAY ;
+	public $_BUILD_SEARCH_ARRAY ;
+	public $_TEXT_ARRAY ;
+	public $_ENCODE_ARRAY ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_item_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'item' );
 	$this->set_id_name(    'item_id' );
 	$this->set_title_name( 'item_title' );

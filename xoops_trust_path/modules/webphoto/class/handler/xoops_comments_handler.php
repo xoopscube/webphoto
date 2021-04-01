@@ -6,7 +6,9 @@
 // 2008-04-02 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class uploader_photo_handler
@@ -17,9 +19,10 @@ class webphoto_xoops_comments_handler extends webphoto_lib_handler
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_xoops_comments_handler()
+public function __construct()
 {
-	$this->webphoto_lib_handler();
+	parent::__construct();
+	//$this->webphoto_lib_handler();
 	$this->set_table_prefix( 'xoopscomments' );
 
 //	$constpref = strtoupper( '_C_' . $dirname. '_' ) ;

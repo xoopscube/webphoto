@@ -17,22 +17,25 @@
 // calc_rating_by_photoid()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_vote_handler
 //=========================================================
 class webphoto_vote_handler extends webphoto_handler_base_ini
 {
-	var $_ONE_DAY_SEC = 86400;	// 1 day ( 86400 sec )
-	var $_WAIT_DAYS   = 1;	// 1 day
+	public $_ONE_DAY_SEC = 86400;	// 1 day ( 86400 sec )
+	public $_WAIT_DAYS   = 1;	// 1 day
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_vote_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'vote' );
 	$this->set_id_name( 'vote_id' );
 
@@ -50,7 +53,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create
 //---------------------------------------------------------
-function create( $flag_new= false )
+public function create( $flag_new= false )
 {
 	$time_create = 0;
 	$time_update = 0;
@@ -78,7 +81,7 @@ function create( $flag_new= false )
 //---------------------------------------------------------
 // insert
 //---------------------------------------------------------
-function insert( $row, $force=false )
+public function insert( $row, $force=false )
 {
 	extract( $row ) ;
 
@@ -119,19 +122,19 @@ function insert( $row, $force=false )
 //---------------------------------------------------------
 // update
 //---------------------------------------------------------
-function update( $row, $force=false )
+public function update( $row, $force=false )
 {
 	extract( $row ) ;
 
 	$sql  = 'UPDATE '.$this->_table.' SET ';
 
-	$sql .= 'vote_time_create='.intval($vote_time_create).', ';
-	$sql .= 'vote_time_update='.intval($vote_time_update).', ';
-	$sql .= 'vote_photo_id='.intval($vote_photo_id).', ';
-	$sql .= 'vote_uid='.intval($vote_uid).', ';
-	$sql .= 'vote_rating='.intval($vote_rating).', ';
+	$sql .= 'vote_time_create=' . (int) $vote_time_create . ', ';
+	$sql .= 'vote_time_update=' . (int) $vote_time_update . ', ';
+	$sql .= 'vote_photo_id=' . (int) $vote_photo_id . ', ';
+	$sql .= 'vote_uid=' . (int) $vote_uid . ', ';
+	$sql .= 'vote_rating=' . (int) $vote_rating . ', ';
 	$sql .= 'vote_hostname='.$this->quote($vote_hostname).' ';
-	$sql .= 'WHERE vote_id='.intval($vote_id);
+	$sql .= 'WHERE vote_id=' . (int) $vote_id;
 
 	return $this->query( $sql );
 }
@@ -139,97 +142,97 @@ function update( $row, $force=false )
 //---------------------------------------------------------
 // delete
 //---------------------------------------------------------
-function delete_by_photoid( $photo_id )
+public function delete_by_photoid( $photo_id )
 {
 	$sql  = 'DELETE FROM '. $this->_table;
-	$sql .= ' WHERE vote_photo_id='. intval($photo_id);
+	$sql .= ' WHERE vote_photo_id=' . (int) $photo_id;
 	return $this->query( $sql );
 }
 
 //---------------------------------------------------------
 // count
 //---------------------------------------------------------
-function get_count_by_photoid( $photo_id )
+public function get_count_by_photoid( $photo_id )
 {
-	$where = 'vote_photo_id='.intval($photo_id);
+	$where = 'vote_photo_id=' . (int) $photo_id;
 	return $this->get_count_by_where( $where );
 }
 
-function get_count_by_photoid_uid( $photo_id, $uid )
+public function get_count_by_photoid_uid( $photo_id, $uid )
 {
-	$where  = 'vote_photo_id='.intval($photo_id);
-	$where .= ' AND vote_uid='.intval($uid);
+	$where  = 'vote_photo_id=' . (int) $photo_id;
+	$where .= ' AND vote_uid=' . (int) $uid;
 	return $this->get_count_by_where( $where );
 }
 
-function get_count_anonymous_by_photoid_hostname( $photo_id, $hostname )
+public function get_count_anonymous_by_photoid_hostname( $photo_id, $hostname )
 {
 	$yesterday = time() - $this->get_ini( 'vote_anonymous_interval' ) ;
 
 	$where  = 'vote_uid=0 ';
-	$where .= ' AND vote_photo_id='.intval($photo_id);
+	$where .= ' AND vote_photo_id=' . (int) $photo_id;
 	$where .= ' AND vote_hostname='.$this->quote($hostname);
-	$where .= ' AND vote_time_update > '.intval($yesterday);
+	$where .= ' AND vote_time_update > ' . (int) $yesterday;
 	return $this->get_count_by_where( $where );
 }
 
 //---------------------------------------------------------
 // rows
 //---------------------------------------------------------
-function get_rows_by_photoid( $photo_id )
+public function get_rows_by_photoid( $photo_id )
 {
-	$where = 'vote_photo_id='.intval($photo_id);
+	$where = 'vote_photo_id=' . (int) $photo_id;
 	return $this->get_rows_by_where( $where );
 }
 
-function get_rows_by_uid( $uid )
+public function get_rows_by_uid( $uid )
 {
-	$where = 'vote_uid='.intval($uid);
+	$where = 'vote_uid=' . (int) $uid;
 	return $this->get_rows_by_where( $where );
 }
 
-function get_rows_user( )
+public function get_rows_user( )
 {
 	$where = 'vote_uid>0';
 	return $this->get_rows_by_where( $where );
 }
 
-function get_rows_guest( )
+public function get_rows_guest( )
 {
 	$where = 'vote_uid=0';
 	return $this->get_rows_by_where( $where );
 }
 
-function get_rows_user_by_photoid( $photo_id )
+public function get_rows_user_by_photoid( $photo_id )
 {
 	$where  = 'vote_uid>0 ';
-	$where .= 'AND vote_photo_id='.intval($photo_id);
+	$where .= 'AND vote_photo_id=' . (int) $photo_id;
 	return $this->get_rows_by_where( $where );
 }
 
-function get_rows_guest_by_photoid( $photo_id )
+public function get_rows_guest_by_photoid( $photo_id )
 {
 	$where  = 'vote_uid=0 ';
-	$where .= 'AND vote_photo_id='.intval($photo_id);
+	$where .= 'AND vote_photo_id=' . (int) $photo_id;
 	return $this->get_rows_by_where( $where );
 }
 
 //---------------------------------------------------------
 // calc
 //---------------------------------------------------------
-function calc_rating_by_photoid( $photo_id, $decimals=4 )
+public function calc_rating_by_photoid( $photo_id, $decimals=4 )
 {
 	return $this->calc_rating_by_rows( 
 		$this->get_rows_by_photoid( $photo_id ) );
 }
 
-function calc_rating_by_uid( $uid, $decimals=1 )
+public function calc_rating_by_uid( $uid, $decimals=1 )
 {
 	return $this->calc_rating_by_rows( 
 		$this->get_rows_by_uid( $uid ) ) ;
 }
 
-function calc_rating_by_rows( $rows, $decimals=0 )
+public function calc_rating_by_rows( $rows, $decimals=0 )
 {
 	$votes  = 0;
 	$total  = 0;
@@ -251,7 +254,7 @@ function calc_rating_by_rows( $rows, $decimals=0 )
 	return array( $votes, $total, $rating ) ;
 }
 
-function format_rating( $rating, $decimals=1 )
+public function format_rating( $rating, $decimals=1 )
 {
 	return number_format( $rating , $decimals ) ;
 }

@@ -12,7 +12,9 @@
 // webphoto_lib_handler -> webphoto_handler_base_ini
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_tag_handler
@@ -23,9 +25,10 @@ class webphoto_tag_handler extends webphoto_handler_base_ini
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_tag_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname );
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'tag' );
 	$this->set_id_name( 'tag_id' );
 

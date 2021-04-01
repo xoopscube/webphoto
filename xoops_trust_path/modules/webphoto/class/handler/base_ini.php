@@ -12,27 +12,30 @@
 // webphoto_lib_mysql_utility
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_handler_base_ini
 //=========================================================
 class webphoto_handler_base_ini extends webphoto_lib_tree_handler
 {
-	var $_utility_class;
-	var $_mysql_utility_class ;
-	var $_ini_class;
+	public $_utility_class;
+	public $_mysql_utility_class ;
+	public $_ini_class;
 
-	var $_MODULE_DIR;
-	var $_TRUST_DIRNAME;
-	var $_TRUST_DIR;
+	public $_MODULE_DIR;
+	public $_TRUST_DIRNAME;
+	public $_TRUST_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_handler_base_ini( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_lib_tree_handler( $dirname );
+	parent::__construct( $dirname );
+	//$this->webphoto_lib_tree_handler( $dirname );
 
 	$this->_MODULE_DIR    = XOOPS_ROOT_PATH  .'/modules/'. $dirname;
 	$this->_TRUST_DIRNAME = $trust_dirname;

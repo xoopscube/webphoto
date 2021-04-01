@@ -14,7 +14,9 @@
 // webphoto_lib_handler -> webphoto_handler_base_ini
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_gicon_handler
@@ -25,9 +27,10 @@ class webphoto_gicon_handler extends webphoto_handler_base_ini
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_gicon_handler( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
 	$this->set_table_prefix_dirname( 'gicon' );
 	$this->set_id_name( 'gicon_id' );
 
@@ -46,7 +49,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create
 //---------------------------------------------------------
-function create( $flag_new= false )
+public function create( $flag_new= false )
 {
 	$time_create = 0;
 	$time_update = 0;
@@ -84,7 +87,7 @@ function create( $flag_new= false )
 //---------------------------------------------------------
 // insert
 //---------------------------------------------------------
-function insert( $row, $force=false )
+public function insert( $row, $force=false )
 {
 	extract( $row ) ;
 
@@ -139,14 +142,14 @@ function insert( $row, $force=false )
 //---------------------------------------------------------
 // update
 //---------------------------------------------------------
-function update( $row, $force=false )
+public function update( $row, $force=false )
 {
 	extract( $row ) ;
 
 	$sql  = 'UPDATE '.$this->_table.' SET ';
 
-	$sql .= 'gicon_time_create='.intval($gicon_time_create).', ';
-	$sql .= 'gicon_time_update='.intval($gicon_time_update).', ';
+	$sql .= 'gicon_time_create=' . (int) $gicon_time_create . ', ';
+	$sql .= 'gicon_time_update=' . (int) $gicon_time_update . ', ';
 	$sql .= 'gicon_title='.$this->quote($gicon_title).', ';
 	$sql .= 'gicon_image_path='.$this->quote($gicon_image_path).', ';
 	$sql .= 'gicon_image_name='.$this->quote($gicon_image_name).', ';
@@ -171,7 +174,7 @@ function update( $row, $force=false )
 //---------------------------------------------------------
 // get rows
 //---------------------------------------------------------
-function get_sel_options( $none=false, $none_name='---' )
+public function get_sel_options( $none=false, $none_name='---' )
 {
 	$rows = $this->get_rows_all_asc();
 

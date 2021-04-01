@@ -15,22 +15,25 @@
 // removed build_row_by_photo_info() build_row_by_thumb_info()
 //--------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_handler
 //=========================================================
 class webphoto_photo_handler extends webphoto_lib_handler
 {
-	var $_AREA_NS = 1.0;
-	var $_AREA_EW = 1.0;
+	public $_AREA_NS = 1.0;
+	public $_AREA_EW = 1.0;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_handler( $dirname )
+public function __construct( $dirname )
 {
-	$this->webphoto_lib_handler( $dirname );
+	parent::__construct( $dirname );
+	//$this->webphoto_lib_handler( $dirname );
 	$this->set_table_prefix_dirname( 'photo' );
 	$this->set_id_name( 'photo_id' );
 

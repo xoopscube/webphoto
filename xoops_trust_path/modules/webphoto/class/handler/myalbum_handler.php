@@ -12,26 +12,29 @@
 // BUG: wrong table name
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_myalbum_handler
 //=========================================================
 class webphoto_myalbum_handler extends webphoto_lib_handler
 {
-	var $_cat_table;
-	var $_photos_table;
-	var $_text_table;
-	var $_votedata_table;
+	public $_cat_table;
+	public $_photos_table;
+	public $_text_table;
+	public $_votedata_table;
 
-	var $_MYALBUM_MID = 0;
+	public $_MYALBUM_MID = 0;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_myalbum_handler()
+public function __construct()
 {
-	$this->webphoto_lib_handler();
+	parent::__construct();
+	//$this->webphoto_lib_handler();
 }
 
 public static function &getInstance()
