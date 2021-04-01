@@ -14,34 +14,37 @@
 // _C_WEBPHOTO_UPLOAD_FIELD_PLOGO
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_flashvar_edit
 //=========================================================
 class webphoto_flashvar_edit extends webphoto_base_this
 {
-	var $_config_class;
-	var $_flashvar_handler;
-	var $_upload_class;
-	var $_image_cmd_class;
+	public $_config_class;
+	public $_flashvar_handler;
+	public $_upload_class;
+	public $_image_cmd_class;
 
-	var $_cfg_logo_width ;
+	public $_cfg_logo_width ;
 
-	var $_newid = 0 ;
-	var $_error_upload = false;
+	public $_newid = 0 ;
+	public $_error_upload = false;
 
-	var $_PLAYERLOGO_SIZE       = _C_WEBPHOTO_PLAYERLOGO_SIZE ;	// 30 KB
-	var $_PLAYERLOGO_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_PLOGO ;
+	public $_PLAYERLOGO_SIZE       = _C_WEBPHOTO_PLAYERLOGO_SIZE ;	// 30 KB
+	public $_PLAYERLOGO_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_PLOGO ;
 
-	var $_NORMAL_EXTS = null;
+	public $_NORMAL_EXTS = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_flashvar_edit( $dirname , $trust_dirname )
+function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_flashvar_handler =& webphoto_flashvar_handler::getInstance( $dirname );
 	$this->_upload_class     =& webphoto_upload::getInstance( $dirname , $trust_dirname );
@@ -63,7 +66,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // ssubmit
 //---------------------------------------------------------
-function submit()
+public function submit()
 {
 	$this->_newid = 0 ;
 
@@ -86,7 +89,7 @@ function submit()
 	return 0 ;
 }
 
-function build_row_by_post( $row ) 
+public function build_row_by_post( $row )
 {
 	$row['flashvar_item_id']          = $this->_post_class->get_post_int( 'flashvar_item_id' );
 	$row['flashvar_width']            = $this->_post_class->get_post_int( 'flashvar_width' );
@@ -138,7 +141,7 @@ function build_row_by_post( $row )
 	return $row;
 }
 
-function fetch_logo()
+public function fetch_logo()
 {
 	$this->_error_upload = false;
 
@@ -166,12 +169,12 @@ function fetch_logo()
 	return 0 ;
 }
 
-function get_newid()
+public function get_newid()
 {
 	return $this->_newid ;
 }
 
-function get_error_upload()
+public function get_error_upload()
 {
 	return $this->_error_upload ;
 }
@@ -179,7 +182,7 @@ function get_error_upload()
 //---------------------------------------------------------
 // modify
 //---------------------------------------------------------
-function modify()
+public function modify()
 {
 	$flashvar_id = $this->_post_class->get_post_int( 'flashvar_id' );
 
@@ -209,7 +212,7 @@ function modify()
 //---------------------------------------------------------
 // restore
 //---------------------------------------------------------
-function restore() 
+public function restore()
 {
 	$flashvar_id = $this->_post_class->get_post_int( 'flashvar_id' );
 

@@ -18,42 +18,45 @@
 // create_swf()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_base
 //=========================================================
 class webphoto_ext_base extends webphoto_base_ini
 {
-	var $_utility_class;
-	var $_mime_handler;
-	var $_config_class;
-	var $_multibyte_class;
+	public $_utility_class;
+	public $_mime_handler;
+	public $_config_class;
+	public $_multibyte_class;
 
-	var $_cfg_work_dir;
-	var $_cfg_makethumb;
-	var $_constpref;
+	public $_cfg_work_dir;
+	public $_cfg_makethumb;
+	public $_constpref;
 
-	var $_flag_chmod = false;
-	var $_cached     = array();
-	var $_errors     = array();
-	var $_cached_mime_type_array = array();
-	var $_cached_mime_kind_array  = array();
+	public $_flag_chmod = false;
+	public $_cached     = array();
+	public $_errors     = array();
+	public $_cached_mime_type_array = array();
+	public $_cached_mime_kind_array  = array();
 
-	var $_TMP_DIR;
+	public $_TMP_DIR;
 
-	var $_JPEG_EXT     = 'jpg';
-	var $_TEXT_EXT     = 'txt';
-	var $_ASX_EXT      = 'asx';
+	public $_JPEG_EXT     = 'jpg';
+	public $_TEXT_EXT     = 'txt';
+	public $_ASX_EXT      = 'asx';
 
-	var $_FLAG_DEBUG = false ;
+	public $_FLAG_DEBUG = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_base( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_mime_handler  =& webphoto_mime_handler::getInstance(
 		$dirname, $trust_dirname );

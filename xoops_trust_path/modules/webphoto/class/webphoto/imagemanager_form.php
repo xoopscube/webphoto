@@ -6,7 +6,9 @@
 // 2009-01-04 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_imagemanager_form
@@ -17,9 +19,10 @@ class webphoto_imagemanager_form extends webphoto_form_this
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_imagemanager_form( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_form_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_form_this( $dirname, $trust_dirname );
 	$this->init_preload();
 }
 
@@ -35,7 +38,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // imagemanager
 //---------------------------------------------------------
-function print_form_imagemanager( $row, $param )
+public function print_form_imagemanager( $row, $param )
 {
 	$has_resize    = $param['has_resize'];
 	$allowed_exts  = $param['allowed_exts'];

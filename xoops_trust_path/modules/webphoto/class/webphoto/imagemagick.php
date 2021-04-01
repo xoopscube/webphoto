@@ -14,7 +14,9 @@
 // $trust_dirname
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_imagemagick
@@ -22,20 +24,21 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_imagemagick extends webphoto_cmd_base
 {
-	var $_imagemagick_class;
-	var $_cfg_imagingpipe;
+	public $_imagemagick_class;
+	public $_cfg_imagingpipe;
 
-	var $_PIPEID_IMAGICK = _C_WEBPHOTO_PIPEID_IMAGICK ;
+	public $_PIPEID_IMAGICK = _C_WEBPHOTO_PIPEID_IMAGICK ;
 
-	var $_CMD_CONVERT = 'convert';
-	var $_CMYK_OPTION = '-colorspace RGB';
+	public $_CMD_CONVERT = 'convert';
+	public $_CMYK_OPTION = '-colorspace RGB';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_imagemagick( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_cmd_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 	$this->_imagemagick_class =& webphoto_lib_imagemagick::getInstance();
 
@@ -59,7 +62,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // create jpeg
 //---------------------------------------------------------
-function create_jpeg_from_cmyk( $src_file, $dst_file, $rotate=0, $option=null )
+public function create_jpeg_from_cmyk( $src_file, $dst_file, $rotate=0, $option=null )
 {
 	$new_option  = $this->_CMYK_OPTION;
 
@@ -72,7 +75,7 @@ function create_jpeg_from_cmyk( $src_file, $dst_file, $rotate=0, $option=null )
 	return $this->create_jpeg( $src_file, $dst_file, $new_option );
 }
 
-function create_jpeg( $src_file, $dst_file, $option=null )
+public function create_jpeg( $src_file, $dst_file, $option=null )
 {
 	if ( $this->_cfg_imagingpipe != $this->_PIPEID_IMAGICK ) {
 		return 0 ;	// no action

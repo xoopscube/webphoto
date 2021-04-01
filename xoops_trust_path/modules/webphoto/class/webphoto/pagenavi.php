@@ -12,23 +12,26 @@
 // calc_navi_page()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_pagenavi
 //=========================================================
 class webphoto_pagenavi extends webphoto_base_this
 {
-	var $_pagenavi_class;
+	public $_pagenavi_class;
 
-	var $_FLAG_DEBUG_TRACE = false;
+	public $_FLAG_DEBUG_TRACE = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_pagenavi( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_pagenavi_class =& webphoto_lib_pagenavi::getInstance();
 	$this->_pagenavi_class->set_mark_id_prev( '<b>'. $this->get_constant('NAVI_PREVIOUS') .'</b>' );

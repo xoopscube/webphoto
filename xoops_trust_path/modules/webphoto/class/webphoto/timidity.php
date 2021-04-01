@@ -14,7 +14,9 @@
 // $trust_dirname
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_timidity
@@ -22,17 +24,18 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_timidity extends webphoto_cmd_base
 {
-	var $_timidity_class;
-	var $_cfg_use_timidity;
+	public $_timidity_class;
+	public $_cfg_use_timidity;
 
-	var $_WAV_EXT    = 'wav';
+	public $_WAV_EXT    = 'wav';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_timidity( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_cmd_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 	$this->_timidity_class   =& webphoto_lib_timidity::getInstance();
 

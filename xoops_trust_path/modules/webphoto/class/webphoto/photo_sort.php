@@ -22,39 +22,41 @@
 // photo_handler -> item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_sort
 //=========================================================
 class webphoto_photo_sort
 {
-	var $_config_class;
-	var $_ini_class;
+	public $_config_class;
+	public $_ini_class;
 
-	var $_DIRNAME       = null;
-	var $_TRUST_DIRNAME = null;
-	var $_MODULE_URL;
-	var $_MODULE_DIR;
-	var $_TRUST_DIR;
+	public $_DIRNAME       = null;
+	public $_TRUST_DIRNAME = null;
+	public $_MODULE_URL;
+	public $_MODULE_DIR;
+	public $_TRUST_DIR;
 
-	var $_PHOTO_SORT_ARRAY;
+	public $_PHOTO_SORT_ARRAY;
 
-	var $_PHOTO_SORT_DEFAULT;
-	var $_ORDERBY_RANDOM = 'rand()';
+	public $_PHOTO_SORT_DEFAULT;
+	public $_ORDERBY_RANDOM = 'rand()';
 
-	var $_MODE_DEFAULT ;
-	var $_SORT_TO_ORDER_ARRAY ;
-	var $_MODE_TO_KIND_ARRAY ;
-	var $_MODE_TO_SORT_ARRAY ;
-	var $_KIND_TO_NAME_ARRAY ;
-	var $_PHOTO_KIND_ARRAY   ;
-	var $_NAME_DEFAULT       ;
+	public $_MODE_DEFAULT ;
+	public $_SORT_TO_ORDER_ARRAY ;
+	public $_MODE_TO_KIND_ARRAY ;
+	public $_MODE_TO_SORT_ARRAY ;
+	public $_KIND_TO_NAME_ARRAY ;
+	public $_PHOTO_KIND_ARRAY   ;
+	public $_NAME_DEFAULT       ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_sort( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->_config_class =& webphoto_config::getInstance( $dirname );
 

@@ -69,110 +69,113 @@
 // used class  webphoto_build_uri
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_base_this
 //=========================================================
 class webphoto_base_this extends webphoto_base_ini
 {
-	var $_config_class;
-	var $_item_handler;
-	var $_file_handler;
-	var $_cat_handler;
-	var $_post_class;
-	var $_perm_class;
-	var $_uri_class;
-	var $_preload_class;
-	var $_kind_class;
-	var $_multibyte_class;
-	var $_mysql_utility_class ;
+	public $_config_class;
+	public $_item_handler;
+	public $_file_handler;
+	public $_cat_handler;
+	public $_post_class;
+	public $_perm_class;
+	public $_uri_class;
+	public $_preload_class;
+	public $_kind_class;
+	public $_multibyte_class;
+	public $_mysql_utility_class ;
 
-	var $_cfg_uploads_path ;
-	var $_cfg_nameoruname;
+	public $_cfg_uploads_path ;
+	public $_cfg_nameoruname;
 
-	var $_usereal     = false;
-	var $_is_japanese = false;
+	public $_usereal     = false;
+	public $_is_japanese = false;
 
-	var $_flag_force_db = false;
+	public $_flag_force_db = false;
 
-	var $_UPLOADS_PATH ;
-	var $_MEDIAS_PATH ;
-	var $_WORK_DIR ;
-	var $_FILE_DIR ;
-	var $_UPLOADS_DIR;
-	var $_PHOTOS_PATH;
-	var $_PHOTOS_DIR ;
-	var $_PHOTOS_URL ;
-	var $_THUMBS_PATH;
-	var $_THUMBS_DIR;
-	var $_THUMBS_URL;
-	var $_LARGES_PATH;
-	var $_LARGES_DIR;
-	var $_LARGES_URL;
-	var $_MIDDLES_PATH;
-	var $_MIDDLES_DIR;
-	var $_MIDDLES_URL;
-	var $_SMALLS_PATH;
-	var $_SMALLS_DIR;
-	var $_SMALLS_URL;
-	var $_FLASHS_PATH;
-	var $_FLASHS_DIR;
-	var $_FLASHS_URL;
-	var $_DOCOMOS_PATH;
-	var $_DOCOMOS_DIR;
-	var $_DOCOMOS_URL;
-	var $_PDFS_PATH;
-	var $_PDFS_DIR;
-	var $_PDFS_URL;
-	var $_SWFS_PATH;
-	var $_SWFS_DIR;
-	var $_SWFS_URL;
-	var $_JPEGS_PATH;
-	var $_JPEGS_DIR;
-	var $_JPEGS_URL;
-	var $_MP3S_PATH;
-	var $_MP3S_DIR;
-	var $_MP3S_URL;
-	var $_WAVS_PATH;
-	var $_WAVS_DIR;
-	var $_WAVS_URL;
-	var $_CATS_PATH;
-	var $_CATS_DIR;
-	var $_CATS_URL;
-	var $_GICONS_PATH;
-	var $_GICONS_DIR;
-	var $_GICONS_URL;
-	var $_GSHADOWS_PATH;
-	var $_GSHADOWS_DIR;
-	var $_GSHADOWS_URL;
-	var $_QRS_DIR;
-	var $_QRS_URL;
-	var $_PLAYLISTS_DIR;
-	var $_PLAYLISTS_URL;
-	var $_LOGOS_DIR;
-	var $_MEDIAS_DIR;
-	var $_MAIL_DIR;
-	var $_TMP_DIR;
-	var $_LOG_DIR;
-	var $_ICONS_URL;
-	var $_ROOT_EXTS_DIR;
-	var $_ROOT_EXTS_URL;
+	public $_UPLOADS_PATH ;
+	public $_MEDIAS_PATH ;
+	public $_WORK_DIR ;
+	public $_FILE_DIR ;
+	public $_UPLOADS_DIR;
+	public $_PHOTOS_PATH;
+	public $_PHOTOS_DIR ;
+	public $_PHOTOS_URL ;
+	public $_THUMBS_PATH;
+	public $_THUMBS_DIR;
+	public $_THUMBS_URL;
+	public $_LARGES_PATH;
+	public $_LARGES_DIR;
+	public $_LARGES_URL;
+	public $_MIDDLES_PATH;
+	public $_MIDDLES_DIR;
+	public $_MIDDLES_URL;
+	public $_SMALLS_PATH;
+	public $_SMALLS_DIR;
+	public $_SMALLS_URL;
+	public $_FLASHS_PATH;
+	public $_FLASHS_DIR;
+	public $_FLASHS_URL;
+	public $_DOCOMOS_PATH;
+	public $_DOCOMOS_DIR;
+	public $_DOCOMOS_URL;
+	public $_PDFS_PATH;
+	public $_PDFS_DIR;
+	public $_PDFS_URL;
+	public $_SWFS_PATH;
+	public $_SWFS_DIR;
+	public $_SWFS_URL;
+	public $_JPEGS_PATH;
+	public $_JPEGS_DIR;
+	public $_JPEGS_URL;
+	public $_MP3S_PATH;
+	public $_MP3S_DIR;
+	public $_MP3S_URL;
+	public $_WAVS_PATH;
+	public $_WAVS_DIR;
+	public $_WAVS_URL;
+	public $_CATS_PATH;
+	public $_CATS_DIR;
+	public $_CATS_URL;
+	public $_GICONS_PATH;
+	public $_GICONS_DIR;
+	public $_GICONS_URL;
+	public $_GSHADOWS_PATH;
+	public $_GSHADOWS_DIR;
+	public $_GSHADOWS_URL;
+	public $_QRS_DIR;
+	public $_QRS_URL;
+	public $_PLAYLISTS_DIR;
+	public $_PLAYLISTS_URL;
+	public $_LOGOS_DIR;
+	public $_MEDIAS_DIR;
+	public $_MAIL_DIR;
+	public $_TMP_DIR;
+	public $_LOG_DIR;
+	public $_ICONS_URL;
+	public $_ROOT_EXTS_DIR;
+	public $_ROOT_EXTS_URL;
 
-	var $_EXT_PNG = 'png';
-	var $_ICON_NAME_DEFAULT = 'default.png';
+	public $_EXT_PNG = 'png';
+	public $_ICON_NAME_DEFAULT = 'default.png';
 
-	var $_C_YES = 1;
+	public $_C_YES = 1;
 
-	var $_PHOTO_LIST_LIMIT        = 1;
-	var $_PHOTO_LIST_UPDATE_ORDER = 'item_time_update DESC, item_id DESC';
+	public $_PHOTO_LIST_LIMIT        = 1;
+	public $_PHOTO_LIST_UPDATE_ORDER = 'item_time_update DESC, item_id DESC';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_base_this( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname , $trust_dirname );
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_item_handler 
 		=& webphoto_item_handler::getInstance( $dirname, $trust_dirname );
@@ -270,7 +273,7 @@ function webphoto_base_this( $dirname, $trust_dirname )
 //---------------------------------------------------------
 // config class
 //---------------------------------------------------------
-function get_config_by_name( $name )
+public function get_config_by_name( $name )
 {
 	return $this->_config_class->get_by_name( $name );
 }
@@ -278,7 +281,7 @@ function get_config_by_name( $name )
 //---------------------------------------------------------
 // check waiting
 //---------------------------------------------------------
-function build_check_waiting()
+public function build_check_waiting()
 {
 	$url = $this->_MODULE_URL.'/admin/index.php?fct=item_manager&amp;op=list_waiting' ;
 	$str = '';
@@ -287,7 +290,7 @@ function build_check_waiting()
 	if ( $waiting > 0 ) {
 		$str  = '<a href="'. $url .'" style="color:red;">';
 		$str .= sprintf( _AM_WEBPHOTO_CAT_FMT_NEEDADMISSION , $waiting ) ;
-		$str .= "</a><br />\n";
+		$str .= "</a><br>\n";
 	}
 	return $str;
 }
@@ -295,7 +298,7 @@ function build_check_waiting()
 //---------------------------------------------------------
 // perms
 //---------------------------------------------------------
-function get_group_perms_str_by_post( $name )
+public function get_group_perms_str_by_post( $name )
 {
 	$arr = $this->_post_class->get_post( $name );
 	return $this->_utility_class->convert_group_perms_array_to_str( $arr );
@@ -304,7 +307,7 @@ function get_group_perms_str_by_post( $name )
 //---------------------------------------------------------
 // jpeg
 //---------------------------------------------------------
-function is_jpeg_not_cmyk( $file, $ext=null )
+public function is_jpeg_not_cmyk( $file, $ext=null )
 {
 	if ( empty($ext) ) {
 		$ext = $this->parse_ext( $file );
@@ -320,52 +323,52 @@ function is_jpeg_not_cmyk( $file, $ext=null )
 //---------------------------------------------------------
 // kind class
 //---------------------------------------------------------
-function get_normal_exts()
+public function get_normal_exts()
 {
 	return $this->_kind_class->get_image_exts() ;
 }
 
-function is_normal_ext( $ext )
+public function is_normal_ext( $ext )
 {
 	return $this->_kind_class->is_image_ext( $ext ) ;
 }
 
-function is_image_ext( $ext )
+public function is_image_ext( $ext )
 {
 	return $this->_kind_class->is_image_ext( $ext ) ;
 }
 
-function is_jpeg_ext( $ext )
+public function is_jpeg_ext( $ext )
 {
 	return $this->_kind_class->is_jpeg_ext( $ext ) ;
 }
 
-function is_swf_ext( $ext )
+public function is_swf_ext( $ext )
 {
 	return $this->_kind_class->is_swf_ext( $ext ) ;
 }
 
-function is_swfobject_ext( $ext )
+public function is_swfobject_ext( $ext )
 {
 	return $this->_kind_class->is_swfobject_ext( $ext ) ;
 }
 
-function is_mediaplayer_ext( $ext )
+public function is_mediaplayer_ext( $ext )
 {
 	return $this->_kind_class->is_mediaplayer_ext( $ext ) ;
 }
 
-function is_video_docomo_ext( $ext )
+public function is_video_docomo_ext( $ext )
 {
 	return $this->_kind_class->is_video_docomo_ext( $ext ) ;
 }
 
-function is_flash_ext( $ext )
+public function is_flash_ext( $ext )
 {
 	return $this->_kind_class->is_flash_ext( $ext ) ;
 }
 
-function is_pdf_ext( $ext )
+public function is_pdf_ext( $ext )
 {
 	return $this->_kind_class->is_pdf_ext( $ext ) ;
 }
@@ -715,14 +718,14 @@ function preload_error( $flag_debug )
 		if ( $flag_debug ) {
 			echo "<pre>";
 			print_r( $errors );
-			echo "</pre><br />\n";
+			echo "</pre><br>\n";
 		}
 	}
 }
 
 function build_admin_footer()
 {
-	$str  = "<br /><hr />\n";
+	$str  = "<br><hr />\n";
 	$str .= $this->_utility_class->build_execution_time( WEBPHOTO_TIME_START );
 	$str .= $this->_utility_class->build_memory_usage();
 	return $str;
@@ -807,7 +810,4 @@ function mysql_datetime_to_year( $datetime )
 	return $this->_mysql_utility_class->mysql_datetime_to_year( $datetime );
 }
 
-// --- class end ---
 }
-
-?>

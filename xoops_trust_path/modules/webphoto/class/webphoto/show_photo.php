@@ -56,64 +56,67 @@
 // added build_show_is_video()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_show_photo
 //=========================================================
 class webphoto_show_photo extends webphoto_base_this
 {
-	var $_tag_build_class;
-	var $_highlight_class;
-	var $_image_class;
-	var $_multibyte_class;
+	public $_tag_build_class;
+	public $_highlight_class;
+	public $_image_class;
+	public $_multibyte_class;
 
 // config
-	var $_cfg_newdays;
-	var $_cfg_popular;
-	var $_cfg_nameoruname;
-	var $_cfg_thumb_width;
-	var $_cfg_middle_width;
-	var $_cfg_item_summary;
-	var $_cfg_cat_summary;
-	var $_cfg_newphotos;
-	var $_cfg_gmap_photos;
-	var $_cfg_tags;
-	var $_cfg_viewcattype;
-	var $_cfg_sort;
-	var $_cfg_use_popbox;
-	var $_cfg_perm_cat_read;
-	var $_cfg_perm_item_read;
-	var $_cfg_gmap_apikey;
-	var $_cfg_cat_main_width;
-	var $_cfg_cat_sub_width;
-	var $_cfg_timeline_dirname;
+	public $_cfg_newdays;
+	public $_cfg_popular;
+	public $_cfg_nameoruname;
+	public $_cfg_thumb_width;
+	public $_cfg_middle_width;
+	public $_cfg_item_summary;
+	public $_cfg_cat_summary;
+	public $_cfg_newphotos;
+	public $_cfg_gmap_photos;
+	public $_cfg_tags;
+	public $_cfg_viewcattype;
+	public $_cfg_sort;
+	public $_cfg_use_popbox;
+	public $_cfg_perm_cat_read;
+	public $_cfg_perm_item_read;
+	public $_cfg_gmap_apikey;
+	public $_cfg_cat_main_width;
+	public $_cfg_cat_sub_width;
+	public $_cfg_timeline_dirname;
 
 // ini
-	var $_ini_misc_array;
-	var $_ini_window_mergin;
-	var $_ini_content_length;
-	var $_ini_exif_length;
-	var $_ini_rating_decimals;
-	var $_ini_filesize_precision;
+	public $_ini_misc_array;
+	public $_ini_window_mergin;
+	public $_ini_content_length;
+	public $_ini_exif_length;
+	public $_ini_rating_decimals;
+	public $_ini_filesize_precision;
 
-	var $_item_text_type_array;
-	var $_time_newdays;
-	var $_usereal;
+	public $_item_text_type_array;
+	public $_time_newdays;
+	public $_usereal;
 
-	var $_flag_highlight = false;
-	var $_keyword_array  = null;
+	public $_flag_highlight = false;
+	public $_keyword_array  = null;
 
-	var $_URL_DEFAULT_IMAGE;
-	var $_URL_PIXEL_IMAGE;
-	var $_URL_CATEGORY_IMAGE;
+	public $_URL_DEFAULT_IMAGE;
+	public $_URL_PIXEL_IMAGE;
+	public $_URL_CATEGORY_IMAGE;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_show_photo( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_image_class 
 		=& webphoto_show_image::getInstance( $dirname, $trust_dirname );

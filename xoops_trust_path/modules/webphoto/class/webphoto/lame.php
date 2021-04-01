@@ -12,7 +12,9 @@
 // $trust_dirname
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_lame
@@ -20,15 +22,16 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_lame extends webphoto_cmd_base
 {
-	var $_lame_class;
-	var $_cfg_use_lame;
+	public $_lame_class;
+	public $_cfg_use_lame;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_lame( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_cmd_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 	$this->_lame_class   =& webphoto_lib_lame::getInstance();
 

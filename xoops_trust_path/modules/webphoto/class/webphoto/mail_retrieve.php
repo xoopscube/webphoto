@@ -16,36 +16,39 @@
 // added set_flag_chmod()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_mail_retrieve
 //=========================================================
 class webphoto_mail_retrieve extends webphoto_mail_photo
 {
-	var $_pop_class ;
+	public $_pop_class ;
 
-	var $_flag_retrive_chmod = false ;
+	public $_flag_retrive_chmod = false ;
 
-	var $_is_set_mail = false;
-	var $_has_mail    = false;
+	public $_is_set_mail = false;
+	public $_has_mail    = false;
 
-	var $_mail_count = 0;
-	var $_mail_array = null;
+	public $_mail_count = 0;
+	public $_mail_array = null;
 
-	var $_MAX_MAILLOG = 1000;
+	public $_MAX_MAILLOG = 1000;
 
-	var $_FILE_ACCESS = null;
-	var $_TIME_ACCESS = 60; // 60 sec ( 1 min )
+	public $_FILE_ACCESS = null;
+	public $_TIME_ACCESS = 60; // 60 sec ( 1 min )
 
-	var $_DEBUG_MAIL_FILE = null;
+	public $_DEBUG_MAIL_FILE = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_mail_retrieve( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_mail_photo( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_mail_photo( $dirname , $trust_dirname );
 	$this->set_mail_groups( XOOPS_GROUP_USERS );
 	$this->set_flag_chmod( true );
 
@@ -79,7 +82,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // check
 //---------------------------------------------------------
-function check_perm()
+public function check_perm()
 {
 	if ( ! $this->_is_set_mail ) {
 		return _C_WEBPHOTO_ERR_NO_PERM;
@@ -92,17 +95,17 @@ function check_perm()
 	return 0;
 }
 
-function is_set_mail()
+public function is_set_mail()
 {
 	return $this->_is_set_mail ;
 }
 
-function has_mail()
+public function has_mail()
 {
 	return $this->_has_mail ;
 }
 
-function set_flag_chmod( $val )
+public function set_flag_chmod( $val )
 {
 	$this->set_image_video_flag_chmod( $val );
 	$this->set_flag_mail_chmod( $val );
@@ -112,7 +115,7 @@ function set_flag_chmod( $val )
 //---------------------------------------------------------
 // retrieve
 //---------------------------------------------------------
-function retrieve()
+public function retrieve()
 {
 	if ( ! $this->check_access_time() ) {
 		$msg  = $this->get_constant('TEXT_MAIL_ACCESS_TIME') ;
@@ -131,19 +134,19 @@ function retrieve()
 	return $ret;
 }
 
-function check_access_time()
+public function check_access_time()
 {
 	return $this->_utility_class->check_file_time( 
 		$this->_FILE_ACCESS, $this->_TIME_ACCESS );
 }
 
-function renew_access_time()
+public function renew_access_time()
 {
 	$this->_utility_class->renew_file_time(  
 		$this->_FILE_ACCESS, $this->_flag_retrive_chmod );
 }
 
-function retrieve_exec()
+public function retrieve_exec()
 {
 	if ( $this->_DEBUG_MAIL_FILE ) {
 		$this->print_msg_level_user( 'DEBUG MODE', false, true );
@@ -173,7 +176,7 @@ function retrieve_exec()
 	return 0;
 }
 
-function mail_pop()
+public function mail_pop()
 {
 	$this->_mail_count = 0;
 	$this->_mail_array = null;
@@ -221,12 +224,12 @@ function mail_pop()
 	return 0;
 }
 
-function get_mail_count()
+public function get_mail_count()
 {
 	return $this->_mail_count ;
 }
 
-function build_mail_file( $file )
+public function build_mail_file( $file )
 {
 	$arr = array(
 		'maillog_id' => $this->add_maillog( $file ) ,
@@ -235,7 +238,7 @@ function build_mail_file( $file )
 	return $arr;
 }
 
-function mail_parse( $file_arr )
+public function mail_parse( $file_arr )
 {
 	$msg = "<h4>".$this->get_constant('SUBTITLE_MAIL_PARSE')."</h4>\n";
 	$this->print_msg_level_user( $msg );
@@ -250,14 +253,14 @@ function mail_parse( $file_arr )
 	return $param_arr;
 }
 
-function add_photos( $file_arr )
+public function add_photos( $file_arr )
 {
 	$msg = "<h4>".$this->get_constant('SUBTITLE_MAIL_PHOTO')."</h4>\n";
 	$this->print_msg_level_user( $msg );
 
 	$count = $this->add_photos_from_mail( $file_arr );
 
-	$msg  = "<br />\n";
+	$msg  = "<br>\n";
 	$msg .= sprintf( $this->get_constant('TEXT_MAIL_SUBMITED_FMT'), $count );
 	$this->print_msg_level_user( $msg, false, true );
 

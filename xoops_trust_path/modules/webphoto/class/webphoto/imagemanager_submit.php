@@ -6,100 +6,103 @@
 // 2009-01-04 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_imagemanager_submit
 //=========================================================
 class webphoto_imagemanager_submit extends webphoto_base_this
 {
-	var $_upload_class;
-	var $_image_class;
-	var $_build_class;
-	var $_mime_class;
-	var $_photo_class;
-	var $_redirect_class;
+	public $_upload_class;
+	public $_image_class;
+	public $_build_class;
+	public $_mime_class;
+	public $_photo_class;
+	public $_redirect_class;
 
-	var $_cfg_makethumb      = false;
-	var $_cfg_addposts       = 0 ;
-	var $_cfg_fsize          = 0 ;
-	var $_cfg_width          = 0 ;
-	var $_cfg_height         = 0 ;
-	var $_cfg_perm_item_read = 0 ;
+	public $_cfg_makethumb      = false;
+	public $_cfg_addposts       = 0 ;
+	public $_cfg_fsize          = 0 ;
+	public $_cfg_width          = 0 ;
+	public $_cfg_height         = 0 ;
+	public $_cfg_perm_item_read = 0 ;
 
-	var $_has_insertable     = false;
-	var $_has_superinsert    = false;
-	var $_has_editable       = false;
-	var $_has_deletable      = false;
-	var $_has_html           = false;
-	var $_has_image_resize   = false;
-	var $_has_image_rotate   = false;
+	public $_has_insertable     = false;
+	public $_has_superinsert    = false;
+	public $_has_editable       = false;
+	public $_has_deletable      = false;
+	public $_has_html           = false;
+	public $_has_image_resize   = false;
+	public $_has_image_rotate   = false;
 
 // item
-	var $_post_item_id          = 0;
-	var $_item_cat_id           = 0;
-	var $_item_title            = null;
-	var $_item_datetime         = null;
-	var $_item_equipment        = null;
-	var $_item_duration         = 0 ;
-	var $_item_exif             = null;
-	var $_item_ext              = null;
-	var $_item_displaytype      = 0 ;
-	var $_item_onclick          = 0 ;
-	var $_item_gmap_latitude    = 0 ;
-	var $_item_gmap_longitude   = 0 ;
-	var $_item_gmap_zoom        = 0 ;
-	var $_item_kind             = _C_WEBPHOTO_ITEM_KIND_UNDEFINED ;
+	public $_post_item_id          = 0;
+	public $_item_cat_id           = 0;
+	public $_item_title            = null;
+	public $_item_datetime         = null;
+	public $_item_equipment        = null;
+	public $_item_duration         = 0 ;
+	public $_item_exif             = null;
+	public $_item_ext              = null;
+	public $_item_displaytype      = 0 ;
+	public $_item_onclick          = 0 ;
+	public $_item_gmap_latitude    = 0 ;
+	public $_item_gmap_longitude   = 0 ;
+	public $_item_gmap_zoom        = 0 ;
+	public $_item_kind             = _C_WEBPHOTO_ITEM_KIND_UNDEFINED ;
 
-	var $_preview_name   = null;
-	var $_tag_name_array = null;
-	var $_special_ext    = null;
+	public $_preview_name   = null;
+	public $_tag_name_array = null;
+	public $_special_ext    = null;
 
-	var $_photo_tmp_name    = null;
-	var $_photo_media_type  = null;
-	var $_photo_media_name  = null;
-	var $_thumb_tmp_name    = null;
-	var $_thumb_media_type  = null;
-	var $_middle_tmp_name   = null;
-	var $_middle_media_type = null;
+	public $_photo_tmp_name    = null;
+	public $_photo_media_type  = null;
+	public $_photo_media_name  = null;
+	public $_thumb_tmp_name    = null;
+	public $_thumb_media_type  = null;
+	public $_middle_tmp_name   = null;
+	public $_middle_media_type = null;
 
-	var $_photo_param = null ;
-	var $_video_param = null ;
-	var $_file_params = null;
-	var $_is_video_thumb_form = false;
+	public $_photo_param = null ;
+	public $_video_param = null ;
+	public $_file_params = null;
+	public $_is_video_thumb_form = false;
 
-	var $_row_create   = null ;
-	var $_row_current  = null;
-	var $_row_update   = null ;
+	public $_row_create   = null ;
+	public $_row_current  = null;
+	public $_row_update   = null ;
 
-	var $_redirect_time = 0 ;
-	var $_redirect_url  = null ;
-	var $_redirect_msg  = null ;
+	public $_redirect_time = 0 ;
+	public $_redirect_url  = null ;
+	public $_redirect_msg  = null ;
 
-	var $_NO_TITLE           = 'no title' ;
-	var $_REDIRECT_MSG_ERROR = 'ERROR not set message';
+	public $_NO_TITLE           = 'no title' ;
+	public $_REDIRECT_MSG_ERROR = 'ERROR not set message';
 
-	var $_MSG_LEVEL = 0;
-	var $_MSG_FIRST = false;
+	public $_MSG_LEVEL = 0;
+	public $_MSG_FIRST = false;
 
-	var $_PHOTO_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
-	var $_THUMB_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
-	var $_MIDDLE_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
+	public $_PHOTO_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
+	public $_THUMB_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
+	public $_MIDDLE_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
 
 // for submit_imagemanager
-	var $_FLAG_FETCH_ALLOW_ALL = false ;
-	var $_FLAG_FETCH_THUMB     = false ;
-	var $_FLAG_ALLOW_NONE      = false ;
+	public $_FLAG_FETCH_ALLOW_ALL = false ;
+	public $_FLAG_FETCH_THUMB     = false ;
+	public $_FLAG_ALLOW_NONE      = false ;
 
 // for admin
-	var $_FLAG_ADMIN = false;
+	public $_FLAG_ADMIN = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_imagemanager_submit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_photo_class    =& webphoto_photo_create::getInstance( $dirname , $trust_dirname );
 	$this->_build_class    =& webphoto_photo_build::getInstance( $dirname );
@@ -139,7 +142,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // set param 
 //---------------------------------------------------------
-function set_flag_admin( $val )
+public function set_flag_admin( $val )
 {
 	$this->_FLAG_ADMIN = (bool)$val;
 }
@@ -298,7 +301,7 @@ function submit_check_redirect( $ret )
 			$url = $this->_MODULE_URL ;
 			$msg = 'Directory Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_format_error();
+				$msg .= '<br>'.$this->get_format_error();
 			}
 			break;
 

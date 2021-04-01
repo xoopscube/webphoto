@@ -30,22 +30,25 @@
 // used get_list_pathinfo_param()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_show_list
 //=========================================================
 class webphoto_show_list extends webphoto_show_main_photo
 {
-	var $_get_uid     = -1;	// not set
-	var $_UID_DEFAULT = -1;	// not set
+	public $_get_uid     = -1;	// not set
+	public $_UID_DEFAULT = -1;	// not set
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_show_list( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_main_photo( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_main_photo( $dirname , $trust_dirname );
 }
 
 public static function &getInstance( $dirname = null, $trust_dirname = null )
@@ -60,7 +63,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // main
 //---------------------------------------------------------
-function list_get_template()
+public function list_get_template()
 {
 	$this->list_get_pathinfo_param();
 
@@ -73,7 +76,7 @@ function list_get_template()
 	return $ret;
 }
 
-function list_main()
+public function list_main()
 {
 	if ( $this->list_sel() ) {
 		return $this->list_build_detail( $this->_param );
@@ -81,7 +84,7 @@ function list_main()
 	return $this->list_build_list();
 }
 
-function list_sel()
+public function list_sel()
 {
 	if ( $this->_param ) {
 		return true;
@@ -92,7 +95,7 @@ function list_sel()
 //---------------------------------------------------------
 // get pathinfo param
 //---------------------------------------------------------
-function list_get_pathinfo_param()
+public function list_get_pathinfo_param()
 {
 	$this->get_pathinfo_param();
 }
@@ -100,18 +103,18 @@ function list_get_pathinfo_param()
 //---------------------------------------------------------
 // list
 //---------------------------------------------------------
-function list_build_list()
+public function list_build_list()
 {
 	return $this->list_build_list_default();
 }
 
-function list_build_list_default()
+public function list_build_list_default()
 {
 	$this->assign_xoops_header_default();
 	return $this->list_build_list_common();
 }
 
-function list_build_list_common( $show_photo_desc=false, $title=null )
+public function list_build_list_common( $show_photo_desc=false, $title=null )
 {
 	$mode = $this->_mode;
 
@@ -137,12 +140,12 @@ function list_build_list_common( $show_photo_desc=false, $title=null )
 }
 
 // overwrite
-function list_get_photo_list()
+public function list_get_photo_list()
 {
 	// dummy
 }
 
-function list_build_photo_array( $title, $param, $total, $row, $link=null, $photo=null )
+public function list_build_photo_array( $title, $param, $total, $row, $link=null, $photo=null )
 {
 	if ( empty($link) && $param ) {
 		$link = $this->build_uri_list_link( $param ) ;
@@ -167,12 +170,12 @@ function list_build_photo_array( $title, $param, $total, $row, $link=null, $phot
 // detail list
 //---------------------------------------------------------
 // overwrite
-function list_build_detail( $param )
+public function list_build_detail( $param )
 {
 	// dummy
 }
 
-function list_build_detail_common( $title, $total, $rows, $photos=null )
+public function list_build_detail_common( $title, $total, $rows, $photos=null )
 {
 	$title_s = $this->sanitize( $title );
 
@@ -204,7 +207,7 @@ function list_build_detail_common( $title, $total, $rows, $photos=null )
 }
 
 // BUG : not show cat_id
-function list_build_init_param( $show_photo_desc=false, $cat_id=0 )
+public function list_build_init_param( $show_photo_desc=false, $cat_id=0 )
 {
 	$param = $this->build_common_param( $this->_mode, $show_photo_desc, $cat_id ) ;
 	$param['param_sort'] = $this->build_uri_list_sort() ;

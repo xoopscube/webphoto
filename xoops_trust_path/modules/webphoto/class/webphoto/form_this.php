@@ -30,82 +30,85 @@
 // used _TMP_PATH
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_form_this
 //=========================================================
 class webphoto_form_this extends webphoto_lib_form
 {
-	var $_cat_handler;
-	var $_item_handler;
-	var $_gicon_handler;
-	var $_config_class;
-	var $_preload_class;
-	var $_perm_class ;
+	public $_cat_handler;
+	public $_item_handler;
+	public $_gicon_handler;
+	public $_config_class;
+	public $_preload_class;
+	public $_perm_class ;
 
-	var $_cfg_gmap_apikey ;
-	var $_cfg_width ;
-	var $_cfg_height ;
-	var $_cfg_fsize ;
-	var $_cfg_makethumb ;
-	var $_cfg_file_size ;
-	var $_cfg_perm_item_read ;
+	public $_cfg_gmap_apikey ;
+	public $_cfg_width ;
+	public $_cfg_height ;
+	public $_cfg_fsize ;
+	public $_cfg_makethumb ;
+	public $_cfg_file_size ;
+	public $_cfg_perm_item_read ;
 
-	var $_has_deletable ;
+	public $_has_deletable ;
 
-	var $_is_japanese    = false;
-	var $_checkbox_array = array();
+	public $_is_japanese    = false;
+	public $_checkbox_array = array();
 
-	var $_FILED_COUNTER_1  = 1;
-	var $_FILED_COUNTER_2  = 2;
+	public $_FILED_COUNTER_1  = 1;
+	public $_FILED_COUNTER_2  = 2;
 
-	var $_UPLOADS_PATH ;
-	var $_MEDIAS_PATH ;
-	var $_WORK_DIR ;
-	var $_FILE_DIR ;
-	var $_PHOTOS_PATH;
-	var $_PHOTOS_DIR ;
-	var $_PHOTOS_URL ;
-	var $_THUMBS_PATH;
-	var $_THUMBS_DIR;
-	var $_THUMBS_URL;
-	var $_CATS_PATH;
-	var $_CATS_DIR;
-	var $_CATS_URL;
-	var $_MEDIAS_DIR;
-	var $_MEDIAS_URL;
-	var $_PLAYLISTS_DIR ;
-	var $_PLAYLISTS_URL ;
-	var $_TMP_DIR;
-	var $_MAIL_DIR;
-	var $_LOG_DIR;
+	public $_UPLOADS_PATH ;
+	public $_MEDIAS_PATH ;
+	public $_WORK_DIR ;
+	public $_FILE_DIR ;
+	public $_PHOTOS_PATH;
+	public $_PHOTOS_DIR ;
+	public $_PHOTOS_URL ;
+	public $_THUMBS_PATH;
+	public $_THUMBS_DIR;
+	public $_THUMBS_URL;
+	public $_CATS_PATH;
+	public $_CATS_DIR;
+	public $_CATS_URL;
+	public $_MEDIAS_DIR;
+	public $_MEDIAS_URL;
+	public $_PLAYLISTS_DIR ;
+	public $_PLAYLISTS_URL ;
+	public $_TMP_DIR;
+	public $_MAIL_DIR;
+	public $_LOG_DIR;
 
-	var $_ICONS_URL;
-	var $_ICON_ROTATE_URL;
-	var $_ROOT_EXTS_DIR;
-	var $_ROOT_EXTS_URL;
+	public $_ICONS_URL;
+	public $_ICON_ROTATE_URL;
+	public $_ROOT_EXTS_DIR;
+	public $_ROOT_EXTS_URL;
 
-	var $_TAGS_SIZE = 80;
+	public $_TAGS_SIZE = 80;
 
-	var $_EMBED_TYPE_DEFAULT = _C_WEBPHOTO_EMBED_TYPE_DEFAULT ;
-	var $_EDITOR_DEFAULT     = _C_WEBPHOTO_EDITOR_DEFAULT ;
-	var $_PHOTO_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
-	var $_THUMB_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
-	var $_MIDDLE_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
+	public $_EMBED_TYPE_DEFAULT = _C_WEBPHOTO_EMBED_TYPE_DEFAULT ;
+	public $_EDITOR_DEFAULT     = _C_WEBPHOTO_EDITOR_DEFAULT ;
+	public $_PHOTO_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
+	public $_THUMB_FIELD_NAME   = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
+	public $_MIDDLE_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
 
-	var $_THIS_IMAGEMANEGER_FCT = 'submit_imagemanager';
-	var $_THIS_SUBMIT_FCT = 'submit';
-	var $_THIS_EDIT_FCT   = 'edit';
-	var $_THIS_ADMIN_FCT  = 'item_manager';
-	var $_THIS_FILE_FCT   = 'submit_file';
+	public $_THIS_IMAGEMANEGER_FCT = 'submit_imagemanager';
+	public $_THIS_SUBMIT_FCT = 'submit';
+	public $_THIS_EDIT_FCT   = 'edit';
+	public $_THIS_ADMIN_FCT  = 'item_manager';
+	public $_THIS_FILE_FCT   = 'submit_file';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_form_this( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_lib_form( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_lib_form( $dirname , $trust_dirname );
 
 	$this->_config_class =& webphoto_config::getInstance( $dirname );
 	$this->_item_handler =& webphoto_item_handler::getInstance( $dirname );
@@ -191,7 +194,7 @@ function build_line_maxpixel( $has_resize )
 
 function _build_ele_maxpixel( $has_resize )
 {
-	$text = $this->_cfg_width .' x '. $this->_cfg_height ."<br />\n" ;
+	$text = $this->_cfg_width .' x '. $this->_cfg_height ."<br>\n" ;
 
 	if ( $has_resize ) {
 		$text .= $this->get_constant('DSC_PIXCEL_RESIZE');
@@ -260,7 +263,7 @@ function _build_ele_title( $size=50 )
 {
 	$value = $this->get_row_by_key( 'item_title' );
 	$ele  = $this->build_input_text( 'item_title', $value, $size );
-	$ele .= "<br />\n";
+	$ele .= "<br>\n";
 	$ele .= $this->get_constant('DSC_TITLE_BLANK');
 	return $ele;
 }
@@ -277,7 +280,7 @@ function _build_ele_photo_file( $cont_row )
 	$url  = $this->build_file_url_size( $cont_row ) ;
 
 	$ele  = $this->build_form_file( $this->_PHOTO_FIELD_NAME );
-	$ele .= "<br />\n";
+	$ele .= "<br>\n";
 
 	if ( $url ) {
 		$ele .= $this->build_link_blank( $url );
@@ -301,7 +304,7 @@ function build_link_blank( $url )
 	}
 
 	$url_s = $this->sanitize( $url );
-	$str   = '<a href="'. $url_s .'" target="_blank">'. $url_s .'</a>'."<br />\n";
+	$str   = '<a href="'. $url_s .'" target="_blank">'. $url_s .'</a>'."<br>\n";
 	return $str;
 }
 
@@ -409,7 +412,7 @@ function build_ele_group_perms_by_key( $name )
 	$text  = '';
 	$text .= $this->build_input_checkbox_js_check_all( $all_name, $id_name );
 	$text .= $this->get_constant('GROUP_PERM_ALL') ;
-	$text .= "<br />\n";
+	$text .= "<br>\n";
 	$text .= $this->build_form_checkbox_group_perms( $id_name, $groups, $perms, $all_yes );
 
 	return $text;

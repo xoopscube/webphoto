@@ -16,7 +16,9 @@
 // nothing to do
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_exif
@@ -24,14 +26,14 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_exif
 {
-	var $_exif_class;
-	var $_utility_class;
-	var $_mysql_utility_class ;
+	public $_exif_class;
+	public $_utility_class;
+	public $_mysql_utility_class ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_exif()
+function __construct()
 {
 	$this->_exif_class    =& webphoto_lib_exif::getInstance();
 	$this->_utility_class =& webphoto_lib_utility::getInstance();

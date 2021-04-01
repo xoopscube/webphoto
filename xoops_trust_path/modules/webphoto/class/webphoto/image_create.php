@@ -28,7 +28,9 @@
 //  -> create_photo() create_thumb_from_upload() etc
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_edit_image_create
@@ -36,18 +38,18 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_image_create
 {
-	var $_image_cmd_class;
-	var $_config_class;
-	var $_kind_class;
+	public $_image_cmd_class;
+	public $_config_class;
+	public $_kind_class;
 
-	var $_has_resize = false;
-	var $_has_rotate = false;
-	var $_flag_chmod = true ;
+	public $_has_resize = false;
+	public $_has_rotate = false;
+	public $_flag_chmod = true ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_image_create( $dirname )
+function __construct( $dirname )
 {
 	$this->_kind_class    =& webphoto_kind::getInstance();
 	$this->_config_class  =& webphoto_config::getInstance( $dirname );

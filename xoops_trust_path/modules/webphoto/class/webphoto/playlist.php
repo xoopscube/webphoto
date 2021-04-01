@@ -17,7 +17,9 @@
 // refresh_cache_by_item_row()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_playlist
@@ -28,48 +30,49 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 
 class webphoto_playlist extends webphoto_lib_error
 {
-	var $_config_class;
-	var $_item_handler;
-	var $_utility_class;
-	var $_xml_class;
-	var $_remote_class;
-	var $_multibyte_class;
+	public $_config_class;
+	public $_item_handler;
+	public $_utility_class;
+	public $_xml_class;
+	public $_remote_class;
+	public $_multibyte_class;
 
-	var $_flag_chmod = true;
+	public $_flag_chmod = true;
 
 // result
-	var $_report = null;
+	public $_report = null;
 
-	var $_DIRNAME;
-	var $_MODULE_URL;
-	var $_MODULE_DIR;
+	public $_DIRNAME;
+	public $_MODULE_URL;
+	public $_MODULE_DIR;
 
-	var $_PLAYLIST_DIR;
-	var $_MEDIA_DIR ;
-	var $_MEDIA_URL ;
+	public $_PLAYLIST_DIR;
+	public $_MEDIA_DIR ;
+	public $_MEDIA_URL ;
 
-	var $_IMAGE_EXTS ;
-	var $_SWFOBJECT_EXTS ;
-	var $_MEDIAPLAYER_EXTS ;
-	var $_CAPTION_EXTS = array('xml');
+	public $_IMAGE_EXTS ;
+	public $_SWFOBJECT_EXTS ;
+	public $_MEDIAPLAYER_EXTS ;
+	public $_CAPTION_EXTS = array('xml');
 
-	var $_XML_EXT = 'xml' ;
+	public $_XML_EXT = 'xml' ;
 
-	var $_lang_status_report  = "Status Report";
-	var $_lang_status_fetched = "This webfeed has been fetched and cached.";
-	var $_lang_status_created = "A new playlist has been cached";
-	var $_lang_err_cache      = "[ERROR] creating cache file";
-	var $_lang_err_nodir      = "The media directory does not exist";
-	var $_lang_err_emptydir   = "The media directory is empty";
-	var $_lang_err_write      = "Can not write the cache file";
-	var $_lang_err_fetch      = "Failed to fetch the web feed. <br />Please confirm the web feed location and refresh the cache.";
+	public $_lang_status_report  = "Status Report";
+	public $_lang_status_fetched = "This webfeed has been fetched and cached.";
+	public $_lang_status_created = "A new playlist has been cached";
+	public $_lang_err_cache      = "[ERROR] creating cache file";
+	public $_lang_err_nodir      = "The media directory does not exist";
+	public $_lang_err_emptydir   = "The media directory is empty";
+	public $_lang_err_write      = "Can not write the cache file";
+	public $_lang_err_fetch      = "Failed to fetch the web feed. <br>Please confirm the web feed location and refresh the cache.";
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_playlist( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_lib_error();
+	parent::__construct();
+	//$this->webphoto_lib_error();
 
 	$this->_DIRNAME    = $dirname ;
 	$this->_MODULE_URL = XOOPS_URL       .'/modules/'. $dirname;
@@ -189,7 +192,7 @@ function get_report()
 {
 	$msg = null ;
 	if ( $this->_report ) {
-		$msg  = $this->_lang_status_report.'<br />' ;
+		$msg  = $this->_lang_status_report.'<br>' ;
 		$msg .= $this->_report ;
 	}
 	return $msg ;
@@ -243,8 +246,8 @@ function _write_cache( $cache, $data )
 
 function _build_error( $error, $param )
 {
-	$msg  = $_lang_err_cache .'<br />';
-	$msg .= $error .'<br />';
+	$msg  = $_lang_err_cache .'<br>';
+	$msg .= $error .'<br>';
 	$msg .= $param ;
 	return $msg ; 
 }
@@ -311,7 +314,7 @@ function _create_list( $row )
 
 	$ret = $this->_write_cache( $cache, $data );
 	if ( $ret ) {
-		$this->_report  = $this->_lang_status_created .'<br />';
+		$this->_report  = $this->_lang_status_created .'<br>';
 		$this->_report .= $cache;
 		return true;	// created
 	}

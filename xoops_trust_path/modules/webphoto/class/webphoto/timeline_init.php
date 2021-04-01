@@ -21,16 +21,16 @@ if( !class_exists('webphoto_timeline_init') )
 //=========================================================
 class webphoto_timeline_init
 {
-	var $_config_class;
-	var $_timeline_class;
+	public $_config_class;
+	public $_timeline_class;
 
-	var $_cfg_timeline_dirname;
-	var $_init_timeline;
+	public $_cfg_timeline_dirname;
+	public $_init_timeline;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_timeline_init( $dirname )
+function __construct( $dirname )
 {
 	$this->_config_class   =& webphoto_config::getInstance( $dirname );
 	$this->_timeline_class =& webphoto_inc_timeline::getSingleton( $dirname );

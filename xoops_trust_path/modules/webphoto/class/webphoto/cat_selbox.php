@@ -16,20 +16,22 @@
 // photo_handler -> item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_cat_selbox
 //=========================================================
 class webphoto_cat_selbox
 {
-	var $_cat_handler;
-	var $_item_handler;
+	public $_cat_handler;
+	public $_item_handler;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_cat_selbox()
+public function __construct()
 {
 	// dummy
 }

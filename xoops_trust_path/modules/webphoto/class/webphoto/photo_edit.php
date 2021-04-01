@@ -40,115 +40,118 @@
 // added create_video_thumb()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_edit
 //=========================================================
 class webphoto_photo_edit extends webphoto_base_this
 {
-	var $_tag_class;
-	var $_upload_class;
-	var $_image_class;
-	var $_build_class;
-	var $_mime_class;
-	var $_photo_class;
-	var $_embed_class;
+	public $_tag_class;
+	public $_upload_class;
+	public $_image_class;
+	public $_build_class;
+	public $_mime_class;
+	public $_photo_class;
+	public $_embed_class;
 
-	var $_cfg_makethumb      = false;
-	var $_cfg_allownoimage   = false ;
-	var $_cfg_addposts       = 0 ;
-	var $_cfg_fsize          = 0 ;
-	var $_cfg_width          = 0 ;
-	var $_cfg_height         = 0 ;
-	var $_cfg_perm_item_read = 0 ;
-	var $_has_insertable     = false;
-	var $_has_superinsert    = false;
-	var $_has_editable       = false;
-	var $_has_deletable      = false;
-	var $_has_image_resize   = false;
-	var $_has_image_rotate   = false;
+	public $_cfg_makethumb      = false;
+	public $_cfg_allownoimage   = false ;
+	public $_cfg_addposts       = 0 ;
+	public $_cfg_fsize          = 0 ;
+	public $_cfg_width          = 0 ;
+	public $_cfg_height         = 0 ;
+	public $_cfg_perm_item_read = 0 ;
+	public $_has_insertable     = false;
+	public $_has_superinsert    = false;
+	public $_has_editable       = false;
+	public $_has_deletable      = false;
+	public $_has_image_resize   = false;
+	public $_has_image_rotate   = false;
 
-	var $_post_photo_id    = 0;
-	var $_post_item_id     = 0;
-	var $_post_item_cat_id = 0;
-	var $_post_type        = null;
+	public $_post_photo_id    = 0;
+	public $_post_item_id     = 0;
+	public $_post_item_cat_id = 0;
+	public $_post_type        = null;
 
 // overwrite param
-	var $_item_title            = null;
-	var $_item_datetime         = null;
-	var $_item_equipment        = null;
-	var $_item_duration         = 0 ;
-	var $_item_exif             = null;
-	var $_item_ext              = null;
-	var $_item_displaytype      = 0 ;
-	var $_item_onclick          = 0 ;
-	var $_item_embed_type       = null;
-	var $_item_embed_src        = null;
-	var $_item_embed_text       = null;
-	var $_item_external_url     = null;
-	var $_item_external_thumb   = null;
-	var $_item_external_middle  = null;
-	var $_item_playlist_type    = 0;
-	var $_item_playlist_feed    = null;
-	var $_item_playlist_dir     = null;
-	var $_item_gmap_latitude    = 0 ;
-	var $_item_gmap_longitude   = 0 ;
-	var $_item_gmap_zoom        = 0 ;
-	var $_item_player_id        = 0 ;
-	var $_item_page_width       = 0 ;
-	var $_item_page_height      = 0 ;
-	var $_item_kind             = _C_WEBPHOTO_ITEM_KIND_UNDEFINED ;
+	public $_item_title            = null;
+	public $_item_datetime         = null;
+	public $_item_equipment        = null;
+	public $_item_duration         = 0 ;
+	public $_item_exif             = null;
+	public $_item_ext              = null;
+	public $_item_displaytype      = 0 ;
+	public $_item_onclick          = 0 ;
+	public $_item_embed_type       = null;
+	public $_item_embed_src        = null;
+	public $_item_embed_text       = null;
+	public $_item_external_url     = null;
+	public $_item_external_thumb   = null;
+	public $_item_external_middle  = null;
+	public $_item_playlist_type    = 0;
+	public $_item_playlist_feed    = null;
+	public $_item_playlist_dir     = null;
+	public $_item_gmap_latitude    = 0 ;
+	public $_item_gmap_longitude   = 0 ;
+	public $_item_gmap_zoom        = 0 ;
+	public $_item_player_id        = 0 ;
+	public $_item_page_width       = 0 ;
+	public $_item_page_height      = 0 ;
+	public $_item_kind             = _C_WEBPHOTO_ITEM_KIND_UNDEFINED ;
 
-	var $_preview_name          = null;
-	var $_tag_name_array        = null;
+	public $_preview_name          = null;
+	public $_tag_name_array        = null;
 
-	var $_checkbox_array      = array();
+	public $_checkbox_array      = array();
 
-	var $_photo_tmp_name    = null;
-	var $_photo_media_type  = null;
-	var $_photo_media_name  = null;
-	var $_thumb_tmp_name    = null;
-	var $_thumb_media_type  = null;
-	var $_middle_tmp_name   = null;
-	var $_middle_media_type = null;
+	public $_photo_tmp_name    = null;
+	public $_photo_media_type  = null;
+	public $_photo_media_name  = null;
+	public $_thumb_tmp_name    = null;
+	public $_thumb_media_type  = null;
+	public $_middle_tmp_name   = null;
+	public $_middle_media_type = null;
 
-	var $_image_thumb_url  = null;
-	var $_image_thumb_path = null;
-	var $_image_info       = null;
+	public $_image_thumb_url  = null;
+	public $_image_thumb_path = null;
+	public $_image_info       = null;
 
-	var $_photo_param = null ;
-	var $_video_param = null ;
-	var $_file_params = null;
+	public $_photo_param = null ;
+	public $_video_param = null ;
+	public $_file_params = null;
 
-	var $_is_video_thumb_form = false;
-	var $_form_action         = null;
+	public $_is_video_thumb_form = false;
+	public $_form_action         = null;
 
-	var $_tag_id_array = null;
-	var $_only_image_extentions = false;
+	public $_tag_id_array = null;
+	public $_only_image_extentions = false;
 
-	var $_FLAG_ADMIN = false;
+	public $_FLAG_ADMIN = false;
 
-	var $_PHOTO_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
-	var $_THUMB_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
-	var $_MIDDLE_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
+	public $_PHOTO_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_PHOTO ;
+	public $_THUMB_FIELD_NAME  = _C_WEBPHOTO_UPLOAD_FIELD_THUMB ;
+	public $_MIDDLE_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_MIDDLE ;
 
-	var $_ORDERBY_DEFAULT = 'idA' ;
-	var $_NO_TITLE  = 'no title' ;
+	public $_ORDERBY_DEFAULT = 'idA' ;
+	public $_NO_TITLE  = 'no title' ;
 
-	var $_EXTERNAL_THUMB_EXT_DEFAULT = 'external';
-	var $_EMBED_THUMB_EXT_DEFAULT    = 'embed';
-	var $_PLAYLIST_THUMB_EXT_DEFAULT = 'playlist';
+	public $_EXTERNAL_THUMB_EXT_DEFAULT = 'external';
+	public $_EMBED_THUMB_EXT_DEFAULT    = 'embed';
+	public $_PLAYLIST_THUMB_EXT_DEFAULT = 'playlist';
 
-	var $_MSG_LEVEL = 0;
-	var $_MSG_FIRST = false;
+	public $_MSG_LEVEL = 0;
+	public $_MSG_FIRST = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_edit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_photo_class    =& webphoto_photo_create::getInstance( $dirname , $trust_dirname );
 	$this->_embed_class    =& webphoto_embed::getInstance( $dirname, $trust_dirname );

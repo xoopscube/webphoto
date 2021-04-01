@@ -12,35 +12,38 @@
 // $trust_dirname
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_navi
 //=========================================================
 class webphoto_photo_navi extends webphoto_lib_error
 {
-	var $_item_handler;
-	var $_image_class;
+	public $_item_handler;
+	public $_image_class;
 
-	var $_script   = null ;
-	var $_id_array = null ;
+	public $_script   = null ;
+	public $_id_array = null ;
 
-	var $_MARK_ID_FIRST = '<b>[&lt;</b>';
-	var $_MARK_ID_LAST  = '<b>&gt;]</b>';
-	var $_MARK_ID_PREV  = '<b>Prev</b>';
-	var $_MARK_ID_NEXT  = '<b>Next</b>';
+	public $_MARK_ID_FIRST = '<b>[&lt;</b>';
+	public $_MARK_ID_LAST  = '<b>&gt;]</b>';
+	public $_MARK_ID_PREV  = '<b>Prev</b>';
+	public $_MARK_ID_NEXT  = '<b>Next</b>';
 
-	var $_max_small_width    = _C_WEBPHOTO_SMALL_WIDTH ;
-	var $_max_small_height   = _C_WEBPHOTO_SMALL_HEIGHT ;
-	var $_max_current_width  = _C_WEBPHOTO_SMALL_CURRENT_WIDTH ;
-	var $_max_current_height = _C_WEBPHOTO_SMALL_CURRENT_HEIGHT ;
+	public $_max_small_width    = _C_WEBPHOTO_SMALL_WIDTH ;
+	public $_max_small_height   = _C_WEBPHOTO_SMALL_HEIGHT ;
+	public $_max_current_width  = _C_WEBPHOTO_SMALL_CURRENT_WIDTH ;
+	public $_max_current_height = _C_WEBPHOTO_SMALL_CURRENT_HEIGHT ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_navi( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_lib_error();
+	parent::__construct();
+	//$this->webphoto_lib_error();
 
 	$this->_item_handler =& webphoto_item_handler::getInstance( 
 		$dirname , $trust_dirname );

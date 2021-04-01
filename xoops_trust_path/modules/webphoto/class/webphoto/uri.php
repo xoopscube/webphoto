@@ -24,7 +24,9 @@
 // webphoto_inc_uri
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_uri
@@ -35,9 +37,10 @@ class webphoto_uri extends webphoto_inc_uri
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_uri( $dirname )
+public function __construct( $dirname )
 {
-	$this->webphoto_inc_uri( $dirname );
+	parent::__construct( $dirname );
+	//$this->webphoto_inc_uri( $dirname );
 
 }
 
@@ -53,7 +56,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // buiid uri
 //---------------------------------------------------------
-function build_photo_id_title( $id, $title, $target='_blank', $flag_amp_sanitize=true, $flag_title_sanitize=true  )
+public function build_photo_id_title( $id, $title, $target='_blank', $flag_amp_sanitize=true, $flag_title_sanitize=true  )
 {
 	$str  = $this->build_photo_a_href( $id, $target, $flag_amp_sanitize );
 	$str .= $id;
@@ -71,7 +74,7 @@ function build_photo_id_title( $id, $title, $target='_blank', $flag_amp_sanitize
 	return $str ;
 }
 
-function build_photo_id( $id, $target='_blank', $flag_amp_sanitize=true )
+public function build_photo_id( $id, $target='_blank', $flag_amp_sanitize=true )
 {
 	$str  = $this->build_photo_a_href( $id, $target, $flag_amp_sanitize );
 	$str .= $id;
@@ -79,7 +82,7 @@ function build_photo_id( $id, $target='_blank', $flag_amp_sanitize=true )
 	return $str ;
 }
 
-function build_photo_title( $title, $target='_blank', $flag_amp_sanitize=true, $flag_title_sanitize=true )
+public function build_photo_title( $title, $target='_blank', $flag_amp_sanitize=true, $flag_title_sanitize=true )
 {
 	$str  = $this->build_photo_a_href( $id, $target, $flag_amp_sanitize );
 	if ( $flag_title_sanitize ) {

@@ -28,30 +28,32 @@
 // remove catlist->set_perm_cat_read()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_public
 //=========================================================
 class webphoto_photo_public
 {
-	var $_config_class;
-	var $_item_cat_handler ;
+	public $_config_class;
+	public $_item_cat_handler ;
 
-	var $_cfg_perm_cat_read ;
+	public $_cfg_perm_cat_read ;
 
-	var $_ORDERBY_ASC    = 'item_id ASC';
-	var $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
+	public $_ORDERBY_ASC    = 'item_id ASC';
+	public $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
 
 // show
-	var $_SHOW_CAT_SUB      = true;
-	var $_SHOW_CAT_MAIN_IMG = true;
-	var $_SHOW_CAT_SUB_IMG  = true;
+	public $_SHOW_CAT_SUB      = true;
+	public $_SHOW_CAT_MAIN_IMG = true;
+	public $_SHOW_CAT_SUB_IMG  = true;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_public( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->_item_cat_handler 
 		=& webphoto_item_cat_handler::getInstance( $dirname, $trust_dirname );

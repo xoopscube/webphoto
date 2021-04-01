@@ -20,33 +20,36 @@
 // used uri_class
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_tag_build
 //=========================================================
 class webphoto_tag_build extends webphoto_lib_error
 {
-	var $_tag_handler;
-	var $_p2t_handler;
-	var $_photo_tag_handler;
-	var $_utility_class;
-	var $_uri_class;
+	public $_tag_handler;
+	public $_p2t_handler;
+	public $_photo_tag_handler;
+	public $_utility_class;
+	public $_uri_class;
 
-	var $_is_japanese = false;
+	public $_is_japanese = false;
 
-	var $_tag_id_array = null;
+	public $_tag_id_array = null;
 
-	var $_DIRNAME;
-	var $_MODULE_URL;
-	var $_MODULE_DIR;
+	public $_DIRNAME;
+	public $_MODULE_URL;
+	public $_MODULE_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_tag_build( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_lib_error();
+	parent::__construct();
+	//$this->webphoto_lib_error();
 
 	$this->_tag_handler       
 		=& webphoto_tag_handler::getInstance(   $dirname, $trust_dirname );
@@ -76,7 +79,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // tag handler
 //---------------------------------------------------------
-function update_tags( $photo_id, $uid, $tag_name_array )
+public function update_tags( $photo_id, $uid, $tag_name_array )
 {
 // get user's tags
 	$old_array = $this->_p2t_handler->get_tag_id_array_by_photoid_uid( $photo_id, $uid );
@@ -87,7 +90,7 @@ function update_tags( $photo_id, $uid, $tag_name_array )
 	return $this->return_code();
 }
 
-function update_tags_admin( $photo_id, $uid, $tag_name_array )
+public function update_tags_admin( $photo_id, $uid, $tag_name_array )
 {
 // get user's tags
 	$old_array = $this->_p2t_handler->get_tag_id_array_by_photoid( $photo_id );
@@ -98,7 +101,7 @@ function update_tags_admin( $photo_id, $uid, $tag_name_array )
 	return $this->return_code();
 }
 
-function add_tags( $photo_id, $uid, $tag_name_array )
+public function add_tags( $photo_id, $uid, $tag_name_array )
 {
 	if ( !is_array($tag_name_array) || !count($tag_name_array) ) {
 		return true; // no action
@@ -153,7 +156,7 @@ function add_tags( $photo_id, $uid, $tag_name_array )
 	return $this->return_code();
 }
 
-function delete_tags( $photo_id, $uid, $old_array, $new_array )
+public function delete_tags( $photo_id, $uid, $old_array, $new_array )
 {
 	$tags = $this->build_delete_tags( $old_array, $new_array );
 	if ( is_array($tags) && count($tags) ) {
@@ -166,7 +169,7 @@ function delete_tags( $photo_id, $uid, $old_array, $new_array )
 	return $this->return_code();
 }
 
-function delete_tags_admin( $photo_id, $old_array, $new_array )
+public function delete_tags_admin( $photo_id, $old_array, $new_array )
 {
 	$tags = $this->build_delete_tags( $old_array, $new_array );
 	if ( is_array($tags) && count($tags) ) {
@@ -179,7 +182,7 @@ function delete_tags_admin( $photo_id, $old_array, $new_array )
 	return $this->return_code();
 }
 
-function build_delete_tags( $old_array, $new_array )
+public function build_delete_tags( $old_array, $new_array )
 {
 	if ( !is_array($old_array) || !count($old_array) ) {
 		return null;
@@ -203,7 +206,7 @@ function build_delete_tags( $old_array, $new_array )
 //---------------------------------------------------------
 // for main_photo.php
 //---------------------------------------------------------
-function build_tags_for_photo( $photo_id, $uid )
+public function build_tags_for_photo( $photo_id, $uid )
 {
 	$arr = $this->get_tag_name_array_by_photoid_uid( $photo_id, $uid );
 	if ( is_array($arr) && count($arr) ) {
@@ -215,7 +218,7 @@ function build_tags_for_photo( $photo_id, $uid )
 //---------------------------------------------------------
 // for show photo
 //---------------------------------------------------------
-function get_tag_name_array_by_photoid( $photo_id )
+public function get_tag_name_array_by_photoid( $photo_id )
 {
 	$id_array = $this->_p2t_handler->get_tag_id_array_by_photoid( $photo_id );
 	if ( !is_array($id_array) || !count($id_array) ) {
@@ -224,7 +227,7 @@ function get_tag_name_array_by_photoid( $photo_id )
 	return $this->build_tag_name_array_by_id_array( $id_array );
 }
 
-function get_tag_name_array_by_photoid_uid( $photo_id, $uid )
+public function get_tag_name_array_by_photoid_uid( $photo_id, $uid )
 {
 	$id_array = $this->_p2t_handler->get_tag_id_array_by_photoid_uid( $photo_id, $uid );
 	if ( !is_array($id_array) || !count($id_array) ) {
@@ -233,7 +236,7 @@ function get_tag_name_array_by_photoid_uid( $photo_id, $uid )
 	return $this->build_tag_name_array_by_id_array( $id_array );
 }
 
-function get_tag_name_array_by_photoid_without_uid( $photo_id, $uid )
+public function get_tag_name_array_by_photoid_without_uid( $photo_id, $uid )
 {
 	$id_array = $this->_p2t_handler->get_tag_id_array_by_photoid_without_uid( $photo_id, $uid );
 	if ( !is_array($id_array) || !count($id_array) ) {
@@ -242,7 +245,7 @@ function get_tag_name_array_by_photoid_without_uid( $photo_id, $uid )
 	return $this->build_tag_name_array_by_id_array( $id_array );
 }
 
-function build_tag_name_array_by_id_array( $id_array )
+public function build_tag_name_array_by_id_array( $id_array )
 {
 	if ( !is_array($id_array) || !count($id_array) ) {
 		return null;
@@ -257,7 +260,7 @@ function build_tag_name_array_by_id_array( $id_array )
 	return $arr;
 }
 
-function build_show_tags_from_tag_name_array( $tag_name_array )
+public function build_show_tags_from_tag_name_array( $tag_name_array )
 {
 	if ( !is_array($tag_name_array) || !count($tag_name_array) ) {
 		return array(); 
@@ -275,7 +278,7 @@ function build_show_tags_from_tag_name_array( $tag_name_array )
 	return $arr;
 }
 
-function decode_tag( $str )
+public function decode_tag( $str )
 {
 	return $this->_uri_class->decode_str( $str );
 }
@@ -283,7 +286,7 @@ function decode_tag( $str )
 //---------------------------------------------------------
 // for submit.php edit.php
 //---------------------------------------------------------
-function tag_name_array_to_str( $arr )
+public function tag_name_array_to_str( $arr )
 {
 	return $this->_utility_class->array_to_str( $arr, _C_WEBPHOTO_TAG_SEPARATOR.' ' );
 }
@@ -291,7 +294,7 @@ function tag_name_array_to_str( $arr )
 //---------------------------------------------------------
 // for Japanese
 //---------------------------------------------------------
-function str_to_tag_name_array( $str )
+public function str_to_tag_name_array( $str )
 {
 	if ( $this->_is_japanese ) {
 		$str = str_replace( _WEBPHOTO_JA_DOKUTEN, _C_WEBPHOTO_TAG_SEPARATOR, $str );
@@ -301,7 +304,7 @@ function str_to_tag_name_array( $str )
 	return $this->_utility_class->str_to_array( $str, _C_WEBPHOTO_TAG_SEPARATOR ) ;
 }
 
-function set_is_japanese( $val )
+public function set_is_japanese( $val )
 {
 	$this->_is_japanese = (bool)$val;
 }

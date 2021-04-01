@@ -27,36 +27,39 @@
 //   -> init_media_uploader( $has_resize, $allowed_mimes, $allowed_exts )
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_upload
 //=========================================================
 class webphoto_upload extends webphoto_base_this
 {
-	var $_mime_class;
-	var $_uploader_class;
+	public $_mime_class;
+	public $_uploader_class;
 
-	var $_max_filesize = 0 ;
-	var $_max_width    = 0 ;
-	var $_max_height   = 0 ;
+	public $_max_filesize = 0 ;
+	public $_max_width    = 0 ;
+	public $_max_height   = 0 ;
 
-	var $_ini_allowed_mimes = true;
+	public $_ini_allowed_mimes = true;
 
-	var $_uploader_media_name = null;
-	var $_uploader_media_type = null;
-	var $_uploader_file_name  = null;
-	var $_tmp_name            = null;
+	public $_uploader_media_name = null;
+	public $_uploader_media_type = null;
+	public $_uploader_file_name  = null;
+	public $_tmp_name            = null;
 
-	var $_PHP_UPLOAD_ERRORS = array();
-	var $_UPLOADER_ERRORS   = array();
+	public $_PHP_UPLOAD_ERRORS = array();
+	public $_UPLOADER_ERRORS   = array();
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_upload( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_mime_class =& webphoto_mime::getInstance( 
 		$dirname , $trust_dirname );

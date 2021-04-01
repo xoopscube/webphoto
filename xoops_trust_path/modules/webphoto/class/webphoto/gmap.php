@@ -32,38 +32,41 @@
 // not use webphoto_convert_to_utf8()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_gmap
 //=========================================================
 class webphoto_gmap extends webphoto_base_this
 {
-	var $_gicon_handler;
-	var $_item_cat_handler;
-	var $_gmap_info_class;
-	var $_catlist_class;
-	var $_public_class;
+	public $_gicon_handler;
+	public $_item_cat_handler;
+	public $_gmap_info_class;
+	public $_catlist_class;
+	public $_public_class;
 
-	var $_cfg_perm_cat_read ;
-	var $_cfg_gmap_apikey ;
-	var $_cfg_gmap_latitude  ;
-	var $_cfg_gmap_longitude ;
-	var $_cfg_gmap_zoom      ;
-	var $_cfg_gmap_photos ;
+	public $_cfg_perm_cat_read ;
+	public $_cfg_gmap_apikey ;
+	public $_cfg_gmap_latitude  ;
+	public $_cfg_gmap_longitude ;
+	public $_cfg_gmap_zoom      ;
+	public $_cfg_gmap_photos ;
 
-	var $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
-	var $_KEY_NAME   = 'item_id' ;
-	var $_LIMIT_ONE   = 1 ;
-	var $_OFFSET_ZERO = 0 ;
-	var $_KEY_TRUE    = true ;
+	public $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
+	public $_KEY_NAME   = 'item_id' ;
+	public $_LIMIT_ONE   = 1 ;
+	public $_OFFSET_ZERO = 0 ;
+	public $_KEY_TRUE    = true ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_gmap( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_gicon_handler   
 		=& webphoto_gicon_handler::getInstance(  $dirname , $trust_dirname);

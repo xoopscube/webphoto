@@ -16,24 +16,27 @@
 // build_total_for_detail()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_date
 //=========================================================
 class webphoto_date extends webphoto_base_this
 {
-	var $_public_class;
+	public $_public_class;
 
-	var $_PHOTO_LIST_DATE_ORDER = 'item_datetime DESC, item_id DESC';
-	var $_PHOTO_LIST_DATE_GROUP = 'item_datetime';
+	public $_PHOTO_LIST_DATE_ORDER = 'item_datetime DESC, item_id DESC';
+	public $_PHOTO_LIST_DATE_GROUP = 'item_datetime';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_date( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );

@@ -6,26 +6,29 @@
 // 2009-01-04 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_misc_form
 //=========================================================
 class webphoto_photo_misc_form extends webphoto_form_this
 {
-	var $_embed_class ;
-	var $_editor_class ;
-	var $_create_class ;
+	public $_embed_class ;
+	public $_editor_class ;
+	public $_create_class ;
 
-	var $_VIDEO_THUMB_WIDTH = 120;
-	var $_VIDEO_THUMB_MAX   = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
+	public $_VIDEO_THUMB_WIDTH = 120;
+	public $_VIDEO_THUMB_MAX   = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_misc_form( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_form_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_form_this( $dirname, $trust_dirname );
 
 	$this->_embed_class  =& webphoto_embed::getInstance( $dirname, $trust_dirname );
 	$this->_editor_class =& webphoto_editor::getInstance( $dirname, $trust_dirname );
@@ -99,7 +102,7 @@ function print_form_editor( $row, $param )
 
 	echo $this->build_table_end();
 	echo $this->build_form_end();
-	echo "<br />\n";
+	echo "<br>\n";
 }
 
 function _build_ele_editor_option( $options )
@@ -152,7 +155,7 @@ function print_form_embed( $mode, $row )
 
 	echo $this->build_table_end();
 	echo $this->build_form_end();
-	echo "<br />\n";
+	echo "<br>\n";
 }
 
 function _build_ele_embed_type_option()
@@ -276,7 +279,7 @@ function print_form_video_thumb( $mode, $row )
 function print_form_video_thumb_single( $url, $width, $num )
 {
 	echo '<td align="center" class="odd">';
-	echo '<img src="'. $this->sanitize($url) .'" width="'. $width .'"><br />';
+	echo '<img src="'. $this->sanitize($url) .'" width="'. $width .'"><br>';
 	echo '<input type="radio" name="num" value="'. $num .'" />';
 	echo "</td>\n";
 }
@@ -345,7 +348,7 @@ function _build_ele_redo_flash( $flash_row )
 	$ele .= $this->get_constant('CAP_REDO_FLASH') ;
 
 	if ( $url ) {
-		$ele .= "<br />\n";
+		$ele .= "<br>\n";
 		$ele .= $this->build_link_blank( $url );
 		$ele .= $this->build_photo_delete_button( 'flash_delete' );
 	}

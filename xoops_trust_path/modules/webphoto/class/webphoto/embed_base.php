@@ -16,27 +16,29 @@
 // BUG: forget to close height
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_embed_base
 //=========================================================
 class webphoto_embed_base
 {
-	var $_snoopy_class;
+	public $_snoopy_class;
 
-	var $_param     = null ;
-	var $_url_head  = null;
-	var $_url_tail  = null;
-	var $_sample    = null;
-	var $_tmp_dir   = null;
+	public $_param     = null ;
+	public $_url_head  = null;
+	public $_url_tail  = null;
+	public $_sample    = null;
+	public $_tmp_dir   = null;
 
-	var $_TYPE = null ;
+	public $_TYPE = null ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_embed_base( $type )
+public function __construct( $type )
 {
 	$this->_TYPE = $type ;
 
@@ -46,52 +48,52 @@ function webphoto_embed_base( $type )
 //---------------------------------------------------------
 // interface
 //---------------------------------------------------------
-function embed( $src, $width, $height, $extra=null )
+public function embed( $src, $width, $height, $extra=null )
 {
 	return null;
 }
 
-function link( $src )
+public function link( $src )
 {
 	return null;
 }
 
-function thumb( $src )
+public function thumb( $src )
 {
 	return null;
 }
 
-function desc()
+public function desc()
 {
 	return null;
 }
 
-function lang_desc()
+public function lang_desc()
 {
 	return null;
 }
 
-function width()
+public function width()
 {
 	return 0;
 }
 
-function height()
+public function height()
 {
 	return 0;
 }
 
-function support_params()
+public function support_params()
 {
 	return null;
 }
 
-function get_xml_params( $src )
+public function get_xml_params( $src )
 {
 	return null;
 }
 
-function build_embed_script( $src, $width, $height )
+public function build_embed_script( $src, $width, $height )
 {
 	return null;
 }
@@ -99,12 +101,12 @@ function build_embed_script( $src, $width, $height )
 //---------------------------------------------------------
 // set param
 //---------------------------------------------------------
-function set_param( $val )
+public function set_param( $val )
 {
 	$this->_param = $val;
 }
 
-function get_param( $name )
+public function get_param( $name )
 {
 	if ( isset( $this->_param[ $name ] ) ) {
 		return  $this->_param[ $name ] ;
@@ -112,7 +114,7 @@ function get_param( $name )
 	return false ;
 }
 
-function set_url( $head, $tail='' )
+public function set_url( $head, $tail='' )
 {
 	$this->_url_head = $head;
 	if ( $tail ) {
@@ -120,12 +122,12 @@ function set_url( $head, $tail='' )
 	}
 }
 
-function set_sample( $sample )
+public function set_sample( $sample )
 {
 	$this->_sample = $sample;
 }
 
-function set_tmp_dir( $val )
+public function set_tmp_dir( $val )
 {
 	$this->_tmp_dir = $val;
 }
@@ -133,68 +135,68 @@ function set_tmp_dir( $val )
 //---------------------------------------------------------
 // build
 //---------------------------------------------------------
-function build_object_begin( $width, $height, $extra=null )
+public function build_object_begin( $width, $height, $extra=null )
 {
 // BUG: forget to close height
 	$str  = '<object width="'.$width.'" height="'.$height.'" '.$extra.' >'."\n";
 	return $str;
 }
 
-function build_object_end()
+public function build_object_end()
 {
 	$str  = "</object>\n";
 	return $str;
 }
 
-function build_param( $name, $value )
+public function build_param( $name, $value )
 {
 	$str = '<param name="'.$name.'" value="'.$value.'" />'."\n";
 	return $str;
 }
 
-function build_embed_flash( $src, $width, $height, $extra=null )
+public function build_embed_flash( $src, $width, $height, $extra=null )
 {
 	$str = '<embed src="'.$src.'" width="'.$width.'" height="'.$height.'" '.$extra.' type="application/x-shockwave-flash" />'."\n";
 	return $str;
 }
 
-function build_script( $src, $extra=null )
+public function build_script( $src, $extra=null )
 {
 	$str  = $this->build_script_begin( $src, $extra );
 	$str .= $this->build_script_end();
 	return $str;
 }
 
-function build_script_begin( $src, $extra=null )
+public function build_script_begin( $src, $extra=null )
 {
 	$str = '<script language="JavaScript" type="text/JavaScript" src="'.$src.'" '.$extra.' >';
 	return $str;
 }
 
-function build_script_end()
+public function build_script_end()
 {
 	$str = '</script>';
 	return $str;
 }
 
-function build_link( $src )
+public function build_link( $src )
 {
 	$str = $this->_url_head . $src . $this->_url_tail;
 	return $str;
 }
 
-function build_desc()
+public function build_desc()
 {
 	return $this->build_desc_span( $this->_url_head, $this->_sample, $this->_url_tail );
 }
 
-function build_desc_span( $head, $sample, $tail=null )
+public function build_desc_span( $head, $sample, $tail=null )
 {
 	$str = $head.'<span style="color: #FF0000;">'.$sample.'</span>'.$tail;
 	return $str;
 }
 
-function build_lang_desc( $str )
+public function build_lang_desc( $str )
 {
 	$cont_name = strtoupper( '_WEBPHOTO_EXTERNEL_'.$this->_TYPE );
 	if( defined( $cont_name ) ) {
@@ -203,7 +205,7 @@ function build_lang_desc( $str )
 	return $str;
 }
 
-function replace_width_height( $str )
+public function replace_width_height( $str )
 {
 	$replacement_width  = 'width="'.  _C_WEBPHOTO_EMBED_REPLACE_WIDTH  .'"' ;
 	$replacement_height = 'height="'. _C_WEBPHOTO_EMBED_REPLACE_HEIGHT .'"' ;
@@ -213,7 +215,7 @@ function replace_width_height( $str )
 	return $str;
 }
 
-function build_embed_script_with_repalce( $src )
+public function build_embed_script_with_replace( $src )
 {
 	$str = $this->build_embed_script( 
 		$src , 
@@ -223,7 +225,7 @@ function build_embed_script_with_repalce( $src )
 	return $str;
 }
 
-function build_support_params()
+public function build_support_params()
 {
 	$arr = array(
 		'title'       => true ,
@@ -240,7 +242,7 @@ function build_support_params()
 //---------------------------------------------------------
 // Simple XML
 //---------------------------------------------------------
-function get_simplexml( $cont )
+public function get_simplexml( $cont )
 {
 	if ( function_exists('simplexml_load_string') ) {
 		return simplexml_load_string( $cont, 'SimpleXMLElement', LIBXML_NOCDATA );
@@ -248,7 +250,7 @@ function get_simplexml( $cont )
 	return false;
 }
 
-function get_xpath( $obj, $key )
+public function get_xpath( $obj, $key )
 {
 	if ( is_object($obj) ) {
 		$xpath = $obj->xpath( $key );
@@ -259,7 +261,7 @@ function get_xpath( $obj, $key )
 	return false;
 }
 
-function get_obj_method( $obj, $key )
+public function get_obj_method( $obj, $key )
 {
 	if ( is_object($obj) && method_exists( $obj, $key ) ) {
 		return $obj->$key();
@@ -267,7 +269,7 @@ function get_obj_method( $obj, $key )
 	return false;
 }
 
-function get_obj_property( $obj, $key )
+public function get_obj_property( $obj, $key )
 {
 	if ( is_object($obj) && property_exists( $obj, $key ) ) {
 		return $obj->$key;
@@ -275,7 +277,7 @@ function get_obj_property( $obj, $key )
 	return false;
 }
 
-function get_obj_attributes( $obj, $key )
+public function get_obj_attributes( $obj, $key )
 {
 	$attr = $this->get_obj_method(    $obj,  'attributes' );
 	$str  = $this->get_obj_property(  $attr, $key );
@@ -285,7 +287,7 @@ function get_obj_attributes( $obj, $key )
 //---------------------------------------------------------
 // snoopy
 //---------------------------------------------------------
-function get_remote_file( $url )
+public function get_remote_file( $url )
 {
 	if ( $this->_snoopy_class->fetch( $url ) ) {
 		return $this->_snoopy_class->results;
@@ -293,7 +295,7 @@ function get_remote_file( $url )
 	return false;
 }
 
-function get_remote_meta_tags( $url )
+public function get_remote_meta_tags( $url )
 {
 	$cont = $this->get_remote_file( $url );
 	if ( empty($cont) ) {
@@ -315,13 +317,13 @@ function get_remote_meta_tags( $url )
 //---------------------------------------------------------
 // file
 //---------------------------------------------------------
-function build_tmp_file_name()
+public function build_tmp_file_name()
 {
 	$str = $this->_tmp_dir.'/'.uniqid('embed');
 	return $str;
 }
 
-function write_file( $file, $text )
+public function write_file( $file, $text )
 {
 	if ( function_exists('file_put_contents') ) {
 		return file_put_contents( $file, $text );
@@ -329,7 +331,7 @@ function write_file( $file, $text )
 	return false;
 }
 
-function unlink_file( $file )
+public function unlink_file( $file )
 {
 	if ( file_exists($file) ) {
 		return unlink( $file );
@@ -340,12 +342,12 @@ function unlink_file( $file )
 //---------------------------------------------------------
 // multibyte
 //---------------------------------------------------------
-function convert_from_utf8( $str )
+public function convert_from_utf8( $str )
 {
 	return $this->convert_encoding( $str, _CHARSET, 'UTF-8' );
 }
 
-function convert_array_from_utf8( $arr )
+public function convert_array_from_utf8( $arr )
 {
 	$ret = array();
 	foreach ( $arr as $v )	{
@@ -354,7 +356,7 @@ function convert_array_from_utf8( $arr )
 	return $ret;
 }
 
-function convert_encoding( $str, $to, $from )
+public function convert_encoding( $str, $to, $from )
 {
 	if ( strtolower($to) == strtolower($from) ) {
 		return $str;
@@ -371,7 +373,7 @@ function convert_encoding( $str, $to, $from )
 //---------------------------------------------------------
 // utility
 //---------------------------------------------------------
-function str_to_array( $str, $pattern )
+public function str_to_array( $str, $pattern )
 {
 	$arr1 = explode( $pattern, $str );
 	$arr2 = array();
@@ -384,7 +386,7 @@ function str_to_array( $str, $pattern )
 	return $arr2;
 }
 
-function array_remove( $arr1, $arr2 )
+public function array_remove( $arr1, $arr2 )
 {
 	if ( !is_array($arr1) || !count($arr1) ) {
 		return $arr1;
@@ -402,16 +404,15 @@ function array_remove( $arr1, $arr2 )
 	return $ret;
 }
 
-function obj_array_to_str_array( $arr )
+public function obj_array_to_str_array( $arr )
 {
 	$ret = array();
 	foreach ( $arr as $a ) 
 	{
-		$ret[] = strval($a);
+		$ret[] = (string) $a;
 	}
 	return $ret;
 }
 
 // --- class end ---
 }
-?>

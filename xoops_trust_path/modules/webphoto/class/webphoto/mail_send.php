@@ -6,22 +6,25 @@
 // 2010-02-01 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_mail_send
 //=========================================================
 class webphoto_mail_send extends webphoto_base_this
 {
-	var $_mail_template_class;
-	var $_mail_send_class;
+	public $_mail_template_class;
+	public $_mail_send_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_mail_send( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_mail_template_class 
 		=& webphoto_d3_mail_template::getInstance( $dirname , $trust_dirname );
@@ -42,7 +45,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // submit
 //---------------------------------------------------------
-function send_waiting( $row )
+public function send_waiting( $row )
 {
 	$from_email = $this->_xoops_adminmail ;
 	$subject    = $this->build_subject( $this->get_constant('MAIL_SUBMIT_WAITING') ) ;
@@ -63,7 +66,7 @@ function send_waiting( $row )
 	}
 }
 
-function build_waiting_users( $item_row )
+public function build_waiting_users( $item_row )
 {
 	$users = null;
 
@@ -81,12 +84,12 @@ function build_waiting_users( $item_row )
 	return $users;
 }
 
-function get_users_by_groupid( $group_id )
+public function get_users_by_groupid( $group_id )
 {
 	return $this->_xoops_class->get_member_users_by_group( $group_id, true );
 }
 
-function build_waiting_common_body( $row, $template )
+public function build_waiting_common_body( $row, $template )
 {
 	$url = $this->_MODULE_URL .'/admin/index.php?fct=item_manager&op=modify_form&item_id='. $row['item_id'] ;
 	$tags = array( 
@@ -97,7 +100,7 @@ function build_waiting_common_body( $row, $template )
 	return $this->build_body_by_tags( $tags, $template );
 }
 
-function build_waiting_body( $user, $str )
+public function build_waiting_body( $user, $str )
 {
 	$tags = array( 
 		'X_UNAME' => $user->getVar('uname') ,
@@ -109,7 +112,7 @@ function build_waiting_body( $user, $str )
 //---------------------------------------------------------
 // admin
 //---------------------------------------------------------
-function send_approve( $row )
+public function send_approve( $row )
 {
 	return $this->send_approve_common( 
 		$row, 
@@ -117,7 +120,7 @@ function send_approve( $row )
 		'submit_approve_notify.tpl' );
 }
 
-function send_refuse( $row )
+public function send_refuse( $row )
 {
 	return $this->send_approve_common( 
 		$row, 
@@ -125,7 +128,7 @@ function send_refuse( $row )
 		'submit_refuse_notify.tpl' );
 }
 
-function send_approve_common( $row, $subject, $template )
+public function send_approve_common( $row, $subject, $template )
 {
 	$email = $this->get_xoops_email_by_uid( $row['item_uid'] );
 	if ( empty($email) ) {
@@ -143,7 +146,7 @@ function send_approve_common( $row, $subject, $template )
 	return $this->send_by_param( $param );
 }
 
-function build_approve_body( $row, $template )
+public function build_approve_body( $row, $template )
 {
 	$tags = array(
 		'PHOTO_TITLE' => $row['item_title'] ,
@@ -157,7 +160,7 @@ function build_approve_body( $row, $template )
 //---------------------------------------------------------
 // utility
 //---------------------------------------------------------
-function send_by_param( $param )
+public function send_by_param( $param )
 {
 	$ret = $this->_mail_send_class->send( $param );
 	if ( !$ret ) {
@@ -167,7 +170,7 @@ function send_by_param( $param )
 	return true;
 }
 
-function build_subject( $subject )
+public function build_subject( $subject )
 {
 	$str  = $subject ;
 	$str .= ' ['. $this->_xoops_sitename .'] ';
@@ -175,7 +178,7 @@ function build_subject( $subject )
 	return $str;
 }
 
-function build_body_by_tags( $tags, $template )
+public function build_body_by_tags( $tags, $template )
 {
 	$this->_mail_template_class->init_tag_array();
 	$this->_mail_template_class->assign( $tags );

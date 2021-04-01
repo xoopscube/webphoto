@@ -15,28 +15,31 @@
 // added delete_maillogs();
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_delete
 //=========================================================
 class webphoto_photo_delete extends webphoto_lib_error
 {
-	var $_item_handler;
-	var $_file_handler;
-	var $_vote_handler;
-	var $_p2t_handler;
-	var $_maillog_handler;
-	var $_mail_unlink_class ;
+	public $_item_handler;
+	public $_file_handler;
+	public $_vote_handler;
+	public $_p2t_handler;
+	public $_maillog_handler;
+	public $_mail_unlink_class ;
 
-	var $_MODULE_ID = 0;
+	public $_MODULE_ID = 0;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_delete( $dirname )
+public function __construct( $dirname )
 {
-	$this->webphoto_lib_error();
+	parent::__construct();
+	//$this->webphoto_lib_error();
 
 	$this->_item_handler      =& webphoto_item_handler::getInstance( $dirname );
 	$this->_file_handler      =& webphoto_file_handler::getInstance( $dirname );

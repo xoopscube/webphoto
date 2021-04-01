@@ -6,22 +6,24 @@
 // 2010-01-10 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_notification_select
 //=========================================================
 class webphoto_notification_select
 {
-	var $_d3_notification_select_class;
-	var $_config_class;
+	public $_d3_notification_select_class;
+	public $_config_class;
 
-	var $_cfg_use_pathinfo;
+	public $_cfg_use_pathinfo;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_notification_select( $dirname )
+public function __construct( $dirname )
 {
 	$this->_notification_select_class =& webphoto_d3_notification_select::getInstance();
 	$this->_notification_select_class->init( $dirname ); 
@@ -42,7 +44,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // notification select class
 //---------------------------------------------------------
-function build_notification_select( $cat_id=0 )
+public function build_notification_select( $cat_id=0 )
 {
 // for core's notificationSubscribableCategoryInfo
 	$_SERVER['PHP_SELF'] = $this->_notification_select_class->get_new_php_self();
@@ -53,7 +55,5 @@ function build_notification_select( $cat_id=0 )
 	return $this->_notification_select_class->build( $this->_cfg_use_pathinfo );
 }
 
-// --- class end ---
 }
 
-?>

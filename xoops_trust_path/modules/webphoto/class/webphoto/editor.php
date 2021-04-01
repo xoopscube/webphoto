@@ -13,21 +13,24 @@
 // item_editor_fefault
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_editor
 //=========================================================
 class webphoto_editor extends webphoto_plugin_ini
 {
-	var $_has_html = false;
+	public $_has_html = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_editor( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_plugin_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_plugin_ini( $dirname, $trust_dirname );
 	$this->set_dirname( 'editors' );
 	$this->set_prefix(  'webphoto_editor_' );
 

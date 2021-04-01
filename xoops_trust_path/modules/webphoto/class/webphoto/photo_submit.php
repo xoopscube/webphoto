@@ -6,48 +6,51 @@
 // 2009-01-04 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_submit
 //=========================================================
 class webphoto_photo_submit extends webphoto_imagemanager_submit
 {
-	var $_embed_class ;
-	var $_editor_class ;
-	var $_tag_class;
+	public $_embed_class ;
+	public $_editor_class ;
+	public $_tag_class;
 
 // post
-	var $_post_type = null;
+	public $_post_type = null;
 
 // item
-	var $_item_editor           = null;
-	var $_item_embed_type       = null;
-	var $_item_embed_src        = null;
-	var $_item_embed_text       = null;
-	var $_item_external_url     = null;
-	var $_item_external_thumb   = null;
-	var $_item_external_middle  = null;
-	var $_item_playlist_type    = 0;
-	var $_item_playlist_feed    = null;
-	var $_item_playlist_dir     = null;
-	var $_item_player_id        = 0 ;
-	var $_item_page_width       = 0 ;
-	var $_item_page_height      = 0 ;
+	public $_item_editor           = null;
+	public $_item_embed_type       = null;
+	public $_item_embed_src        = null;
+	public $_item_embed_text       = null;
+	public $_item_external_url     = null;
+	public $_item_external_thumb   = null;
+	public $_item_external_middle  = null;
+	public $_item_playlist_type    = 0;
+	public $_item_playlist_feed    = null;
+	public $_item_playlist_dir     = null;
+	public $_item_player_id        = 0 ;
+	public $_item_page_width       = 0 ;
+	public $_item_page_height      = 0 ;
 
-	var $_checkbox_array = array();
-	var $_form_action    = null;
+	public $_checkbox_array = array();
+	public $_form_action    = null;
 
-	var $_EXTERNAL_THUMB_EXT_DEFAULT = 'external';
-	var $_EMBED_THUMB_EXT_DEFAULT    = 'embed';
-	var $_PLAYLIST_THUMB_EXT_DEFAULT = 'playlist';
+	public $_EXTERNAL_THUMB_EXT_DEFAULT = 'external';
+	public $_EMBED_THUMB_EXT_DEFAULT    = 'embed';
+	public $_PLAYLIST_THUMB_EXT_DEFAULT = 'playlist';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_submit( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_imagemanager_submit( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_imagemanager_submit( $dirname , $trust_dirname );
 
 	$this->_embed_class  =& webphoto_embed::getInstance( $dirname, $trust_dirname );
 	$this->_editor_class =& webphoto_editor::getInstance( $dirname, $trust_dirname );

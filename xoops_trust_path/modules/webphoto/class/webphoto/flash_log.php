@@ -27,7 +27,9 @@
 // $duration is set at stop
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_flash_log
@@ -35,16 +37,16 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_flash_log
 {
-	var $_config_class ;
-	var $_utility_class ;
+	public $_config_class ;
+	public $_utility_class ;
 
-	var $_WORK_DIR ;
-	var $_LOG_FILE ;
+	public $_WORK_DIR ;
+	public $_LOG_FILE ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_flash_log( $dirname )
+function __construct( $dirname )
 {
 	$this->_utility_class =& webphoto_lib_utility::getInstance();
 	$this->_post_class    =& webphoto_lib_post::getInstance();

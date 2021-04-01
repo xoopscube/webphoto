@@ -6,7 +6,9 @@
 // 2009-01-10 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_multibyte
@@ -18,9 +20,10 @@ class webphoto_multibyte extends webphoto_lib_multibyte
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_multibyte()
+public function __construct()
 {
-	$this->webphoto_lib_multibyte();
+	parent::__construct();
+	//$this->webphoto_lib_multibyte();
 
 	$xoops_class =& webphoto_xoops_base::getInstance();
 	$is_japanese =  $xoops_class->is_japanese( _C_WEBPHOTO_JPAPANESE ) ;

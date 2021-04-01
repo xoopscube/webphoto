@@ -19,62 +19,65 @@
 // build_execution_time()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_factory
 //=========================================================
 class webphoto_factory extends webphoto_base_this
 {
-	var $_photo_class;
-	var $_category_class;
-	var $_header_class;
-	var $_page_class;
-	var $_gmap_class;
-	var $_qr_class;
-	var $_sort_class;
-	var $_public_class;
-	var $_pagenavi_class;
-	var $_timeline_class;
-	var $_auto_publish_class;
-	var $_tagcloud_class;
-	var $_uri_parse_class ;
+	public $_photo_class;
+	public $_category_class;
+	public $_header_class;
+	public $_page_class;
+	public $_gmap_class;
+	public $_qr_class;
+	public $_sort_class;
+	public $_public_class;
+	public $_pagenavi_class;
+	public $_timeline_class;
+	public $_auto_publish_class;
+	public $_tagcloud_class;
+	public $_uri_parse_class ;
 
 // config
-	var $_cfg_cat_summary;
-	var $_cfg_newphotos;
-	var $_cfg_tags;
+	public $_cfg_cat_summary;
+	public $_cfg_newphotos;
+	public $_cfg_tags;
 
 // GET param
-	var $_get_page  = null;
-	var $_get_sort  = null;	// allow empty
-	var $_get_kind  = null;	// allow empty
-	var $_param     = null;
-	var $_param_out = null;
-	var $_sort      = null;	// set default in empty
-	var $_orderby   = null;
-	var $_start     = null;
-	var $_page      = null;	// adjusted
-	var $_mode      = null;
-	var $_mode_orig = null;
-	var $_sub_mode  = null;
-	var $_sub_param = null;
+	public $_get_page  = null;
+	public $_get_sort  = null;	// allow empty
+	public $_get_kind  = null;	// allow empty
+	public $_param     = null;
+	public $_param_out = null;
+	public $_sort      = null;	// set default in empty
+	public $_orderby   = null;
+	public $_start     = null;
+	public $_page      = null;	// adjusted
+	public $_mode      = null;
+	public $_mode_orig = null;
+	public $_sub_mode  = null;
+	public $_sub_param = null;
 
-	var $_cat_id = 0;
+	public $_cat_id = 0;
 
-	var $_xoops_header_array = array();
-	var $_show_array     = array();
-	var $_templete_param = array();
-	var $_template_main  = null;
+	public $_xoops_header_array = array();
+	public $_show_array     = array();
+	public $_templete_param = array();
+	public $_template_main  = null;
 
-	var $_PHOTO_LIMIT;
+	public $_PHOTO_LIMIT;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_factory( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_photo_class 
 		=& webphoto_photo::getInstance( $dirname , $trust_dirname );

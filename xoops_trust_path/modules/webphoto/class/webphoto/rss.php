@@ -31,7 +31,9 @@
 // photo_handler -> item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // usage
@@ -55,47 +57,48 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_rss extends webphoto_lib_rss
 {
-	var $_config_class;
-	var $_item_handler;
-	var $_file_handler;
-	var $_cat_handler;
-	var $_pathinfo_class;
-	var $_multibyte_class;
-	var $_sort_class;
-	var $_search_class;
-	var $_utility_class;
-	var $_public_class;
-	var $_tag_class;
-	var $_main_class ;
-	var $_category_class ;
-	var $_user_class ;
-	var $_place_class ;
-	var $_date_class ;
-	var $_uri_class ;
+	public $_config_class;
+	public $_item_handler;
+	public $_file_handler;
+	public $_cat_handler;
+	public $_pathinfo_class;
+	public $_multibyte_class;
+	public $_sort_class;
+	public $_search_class;
+	public $_utility_class;
+	public $_public_class;
+	public $_tag_class;
+	public $_main_class ;
+	public $_category_class ;
+	public $_user_class ;
+	public $_place_class ;
+	public $_date_class ;
+	public $_uri_class ;
 
-	var $_mode  = null;
-	var $_param = null;
-	var $_limit = 20;
+	public $_mode  = null;
+	public $_param = null;
+	public $_limit = 20;
 
-	var $_MAX_SUMMARY  = 500;
-	var $_MODE_DEFAULT = 'latest';
-	var $_ORDERBY_RANDOM = 'rand()';
+	public $_MAX_SUMMARY  = 500;
+	public $_MODE_DEFAULT = 'latest';
+	public $_ORDERBY_RANDOM = 'rand()';
 
-	var $_CACHE_TIME_RAMDOM = 60;	// 1 min
-	var $_CACHE_TIME_LATEST = 3600;	// 1 hour
-	var $_CACHE_TIME_DEBUG  = 0;	// no cache
+	public $_CACHE_TIME_RAMDOM = 60;	// 1 min
+	public $_CACHE_TIME_LATEST = 3600;	// 1 hour
+	public $_CACHE_TIME_DEBUG  = 0;	// no cache
 
-	var $_LIMIT_DEFAULT = 20;
-	var $_LIMIT_MAX = 100;
+	public $_LIMIT_DEFAULT = 20;
+	public $_LIMIT_MAX = 100;
 
-	var $_DEBUG_FLAG_CACHE_TIME = false;
+	public $_DEBUG_FLAG_CACHE_TIME = false;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_rss( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_lib_rss( $dirname ) ;
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_lib_rss( $dirname ) ;
 	$this->set_template( 'db:'.$dirname.'_main_rss.html' );
 
 	$this->_cat_handler    
@@ -377,7 +380,7 @@ function _build_description( $row, $thumb_row )
 		$img .= '">';
 
 		$desc .= '<a href="'. $this->_build_link( $row ) .'" target="_blank">';
-		$desc .= $img .'</a><br />';
+		$desc .= $img .'</a><br>';
 	}
 
 	if ( strlen($context) > $this->_MAX_SUMMARY ) {

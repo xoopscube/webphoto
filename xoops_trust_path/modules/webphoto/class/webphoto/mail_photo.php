@@ -16,35 +16,38 @@
 // supported gps
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_mail_photo
 //=========================================================
 class webphoto_mail_photo extends webphoto_photo_create
 {
-	var $_user_handler ;
-	var $_maillog_handler ;
-	var $_parse_class ;
-	var $_check_class ;
-	var $_unlink_class ;
+	public $_user_handler ;
+	public $_maillog_handler ;
+	public $_parse_class ;
+	public $_check_class ;
+	public $_unlink_class ;
 
-	var $_cfg_allownoimage = false;
-	var $_flag_mail_chmod  = false;
+	public $_cfg_allownoimage = false;
+	public $_flag_mail_chmod  = false;
 
-	var $_SUBJECT_DEFAULT = 'No Subject';
-	var $_TIME_FORMAT = 'Y/m/d H:i';
-	var $_MAX_BODY    = 250;
+	public $_SUBJECT_DEFAULT = 'No Subject';
+	public $_TIME_FORMAT = 'Y/m/d H:i';
+	public $_MAX_BODY    = 250;
 
-	var $_FLAG_STRICT = true;
-	var $_FLAG_UNLINK_FILE = true;
+	public $_FLAG_STRICT = true;
+	public $_FLAG_UNLINK_FILE = true;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_mail_photo( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_photo_create( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_photo_create( $dirname , $trust_dirname );
 
 	$this->_user_handler    =& webphoto_user_handler::getInstance( $dirname );
 	$this->_maillog_handler =& webphoto_maillog_handler::getInstance( $dirname );

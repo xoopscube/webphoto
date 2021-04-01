@@ -25,60 +25,63 @@
 // build_uri_list_navi_url()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo
 //=========================================================
 class webphoto_photo extends webphoto_show_photo
 {
-	var $_flash_class;
-	var $_embed_class;
-	var $_photo_navi_class;
-	var $_item_public_class;
-	var $_comment_view_class;
-	var $_catlist_class;
-	var $_rate_check_class ;
-	var $_public_class;
-	var $_uri_parse_class;
+	public $_flash_class;
+	public $_embed_class;
+	public $_photo_navi_class;
+	public $_item_public_class;
+	public $_comment_view_class;
+	public $_catlist_class;
+	public $_rate_check_class ;
+	public $_public_class;
+	public $_uri_parse_class;
 
-	var $_cfg_cat_child;
-	var $_cfg_embed_width;
-	var $_cfg_embed_height;
+	public $_cfg_cat_child;
+	public $_cfg_embed_width;
+	public $_cfg_embed_height;
 
-	var $_param      = null;
-	var $_param_out  = null;
-	var $_list_mode  = null;
-	var $_navi_mode  = null;
+	public $_param      = null;
+	public $_param_out  = null;
+	public $_list_mode  = null;
+	public $_navi_mode  = null;
 
 // for photo
-	var $_get_photo_id;
-	var $_get_cat_id;
-	var $_get_kind;
-	var $_orderby;
+	public $_get_photo_id;
+	public $_get_cat_id;
+	public $_get_kind;
+	public $_orderby;
 
-	var $_photo_row = null;
-	var $_has_tagedit    = false;
-	var $_show_codebox   = false ;
-	var $_perm_download  = false;
-	var $_codeinfo_array = null;
+	public $_photo_row = null;
+	public $_has_tagedit    = false;
+	public $_show_codebox   = false ;
+	public $_perm_download  = false;
+	public $_codeinfo_array = null;
 
-	var $_CODEINFO_LIST;
-	var $_FILE_LIST;
+	public $_CODEINFO_LIST;
+	public $_FILE_LIST;
 
-	var $_TIME_SUCCESS = 1;
-	var $_TIME_PENDING = 3;
-	var $_TIME_FAILED  = 5;
+	public $_TIME_SUCCESS = 1;
+	public $_TIME_PENDING = 3;
+	public $_TIME_FAILED  = 5;
 
 // for future
-	var $_get_viewtype = null;
+	public $_get_viewtype = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_photo( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_photo( $dirname , $trust_dirname );
 
 	$this->_flash_class       
 		=& webphoto_flash_player::getInstance( $dirname, $trust_dirname  );
@@ -181,7 +184,7 @@ function photo_edittag()
 		case _C_WEBPHOTO_ERR_TOKEN:
 			$msg = 'Token Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_token_errors();
+				$msg .= '<br>'.$this->get_token_errors();
 			}
 			redirect_header( $redirect_this_url, $this->_TIME_FAILED , $msg );
 			exit();
@@ -189,7 +192,7 @@ function photo_edittag()
 		case _C_WEBPHOTO_ERR_DB:
 			$msg = 'DB Error';
 			if ( $this->_is_module_admin ) {
-				$msg .= '<br />'.$this->get_format_error();
+				$msg .= '<br>'.$this->get_format_error();
 			}
 			redirect_header( $redirect_this_url, $this->_TIME_FAILED, $msg ) ;
 			exit();

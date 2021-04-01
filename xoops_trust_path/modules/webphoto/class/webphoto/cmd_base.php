@@ -14,37 +14,40 @@
 // webphoto_lib_error -> webphoto_base_ini
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_cmd_base
 //=========================================================
 class webphoto_cmd_base extends webphoto_base_ini
 {
-	var $_config_class;
-	var $_mime_class;
-	var $_command_class;
-	var $_ini_safe_mode ;
+	public $_config_class;
+	public $_mime_class;
+	public $_command_class;
+	public $_ini_safe_mode ;
 
-	var $_flag_chmod = true;
+	public $_flag_chmod = true;
 
-	var $_DIRNAME;
-	var $_TMP_DIR;
+	public $_DIRNAME;
+	public $_TMP_DIR;
 
-	var $_JPEG_EXT   = 'jpg';
-	var $_TEXT_EXT   = 'txt';
-	var $_MP3_EXT    = 'mp3';
-	var $_CHMOD_MODE = 0777;
+	public $_JPEG_EXT   = 'jpg';
+	public $_TEXT_EXT   = 'txt';
+	public $_MP3_EXT    = 'mp3';
+	public $_CHMOD_MODE = 0777;
 
-	var $_DEBUG = false ;
+	public $_DEBUG = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_cmd_base( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
+	parent::__construct( $dirname, $trust_dirname);
 	$this->_DIRNAME = $dirname;
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_mime_class    
 		=& webphoto_mime::getInstance( $dirname, $trust_dirname );

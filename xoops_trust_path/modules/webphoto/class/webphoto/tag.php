@@ -14,23 +14,26 @@
 // build_total_for_detail()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_tag
 //=========================================================
 class webphoto_tag extends webphoto_base_this
 {
-	var $_tagcloud_class;
+	public $_tagcloud_class;
 
-	var $_TAG_LIST_START = 0;
+	public $_TAG_LIST_START = 0;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_tag( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_tagcloud_class 
 		=& webphoto_inc_tagcloud::getSingleton( $dirname, $trust_dirname );
@@ -48,7 +51,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // list
 //---------------------------------------------------------
-function build_rows_for_list()
+public function build_rows_for_list()
 {
 	$tag_list_limit  = $this->get_ini('tag_list_limit');
 	$tag_photo_limit = $this->get_ini('tag_photo_limit');
@@ -83,7 +86,7 @@ function build_rows_for_list()
 //---------------------------------------------------------
 // detail
 //---------------------------------------------------------
-function build_total_for_detail( $tag_in )
+public function build_total_for_detail( $tag_in )
 {
 	$tag_name = $this->decode_uri_str( $tag_in );
 
@@ -93,13 +96,13 @@ function build_total_for_detail( $tag_in )
 	return array( $tag_name, $title, $total );
 }
 
-function build_rows_for_detail( $tag_name, $orderby, $limit=0, $start=0 )
+public function build_rows_for_detail( $tag_name, $orderby, $limit=0, $start=0 )
 {
 	return $this->get_rows_by_tag_orderby( 
 		$tag_name, $orderby, $limit, $start );
 }
 
-function build_title( $tag_name )
+public function build_title( $tag_name )
 {
 	$str = $this->get_constant('TITLE_TAGS') .' : '. $tag_name ;
 	return $str;
@@ -108,7 +111,7 @@ function build_title( $tag_name )
 //---------------------------------------------------------
 // rss
 //---------------------------------------------------------
-function build_rows_for_rss( $tag_in, $orderby, $limit=0, $start=0 )
+public function build_rows_for_rss( $tag_in, $orderby, $limit=0, $start=0 )
 {
 	$tag_name = $this->decode_uri_str( $tag_in );
 
@@ -119,17 +122,17 @@ function build_rows_for_rss( $tag_in, $orderby, $limit=0, $start=0 )
 //---------------------------------------------------------
 // tagcloud class
 //---------------------------------------------------------
-function get_count_by_tag( $param )
+public function get_count_by_tag( $param )
 {
 	return $this->_tagcloud_class->get_item_count_by_tag( $param );
 }
 
-function get_tag_rows( $limit=0, $offset=0 )
+public function get_tag_rows( $limit=0, $offset=0 )
 {
 	return $this->_tagcloud_class->get_tag_rows( $limit, $offset );
 }
 
-function get_first_row_by_tag_orderby( $param, $orderby, $limit=0, $offset=0 )
+public function get_first_row_by_tag_orderby( $param, $orderby, $limit=0, $offset=0 )
 {
 	$row    = null ;
 	$id_arr = $this->_tagcloud_class->get_item_id_array_by_tag( 
@@ -141,7 +144,7 @@ function get_first_row_by_tag_orderby( $param, $orderby, $limit=0, $offset=0 )
 	return $row;
 }
 
-function get_rows_by_tag_orderby( $param, $orderby, $limit=0, $offset=0 )
+public function get_rows_by_tag_orderby( $param, $orderby, $limit=0, $offset=0 )
 {
 	$rows   = null ;
 	$id_arr = $this->_tagcloud_class->get_item_id_array_by_tag( 

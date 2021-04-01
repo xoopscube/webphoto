@@ -25,58 +25,61 @@
 // supported exif gps
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_create
 //=========================================================
 class webphoto_photo_create extends webphoto_base_this
 {
-	var $_build_class;
-	var $_image_class;
-	var $_mime_class;
-	var $_video_class;
-	var $_exif_class;
+	public $_build_class;
+	public $_image_class;
+	public $_mime_class;
+	public $_video_class;
+	public $_exif_class;
 
 // config
-	var $_cfg_makethumb    = false;
-	var $_cfg_use_ffmpeg   = false;
-	var $_cfg_use_pathinfo = false;
-	var $_has_resize       = false;
-	var $_has_rotate       = false;
+	public $_cfg_makethumb    = false;
+	public $_cfg_use_ffmpeg   = false;
+	public $_cfg_use_pathinfo = false;
+	public $_has_resize       = false;
+	public $_has_rotate       = false;
 
 // set param
-	var $_flag_print_first_msg = false;
-	var $_flag_force_db        = false;
+	public $_flag_print_first_msg = false;
+	public $_flag_force_db        = false;
 
 // result
-	var $_item_row     = null;
-	var $_item_newid   = 0;
-	var $_item_cat_id  = 0;
-	var $_flag_resized = false;
-	var $_flag_video_flash_created = false ;
-	var $_flag_video_flash_failed  = false ;
-	var $_flag_video_thumb_created = false ;
-	var $_flag_video_thumb_failed  = false ;
+	public $_item_row     = null;
+	public $_item_newid   = 0;
+	public $_item_cat_id  = 0;
+	public $_flag_resized = false;
+	public $_flag_video_flash_created = false ;
+	public $_flag_video_flash_failed  = false ;
+	public $_flag_video_thumb_created = false ;
+	public $_flag_video_thumb_failed  = false ;
 
-	var $_cont_param  = null ;
-	var $_thumb_param = null ;
-	var $_video_param = null ;
-	var $_msg_item    = null ;
+	public $_cont_param  = null ;
+	public $_thumb_param = null ;
+	public $_video_param = null ;
+	public $_msg_item    = null ;
 
-	var $_TITLE_DEFAULT = 'no title';
-	var $_EXT_PNG       = 'png';
-	var $_ICON_NAME_DEFAULT = 'default.png';
+	public $_TITLE_DEFAULT = 'no title';
+	public $_EXT_PNG       = 'png';
+	public $_ICON_NAME_DEFAULT = 'default.png';
 
-	var $_VIDEO_THUMB_MAX = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
-	var $_GMAP_ZOOM       = _C_WEBPHOTO_GMAP_ZOOM ;
+	public $_VIDEO_THUMB_MAX = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
+	public $_GMAP_ZOOM       = _C_WEBPHOTO_GMAP_ZOOM ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_create( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_build_class  =& webphoto_photo_build::getInstance( $dirname );
 	$this->_mime_class   =& webphoto_mime::getInstance( $dirname );

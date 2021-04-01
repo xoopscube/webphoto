@@ -35,71 +35,74 @@
 // added print_form_video()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_edit_form
 //=========================================================
 class webphoto_photo_edit_form extends webphoto_form_this
 {
-	var $_gicon_handler;
-	var $_player_handler;
-	var $_perm_class;
-	var $_tag_class;
-	var $_embed_class;
-	var $_editor_class;
-	var $_kind_class;
+	public $_gicon_handler;
+	public $_player_handler;
+	public $_perm_class;
+	public $_tag_class;
+	public $_embed_class;
+	public $_editor_class;
+	public $_kind_class;
 
-	var $_cfg_gmap_apikey ;
-	var $_cfg_width ;
-	var $_cfg_height ;
-	var $_cfg_fsize ;
-	var $_cfg_makethumb ;
-	var $_cfg_file_size ;
-	var $_cfg_perm_item_read ;
+	public $_cfg_gmap_apikey ;
+	public $_cfg_width ;
+	public $_cfg_height ;
+	public $_cfg_fsize ;
+	public $_cfg_makethumb ;
+	public $_cfg_file_size ;
+	public $_cfg_perm_item_read ;
 
-	var $_has_deletable ;
+	public $_has_deletable ;
 
-	var $_param_type         = null;
-	var $_checkbox_array     = array();
-	var $_xoops_db_groups    = null;
+	public $_param_type         = null;
+	public $_checkbox_array     = array();
+	public $_xoops_db_groups    = null;
 
-	var $_editor_show = false ;
-	var $_editor_js   = null ;
-	var $_editor_desc = null ;
+	public $_editor_show = false ;
+	public $_editor_js   = null ;
+	public $_editor_desc = null ;
 
-	var $_URL_SIZE          = 80;
-	var $_TAGS_SIZE         = 80;
-	var $_EMBED_SRC_SIZE    = 80;
-	var $_SELECT_SIZE       = 1;
-	var $_SELECT_PERM_SIZE  = 3;
-	var $_SELECT_INFO_SIZE  = 5;
-	var $_DESCRIPTION_ROWS  = 5;
-	var $_DESCRIPTION_COLS  = 50;
+	public $_URL_SIZE          = 80;
+	public $_TAGS_SIZE         = 80;
+	public $_EMBED_SRC_SIZE    = 80;
+	public $_SELECT_SIZE       = 1;
+	public $_SELECT_PERM_SIZE  = 3;
+	public $_SELECT_INFO_SIZE  = 5;
+	public $_DESCRIPTION_ROWS  = 5;
+	public $_DESCRIPTION_COLS  = 50;
 
-	var $_ICON_ROTATE_URL;
+	public $_ICON_ROTATE_URL;
 
-	var $_ARRAY_PHOTO_ITEM = array(
+	public $_ARRAY_PHOTO_ITEM = array(
 		'item_datetime', 'item_place', 'item_equipment', 'item_duration',
 		'item_siteurl', 'item_artist', 'item_album', 'item_label' );
 
-	var $_ARRAY_PHOTO_TEXT = null;
+	public $_ARRAY_PHOTO_TEXT = null;
 
-	var $_TD_LEFT_WIDTH = '20%';
+	public $_TD_LEFT_WIDTH = '20%';
 
-	var $_DETAIL_DIV_NAME = 'webphoto_detail';
-	var $_GMAP_DIV_NAME   = 'webphoto_gmap_iframe';
-	var $_GMAP_STYLE      = 'background-color: #ffffff; ';
-	var $_GMAP_WIDTH      = '100%';
-	var $_GMAP_HEIGHT     = '650px';
-	var $_ICON_DIV_STYLE  = 'border: #808080 1px solid; padding: 1px; width:80%; ' ;
+	public $_DETAIL_DIV_NAME = 'webphoto_detail';
+	public $_GMAP_DIV_NAME   = 'webphoto_gmap_iframe';
+	public $_GMAP_STYLE      = 'background-color: #ffffff; ';
+	public $_GMAP_WIDTH      = '100%';
+	public $_GMAP_HEIGHT     = '650px';
+	public $_ICON_DIV_STYLE  = 'border: #808080 1px solid; padding: 1px; width:80%; ' ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_edit_form( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_form_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_form_this( $dirname, $trust_dirname );
 
 	$this->_embed_class    =& webphoto_embed::getInstance( $dirname, $trust_dirname );
 	$this->_editor_class   =& webphoto_editor::getInstance( $dirname, $trust_dirname );
@@ -384,7 +387,7 @@ function print_form_common( $item_row, $param )
 
 	echo $this->render_hidden_buffers();
 	echo $this->build_form_end();
-	echo "<br />\n";
+	echo "<br>\n";
 }
 
 function _is_upload_type()
@@ -441,7 +444,7 @@ function _build_ele_datetime( $size=50 )
 	$value    = $this->sanitize( $datetime );
 
 	$text  = $this->build_input_checkbox_yes( $name_checkbox, $value_checkbox );
-	$text .= $this->get_constant('DSC_SET_DATETIME') ."<br />\n";
+	$text .= $this->get_constant('DSC_SET_DATETIME') ."<br>\n";
 	$text .= $this->build_input_text( $name, $value, $size );
 
 	return $text;
@@ -514,16 +517,16 @@ function _build_ele_thumb_file_external( $thumb_row )
 // icon name
 	if ( empty($link_file) && $value_icon ) {
 		$ele .= $this->get_constant('OR')." ";
-		$ele .= $this->get_constant('ITEM_ICON_NAME')."<br />\n" ;
+		$ele .= $this->get_constant('ITEM_ICON_NAME')."<br>\n" ;
 		$ele .= '<div style="'. $this->_ICON_DIV_STYLE .'">';
 		$ele .= $value_icon ;
-		$ele .= "</div><br />\n" ;
+		$ele .= "</div><br>\n" ;
 	}
 
 	if ( $desc ) {
 		$ele .= $desc ;
 	} elseif ( empty($desc) && $this->_cfg_makethumb ) {
-		$ele .= $this->get_constant('DSC_THUMB_SELECT') ."<br />\n";
+		$ele .= $this->get_constant('DSC_THUMB_SELECT') ."<br>\n";
 	}
 
 	if ( $link_file ) {
@@ -544,7 +547,7 @@ function _build_ele_middle_file_external( $middle_row )
 		$name, $this->_MIDDLE_FIELD_NAME, $middle_row );
 
 	if ( $this->_cfg_makethumb ) {
-		$ele .= $this->get_constant('DSC_THUMB_SELECT') ."<br />\n";
+		$ele .= $this->get_constant('DSC_THUMB_SELECT') ."<br>\n";
 	}
 
 	$ele .= $this->_build_file_link( $name, $this->_MIDDLE_FIELD_NAME, $middle_row );
@@ -559,13 +562,13 @@ function _build_file_external( $name, $field, $file_row )
 
 	$ele  = '';
 	$ele .= $this->build_form_file( $field );
-	$ele .= "<br /><br />\n";
+	$ele .= "<br><br>\n";
 
 	if ( empty($url) ) {
 		$ele .= $this->get_constant('OR')." ";
-		$ele .= $this->get_constant( $name )."<br />\n";
+		$ele .= $this->get_constant( $name )."<br>\n";
 		$ele .= $this->build_input_text( $name, $value, $this->_URL_SIZE );
-		$ele .= "<br /><br />\n";
+		$ele .= "<br><br>\n";
 	}
 
 	return $ele;
@@ -597,7 +600,7 @@ function _build_ele_tags( $param )
 {
 	$value = $this->_tag_class->tag_name_array_to_str( $param['tag_name_array'] );
 	$text  = $this->build_input_text( 'tags', $value, $this->_TAGS_SIZE );
-	$text .= "<br />\n";
+	$text .= "<br>\n";
 	$text .= $this->get_constant('DSC_TAG_DIVID') ;
 	return $text;
 }
@@ -745,7 +748,7 @@ function _build_ele_embed_src()
 	$text  = $this->build_input_text( 'item_embed_src', $value_src, $this->_EMBED_SRC_SIZE );
 
 	if ( $value_type ) {
-		$text .= "<br />\n";
+		$text .= "<br>\n";
 		$text .= $this->_embed_class->build_src_desc( $value_type, $value_src );
 	}
 
@@ -759,7 +762,7 @@ function _build_embed_thumb_desc()
 	if ( $type ) {
 		$thumb = $this->_embed_class->build_thumb( $type, 'example' );
 		if ( $thumb ) {
-			$desc = $this->get_constant('EMBED_THUMB') ."<br />\n";
+			$desc = $this->get_constant('EMBED_THUMB') ."<br>\n";
 		}
 	}
 	return $desc ;

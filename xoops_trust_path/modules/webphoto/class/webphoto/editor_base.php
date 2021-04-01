@@ -14,22 +14,24 @@
 // typo _allow_in_not_has_htmll
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_editor_base
 //=========================================================
 class webphoto_editor_base
 {
-	var $_allow_in_not_has_html = false;
-	var $_show_display_options  = false;
-	var $_display_html   = 0 ;
-	var $_display_smiley = 0 ;
-	var $_display_xcode  = 0 ;
-	var $_display_image  = 0 ;
-	var $_display_br     = 0 ;
+	public $_allow_in_not_has_html = false;
+	public $_show_display_options  = false;
+	public $_display_html   = 0 ;
+	public $_display_smiley = 0 ;
+	public $_display_xcode  = 0 ;
+	public $_display_image  = 0 ;
+	public $_display_br     = 0 ;
 
-function webphoto_editor_base()
+public function __construct()
 {
 	// dummy
 }

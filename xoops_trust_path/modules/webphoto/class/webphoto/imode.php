@@ -12,46 +12,49 @@
 // $trust_dirname in webphoto_photo_public
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_imode
 //=========================================================
 class webphoto_imode extends webphoto_show_photo
 {
-	var $_agent_class;
-	var $_pagenavi_class;
-	var $_multibyte_class;
-	var $_photo_public_class;
-	var $_item_public_class;
+	public $_agent_class;
+	public $_pagenavi_class;
+	public $_multibyte_class;
+	public $_photo_public_class;
+	public $_item_public_class;
 
-	var $_xoops_sitename;
-	var $_item_ecnode_type_array;
-	var $_is_set_mail;
-	var $_has_mail;
+	public $_xoops_sitename;
+	public $_item_ecnode_type_array;
+	public $_is_set_mail;
+	public $_has_mail;
 
-	var $_TITLE_S ;
-	var $_MOBILE_TEMPLATE = null;
+	public $_TITLE_S ;
+	public $_MOBILE_TEMPLATE = null;
 
-	var $_MOBILE_CHARSET_INTERNAL = _CHARSET ;
-	var $_MOBILE_CHARSET_OUTPUT   = _CHARSET ;
+	public $_MOBILE_CHARSET_INTERNAL = _CHARSET ;
+	public $_MOBILE_CHARSET_OUTPUT   = _CHARSET ;
 
-	var $_MOBILE_LATEST_LIMIT   = 1;
-	var $_MOBILE_RANDOM_LIMIT   = 1;
-	var $_MOBILE_RANDOM_ORDERBY = 'rand()';
-	var $_MOBILE_LIST_LIMIT     = 10;
-	var $_MOBILE_LIST_ORDERBY   = 'item_time_update DESC, item_id DESC';
-	var $_MOBILE_NAVI_WINDOWS   = 4;
+	public $_MOBILE_LATEST_LIMIT   = 1;
+	public $_MOBILE_RANDOM_LIMIT   = 1;
+	public $_MOBILE_RANDOM_ORDERBY = 'rand()';
+	public $_MOBILE_LIST_LIMIT     = 10;
+	public $_MOBILE_LIST_ORDERBY   = 'item_time_update DESC, item_id DESC';
+	public $_MOBILE_NAVI_WINDOWS   = 4;
 
 // preload
-	var $_ARRAY_MOBILE_TEXT = null;
+	public $_ARRAY_MOBILE_TEXT = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_imode( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_photo( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_photo( $dirname , $trust_dirname );
 
 	$this->_agent_class        =& webphoto_lib_user_agent::getInstance();
 	$this->_pagenavi_class     =& webphoto_lib_pagenavi::getInstance();

@@ -16,7 +16,9 @@
 // webphoto_cmd_base
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ffmpeg
@@ -24,29 +26,30 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ffmpeg extends webphoto_cmd_base
 {
-	var $_ffmpeg_class ;
+	public $_ffmpeg_class ;
 
-	var $_cfg_use_ffmpeg = false;
+	public $_cfg_use_ffmpeg = false;
 
-	var $_thumb_id = 0;
+	public $_thumb_id = 0;
 
-	var $_PLURAL_MAX    = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
-	var $_PLURAL_SECOND = 0;
-	var $_PLURAL_FIRST  = 0;
-	var $_PLURAL_OFFSET = 1;
+	public $_PLURAL_MAX    = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
+	public $_PLURAL_SECOND = 0;
+	public $_PLURAL_FIRST  = 0;
+	public $_PLURAL_OFFSET = 1;
 
-	var $_SINGLE_SECOND = 1;
+	public $_SINGLE_SECOND = 1;
 
-	var $_THUMB_PREFIX = _C_WEBPHOTO_VIDEO_THUMB_PREFIX ;	// tmp_ffmpeg_
+	public $_THUMB_PREFIX = _C_WEBPHOTO_VIDEO_THUMB_PREFIX ;	// tmp_ffmpeg_
 
-	var $_CMD_FFMPEG = 'ffmpeg';
+	public $_CMD_FFMPEG = 'ffmpeg';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ffmpeg( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_cmd_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 	$this->_cfg_use_ffmpeg = $this->_config_class->get_by_name( 'use_ffmpeg' );
 	$cfg_ffmpegpath        = $this->_config_class->get_dir_by_name( 'ffmpegpath' );

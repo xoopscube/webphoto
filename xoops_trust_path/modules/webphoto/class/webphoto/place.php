@@ -14,25 +14,28 @@
 // build_total_for_detail()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_place
 //=========================================================
 class webphoto_place extends webphoto_base_this
 {
-	var $_public_class;
-	var $_search_class;
+	public $_public_class;
+	public $_search_class;
 
-	var $_PHOTO_LIST_PLACE_ORDER = 'item_place ASC, item_id DESC';
-	var $_PHOTO_LIST_PLACE_GROUP = 'item_place';
+	public $_PHOTO_LIST_PLACE_ORDER = 'item_place ASC, item_id DESC';
+	public $_PHOTO_LIST_PLACE_GROUP = 'item_place';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_place( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );

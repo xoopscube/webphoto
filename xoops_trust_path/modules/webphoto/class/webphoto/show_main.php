@@ -50,100 +50,103 @@
 // used build_uri_category() build_main_navi_url() etc
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_show_main
 //=========================================================
 class webphoto_show_main extends webphoto_show_photo
 {
-	var $_page_class;
-	var $_user_handler;
-	var $_pathinfo_class;
-	var $_gmap_class;
-	var $_header_class;
-	var $_pagenavi_class;
-	var $_d3_notification_select_class;
-	var $_sort_class;
-	var $_rate_check_class;
-	var $_public_class ;
-	var $_timeline_class ;
+	public $_page_class;
+	public $_user_handler;
+	public $_pathinfo_class;
+	public $_gmap_class;
+	public $_header_class;
+	public $_pagenavi_class;
+	public $_d3_notification_select_class;
+	public $_sort_class;
+	public $_rate_check_class;
+	public $_public_class ;
+	public $_timeline_class ;
 
-	var $_sort_name;
+	public $_sort_name;
 
 // pathinfo param
-	var $_get_op;
-	var $_get_sort;
-	var $_get_kind;
-	var $_get_page;
+	public $_get_op;
+	public $_get_sort;
+	public $_get_kind;
+	public $_get_page;
 
-	var $_use_box_js;
+	public $_use_box_js;
 
-	var $_mode       = null;
-	var $_list_mode  = null;
-	var $_navi_mode  = null;
-	var $_param      = null;
-	var $_param_out  = null;
+	public $_mode       = null;
+	public $_list_mode  = null;
+	public $_navi_mode  = null;
+	public $_param      = null;
+	public $_param_out  = null;
 
-	var $_init_timeline ;
+	public $_init_timeline ;
 
 // set by config
-	var $_MAX_PHOTOS;
-	var $_MAX_GMAPS;
-	var $_MAX_TAG_CLOUD;
-	var $_VIEWTYPE_DEFAULT;
-	var $_USE_POPBOX_JS;
-	var $_TEMPLATE_MAIN = null ;
+	public $_MAX_PHOTOS;
+	public $_MAX_GMAPS;
+	public $_MAX_TAG_CLOUD;
+	public $_VIEWTYPE_DEFAULT;
+	public $_USE_POPBOX_JS;
+	public $_TEMPLATE_MAIN = null ;
 
-	var $_SORT_ARRAY = array();
+	public $_SORT_ARRAY = array();
 
-	var $_PAGE_DEFAULT  = 1;
+	public $_PAGE_DEFAULT  = 1;
 
-	var $_get_uid     = -1;	// not set
-	var $_UID_DEFAULT = -1;	// not set
+	public $_get_uid     = -1;	// not set
+	public $_UID_DEFAULT = -1;	// not set
 
-	var $_ACTION_DEFAULT  = 'latest';
+	public $_ACTION_DEFAULT  = 'latest';
 
-	var $_TOP_CATLIST_COLS    = 3;
-	var $_TOP_CATLIST_DELMITA = '<br />';
-	var $_CAT_CATLIST_COLS    = 3;
-	var $_CAT_CATLIST_DELMITA = '<br />';
+	public $_TOP_CATLIST_COLS    = 3;
+	public $_TOP_CATLIST_DELMITA = '<br>';
+	public $_CAT_CATLIST_COLS    = 3;
+	public $_CAT_CATLIST_DELMITA = '<br>';
 
-	var $_PHOTO_LIST_LIMIT      = 1;
-	var $_PHOTO_LIST_ORDER      = 'item_time_update DESC, item_id DESC';
-	var $_PHOTO_LIST_DATE_ORDER = 'item_datetime DESC, item_id DESC';
-	var $_ORDERBY_RANDOM = 'rand()';
-	var $_ORDERBY_ASC    = 'item_id ASC';
-	var $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
+	public $_PHOTO_LIST_LIMIT      = 1;
+	public $_PHOTO_LIST_ORDER      = 'item_time_update DESC, item_id DESC';
+	public $_PHOTO_LIST_DATE_ORDER = 'item_datetime DESC, item_id DESC';
+	public $_ORDERBY_RANDOM = 'rand()';
+	public $_ORDERBY_ASC    = 'item_id ASC';
+	public $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
 
-	var $_MODE_DEFAULT = 'latest';
-	var $_RSS_LIMIT    = 100;
+	public $_MODE_DEFAULT = 'latest';
+	public $_RSS_LIMIT    = 100;
 
-	var $_OFFSET_ZERO = 0 ;
-	var $_KEY_TRUE    = true ;
-	var $_KEY_NAME    = 'item_id' ;
+	public $_OFFSET_ZERO = 0 ;
+	public $_KEY_TRUE    = true ;
+	public $_KEY_NAME    = 'item_id' ;
 
-	var $_QR_MODULE_SIZE = 3;
+	public $_QR_MODULE_SIZE = 3;
 
 // show
-	var $_SHOW_RSS          = true;
-	var $_SHOW_CAT_SUB      = true;
-	var $_SHOW_CAT_MAIN_IMG = true;
-	var $_SHOW_CAT_SUB_IMG  = true;
+	public $_SHOW_RSS          = true;
+	public $_SHOW_CAT_SUB      = true;
+	public $_SHOW_CAT_MAIN_IMG = true;
+	public $_SHOW_CAT_SUB_IMG  = true;
 
 // kind
-	var $_PHOTO_KIND_ARRAY = array(
+	public $_PHOTO_KIND_ARRAY = array(
 		'latest', 'new', 'popular', 'random', 'video', 'picture', 'office' );
-	var $_PHOTO_KIND_DEFAULT = 'latest';
+	public $_PHOTO_KIND_DEFAULT = 'latest';
 
-	var $_DEBUG_PRELOAD = false ;
+	public $_DEBUG_PRELOAD = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_show_main( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_show_photo( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_photo( $dirname, $trust_dirname );
 
 	$this->_user_handler     
 		=& webphoto_user_handler::getInstance( $dirname, $trust_dirname );

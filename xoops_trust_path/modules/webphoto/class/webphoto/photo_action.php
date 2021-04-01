@@ -31,21 +31,24 @@
 // set values in preview
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_photo_action
 //=========================================================
 class webphoto_photo_action extends webphoto_photo_submit
 {
-	var $_show_image_class;
+	public $_show_image_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_photo_action( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_photo_submit( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_photo_submit( $dirname , $trust_dirname );
 
 	$this->_show_image_class =& webphoto_show_image::getInstance( $dirname );
 }
@@ -147,7 +150,7 @@ function print_form_video_thumb( $mode, $item_row )
 {
 	if ( $this->has_msg_array() ) {
 		echo $this->get_format_msg_array() ;
-		echo "<br />\n";
+		echo "<br>\n";
 	}
 
 	$form_class =& webphoto_photo_misc_form::getInstance(
@@ -163,13 +166,13 @@ function print_form_delete_confirm( $mode, $item_row )
 	$img_tag = $this->_show_image_class->build_img_tag_by_item_row( $item_row ) ;
 
 	echo '<h4>'. $this->get_constant('TITLE_PHOTODEL') ."</h4>\n";
-	echo '<b>'. $this->sanitize( $item_row['item_title'] ) ."<b><br />\n";
+	echo '<b>'. $this->sanitize( $item_row['item_title'] ) ."<b><br>\n";
 
 	if ( $img_tag ) {
 		echo $img_tag ;
 	}
 
-	echo "<br />\n";
+	echo "<br>\n";
 
 	$form_class =& webphoto_photo_misc_form::getInstance(
 		$this->_DIRNAME , $this->_TRUST_DIRNAME );
@@ -657,7 +660,7 @@ function video_flash_delete( $item_row, $url_redirect )
 
 	$ret = $this->_item_handler->update( $item_row );
 	if ( !$ret ) {
-		$msg  = "DB Error <br />\n" ;
+		$msg  = "DB Error <br>\n" ;
 		$msg .= $this->_item_handler->get_format_error() ;
 		redirect_header( $url_redirect, $this->_TIME_FAILED, $msg );
 		exit();
@@ -694,7 +697,7 @@ function file_delete_common( $item_row, $item_name, $url_redirect, $flag_redirec
 
 	$ret = $this->_file_handler->delete_by_id( $file_id );
 	if ( !$ret ) {
-		$msg  = "DB Error <br />\n" ;
+		$msg  = "DB Error <br>\n" ;
 		$msg .= $this->_file_handler->get_format_error() ;
 		redirect_header( $url_redirect, $this->_TIME_FAILED, $msg );
 		exit();

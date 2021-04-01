@@ -24,44 +24,47 @@
 // added is_video_ext()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_mime
 //=========================================================
 class webphoto_mime extends webphoto_base_ini
 {
-	var $_mime_handler ;
+	public $_mime_handler ;
 
-	var $_cached_my_allowed_mimes = null;
-	var $_cached_kind_array = array();
-	var $_cached_mime_array = array();
-	var $_cached_mime_options_array = array();
+	public $_cached_my_allowed_mimes = null;
+	public $_cached_kind_array = array();
+	public $_cached_mime_array = array();
+	public $_cached_mime_options_array = array();
 
-	var $_mime_kind_image_array;
-	var $_mime_kind_video_array;
-	var $_mime_kind_audio_array;
-	var $_mime_kind_office_array;
-	var $_mime_kind_image_other_array;
+	public $_mime_kind_image_array;
+	public $_mime_kind_video_array;
+	public $_mime_kind_audio_array;
+	public $_mime_kind_office_array;
+	public $_mime_kind_image_other_array;
 
-	var $_IMAGE_MEDIUM = 'image' ;
-	var $_VIDEO_MEDIUM = 'video' ;
-	var $_AUDIO_MEDIUM = 'audio' ;
+	public $_IMAGE_MEDIUM = 'image' ;
+	public $_VIDEO_MEDIUM = 'video' ;
+	public $_AUDIO_MEDIUM = 'audio' ;
 
-	var $_MIME_OPTION_DELMITA_1 = ';';
-	var $_MIME_OPTION_DELMITA_2 = ':';
+	public $_MIME_OPTION_DELMITA_1 = ';';
+	public $_MIME_OPTION_DELMITA_2 = ':';
 
 // asx is meta file (text)
-	var $_EXT_ASX = 'asx';
+	public $_EXT_ASX = 'asx';
 
-	var $_IMAGE_EXTS;
+	public $_IMAGE_EXTS;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_mime( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_mime_handler  =& webphoto_mime_handler::getInstance(
 		$dirname, $trust_dirname );

@@ -14,7 +14,9 @@
 // used build_uri_photo()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_gmap_info
@@ -25,9 +27,10 @@ class webphoto_gmap_info extends webphoto_base_this
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_gmap_info( $dirname , $trust_dirname  )
+public function __construct( $dirname , $trust_dirname  )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname  );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname  );
 
 	$this->_IMG_EDIT = '<img src="'. $this->_ICONS_URL.'/edit.png" width="18" height="15" border="0" alt="' ._WEBPHOTO_TITLE_EDIT .'" title="'. _WEBPHOTO_TITLE_EDIT .'" />';
 }
@@ -44,12 +47,12 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // gmap
 //---------------------------------------------------------
-function build_info( $param )
+public function build_info( $param )
 {
 	return $this->build_info_default( $param );
 }
 
-function build_info_default( $param )
+public function build_info_default( $param )
 {
 	$info  = '<div style="text-align:center; font-size: 80%; ">';
 	$info .= $this->build_info_thumb(    $param );
@@ -62,21 +65,21 @@ function build_info_default( $param )
 	return $info;
 }
 
-function build_info_thumb( $param )
+public function build_info_thumb( $param )
 {
 	$a_photo   = $this->build_a_photo(   $param );
 	$img_thumb = $this->build_img_thumb( $param );
 
 	$str = null;
 	if ( $img_thumb && $a_photo ) {
-		$str = $a_photo . $img_thumb .'</a><br />';
+		$str = $a_photo . $img_thumb .'</a><br>';
 	} elseif ( $img_thumb ) {
-		$str = $img_thumb .'<br />';
+		$str = $img_thumb .'<br>';
 	}
 	return $str;
 }
 
-function build_info_title( $param )
+public function build_info_title( $param )
 {
 	$str = '';
 
@@ -91,53 +94,53 @@ function build_info_title( $param )
 	}
 
 	if ( $title_s && $a_photo ) {
-		$str .= $a_photo . $title_s .'</a><br />';
+		$str .= $a_photo . $title_s .'</a><br>';
 	} elseif ( $title_s ) {
-		$str .= $title_s .'<br />';
+		$str .= $title_s .'<br>';
 	}
 	return $str;
 }
 
-function build_info_author( $param )
+public function build_info_author( $param )
 {
 	$uid   = intval( $param['item_uid'] );
 	$href  = $this->build_uri_user( $uid ) ;
 	$uname = $this->get_xoops_uname_by_uid( $uid );
 	if ( $uid > 0 ) {
 		$str  = '<a href="'. $href .'">';
-		$str .= $uname .'</a><br />';
+		$str .= $uname .'</a><br>';
 	} else {
-		$str = $uname .'<br />';
+		$str = $uname .'<br>';
 	}
 	return $str;
 }
 
-function build_info_datetime( $param )
+public function build_info_datetime( $param )
 {
 	$datetime_disp = $this->mysql_datetime_to_str( $param['item_datetime'] );
 	if ( $datetime_disp ) {
-		$str = $datetime_disp .'<br />';
+		$str = $datetime_disp .'<br>';
 		return $str;
 	}
 	return null;
 }
 
-function build_info_place( $param )
+public function build_info_place( $param )
 {
 	$place_s = $this->sanitize( $param['item_place'] );
 	if ( $place_s ) {
-		$str = $place_s .'<br />';
+		$str = $place_s .'<br>';
 		return $str;
 	}
 	return null;
 }
 
-function build_img_thumb( $param )
+public function build_img_thumb( $param )
 {
 	$title_s = $this->sanitize( $param['item_title'] );
 	$url_s   = $this->sanitize( $param['thumb_url'] );
-	$width   = intval( $param['thumb_width'] );
-	$height  = intval( $param['thumb_height'] );
+	$width   = (int) $param['thumb_width'];
+	$height  = (int) $param['thumb_height'];
 
 	$img = null;
 	if ( $url_s && $width && $height ) {
@@ -149,7 +152,7 @@ function build_img_thumb( $param )
 	return $img;
 }
 
-function build_a_photo( $param )
+public function build_a_photo( $param )
 {
 	$href   = $this->build_href_photo(   $param );
 	$target = $this->build_target_photo( $param );
@@ -160,12 +163,12 @@ function build_a_photo( $param )
 	return null;
 }
 
-function build_href_photo( $param )
+public function build_href_photo( $param )
 {
 	return $this->build_uri_photo( $param['item_id'] ) ;
 }
 
-function build_target_photo( $param )
+public function build_target_photo( $param )
 {
 	$str = '_top';
 	if ( ! $this->check_normal_ext( $param ) ) {
@@ -174,7 +177,7 @@ function build_target_photo( $param )
 	return $str;
 }
 
-function check_normal_ext( $param )
+public function check_normal_ext( $param )
 {
 	return $this->is_normal_ext( $param['item_ext'] );
 }

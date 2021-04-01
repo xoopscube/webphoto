@@ -25,15 +25,16 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_ext extends webphoto_lib_plugin
 {
-	var $_cached_list = null;
-	var $_cached_objs_by_ext = array() ;
+	public $_cached_list = null;
+	public $_cached_objs_by_ext = array() ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_lib_plugin( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_lib_plugin( $dirname, $trust_dirname );
 	$this->set_dirname( 'exts' );
 	$this->set_prefix(  'webphoto_ext_' );
 }

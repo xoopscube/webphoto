@@ -20,30 +20,32 @@
 // is_general_kind() etc
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_kind
 //=========================================================
 class webphoto_kind
 {
-	var $_IMAGE_EXTS ;
-	var $_SWFOBJECT_EXTS ;
-	var $_MEDIAPLAYER_AUDIO_EXTS ;
-	var $_MEDIAPLAYER_VIDEO_EXTS ;
-	var $_VIDEO_DOCOMO_EXTS ;
+	public $_IMAGE_EXTS ;
+	public $_SWFOBJECT_EXTS ;
+	public $_MEDIAPLAYER_AUDIO_EXTS ;
+	public $_MEDIAPLAYER_VIDEO_EXTS ;
+	public $_VIDEO_DOCOMO_EXTS ;
 
-	var $_FLASH_EXTS = array( 'flv' );
-	var $_PDF_EXTS   = array( 'pdf' );
-	var $_SWF_EXTS   = array( 'swf' );
-	var $_JPEG_EXTS  = array( 'jpg','jpeg' );
-	var $_MP3_EXTS   = array( 'mp3' );
-	var $_WAV_EXTS   = array( 'wav' );
+	public $_FLASH_EXTS = array( 'flv' );
+	public $_PDF_EXTS   = array( 'pdf' );
+	public $_SWF_EXTS   = array( 'swf' );
+	public $_JPEG_EXTS  = array( 'jpg','jpeg' );
+	public $_MP3_EXTS   = array( 'mp3' );
+	public $_WAV_EXTS   = array( 'wav' );
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_kind()
+function __construct()
 {
 	$this->_IMAGE_EXTS             = explode( '|', _C_WEBPHOTO_IMAGE_EXTS );
 	$this->_SWFOBJECT_EXTS         = explode( '|', _C_WEBPHOTO_SWFOBJECT_EXTS ) ;

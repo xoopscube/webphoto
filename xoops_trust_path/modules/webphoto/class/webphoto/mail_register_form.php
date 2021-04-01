@@ -12,7 +12,9 @@
 // added print_user_form()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_mail_register_form
@@ -23,9 +25,10 @@ class webphoto_mail_register_form extends webphoto_form_this
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_mail_register_form( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_form_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_form_this( $dirname, $trust_dirname );
 }
 
 public static function &getInstance( $dirname = null, $trust_dirname = null )
@@ -40,7 +43,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // user form
 //---------------------------------------------------------
-function print_user_form( $row )
+public function print_user_form( $row )
 {
 	$this->set_row( $row );
 
@@ -62,7 +65,7 @@ function print_user_form( $row )
 
 }
 
-function _build_ele_user_submitter()
+public function _build_ele_user_submitter()
 {
 	$uid = $this->get_row_by_key( 'user_uid' );
 	$text  = $this->build_form_user_select( 'user_uid', $uid, false );
@@ -72,7 +75,7 @@ function _build_ele_user_submitter()
 //---------------------------------------------------------
 // submit form
 //---------------------------------------------------------
-function print_submit_form( $row, $param )
+public function print_submit_form( $row, $param )
 {
 	$mode = $param['mode'];
 	
@@ -114,13 +117,13 @@ function print_submit_form( $row, $param )
 
 }
 
-function _build_ele_category()
+public function _build_ele_category()
 {
 	return $this->_cat_handler->build_selbox_with_perm_post(
 		$this->get_row_by_key( 'user_cat_id' ) , 'user_cat_id' );
 }
 
-function _build_ele_submitter()
+public function _build_ele_submitter()
 {
 	$uid = $this->get_row_by_key( 'user_uid' );
 	$text  = $this->_xoops_class->get_user_uname_from_id( $uid );

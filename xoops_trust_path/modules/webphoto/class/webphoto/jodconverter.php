@@ -16,7 +16,9 @@
 // chmod_file()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_jodconverter
@@ -24,20 +26,20 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_jodconverter extends webphoto_cmd_base
 {
-	var $_config_class;
-	var $_jod_class;
-	var $_multibyte_class;
-	var $_utility_class;
+	public $_config_class;
+	public $_jod_class;
+	public $_multibyte_class;
+	public $_utility_class;
 
-	var $_use_jod    = false;
-	var $_java_path  = '';
-	var $_junk_words = null;
+	public $_use_jod    = false;
+	public $_java_path  = '';
+	public $_junk_words = null;
 
-	var $_TMP_DIR;
-	var $_TEXT_EXT = 'txt';
-	var $_HTML_EXT = 'html';
+	public $_TMP_DIR;
+	public $_TEXT_EXT = 'txt';
+	public $_HTML_EXT = 'html';
 
-	var $_JUNK_WORDS_ENG = array(
+	public $_JUNK_WORDS_ENG = array(
 		'Slide', 'First page', 'Last page', 'Back', 'Continue', 'Graphics', 'Text', 
 		'Overview', 'Sheet'
 	); 
@@ -45,9 +47,10 @@ class webphoto_jodconverter extends webphoto_cmd_base
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_jodconverter( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_cmd_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 	$this->_config_class    =& webphoto_config::getInstance( $dirname );
 	$this->_jod_class       =& webphoto_lib_jodconverter::getInstance();

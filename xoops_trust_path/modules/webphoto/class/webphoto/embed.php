@@ -20,29 +20,32 @@
 // $class->width()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_embed
 //=========================================================
 class webphoto_embed extends webphoto_lib_plugin
 {
-	var $_config_class;
+	public $_config_class;
 
-	var $_param = null ;
+	public $_param = null ;
 
-	var $_WIDTH_DEFAULT  = _C_WEBPHOTO_EMBED_WIDTH_DEFAULT ;
-	var $_HEIGHT_DEFAULT = _C_WEBPHOTO_EMBED_HEIGHT_DEFAULT ;
+	public $_WIDTH_DEFAULT  = _C_WEBPHOTO_EMBED_WIDTH_DEFAULT ;
+	public $_HEIGHT_DEFAULT = _C_WEBPHOTO_EMBED_HEIGHT_DEFAULT ;
 
-	var $_WORK_DIR;
-	var $_TMP_DIR;
+	public $_WORK_DIR;
+	public $_TMP_DIR;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_embed( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_lib_plugin( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_lib_plugin( $dirname, $trust_dirname );
 	$this->set_dirname( 'embeds' );
 	$this->set_prefix(  'webphoto_embed_' );
 
@@ -64,14 +67,14 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // embed
 //---------------------------------------------------------
-function set_param( $val )
+public function set_param( $val )
 {
 	if ( is_array($val) ) {
 		$this->_param = $val;
 	}
 }
 
-function get_xml_params( $type, $src )
+public function get_xml_params( $type, $src )
 {
 	if ( empty($type) ) {
 		return false;
@@ -90,7 +93,7 @@ function get_xml_params( $type, $src )
 	return $class->get_xml_params( $src );
 }
 
-function build_embed_link( $type, $src, $width, $height )
+public function build_embed_link( $type, $src, $width, $height )
 {
 	if ( empty($type) ) {
 		return false;
@@ -131,7 +134,7 @@ function build_embed_link( $type, $src, $width, $height )
 	return array( $embed, $link );
 }
 
-function build_link( $type, $src )
+public function build_link( $type, $src )
 {
 	if ( empty($type) ) {
 		return false;
@@ -149,7 +152,7 @@ function build_link( $type, $src )
 	return $class->link( $src );
 }
 
-function build_type_options( $flag_general )
+public function build_type_options( $flag_general )
 {
 	$list = $this->build_list();
 
@@ -165,7 +168,7 @@ function build_type_options( $flag_general )
 	return $arr;
 }
 
-function build_src_desc( $type, $src )
+public function build_src_desc( $type, $src )
 {
 	if ( empty($type) ) {
 		return false;
@@ -182,19 +185,19 @@ function build_src_desc( $type, $src )
 	}
 
 // typo
-	$str  = $lang ."<br />\n";
-	$str .= _WEBPHOTO_EMBED_EXAMPLE ."<br />\n";
-	$str .= $class->desc() ."<br />\n";
+	$str  = $lang ."<br>\n";
+	$str .= _WEBPHOTO_EMBED_EXAMPLE ."<br>\n";
+	$str .= $class->desc() ."<br>\n";
 
 	if ( $src ) {
 		$str .= '<img src="'. $class->thumb( $src ) .' border="0" />';
-		$str .= "<br />\n";
+		$str .= "<br>\n";
 	}
 
 	return $str;
 }
 
-function build_thumb( $type, $src )
+public function build_thumb( $type, $src )
 {
 	if ( empty($type) ) {
 		return false;
@@ -212,7 +215,7 @@ function build_thumb( $type, $src )
 	return $class->thumb( $src );
 }
 
-function build_support_params( $type )
+public function build_support_params( $type )
 {
 	if ( empty($type) ) {
 		return false;

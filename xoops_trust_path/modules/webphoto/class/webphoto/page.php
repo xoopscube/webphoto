@@ -18,29 +18,32 @@
 // $trust_dirname in webphoto_photo_public
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_page
 //=========================================================
 class webphoto_page extends webphoto_base_this
 {
-	var $_public_class ;
-	var $_timeline_class;
+	public $_public_class ;
+	public $_timeline_class;
 
-	var $_cfg_file_dir;
-	var $_cfg_is_set_mail;
-	var $_cfg_uploads_path;
+	public $_cfg_file_dir;
+	public $_cfg_is_set_mail;
+	public $_cfg_uploads_path;
 
-	var $_has_mail;
-	var $_has_file;
+	public $_has_mail;
+	public $_has_file;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_page( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_timeline_class =& webphoto_inc_timeline::getSingleton( $dirname );
 	$this->_public_class   
@@ -66,7 +69,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // build main param
 //---------------------------------------------------------
-function build_main_param()
+public function build_main_param()
 {
 	$arr = array_merge( 
 		$this->build_xoops_param(), 
@@ -80,7 +83,7 @@ function build_main_param()
 	return $arr;
 }
 
-function build_xoops_param()
+public function build_xoops_param()
 {
 	$arr = array(
 		'mydirname'        => $this->_DIRNAME ,
@@ -93,7 +96,7 @@ function build_xoops_param()
 	return $arr;
 }
 
-function build_config_param()
+public function build_config_param()
 {
 	$config_array = $this->get_config_array();
 	foreach ( $config_array as $k => $v ) {
@@ -103,7 +106,7 @@ function build_config_param()
 	return $arr;
 }
 
-function build_perm_param()
+public function build_perm_param()
 {
 	$arr = array(
 		'has_rateview'     => $this->_perm_class->has_rateview() ,
@@ -116,7 +119,7 @@ function build_perm_param()
 	return $arr;
 }
 
-function build_show_param()
+public function build_show_param()
 {
 	$show_rateview    = false ;
 	$show_ratevote    = false ;
@@ -137,7 +140,7 @@ function build_show_param()
 	return $arr;
 }
 
-function build_menu_param()
+public function build_menu_param()
 {
 	$total = $this->get_public_total();
 
@@ -153,7 +156,7 @@ function build_menu_param()
 	return $arr;
 }
 
-function build_footer_param()
+public function build_footer_param()
 {
 	$arr = array(
 		'is_module_admin' => $this->xoops_is_module_admin() ,
@@ -162,7 +165,7 @@ function build_footer_param()
 	return $arr;
 }
 
-function build_qrs_param()
+public function build_qrs_param()
 {
 	$qrs_path = $this->_cfg_uploads_path.'/qrs' ;
 	$qrs_url  = XOOPS_URL . $qrs_path ;

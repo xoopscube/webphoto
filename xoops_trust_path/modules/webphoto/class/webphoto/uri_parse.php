@@ -6,21 +6,23 @@
 // 2010-11-03 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_uri_parse
 //=========================================================
 class webphoto_uri_parse
 {
-	var $_sort_class ;
-	var $_pathinfo_class ;
-	var $_xoops_class;
+	public $_sort_class ;
+	public $_pathinfo_class ;
+	public $_xoops_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_uri_parse( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
 	$this->_sort_class 
 		=& webphoto_photo_sort::getInstance( $dirname, $trust_dirname );
@@ -41,24 +43,24 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // factory
 //---------------------------------------------------------
-function get_page_mode()
+public function get_page_mode()
 {
 	$input = $this->_pathinfo_class->get_fct_op_0();
 	return $this->_sort_class->input_to_mode( $input );
 }
 
-function get_get_page()
+public function get_get_page()
 {
 	return $this->_pathinfo_class->get_page() ;
 }
 
-function get_get_sort()
+public function get_get_sort()
 {
 	return $this->_sort_class->get_photo_sort_name(
 		$this->_pathinfo_class->get_text('sort') );
 }
 
-function get_get_kind()
+public function get_get_kind()
 {
 	return $this->_sort_class->get_photo_kind_name( 
 		$this->_pathinfo_class->get_text('kind') );

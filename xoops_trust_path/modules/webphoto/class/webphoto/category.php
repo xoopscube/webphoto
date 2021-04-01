@@ -15,30 +15,33 @@
 // BUG: total is wrong
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_category
 //=========================================================
 class webphoto_category extends webphoto_show_photo
 {
-	var $_public_class;
-	var $_catlist_class;
+	public $_public_class;
+	public $_catlist_class;
 
-	var $_saved_sum_mode = 0;
-	var $_saved_total    = 0;
+	public $_saved_sum_mode = 0;
+	public $_saved_total    = 0;
 
-	var $_cfg_cat_child      = null;
-	var $_cfg_perm_cat_read  = null;
-	var $_cfg_cat_main_width = null;
-	var $_cfg_cat_sub_width  = null;
+	public $_cfg_cat_child      = null;
+	public $_cfg_perm_cat_read  = null;
+	public $_cfg_cat_main_width = null;
+	public $_cfg_cat_sub_width  = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_category( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_show_photo( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_show_photo( $dirname , $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
@@ -64,7 +67,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // list
 //---------------------------------------------------------
-function build_photo_list_for_list()
+public function build_photo_list_for_list()
 {
 	$cat_rows = $this->_catlist_class->get_cat_all_tree_array();
 	if ( !is_array($cat_rows) || !count($cat_rows) ) {
@@ -111,7 +114,7 @@ function build_photo_list_for_list()
 	return array($photo_list, $photo_rows);
 }
 
-function get_photo_for_list( $cat_id )
+public function get_photo_for_list( $cat_id )
 {
 	$photo_row = null;
 	$rows      = null;
@@ -132,7 +135,7 @@ function get_photo_for_list( $cat_id )
 	return array( $photo_row, $total, $small_sum );
 }
 
-function build_cat_summary_disp( $desc )
+public function build_cat_summary_disp( $desc )
 {
 	return $this->_multibyte_class->build_summary( $desc, $this->_cfg_cat_summary );
 }
@@ -140,7 +143,7 @@ function build_cat_summary_disp( $desc )
 //---------------------------------------------------------
 // detail
 //---------------------------------------------------------
-function build_total_for_detail( $cat_id )
+public function build_total_for_detail( $cat_id )
 {
 	$row = $this->_catlist_class->get_cat_row_by_catid_perm( $cat_id );
 
@@ -172,12 +175,12 @@ function build_total_for_detail( $cat_id )
 
 }
 
-function build_rows_for_detail( $sum_mode, $cat_id, $orderby, $limit, $start )
+public function build_rows_for_detail( $sum_mode, $cat_id, $orderby, $limit, $start )
 {
 	return $this->get_rows_by_catid( $sum_mode, $cat_id, $orderby, $limit, $start );
 }
 
-function get_total_by_catid( $sel_mode, $cat_id )
+public function get_total_by_catid( $sel_mode, $cat_id )
 {
 	$name      = 'catid_array';
 	$sum_mode  = 0;	// small_sum
@@ -221,7 +224,7 @@ function get_total_by_catid( $sel_mode, $cat_id )
 	return array( $sum_mode, $total, $total_sum, $small_sum );
 }
 
-function get_rows_by_catid( $sum_mode, $cat_id, $orderby, $limit=0, $offset=0 )
+public function get_rows_by_catid( $sum_mode, $cat_id, $orderby, $limit=0, $offset=0 )
 {
 	$name = 'catid_array';
 
@@ -243,7 +246,7 @@ function get_rows_by_catid( $sum_mode, $cat_id, $orderby, $limit=0, $offset=0 )
 	return $rows;
 }
 
-function check_cat_perm_read_by_catid( $cat_id )
+public function check_cat_perm_read_by_catid( $cat_id )
 {
 	if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 		return true;
@@ -257,7 +260,7 @@ function check_cat_perm_read_by_catid( $cat_id )
 //---------------------------------------------------------
 // rss
 //---------------------------------------------------------
-function build_rows_for_rss( $cat_id, $orderby, $limit=0, $start=0 )
+public function build_rows_for_rss( $cat_id, $orderby, $limit=0, $start=0 )
 {
 	$rows      = null;
 
@@ -276,7 +279,7 @@ function build_rows_for_rss( $cat_id, $orderby, $limit=0, $start=0 )
 //---------------------------------------------------------
 // catpath
 //---------------------------------------------------------
-function build_catpath( $cat_id )
+public function build_catpath( $cat_id )
 {
 	$rows = $this->_cat_handler->get_parent_path_array( $cat_id );
 	if ( !is_array($rows) || !count($rows) ) {
@@ -302,7 +305,7 @@ function build_catpath( $cat_id )
 //---------------------------------------------------------
 // catlist
 //---------------------------------------------------------
-function build_catlist( $cat_id, $cols_in, $delmita )
+public function build_catlist( $cat_id, $cols_in, $delmita )
 {
 	$show_sub      = $this->get_ini('category_show_sub');
 	$show_main_img = $this->get_ini('category_show_main_img');

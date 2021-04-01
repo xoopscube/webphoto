@@ -23,31 +23,32 @@ if( !class_exists('webphoto_timeline') )
 //=========================================================
 class webphoto_timeline extends webphoto_base_this
 {
-	var $_public_class;
-	var $_catlist_class;
-	var $_timeline_init_class;
+	public $_public_class;
+	public $_catlist_class;
+	public $_timeline_init_class;
 
-	var $_cfg_timeline_scale;
-	var $_cfg_timeline_latest;
-	var $_cfg_timeline_random;
+	public $_cfg_timeline_scale;
+	public $_cfg_timeline_latest;
+	public $_cfg_timeline_random;
 
-	var $_init_timeline;
+	public $_init_timeline;
 
-	var $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
-	var $_ORDERBY_RANDOM = 'rand()';
-	var $_OFFSET_ZERO  = 0 ;
-	var $_KEY_TRUE     = true ;
-	var $_KEY_NAME     = 'item_id' ;
-	var $_DATE_DEFAULT = '';
+	public $_ORDERBY_LATEST = 'item_time_update DESC, item_id DESC';
+	public $_ORDERBY_RANDOM = 'rand()';
+	public $_OFFSET_ZERO  = 0 ;
+	public $_KEY_TRUE     = true ;
+	public $_KEY_NAME     = 'item_id' ;
+	public $_DATE_DEFAULT = '';
 
-	var $_SHOW_FALSE = array( 'show_timeline' => false );
+	public $_SHOW_FALSE = array( 'show_timeline' => false );
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_timeline( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname  );
@@ -79,7 +80,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // timeline class
 //---------------------------------------------------------
-function build_for_detail( $param, $flag_large )
+public function build_for_detail( $param, $flag_large )
 {
 	if ( ! $this->_init_timeline ) {
 		return $this->_SHOW_FALSE;
@@ -107,7 +108,7 @@ function build_for_detail( $param, $flag_large )
 	return $param;
 }
 
-function get_lang_param()
+public function get_lang_param()
 {
 	return $this->_timeline_init_class->get_lang_param();
 }
@@ -115,7 +116,7 @@ function get_lang_param()
 //---------------------------------------------------------
 // private
 //---------------------------------------------------------
-function get_unit_default( $param )
+public function get_unit_default( $param )
 {
 	$mode   = $param['mode'];
 	$cat_id = $param['cat_id'];
@@ -135,7 +136,7 @@ function get_unit_default( $param )
 	return $unit;
 }
 
-function build_rows_for_detail( $param )
+public function build_rows_for_detail( $param )
 {
 	$mode      = $param['mode'];
 	$cat_id    = $param['cat_id'];
@@ -155,7 +156,7 @@ function build_rows_for_detail( $param )
 	return $rows;
 }
 
-function build_rows_for_detail_main()
+public function build_rows_for_detail_main()
 {
 	$latest_rows = $this->get_rows_by_orderby( 
 		$this->_ORDERBY_LATEST, $this->_cfg_timeline_latest );
@@ -167,7 +168,7 @@ function build_rows_for_detail_main()
 	return $all_rows ;
 }
 
-function build_rows_for_detail_category( $cat_id )
+public function build_rows_for_detail_category( $cat_id )
 {
 	$latest_rows = $this->get_rows_by_catid_orderby( 
 		$cat_id, $this->_ORDERBY_LATEST, $this->_cfg_timeline_latest );
@@ -182,7 +183,7 @@ function build_rows_for_detail_category( $cat_id )
 //---------------------------------------------------------
 // timeline
 //---------------------------------------------------------
-function build_timeline_from_photos( $unit, $date, $photos, $flag_large )
+public function build_timeline_from_photos( $unit, $date, $photos, $flag_large )
 {
 	$show    = false ;
 	$js      = null ;
@@ -207,7 +208,7 @@ function build_timeline_from_photos( $unit, $date, $photos, $flag_large )
 	return $arr;
 }
 
-function get_timeline_class( $flag_large )
+public function get_timeline_class( $flag_large )
 {
 	if ( $flag_large ) {
 		return 'webphoto_timeline_large';
@@ -218,7 +219,7 @@ function get_timeline_class( $flag_large )
 //---------------------------------------------------------
 // photos
 //---------------------------------------------------------
-function build_photos_from_rows( $rows )
+public function build_photos_from_rows( $rows )
 {
 	$arr = array();
 	foreach ( $rows as $row ) {

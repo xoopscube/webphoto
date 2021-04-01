@@ -13,29 +13,32 @@
 // $trust_dirname in webphoto_item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_item_public
 //=========================================================
 class webphoto_item_public extends webphoto_base_ini
 {
-	var $_config_class;
-	var $_cat_handler;
-	var $_item_handler;
+	public $_config_class;
+	public $_cat_handler;
+	public $_item_handler;
 
-	var $_cfg_perm_cat_read;
-	var $_cfg_perm_item_read;
+	public $_cfg_perm_cat_read;
+	public $_cfg_perm_item_read;
 
-	var $_item_row = null ;
-	var $_error    = null;
+	public $_item_row = null ;
+	public $_error    = null;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_item_public( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_config_class =& webphoto_config::getInstance( $dirname );
 	$this->_cat_handler  =& webphoto_cat_handler::getInstance( 

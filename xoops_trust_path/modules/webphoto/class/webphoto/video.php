@@ -22,52 +22,55 @@
 // tmppath -> tmpdir
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_video
 //=========================================================
 class webphoto_video extends webphoto_lib_error
 {
-	var $_mime_handler ;
-	var $_config_class ;
-	var $_utility_class ;
-	var $_ffmpeg_class ;
+	public $_mime_handler ;
+	public $_config_class ;
+	public $_utility_class ;
+	public $_ffmpeg_class ;
 
-	var $_cfg_use_ffmpeg = false;
+	public $_cfg_use_ffmpeg = false;
 
-	var $_thumb_id   = 0;
-	var $_flash_info = null ;
+	public $_thumb_id   = 0;
+	public $_flash_info = null ;
 
-	var $_cached_extra_array = array();
+	public $_cached_extra_array = array();
 
-	var $_FLASHS_PATH ;
-	var $_TMP_DIR ;
+	public $_FLASHS_PATH ;
+	public $_TMP_DIR ;
 
-	var $_PLURAL_MAX    = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
-	var $_PLURAL_SECOND = 0;
-	var $_PLURAL_FIRST  = 0;
-	var $_PLURAL_OFFSET = 1;
+	public $_PLURAL_MAX    = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX ;
+	public $_PLURAL_SECOND = 0;
+	public $_PLURAL_FIRST  = 0;
+	public $_PLURAL_OFFSET = 1;
 
-	var $_SINGLE_MAX    = 1;
-	var $_SINGLE_SECOND = 1;
-	var $_SINGLE_FIRST  = 0;
+	public $_SINGLE_MAX    = 1;
+	public $_SINGLE_SECOND = 1;
+	public $_SINGLE_FIRST  = 0;
 
-	var $_THUMB_PREFIX = _C_WEBPHOTO_VIDEO_THUMB_PREFIX ;	// tmp_video_
-	var $_THUMB_EXT    = 'jpg';
-	var $_ICON_EXT     = 'png';
-	var $_FLASH_EXT    = _C_WEBPHOTO_VIDEO_FLASH_EXT ;	// flv
-	var $_FLASH_MIME   = 'video/x-flv';
-	var $_FLASH_MEDIUM = 'video';
+	public $_THUMB_PREFIX = _C_WEBPHOTO_VIDEO_THUMB_PREFIX ;	// tmp_video_
+	public $_THUMB_EXT    = 'jpg';
+	public $_ICON_EXT     = 'png';
+	public $_FLASH_EXT    = _C_WEBPHOTO_VIDEO_FLASH_EXT ;	// flv
+	public $_FLASH_MIME   = 'video/x-flv';
+	public $_FLASH_MEDIUM = 'video';
 
-	var $_DEBUG = false ;
+	public $_DEBUG = false ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_video( $dirname )
+public function __construct( $dirname )
 {
-	$this->webphoto_lib_error();
+	parent::__construct();
+	//$this->webphoto_lib_error();
 
 	$this->_mime_handler  =& webphoto_mime_handler::getInstance( $dirname );
 	$this->_config_class  =& webphoto_config::getInstance( $dirname );

@@ -14,22 +14,25 @@
 // $trust_dirname in webphoto_cat_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_notification
 //=========================================================
 class webphoto_notification_event extends webphoto_d3_notification_event
 {
-	var $_cat_handler;
-	var $_uri_class;
+	public $_cat_handler;
+	public $_uri_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_notification_event( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_d3_notification_event();
+	parent::__construct();
+	//$this->webphoto_d3_notification_event();
 	$this->init( $dirname , $trust_dirname );
 
 	$this->_cat_handler  
@@ -50,7 +53,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // function
 //---------------------------------------------------------
-function notify_new_photo( $photo_id, $cat_id, $photo_title )
+public function notify_new_photo( $photo_id, $cat_id, $photo_title )
 {
 	$cat_title = $this->_cat_handler->get_cached_value_by_id_name( $cat_id, 'cat_title' );
 
@@ -77,7 +80,7 @@ function notify_new_photo( $photo_id, $cat_id, $photo_title )
 
 }
 
-function notify_waiting( $photo_id, $photo_title )
+public function notify_waiting( $photo_id, $photo_title )
 {
 	$url = $this->_MODULE_URL .'/admin/index.php?fct=item_manager&op=modify_form&item_id='. $photo_id ;
 	$tags = array( 

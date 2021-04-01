@@ -24,38 +24,40 @@
 // is_image_kind -> is_src_image_kind
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_show_image
 //=========================================================
 class webphoto_show_image
 {
-	var $_config_class;
-	var $_item_handler;
-	var $_file_handler;
-	var $_kind_class;
-	var $_utility_class;
+	public $_config_class;
+	public $_item_handler;
+	public $_file_handler;
+	public $_kind_class;
+	public $_utility_class;
 
-	var $_max_large_width;
-	var $_max_large_height;
-	var $_max_middle_width;
-	var $_max_middle_height;
-	var $_max_thumb_width;
-	var $_max_thumb_height;
+	public $_max_large_width;
+	public $_max_large_height;
+	public $_max_middle_width;
+	public $_max_middle_height;
+	public $_max_thumb_width;
+	public $_max_thumb_height;
 
-	var $_DIRNAME;
-	var $_MODULE_URL;
-	var $_MODULE_DIR;
+	public $_DIRNAME;
+	public $_MODULE_URL;
+	public $_MODULE_DIR;
 
-	var $_ROOT_EXTS_URL ;
-	var $_DEFAULT_ICON_SRC;
-	var $_PIXEL_ICON_SRC;
+	public $_ROOT_EXTS_URL ;
+	public $_DEFAULT_ICON_SRC;
+	public $_PIXEL_ICON_SRC;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_show_image( $dirname , $trust_dirname )
+function __construct( $dirname , $trust_dirname )
 {
 	$this->_config_class  =& webphoto_config::getInstance( $dirname );
 	$this->_kind_class    =& webphoto_kind::getInstance();

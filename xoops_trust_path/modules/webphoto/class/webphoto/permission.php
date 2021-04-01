@@ -18,35 +18,38 @@
 // added has_mail() has_file()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_permission
 //=========================================================
 class webphoto_permission extends webphoto_inc_group_permission
 {
-	var $_has_insertable ; 
-	var $_has_superinsert ; 
-	var $_has_editable ; 
-	var $_has_supereditable ;
-	var $_has_deletable ;  
-	var $_has_superdeletable ; 
-	var $_has_touchothers  ; 
-	var $_has_supertouchothers ;
-	var $_has_rateview ; 
-	var $_has_ratevote ;  
-	var $_has_tellafriend  ; 
-	var $_has_tagedit ;
-	var $_has_mail ;
-	var $_has_file ;
-	var $_has_html ;
+	public $_has_insertable ;
+	public $_has_superinsert ;
+	public $_has_editable ;
+	public $_has_supereditable ;
+	public $_has_deletable ;
+	public $_has_superdeletable ;
+	public $_has_touchothers  ;
+	public $_has_supertouchothers ;
+	public $_has_rateview ;
+	public $_has_ratevote ;
+	public $_has_tellafriend  ;
+	public $_has_tagedit ;
+	public $_has_mail ;
+	public $_has_file ;
+	public $_has_html ;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_permission( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_inc_group_permission( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_inc_group_permission( $dirname , $trust_dirname );
 
 	$this->_has_insertable       = $this->has_perm( 'insertable' );
 	$this->_has_superinsert      = $this->has_perm( 'superinsert' );
@@ -77,77 +80,77 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // has permit
 //---------------------------------------------------------
-function has_insertable()
+public function has_insertable()
 {
 	return $this->_has_insertable ;
 }
 
-function has_superinsert()
+public function has_superinsert()
 {
 	return $this->_has_superinsert ;
 }
 
-function has_editable()
+public function has_editable()
 {
 	return $this->_has_editable ;
 }
 
-function has_superedit()
+public function has_superedit()
 {
 	return $this->_has_superedit ;
 }
 
-function has_deletable()
+public function has_deletable()
 {
 	return $this->_has_deletable ;
 }
 
-function has_superdelete()
+public function has_superdelete()
 {
 	return $this->_has_superdelete ;
 }
 
-function has_touchothers()
+public function has_touchothers()
 {
 	return $this->_has_touchothers ;
 }
 
-function has_supertouchothers()
+public function has_supertouchothers()
 {
 	return $this->_has_supertouchothers ;
 }
 
-function has_rateview()
+public function has_rateview()
 {
 	return $this->_has_rateview ;
 }
 
-function has_ratevote()
+public function has_ratevote()
 {
 	return $this->_has_ratevote ;
 }
 
-function has_tellafriend()
+public function has_tellafriend()
 {
 	return $this->_has_tellafriend ;
 }
 
-function has_tagedit()
+public function has_tagedit()
 {
 	return $this->_has_tagedit ;
 }
 
-function has_mail()
+public function has_mail()
 {
 	return $this->_has_mail ;
 }
 
-function has_file()
+public function has_file()
 {
 	return $this->_has_file ;
 }
 
-function has_html()
+public function has_html()
 {
 	return $this->_has_html ;
 }

@@ -14,24 +14,27 @@
 // build_total_for_detail()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_user
 //=========================================================
 class webphoto_user extends webphoto_base_this
 {
-	var $_public_class;
+	public $_public_class;
 
-	var $_PHOTO_LIST_USER_ORDER = 'item_uid ASC, item_id DESC';
-	var $_PHOTO_LIST_USER_GROUP = 'item_uid';
+	public $_PHOTO_LIST_USER_ORDER = 'item_uid ASC, item_id DESC';
+	public $_PHOTO_LIST_USER_GROUP = 'item_uid';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_user( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );

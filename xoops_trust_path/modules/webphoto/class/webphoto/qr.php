@@ -6,23 +6,26 @@
 // 2010-01-10 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_qr
 //=========================================================
 class webphoto_qr extends webphoto_base_this
 {
-	var $_user_handler;
+	public $_user_handler;
 
-	var $_QR_MODULE_SIZE = 3;
+	public $_QR_MODULE_SIZE = 3;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_qr( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_user_handler
 		=& webphoto_user_handler::getInstance( $dirname, $trust_dirname );
@@ -40,7 +43,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // qr code
 //---------------------------------------------------------
-function create_mobile_qr( $id )
+public function create_mobile_qr( $id )
 {
 	$file = $this->_QRS_DIR.'/'.$this->build_mobile_filename( $id );
 	if ( !is_file( $file) ) {
@@ -50,7 +53,7 @@ function create_mobile_qr( $id )
 	}
 }
 
-function build_mobile_param( $photo_id )
+public function build_mobile_param( $photo_id )
 {
 	$arr = array(
 		'mobile_email'    => $this->get_mobile_email() ,
@@ -60,7 +63,7 @@ function build_mobile_param( $photo_id )
 	return $arr;
 }
 
-function build_mobile_url( $id )
+public function build_mobile_url( $id )
 {
 	$url = $this->_MODULE_URL.'/i.php';
 	if ( $id > 0 ) {
@@ -69,7 +72,7 @@ function build_mobile_url( $id )
 	return $url;
 }
 
-function build_mobile_filename( $id )
+public function build_mobile_filename( $id )
 {
 	$file = 'qr_index.png';
 	if ( $id > 0 ) {
@@ -78,7 +81,7 @@ function build_mobile_filename( $id )
 	return $file;
 }
 
-function get_mobile_email()
+public function get_mobile_email()
 {
 	$row = $this->_user_handler->get_row_by_uid( $this->_xoops_uid );
 	if ( is_array($row) ) {

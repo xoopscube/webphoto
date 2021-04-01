@@ -36,7 +36,9 @@
 // build_embedlink()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_flash_player
@@ -50,47 +52,48 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 
 class webphoto_flash_player extends webphoto_base_ini
 {
-	var $_config_class;
-	var $_item_handler;
-	var $_file_handler;
-	var $_player_handler;
-	var $_flashvar_handler;
+	public $_config_class;
+	public $_item_handler;
+	public $_file_handler;
+	public $_player_handler;
+	public $_flashvar_handler;
 
-	var $_cfg_use_callback;
+	public $_cfg_use_callback;
 
 // result
-	var $_report = null;
+	public $_report = null;
 
 // local
-	var $_item_row     = null;
-	var $_flashvar_row = null;
-	var $_item_id      = 0 ;
-	var $_kind         = null ;
+	public $_item_row     = null;
+	public $_flashvar_row = null;
+	public $_item_id      = 0 ;
+	public $_kind         = null ;
 
-	var $_flashplayer = null;
-	var $_screencolor = null;
-	var $_width       = 0;
-	var $_height      = 0;
+	public $_flashplayer = null;
+	public $_screencolor = null;
+	public $_width       = 0;
+	public $_height      = 0;
 
-	var $_PLAYLISTS_DIR ;
-	var $_PLAYLISTS_URL ;
-	var $_LOGOS_DIR ;
-	var $_LOGOS_URL ;
+	public $_PLAYLISTS_DIR ;
+	public $_PLAYLISTS_URL ;
+	public $_LOGOS_DIR ;
+	public $_LOGOS_URL ;
 
-	var $_CALLBACK_URL = null;
+	public $_CALLBACK_URL = null;
 
-	var $_CODEBASE = 'http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0';
-	var $_CLASSID  = 'clsid:d27cdb6e-ae6d-11cf-96b8-444553540000';
+	public $_CODEBASE = 'http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0';
+	public $_CLASSID  = 'clsid:d27cdb6e-ae6d-11cf-96b8-444553540000';
 
 // show black if change the font size in web brawser
-	var $_SCREENCOLOR_DEFAULT = '#ffffff' ;	// white
+	public $_SCREENCOLOR_DEFAULT = '#ffffff' ;	// white
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_flash_player( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_ini( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 	$this->_xoops_class      =& webphoto_xoops_base::getInstance();
 	$this->_utility_class    =& webphoto_lib_utility::getInstance();
@@ -367,7 +370,7 @@ function set_variables_in_buffer( $param )
 
 		default;
 			if ( $this->_is_module_admin ) {
-				echo "NOT flash player type <br />\n";
+				echo "NOT flash player type <br>\n";
 			}
 			return false;
 	}

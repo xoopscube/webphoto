@@ -16,22 +16,25 @@
 // build_total_for_detail()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_main
 //=========================================================
 class webphoto_main extends webphoto_base_this
 {
-	var $_public_class;
-	var $_sort_class;
+	public $_public_class;
+	public $_sort_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_main( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
@@ -51,7 +54,7 @@ public static function &getInstance( $dirname = null, $trust_dirname = null )
 //---------------------------------------------------------
 // detail
 //---------------------------------------------------------
-function build_total_for_detail( $mode )
+public function build_total_for_detail( $mode )
 {
 	$title = $this->build_title_by_mode( $mode );
 	$name  = $this->_sort_class->mode_to_name( $mode );
@@ -60,7 +63,7 @@ function build_total_for_detail( $mode )
 	return array( $title, $total );
 }
 
-function build_rows_for_detail( $mode, $sort, $limit=0, $start=0 )
+public function build_rows_for_detail( $mode, $sort, $limit=0, $start=0 )
 {
 	$name    = $this->_sort_class->mode_to_name( $mode );
 	$orderby = $this->_sort_class->mode_to_orderby( $mode, $sort );
@@ -72,7 +75,7 @@ function build_rows_for_detail( $mode, $sort, $limit=0, $start=0 )
 //---------------------------------------------------------
 // rss
 //---------------------------------------------------------
-function build_rows_for_rss( $mode, $limit=0, $start=0 )
+public function build_rows_for_rss( $mode, $limit=0, $start=0 )
 {
 	$sort = null;
 	return $this->build_rows_for_detail( $mode, $sort, $limit, $start );

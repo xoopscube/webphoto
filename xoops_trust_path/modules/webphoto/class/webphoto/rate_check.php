@@ -12,22 +12,25 @@
 // $trust_dirname in webphoto_item_handler
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_rate_check
 //=========================================================
 class webphoto_rate_check extends webphoto_lib_base
 {
-	var $_item_handler;
-	var $_vote_handler;
+	public $_item_handler;
+	public $_vote_handler;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_rate_check( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_lib_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_lib_base( $dirname, $trust_dirname );
 
 	$this->_item_handler =& webphoto_item_handler::getInstance( 
 		$dirname, $trust_dirname );

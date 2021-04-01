@@ -23,33 +23,34 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_xoops_header extends webphoto_base_this
 {
-	var $_header_class;
+	public $_header_class;
 
-	var $_cfg_gmap_apikey;
-	var $_cfg_use_popbox;
-	var $_cfg_use_lightbox;
-	var $_cfg_timeline_dirname;
+	public $_cfg_gmap_apikey;
+	public $_cfg_use_popbox;
+	public $_cfg_use_lightbox;
+	public $_cfg_timeline_dirname;
 
-	var $_flag_css      = false;
-	var $_flag_box      = false;
-	var $_flag_rss      = false;
-	var $_flag_gmap     = false;
-	var $_flag_popbox   = false;
-	var $_flag_lightbox = false;
-	var $_flag_timeline = false;
+	public $_flag_css      = false;
+	public $_flag_box      = false;
+	public $_flag_rss      = false;
+	public $_flag_gmap     = false;
+	public $_flag_popbox   = false;
+	public $_flag_lightbox = false;
+	public $_flag_timeline = false;
 
-	var $_rss_mode    = null;
-	var $_rss_param   = null;
-	var $_rss_limit   = 100;
+	public $_rss_mode    = null;
+	public $_rss_param   = null;
+	public $_rss_limit   = 100;
 
-	var $_LIGHTBOX_URL;
+	public $_LIGHTBOX_URL;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_xoops_header( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 	$this->_header_class =& webphoto_inc_xoops_header::getSingleton( $dirname );
 
@@ -241,7 +242,7 @@ function _build_timeline_extend_js()
 	$str = <<< EOF
 function webphoto_timeline_zoom( link, op, sm, sp, unit )
 {
-	var date  = timeline_get_center_date();
+	public date  = timeline_get_center_date();
 	link.href = '{$this->_MODULE_URL}/index.php?op=' + op + '&sm=' + sm + '&sp=' + sp + '&unit=' + unit + '&date=' + encodeURIComponent(date) ;
 	return true;
 }

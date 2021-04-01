@@ -16,24 +16,27 @@
 // build_lang_keytooshort()
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_search
 //=========================================================
 class webphoto_search extends webphoto_base_this
 {
-	var $_public_class;
-	var $_search_class;
+	public $_public_class;
+	public $_search_class;
 
-	var $_min_keyword;
+	public $_min_keyword;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_search( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	$this->_public_class
 		=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );

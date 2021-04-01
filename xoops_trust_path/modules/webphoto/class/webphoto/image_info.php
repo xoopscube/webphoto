@@ -14,29 +14,32 @@
 // added build_photo_full_info()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_image_info
 //=========================================================
 class webphoto_image_info extends webphoto_base_this
 {
-	var $_max_middle_width;
-	var $_max_middle_height;
-	var $_max_thumb_width;
-	var $_max_thumb_height;
+	public $_max_middle_width;
+	public $_max_middle_height;
+	public $_max_thumb_width;
+	public $_max_thumb_height;
 
-	var $_IMAGE_MEDIUM = 'image';
+	public $_IMAGE_MEDIUM = 'image';
 
-	var $_ASCII_LOWER_A = 97; 
-	var $_ASCII_LOWER_Z = 122;
+	public $_ASCII_LOWER_A = 97;
+	public $_ASCII_LOWER_Z = 122;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_image_info( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_base_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 	list( $this->_max_middle_width, $this->_max_middle_height )
 		= $this->_config_class->get_middle_wh();

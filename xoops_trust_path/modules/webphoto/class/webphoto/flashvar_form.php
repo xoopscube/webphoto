@@ -12,7 +12,9 @@
 // _C_WEBPHOTO_UPLOAD_FIELD_PLOGO
 //---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_flashvar_form
@@ -20,32 +22,33 @@ if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 
 class webphoto_flashvar_form extends webphoto_form_this
 {
-	var $_flashvar_handler;
+	public $_flashvar_handler;
 
-	var $_cfg_fsize      = 0 ;
-	var $_cfg_logo_width = 0 ;
-	var $_cfg_captcha    = null;
+	public $_cfg_fsize      = 0 ;
+	public $_cfg_logo_width = 0 ;
+	public $_cfg_captcha    = null;
 
-	var $_LOGOS_PATH ;
-	var $_LOGOS_DIR ;
-	var $_LOGOS_URL ;
+	public $_LOGOS_PATH ;
+	public $_LOGOS_DIR ;
+	public $_LOGOS_URL ;
 
-	var $_THIS_FCT = null;
-	var $_THIS_URL = null;
+	public $_THIS_FCT = null;
+	public $_THIS_URL = null;
 
-	var $_PLAYERLOGO_SIZE       = _C_WEBPHOTO_PLAYERLOGO_SIZE ;	// 30 KB
-	var $_PLAYERLOGO_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_PLOGO ;
+	public $_PLAYERLOGO_SIZE       = _C_WEBPHOTO_PLAYERLOGO_SIZE ;	// 30 KB
+	public $_PLAYERLOGO_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_PLOGO ;
 
-	var $_CAPTCHA_API_FILE = null;
-	var $_SIZE_COLOR   = 10;
-	var $_SIZE_DISPLAY =  4;
+	public $_CAPTCHA_API_FILE = null;
+	public $_SIZE_COLOR   = 10;
+	public $_SIZE_DISPLAY =  4;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_flashvar_form( $dirname , $trust_dirname )
+public function __construct( $dirname , $trust_dirname )
 {
-	$this->webphoto_form_this( $dirname , $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_form_this( $dirname , $trust_dirname );
 	$this->set_path_color_pickup( $this->_MODULE_URL.'/libs' );
 
 	$this->_flashvar_handler  =& webphoto_flashvar_handler::getInstance( $dirname );
@@ -270,7 +273,7 @@ function _build_line_display( $name )
 	$ele   = $this->build_input_text( $name, $value, $this->_SIZE_DISPLAY );
 
 	$desc  = $this->_get_caption_desc( $name );
-	$desc .= '<br />';
+	$desc .= '<br>';
 	$desc .= $this->get_constant( 'FLASHVAR_DISPLAY_DEFAULT' );
 
 	return $this->build_line_cap_ele( $title, $desc, $ele );
@@ -282,7 +285,7 @@ function _build_line_color( $name )
 	$value = $this->get_row_by_key( $name );
 
 	$desc  = $this->_get_caption_desc( $name );
-	$desc .= '<br />';
+	$desc .= '<br>';
 	$desc .= $this->get_constant( 'FLASHVAR_COLOR_DEFAULT' );
 
 	$ele  = $this->build_form_color_pickup( 
@@ -296,7 +299,7 @@ function _build_line_logo_file()
 	$desc  = $this->get_constant( 'CAP_MAXPIXEL' ) .' ';
 	$desc .= $this->_cfg_logo_width .' x ';
 	$desc .= $this->_cfg_logo_width .' px';
-	$desc .= "<br />\n";
+	$desc .= "<br>\n";
 	$desc .= $this->get_constant( 'DSC_PIXCEL_RESIZE' ) .' ';
 
 	$ele = $this->build_form_file( $this->_PLAYERLOGO_FIELD_NAME );
@@ -306,7 +309,7 @@ function _build_line_logo_file()
 
 function _build_line_logo_select()
 {
-	$desc  = $this->get_constant( 'FLASHVARS_LOGO_DSC' ) ."<br />\n";
+	$desc  = $this->get_constant( 'FLASHVARS_LOGO_DSC' ) ."<br>\n";
 	$desc .= $this->_LOGOS_DIR ;
 
 	$ele  = $this->_build_ele_logo_select();

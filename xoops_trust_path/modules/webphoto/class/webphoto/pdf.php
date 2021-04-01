@@ -20,7 +20,9 @@
 // icon_name in create_image()
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_pdf
@@ -28,25 +30,26 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 //=========================================================
 class webphoto_pdf extends webphoto_cmd_base
 {
-	var $_multibyte_class;
-	var $_xpdf_class;
-	var $_imagemagick_class;
+	public $_multibyte_class;
+	public $_xpdf_class;
+	public $_imagemagick_class;
 
-	var $_cfg_use_xpdf;
-	var $_cfg_xpdfpath;
-	var $_ini_cmd_pdf_jpeg ;
+	public $_cfg_use_xpdf;
+	public $_cfg_xpdfpath;
+	public $_ini_cmd_pdf_jpeg ;
 
-	var $_cached = array();
+	public $_cached = array();
 
-	var $_PDF_EXT = 'pdf';
-	var $_PS_EXT  = 'ps';
+	public $_PDF_EXT = 'pdf';
+	public $_PS_EXT  = 'ps';
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_pdf( $dirname, $trust_dirname )
+public function __construct( $dirname, $trust_dirname )
 {
-	$this->webphoto_cmd_base( $dirname, $trust_dirname );
+	parent::__construct( $dirname, $trust_dirname);
+	//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 	$this->_xpdf_class        =& webphoto_lib_xpdf::getInstance();
 	$this->_imagemagick_class =& webphoto_lib_imagemagick::getInstance();
