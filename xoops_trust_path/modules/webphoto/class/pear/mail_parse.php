@@ -11,9 +11,9 @@
 //=========================================================
 class webphoto_pear_mail_parse extends webphoto_pear_mail_decode
 {
-	var $_result = null;
+	public $_result = null;
 
-	var $_MAILER_LIST = array('x_mailer','x_mail_agent','user_agent');
+	public $_MAILER_LIST = array('x_mailer','x_mail_agent','user_agent');
 
 //---------------------------------------------------------
 // constructor

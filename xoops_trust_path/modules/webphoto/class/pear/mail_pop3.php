@@ -18,15 +18,15 @@
 class webphoto_pear_mail_pop3
 {
 // set param
-	var $_HOST = null;
-	var $_USER = null;
-	var $_PASS = null;
+	public $_HOST = null;
+	public $_USER = null;
+	public $_PASS = null;
 
-	var $_PORT = '110';	// pop3
-	var $_MAX_MAIL = 10;
+	public $_PORT = '110';	// pop3
+	public $_MAX_MAIL = 10;
 
-	var $_mail_arr  = array();
-	var $_error_arr = array();
+	public $_mail_arr  = array();
+	public $_error_arr = array();
 
 //---------------------------------------------------------
 // constructor

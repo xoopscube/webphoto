@@ -17,9 +17,9 @@
 //=========================================================
 class webphoto_pear_mail_decode
 {
-	var $_mail_class;
+	public $_mail_class;
 
-	var $_CHARSET_LOCAL = 'utf-8';
+	public $_CHARSET_LOCAL = 'utf-8';
 
 //---------------------------------------------------------
 // constructor
