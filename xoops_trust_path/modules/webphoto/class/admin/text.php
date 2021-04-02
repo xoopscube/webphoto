@@ -1,34 +1,26 @@
 <?php
-// $Id: text.php,v 1.3 2010/09/19 06:43:11 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-09-17 K.OHWADA
-// webphoto_lib_readfile
-// 2008-11-08 K.OHWADA
-// TMP_DIR -> MAIL_DIR
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_text
-//=========================================================
+
 class webphoto_admin_text extends webphoto_base_this {
 	public $_readfile_class;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function webphoto_admin_text( $dirname, $trust_dirname ) {
-		$this->webphoto_base_this( $dirname, $trust_dirname );
+
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_readfile_class =& webphoto_lib_readfile::getInstance();
 	}
@@ -42,9 +34,7 @@ class webphoto_admin_text extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$name = $this->_post_class->get_get_text( 'name' );
 		$file = $this->_MAIL_DIR . '/' . $name;
@@ -57,7 +47,7 @@ class webphoto_admin_text extends webphoto_base_this {
 		exit();
 	}
 
-// --- class end ---
+
 }
 
-?>
+

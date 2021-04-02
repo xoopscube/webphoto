@@ -1,64 +1,20 @@
 <?php
-// $Id: index.php,v 1.29 2011/05/10 02:56:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// _AM_WEBPHOTO_PLEASE_IMPORT_MYALBUM
-// 2010-10-01 K.OHWADA
-// _WAVS_DIR
-// 2010-06-06 K.OHWADA
-// change_check_module_version()
-// 2010-02-15 K.OHWADA
-// build_admin_footer()
-// 2010-02-01 K.OHWADA
-// _check_module_version()
-// 2009-12-06 K.OHWADA
-// change _print_file_check()
-// 2009-10-25 K.OHWADA
-// JPEGS_DIR
-// 2009-04-19 K.OHWADA
-// webphoto_lib_file_check
-// 2009-04-10 K.OHWADA
-// _print_timeline()
-// 2009-03-15 K.OHWADA
-// SMALLS_DIR
-// 2009-01-25 K.OHWADA
-// _SWFS_DIR
-// 2009-01-10 K.OHWADA
-// _PDFS_DIR
-// 2008-12-12 K.OHWADA
-// getInstance() -> getSingleton()
-// 2008-12-07 K.OHWADA
-// window.close()
-// 2008-12-06 K.OHWADA
-// check_writable
-// 2008-12-05 K.OHWADA
-// $this->_workdir_class->init()
-// 2008-11-08 K.OHWADA
-// webphoto_inc_workdir
-// 2008-10-01 K.OHWADA
-// use PLAYLISTS_DIR
-// 2008-08-24 K.OHWADA
-// added _print_check_update()
-// 2008-08-01 K.OHWADA
-// added DIR_TRUST_MOD_UPLOADS
-// 2008-07-01 K.OHWADA
-// added to check PATH_INFO
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_index
-//=========================================================
+
 class webphoto_admin_index extends webphoto_base_this {
 	public $_checkconfig_class;
 	public $_update_check_class;
@@ -69,13 +25,10 @@ class webphoto_admin_index extends webphoto_base_this {
 
 	public $_MKDIR_MODE = 0777;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_update_check_class =& webphoto_admin_update_check::getInstance(
 			$dirname, $trust_dirname );
@@ -99,10 +52,8 @@ class webphoto_admin_index extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		xoops_cp_header();
 
 		if ( isset( $_SERVER["PATH_INFO"] ) && $_SERVER["PATH_INFO"] ) {
@@ -129,10 +80,10 @@ class webphoto_admin_index extends webphoto_base_this {
 		xoops_cp_footer();
 	}
 
-//---------------------------------------------------------
+
 // check permission
-//---------------------------------------------------------
-	function _print_check() {
+
+	public function _print_check() {
 		echo $this->_make_dir( $this->_UPLOADS_DIR );
 		echo $this->_make_dir( $this->_PHOTOS_DIR );
 		echo $this->_make_dir( $this->_THUMBS_DIR );
@@ -187,18 +138,18 @@ class webphoto_admin_index extends webphoto_base_this {
 		echo "<br>\n";
 	}
 
-	function _check_module_version() {
+	public function _check_module_version() {
 		$ver1 = $this->_xoops_class->get_my_module_version();
 		$ver2 = $this->_xoops_class->get_module_info_version_by_dirname( $this->_DIRNAME, true );
 
-		if ( intval( $ver1 ) >= intval( $ver2 ) ) {
+		if ( (int) $ver1 >= intval( $ver2 ) ) {
 			return true;
 		}
 
 		return false;
 	}
 
-	function _get_module_update_url() {
+	public function _get_module_update_url() {
 		if ( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 			$str = XOOPS_URL . "/modules/legacy/admin/index.php?action=ModuleUpdate&amp;dirname=" . $this->_DIRNAME;
 		} else {
@@ -208,7 +159,7 @@ class webphoto_admin_index extends webphoto_base_this {
 		return $str;
 	}
 
-	function _make_dir( $dir, $check_writable = true ) {
+	public function _make_dir( $dir, $check_writable = true ) {
 		$not_dir = true;
 		if ( is_dir( $dir ) ) {
 			$not_dir = false;
@@ -271,7 +222,7 @@ class webphoto_admin_index extends webphoto_base_this {
 		return true;
 	}
 
-	function _print_file_check() {
+	public function _print_file_check() {
 		$url = $this->_MODULE_URL . '/admin/index.php?fct=check_file';
 
 		echo "<h4>" . _AM_WEBPHOTO_FILE_CHECK . "</h4>\n";
@@ -281,7 +232,7 @@ class webphoto_admin_index extends webphoto_base_this {
 		echo "</a><br><br>\n";
 	}
 
-	function _print_timeline() {
+	public function _print_timeline() {
 		$timeline_dirname = $this->get_config_by_name( 'timeline_dirname' );
 		$TIMELINE_DIR     = XOOPS_TRUST_PATH . '/modules/' . $timeline_dirname;
 		$version_file     = $TIMELINE_DIR . '/include/version.php';
@@ -318,7 +269,7 @@ class webphoto_admin_index extends webphoto_base_this {
 		echo "<br>\n";
 	}
 
-	function _print_command_url() {
+	public function _print_command_url() {
 		$pass = $this->get_config_by_name( 'bin_pass' );
 		$url  = $this->_MODULE_URL . '/bin/retrieve.php?pass=' . $pass;
 
@@ -328,7 +279,4 @@ class webphoto_admin_index extends webphoto_base_this {
 		echo "</a><br><br>\n";
 	}
 
-// --- class end ---
 }
-
-?>

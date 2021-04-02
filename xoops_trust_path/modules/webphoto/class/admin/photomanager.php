@@ -1,32 +1,20 @@
 <?php
-// $Id: photomanager.php,v 1.6 2010/03/19 00:23:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-03-18 K.OHWADA
-// format_and_update_item()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_edit_item_delete
-// 2009-01-10 K.OHWADA
-// webphoto_photo_delete -> webphoto_edit_item_delete 
-// 2008-10-01 K.OHWADA
-// delete_photo -> delete_photo_by_item_id
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_photomanager
-//=========================================================
+
 class webphoto_admin_photomanager extends webphoto_edit_base {
 	public $_search_class;
 	public $_delete_class;
@@ -46,13 +34,10 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 	public $_TIME_SUCCESS = 1;
 	public $_TIME_FAIL = 5;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_base( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_search_class =& webphoto_edit_search_build::getInstance(
 			$dirname, $trust_dirname );
@@ -69,9 +54,7 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$this->_get_perpage = $this->_post_class->get_get_int( 'perpage', $this->_PERPAGE_DEFAULT );
 		$this->_get_catid   = $this->_post_class->get_get_int( 'cat_id' );
@@ -111,9 +94,9 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 		return $action;
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	function _delete() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_ADMIN_PHOTO_PHP, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -129,9 +112,9 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 		exit;
 	}
 
-//---------------------------------------------------------
+
 // update
-//---------------------------------------------------------
+
 	function _update() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_ADMIN_PHOTO_PHP, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -260,9 +243,9 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 		exit;
 	}
 
-//---------------------------------------------------------
+
 // print_form
-//---------------------------------------------------------
+
 	function _print_form() {
 		$form_class =& webphoto_admin_photo_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -294,7 +277,7 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 
 	}
 
-// --- class end ---
+
 }
 
-?>
+

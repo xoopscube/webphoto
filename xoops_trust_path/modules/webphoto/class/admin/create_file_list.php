@@ -1,28 +1,27 @@
 <?php
-// $Id: create_file_list.php,v 1.1 2009/04/19 16:07:42 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-04-19 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_create_file_list
-//=========================================================
+
 class webphoto_admin_create_file_list extends webphoto_base_this {
 	public $_file_class;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_file_class =& webphoto_lib_file_check::getInstance(
 			$dirname, $trust_dirname );
@@ -37,9 +36,9 @@ class webphoto_admin_create_file_list extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // function
-//---------------------------------------------------------
+
 	public function main() {
 		xoops_cp_header();
 

@@ -1,40 +1,20 @@
 <?php
-// $Id: import.php,v 1.10 2011/06/05 07:23:40 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-06-04 K.OHWADA
-// Fatal error: Class 'webphoto_item_create_class' not found
-// 2010-11-11 K.OHWADA
-// file_id_to_item_name()
-// 2010-03-18 K.OHWADA
-// format_and_insert_item()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_item_handler
-// get_ini()
-// 2009-01-10 K.OHWADA
-// webphoto_import -> webphoto_edit_import
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-// 2008-08-01 K.OHWADA
-// use create_from_file()
-// 2008-07-01 K.OHWADA
-// added _import_image_read_src() _import_image_each_photo()
-// xoops_error() -> build_error_msg()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_import
-//=========================================================
+
 class webphoto_admin_import extends webphoto_edit_import {
 
 	public $_image_handler;
@@ -52,13 +32,10 @@ class webphoto_admin_import extends webphoto_edit_import {
 	public $_webphoto_file_handler;
 	public $_webphoto_vote_handler;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_import( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_groupperm_class =& webphoto_xoops_groupperm::getInstance();
 
@@ -80,10 +57,8 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		xoops_cp_header();
 
 		echo $this->build_admin_menu();
@@ -118,7 +93,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		exit();
 	}
 
-	function _get_op() {
+	public function _get_op() {
 		$op        = $this->_post_class->get_post_text( 'op' );
 		$imgcat_id = $this->_post_class->get_post_int( 'imgcat_id' );
 		$cid       = $this->_post_class->get_post_int( 'cid' );
@@ -139,14 +114,14 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return '';
 	}
 
-	function _is_copy_comment() {
+	public function _is_copy_comment() {
 		return $this->_post_class->get_post_int( 'copy_comment' );
 	}
 
-//---------------------------------------------------------
+
 // image
-//---------------------------------------------------------
-	function _import_image() {
+
+	public function _import_image() {
 		$imgcat_id = $this->_post_class->get_post_int( 'imgcat_id' );
 
 		$new_cid = $this->_import_image_cat( $imgcat_id );
@@ -159,7 +134,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->print_finish();
 	}
 
-	function _import_image_cat( $src_cid ) {
+	public function _import_image_cat( $src_cid ) {
 		echo "<h4>category</h4>\n";
 
 		$image_row = $this->_image_handler->get_category_row_by_id( $src_cid );
@@ -181,7 +156,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $this->_cat_handler->insert( $row );
 	}
 
-	function _import_image_photos( $src_cid, $new_cid ) {
+	public function _import_image_photos( $src_cid, $new_cid ) {
 		echo "<h4>photo</h4>\n";
 
 // save row
@@ -220,7 +195,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->print_import_count( $import_count );
 	}
 
-	function _import_image_read_src( $image_row, $tmp_file, $imgcat_storetype ) {
+	public function _import_image_read_src( $image_row, $tmp_file, $imgcat_storetype ) {
 		$image_id   = $image_row['image_id'];
 		$image_name = $image_row['image_name'];
 		$src_file   = XOOPS_UPLOAD_PATH . '/' . $image_name;
@@ -250,7 +225,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return true;
 	}
 
-	function _import_image_each_photo( $item_row, $image_row, $tmp_file ) {
+	public function _import_image_each_photo( $item_row, $image_row, $tmp_file ) {
 		$created = $image_row['image_created'];
 
 		$item_row['item_title']       = $image_row['image_nicename'];
@@ -270,10 +245,10 @@ class webphoto_admin_import extends webphoto_edit_import {
 
 	}
 
-//---------------------------------------------------------
+
 // myalbum
-//---------------------------------------------------------
-	function _import_myalbum() {
+
+	public function _import_myalbum() {
 		$cid         = $this->_post_class->get_post_int( 'cid' );
 		$src_dirname = $this->_post_class->get_post_text( 'src_dirname' );
 
@@ -295,7 +270,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->print_finish();
 	}
 
-	function _import_myalbum_cat( $src_cid ) {
+	public function _import_myalbum_cat( $src_cid ) {
 		echo "<h4>category</h4>\n";
 
 		$myalbum_row = $this->_myalbum_handler->get_cat_row_by_id( $src_cid );
@@ -307,7 +282,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $this->insert_category_from_myalbum( 0, $myalbum_row );
 	}
 
-	function _import_myalbum_photos( $src_cid, $new_cid ) {
+	public function _import_myalbum_photos( $src_cid, $new_cid ) {
 		echo "<h4>photo</h4>\n";
 
 		$myalbum_rows = $this->_myalbum_handler->get_photos_rows_by_cid( $src_cid );
@@ -352,7 +327,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->print_import_count( $import_count );
 	}
 
-	function _add_votes_from_myalbum( $lid, $newid ) {
+	public function _add_votes_from_myalbum( $lid, $newid ) {
 		$myalbum_rows = $this->_myalbum_handler->get_votedata_row_by_lid( $lid );
 		if ( ! is_array( $myalbum_rows ) || ! count( $myalbum_rows ) ) {
 			return true;    // no action
@@ -368,10 +343,10 @@ class webphoto_admin_import extends webphoto_edit_import {
 		}
 	}
 
-//---------------------------------------------------------
+
 // webphoto
-//---------------------------------------------------------
-	function _import_webphoto() {
+
+	public function _import_webphoto() {
 		$cat_id      = $this->_post_class->get_post_int( 'cat_id' );
 		$src_dirname = $this->_post_class->get_post_text( 'src_dirname' );
 
@@ -393,7 +368,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->print_finish();
 	}
 
-	function _init_webphoto( $src_dirname ) {
+	public function _init_webphoto( $src_dirname ) {
 		$module_class =& webphoto_xoops_module::getInstance();
 		$config_class =& webphoto_inc_config::getSingleton( $src_dirname );
 
@@ -418,7 +393,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $mid;
 	}
 
-	function _import_webphoto_cat( $src_cid ) {
+	public function _import_webphoto_cat( $src_cid ) {
 		echo "<h4>category</h4>\n";
 
 		$webphoto_row = $this->_webphoto_cat_handler->get_row_by_id( $src_cid );
@@ -433,7 +408,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $this->_cat_handler->insert( $row );
 	}
 
-	function _import_webphoto_photos( $src_cid, $new_cid ) {
+	public function _import_webphoto_photos( $src_cid, $new_cid ) {
 		echo "<h4>photo</h4>\n";
 
 		$webphoto_item_rows = $this->_webphoto_item_create_class->get_rows_by_catid( $src_cid );
@@ -462,7 +437,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->print_import_count( $import_count );
 	}
 
-	function _add_photo_from_webphoto( $new_cid, $webphoto_item_row ) {
+	public function _add_photo_from_webphoto( $new_cid, $webphoto_item_row ) {
 // insert
 		$item_row                = $webphoto_item_row;
 		$item_row['item_id']     = 0;
@@ -502,7 +477,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $item_id;
 	}
 
-	function _add_file_from_webphoto( $item_id, $webphoto_file_id ) {
+	public function _add_file_from_webphoto( $item_id, $webphoto_file_id ) {
 		$file_row = $this->_webphoto_file_handler->get_row_by_id( $webphoto_file_id );
 		if ( ! is_array( $file_row ) ) {
 			echo ' no src file record ';
@@ -524,7 +499,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		return $newid;
 	}
 
-	function _add_votes_from_webphoto( $src_id, $newid ) {
+	public function _add_votes_from_webphoto( $src_id, $newid ) {
 		$webphoto_rows = $this->_webphoto_vote_handler->get_rows_by_photoid( $src_id );
 		if ( ! is_array( $webphoto_rows ) || ! count( $webphoto_rows ) ) {
 			return true;    // no action
@@ -544,10 +519,10 @@ class webphoto_admin_import extends webphoto_edit_import {
 		}
 	}
 
-//---------------------------------------------------------
+
 // print form
-//---------------------------------------------------------
-	function _print_form() {
+
+	public function _print_form() {
 		$this->_form_class = webphoto_admin_import_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
@@ -563,7 +538,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		$this->_print_form_webphotos();
 	}
 
-	function _print_myalbum_link() {
+	public function _print_myalbum_link() {
 		$title = $this->get_admin_title( 'IMPORT_MYALBUM' );
 
 		echo "<h4>" . $title . "</h4>\n";
@@ -575,7 +550,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		echo $this->_form_class->build_div_end();
 	}
 
-	function _print_form_image() {
+	public function _print_form_image() {
 		echo "<h4>" . _AM_WEBPHOTO_FMT_IMPORTFROMIMAGEMANAGER . "</h4>\n";
 
 		$cat_rows = $this->_image_handler->get_category_rows_with_image_count();
@@ -583,7 +558,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 
 	}
 
-	function _print_form_myalbums() {
+	public function _print_form_myalbums() {
 		$module_array = $this->_myalbum_handler->get_myalbum_module_array();
 		if ( ! is_array( $module_array ) || ! count( $module_array ) ) {
 			return true;    // no acton
@@ -605,7 +580,7 @@ class webphoto_admin_import extends webphoto_edit_import {
 		}
 	}
 
-	function _print_form_webphotos() {
+	public function _print_form_webphotos() {
 		$param = array(
 			'file'   => 'include/webphoto.php',
 			'except' => $this->_DIRNAME,
@@ -633,7 +608,4 @@ class webphoto_admin_import extends webphoto_edit_import {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

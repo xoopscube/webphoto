@@ -1,32 +1,27 @@
 <?php
-// $Id: user_table_manage.php,v 1.2 2009/11/29 07:34:21 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_user_handler
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_user_table_manage
-//=========================================================
+
 class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
-		parent::__construct( $dirname , $trust_dirname );
-		//$this->webphoto_lib_manage( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
+
 		$this->set_manage_handler(
 			webphoto_user_handler::getInstance( $dirname, $trust_dirname ) );
 		$this->set_manage_title_by_name( 'USER_TABLE_MANAGE' );
@@ -44,16 +39,14 @@ class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		$this->_main();
 	}
 
-//=========================================================
+
 // override for caller
-//=========================================================
+
 	public function _build_row_by_post( $row = array() ) {
 		$row = array(
 			'user_id'          => $this->_post_class->get_post_get_int( 'user_id' ),
@@ -77,9 +70,9 @@ class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 		return $row;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	public function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
 
@@ -102,7 +95,7 @@ class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 		echo "</table></form>\n";
 	}
 
-// --- class end ---
+
 }
 
-?>
+

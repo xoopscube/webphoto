@@ -1,18 +1,20 @@
 <?php
-// $Id: rss_manager.php,v 1.1 2009/03/06 03:54:16 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-03-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_rss_manager
-//=========================================================
+
 class webphoto_admin_rss_manager extends webphoto_base_this {
 	public $_form_class;
 
@@ -21,11 +23,9 @@ class webphoto_admin_rss_manager extends webphoto_base_this {
 	public $_THIS_FCT = 'rss_manager';
 	public $_THIS_URL;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function webphoto_admin_rss_manager( $dirname, $trust_dirname ) {
-		$this->webphoto_base_this( $dirname, $trust_dirname );
+
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_rss_class  =& webphoto_rss::getInstance(
 			$dirname, $trust_dirname );
@@ -46,9 +46,7 @@ class webphoto_admin_rss_manager extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$op = $this->_post_class->get_post_text( 'op' );
 
@@ -80,7 +78,7 @@ class webphoto_admin_rss_manager extends webphoto_base_this {
 		exit();
 	}
 
-// --- class end ---
+
 }
 
-?>
+

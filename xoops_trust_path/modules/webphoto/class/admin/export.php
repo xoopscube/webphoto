@@ -1,33 +1,20 @@
 <?php
-// $Id: export.php,v 1.6 2010/11/16 23:43:38 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// get_file_extend_row_by_kind()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_cat_selbox
-// get_ini()
-// 2008-10-01 K.OHWADA
-// remove an unnecessary title
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-// 2008-07-01 K.OHWADA
-// xoops_error() -> build_error_msg()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_export
-//=========================================================
+
 class webphoto_admin_export extends webphoto_base_this {
 
 	public $_groupperm_class;
@@ -37,13 +24,10 @@ class webphoto_admin_export extends webphoto_base_this {
 	public $_src_catid;
 	public $_img_catid;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_groupperm_class =& webphoto_xoops_groupperm::getInstance();
 
@@ -65,10 +49,8 @@ class webphoto_admin_export extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		xoops_cp_header();
 
 		echo $this->build_admin_menu();
@@ -97,7 +79,7 @@ class webphoto_admin_export extends webphoto_base_this {
 		exit();
 	}
 
-	function _get_op() {
+	public function _get_op() {
 		$op               = $this->_post_class->get_post_text( 'op' );
 		$this->_src_catid = $this->_post_class->get_post_int( 'cat_id' );
 		$this->_img_catid = $this->_post_class->get_post_int( 'imgcat_id' );
@@ -113,10 +95,10 @@ class webphoto_admin_export extends webphoto_base_this {
 		return '';
 	}
 
-//---------------------------------------------------------
+
 // image
-//---------------------------------------------------------
-	function _export_image() {
+
+	public function _export_image() {
 		$use_thumb = $this->_post_class->get_post_int( 'use_thumb' );
 
 		$cat_row = $this->_image_handler->get_category_row_by_id( $this->_img_catid );
@@ -228,10 +210,10 @@ class webphoto_admin_export extends webphoto_base_this {
 		$this->_print_finish();
 	}
 
-//---------------------------------------------------------
+
 // print form
-//---------------------------------------------------------
-	function _print_form() {
+
+	public function _print_form() {
 		$this->_form_class = webphoto_admin_export_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
@@ -243,7 +225,7 @@ class webphoto_admin_export extends webphoto_base_this {
 		}
 	}
 
-	function _print_form_image() {
+	public function _print_form_image() {
 		echo "<h4>" . _AM_WEBPHOTO_FMT_EXPORTTOIMAGEMANAGER . "</h4>\n";
 
 		$cat_selbox_class =& webphoto_cat_selbox::getInstance();
@@ -256,20 +238,20 @@ class webphoto_admin_export extends webphoto_base_this {
 
 	}
 
-	function _print_export_count( $count ) {
+	public function _print_export_count( $count ) {
 		echo "<br>\n";
 		echo "<b>";
 		echo sprintf( _AM_WEBPHOTO_FMT_EXPORTSUCCESS, $count );
 		echo "</b><br>\n";
 	}
 
-	function _print_finish() {
+	public function _print_finish() {
 		echo "<br><hr />\n";
 		echo "<h4>FINISHED</h4>\n";
 		echo '<a href="index.php">GOTO Admin Menu</a>' . "<br>\n";
 	}
 
-// --- class end ---
+
 }
 
-?>
+

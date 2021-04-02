@@ -1,36 +1,27 @@
 <?php
-// $Id: admission_form.php,v 1.3 2008/08/25 19:28:05 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-// 2008-07-01 K.OHWADA
-// bug fix
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_admission_form
-//=========================================================
+
 class webphoto_admin_admission_form extends webphoto_form_this {
 	public $_ADMISSION_SEARCH_SIZE = 20;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_form_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
@@ -42,9 +33,7 @@ class webphoto_admin_admission_form extends webphoto_form_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
 // admission
-//---------------------------------------------------------
 	public function print_form_admission_search( $txt ) {
 		echo $this->build_form_tag( '', $this->_THIS_URL, 'get' );
 		echo $this->build_input_hidden( 'fct', 'admission' );
@@ -143,5 +132,4 @@ class webphoto_admin_admission_form extends webphoto_form_this {
 
 	}
 
-// --- class end ---
 }

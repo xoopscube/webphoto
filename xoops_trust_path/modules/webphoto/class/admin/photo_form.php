@@ -1,37 +1,20 @@
 <?php
-// $Id: photo_form.php,v 1.9 2010/09/19 06:43:11 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-09-17 K.OHWADA
-// build_form_admin_edit()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_cat_selbox
-// 2009-01-10 K.OHWADA
-// _check_deadlink()
-// 2008-11-29 K.OHWADA
-// _WEBPHOTO_DSC_SET_TIME_UPDATE -> _WEBPHOTO_DSC_SET_ITEM_TIME_UPDATE
-// 2008-11-16 K.OHWADA
-// ahref_file -> media_url_s 
-// 2008-10-01 K.OHWADA
-// submit -> item_manager
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-// used preload_init()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_photo_form
-//=========================================================
+
 class webphoto_admin_photo_form extends webphoto_edit_form {
 	public $_show_class;
 	public $_cat_selbox_class;
@@ -52,13 +35,10 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 	public $_COLOR_WHITE = '#FFFFFF';
 	public $_COLOR_PINK = '#FFE4E1';    /* mistrose */
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_form( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->init_pagenavi();
 
@@ -82,9 +62,9 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // print_form
-//---------------------------------------------------------
+
 	function print_form( $photo_count, $photo_rows, $perpage, $photonavinfo ) {
 		$this->_get_catid     = $this->_post_class->get_get_int( 'cat_id' );
 		$this->_get_pos       = $this->_post_class->get_get_int( 'pos' );
@@ -169,9 +149,9 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 
 	}
 
-//---------------------------------------------------------
+
 // print_num_form
-//---------------------------------------------------------
+
 	function _print_form_search_table( $photo_count, $perpage ) {
 // Page Navigation
 		$extra = "fct=photomanager&perpage=" . $perpage . "&cat_id=" . $this->_get_catid . "&txt=" . urlencode( $this->_get_txt );
@@ -230,9 +210,9 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // print_photo
-//---------------------------------------------------------
+
 	function _print_photo( $row ) {
 		$cfg_thumb_width  = $this->_config_class->get_by_name( 'thumb_width' );
 		$cfg_thumb_height = $this->_config_class->get_by_name( 'thumb_height' );
@@ -351,9 +331,9 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 		return true;
 	}
 
-//---------------------------------------------------------
+
 // print_edit_table
-//---------------------------------------------------------
+
 	function _print_form_edit_table( $perpage ) {
 		$template = 'db:' . $this->_DIRNAME . '_form_admin_photo.html';
 
@@ -533,7 +513,5 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 		return $this->build_input_submit( 'update', _AM_WEBPHOTO_BUTTON_UPDATE, $extra );
 	}
 
-// --- class end ---
-}
 
-?>
+}

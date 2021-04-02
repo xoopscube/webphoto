@@ -1,18 +1,20 @@
 <?php
-// $Id: maillog_form.php,v 1.1 2010/09/19 06:43:11 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
-//=========================================================
-// webphoto module
-// 2010-09-17 K.OHWADA
-//=========================================================
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_maillog_form
-//=========================================================
 class webphoto_admin_maillog_form extends webphoto_edit_form {
 	public $_maillog_handler;
 	public $_cat_selbox_class;
@@ -26,13 +28,10 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 	public $_UID_ADMIN = 1;
 	public $_CAT_ID_DEFAULT = 0;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_form( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_maillog_handler
 			=& webphoto_maillog_handler::getInstance( $dirname, $trust_dirname );
@@ -51,10 +50,10 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // build_form
-//---------------------------------------------------------
-	function build_form( $row ) {
+
+	public function build_form( $row ) {
 		$template = 'db:' . $this->_DIRNAME . '_form_admin_maillog.html';
 
 		$this->set_row( $row );
@@ -72,7 +71,7 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $tpl->fetch( $template );
 	}
 
-	function build_form_maillog() {
+	public function build_form_maillog() {
 		$userstart   = $this->_post_class->get_get( 'userstart' );
 		$show_submit = $this->show_submit();
 
@@ -104,17 +103,13 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $arr;
 	}
 
-	function show_submit() {
-		$status = intval( $this->get_row_by_key( 'maillog_status' ) );
+	public function show_submit() {
+		$status = (int) $this->get_row_by_key( 'maillog_status' );
 
-		if ( $status != _C_WEBPHOTO_MAILLOG_STATUS_SUBMIT ) {
-			return true;
-		}
-
-		return false;
+		return $status != _C_WEBPHOTO_MAILLOG_STATUS_SUBMIT;
 	}
 
-	function photo_ids_disp() {
+	public function photo_ids_disp() {
 		$photo_id_arr = $this->_maillog_handler->build_photo_ids_row_to_array( $this->get_row() );
 		if ( ! is_array( $photo_id_arr ) || ! count( $photo_id_arr ) ) {
 			return $this->_TEXT_EMPTY_SUBSUTITUTE;
@@ -122,7 +117,7 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 
 		$text = '';
 		foreach ( $photo_id_arr as $photo_id ) {
-			$photo_id = intval( $photo_id );
+			$photo_id = (int) $photo_id;
 			$url      = $this->_MODULE_URL . '/index.php?fct=photo&amp;p=' . $photo_id;
 			$title_s  = $this->_item_handler->get_cached_value_by_id_name(
 				$photo_id, 'photo_title', true );
@@ -137,7 +132,7 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $text;
 	}
 
-	function file_disp() {
+	public function file_disp() {
 		$file = $this->get_row_by_key( 'maillog_file' );
 		if ( empty( $file ) ) {
 			return $this->_TEXT_EMPTY_SUBSUTITUTE;
@@ -154,8 +149,8 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $text;
 	}
 
-	function attach_disp() {
-		$status = intval( $this->get_row_by_key( 'maillog_status' ) );
+	public function attach_disp() {
+		$status = (int) $this->get_row_by_key( 'maillog_status' );
 
 		$attach_arr = $this->_maillog_handler->build_attach_row_to_array( $this->get_row() );
 		if ( ! is_array( $attach_arr ) || ! count( $attach_arr ) ) {
@@ -176,7 +171,7 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $text;
 	}
 
-	function comment_disp() {
+	public function comment_disp() {
 		$str = $this->_maillog_handler->build_show_comment( $this->get_row() );
 		$str = $this->substitute_empty( $str );
 
@@ -224,7 +219,5 @@ class webphoto_admin_maillog_form extends webphoto_edit_form {
 		return $arr;
 	}
 
-// --- class end ---
 }
 
-?>

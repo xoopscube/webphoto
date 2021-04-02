@@ -1,24 +1,19 @@
 <?php
-// $Id: groupperm_form.php,v 1.2 2010/02/17 04:34:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-02-15 K.OHWADA
-// $_FLAG_PERM_ADMIN
-//---------------------------------------------------------
-
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_groupperm_form
-//=========================================================
+
 class webphoto_admin_groupperm_form extends webphoto_edit_base {
 
 	public $_def_class;
@@ -27,13 +22,10 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 	public $_TEMPLATE;
 	public $_FLAG_PERM_ADMIN = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_base( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_form_class =& webphoto_lib_groupperm_form::getInstance();
 		$this->_def_class  =& webphoto_inc_gperm_def::getInstance();
@@ -50,10 +42,8 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function build_form( $fct ) {
+
+	public function build_form( $fct ) {
 		$group_list = $this->_form_class->build_group_list(
 			$this->_MODULE_ID,
 			_C_WEBPHOTO_GPERM_NAME,
@@ -74,7 +64,7 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return $tpl->fetch( $this->_TEMPLATE );
 	}
 
-	function build_form_by_groupid( $group_id, $fct, $cat_id ) {
+	public function build_form_by_groupid( $group_id, $fct, $cat_id ) {
 		$group_list = $this->_form_class->build_group_list_single(
 			$this->_MODULE_ID,
 			$group_id,
@@ -95,7 +85,7 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return $tpl->fetch( $this->_TEMPLATE );
 	}
 
-	function build_param( $group_list, $hidden_list ) {
+	public function build_param( $group_list, $hidden_list ) {
 		$param                            = $this->_form_class->build_param( $this->_MODULE_ID, $this->_ADMIN_INDEX_PHP );
 		$param['lang_title_groupperm']    = $this->get_admin_title( 'GROUPPERM' );
 		$param['lang_group_mod_category'] = _AM_WEBPHOTO_GROUP_MOD_CATEGORY;
@@ -105,7 +95,7 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return array_merge( $param, $this->get_gperm_lang() );
 	}
 
-	function get_gperm_lang() {
+	public function get_gperm_lang() {
 		$arr = array(
 			'lang_gperm_module_admin' => _AM_WEBPHOTO_GPERM_MODULE_ADMIN,
 			'lang_gperm_module_read'  => _AM_WEBPHOTO_GPERM_MODULE_READ,
@@ -114,11 +104,11 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return $arr;
 	}
 
-	function rebuild_group_list( $group_list ) {
-		list( $groupid_admin, $groupid_user )
+	public function rebuild_group_list( $group_list ) {
+		[ $groupid_admin, $groupid_user ]
 			= $this->get_mod_groupid();
 
-		list( $cat_rows, $cat_groupid_array )
+		[ $cat_rows, $cat_groupid_array ]
 			= $this->get_cat_rows_by_groupid();
 
 		$new_list = array();
@@ -148,7 +138,7 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return $new_list;
 	}
 
-	function get_mod_groupid() {
+	public function get_mod_groupid() {
 		$groupid_admin = 0;
 		$groupid_user  = 0;
 
@@ -162,7 +152,7 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return array( $groupid_admin, $groupid_user );
 	}
 
-	function get_cat_rows_by_groupid() {
+	public function get_cat_rows_by_groupid() {
 		$groupid_array   = array();
 		$rows_by_groupid = array();
 		$rows            = $this->_cat_handler->get_rows_all_asc();
@@ -178,7 +168,4 @@ class webphoto_admin_groupperm_form extends webphoto_edit_base {
 		return array( $rows_by_groupid, $groupid_array );
 	}
 
-// --- class end ---
 }
-
-?>

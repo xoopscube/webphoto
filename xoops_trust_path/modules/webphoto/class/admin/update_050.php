@@ -1,26 +1,20 @@
 <?php
-// $Id: update_050.php,v 1.4 2010/03/19 00:23:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-03-18 K.OHWADA
-// webphoto_edit_item_create
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_player_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_update_050
-//=========================================================
+
 class webphoto_admin_update_050 extends webphoto_base_this {
 	public $_item_create_class;
 	public $_player_handler;
@@ -35,11 +29,9 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 	public $_THIS_FCT = 'update_050';
 	public $_THIS_URL = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function webphoto_admin_update_050( $dirname, $trust_dirname ) {
-		$this->webphoto_base_this( $dirname, $trust_dirname );
+
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_item_create_class
 			=& webphoto_edit_item_create::getInstance( $dirname, $trust_dirname );
@@ -66,9 +58,9 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // init
-//---------------------------------------------------------
+
 	function get_post_offset() {
 		$this->_post_offset = $this->_post_class->get_post_get( 'offset' );
 		$this->_next        = $this->_post_offset + $this->_LIMIT;
@@ -76,9 +68,7 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 		return $this->_post_offset;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		xoops_cp_header();
 
@@ -128,9 +118,9 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // update_item
-//---------------------------------------------------------
+
 	function _update_item() {
 		$offset = $this->get_post_offset();
 
@@ -223,9 +213,9 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 		return $duration;
 	}
 
-//---------------------------------------------------------
+
 // update_player
-//---------------------------------------------------------
+
 	function _update_player() {
 		echo "<h4>player table</h4>\n";
 
@@ -247,9 +237,9 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 		$this->_print_finish();
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function _print_finish() {
 		echo "<br><hr />\n";
 		echo "<h4>FINISHED</h4>\n";
@@ -310,7 +300,7 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 		echo $text;
 	}
 
-// --- class end ---
+
 }
 
-?>
+

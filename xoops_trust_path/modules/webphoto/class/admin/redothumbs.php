@@ -1,49 +1,20 @@
 <?php
-// $Id: redothumbs.php,v 1.16 2011/06/05 07:23:40 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-06-04 K.OHWADA
-// build_uri_photo_id_title()
-// 2010-11-11 K.OHWADA
-// webphoto_edit_jpeg_create
-// 2010-10-01 K.OHWADA
-// webphoto_image_create
-// 2010-03-18 K.OHWADA
-// format_and_update_item()
-// 2009-12-12 K.OHWADA
-// Fatal error: cont_ceate_class -> cont_create_class
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_edit_item_delete
-// 2009-01-10 K.OHWADA
-// _exist_thumb_icon()
-// 2008-11-08 K.OHWADA
-// cmd_modify_photo() -> resize_photo()
-// BUG: Fatal error: Call to undefined method webphoto_photo_delete::delete_photo()
-// BUG: Undefined variable: retocde
-// 2008-10-01 K.OHWADA
-// check if set cont file
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-// 2008-08-15 K.OHWADA
-// BUG: undefined method create_thumb_from_photo()
-// 2008-07-01 K.OHWADA
-// used webphoto_lib_exif
-// used create_thumb_from_photo()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_redothumbs
-//=========================================================
+
 class webphoto_admin_redothumbs extends webphoto_edit_base {
 	public $_delete_class;
 	public $_exif_class;
@@ -76,13 +47,10 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 	public $_TIME_SUCCESS = 1;
 	public $_TIME_FAIL = 5;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function __construct( $dirname, $trust_dirname ) {
+
+	public function __construct( $dirname, $trust_dirname ) {
 
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_edit_base( $dirname, $trust_dirname );
 
 		$this->_exif_class =& webphoto_exif::getInstance();
 
@@ -118,9 +86,7 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		$post_submit = $this->_post_class->get_post_text( 'submit' );
 		$post_start  = $this->_post_class->get_post_int( 'start' );
@@ -946,9 +912,9 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return $file && file_exists( $file ) && is_file( $file ) && ! is_dir( $file );
 	}
 
-//---------------------------------------------------------
+
 // image size
-//---------------------------------------------------------
+
 	public function _get_image_param( $file, $flag_msg = true ) {
 		if ( ! file_exists( $file ) ) {
 			return false;
@@ -974,9 +940,9 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return $param;
 	}
 
-//---------------------------------------------------------
+
 // update item
-//---------------------------------------------------------
+
 	public function _update_item_file_id( $item_id, $file_id, $file_id_name ) {
 		$row                  = $this->get_item_row_by_id( $item_id );
 		$row[ $file_id_name ] = $file_id;
@@ -1009,9 +975,9 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return true;
 	}
 
-//---------------------------------------------------------
+
 // file handler
-//---------------------------------------------------------
+
 	public function _get_cont_row( $item_id, $flag_msg = true ) {
 		return $this->_get_file_row_by_itemid_kind(
 			$item_id,
@@ -1095,9 +1061,9 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return $this->_file_handler->exists_full_path_by_row( $file_row );
 	}
 
-//---------------------------------------------------------
+
 // insert update file
-//---------------------------------------------------------
+
 	public function _insert_file_by_param( $item_id, $param ) {
 		$duration = isset( $param['duration'] ) ? (int) $param['duration'] : 0;
 
@@ -1173,9 +1139,9 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return true;
 	}
 
-//---------------------------------------------------------
+
 // tmp file
-//---------------------------------------------------------
+
 	public function clear_tmp_files_in_tmp_dir() {
 		return $this->clear_tmp_files(
 			$this->_TMP_DIR, _C_WEBPHOTO_UPLOADER_PREFIX, $this->_TMP_FILE_TIME );
@@ -1212,9 +1178,9 @@ class webphoto_admin_redothumbs extends webphoto_edit_base {
 		return $count;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	public function _print_form( $param ) {
 		$form =& webphoto_admin_redo_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );

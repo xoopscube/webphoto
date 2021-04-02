@@ -1,49 +1,20 @@
 <?php
-// $Id: cat_form.php,v 1.15 2011/12/28 16:16:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// webphoto_timeline_init
-// 2010-03-14 K.OHWADA
-// BUG: typo prem -> perm
-// 2010-02-15 K.OHWADA
-// $_FLAG_PERM_ADMIN
-// 2010-02-01 K.OHWADA
-// build_cat_list_form()
-// 2009-12-06 K.OHWADA
-// cat_group_id
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_gicon_handler
-// 2009-05-17 K.OHWADA
-// _build_children_list()
-// 2009-04-27 K.OHWADA
-// _build_script() -> build_script_edit_js()
-// 2009-01-10 K.OHWADA
-// webphoto_form_this -> webphoto_edit_form
-// _build_gmap_iframe()
-// 2008-12-12 K.OHWADA
-// _build_ele_perm_read()
-// 2008-11-08 K.OHWADA
-// _build_line_category_file()
-// 2008-10-01 K.OHWADA
-// submit -> item_manager
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_cat_form
-//=========================================================
+
 class webphoto_admin_cat_form extends webphoto_edit_form {
 	public $_gicon_handler;
 	public $_timeline_init_class;
@@ -65,13 +36,10 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 
 	public $_CAT_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_CATEGORY;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_form( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_gicon_handler
 			=& webphoto_gicon_handler::getInstance( $dirname, $trust_dirname );
@@ -93,9 +61,7 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// print form
-//---------------------------------------------------------
+
 	public function print_form( $row, $param ) {
 		$template = 'db:' . $this->_DIRNAME . '_form_admin_cat.html';
 
@@ -391,9 +357,7 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 		return str_replace( '.', ' --', substr( $row['prefix'], 1 ) ) . ' ';
 	}
 
-//---------------------------------------------------------
 // timeline
-//---------------------------------------------------------
 	public function show_timeline() {
 		return $this->_timeline_init_class->get_init();
 	}
@@ -406,9 +370,7 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 		return $this->build_form_options( $value, $options );
 	}
 
-//---------------------------------------------------------
 // list
-//---------------------------------------------------------
 	public function print_list( $cat_tree_array ) {
 		$template = 'db:' . $this->_DIRNAME . '_form_admin_cat_list.html';
 
@@ -461,9 +423,7 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 		return $height;
 	}
 
-//---------------------------------------------------------
 // del confirm
-//---------------------------------------------------------
 	public function print_del_confirm( $cat_id ) {
 		$hiddens = [
 			'fct'    => 'catmanager',

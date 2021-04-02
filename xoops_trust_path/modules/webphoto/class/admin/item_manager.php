@@ -1,71 +1,19 @@
 <?php
-// $Id: item_manager.php,v 1.33 2011/11/04 15:08:24 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-11-03 K.OHWADA
-// add tag_array_name to _print_form_admin()
-// 2011-05-01 K.OHWADA
-// set always if playlist
-// 2010-11-11 K.OHWADA
-// file_id_to_item_name()
-// 2010-10-01 K.OHWADA
-// _file_delete()
-// 2010-03-18 K.OHWADA
-// format_and_update_item()
-// 2010-02-15 K.OHWADA
-// print_list_table()
-// 2010-01-10 K.OHWADA
-// init_for_admin()
-// 2009-12-06 K.OHWADA
-// mail_approve()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_flash_player
-// 2009-05-28 K.OHWADA
-// BUG: not show tag
-// 2009-05-17 K.OHWADA
-// _build_cat_title()
-// 2009-05-05 K.OHWADA
-// remove _build_form_common_param_admin()
-// 2009-04-19 K.OHWADA
-// print_form_admin() -> build_form_admin_with_template()
-// Fatal error: Class 'webphoto_flashvar_form'
-// 2009-03-15 K.OHWADA
-// small_delete()
-// 2009-02-20 K.OHWADA
-// Fatal error: Call to undefined method create_item_row_submit_preview()
-// 2009-01-25 K.OHWADA
-// _print_form_admin_with_mode() -> _print_form_admin()
-// 2009-01-10 K.OHWADA
-// webphoto_photo_action -> webphoto_edit_action
-// 2009-01-04 K.OHWADA
-// webphoto_photo_misc_form
-// 2008-12-12 K.OHWADA
-// $ext_disp in _print_list_table()
-// 2008-12-07 K.OHWADA
-// _print_menu_link()
-// 2008-11-29 K.OHWADA
-// _list_status()
-// _get_photo_url()
-// 2008-11-16 K.OHWADA
-// load_movie() -> build_movie()
-// 2008-11-08 K.OHWADA
-// webphoto_flash_log
-// _thumb_delete()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_item_manager
-//=========================================================
 class webphoto_admin_item_manager extends webphoto_edit_action {
 	public $_vote_handler;
 	public $_flashvar_handler;
@@ -94,13 +42,10 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 	public $_TIME_PENDING = 3;
 	public $_TIME_FAILED = 5;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_action( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_flag_admin( true );
 		$this->set_fct( 'item_manager' );
@@ -137,9 +82,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		$action = $this->_get_action();
 
@@ -298,9 +241,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		return '';
 	}
 
-//---------------------------------------------------------
+
 // menu
-//---------------------------------------------------------
+
 	public function _menu() {
 		xoops_cp_header();
 		echo $this->build_admin_menu();
@@ -394,9 +337,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		echo $pagenavi_class->renderNav();
 	}
 
-//---------------------------------------------------------
+
 // list waiting
-//---------------------------------------------------------
+
 	public function _list_waiting() {
 		$this->_list_status( _C_WEBPHOTO_STATUS_WAITING, 'waiting' );
 	}
@@ -432,9 +375,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // submit form
-//---------------------------------------------------------
+
 	public function _submit_form() {
 		$mode = 'admin_submit';
 
@@ -459,9 +402,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 			$this->get_admin_title( 'ITEM_MANAGER' ), $this->_THIS_URL );
 	}
 
-//---------------------------------------------------------
+
 // modify form
-//---------------------------------------------------------
+
 	public function _modify_form() {
 		$show_class =& webphoto_show_photo::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -564,9 +507,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		echo nl2br( $this->sanitize( $movie ) );
 	}
 
-//---------------------------------------------------------
+
 // delete confirm
-//---------------------------------------------------------
+
 	public function _confirm_form() {
 		$item_id  = $this->_post_class->get_post_get_int( 'item_id' );
 		$item_row = $this->_item_create_class->get_row_by_id( $item_id );
@@ -584,9 +527,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // submit
-//---------------------------------------------------------
+
 	public function _submit() {
 		$this->_check_token_and_redirect();
 
@@ -678,9 +621,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		return $url;
 	}
 
-//---------------------------------------------------------
+
 // modify
-//---------------------------------------------------------
+
 	public function _modify() {
 		$this->_check_token_and_redirect();
 		$item_row = $this->_get_item_row_or_redirect();
@@ -719,9 +662,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // approve
-//---------------------------------------------------------
+
 	public function _approve() {
 		$this->_check_token_and_redirect();
 		$post_ids = $this->_post_class->get_post( 'item_list_form_id' );
@@ -761,9 +704,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		return $this->_factory_create_class->use_item_perm_level();
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	public function _delete() {
 		$this->_check_token_and_redirect();
 		$item_row = $this->_get_item_row_or_redirect();
@@ -785,9 +728,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // delete all
-//---------------------------------------------------------
+
 	public function _delete_all() {
 		$this->_check_token_and_redirect();
 
@@ -806,9 +749,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // video_thumb
-//---------------------------------------------------------
+
 	public function _video() {
 		$this->_check_token_and_redirect();
 		$item_row = $this->_get_item_row_or_redirect();
@@ -826,9 +769,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // video redo exec
-//---------------------------------------------------------
+
 	public function _redo() {
 		$this->_check_token_and_redirect();
 		$item_row = $this->_get_item_row_or_redirect();
@@ -867,9 +810,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // file delete
-//---------------------------------------------------------
+
 	public function _cont_delete() {
 		$this->_check_token_and_redirect();
 
@@ -921,9 +864,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // flashvar form
-//---------------------------------------------------------
+
 	public function _flashvar_form() {
 		xoops_cp_header();
 		echo $this->_build_bread_crumb();
@@ -955,9 +898,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // flashvar submit
-//---------------------------------------------------------
+
 	function _flashvar_submit() {
 // Fatal error: Class 'webphoto_flashvar_edit'
 		$edit_class =& webphoto_edit_flashvar_edit::getInstance(
@@ -1024,9 +967,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		return array( $url, $time, $msg );
 	}
 
-//---------------------------------------------------------
+
 // flashvar modify
-//---------------------------------------------------------
+
 	function _flashvar_modify() {
 // Fatal error: Class 'webphoto_flashvar_edit' not found 
 
@@ -1045,9 +988,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // flashvar restore
-//---------------------------------------------------------
+
 	function _flashvar_restore() {
 		$edit_class =& webphoto_flashvar_edit::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -1064,9 +1007,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // vote stats
-//---------------------------------------------------------
+
 	function _vote_stats() {
 		$show_class =& webphoto_show_photo::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -1261,9 +1204,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		}
 	}
 
-//---------------------------------------------------------
+
 // delete vote
-//---------------------------------------------------------
+
 	function _delete_vote() {
 		$item_id = $this->_post_class->get_post_get_int( 'item_id' );
 		$vote_id = $this->_post_class->get_post_get_int( 'vote_id' );
@@ -1280,9 +1223,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // view log
-//---------------------------------------------------------
+
 	function _view_log() {
 		xoops_cp_header();
 		echo $this->_build_bread_crumb();
@@ -1354,9 +1297,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 
 	}
 
-//---------------------------------------------------------
+
 // empty log
-//---------------------------------------------------------
+
 	function _empty_log() {
 		$this->_log_class->empty_log();
 
@@ -1365,9 +1308,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // refresh playlist cache
-//---------------------------------------------------------
+
 	function _refresh_cache() {
 		$this->_playlist_class->refresh_cache_all();
 
@@ -1375,9 +1318,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function _print_list_table( $mode, $item_rows ) {
 		$this->_admin_item_form_class->print_list_table( $mode, $item_rows );
 	}
@@ -1440,7 +1383,4 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		echo $this->_misc_form_class->build_form_video_thumb_with_template( $mode, $item_row );
 	}
 
-// --- class end ---
 }
-
-?>

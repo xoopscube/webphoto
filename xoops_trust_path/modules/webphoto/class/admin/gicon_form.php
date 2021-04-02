@@ -1,28 +1,20 @@
 <?php
-// $Id: gicon_form.php,v 1.4 2009/11/29 07:34:21 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_gicon_handler
-// 2009-01-10 K.OHWADA
-// webphoto_form_this -> webphoto_edit_form
-// 2008-11-08 K.OHWADA
-// _C_WEBPHOTO_UPLOAD_FIELD_GICON
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_gicon_form
-//=========================================================
+
 class webphoto_admin_gicon_form extends webphoto_edit_form {
 	public $_gicon_handler;
 
@@ -37,13 +29,10 @@ class webphoto_admin_gicon_form extends webphoto_edit_form {
 	public $_IMAGE_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_GICON;
 	public $_SHADOW_FIELD_NAME = _C_WEBPHOTO_UPLOAD_FIELD_GSHADOW;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_form( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_gicon_handler
 			=& webphoto_gicon_handler::getInstance( $dirname, $trust_dirname );
@@ -63,9 +52,9 @@ class webphoto_admin_gicon_form extends webphoto_edit_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // print form
-//---------------------------------------------------------
+
 	function print_form( $mode, $row ) {
 		switch ( $mode ) {
 			case 'edit':
@@ -181,9 +170,9 @@ class webphoto_admin_gicon_form extends webphoto_edit_form {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // list
-//---------------------------------------------------------
+
 	function print_list( $rows ) {
 
 // --- form ---
@@ -216,7 +205,7 @@ class webphoto_admin_gicon_form extends webphoto_edit_form {
 	function _print_line( $row ) {
 		$oddeven = $this->get_alternate_class();
 
-		$gicon_id      = intval( $row['gicon_id'] );
+		$gicon_id      = (int) $row['gicon_id'];
 		$title_s       = $this->sanitize( $row['gicon_title'] );
 		$del_confirm   = 'confirm("' . sprintf( _AM_WEBPHOTO_GICON_DELCONFIRM, $title_s ) . '")';
 		$onclick       = 'if (' . $del_confirm . ') { document.MainForm.delgicon.value="' . $gicon_id . '"; submit(); }';
@@ -235,23 +224,23 @@ class webphoto_admin_gicon_form extends webphoto_edit_form {
 		echo '<td class="' . $oddeven . '">';
 		if ( $row['gicon_image_path'] ) {
 			echo '<img src="' . XOOPS_URL . $this->sanitize( $row['gicon_image_path'] ) . '" valign="middle" />';
-			echo ' ( ' . intval( $row['gicon_image_width'] ) . ' x ' . intval( $row['gicon_image_height'] ) . ' )';
+			echo ' ( ' . (int) $row['gicon_image_width'] . ' x ' . (int) $row['gicon_image_height'] . ' )';
 		}
 		echo "</td>\n";
 
 		echo '<td class="' . $oddeven . '">';
 		if ( $row['gicon_shadow_path'] ) {
 			echo '<img src="' . XOOPS_URL . $this->sanitize( $row['gicon_shadow_path'] ) . '" valign="middle" />';
-			echo ' ( ' . intval( $row['gicon_shadow_width'] ) . ' x ' . intval( $row['gicon_shadow_height'] ) . ' )';
+			echo ' ( ' . (int) $row['gicon_shadow_width'] . ' x ' . (int) $row['gicon_shadow_height'] . ' )';
 		}
 		echo "</td>\n";
 
 		echo '<td class="' . $oddeven . '"> ';
-		echo intval( $row['gicon_anchor_x'] ) . ' x ' . intval( $row['gicon_anchor_y'] );
+		echo (int) $row['gicon_anchor_x'] . ' x ' . (int) $row['gicon_anchor_y'];
 		echo " </td>\n";
 
 		echo '<td class="' . $oddeven . '"> ';
-		echo intval( $row['gicon_info_x'] ) . ' x ' . intval( $row['gicon_info_y'] );
+		echo (int) $row['gicon_info_x'] . ' x ' . (int) $row['gicon_info_y'];
 		echo " </td>\n";
 
 		echo '<td class="' . $oddeven . '" nowrap="nowrap" align="center">';
@@ -265,7 +254,4 @@ class webphoto_admin_gicon_form extends webphoto_edit_form {
 
 	}
 
-// --- class end ---
 }
-
-?>

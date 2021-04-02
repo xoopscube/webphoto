@@ -1,34 +1,20 @@
 <?php
-// $Id: player_manager.php,v 1.7 2010/02/23 01:10:59 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-02-20 K.OHWADA
-// set_path_color_pickup()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_flash_player
-// 2009-02-20 K.OHWADA
-// BUG: not set player_screencolor
-// 2009-01-25 K.OHWADA
-// build_movie_by_item_row();
-// 2009-01-10 K.OHWADA
-// $_STYLE_NOT_SET
-// 2008-11-16 K.OHWADA
-// load_movie() -> build_movie()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_player_manager
-//=========================================================
+
 class webphoto_admin_player_manager extends webphoto_base_this {
 	public $_player_handler;
 	public $_flashvar_handler;
@@ -46,13 +32,10 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 	public $_TIME_SUCCESS = 1;
 	public $_TIME_FAIL = 5;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_flashvar_handler =& webphoto_flashvar_handler::getInstance(
 			$dirname, $trust_dirname );
@@ -75,9 +58,7 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$op = $this->_post_class->get_post_get_text( 'op' );
 
@@ -121,9 +102,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 
 	}
 
-//---------------------------------------------------------
+
 // menu
-//---------------------------------------------------------
+
 	function _print_menu() {
 		$player_id = $this->_post_class->get_get_int( 'player_id' );
 		$item_id   = $this->_post_class->get_get_int( 'item_id' );
@@ -187,9 +168,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // new player editor
-//---------------------------------------------------------
+
 	function _submit_form() {
 		$row = $this->_player_handler->create( true );
 		$this->_print_form_common( 'submit', $row );
@@ -319,9 +300,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // clone player editor
-//---------------------------------------------------------
+
 	function _clone_form() {
 		$row = $this->_player_handler->get_row_by_id( $this->_player_id );
 		if ( ! is_array( $row ) ) {
@@ -332,9 +313,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		$this->_print_form_common( 'clone', $row );
 	}
 
-//---------------------------------------------------------
+
 // modify player
-//---------------------------------------------------------
+
 	function _modify_form() {
 		$row = $this->_player_handler->get_row_by_id( $this->_player_id );
 		if ( ! is_array( $row ) ) {
@@ -344,9 +325,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		$this->_print_form_common( 'modify', $row );
 	}
 
-//---------------------------------------------------------
+
 // new player save
-//---------------------------------------------------------
+
 	function _submit() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -394,9 +375,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		return $row;
 	}
 
-//---------------------------------------------------------
+
 // modify player save
-//---------------------------------------------------------
+
 	function _modify() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -422,9 +403,9 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 		redirect_header( $url, $this->_TIME_SUCCESS, _AM_WEBPHOTO_PLAYER_MODIFIED );
 	}
 
-//---------------------------------------------------------
+
 // delete player
-//---------------------------------------------------------
+
 	function _delete() {
 		$ok = $this->_post_class->get_post_int( 'ok' );
 
@@ -481,7 +462,7 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 			$this->get_admin_title( 'PLAYER_MANAGER' ), $this->_THIS_URL );
 	}
 
-// --- class end ---
+
 }
 
-?>
+

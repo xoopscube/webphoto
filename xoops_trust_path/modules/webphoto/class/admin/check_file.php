@@ -1,37 +1,30 @@
 <?php
-// $Id: check_file.php,v 1.2 2010/01/26 08:25:45 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-01-10 K.OHWADA
-// green()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_check_file
-//=========================================================
+
 class webphoto_admin_check_file extends webphoto_base_this {
 	public $_file_check_class;
 
 // color: green;
 	public $_SPAN_STYLE_GREEN = 'color: #00ff00;';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_file_check_class =& webphoto_lib_file_check::getInstance(
 			$dirname, $trust_dirname );
@@ -46,9 +39,7 @@ class webphoto_admin_check_file extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		xoops_cp_header();
 
@@ -61,9 +52,9 @@ class webphoto_admin_check_file extends webphoto_base_this {
 		xoops_cp_footer();
 	}
 
-//---------------------------------------------------------
+
 // check file
-//---------------------------------------------------------
+
 	function _print_file_check() {
 		$flag_error = false;
 
@@ -93,7 +84,6 @@ class webphoto_admin_check_file extends webphoto_base_this {
 		return $str;
 	}
 
-// --- class end ---
+
 }
 
-?>

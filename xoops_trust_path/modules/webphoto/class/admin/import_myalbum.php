@@ -1,40 +1,29 @@
 <?php
-// $Id: import_myalbum.php,v 1.5 2009/01/24 07:10:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-01-10 K.OHWADA
-// webphoto_import -> webphoto_edit_import
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-// 2008-07-01 K.OHWADA
-// xoops_error() -> build_error_msg()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_import_myalbum
-//=========================================================
+
 class webphoto_admin_import_myalbum extends webphoto_edit_import {
 	public $_form_class;
 
 	public $_src_dirname = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_import( $dirname, $trust_dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_form_class =& webphoto_admin_import_form::getInstance( $dirname, $trust_dirname );
 	}
@@ -48,10 +37,8 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		xoops_cp_header();
 
 		echo $this->build_admin_menu();
@@ -106,13 +93,14 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // menu
-//---------------------------------------------------------
-	function _menu() {
+
+	public function _menu() {
 		$this->_check_cat_table()
 
 		?>
+
         <br>
         There are 5 steps. <br>
         1. select myalbum module <br>
@@ -125,6 +113,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
         <h4 style="color:#ff0000;">Warnig</h4>
         Excute only once, after install. <br>
         This program overwrite MySQL tables. <br>
+
 		<?php
 
 		$this->_form_sel_myalbum();
@@ -132,7 +121,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 
 	}
 
-	function _check_cat_table() {
+	public function _check_cat_table() {
 		if ( $this->_cat_handler->get_count_all() > 0 ) {
 			$msg = 'already there are records in category table';
 			echo $this->build_error_msg( $msg );
@@ -142,10 +131,10 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		}
 	}
 
-//---------------------------------------------------------
+
 // import_category
-//---------------------------------------------------------
-	function _import_category() {
+
+	public function _import_category() {
 // === myalbum category table ===
 //  cid int(5) unsigned NOT NULL auto_increment,
 //  pid int(5) unsigned NOT NULL default '0',
@@ -176,10 +165,10 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_form_photo();
 	}
 
-//---------------------------------------------------------
+
 // import_photo
-//---------------------------------------------------------
-	function _import_photo() {
+
+	public function _import_photo() {
 // === myalbum link & text table ===
 // --- link table ---
 //  lid int(11) unsigned NOT NULL auto_increment,
@@ -240,10 +229,10 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 
 	}
 
-//---------------------------------------------------------
+
 // import_vote
-//---------------------------------------------------------
-	function _import_vote() {
+
+	public function _import_vote() {
 // === myalbum votedata table ===
 //  ratingid int(11) unsigned NOT NULL auto_increment,
 //  lid int(11) unsigned NOT NULL default '0',
@@ -272,10 +261,10 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_form_comment();
 	}
 
-//---------------------------------------------------------
+
 // import_comment
-//---------------------------------------------------------
-	function _import_comment() {
+
+	public function _import_comment() {
 		echo "<h4>STEP 5 : import xoopscomments table</h4>";
 		$this->_print_src_dirname();
 
@@ -289,10 +278,10 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->print_finish();
 	}
 
-//---------------------------------------------------------
+
 // truncate
-//---------------------------------------------------------
-	function _truncate() {
+
+	public function _truncate() {
 		echo "<h4>Truncate category table</h4>";
 		$this->_cat_handler->truncate_table();
 
@@ -311,10 +300,10 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->print_finish();
 	}
 
-//---------------------------------------------------------
+
 // check
-//---------------------------------------------------------
-	function _check() {
+
+	public function _check() {
 // check exists myalbum module
 		$ret = $this->_exists_myalbum_module();
 		if ( ! $ret ) {
@@ -324,7 +313,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		return $this->check_token();
 	}
 
-	function _exists_myalbum_module() {
+	public function _exists_myalbum_module() {
 		$dirname = $this->_post_class->get_post_text( 'src_dirname' );
 
 // check exists myalbum module
@@ -341,14 +330,14 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		return true;
 	}
 
-	function _print_src_dirname() {
+	public function _print_src_dirname() {
 		echo 'from dirname : ' . $this->_src_dirname . "<br>\n";
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
-	function _form_sel_myalbum() {
+
+	public function _form_sel_myalbum() {
 		$module_array = $this->_myalbum_handler->get_myalbum_module_array();
 		if ( ! is_array( $module_array ) || ! count( $module_array ) ) {
 			$msg = "myalbum module is not installed \n";
@@ -372,7 +361,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_form_class->print_form_sel_myalbum( $title, $options );
 	}
 
-	function _form_truncate( $op ) {
+	public function _form_truncate( $op ) {
 		$title  = 'STEP 0 : initalize';
 		$submit = 'GO STEP 0';
 
@@ -386,7 +375,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit );
 	}
 
-	function _form_image() {
+	public function _form_image() {
 		$title  = 'STEP 1 : photo images';
 		$op     = 'import_image';
 		$submit = 'GO STEP 1';
@@ -395,7 +384,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit );
 	}
 
-	function _form_category() {
+	public function _form_category() {
 		$title  = 'STEP 2 : import category table';
 		$op     = 'import_category';
 		$submit = 'GO STEP 2';
@@ -404,7 +393,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit );
 	}
 
-	function _form_photo() {
+	public function _form_photo() {
 		$title  = 'STEP 3 : import photo table';
 		$op     = 'import_photo';
 		$submit = 'GO STEP 3';
@@ -413,7 +402,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit );
 	}
 
-	function _form_next_photo( $offset ) {
+	public function _form_next_photo( $offset ) {
 		$title  = 'STEP 3 : import photo table';
 		$submit = "GO next " . $this->_LIMIT . " links";
 		$op     = 'import_photo';
@@ -423,7 +412,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit, $offset );
 	}
 
-	function _form_votedate() {
+	public function _form_votedate() {
 		$title  = 'STEP 4 : import votedate table';
 		$op     = 'import_vote';
 		$submit = 'GO STEP 4';
@@ -432,7 +421,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit );
 	}
 
-	function _form_comment() {
+	public function _form_comment() {
 		$title  = 'STEP 5 : import comment table';
 		$op     = 'import_comment';
 		$submit = 'GO STEP 5';
@@ -441,7 +430,7 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		$this->_print_form_next( $title, $op, $submit );
 	}
 
-	function _print_form_next( $title, $op, $submit_value, $offset = 0 ) {
+	public function _print_form_next( $title, $op, $submit_value, $offset = 0 ) {
 		echo "<br>\n";
 
 		if ( $offset > 0 ) {
@@ -467,7 +456,4 @@ class webphoto_admin_import_myalbum extends webphoto_edit_import {
 		echo $text;
 	}
 
-// --- class end ---
 }
-
-?>

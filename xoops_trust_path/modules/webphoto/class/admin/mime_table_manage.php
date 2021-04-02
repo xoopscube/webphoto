@@ -1,37 +1,26 @@
 <?php
-// $Id: mime_table_manage.php,v 1.4 2009/11/29 07:34:21 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_mime_handler
-// 2009-10-25 K.OHWADA
-// mime_kind
-// 2008-07-01 K.OHWADA
-// added mime_ffmpeg
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_mime_table_manage
-//=========================================================
+
 class webphoto_admin_mime_table_manage extends webphoto_lib_manage {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_lib_manage( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_manage_handler(
 			webphoto_mime_handler::getInstance( $dirname, $trust_dirname ) );
@@ -51,16 +40,14 @@ class webphoto_admin_mime_table_manage extends webphoto_lib_manage {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$this->_main();
 	}
 
-//=========================================================
+
 // override for caller
-//=========================================================
+
 	function _build_row_by_post( $row = array() ) {
 		$row = array(
 			'mime_id'          => $this->_post_class->get_post_get_int( 'mime_id' ),
@@ -79,9 +66,9 @@ class webphoto_admin_mime_table_manage extends webphoto_lib_manage {
 		return $row;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
 
@@ -105,7 +92,4 @@ class webphoto_admin_mime_table_manage extends webphoto_lib_manage {
 		echo "</table></form>\n";
 	}
 
-// --- class end ---
 }
-
-?>

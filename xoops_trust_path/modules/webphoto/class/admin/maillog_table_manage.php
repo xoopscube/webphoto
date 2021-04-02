@@ -1,36 +1,27 @@
 <?php
-// $Id: maillog_table_manage.php,v 1.3 2009/11/29 07:34:21 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_maillog_handler
-// 2009-01-10 K.OHWADA
-// webphoto_mail_unlink -> webphoto_edit_mail_unlink
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_maillog_table_manage
-//=========================================================
+
 class webphoto_admin_maillog_table_manage extends webphoto_lib_manage {
 	public $_unlink_class;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_lib_manage( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_manage_handler(
 			webphoto_maillog_handler::getInstance( $dirname, $trust_dirname ) );
@@ -51,16 +42,14 @@ class webphoto_admin_maillog_table_manage extends webphoto_lib_manage {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		$this->_main();
 	}
 
-//=========================================================
+
 // override for caller
-//=========================================================
+
 	public function _build_row_by_post( $row = array() ) {
 		$row = array(
 			'maillog_id'          => $this->_post_class->get_post_get_int( 'maillog_id' ),
@@ -79,9 +68,9 @@ class webphoto_admin_maillog_table_manage extends webphoto_lib_manage {
 		return $row;
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	public function _manage_delete_option( $row ) {
 		$this->_unlink_class->unlink_by_maillog_row( $row );
 	}
@@ -90,9 +79,9 @@ class webphoto_admin_maillog_table_manage extends webphoto_lib_manage {
 		$this->_unlink_class->unlink_by_maillog_row( $row );
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	public function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
 
@@ -116,7 +105,4 @@ class webphoto_admin_maillog_table_manage extends webphoto_lib_manage {
 		echo "</table></form>\n";
 	}
 
-// --- class end ---
 }
-
-?>

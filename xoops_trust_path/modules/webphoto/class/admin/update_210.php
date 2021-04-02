@@ -1,29 +1,29 @@
 <?php
-// $Id: update_210.php,v 1.1 2010/01/25 10:05:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2010-01-10 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_update_210
-//=========================================================
+
 class webphoto_admin_update_210 extends webphoto_base_this {
 	public $_form_class;
 
 	public $_THIS_FCT = 'update_210';
 	public $_THIS_URL = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function webphoto_admin_update_210( $dirname, $trust_dirname ) {
-		$this->webphoto_base_this( $dirname, $trust_dirname );
+
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_form_class =& webphoto_lib_form::getInstance( $dirname, $trust_dirname );
 
@@ -45,9 +45,7 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		xoops_cp_header();
 
@@ -98,9 +96,9 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // update_item
-//---------------------------------------------------------
+
 	function _update_item() {
 		$item_detail_onclick = $this->_post_class->get_post_get( 'item_detail_onclick' );
 
@@ -123,9 +121,9 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 		return $this->_item_handler->query( $sql );
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function _print_finish() {
 		echo "<br><hr />\n";
 		echo "<h4>FINISHED</h4>\n";
@@ -165,7 +163,7 @@ EOF;
 		return $str;
 	}
 
-// --- class end ---
+
 }
 
-?>
+

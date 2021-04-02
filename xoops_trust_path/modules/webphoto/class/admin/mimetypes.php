@@ -1,38 +1,20 @@
 <?php
-// $Id: mimetypes.php,v 1.9 2010/05/09 12:54:48 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-05-09 K.OHWADA
-// Fatal error: Call to undefined method build_perms_with_separetor()
-// 2010-02-15 K.OHWADA
-// $_GLUE_ALLOWED
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_mime_handler
-// 2009-10-25 K.OHWADA
-// mime_kind
-// 2008-12-12 K.OHWADA
-// build_group_perms_by_post()
-// 2008-08-24 K.OHWADA
-// used build_perms_array_to_str()
-// 2008-08-01 K.OHWADA
-// added _print_show_allowed_mime_all()
-// 2008-07-01 K.OHWADA
-// added mime_ffmpeg
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_mimetypes
-//=========================================================
+
 class webphoto_admin_mimetypes extends webphoto_base_this {
 	public $_mime_handler;
 
@@ -49,12 +31,10 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 	public $_STYLE_NAVI = 'text-align:right; padding:8px;';
 	public $_GLUE_ALLOWED = ' ';    // space
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 		//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 		$this->_mime_handler =& webphoto_mime_handler::getInstance(
@@ -74,9 +54,7 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		switch ( $this->_get_op() ) {
 			case 'openurl':
@@ -131,9 +109,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		return $op;
 	}
 
-//---------------------------------------------------------
+
 // save
-//---------------------------------------------------------
+
 	function _save() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_ADMIN_MIME_PHP, 3, $this->get_token_errors() );
@@ -185,9 +163,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	function _delete() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_ADMIN_MIME_PHP, 3, $this->get_token_errors() );
@@ -215,9 +193,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // delete cofirm
-//---------------------------------------------------------
+
 	function _delete_confirm() {
 		$post_mime_id = $this->_post_class->get_post_int( 'mime_id' );
 
@@ -242,9 +220,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		xoops_cp_footer();
 	}
 
-//---------------------------------------------------------
+
 // print form
-//---------------------------------------------------------
+
 	function _print_edit_form() {
 		$get_mime_id = $this->_post_class->get_get_int( 'mime_id' );
 
@@ -278,9 +256,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		$this->_print_mime_form_mimetype( $row );
 	}
 
-//---------------------------------------------------------
+
 // print list
-//---------------------------------------------------------
+
 	function _print_list() {
 		$get_group_id = $this->_post_class->get_get_int( 'group_id' );
 		$get_start    = $this->_post_class->get_get_int( 'start' );
@@ -416,9 +394,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // show_allowed_mime_all
-//---------------------------------------------------------
+
 	function _print_show_allowed_mime_all() {
 		echo '<fieldset>';
 		echo '<legend style="' . $this->_STYLE_LEGEND . '">';
@@ -479,9 +457,9 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // admin_mime_form
-//---------------------------------------------------------
+
 	function _print_mime_form_mimetype( $row ) {
 		$mime_form =& webphoto_admin_mime_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -494,10 +472,10 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 		$mime_form->print_form_mimefind();
 	}
 
-//---------------------------------------------------------
+
 // update 
 // NOT use
-//---------------------------------------------------------
+
 	function openurl() {
 		$post_fileext = $this->_post_class->get_post_text( 'fileext' );
 		$url          = "http://filext.com/detaillist.php?extdetail=" . $post_fileext . "";
@@ -574,8 +552,4 @@ class webphoto_admin_mimetypes extends webphoto_base_this {
 
 		redirect_header( $this->_ADMIN_MIME_PHP, 1, _AM_WEBPHOTO_MIME_MODIFIED );
 	}
-
-// --- class end ---
 }
-
-?>

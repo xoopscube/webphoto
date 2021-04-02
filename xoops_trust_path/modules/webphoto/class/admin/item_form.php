@@ -1,73 +1,20 @@
 <?php
-// $Id: item_form.php,v 1.33 2011/04/30 23:30:20 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// Fatal error: Call to undefined method get_cached_file_row_by_kind()
-// 2010-11-11 K.OHWADA
-// show_item_icon_name()
-// 2010-10-01 K.OHWADA
-// item_uid_options()
-// item_displayfile_select_options()
-// 2010-05-08 K.OHWADA
-// show_admin_gmap()
-// 2010-02-15 K.OHWADA
-// print_list_table()
-// 2010-01-10 K.OHWADA
-// init_for_admin()
-// 2009-12-06 K.OHWADA
-// item_perm_level
-// build_form_common()
-// 2009-11-11 K.OHWADA
-// item_detail_onclick
-// 2009-10-25 K.OHWADA
-// BUG: player id is not correctly selected 
-// 2009-06-28 K.OHWADA
-// set_default_item_row()
-// 2009-05-30 K.OHWADA
-// $is_edit in show_err_invalid_cat()
-// 2009-05-17 K.OHWADA
-// show_err_invalid_cat()
-// 2009-05-05 K.OHWADA
-// print_form_playlist() -> print_form_playlist_with_param()
-// 2009-04-19 K.OHWADA
-// build_form_admin_by_item_row() -> build_form_admin_with_template()
-// 2009-03-15 K.OHWADA
-// _build_ele_small_file()
-// 2009-01-25 K.OHWADA
-// print_form_admin() -> print_form_admin_by_files()
-// item_content
-// 2009-01-10 K.OHWADA
-// webphoto_form_this -> webphoto_edit_form
-// post variable form_playlist
-// 2009-01-04 K.OHWADA
-// _init_editor()
-// 2008-12-12 K.OHWADA
-// build_ele_perm_read()
-// 2008-12-07 K.OHWADA
-// _build_ele_votes()
-// 2008-11-29 K.OHWADA
-// _build_ele_time_publish()
-// 2008-11-16 K.OHWADA
-// BUG: Warning [PHP]: Missing argument 1
-// build_ele_codeinfo()
-// 2008-11-08 K.OHWADA
-// _build_ele_middle_file_external()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_item_form
-//=========================================================
+
 class webphoto_admin_item_form extends webphoto_edit_photo_form {
 	public $_sort_class;
 
@@ -91,13 +38,10 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		'file_jpeg'
 	];
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct($dirname, $trust_dirname);
-		//$this->webphoto_edit_photo_form( $dirname, $trust_dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_sort_class
 			=& webphoto_photo_sort::getInstance( $dirname, $trust_dirname );
@@ -121,10 +65,10 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // build submit edit form
-//---------------------------------------------------------
-	function build_form_admin_with_template( $mode, $item_row ) {
+
+	public function build_form_admin_with_template( $mode, $item_row ) {
 		$template = 'db:' . $this->_DIRNAME . '_form_admin_item.html';
 
 		$item_row = $this->set_default_item_row( $item_row );
@@ -142,7 +86,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $tpl->fetch( $template );
 	}
 
-	function build_form_admin_by_item_row( $mode, $item_row ) {
+	public function build_form_admin_by_item_row( $mode, $item_row ) {
 		$cont_row  = $this->get_cached_file_extend_row_by_kind(
 			$item_row, _C_WEBPHOTO_FILE_KIND_CONT );
 		$jpeg_row  = $this->get_cached_file_extend_row_by_kind(
@@ -171,7 +115,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $this->build_form_admin_by_files( $mode, $files );
 	}
 
-	function build_form_admin_by_files( $mode, $files ) {
+	public function build_form_admin_by_files( $mode, $files ) {
 		$item_row   = $files['item_row'];
 		$cont_row   = $files['cont_row'];
 		$jpeg_row   = $files['jpeg_row'];
@@ -295,8 +239,9 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return array_merge( $arr1, $arr2 );
 	}
 
-	function cap_style() {
-		$arr = array();
+	public function cap_style() {
+
+		$arr = [];
 
 		$style_default   = $this->get_ini( 'style_cap_default' );
 		$style_highlight = $this->get_ini( 'style_cap_highlight' );
@@ -324,17 +269,14 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return false;
 	}
 
-	function show_valid() {
+	public function show_valid() {
 		$value = $this->get_row_by_key( 'item_status' );
-		if ( $value == _C_WEBPHOTO_STATUS_WAITING ) {
-			return true;
-		}
 
-		return false;
+		return $value == _C_WEBPHOTO_STATUS_WAITING;
 	}
 
 // BUG: NOT show gmap
-	function show_admin_gmap() {
+	public function show_admin_gmap() {
 		if ( $this->_cfg_gmap_apikey ) {
 			return true;
 		}
@@ -342,7 +284,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return false;
 	}
 
-	function show_item_playlist() {
+	public function show_item_playlist() {
 		$show_type = false;
 		$show_time = false;
 		$show_feed = false;
@@ -361,7 +303,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return array( $show_type, $show_time, $show_feed, $show_dir );
 	}
 
-	function show_admin_file_photo() {
+	public function show_admin_file_photo() {
 		if ( $this->is_embed_type() ) {
 			return false;
 		}
@@ -372,14 +314,14 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return true;
 	}
 
-	function item_status_select_options() {
+	public function item_status_select_options() {
 		$value   = $this->get_row_by_key( 'item_status' );
 		$options = $this->_item_handler->get_status_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_kind_select_options() {
+	public function item_kind_select_options() {
 		$name    = 'item_kind';
 		$value   = $this->get_row_by_key( 'item_kind' );
 		$options = $this->_item_handler->get_kind_options();
@@ -387,49 +329,49 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_displaytype_select_options() {
+	public function item_displaytype_select_options() {
 		$value   = $this->get_row_by_key( 'item_displaytype' );
 		$options = $this->_item_handler->get_displaytype_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_displayfile_select_options() {
+	public function item_displayfile_select_options() {
 		$value   = $this->get_row_by_key( 'item_displayfile' );
 		$options = $this->_item_handler->get_displayfile_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_onclick_select_options() {
+	public function item_onclick_select_options() {
 		$value   = $this->get_row_by_key( 'item_onclick' );
 		$options = $this->_item_handler->get_onclick_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_detail_onclick_select_options() {
+	public function item_detail_onclick_select_options() {
 		$value   = $this->get_row_by_key( 'item_detail_onclick' );
 		$options = $this->_item_handler->get_detail_onclick_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_player_id_select_options() {
+	public function item_player_id_select_options() {
 // BUG: player id is not correctly selected 
 		$value = $this->get_row_by_key( 'item_player_id' );
 
 		return $this->_player_handler->build_row_options( $value, true );
 	}
 
-	function item_playlist_type_select_options() {
+	public function item_playlist_type_select_options() {
 		$value   = $this->get_item_playlist_type( true );
 		$options = $this->_item_handler->get_playlist_type_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_playlist_dir_select_options() {
+	public function item_playlist_dir_select_options() {
 		$value   = $this->get_row_by_key( 'item_playlist_dir' );
 		$options = $this->_utility_class->get_dirs_in_dir( $this->_MEDIAS_DIR, false, true, true );
 		if ( ! is_array( $options ) || ! count( $options ) ) {
@@ -439,14 +381,14 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $this->build_form_options( $value, $options );
 	}
 
-	function item_playlist_time_select_options() {
+	public function item_playlist_time_select_options() {
 		$value   = $this->get_row_by_key( 'item_playlist_time' );
 		$options = $this->_item_handler->get_playlist_time_options();
 
 		return $this->build_form_options( $value, $options );
 	}
 
-	function get_item_playlist_type( $flag ) {
+	public function get_item_playlist_type( $flag ) {
 		$value = $this->get_row_by_key( 'item_playlist_type' );
 		if ( $flag && empty( $value ) ) {
 			$value = $this->_PLAYLIST_TYPE_DEFAULT;
@@ -455,7 +397,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $value;
 	}
 
-	function is_playlist_type() {
+	public function is_playlist_type() {
 		$kind = $this->get_row_by_key( 'item_kind' );
 		if ( $this->is_playlist_feed_kind() ) {
 			return true;
@@ -467,7 +409,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return false;
 	}
 
-	function is_playlist_feed_kind() {
+	public function is_playlist_feed_kind() {
 		$kind = $this->get_row_by_key( 'item_kind' );
 		if ( $this->_kind_class->is_playlist_feed_kind( $kind ) ) {
 			return true;
@@ -476,7 +418,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return false;
 	}
 
-	function is_playlist_dir_kind() {
+	public function is_playlist_dir_kind() {
 		$kind = $this->get_row_by_key( 'item_kind' );
 		if ( $this->_kind_class->is_playlist_dir_kind( $kind ) ) {
 			return true;
@@ -485,7 +427,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return false;
 	}
 
-	function build_admin_language() {
+	public function build_admin_language() {
 		$arr = array(
 // form
 			'lang_playlist_feed_dsc' => _AM_WEBPHOTO_PLAYLIST_FEED_DSC,
@@ -504,19 +446,19 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // uid
-//---------------------------------------------------------
-	function item_user_param( $userstart ) {
+
+	public function item_user_param( $userstart ) {
 		$uid = $this->get_row_by_key( 'item_uid' );
 
 		return $this->get_user_param( $uid, $userstart );
 	}
 
-//---------------------------------------------------------
+
 // playlist
-//---------------------------------------------------------
-	function print_form_playlist( $mode, $item_row ) {
+
+	public function print_form_playlist( $mode, $item_row ) {
 		if ( ! $this->is_show_form_admin( $item_row ) ) {
 			return;
 		}
@@ -525,7 +467,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 			$item_row, $this->build_form_select_param( $mode ) );
 	}
 
-	function print_form_playlist_with_param( $item_row, $param ) {
+	public function print_form_playlist_with_param( $item_row, $param ) {
 		$mode        = $param['mode'];
 		$form_embed  = $param['form_embed'];
 		$form_editor = $param['form_editor'];
@@ -568,21 +510,21 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		echo "<br>\n";
 	}
 
-	function _build_ele_playlist_kind() {
+	public function _build_ele_playlist_kind() {
 		$value   = $this->get_item_embed_type( false );
 		$options = $this->_item_handler->get_kind_options( 'playlist' );
 
 		return $this->build_form_select( 'item_kind', $value, $options, 1 );
 	}
 
-	function _build_ele_playlist_type() {
+	public function _build_ele_playlist_type() {
 		$value   = $this->_get_playlist_type( true );
 		$options = $this->_item_handler->get_playlist_type_options();
 
 		return $this->build_form_select( 'item_playlist_type', $value, $options, 1 );
 	}
 
-	function _get_playlist_type( $flag ) {
+	public function _get_playlist_type( $flag ) {
 		$value = $this->get_row_by_key( 'item_playlist_type' );
 		if ( $flag && empty( $value ) ) {
 			$value = $this->_PLAYLIST_TYPE_DEFAULT;
@@ -591,10 +533,10 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $value;
 	}
 
-//---------------------------------------------------------
+
 // refresh playlist cache
-//---------------------------------------------------------
-	function print_form_refresh_cache() {
+
+	public function print_form_refresh_cache() {
 		echo $this->build_form_tag( 'playlist_refresh', $this->_URL_ADMIN_INDEX );
 		echo $this->build_html_token();
 
@@ -605,10 +547,10 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		echo $this->build_form_end();
 	}
 
-//---------------------------------------------------------
+
 // refresh playlist cache
-//---------------------------------------------------------
-	function print_form_select_item( $item_id, $sort ) {
+
+	public function print_form_select_item( $item_id, $sort ) {
 		echo '<form style="left; width: 60%;" name="sortform" id="sortform">' . "\n";
 		echo $this->_build_sort_select( $sort );
 		echo $this->_build_button( 'submit_form', _AM_WEBPHOTO_ITEM_ADD );
@@ -616,7 +558,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 
 	}
 
-	function _build_sort_select( $sort_in ) {
+	public function _build_sort_select( $sort_in ) {
 		$url = $this->_THIS_URL . '&sort=';
 
 		$str = '<select name="sort" onChange="location=this.options[this.selectedIndex].value;">' . "\n";
@@ -636,17 +578,17 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $str;
 	}
 
-	function _build_button( $op, $value ) {
+	public function _build_button( $op, $value ) {
 		$onclick = "location='" . $this->_THIS_URL . "&amp;op=" . $op . "'";
 		$str     = '<input type="button" value="' . $value . '" onClick="' . $onclick . '" />' . "\n";
 
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // list
-//---------------------------------------------------------
-	function print_list_table( $mode, $item_rows ) {
+
+	public function print_list_table( $mode, $item_rows ) {
 		$template = 'db:' . $this->_DIRNAME . '_form_admin_item_list.html';
 
 		$is_waiting = ( $mode == 'waiting' ) ? true : false;
@@ -665,15 +607,11 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		echo $tpl->fetch( $template );
 	}
 
-	function build_list_show_waiting( $mode ) {
-		if ( $mode == 'waiting' ) {
-			return true;
-		}
-
-		return false;
+	public function build_list_show_waiting( $mode ) {
+		return $mode == 'waiting';
 	}
 
-	function build_item_list( $item_rows ) {
+	public function build_item_list( $item_rows ) {
 		$this->_cat_handler->set_path_separator( ' ' );
 		$kind_options = $this->_item_handler->get_kind_options();
 
@@ -700,7 +638,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $arr;
 	}
 
-	function build_list_status( $row ) {
+	public function build_list_status( $row ) {
 		$item_id = $row['item_id'];
 		$status  = $row['item_status'];
 		$publish = $row['item_time_publish'];
@@ -767,7 +705,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return array( $is_online, $report, $link, $icon );
 	}
 
-	function build_list_photo_url( $item_row, $is_online ) {
+	public function build_list_photo_url( $item_row, $is_online ) {
 		$item_id      = $item_row['item_id'];
 		$external_url = $item_row['item_external_url'];
 
@@ -783,21 +721,18 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		return $url;
 	}
 
-	function build_list_cont_url( $item_row ) {
+	public function build_list_cont_url( $item_row ) {
 // Fatal error: Call to undefined method get_cached_file_row_by_kind()
 
 		return $this->build_file_url_by_kind( $item_row, _C_WEBPHOTO_FILE_KIND_CONT );
 	}
 
-	function build_list_cat_title( $cat_id ) {
+	public function build_list_cat_title( $cat_id ) {
 		return $this->_cat_handler->get_cached_value_by_id_name( $cat_id, 'cat_title' );
 	}
 
-	function build_list_player_title( $player_id ) {
+	public function build_list_player_title( $player_id ) {
 		return $this->_player_handler->get_cached_value_by_id_name( $player_id, 'player_title' );
 	}
 
-// --- class end ---
 }
-
-?>

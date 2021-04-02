@@ -1,36 +1,24 @@
 <?php
-// $Id: update.php,v 1.12 2011/11/12 11:05:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// Older than v2.00
-// 2010-01-10 K.OHWADA
-// get_url('210')
-// 2009-04-19 K.OHWADA
-// create_file_check
-// 2009-03-15 K.OHWADA
-// v1.30
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_update
-//=========================================================
+
 class webphoto_admin_update extends webphoto_base_this {
 	public $_update_check_class;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
 		parent::__construct( $dirname, $trust_dirname );
@@ -48,9 +36,7 @@ class webphoto_admin_update extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		xoops_cp_header();
 
@@ -93,7 +79,7 @@ class webphoto_admin_update extends webphoto_base_this {
 		echo "</a><br><br>\n";
 	}
 
-// --- class end ---
+
 }
 
-?>
+

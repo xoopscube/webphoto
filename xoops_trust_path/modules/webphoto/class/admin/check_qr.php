@@ -1,29 +1,28 @@
 <?php
-// $Id: check_qr.php,v 1.1 2008/12/10 19:10:04 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-12-06 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_check_qr
-//=========================================================
+
 class webphoto_admin_check_qr extends webphoto_base_this {
 	public $_TITLE = 'QR code check';
 	public $_QR_MODULE_SIZE = 3;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
@@ -35,9 +34,7 @@ class webphoto_admin_check_qr extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		restore_error_handler();
 		error_reporting( E_ALL );

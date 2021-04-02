@@ -1,34 +1,27 @@
 <?php
-// $Id: export_form.php,v 1.2 2009/01/24 07:10:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-01-10 K.OHWADA
-// webphoto_form_this -> webphoto_edit_form
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_export_form
-//=========================================================
+
 class webphoto_admin_export_form extends webphoto_edit_form {
 	public $_SUBMIT_EXTRA;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_form( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_SUBMIT_EXTRA = ' onclick="return confirm(' . _AM_WEBPHOTO_EXPORTCONFIRM . ');" ';
 
@@ -43,17 +36,17 @@ class webphoto_admin_export_form extends webphoto_edit_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // export image
-//---------------------------------------------------------
-	function print_form_image( $src_selbox, $dst_selbox ) {
+
+	public function print_form_image( $src_selbox, $dst_selbox ) {
 		$this->print_form_common( 'ImageManager', 'image', $src_selbox, $dst_selbox, null, true );
 	}
 
-//---------------------------------------------------------
+
 // common
-//---------------------------------------------------------
-	function print_form_common( $form, $op, $src_selbox, $dst_selbox, $dst_dirname = null, $flag_thumb = false ) {
+
+	public function print_form_common( $form, $op, $src_selbox, $dst_selbox, $dst_dirname = null, $flag_thumb = false ) {
 		echo $this->build_div_tag();
 		echo $this->build_form_begin( $form );
 		echo $this->build_input_hidden( 'fct', 'export' );
@@ -80,7 +73,7 @@ class webphoto_admin_export_form extends webphoto_edit_form {
 
 	}
 
-// --- class end ---
+
 }
 
-?>
+

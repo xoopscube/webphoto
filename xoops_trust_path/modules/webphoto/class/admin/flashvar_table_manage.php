@@ -1,35 +1,27 @@
 <?php
-// $Id: flashvar_table_manage.php,v 1.3 2011/05/10 02:56:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// JW Player 5.6
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_flashvar_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_flashvar_table_manage
-//=========================================================
+
 class webphoto_admin_flashvar_table_manage extends webphoto_lib_manage {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_lib_manage( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
+
 		$this->set_manage_handler(
 			webphoto_flashvar_handler::getInstance( $dirname, $trust_dirname ) );
 		$this->set_manage_title_by_name( 'FLASHVAR_TABLE_MANAGE' );
@@ -47,16 +39,14 @@ class webphoto_admin_flashvar_table_manage extends webphoto_lib_manage {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$this->_main();
 	}
 
-//=========================================================
+
 // override for caller
-//=========================================================
+
 	function _build_row_by_post( $row = array() ) {
 		$row = array(
 			'flashvar_id'                  => $this->_post_class->get_post_get_int( 'flashvar_id' ),
@@ -143,9 +133,9 @@ class webphoto_admin_flashvar_table_manage extends webphoto_lib_manage {
 		return $row;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
 
@@ -241,7 +231,7 @@ class webphoto_admin_flashvar_table_manage extends webphoto_lib_manage {
 
 	function _build_row_item_id() {
 		$name  = 'flashvar_item_id';
-		$value = intval( $this->get_row_by_key( $name ) );
+		$value = (int) $this->get_row_by_key( $name );
 		$ele   = $this->build_input_text( $name, $value );
 		if ( $value > 0 ) {
 			$url = $this->_MODULE_URL . '/admin/index.php?fct=item_table_manage&op=form&id=' . $value;
@@ -252,7 +242,4 @@ class webphoto_admin_flashvar_table_manage extends webphoto_lib_manage {
 		return $this->build_line_ele( $this->get_constant( $name ), $ele );
 	}
 
-// --- class end ---
 }
-
-?>

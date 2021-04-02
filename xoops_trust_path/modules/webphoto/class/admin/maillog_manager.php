@@ -1,30 +1,20 @@
 <?php
-// $Id: maillog_manager.php,v 1.7 2010/09/19 06:43:11 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-09-17 K.OHWADA
-// webphoto_admin_maillog_form
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_maillog_handler
-// 2009-01-10 K.OHWADA
-// webphoto_edit_mail_photo -> webphoto_edit_mail_photo
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_maillog_table_manage
-//=========================================================
+
 class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 	public $_config_class;
 	public $_cat_handler;
@@ -42,13 +32,10 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 
 	public $_ADMIN_UID = 1;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_lib_manage( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_manage_handler(
 			webphoto_maillog_handler::getInstance( $dirname, $trust_dirname ) );
@@ -93,9 +80,7 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		switch ( $this->_get_op() ) {
 			case 'add':
@@ -171,9 +156,9 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 		return $this->_post_class->get_post_get( 'op' );
 	}
 
-//---------------------------------------------------------
+
 // submit
-//---------------------------------------------------------
+
 	public function _submit() {
 		$id     = $this->_post_class->get_post_get_int( 'maillog_id' );
 		$uid    = $this->_post_class->get_post_int( 'uid' );
@@ -211,9 +196,9 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	public function _manage_delete_option( $row ) {
 		$this->_unlink_class->unlink_by_maillog_row( $row );
 	}
@@ -222,9 +207,9 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 		$this->_unlink_class->unlink_by_maillog_row( $row );
 	}
 
-//---------------------------------------------------------
+
 // list
-//---------------------------------------------------------
+
 	public function _get_count_by_sortid( $sortid ) {
 		switch ( $sortid ) {
 			case 1:
@@ -273,9 +258,9 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	public function _print_form( $row ) {
 		echo $this->_maillog_form_class->build_form( $row );
 	}
@@ -422,7 +407,5 @@ class webphoto_admin_maillog_manager extends webphoto_lib_manage {
 		return $str;
 	}
 
-// --- class end ---
 }
 
-?>

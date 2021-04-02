@@ -1,48 +1,20 @@
 <?php
-// $Id: checkconfigs.php,v 1.16 2010/02/07 12:20:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-02-01 K.OHWADA
-// _module_version()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_jodconverter
-// 2009-10-25 K.OHWADA
-// webphoto_lib_lame
-// 2009-08-08 K.OHWADA
-// _build_db_character()
-// 2009-01-25 K.OHWADA
-// webphoto_jodconverter
-// 2009-01-10 K.OHWADA
-// xpdf version
-// 2008-12-07 K.OHWADA
-// _check_qr_code()
-// 2008-11-16 K.OHWADA
-// webphoto_lib_server_info
-// 2008-11-08 K.OHWADA
-// tmpdir -> workdir
-// BUG: ths -> this
-// 2008-10-01 K.OHWADA
-// use cfg_uploadspath
-// 2008-08-01 K.OHWADA
-// show Multibyte Extention
-// tmppath -> tmpdir
-// 2008-07-01 K.OHWADA
-// added FFmpeg
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_checkconfigs
-//=========================================================
+
 class webphoto_admin_checkconfigs extends webphoto_base_this {
 	public $_server_class;
 	public $_multibyte_class;
@@ -53,13 +25,10 @@ class webphoto_admin_checkconfigs extends webphoto_base_this {
 	public $_CHAR_SLASH = '/';
 	public $_HEX_SLASH = 0x2f;    // 0x2f = slash '/'
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_server_class    =& webphoto_lib_server_info::getInstance();
 		$this->_multibyte_class =& webphoto_lib_multibyte::getInstance();
@@ -74,9 +43,7 @@ class webphoto_admin_checkconfigs extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function check() {
 		$this->_check_server();
 		echo "<br>\n";

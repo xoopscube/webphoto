@@ -1,58 +1,30 @@
 <?php
-// $Id: item_table_manage.php,v 1.13 2010/11/16 23:43:38 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-24 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// file_id_to_item_name()
-// 2010-09-20 K.OHWADA
-// item_displayfile
-// 2010-01-10 K.OHWADA
-// item_description_scroll
-// 2009-12-06 K.OHWADA
-// item_perm_level
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_item_handler
-// item_detail_onclick
-// 2009-01-10 K.OHWADA
-// item_content etc
-// 2009-01-04 K.OHWADA
-// item_editor
-// 2008-11-29 K.OHWADA
-// item_icon_width
-// 2008-11-16 K.OHWADA
-// item_codeinfo
-// 2008-11-08 K.OHWADA
-// Fatal error: Call to undefined method webphoto_photo_delete::delete_photo()
-// 2008-10-01 K.OHWADA
-// item_embed_type item_playlist_type etc
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_item_table_manage
-//=========================================================
+
 class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 	public $_search_class;
 	public $_delete_class;
 
 	public $_URL_SIZE = 80;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_lib_manage( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_manage_handler(
 			webphoto_item_handler::getInstance( $dirname, $trust_dirname ) );
@@ -77,32 +49,30 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		$this->_main();
 	}
 
-//=========================================================
+
 // override for caller
-//=========================================================
-	function _build_row_add( $row = array() ) {
+
+	public function _build_row_add( $row = array() ) {
 		return $this->_build_row_common();
 	}
 
-	function _build_row_edit( $row = array() ) {
+	public function _build_row_edit( $row = array() ) {
 		return $this->_build_row_common();
 	}
 
-	function _build_row_common() {
+	public function _build_row_common() {
 		$row                = $this->_build_row_by_post();
 		$row['item_search'] = $this->_search_class->build_with_tag( $row );
 
 		return $row;
 	}
 
-	function _build_row_by_post( $row = array() ) {
+	public function _build_row_by_post( $row = array() ) {
 		$row = array(
 			'item_datetime' => $this->_manage_handler->build_datetime_by_post( 'item_datetime' ),
 
@@ -192,10 +162,10 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 		return $row;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
-	function _print_form( $row ) {
+
+	public function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
 
 		echo $this->build_table_begin();
@@ -289,7 +259,7 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 		echo "</table></form>\n";
 	}
 
-	function _build_row_manage_id() {
+	public function _build_row_manage_id() {
 		$title = $this->get_constant( $this->_manage_id_name );
 		if ( empty( $title ) ) {
 			$title = $this->_MANAGE_TITLE_ID_DEFAULT;
@@ -307,9 +277,9 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 		return $this->build_line_ele( $title, $ele );
 	}
 
-	function _build_row_file_id( $i ) {
+	public function _build_row_file_id( $i ) {
 		$name  = $this->_manage_handler->file_id_to_item_name( $i );
-		$value = intval( $this->get_row_by_key( $name ) );
+		$value = (int) $this->get_row_by_key( $name );
 		$ele   = $this->build_input_text( $name, $value );
 		if ( $value > 0 ) {
 			$url = $this->_MODULE_URL . '/admin/index.php?fct=file_table_manage&amp;op=form&amp;id=' . $value;
@@ -320,10 +290,10 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 		return $this->build_line_ele( $this->get_constant( $name ), $ele );
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
-	function manage_delete() {
+
+	public function manage_delete() {
 // Fatal error: Call to undefined method webphoto_photo_delete::delete_photo()
 		$this->_delete_class->delete_photo_by_item_id( $this->get_post_id() );
 
@@ -331,7 +301,4 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 		exit();
 	}
 
-// --- class end ---
 }
-
-?>

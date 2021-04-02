@@ -1,29 +1,21 @@
 <?php
-// $Id: update_check.php,v 1.6 2010/01/25 10:03:07 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-01-10 K.OHWADA
-// webphoto_lib_base -> webphoto_base_ini
-// check_210()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_item_handler
-// 2009-03-15 K.OHWADA
-// check_130()
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_update_check 
-//=========================================================
+
 class webphoto_admin_update_check extends webphoto_base_ini {
 	public $_item_handler;
 	public $_file_handler;
@@ -32,11 +24,9 @@ class webphoto_admin_update_check extends webphoto_base_ini {
 
 	public $_item_count_all;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function webphoto_admin_update_check( $dirname, $trust_dirname ) {
-		$this->webphoto_base_ini( $dirname, $trust_dirname );
+
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_item_handler   =& webphoto_item_handler::getInstance(
 			$dirname, $trust_dirname );
@@ -59,9 +49,9 @@ class webphoto_admin_update_check extends webphoto_base_ini {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // check
-//---------------------------------------------------------
+
 	function build_msg( $msg, $flag_highlight = false, $flag_br = false ) {
 		$str = null;
 
@@ -143,7 +133,7 @@ class webphoto_admin_update_check extends webphoto_base_ini {
 		return $url;
 	}
 
-// --- class end ---
+
 }
 
-?>
+

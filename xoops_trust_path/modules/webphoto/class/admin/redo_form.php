@@ -1,35 +1,26 @@
 <?php
-// $Id: redo_form.php,v 1.3 2009/01/24 07:10:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-01-10 K.OHWADA
-// webphoto_form_this -> webphoto_edit_form
-// 2008-07-01 K.OHWADA
-// added _build_ele_exif()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_redo_form
-//=========================================================
+
 class webphoto_admin_redo_form extends webphoto_edit_form {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_form( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
@@ -41,9 +32,9 @@ class webphoto_admin_redo_form extends webphoto_edit_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // redothumbs
-//---------------------------------------------------------
+
 	function print_form_redothumbs( $param ) {
 		$cfg_width  = $this->_config_class->get_by_name( 'width' );
 		$cfg_height = $this->_config_class->get_by_name( 'height' );
@@ -90,7 +81,7 @@ class webphoto_admin_redo_form extends webphoto_edit_form {
 		return $this->build_form_radio( 'exif', $value, $options );
 	}
 
-// --- class end ---
+
 }
 
-?>
+

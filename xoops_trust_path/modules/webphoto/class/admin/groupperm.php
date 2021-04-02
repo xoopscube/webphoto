@@ -1,30 +1,20 @@
 <?php
-// $Id: groupperm.php,v 1.6 2010/02/17 04:34:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-02-15 K.OHWADA
-// get_errors()
-// 2009-12-06 K.OHWADA
-// webphoto_lib_groupperm
-// 2009-01-04 K.OHWADA
-// _B_WEBPHOTO_GPERM_HTML
-// 2008-08-01 K.OHWADA
-// added _B_WEBPHOTO_GPERM_MAIL
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_groupperm
-//=========================================================
+
 class webphoto_admin_groupperm extends webphoto_edit_base {
 	public $_groupperm_class;
 	public $_form_class;
@@ -40,13 +30,10 @@ class webphoto_admin_groupperm extends webphoto_edit_base {
 
 	public $_DEBUG = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_base( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_form_class
 			=& webphoto_admin_groupperm_form::getInstance( $dirname, $trust_dirname );
@@ -65,9 +52,7 @@ class webphoto_admin_groupperm extends webphoto_edit_base {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$perms = $this->get_post( 'perms' );
 		if ( is_array( $perms ) ) {
@@ -84,9 +69,9 @@ class webphoto_admin_groupperm extends webphoto_edit_base {
 		xoops_cp_footer();
 	}
 
-//---------------------------------------------------------
+
 // groupperm
-//---------------------------------------------------------
+
 	function groupperm( $perms ) {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -116,14 +101,11 @@ class webphoto_admin_groupperm extends webphoto_edit_base {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function build_form() {
 		return $this->_form_class->build_form( $this->_THIS_FCT );
 	}
 
-// --- class end ---
 }
-
-?>

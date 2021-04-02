@@ -1,25 +1,25 @@
 <?php
-// $Id: rss_view.php,v 1.1 2009/03/06 03:54:16 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-03-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_rss_view
-//=========================================================
+
 class webphoto_admin_rss_view extends webphoto_rss {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	function webphoto_admin_rss_view( $dirname, $trust_dirname ) {
-		$this->webphoto_rss( $dirname, $trust_dirname );
+
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
@@ -31,14 +31,9 @@ class webphoto_admin_rss_view extends webphoto_rss {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		$this->view_rss();
 	}
 
-// --- class end ---
 }
-
-?>

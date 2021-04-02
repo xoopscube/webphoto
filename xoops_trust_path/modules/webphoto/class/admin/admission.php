@@ -1,24 +1,19 @@
 <?php
-// $Id: admission.php,v 1.2 2008/08/25 19:28:05 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_admission
-//=========================================================
 class webphoto_admin_admission extends webphoto_base_this {
 	public $_notification_class;
 	public $_delete_class;
@@ -31,13 +26,10 @@ class webphoto_admin_admission extends webphoto_base_this {
 
 	public $_PERPAGE = 20;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 // use delete_photo
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_notification_class =& webphoto_notification_event::getInstance( $dirname, $trust_dirname );
 		$this->_delete_class       =& webphoto_photo_delete::getInstance( $dirname );
@@ -54,9 +46,7 @@ class webphoto_admin_admission extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		$this->_get_pos = $this->_post_class->get_get_int( 'pos' );
 		$this->_get_txt = $this->_post_class->get_get_text( 'txt' );
@@ -164,5 +154,4 @@ class webphoto_admin_admission extends webphoto_base_this {
 
 	}
 
-// --- class end ---
 }

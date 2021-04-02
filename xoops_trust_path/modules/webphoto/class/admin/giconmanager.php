@@ -1,36 +1,20 @@
 <?php
-// $Id: giconmanager.php,v 1.9 2010/11/16 23:43:38 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// build_file_full_path()
-// 2009-11-11 K.OHWADA
-// $trust_dirname in webphoto_gicon_handler
-// 2009-01-10 K.OHWADA
-// webphoto_edit_gicon_create
-// 2008-11-08 K.OHWADA
-// _rename_image() -> _resize_image()
-// _C_WEBPHOTO_UPLOAD_FIELD_GICON
-// 2008-10-01 K.OHWADA
-// move $_GICONS_PATH to webphoto_base_this
-// BUG: not delete gicon
-// 2008-07-01 K.OHWADA
-// used get_my_allowed_mimes()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_giconmanager
-//=========================================================
+
 class webphoto_admin_giconmanager extends webphoto_edit_base {
 	public $_gicon_handler;
 	public $_upload_class;
@@ -53,13 +37,10 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 	public $_TIME_SUCCESS = 1;
 	public $_TIME_FAIL = 5;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_base( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_gicon_handler
 			=& webphoto_gicon_handler::getInstance( $dirname, $trust_dirname );
@@ -84,9 +65,7 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	function main() {
 		$this->_check();
 
@@ -159,9 +138,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		return 'list';
 	}
 
-//---------------------------------------------------------
+
 // check
-//---------------------------------------------------------
+
 	function _check() {
 		$ret = $this->_exec_check();
 		switch ( $ret ) {
@@ -189,9 +168,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		return 0;
 	}
 
-//---------------------------------------------------------
+
 // insert
-//---------------------------------------------------------
+
 	function _insert() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -344,9 +323,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		return 0;
 	}
 
-//---------------------------------------------------------
+
 // update
-//---------------------------------------------------------
+
 	function _update() {
 		if ( ! $this->check_token() ) {
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $this->get_token_errors() );
@@ -442,9 +421,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		return 0;
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	function _delete() {
 		$gicon_id = $this->_post_delgicon;
 
@@ -496,9 +475,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function _print_edit_form() {
 		$row = $this->_gicon_handler->get_row_by_id( $this->_post_gicon_id );
 		if ( ! is_array( $row ) ) {
@@ -514,9 +493,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		$this->_print_gicon_form( 'new', $row );
 	}
 
-//---------------------------------------------------------
+
 // list
-//---------------------------------------------------------
+
 	function _print_list() {
 		echo '<p><a href="' . $this->_THIS_URL . '&amp;disp=new">';
 		echo _AM_WEBPHOTO_GICON_ADD;
@@ -528,9 +507,9 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 
 	}
 
-//---------------------------------------------------------
+
 // admin_gicon_form
-//---------------------------------------------------------
+
 	function _print_gicon_form( $mode, $row ) {
 		$form =& webphoto_admin_gicon_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -543,7 +522,4 @@ class webphoto_admin_giconmanager extends webphoto_edit_base {
 		$form->print_list( $rows );
 	}
 
-// --- class end ---
 }
-
-?>

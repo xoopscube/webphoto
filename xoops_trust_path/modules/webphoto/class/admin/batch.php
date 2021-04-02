@@ -1,44 +1,30 @@
 <?php
-// $Id: batch.php,v 1.6 2009/05/17 08:58:59 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-05-05 K.OHWADA
-// webphoto_admin_batch_form -> webphoto_edit_photo_form
-// 2009-01-10 K.OHWADA
-// webphoto_photo_create -> webphoto_edit_factory_create
-// 2008-08-01 K.OHWADA
-// use webphoto_photo_create
-// 2008-07-01 K.OHWADA
-// used create_flash() create_single_thumb()
-// xoops_error() -> build_error_msg()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_batch
-//=========================================================
+
 class webphoto_admin_batch extends webphoto_edit_submit {
 	public $_TIME_SUCCESS = 1;
 	public $_TIME_FAIL = 5;
 
 	public $_SHOW_FORM_ADMIN_EDITOR = true;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_edit_submit( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_flag_admin( true );
 		$this->set_fct( 'batch' );
@@ -57,9 +43,7 @@ class webphoto_admin_batch extends webphoto_edit_submit {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
+
 	public function main() {
 		$this->_check_cat();
 
@@ -104,9 +88,7 @@ class webphoto_admin_batch extends webphoto_edit_submit {
 		echo "<h3>" . $title . "</h3>\n";
 	}
 
-//---------------------------------------------------------
 // submit
-//---------------------------------------------------------
 	public function _submit() {
 		xoops_cp_header();
 		$this->_print_title();
@@ -118,7 +100,7 @@ class webphoto_admin_batch extends webphoto_edit_submit {
 			echo "<br>\n";
 		}
 
-		echo "<br><hr />\n";
+		echo "<br><hr>\n";
 		echo "<h4>" . _AM_WEBPHOTO_FINISHED . "</h4>\n";
 		echo '<a href="index.php">GOTO Admin Menu</a>' . "<br>\n";
 
@@ -245,9 +227,7 @@ class webphoto_admin_batch extends webphoto_edit_submit {
 		return $this->return_code();
 	}
 
-//---------------------------------------------------------
 // print form
-//---------------------------------------------------------
 	public function _print_form() {
 		$item_row = $this->create_item_row_default();
 		$this->init_form();
@@ -259,5 +239,4 @@ class webphoto_admin_batch extends webphoto_edit_submit {
 		echo $this->_photo_form_class->build_form_photo_with_template( $item_row );
 	}
 
-// --- class end ---
 }

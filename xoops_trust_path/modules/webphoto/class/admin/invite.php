@@ -1,24 +1,20 @@
 <?php
-// $Id: invite.php,v 1.2 2011/11/12 11:05:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// get_valid_mail_addr()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_admin_invite
-//=========================================================
+
 class webphoto_admin_invite extends webphoto_base_this {
 	public $_mail_template_class;
 	public $_mail_send_class;
@@ -34,13 +30,10 @@ class webphoto_admin_invite extends webphoto_base_this {
 	public $_FORM_TEMPLATE = 'form_admin_invite.html';
 	public $_MAIL_TEMPLATE = 'invite.tpl';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
 
-		parent::__construct ( $dirname , $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
+		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_mail_template_class
 			=& webphoto_d3_mail_template::getInstance( $dirname, $trust_dirname );
@@ -61,10 +54,8 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
-	function main() {
+
+	public function main() {
 		xoops_cp_header();
 
 		echo $this->build_admin_menu();
@@ -87,7 +78,7 @@ class webphoto_admin_invite extends webphoto_base_this {
 		exit();
 	}
 
-	function _get_op() {
+	public function _get_op() {
 		$this->_post_email   = $this->_post_class->get_post_text( 'email' );
 		$this->_post_name    = $this->_post_class->get_post_text( 'name' );
 		$this->_post_message = $this->_post_class->get_post_text( 'message' );
@@ -100,10 +91,10 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return '';
 	}
 
-//---------------------------------------------------------
+
 // invite
-//---------------------------------------------------------
-	function _invite() {
+
+	public function _invite() {
 		$ret = $this->_invite_exec();
 		if ( $ret == 1 ) {
 			echo $this->get_format_msg_array( true, false, true );
@@ -120,7 +111,7 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return false;
 	}
 
-	function _invite_exec() {
+	public function _invite_exec() {
 		$email = $this->_mail_send_class->get_valid_mail_addr( $this->_post_email );
 		if ( empty( $email ) ) {
 			$this->set_error( $this->get_constant( 'ERR_MAIL_ILLEGAL' ) );
@@ -154,7 +145,7 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return 1;
 	}
 
-	function _get_from_email() {
+	public function _get_from_email() {
 		if ( $this->_xoops_user_email ) {
 			return $this->_xoops_user_email;
 		}
@@ -162,11 +153,11 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return $this->_xoops_adminmail;
 	}
 
-	function _get_subject() {
+	public function _get_subject() {
 		return sprintf( _AM_WEBPHOTO_INVITE_SUBJECT, $this->_post_name, $this->_MODULE_NAME );
 	}
 
-	function _get_body() {
+	public function _get_body() {
 		$tags = array(
 			'INVITE_NAME'    => $this->_post_name,
 			'INVITE_MASSAGE' => $this->_post_message,
@@ -179,14 +170,14 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // print form
-//---------------------------------------------------------
-	function _print_form() {
+
+	public function _print_form() {
 		echo $this->_build_form_invite();
 	}
 
-	function _build_form_invite() {
+	public function _build_form_invite() {
 		$template = $this->build_form_template( $this->_FORM_TEMPLATE );
 
 		$name = $this->_post_name;
@@ -217,32 +208,30 @@ class webphoto_admin_invite extends webphoto_base_this {
 		return $tpl->fetch( $template );
 	}
 
-	function build_form_template( $name ) {
+	public function build_form_template( $name ) {
 		$str = 'db:' . $this->_DIRNAME . '_' . $name;
 
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
-	function clear_msg_array() {
+
+	public function clear_msg_array() {
 		$this->_msg_class->clear_msg_array();
 	}
 
-	function set_msg( $msg, $flag_highlight = false ) {
+	public function set_msg( $msg, $flag_highlight = false ) {
 		$this->_msg_class->set_msg( $msg, $flag_highlight );
 	}
 
-	function get_msg_array() {
+	public function get_msg_array() {
 		return $this->_msg_class->get_msg_array();
 	}
 
-	function get_format_msg( $flag_sanitize = true ) {
+	public function get_format_msg( $flag_sanitize = true ) {
 		return $this->_msg_class->get_format_msg( $flag_sanitize );
 	}
 
-// --- class end ---
 }
 
-?>
