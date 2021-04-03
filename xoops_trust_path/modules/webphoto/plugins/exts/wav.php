@@ -14,61 +14,54 @@
 // $trust_dirname 
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_wav
 //=========================================================
-class webphoto_ext_wav extends webphoto_ext_base
-{
+class webphoto_ext_wav extends webphoto_ext_base {
 	public $_lame_class;
-	public $_ffmpeg_class ;
+	public $_ffmpeg_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_wav( $dirname, $trust_dirname )
-{
-	$this->webphoto_ext_base( $dirname, $trust_dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_lame_class   =& webphoto_lame::getInstance(   $dirname, $trust_dirname  );
-	$this->_ffmpeg_class =& webphoto_ffmpeg::getInstance( $dirname, $trust_dirname );
-}
+		$this->_lame_class   =& webphoto_lame::getInstance( $dirname, $trust_dirname );
+		$this->_ffmpeg_class =& webphoto_ffmpeg::getInstance( $dirname, $trust_dirname );
+	}
 
 //---------------------------------------------------------
 // check ext
 //---------------------------------------------------------
-function is_ext( $ext )
-{
-	return $this->is_audio_wav_ext( $ext );
-}
+	public function is_ext( $ext ) {
+		return $this->is_audio_wav_ext( $ext );
+	}
 
-function is_audio_wav_ext( $ext )
-{
-	return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_AUDIO_WAV );
-}
+	public function is_audio_wav_ext( $ext ) {
+		return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_AUDIO_WAV );
+	}
 
 //---------------------------------------------------------
 // create mp3
 //---------------------------------------------------------
-function create_mp3( $param )
-{
-	$src_file = $param['src_file'];
-	$mp3_file = $param['mp3_file'] ;
+	public function create_mp3( $param ) {
+		$src_file = $param['src_file'];
+		$mp3_file = $param['mp3_file'];
 
-	return $this->_lame_class->create_mp3( $src_file, $mp3_file );
-}
+		return $this->_lame_class->create_mp3( $src_file, $mp3_file );
+	}
 
 //---------------------------------------------------------
 // duration
 //---------------------------------------------------------
-function get_video_info( $param )
-{
-	$src_file = $param['src_file'];
-	return $this->_ffmpeg_class->get_video_info( $src_file );
-}
+	public function get_video_info( $param ) {
+		$src_file = $param['src_file'];
 
-// --- class end ---
+		return $this->_ffmpeg_class->get_video_info( $src_file );
+	}
 }
-
-?>

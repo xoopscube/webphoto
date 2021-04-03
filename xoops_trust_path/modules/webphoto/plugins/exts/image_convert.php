@@ -12,51 +12,45 @@
 // $trust_dirname 
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_image_convert
 //=========================================================
-class webphoto_ext_image_convert extends webphoto_ext_base
-{
+class webphoto_ext_image_convert extends webphoto_ext_base {
 	public $_imagemagick_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_image_convert( $dirname, $trust_dirname )
-{
-	$this->webphoto_ext_base( $dirname, $trust_dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_imagemagick_class =& webphoto_imagemagick::getInstance( $dirname, $trust_dirname );
+		$this->_imagemagick_class =& webphoto_imagemagick::getInstance( $dirname, $trust_dirname );
 
-	$this->set_debug_by_name( 'IMAGE_CONVERT' );
-}
+		$this->set_debug_by_name( 'IMAGE_CONVERT' );
+	}
 
 //---------------------------------------------------------
 // check ext
 //---------------------------------------------------------
-function is_ext( $ext )
-{
-	return $this->is_image_convert_ext( $ext );
-}
+	public function is_ext( $ext ) {
+		return $this->is_image_convert_ext( $ext );
+	}
 
-function is_image_convert_ext( $ext )
-{
-	return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_IMAGE_CONVERT );
-}
+	public function is_image_convert_ext( $ext ) {
+		return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_IMAGE_CONVERT );
+	}
 
 //---------------------------------------------------------
 // create jpeg
 //---------------------------------------------------------
-function create_jpeg( $param )
-{
-	$src_file  = $param['src_file'] ;
-	$jpeg_file = $param['jpeg_file'] ;
-	return $this->_imagemagick_class->create_jpeg( $src_file, $jpeg_file );
-}
+	public function create_jpeg( $param ) {
+		$src_file  = $param['src_file'];
+		$jpeg_file = $param['jpeg_file'];
 
-// --- class end ---
+		return $this->_imagemagick_class->create_jpeg( $src_file, $jpeg_file );
+	}
 }
-
-?>

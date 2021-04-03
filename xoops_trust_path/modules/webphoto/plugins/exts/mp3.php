@@ -6,48 +6,43 @@
 // 2010-10-01 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_mp3
 //=========================================================
-class webphoto_ext_mp3 extends webphoto_ext_base
-{
-	public $_ffmpeg_class ;
+class webphoto_ext_mp3 extends webphoto_ext_base {
+	public $_ffmpeg_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_mp3( $dirname, $trust_dirname )
-{
-	$this->webphoto_ext_base( $dirname, $trust_dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_ffmpeg_class =& webphoto_ffmpeg::getInstance( $dirname, $trust_dirname );
-}
+		$this->_ffmpeg_class =& webphoto_ffmpeg::getInstance( $dirname, $trust_dirname );
+	}
 
 //---------------------------------------------------------
 // check type
 //---------------------------------------------------------
-function is_ext( $ext )
-{
-	return $this->is_audio_ext( $ext );
-}
+	public function is_ext( $ext ) {
+		return $this->is_audio_ext( $ext );
+	}
 
-function is_audio_ext( $ext )
-{
-	return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_AUDIO_MP3 );
-}
+	public function is_audio_ext( $ext ) {
+		return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_AUDIO_MP3 );
+	}
 
 //---------------------------------------------------------
 // duration
 //---------------------------------------------------------
-function get_video_info( $param )
-{
-	$src_file = $param['src_file'];
-	return $this->_ffmpeg_class->get_video_info( $src_file );
+	public function get_video_info( $param ) {
+		$src_file = $param['src_file'];
+
+		return $this->_ffmpeg_class->get_video_info( $src_file );
+	}
 }
 
-// --- class end ---
-}
-
-?>

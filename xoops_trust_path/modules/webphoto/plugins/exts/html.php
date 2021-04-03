@@ -12,35 +12,33 @@
 // $trust_dirname 
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_pdf
 //=========================================================
-class webphoto_ext_html extends webphoto_ext_base
-{
-	public $_HTML_EXTS = array('html', 'htm');
+class webphoto_ext_html extends webphoto_ext_base {
+	public $_HTML_EXTS = array( 'html', 'htm' );
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_html( $dirname, $trust_dirname )
-{
-	$this->webphoto_ext_base( $dirname, $trust_dirname );
-}
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
+	}
 
 //---------------------------------------------------------
 // check ext
 //---------------------------------------------------------
-function is_ext( $ext )
-{
-	return $this->is_html_ext( $ext );
-}
+	public function is_ext( $ext ) {
+		return $this->is_html_ext( $ext );
+	}
 
-function is_html_ext( $ext )
-{
-	return $this->is_ext_in_array( $ext, $this->_HTML_EXTS );
-}
+	public function is_html_ext( $ext ) {
+		return $this->is_ext_in_array( $ext, $this->_HTML_EXTS );
+	}
 
 //---------------------------------------------------------
 // create image
@@ -49,44 +47,40 @@ function is_html_ext( $ext )
 //---------------------------------------------------------
 // text content
 //---------------------------------------------------------
-function get_text_content( $param )
-{
-	$file_cont = isset($param['file_cont'])  ? $param['file_cont'] : null ;
+	public function get_text_content( $param ) {
+		$file_cont = isset( $param['file_cont'] ) ? $param['file_cont'] : null;
 
-	if ( !is_file($file_cont) ) {
-		return false;
+		if ( ! is_file( $file_cont ) ) {
+			return false;
+		}
+
+		$text = file_get_contents( $file_cont );
+
+		$encoding = $this->find_html_encoding( $text, true );
+		if ( $encoding ) {
+			$text = $this->_multibyte_class->convert_encoding( $text, _CHARSET, $encoding );
+		}
+
+		$text = $this->_multibyte_class->build_plane_text( $text );
+
+		return $text;
 	}
-
-	$text = file_get_contents( $file_cont );
-
-	$encoding = $this->find_html_encoding( $text, true );
-	if ( $encoding) {
-		$text = $this->_multibyte_class->convert_encoding( $text, _CHARSET, $encoding );
-	}
-
-	$text = $this->_multibyte_class->build_plane_text( $text );
-	return $text;
-}
 
 //---------------------------------------------------------
 // find HTML encoding
 // < meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
 //---------------------------------------------------------
-function find_html_encoding( $text, $flag_auto=false )
-{
-	$encoding = null;
-	if ( preg_match('/<(meta.*Content-Type.*)>/is', $text, $match1) ) {
-		if ( preg_match('/charset=([a-zA-Z0-9\-\_]+)/is', $match1[1], $match2) ) {
-			$encoding = trim($match2[1]);
+	public function find_html_encoding( $text, $flag_auto = false ) {
+		$encoding = null;
+		if ( preg_match( '/<(meta.*Content-Type.*)>/is', $text, $match1 ) ) {
+			if ( preg_match( '/charset=([a-zA-Z0-9\-\_]+)/is', $match1[1], $match2 ) ) {
+				$encoding = trim( $match2[1] );
+			}
 		}
-	}
-	if ( empty($encoding) && $flag_auto ) {
-		$encoding = $this->_multibyte_class->m_mb_detect_encoding( $text );
-	}
-	return $encoding;
-}
+		if ( empty( $encoding ) && $flag_auto ) {
+			$encoding = $this->_multibyte_class->m_mb_detect_encoding( $text );
+		}
 
-// --- class end ---
+		return $encoding;
+	}
 }
-
-?>

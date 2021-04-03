@@ -6,7 +6,9 @@
 // 2010-06-06 K.OHWADA
 //=========================================================
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_embed_ustream
@@ -22,150 +24,143 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
 // </object>
 
 //=========================================================
-class webphoto_embed_ustream extends webphoto_embed_base
-{
+class webphoto_embed_ustream extends webphoto_embed_base {
 
-function webphoto_embed_ustream()
-{
-	$this->webphoto_embed_base( 'ustream' );
-	$this->set_url( 'http://www.ustream.tv/recorded/' );
-	$this->set_sample( '6996774' );
-}
+	function webphoto_embed_ustream() {
+		$this->webphoto_embed_base( 'ustream' );
+		$this->set_url( 'http://www.ustream.tv/recorded/' );
+		$this->set_sample( '6996774' );
+	}
 
-function embed( $src, $width, $height )
-{
-	$movie = 'http://www.ustream.tv/flash/video/'.$src;
+	function embed( $src, $width, $height ) {
+		$movie = 'http://www.ustream.tv/flash/video/' . $src;
 
-	$flashvars         = 'autoplay=false';
-	$allowfullscreen   = 'true';
-	$allowscriptaccess = 'always';
+		$flashvars         = 'autoplay=false';
+		$allowfullscreen   = 'true';
+		$allowscriptaccess = 'always';
 
-	$obj_extra = 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ';
+		$obj_extra = 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ';
 
-	$embed_extra  = 'flashvars="'. $flashvars .'" ';
-	$embed_extra .= 'allowfullscreen="'. $allowfullscreen .'" ';
-	$embed_extra .= 'allowscriptaccess="'. $allowscriptaccess .'" ';
+		$embed_extra = 'flashvars="' . $flashvars . '" ';
+		$embed_extra .= 'allowfullscreen="' . $allowfullscreen . '" ';
+		$embed_extra .= 'allowscriptaccess="' . $allowscriptaccess . '" ';
 
-	$str  = $this->build_object_begin( $width, $height, $obj_extra );
-	$str .= $this->build_param( 'flashvars',         $flashvars );
-	$str .= $this->build_param( 'allowfullscreen',   $allowfullscreen );
-	$str .= $this->build_param( 'allowscriptaccess', $allowscriptaccess );
-	$str .= $this->build_embed_flash( $movie, $width, $height, $embed_extra );
-	$str .= $this->build_object_end();
-	return $str;
-}
+		$str = $this->build_object_begin( $width, $height, $obj_extra );
+		$str .= $this->build_param( 'flashvars', $flashvars );
+		$str .= $this->build_param( 'allowfullscreen', $allowfullscreen );
+		$str .= $this->build_param( 'allowscriptaccess', $allowscriptaccess );
+		$str .= $this->build_embed_flash( $movie, $width, $height, $embed_extra );
+		$str .= $this->build_object_end();
 
-function link( $src )
-{
-	return $this->build_link( $src );
-}
+		return $str;
+	}
 
-function width()
-{
-	return 320;
-}
+	function link( $src ) {
+		return $this->build_link( $src );
+	}
 
-function height()
-{
-	return 260;
-}
+	function width() {
+		return 320;
+	}
 
-function desc()
-{
-	return $this->build_desc();
-}
+	function height() {
+		return 260;
+	}
+
+	function desc() {
+		return $this->build_desc();
+	}
 
 //---------------------------------------------------------
 // xml
 //---------------------------------------------------------
-function support_params()
-{
-	return $this->build_support_params();
-}
-
-function get_xml_params( $src )
-{
-	$url = 'http://api.ustream.tv/xml/video/'.$src.'/getinfo';
-	$cont = $this->get_remote_file( $url );
-	if ( empty($cont) ) {
-		return false;
+	function support_params() {
+		return $this->build_support_params();
 	}
 
-	$xml   = $this->get_simplexml( $cont );
-	$error = trim( $this->get_obj_property( $xml, 'error' ) );
-	if ( $error ) {
-		return false;
+	function get_xml_params( $src ) {
+		$url  = 'http://api.ustream.tv/xml/video/' . $src . '/getinfo';
+		$cont = $this->get_remote_file( $url );
+		if ( empty( $cont ) ) {
+			return false;
+		}
+
+		$xml   = $this->get_simplexml( $cont );
+		$error = trim( $this->get_obj_property( $xml, 'error' ) );
+		if ( $error ) {
+			return false;
+		}
+
+		$results = $this->get_obj_property( $xml, 'results' );
+		if ( ! is_object( $results ) ) {
+			return false;
+		}
+
+		$arr = array(
+			'title'       => $this->get_xml_title( $results ),
+			'description' => $this->get_xml_description( $results ),
+			'url'         => $this->get_xml_url( $results ),
+			'thumb'       => $this->get_xml_thumb( $results ),
+			'duration'    => $this->get_xml_duration( $results ),
+			'tags'        => $this->get_xml_tags( $results ),
+			'script'      => $this->get_xml_script( $results ),
+
+		);
+
+		return $arr;
 	}
 
-	$results = $this->get_obj_property( $xml, 'results' );
-	if ( !is_object($results) ) {
-		return false;
+	function get_xml_title( $results ) {
+		$str = $this->get_obj_property( $results, 'title' );
+		$str = $this->convert_from_utf8( strval( $str ) );
+
+		return $str;
 	}
 
-	$arr = array(
-		'title'       => $this->get_xml_title(       $results ),
-		'description' => $this->get_xml_description( $results ),
-		'url'         => $this->get_xml_url(         $results ),
-		'thumb'       => $this->get_xml_thumb(       $results ),
-		'duration'    => $this->get_xml_duration(    $results ),
-		'tags'        => $this->get_xml_tags(        $results ),
-		'script'      => $this->get_xml_script(      $results ),
+	function get_xml_description( $results ) {
+		$str = $this->get_obj_property( $results, 'description' );
+		$str = $this->convert_from_utf8( strval( $str ) );
 
-	);
-	return $arr;
-}
+		return $str;
+	}
 
-function get_xml_title( $results )
-{
-	$str = $this->get_obj_property( $results, 'title' );
-	$str = $this->convert_from_utf8( strval($str) );
-	return $str;
-}
+	function get_xml_url( $results ) {
+		$str = $this->get_obj_property( $results, 'url' );
+		$str = strval( $str );
 
-function get_xml_description( $results )
-{
-	$str = $this->get_obj_property( $results, 'description' );
-	$str = $this->convert_from_utf8( strval($str) );
-	return $str;
-}
+		return $str;
+	}
 
-function get_xml_url( $results )
-{
-	$str = $this->get_obj_property( $results, 'url' );
-	$str = strval($str);
-	return $str;
-}
+	function get_xml_thumb( $results ) {
+		$url = $this->get_obj_property( $results, 'imageUrl' );
+		$str = $this->get_obj_property( $url, 'small' );
+		$str = strval( $str );
 
-function get_xml_thumb( $results )
-{
-	$url = $this->get_obj_property( $results, 'imageUrl' );
-	$str = $this->get_obj_property( $url,     'small' );
-	$str = strval($str);
-	return $str;
-}
+		return $str;
+	}
 
-function get_xml_duration( $results )
-{
-	$str = $this->get_obj_property( $results, 'lengthInSecond' );
-	$str = floor($str);
-	return $str;
-}
+	function get_xml_duration( $results ) {
+		$str = $this->get_obj_property( $results, 'lengthInSecond' );
+		$str = floor( $str );
 
-function get_xml_tags( $results )
-{
-	$tags = $this->get_obj_property( $results, 'tags' );
-	$arr  = $this->get_obj_property( $tags,    'array' );
-	$arr  = $this->obj_array_to_str_array( $arr );
-	$arr  = $this->convert_array_from_utf8( $arr );
-	return $arr;
-}
+		return $str;
+	}
 
-function get_xml_script( $results )
-{
-	$str = $this->get_obj_property( $results, 'embedTag' );
-	$str = $this->replace_width_height( $str );
-	return $str;
-}
+	function get_xml_tags( $results ) {
+		$tags = $this->get_obj_property( $results, 'tags' );
+		$arr  = $this->get_obj_property( $tags, 'array' );
+		$arr  = $this->obj_array_to_str_array( $arr );
+		$arr  = $this->convert_array_from_utf8( $arr );
+
+		return $arr;
+	}
+
+	function get_xml_script( $results ) {
+		$str = $this->get_obj_property( $results, 'embedTag' );
+		$str = $this->replace_width_height( $str );
+
+		return $str;
+	}
 
 // --- class end ---
 }

@@ -14,69 +14,64 @@
 // $trust_dirname 
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_xls
 //=========================================================
-class webphoto_ext_xls extends webphoto_ext_base
-{
+class webphoto_ext_xls extends webphoto_ext_base {
 	public $_pdf_class;
 	public $_jod_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function webphoto_ext_xls( $dirname, $trust_dirname )
-{
-	$this->webphoto_ext_base( $dirname, $trust_dirname );
+	function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_pdf_class 
-		=& webphoto_pdf::getInstance( $dirname, $trust_dirname );
-	$this->_jod_class 
-		=& webphoto_jodconverter::getInstance( $dirname, $trust_dirname );
+		$this->_pdf_class
+			=& webphoto_pdf::getInstance( $dirname, $trust_dirname );
+		$this->_jod_class
+			=& webphoto_jodconverter::getInstance( $dirname, $trust_dirname );
 
-	$this->set_debug_by_name( 'XLS' );
-}
+		$this->set_debug_by_name( 'XLS' );
+	}
 
 //---------------------------------------------------------
 // check ext
 //---------------------------------------------------------
-function is_ext( $ext )
-{
-	return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_OFFICE_XLS );
-}
+	public function is_ext( $ext ) {
+		return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_OFFICE_XLS );
+	}
 
 //---------------------------------------------------------
 // create pdf
 //---------------------------------------------------------
-function create_pdf( $param )
-{
-	$src_file = $param['src_file'] ;
-	$pdf_file = $param['pdf_file'] ;
-	return $this->_jod_class->create_pdf( $src_file, $pdf_file );
-}
+	public function create_pdf( $param ) {
+		$src_file = $param['src_file'];
+		$pdf_file = $param['pdf_file'];
+
+		return $this->_jod_class->create_pdf( $src_file, $pdf_file );
+	}
 
 //---------------------------------------------------------
 // create image
 //---------------------------------------------------------
-function create_jpeg( $param )
-{
-	$pdf_file  = $param['pdf_file'] ;
-	$jpeg_file = $param['jpeg_file'] ;
-	return $this->_pdf_class->create_jpeg( $pdf_file, $jpeg_file );
-}
+	public function create_jpeg( $param ) {
+		$pdf_file  = $param['pdf_file'];
+		$jpeg_file = $param['jpeg_file'];
+
+		return $this->_pdf_class->create_jpeg( $pdf_file, $jpeg_file );
+	}
 
 //---------------------------------------------------------
 // text content
 //---------------------------------------------------------
-function get_text_content( $param )
-{
-	$file_cont = isset($param['file_cont']) ? $param['file_cont'] : null ;
-	return $this->_jod_class->get_text_content_for_xls_ppt( $file_cont );
-}
+	public function get_text_content( $param ) {
+		$file_cont = isset( $param['file_cont'] ) ? $param['file_cont'] : null;
 
-// --- class end ---
+		return $this->_jod_class->get_text_content_for_xls_ppt( $file_cont );
+	}
 }
-
-?>

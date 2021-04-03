@@ -14,56 +14,52 @@
 // $trust_dirname 
 //---------------------------------------------------------
 
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //=========================================================
 // class webphoto_ext_pdf
 //=========================================================
-class webphoto_ext_pdf extends webphoto_ext_base
-{
+class webphoto_ext_pdf extends webphoto_ext_base {
 	public $_pdf_class;
 
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-public function __construct( $dirname, $trust_dirname )
-{
-	parent::__construct( $dirname, $trust_dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_pdf_class 
-		=& webphoto_pdf::getInstance( $dirname, $trust_dirname );
+		$this->_pdf_class
+			=& webphoto_pdf::getInstance( $dirname, $trust_dirname );
 
-	$this->set_debug_by_name( 'PDF' );
-}
+		$this->set_debug_by_name( 'PDF' );
+	}
 
 //---------------------------------------------------------
 // check ext
 //---------------------------------------------------------
-function is_ext( $ext )
-{
-	return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_OFFICE_PDF );
-}
+	public function is_ext( $ext ) {
+		return $this->match_ext_kind( $ext, _C_WEBPHOTO_MIME_KIND_OFFICE_PDF );
+	}
 
 //---------------------------------------------------------
 // create jpeg
 //---------------------------------------------------------
-function create_jpeg( $param )
-{
-	$src_file  = $param['src_file'] ;
-	$jpeg_file = $param['jpeg_file'] ;
-	return $this->_pdf_class->create_jpeg( $src_file, $jpeg_file );
-}
+	public function create_jpeg( $param ) {
+		$src_file  = $param['src_file'];
+		$jpeg_file = $param['jpeg_file'];
+
+		return $this->_pdf_class->create_jpeg( $src_file, $jpeg_file );
+	}
 
 //---------------------------------------------------------
 // text content
 //---------------------------------------------------------
-function get_text_content( $param )
-{
-	$file = isset($param['file_cont']) ? $param['file_cont'] : null ;
-	return $this->_pdf_class->get_text_content( $file );
-}
+	public function get_text_content( $param ) {
+		$file = isset( $param['file_cont'] ) ? $param['file_cont'] : null;
 
-// --- class end ---
-}
+		return $this->_pdf_class->get_text_content( $file );
+	}
 
-?>
+}

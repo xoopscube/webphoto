@@ -13,33 +13,31 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 //=========================================================
 // class webphoto_editor_plain
 //=========================================================
-class webphoto_editor_plain extends webphoto_editor_base
-{
+class webphoto_editor_plain extends webphoto_editor_base {
 
-public function __construct()
-{
-	parent::__construct();
-	//$this->webphoto_editor_base();
+	public function __construct() {
+		parent::__construct();
+		//$this->webphoto_editor_base();
 
-	$this->set_display_smiley( 1 ) ;
-	$this->set_display_xcode(  1 ) ;
-	$this->set_display_image(  1 ) ;
-	$this->set_display_br(     1 ) ;
-}
+		$this->set_display_smiley( 1 );
+		$this->set_display_xcode( 1 );
+		$this->set_display_image( 1 );
+		$this->set_display_br( 1 );
+	}
 
-function exists()
-{
-	return true ;
-}
+	function exists() {
+		return true;
+	}
 
-function build_textarea( $id, $name, $value, $rows, $cols, $item_row )
-{
-	$str  = '<textarea id="'.$id.'" name="'.$name.'" rows="'.$rows.'" cols="'.$cols.'" >';
-	$str .= $this->sanitize($value);
-	$str .= '</textarea>';
-	return $str;
-}
+	function build_textarea( $id, $name, $value, $rows, $cols, $item_row ) {
+		$str = '<textarea id="' . $id . '" name="' . $name . '" rows="' . $rows . '" cols="' . $cols . '" >';
+		$str .= $this->sanitize( $value );
+		$str .= '</textarea>';
+
+		return $str;
+	}
 
 // --- class end ---
 }
+
 ?>
