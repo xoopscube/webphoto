@@ -1,64 +1,59 @@
 <?php
-// $Id: gperm_def.php,v 1.1 2009/12/16 13:36:20 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
-
-if ( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//=========================================================
-// class webphoto_inc_gperm_def
-//=========================================================
-class webphoto_inc_gperm_def
-{
-
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function webphoto_inc_gperm_def()
-{
-	// dummy
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
 }
 
-public static function &getInstance()
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_inc_gperm_def();
+
+class webphoto_inc_gperm_def {
+
+	public function __construct() {
+		// dummy
 	}
-	return $instance;
-}
 
-//---------------------------------------------------------
+	public static function &getInstance() {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_inc_gperm_def();
+		}
+
+		return $instance;
+	}
+
+
 // group
-//---------------------------------------------------------
-function get_perms_admin()
-{
-	$arr = array(
-		_B_WEBPHOTO_GPERM_INSERTABLE ,
-		_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE ,
-		_B_WEBPHOTO_GPERM_SUPEREDIT   | _B_WEBPHOTO_GPERM_EDITABLE ,
-		_B_WEBPHOTO_GPERM_SUPERDELETE | _B_WEBPHOTO_GPERM_DELETABLE ,
-		_B_WEBPHOTO_GPERM_RATEVIEW ,
-		_B_WEBPHOTO_GPERM_RATEVOTE    | _B_WEBPHOTO_GPERM_RATEVIEW ,
-		_B_WEBPHOTO_GPERM_TELLAFRIEND ,
-		_B_WEBPHOTO_GPERM_TAGEDIT ,
-		_B_WEBPHOTO_GPERM_MAIL ,
-		_B_WEBPHOTO_GPERM_FILE ,
-		_B_WEBPHOTO_GPERM_HTML ,
-	) ;
-	return $arr;
-}
 
-function get_perms_user()
-{
-	$arr = array(
-		_B_WEBPHOTO_GPERM_INSERTABLE ,
+	function get_perms_admin() {
+		return array(
+			_B_WEBPHOTO_GPERM_INSERTABLE,
+			_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE,
+			_B_WEBPHOTO_GPERM_SUPEREDIT | _B_WEBPHOTO_GPERM_EDITABLE,
+			_B_WEBPHOTO_GPERM_SUPERDELETE | _B_WEBPHOTO_GPERM_DELETABLE,
+			_B_WEBPHOTO_GPERM_RATEVIEW,
+			_B_WEBPHOTO_GPERM_RATEVOTE | _B_WEBPHOTO_GPERM_RATEVIEW,
+			_B_WEBPHOTO_GPERM_TELLAFRIEND,
+			_B_WEBPHOTO_GPERM_TAGEDIT,
+			_B_WEBPHOTO_GPERM_MAIL,
+			_B_WEBPHOTO_GPERM_FILE,
+			_B_WEBPHOTO_GPERM_HTML,
+		);
+	}
+
+	function get_perms_user() {
+		return array(
+			_B_WEBPHOTO_GPERM_INSERTABLE,
 //		_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE ,
-		_B_WEBPHOTO_GPERM_SUPEREDIT   | _B_WEBPHOTO_GPERM_EDITABLE ,
-		_B_WEBPHOTO_GPERM_SUPERDELETE | _B_WEBPHOTO_GPERM_DELETABLE ,
+			_B_WEBPHOTO_GPERM_SUPEREDIT | _B_WEBPHOTO_GPERM_EDITABLE,
+			_B_WEBPHOTO_GPERM_SUPERDELETE | _B_WEBPHOTO_GPERM_DELETABLE,
 //		_B_WEBPHOTO_GPERM_RATEVIEW ,
 //		_B_WEBPHOTO_GPERM_RATEVOTE    | _B_WEBPHOTO_GPERM_RATEVIEW ,
 //		_B_WEBPHOTO_GPERM_TELLAFRIEND ,
@@ -66,39 +61,32 @@ function get_perms_user()
 //		_B_WEBPHOTO_GPERM_MAIL ,
 //		_B_WEBPHOTO_GPERM_FILE ,
 //		_B_WEBPHOTO_GPERM_HTML ,
-	) ;
-	return $arr;
-}
+		);
+	}
 
-function get_perm_list()
-{
-	$arr = array(
-		_B_WEBPHOTO_GPERM_INSERTABLE => _AM_WEBPHOTO_GPERM_INSERTABLE ,
-		_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE 
-			=> _AM_WEBPHOTO_GPERM_SUPERINSERT ,
+	function get_perm_list() {
+		return array(
+			_B_WEBPHOTO_GPERM_INSERTABLE => _AM_WEBPHOTO_GPERM_INSERTABLE,
+			_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE
+			                             => _AM_WEBPHOTO_GPERM_SUPERINSERT,
 
 //		_B_WEBPHOTO_GPERM_EDITABLE => _AM_WEBPHOTO_GPERM_EDITABLE ,
-		_B_WEBPHOTO_GPERM_SUPEREDIT | _B_WEBPHOTO_GPERM_EDITABLE 
-			=> _AM_WEBPHOTO_GPERM_SUPEREDIT ,
+			_B_WEBPHOTO_GPERM_SUPEREDIT | _B_WEBPHOTO_GPERM_EDITABLE
+			                             => _AM_WEBPHOTO_GPERM_SUPEREDIT,
 
 //		_B_WEBPHOTO_GPERM_DELETABLE => _AM_WEBPHOTO_GPERM_DELETABLE ,
-		_B_WEBPHOTO_GPERM_SUPERDELETE | _B_WEBPHOTO_GPERM_DELETABLE 
-			=> _AM_WEBPHOTO_GPERM_SUPERDELETE ,
+			_B_WEBPHOTO_GPERM_SUPERDELETE | _B_WEBPHOTO_GPERM_DELETABLE
+			                             => _AM_WEBPHOTO_GPERM_SUPERDELETE,
 
-		_B_WEBPHOTO_GPERM_RATEVIEW => _AM_WEBPHOTO_GPERM_RATEVIEW ,
-		_B_WEBPHOTO_GPERM_RATEVOTE | _B_WEBPHOTO_GPERM_RATEVIEW 
-			=> _AM_WEBPHOTO_GPERM_RATEVOTE ,
+			_B_WEBPHOTO_GPERM_RATEVIEW => _AM_WEBPHOTO_GPERM_RATEVIEW,
+			_B_WEBPHOTO_GPERM_RATEVOTE | _B_WEBPHOTO_GPERM_RATEVIEW
+			                           => _AM_WEBPHOTO_GPERM_RATEVOTE,
 
-		_B_WEBPHOTO_GPERM_TELLAFRIEND => _AM_WEBPHOTO_GPERM_TELLAFRIEND ,
-		_B_WEBPHOTO_GPERM_TAGEDIT     => _AM_WEBPHOTO_GPERM_TAGEDIT ,
-		_B_WEBPHOTO_GPERM_MAIL    => _AM_WEBPHOTO_GPERM_MAIL ,
-		_B_WEBPHOTO_GPERM_FILE    => _AM_WEBPHOTO_GPERM_FILE ,
-		_B_WEBPHOTO_GPERM_HTML    => _AM_WEBPHOTO_GPERM_HTML ,
-	) ;
-	return $arr;
+			_B_WEBPHOTO_GPERM_TELLAFRIEND => _AM_WEBPHOTO_GPERM_TELLAFRIEND,
+			_B_WEBPHOTO_GPERM_TAGEDIT     => _AM_WEBPHOTO_GPERM_TAGEDIT,
+			_B_WEBPHOTO_GPERM_MAIL        => _AM_WEBPHOTO_GPERM_MAIL,
+			_B_WEBPHOTO_GPERM_FILE        => _AM_WEBPHOTO_GPERM_FILE,
+			_B_WEBPHOTO_GPERM_HTML        => _AM_WEBPHOTO_GPERM_HTML,
+		);
+	}
 }
-
-// --- class end ---
-}
-
-?>
