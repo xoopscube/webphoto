@@ -20,7 +20,9 @@
 // msg.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // webphoto files

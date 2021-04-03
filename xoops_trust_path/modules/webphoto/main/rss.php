@@ -34,13 +34,15 @@
 // added uri.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // xoops system files
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
-include_once XOOPS_ROOT_PATH.'/class/template.php';
+include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
+include_once XOOPS_ROOT_PATH . '/class/template.php';
 
 //---------------------------------------------------------
 // webphoto files
@@ -102,7 +104,7 @@ webphoto_include_language( 'main.php' );
 //=========================================================
 // main
 //=========================================================
-$webphoto_manage =& webphoto_main_rss::getInstance( WEBPHOTO_DIRNAME , WEBPHOTO_TRUST_DIRNAME );
+$webphoto_manage =& webphoto_main_rss::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $webphoto_manage->main();
 exit();
 

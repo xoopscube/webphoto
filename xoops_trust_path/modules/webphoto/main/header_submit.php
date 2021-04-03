@@ -6,7 +6,9 @@
 // 2011-11-11 K.OHWADA
 //=========================================================
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // webphoto files

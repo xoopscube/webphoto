@@ -12,7 +12,9 @@
 // remove get_photo_globals()
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // webphoto files
@@ -23,14 +25,14 @@ webphoto_include_once( 'class/main/date.php' );
 //=========================================================
 // main
 //=========================================================
-$manage =& webphoto_main_date::getInstance( WEBPHOTO_DIRNAME , WEBPHOTO_TRUST_DIRNAME );
+$manage =& webphoto_main_date::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 
-$xoopsOption['template_main'] = $manage->list_get_template() ;
-include XOOPS_ROOT_PATH . '/header.php' ;
+$xoopsOption['template_main'] = $manage->list_get_template();
+include XOOPS_ROOT_PATH . '/header.php';
 
-$xoopsTpl->assign( $manage->list_main() ) ;
+$xoopsTpl->assign( $manage->list_main() );
 
-include XOOPS_ROOT_PATH .'/footer.php' ;
+include XOOPS_ROOT_PATH . '/footer.php';
 exit();
 
 ?>

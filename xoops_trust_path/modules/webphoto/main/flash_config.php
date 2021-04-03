@@ -14,12 +14,14 @@
 // header_file.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // xoops system files
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/snoopy.php';
+include_once XOOPS_ROOT_PATH . '/class/snoopy.php';
 
 //---------------------------------------------------------
 // webphoto files
@@ -37,8 +39,8 @@ webphoto_include_once( 'class/main/flash_config.php' );
 //=========================================================
 // main
 //=========================================================
-$webphoto_manage =& webphoto_main_flash_config::getInstance( 
-	WEBPHOTO_DIRNAME , WEBPHOTO_TRUST_DIRNAME );
+$webphoto_manage =& webphoto_main_flash_config::getInstance(
+	WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $webphoto_manage->main();
 exit();
 

@@ -13,13 +13,15 @@
 // header_submit.php -> header_submit_imagemanager.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // xoops system files
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/template.php';
-include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
+include_once XOOPS_ROOT_PATH . '/class/template.php';
+include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 
 //---------------------------------------------------------
 // webphoto files

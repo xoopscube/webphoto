@@ -14,7 +14,9 @@
 // image.php -> image_tmp.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // webphoto files
@@ -31,7 +33,7 @@ webphoto_include_once( 'class/main/image_tmp.php' );
 //=========================================================
 // main
 //=========================================================
-$webphoto_manage =& webphoto_main_image_tmp::getInstance( WEBPHOTO_DIRNAME , WEBPHOTO_TRUST_DIRNAME );
+$webphoto_manage =& webphoto_main_image_tmp::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $webphoto_manage->main();
 exit();
 

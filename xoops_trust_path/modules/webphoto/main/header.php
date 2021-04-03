@@ -44,18 +44,20 @@
 // added uri.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // xoops system files
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/template.php';
-include_once XOOPS_ROOT_PATH.'/class/snoopy.php';
+include_once XOOPS_ROOT_PATH . '/class/template.php';
+include_once XOOPS_ROOT_PATH . '/class/snoopy.php';
 
 //---------------------------------------------------------
 // webphoto files
 //---------------------------------------------------------
-define("QRCODE_DATA_PATH", WEBPHOTO_TRUST_PATH.'/class/qrcode/qrcode_data' );
+define( "QRCODE_DATA_PATH", WEBPHOTO_TRUST_PATH . '/class/qrcode/qrcode_data' );
 
 webphoto_include_once( 'main/header_item_handler.php' );
 webphoto_include_once( 'include/gmap_api.php' );

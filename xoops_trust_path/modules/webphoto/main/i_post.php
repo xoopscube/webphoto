@@ -12,7 +12,9 @@
 // main/include_mail_recv.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // webphoto files
@@ -34,7 +36,7 @@ webphoto_include_language( 'extra.php' );
 //=========================================================
 // main
 //=========================================================
-$manage =& webphoto_main_i_post::getInstance( WEBPHOTO_DIRNAME , WEBPHOTO_TRUST_DIRNAME );
+$manage =& webphoto_main_i_post::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $manage->main();
 exit();
 

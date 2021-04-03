@@ -20,12 +20,14 @@
 //   admin/header_edit.php bin/retrieve.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // xoops system files
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/snoopy.php';
+include_once XOOPS_ROOT_PATH . '/class/snoopy.php';
 
 //---------------------------------------------------------
 // webphoto files

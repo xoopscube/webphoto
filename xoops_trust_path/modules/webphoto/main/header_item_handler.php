@@ -14,23 +14,25 @@
 // class/inc/config.php
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 //---------------------------------------------------------
 // webphoto
 //---------------------------------------------------------
-if( !defined("WEBPHOTO_DIRNAME") ) {
-	  define("WEBPHOTO_DIRNAME", $MY_DIRNAME );
+if ( ! defined( "WEBPHOTO_DIRNAME" ) ) {
+	define( "WEBPHOTO_DIRNAME", $MY_DIRNAME );
 }
-if( !defined("WEBPHOTO_ROOT_PATH") ) {
-	  define("WEBPHOTO_ROOT_PATH", XOOPS_ROOT_PATH.'/modules/'.WEBPHOTO_DIRNAME );
+if ( ! defined( "WEBPHOTO_ROOT_PATH" ) ) {
+	define( "WEBPHOTO_ROOT_PATH", XOOPS_ROOT_PATH . '/modules/' . WEBPHOTO_DIRNAME );
 }
 
 //---------------------------------------------------------
 // webphoto files
 //---------------------------------------------------------
-include_once WEBPHOTO_TRUST_PATH.'/class/d3/optional.php';
-include_once WEBPHOTO_TRUST_PATH.'/include/optional.php';
+include_once WEBPHOTO_TRUST_PATH . '/class/d3/optional.php';
+include_once WEBPHOTO_TRUST_PATH . '/include/optional.php';
 
 webphoto_include_once( 'include/constants.php' );
 webphoto_include_once( 'class/lib/error.php' );
