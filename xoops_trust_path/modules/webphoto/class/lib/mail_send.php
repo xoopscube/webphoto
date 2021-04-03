@@ -1,20 +1,15 @@
 <?php
-// $Id: mail_send.php,v 1.3 2011/11/12 17:17:47 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
 
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// webphoto_lib_mail
-//---------------------------------------------------------
-
-//=========================================================
-// class webphoto_lib_mail_send
-//=========================================================
 class webphoto_lib_mail_send extends webphoto_lib_error {
 	public $_mail_class;
 
@@ -24,12 +19,9 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 
 	public $_LANG_ERR_NO_TO_EMAIL = 'Not Set Email Address';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
+
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_mail_class =& webphoto_lib_mail::getInstance();
 
@@ -46,18 +38,18 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // send email
-//---------------------------------------------------------
+
 	function send( $param ) {
-		$to_emails  = isset( $param['to_emails'] ) ? $param['to_emails'] : null;
-		$users      = isset( $param['users'] ) ? $param['users'] : null;
-		$subject    = isset( $param['subject'] ) ? $param['subject'] : null;
-		$body       = isset( $param['body'] ) ? $param['body'] : null;
-		$tags       = isset( $param['tags'] ) ? $param['tags'] : null;
-		$debug      = isset( $param['debug'] ) ? $param['debug'] : false;
-		$from_name  = isset( $param['from_name'] ) ? $param['from_name'] : $this->_xoops_sitename;
-		$from_email = isset( $param['from_email'] ) ? $param['from_email'] : $this->_xoops_adminmail;
+		$to_emails  = $param['to_emails'] ?? null;
+		$users      = $param['users'] ?? null;
+		$subject    = $param['subject'] ?? null;
+		$body       = $param['body'] ?? null;
+		$tags       = $param['tags'] ?? null;
+		$debug      = $param['debug'] ?? false;
+		$from_name  = $param['from_name'] ?? $this->_xoops_sitename;
+		$from_email = $param['from_email'] ?? $this->_xoops_adminmail;
 
 		if ( empty( $to_emails ) && empty( $users ) ) {
 			$this->set_error( $this->_LANG_ERR_NO_TO_EMAIL );
@@ -105,9 +97,9 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 		return $this->_mail_class->get_valid_addr( $addr );
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_msg_array() {
 		$this->_msg_array = array();
 	}
@@ -141,9 +133,9 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 		}
 	}
 
-//---------------------------------------------------------
+
 // XOOPS system
-//---------------------------------------------------------
+
 	function get_xoops_sitename() {
 		global $xoopsConfig;
 
@@ -156,7 +148,4 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 		return $xoopsConfig['adminmail'];
 	}
 
-// --- class end ---
 }
-
-?>

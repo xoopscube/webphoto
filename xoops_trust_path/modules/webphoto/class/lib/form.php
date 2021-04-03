@@ -1,37 +1,20 @@
 <?php
-// $Id: form.php,v 1.8 2011/12/26 06:51:31 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// remove get_mysql_date_today()
-// 2009-12-06 K.OHWADA
-// get_system_groups()
-// 2009-05-05 K.OHWADA
-// get_post_text()
-// 2008-11-29 K.OHWADA
-// format_timestamp()
-// 2008-11-16 K.OHWADA
-// get_cached_xoops_db_groups()
-// _xoops_user_groups -> _xoops_groups
-// 2008-10-01 K.OHWADA
-// use build_menu_with_sub()
-// 2008-08-01 K.OHWADA
-// added build_error_msg()
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_form
-//=========================================================
+
 class webphoto_lib_form extends webphoto_lib_element {
 	public $_post_class;
 	public $_utility_class;
@@ -65,14 +48,12 @@ class webphoto_lib_form extends webphoto_lib_element {
 
 	public $_FLAG_ADMIN_SUB_MENU = true;
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-
-		//$this->webphoto_lib_element();
-
 
 		$this->set_form_name( $dirname . '_form' );
 		$this->set_title_header( $dirname );
@@ -109,18 +90,18 @@ class webphoto_lib_form extends webphoto_lib_element {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	public function get_post_js_checkbox_array() {
 		$name = $this->_FORM_NAME . '_id';
 
 		return $this->get_post( $name );
 	}
 
-//---------------------------------------------------------
+
 // paginavi
-//---------------------------------------------------------
+
 	function init_pagenavi() {
 		$this->_pagenavi_class =& webphoto_lib_pagenavi::getInstance();
 	}
@@ -154,9 +135,9 @@ class webphoto_lib_form extends webphoto_lib_element {
 		return $this->get_post_get_text( 'fct' );
 	}
 
-//---------------------------------------------------------
+
 // for admin
-//---------------------------------------------------------
+
 	public function build_admin_menu() {
 		$menu_class =& webphoto_lib_admin_menu::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -186,9 +167,9 @@ class webphoto_lib_form extends webphoto_lib_element {
 		return $const_name_2;
 	}
 
-//---------------------------------------------------------
+
 // utility class
-//---------------------------------------------------------
+
 	public function str_to_array( $str, $pattern ) {
 		return $this->_utility_class->str_to_array( $str, $pattern );
 	}
@@ -209,9 +190,9 @@ class webphoto_lib_form extends webphoto_lib_element {
 		return $this->_utility_class->build_error_msg( $msg, $title, $flag_sanitize );
 	}
 
-//---------------------------------------------------------
+
 // post class
-//---------------------------------------------------------
+
 	public function get_post_text( $key, $default = null ) {
 		return $this->_post_class->get_post_text( $key, $default );
 	}
@@ -236,9 +217,9 @@ class webphoto_lib_form extends webphoto_lib_element {
 		return $this->_post_class->get_post_get_int( $key, $default );
 	}
 
-//---------------------------------------------------------
+
 // xoops 
-//---------------------------------------------------------
+
 	public function _init_xoops_param() {
 		$this->_xoops_language = $this->_xoops_class->get_config_by_name( 'language' );
 		$this->_xoops_sitename = $this->_xoops_class->get_config_by_name( 'sitename' );
@@ -286,16 +267,16 @@ class webphoto_lib_form extends webphoto_lib_element {
 		exit();
 	}
 
-//---------------------------------------------------------
+
 // timestamp
-//---------------------------------------------------------
+
 	public function format_timestamp( $time, $format = "l", $timeoffset = "" ) {
 		return formatTimestamp( $time, $format, $timeoffset );
 	}
 
-//---------------------------------------------------------
+
 // d3 language
-//---------------------------------------------------------
+
 	public function _init_d3_language( $dirname, $trust_dirname ) {
 		$this->_language_class =& webphoto_d3_language::getInstance();
 		$this->_language_class->init( $dirname, $trust_dirname );
@@ -315,7 +296,6 @@ class webphoto_lib_form extends webphoto_lib_element {
 		$this->_TRUST_DIR     = XOOPS_TRUST_PATH . '/modules/' . $trust_dirname;
 	}
 
-// --- class end ---
 }
 
 

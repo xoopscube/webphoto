@@ -1,26 +1,16 @@
 <?php
-// $Id: server_info.php,v 1.3 2009/08/09 05:47:09 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-11-16 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// 2009-08-08 K.OHWADA
-// remove build_php_mbstring()
-// 2009-01-10 K.OHWADA
-// move "program version"
-//---------------------------------------------------------
-
-//=========================================================
-// class webphoto_lib_server_info
-//=========================================================
 class webphoto_lib_server_info {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -34,9 +24,8 @@ class webphoto_lib_server_info {
 		return $instance;
 	}
 
-//---------------------------------------------------------
 // server info
-//---------------------------------------------------------
+
 	function build_server() {
 		$db              = XoopsDatabaseFactory::getDatabaseConnection();
 		$get_server_info = ( is_object( $db->conn ) && get_class( $db->conn ) === 'mysqli' ) ? 'mysqli_get_server_info' : 'mysql_get_server_info';
@@ -59,7 +48,7 @@ class webphoto_lib_server_info {
 		$str = "error_reporting: " . error_reporting() . "<br>\n";
 		$str .= $this->build_ini_int( 'display_errors' ) . "<br>\n";
 		$str .= $this->build_ini_int( 'memory_limit' ) . "<br>\n";
-		$str .= "magic_quotes_gpc: " . intval( get_magic_quotes_gpc() ) . "<br>\n";
+		$str .= "magic_quotes_gpc: " . (int) get_magic_quotes_gpc() . "<br>\n";
 		$str .= $this->build_ini_int( 'safe_mode' ) . "<br>\n";
 		$str .= $this->build_ini_val( 'open_basedir' ) . "<br>\n";
 
@@ -98,7 +87,7 @@ class webphoto_lib_server_info {
 	}
 
 	function build_ini_int( $key ) {
-		$str = $key . ': ' . intval( ini_get( $key ) );
+		$str = $key . ': ' . (int) ini_get( $key );
 
 		return $str;
 	}
@@ -125,9 +114,9 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function build_on_off( $val, $flag_red = false ) {
 		$str = '';
 		if ( $val ) {
@@ -142,18 +131,15 @@ class webphoto_lib_server_info {
 	}
 
 	function font_red( $str ) {
-		$str = '<font color="#FF0000"><b>' . $str . '</b></font>';
+		$str = '<span style="color:#FF0000"><b>' . $str . '</b></span>';
 
 		return $str;
 	}
 
 	function font_green( $str ) {
-		$str = '<font color="#00FF00"><b>' . $str . '</b></font>';
+		$str = '<span style="color:#00FF00"><b>' . $str . '</b></span>';
 
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -1,35 +1,26 @@
 <?php
-// $Id: xpdf.php,v 1.4 2010/06/16 22:24:47 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2009-01-10 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-06-06 K.OHWADA
-// is_win_os()
-// 2010-03-24 K.OHWADA
-// pdftops()
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_xpdf
-//=========================================================
-
-//---------------------------------------------------------
 // retune code
 //   0  No error.
 //   1  Error opening a PDF file.
 //   2  Error opening an output file.
 //   3  Error related to PDF permissions.
 //   99 Other error.
-//---------------------------------------------------------
+
 
 class webphoto_lib_xpdf {
 	public $_cmd_pdftoppm = 'pdftoppm';
@@ -40,9 +31,6 @@ class webphoto_lib_xpdf {
 	public $_msg_array = array();
 	public $_DEBUG = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -56,9 +44,9 @@ class webphoto_lib_xpdf {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	function set_cmd_path( $val ) {
 		$this->_cmd_path      = $val;
 		$this->_cmd_pdftoppm  = $this->_cmd_path . 'pdftoppm';
@@ -159,9 +147,9 @@ class webphoto_lib_xpdf {
 		return $ret_code;
 	}
 
-//---------------------------------------------------------
+
 // version
-//---------------------------------------------------------
+
 	function version( $path ) {
 		$pdftotext = $path . 'pdftotext';
 		if ( $this->is_win_os() ) {
@@ -182,15 +170,11 @@ class webphoto_lib_xpdf {
 		return array( $ret, $msg );
 	}
 
-//---------------------------------------------------------
-// utility
-//---------------------------------------------------------
-	function is_win_os() {
-		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
-			return true;
-		}
 
-		return false;
+// utility
+
+	function is_win_os() {
+		return strpos( PHP_OS, "WIN" ) === 0;
 	}
 
 	function conv_win_cmd( $cmd ) {
@@ -212,9 +196,9 @@ class webphoto_lib_xpdf {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_msg_array() {
 		$this->_msg_array = array();
 	}
@@ -233,7 +217,4 @@ class webphoto_lib_xpdf {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

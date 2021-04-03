@@ -1,26 +1,23 @@
 <?php
-// $Id: pagenavi.php,v 1.2 2010/05/10 10:34:49 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-05-10 K.OHWADA
-// calc_page()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_pagenavi
+ * base on happy_linux_pagenavi
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_pagenavi
-// base on happy_linux_pagenavi
-//=========================================================
+
 class webphoto_lib_pagenavi {
+
 //	public $_MAX_PAGELIST = 10;
 
 // input parameter
@@ -68,9 +65,9 @@ class webphoto_lib_pagenavi {
 	public $_FLAG_DEBUG_MSG = false;
 	public $_FLAG_DEBUG_TRACE = false;
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -84,18 +81,14 @@ class webphoto_lib_pagenavi {
 		return $instance;
 	}
 
-//=========================================================
 // Public
-//=========================================================
-
-//---------------------------------------------------------
 // same as XoopsPageNav
 // use positon (start offset 0.10.20...)
-//---------------------------------------------------------
+
 	function XoopsPageNav( $total, $perpage, $position, $start_name = 'start', $extra_arg = '' ) {
-		$this->_total    = intval( $total );
-		$this->_perpage  = intval( $perpage );
-		$this->_position = intval( $position );
+		$this->_total    = (int) $total;
+		$this->_perpage  = (int) $perpage;
+		$this->_position = (int) $position;
 
 		$amp = '';
 		if ( ( $extra_arg != '' ) && ! $this->_check_tail_amp( $extra_arg ) ) {
@@ -174,7 +167,7 @@ class webphoto_lib_pagenavi {
 	}
 
 	function _position_to_page( $position, $perpage ) {
-		$page = intval( floor( ( $position + $perpage ) / $perpage ) );
+		$page = (int) floor( ( $position + $perpage ) / $perpage );
 
 		return $page;
 	}
@@ -204,10 +197,10 @@ class webphoto_lib_pagenavi {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // build pagenavi
 // use page (1.2.3...)
-//---------------------------------------------------------
+
 	function build( $script, $page = - 1, $perpage = - 1, $total = - 1, $window = 8 ) {
 		$page = $this->_get_page_internal( $page );
 		if ( $page === false ) {
@@ -246,7 +239,7 @@ class webphoto_lib_pagenavi {
 		$prev = $page_current - 1;
 		$next = $page_current + 1;
 
-		$half = intval( $window / 2 );
+		$half = (int) ( $window / 2 );
 
 		$start = $this->_MIN_PAGE;
 		$end   = $page_last;
@@ -318,10 +311,10 @@ class webphoto_lib_pagenavi {
 		return $navi;
 	}
 
-//---------------------------------------------------------
+
 // build pagenavi
 // use id (1.2.3...)
-//---------------------------------------------------------
+
 	function build_id_array( $script, $id_array, $id_current, $window = 7 ) {
 		if ( ! is_array( $id_array ) ) {
 			return '';
@@ -393,9 +386,9 @@ class webphoto_lib_pagenavi {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // calc start end
-//---------------------------------------------------------
+
 	function calc_page( $page = - 1, $perpage = - 1, $total = - 1 ) {
 		$page = $this->_get_page_internal( $page );
 		if ( $page === false ) {
@@ -454,9 +447,9 @@ class webphoto_lib_pagenavi {
 		return $end;
 	}
 
-//---------------------------------------------------------
+
 // GET paramter
-//---------------------------------------------------------
+
 	function set_page_by_get() {
 		$this->set_page( $this->get_page_from_get() );
 	}
@@ -495,40 +488,40 @@ class webphoto_lib_pagenavi {
 	}
 
 	function get_get_int( $key, $default = 0 ) {
-		$val = isset( $_GET[ $key ] ) ? intval( $_GET[ $key ] ) : intval( $default );
+		$val = isset( $_GET[ $key ] ) ? (int) $_GET[ $key ] : intval( $default );
 
 		return $val;
 	}
 
-//---------------------------------------------------------
+
 // set and get parameter
-//---------------------------------------------------------
+
 	function set_total( $val ) {
-		$this->_total = intval( $val );
+		$this->_total = (int) $val;
 	}
 
 	function set_page( $val ) {
-		$this->_page = intval( $val );
+		$this->_page = (int) $val;
 	}
 
 	function set_perpage( $val ) {
-		$this->_perpage = intval( $val );
+		$this->_perpage = (int) $val;
 	}
 
 	function set_sortid( $val ) {
-		$this->_sortid = intval( $val );
+		$this->_sortid = (int) $val;
 	}
 
 	function set_perpage_default( $val ) {
-		$this->_PERPAGE_DEFAULT = intval( $val );
+		$this->_PERPAGE_DEFAULT = (int) $val;
 	}
 
 	function set_sortid_default( $val ) {
-		$this->_SORTID_DEFAULT = intval( $val );
+		$this->_SORTID_DEFAULT = (int) $val;
 	}
 
 	function set_max_sortid( $val ) {
-		$this->_MAX_SORTID = intval( $val );
+		$this->_MAX_SORTID = (int) $val;
 	}
 
 	function set_separator_path( $val ) {
@@ -572,7 +565,7 @@ class webphoto_lib_pagenavi {
 	}
 
 	function get_perpage_default( $val ) {
-		$this->_PERPAGE_DEFAULT = intval( $val );
+		$this->_PERPAGE_DEFAULT = (int) $val;
 	}
 
 	function get_max_sortid() {
@@ -588,7 +581,7 @@ class webphoto_lib_pagenavi {
 	}
 
 	function _get_page_internal( $val ) {
-		$val = intval( $val );
+		$val = (int) $val;
 		if ( $val < $this->_MIN_PAGE ) {
 			if ( $this->_page >= $this->_MIN_PAGE ) {
 				$val = $this->_page;
@@ -603,7 +596,7 @@ class webphoto_lib_pagenavi {
 	}
 
 	function _get_perpage_internal( $val ) {
-		$val = intval( $val );
+		$val = (int) $val;
 		if ( $val < $this->_MIN_PERPAGE ) {
 			if ( $this->_perpage >= $this->_MIN_PERPAGE ) {
 				$val = $this->_perpage;
@@ -618,7 +611,7 @@ class webphoto_lib_pagenavi {
 	}
 
 	function _get_total_internal( $val ) {
-		$val = intval( $val );
+		$val = (int) $val;
 		if ( $val < $this->_MIN_TOTAL ) {
 			if ( $this->_total >= $this->_MIN_TOTAL ) {
 				$val = $this->_total;
@@ -633,7 +626,7 @@ class webphoto_lib_pagenavi {
 	}
 
 	function _get_sortid_internal( $val ) {
-		$val = intval( $val );
+		$val = (int) $val;
 		if ( $val < $this->_MIN_SORTID ) {
 			if ( $this->_sortid >= $this->_MIN_SORTID ) {
 				$val = $this->_sortid;
@@ -647,9 +640,9 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-//---------------------------------------------------------
+
 // sort parameter
-//---------------------------------------------------------
+
 	function clear_sort() {
 		$this->_MAX_SORTID = 0;
 		$this->_sort_arr   = array();
@@ -679,11 +672,7 @@ class webphoto_lib_pagenavi {
 
 		$sortid = $this->_adjust_sortid( $sortid );
 
-		if ( isset( $this->_sort_arr[ $sortid ] ) ) {
-			return $this->_sort_arr[ $sortid ];
-		}
-
-		return false;
+		return $this->_sort_arr[ $sortid ] ?? false;
 	}
 
 	function get_sort_value( $key, $sort_id = - 1 ) {
@@ -702,7 +691,7 @@ class webphoto_lib_pagenavi {
 	}
 
 
-//---------------------------------------------------------
+
 // add script
 //
 // sortid:
@@ -712,7 +701,7 @@ class webphoto_lib_pagenavi {
 //       ex) foo.php? sortid=$this->_sortid
 //   -2: dont add sortid
 //       ex) foo.php
-//---------------------------------------------------------
+
 	function add_script_sortid( $script, $separator = null ) {
 		if ( $this->_sortid > $this->_MIN_SORTID ) {
 			if ( empty( $separator ) ) {
@@ -760,14 +749,14 @@ class webphoto_lib_pagenavi {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // analyze_script_type
 //
 // script:
 //   type 0: foo.php
 //   type 1: foo.php?
 //   type 2: foo.php?bar=abc
-//---------------------------------------------------------
+
 	function _analyze_script_type( $script ) {
 		$type = 0;    // foo.php
 
@@ -784,9 +773,9 @@ class webphoto_lib_pagenavi {
 		return $type;
 	}
 
-//---------------------------------------------------------
+
 // adjust
-//---------------------------------------------------------
+
 	function _adjust_page( $page, $total_pages ) {
 		if ( $page < $this->_MIN_PAGE ) {
 			$page = $this->_MIN_PAGE;
@@ -809,9 +798,9 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-//---------------------------------------------------------
+
 // sanitize
-//---------------------------------------------------------
+
 	function _sanitize_url( $str ) {
 		$str = $this->_deny_javascript( $str );
 		$str = preg_replace( '/&amp;/i', '&', $str );
@@ -838,9 +827,9 @@ class webphoto_lib_pagenavi {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // debug
-//---------------------------------------------------------
+
 	function _debug_msg( $msg ) {
 		if ( $this->_FLAG_DEBUG_MSG ) {
 			echo $msg;
@@ -850,7 +839,5 @@ class webphoto_lib_pagenavi {
 		}
 	}
 
-// --- class end ---
 }
 
-?>

@@ -1,37 +1,24 @@
 <?php
-// $Id: exif.php,v 1.7 2009/08/31 16:41:25 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-08-30 K.OHWADA
-// calc_fraction()
-// 2008-08-24 K.OHWADA
-// parse_gps() -> parse_gps_docomo()
-// 2008-08-01 K.OHWADA
-// docomo gps
-// 2008-07-16 K.OHWADA
-// use DateTimeOriginal
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_exif
+ * http://it.jeita.or.jp/document/publica/standard/exif/japanese/jeida49ja.htm
+ * http://park2.wakwak.com/~tsuruzoh/Computer/Digicams/exif.html
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_exif
-// http://it.jeita.or.jp/document/publica/standard/exif/japanese/jeida49ja.htm
-// http://park2.wakwak.com/~tsuruzoh/Computer/Digicams/exif.html
-//=========================================================
+
 class webphoto_lib_exif {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -45,9 +32,9 @@ class webphoto_lib_exif {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // encoding
-//---------------------------------------------------------
+
 	public function read_file( $filename ) {
 		if ( ! function_exists( 'exif_imagetype' ) ||
 		     ! function_exists( 'exif_read_data' ) ) {
@@ -172,7 +159,7 @@ class webphoto_lib_exif {
 		echo $this->parse_array( $exif );
 	}
 
-//---------------------------------------------------------
+
 // GPSLatitudeRef: N
 // GPSLatitude.0: 35/1
 // GPSLatitude.1: 00/1
@@ -181,7 +168,7 @@ class webphoto_lib_exif {
 // GPSLongitude.0: 135/1
 // GPSLongitude.1: 41/1
 // GPSLongitude.2: 35600/1000
-//---------------------------------------------------------
+
 	public function parse_gps_docomo( $exif ) {
 		$gps      = null;
 		$lat      = null;
@@ -248,11 +235,11 @@ class webphoto_lib_exif {
 		return $fig;
 	}
 
-//---------------------------------------------------------
+
 // TAB \x09 \t
 // LF  \xOA \n
 // CR  \xOD \r
-//---------------------------------------------------------
+
 	public function str_replace_control_code( $str, $replace = ' ' ) {
 		$str = preg_replace( '/[\x00-\x08]/', $replace, $str );
 		$str = preg_replace( '/[\x0B-\x0C]/', $replace, $str );
@@ -262,7 +249,4 @@ class webphoto_lib_exif {
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

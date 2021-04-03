@@ -1,27 +1,20 @@
 <?php
-// $Id: groupperm_form.php,v 1.4 2010/02/17 04:34:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-02-15 K.OHWADA
-// check_right()
-// 2010-01-20 K.OHWADA
-// XOOPS_CUBE_LEGACY
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_groupperm_form
+ * refer myalubum's MyXoopsGroupPermForm
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_groupperm_form
-// refer myalubum's MyXoopsGroupPermForm
-//=========================================================
 
 class webphoto_lib_groupperm_form {
 	public $_module_handler;
@@ -30,9 +23,6 @@ class webphoto_lib_groupperm_form {
 
 	public $_CHECKED = 'checked="checked"';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		$this->_module_handler    =& xoops_gethandler( 'module' );
 		$this->_member_handler    =& xoops_gethandler( 'member' );
@@ -48,9 +38,6 @@ class webphoto_lib_groupperm_form {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
 	public function build_param( $mod_id, $action = null ) {
 		$arr = array(
 			'cols'          => 4,
@@ -168,7 +155,4 @@ class webphoto_lib_groupperm_form {
 		return $arr;
 	}
 
-// --- class end ---
 }
-
-?>

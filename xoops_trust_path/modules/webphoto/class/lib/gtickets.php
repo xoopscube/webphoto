@@ -1,22 +1,21 @@
 <?php
-// $Id: gtickets.php,v 1.1 2008/06/21 12:22:27 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class XoopsGTicket
+ * same as Peak's Tinyd module v2.25 <http://www.peak.ne.jp/xoops/>
+ * GIJOE's Ticket Class (based on Marijuana's Oreteki XOOPS)
+ * nobunobu's suggestions are applied
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
-
-//=========================================================
-// class XoopsGTicket
-// same as Peak's Tinyd module v2.25 <http://www.peak.ne.jp/xoops/>
-//=========================================================
-
-// GIJOE's Ticket Class (based on Marijuana's Oreteki XOOPS)
-// nobunobu's suggestions are applied
 
 if ( ! class_exists( 'XoopsGTicket' ) ) {
 
@@ -336,5 +335,3 @@ if ( ! function_exists( 'admin_refcheck' ) ) {
 	}
 
 }
-
-?>

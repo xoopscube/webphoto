@@ -1,38 +1,19 @@
 <?php
-// $Id: image_cmd.php,v 1.9 2010/10/06 02:22:46 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-10-01 K.OHWADA
-// same_ext()
-// 2009-04-21 K.OHWADA
-// chmod_file()
-// 2009-01-10 K.OHWADA
-// add_icon()
-// 2008-11-08 K.OHWADA
-// webphoto_lib_gd etc
-// 2008-08-24 K.OHWADA
-// exec_modify_photo()
-// 2008-07-01 K.OHWADA
-// changed rename to copy in modify_photo
-// removed unlink in modify_photo
-// removed create thumb icon
-// 2008-04-02 K.OHWADA
-// supported gif functions of GD
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_image_cmd
-//=========================================================
+
 class webphoto_lib_image_cmd {
 	public $_gd_class;
 	public $_imagemagick_class;
@@ -64,9 +45,7 @@ class webphoto_lib_image_cmd {
 
 	public $_CHMOD_MODE = 0777;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		$this->_gd_class          =& webphoto_lib_gd::getInstance();
 		$this->_imagemagick_class =& webphoto_lib_imagemagick::getInstance();
@@ -84,9 +63,9 @@ class webphoto_lib_image_cmd {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	function set_watermark( $val ) {
 		$this->_PATH_WATERMRAK = $val;
 	}
@@ -132,9 +111,9 @@ class webphoto_lib_image_cmd {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // property
-//---------------------------------------------------------
+
 	function has_resize() {
 		if ( $this->_cfg_imagingpipe == $this->_PIPEID_IMAGICK ) {
 			return true;
@@ -163,14 +142,14 @@ class webphoto_lib_image_cmd {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // return value
 //   -1 : read fault
 //    1 : complete created
 //    2 : copied
 //    3 : skipped
 //    5 : resize
-//---------------------------------------------------------
+
 	function resize_rotate( $src_file, $dst_file, $max_width, $max_height, $rotate = 0 ) {
 		if ( ! is_readable( $src_file ) ) {
 			return $this->_CODE_READFAULT;    // read fault
@@ -263,9 +242,9 @@ class webphoto_lib_image_cmd {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // add icon
-//---------------------------------------------------------
+
 	function add_icon( $src_file, $dst_file, $icon_file ) {
 		if ( $this->_cfg_imagingpipe == $this->_PIPEID_IMAGICK ) {
 			$this->_imagemagick_class->add_icon( $src_file, $dst_file, $icon_file );
@@ -278,9 +257,9 @@ class webphoto_lib_image_cmd {
 		}
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function is_image_file( $file ) {
 		return $this->is_normal_ext( $this->parse_ext( $file ) );
 	}
@@ -328,9 +307,9 @@ class webphoto_lib_image_cmd {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_msgs() {
 		$this->_msgs = array();
 	}
@@ -355,7 +334,4 @@ class webphoto_lib_image_cmd {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

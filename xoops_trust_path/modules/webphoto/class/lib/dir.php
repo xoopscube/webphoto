@@ -1,26 +1,23 @@
 <?php
-// $Id: dir.php,v 1.1 2009/04/19 11:41:45 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-04-19 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_dir
-//=========================================================
 class webphoto_lib_dir {
 	public $_MKDIR_MODE = 0777;
 
 	public $_EXCEPT_FILES = array( '.', '..', 'CVS', 'Thumbs.db' );
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -34,9 +31,6 @@ class webphoto_lib_dir {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// get files
-//---------------------------------------------------------
 	public function get_files_in_deep_dir( $dir ) {
 		return $this->array_fullpath_recursive( '', $this->array_dirlist_recursive( $dir ) );
 	}
@@ -155,9 +149,9 @@ class webphoto_lib_dir {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // make dir
-//---------------------------------------------------------
+
 	public function make_dir( $dir, $check_writable = true ) {
 		$not_dir = true;
 		if ( is_dir( $dir ) ) {
@@ -198,9 +192,9 @@ class webphoto_lib_dir {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // recursive function
-//---------------------------------------------------------
+
 	public function array_fullpath_recursive( $dir, $dirlist ) {
 		$fullpath = array();
 		foreach ( $dirlist as $id => $filename ) {
@@ -244,9 +238,9 @@ class webphoto_lib_dir {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	public function strip_slash_from_tail( $str ) {
 		if ( substr( $str, - 1, 1 ) == '/' ) {
 			$str = substr( $str, 0, - 1 );
@@ -261,7 +255,4 @@ class webphoto_lib_dir {
 		return $val;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -1,27 +1,15 @@
 <?php
-// $Id: manage.php,v 1.5 2010/11/16 23:43:38 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
 
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// Undefined variable: id 
-// 2008-10-01 K.OHWADA
-// build_manage_list_menu()
-// 2008-08-01 K.OHWADA
-// added _manage_delete_all_each()
-// 2008-07-01 K.OHWADA
-// change build_comp_url()
-// xoops_error() -> build_error_msg()
-//---------------------------------------------------------
-
-//=========================================================
-// class webphoto_lib_manage
-//=========================================================
 class webphoto_lib_manage extends webphoto_lib_form {
 	public $_manage_handler;
 
@@ -48,12 +36,11 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	public $_LANG_NO_RECORD = 'there are no record';
 	public $_LANG_THERE_ARE = 'there are %s records';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_lib_form( $dirname , $trust_dirname );
+
 		$this->init_pagenavi();
 
 		$this->set_manage_sub_title_array( $this->_MANAGE_SUB_TITLE_ARRAY_DEFAULT );
@@ -122,9 +109,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		$this->_LANG_THERE_ARE = $val;
 	}
 
-//---------------------------------------------------------
+
 // id
-//---------------------------------------------------------
+
 	function get_post_id() {
 		$id = $this->_post_class->get_post_get_int( $this->_manage_id_name );
 		if ( $id > 0 ) {
@@ -145,9 +132,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // list
-//---------------------------------------------------------
+
 	function manage_list() {
 		$this->_pagenavi_class->set_page_by_get();
 		$this->_pagenavi_class->set_perpage_by_get();
@@ -331,9 +318,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $this->_manage_list_column_array;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	function manage_form() {
 		$this->manage_print_form();
 	}
@@ -374,9 +361,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		$this->_print_form( $row );
 	}
 
-//---------------------------------------------------------
+
 // add
-//---------------------------------------------------------
+
 	function manage_add() {
 		$row_new    = $this->_manage_handler->create( true );
 		$row_add    = $this->_build_row_add();
@@ -398,14 +385,14 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		if ( empty( $id ) ) {
 			$id = $this->get_post_id();
 		}
-		$url = $this->_THIS_FCT_URL . '&amp;op=form&amp;id=' . intval( $id );
+		$url = $this->_THIS_FCT_URL . '&amp;op=form&amp;id=' . (int) $id;
 
 		return $url;
 	}
 
-//---------------------------------------------------------
+
 // edit
-//---------------------------------------------------------
+
 	function manage_edit() {
 		$row_edit = $this->_build_row_edit();
 		$id       = $this->get_manage_id( $row_edit );
@@ -451,9 +438,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return true;
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	function manage_delete() {
 // exit if no record
 		$row = $this->_manage_delete_get_row();
@@ -524,9 +511,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return true;
 	}
 
-//---------------------------------------------------------
+
 // manage title
-//---------------------------------------------------------
+
 	function build_manage_title() {
 		$text = $this->build_manage_bread_crumb();
 		$text .= $this->build_show_title();
@@ -565,9 +552,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // manage list
-//---------------------------------------------------------
+
 	function get_manage_total_print_error() {
 		$total = $this->get_manage_total();
 		if ( $total == 0 ) {
@@ -629,7 +616,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function build_manage_line_id( $id ) {
-		$id  = intval( $id );
+		$id  = (int) $id;
 		$url = $this->_THIS_FCT_URL . '&amp;op=form&amp;id=' . $id;
 
 		$text = '<td class="' . $this->_alternate_class . '">';
@@ -651,9 +638,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // manage navi
-//---------------------------------------------------------
+
 	function build_manage_pagenavi() {
 		$script = $this->_THIS_FCT_URL;
 		$script = $this->_pagenavi_class->add_script_sortid( $script );
@@ -671,16 +658,16 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // manage form
-//---------------------------------------------------------
+
 	function get_manage_row_by_id( $id = null ) {
 		$false = false;
 
 		if ( empty( $id ) ) {
 			$id = $this->get_post_id();
 		}
-		$id = intval( $id );
+		$id = (int) $id;
 
 		if ( $id > 0 ) {
 			$row = $this->_manage_handler->get_row_by_id( $id );
@@ -746,18 +733,18 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $this->build_line_add();
 	}
 
-//---------------------------------------------------------
+
 // complement caption by name
-//---------------------------------------------------------
+
 	function build_comp_td( $name ) {
 		$str = '<th>' . $this->get_constant( $name ) . '</th>';
 
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // build comp
-//---------------------------------------------------------
+
 	function build_comp_label( $name ) {
 		return $this->build_row_label( $this->get_constant( $name ), $name );
 	}
@@ -778,9 +765,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $this->build_row_textarea( $this->get_constant( $name ), $name, $rows, $cols );
 	}
 
-//---------------------------------------------------------
+
 // footer
-//---------------------------------------------------------
+
 	function build_admin_footer() {
 		$text = "<br><hr />\n";
 		$text .= $this->_utility_class->build_execution_time( $this->_manage_start_time );
@@ -789,9 +776,9 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // sample
-//---------------------------------------------------------
+
 	function _main() {
 		switch ( $this->_get_op() ) {
 			case 'add':
@@ -860,9 +847,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		return $this->_post_class->get_post_get( 'op' );
 	}
 
-//=========================================================
 // override for caller
-//=========================================================
 	function _get_list_total() {
 		$total               = $this->_get_count_by_sortid( $this->pagenavi_get_sortid() );
 		$this->_manage_total = $total;
@@ -929,7 +914,4 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		// dummy
 	}
 
-// --- class end ---
 }
-
-?>

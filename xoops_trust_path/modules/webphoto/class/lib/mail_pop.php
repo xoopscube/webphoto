@@ -1,15 +1,15 @@
 <?php
-// $Id: mail_pop.php,v 1.1 2008/08/08 04:39:14 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
 
-//=========================================================
-// class webphoto_lib_mail_pop
-// base on mailbbs's pop.php
-//=========================================================
 class webphoto_lib_mail_pop {
 // set param
 	public $_HOST = null;
@@ -25,9 +25,7 @@ class webphoto_lib_mail_pop {
 	public $_msg_arr = array();
 	public $_error_arr = array();
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -41,9 +39,9 @@ class webphoto_lib_mail_pop {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	function set_host( $val ) {
 		$this->_HOST = $val;
 	}
@@ -56,9 +54,9 @@ class webphoto_lib_mail_pop {
 		$this->_PASS = $val;
 	}
 
-//---------------------------------------------------------
+
 // pop mail
-//---------------------------------------------------------
+
 	function recv_mails() {
 		$this->clear_mails();
 		$this->clear_msgs();
@@ -185,9 +183,9 @@ class webphoto_lib_mail_pop {
 		return $dat;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_mails() {
 		$this->_mail_arr = array();
 	}
@@ -224,7 +222,5 @@ class webphoto_lib_mail_pop {
 		return $this->_error_arr;
 	}
 
-// --- class end ---
 }
 
-?>

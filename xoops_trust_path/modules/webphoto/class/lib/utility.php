@@ -1,55 +1,19 @@
 <?php
-// $Id: utility.php,v 1.21 2011/12/29 03:39:29 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// BUG : logic was reverse
-// 2011-05-01 K.OHWADA
-// substitute_filename_to_underbar()
-// 2010-11-11 K.OHWADA
-// Incorrect datetime value
-// 2010-10-01 K.OHWADA
-// is_image_cmyk()
-// 2010-01-10 K.OHWADA
-// array_remove()
-// 2009-10-20 K.OHWADA
-// array_to_key_value()
-// 2009-04-21 K.OHWADA
-// chmod_file()
-// 2009-04-10 K.OHWADA
-// mysql_datetime_to_unixtime()
-// 2009-01-10 K.OHWADA
-// build_random_file_name()
-// 2008-11-29 K.OHWADA
-// check_file_time()
-// 2008-11-08 K.OHWADA
-// read_file_cvs() get_array_value_by_key()
-// 2008-10-01 K.OHWADA
-// undo_htmlspecialchars()
-// 2008-09-20 K.OHWADA
-// BUG: 12:00:52 -> 12:52
-// 2008-08-24 K.OHWADA
-// changed write_file()
-// 2008-08-01 K.OHWADA
-// added get_files_in_dir()
-// 2008-07-01 K.OHWADA
-// changed parse_ext()
-// added build_error_msg()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_utility
-//=========================================================
+
 class webphoto_lib_utility {
 	public $_ini_safe_mode;
 
@@ -65,12 +29,6 @@ class webphoto_lib_utility {
 	public $_C_YES = 1;
 	public $_CHMOD_MODE = 0777;
 
-// base on style sheet of default theme
-	public $_STYLE_ERROR_MSG = 'background-color: #FFCCCC; text-align: center; border-top: 1px solid #DDDDFF; border-left: 1px solid #DDDDFF; border-right: 1px solid #AAAAAA; border-bottom: 1px solid #AAAAAA; font-weight: bold; padding: 10px; ';
-
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		$this->_ini_safe_mode = ini_get( 'safe_mode' );
 	}
@@ -84,9 +42,8 @@ class webphoto_lib_utility {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
 	function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
@@ -291,11 +248,11 @@ class webphoto_lib_utility {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // format
-//---------------------------------------------------------
+
 	function format_filesize( $size, $precision = 2 ) {
-		$format = '%.' . intval( $precision ) . 'f';
+		$format = '%.' . (int) $precision . 'f';
 		$bytes  = array( 'B', 'KB', 'MB', 'GB', 'TB' );
 		foreach ( $bytes as $unit ) {
 			if ( $size > 1000 ) {
@@ -330,16 +287,16 @@ class webphoto_lib_utility {
 	}
 
 	function parse_time( $time ) {
-		$hour = intval( $time / 3600 );
-		$min  = intval( ( $time - 3600 * $hour ) / 60 );
+		$hour = (int) ( $time / 3600 );
+		$min  = (int) ( ( $time - 3600 * $hour ) / 60 );
 		$sec  = $time - 3600 * $hour - 60 * $min;
 
 		return array( $hour, $min, $sec );
 	}
 
-//---------------------------------------------------------
+
 // file name
-//---------------------------------------------------------
+
 	function build_random_file_name( $id, $ext, $extra = null ) {
 		$str = $this->build_random_file_node( $id, $extra );
 		$str .= '.' . $ext;
@@ -370,9 +327,9 @@ class webphoto_lib_utility {
 		return sprintf( $format, $id );
 	}
 
-//---------------------------------------------------------
+
 // file
-//---------------------------------------------------------
+
 	function unlink_file( $file ) {
 		if ( $this->check_file( $file ) ) {
 			return unlink( $file );
@@ -461,7 +418,7 @@ class webphoto_lib_utility {
 	function check_file_time( $file, $interval ) {
 // if passing interval time
 		if ( file_exists( $file ) ) {
-			$time = intval( trim( file_get_contents( $file ) ) );
+			$time = (int) trim( file_get_contents( $file ) );
 			if ( ( $time > 0 ) &&
 			     ( time() > ( $time + $interval ) ) ) {
 				return true;
@@ -485,9 +442,9 @@ class webphoto_lib_utility {
 		}
 	}
 
-//---------------------------------------------------------
+
 // dir
-//---------------------------------------------------------
+
 	function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
 		$arr = array();
 
@@ -602,9 +559,9 @@ class webphoto_lib_utility {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // image
-//---------------------------------------------------------
+
 	function adjust_image_size( $width, $height, $max_width, $max_height ) {
 		if ( $width > $max_width ) {
 			$mag    = $max_width / $width;
@@ -618,7 +575,7 @@ class webphoto_lib_utility {
 			$width  = $width * $mag;
 		}
 
-		return array( intval( $width ), intval( $height ) );
+		return array( (int) $width, (int) $height );
 	}
 
 	function is_image_cmyk( $file ) {
@@ -631,9 +588,9 @@ class webphoto_lib_utility {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // encode
-//---------------------------------------------------------
+
 	function encode_slash( $str ) {
 		return str_replace( '/', $this->_HTML_SLASH, $str );
 	}
@@ -650,9 +607,9 @@ class webphoto_lib_utility {
 		return str_replace( $this->_HTML_COLON, ':', $str );
 	}
 
-//---------------------------------------------------------
+
 // file name
-//---------------------------------------------------------
+
 	function substitute_filename_to_underbar( $name, $char = '_' ) {
 // substitute the characters that cannot be used as the file name to underbar. 
 // \ / : * ? " < > | sapce
@@ -675,9 +632,9 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // group perms
-//---------------------------------------------------------
+
 	function convert_group_perms_array_to_str( $perms, $glue = '&' ) {
 		$arr = $this->arrenge_group_perms_array( $perms );
 
@@ -692,7 +649,7 @@ class webphoto_lib_utility {
 		$arr = array();
 		foreach ( $perms as $k => $v ) {
 			if ( $v == $this->_C_YES ) {
-				$arr[] = intval( $k );
+				$arr[] = (int) $k;
 			}
 		}
 
@@ -708,9 +665,9 @@ class webphoto_lib_utility {
 		return $val;
 	}
 
-//---------------------------------------------------------
+
 // time
-//---------------------------------------------------------
+
 	function str_to_time( $str ) {
 		$str = trim( $str );
 		if ( $str ) {
@@ -725,9 +682,9 @@ class webphoto_lib_utility {
 		return 0;
 	}
 
-//---------------------------------------------------------
+
 // footer
-//---------------------------------------------------------
+
 	function build_execution_time( $time_start = 0 ) {
 		$str = 'execution time : ';
 		$str .= $this->get_execution_time( $time_start );
@@ -749,7 +706,7 @@ class webphoto_lib_utility {
 
 	function get_execution_time( $time_start = 0 ) {
 		list( $usec, $sec ) = explode( " ", microtime() );
-		$time = floatval( $sec ) + floatval( $usec ) - $time_start;
+		$time = (float) $sec + (float) $usec - $time_start;
 		$exec = sprintf( "%6.3f", $time );
 
 		return $exec;
@@ -782,12 +739,12 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // base on core's xoops_error
 // XLC do not support 'errorMsg' style class in admin cp
-//---------------------------------------------------------
+
 	function build_error_msg( $msg, $title = '', $flag_sanitize = true ) {
-		$str = '<div style="' . $this->_STYLE_ERROR_MSG . '">';
+		$str = '<div class="tips">';
 		if ( $title != '' ) {
 			if ( $flag_sanitize ) {
 				$title = $this->sanitize( $title );
@@ -812,9 +769,9 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // sanitize
-//---------------------------------------------------------
+
 	function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
@@ -843,7 +800,5 @@ class webphoto_lib_utility {
 		return strtr( $str, $arr );
 	}
 
-// --- class end ---
 }
 
-?>

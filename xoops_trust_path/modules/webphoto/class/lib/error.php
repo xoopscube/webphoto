@@ -1,27 +1,19 @@
 <?php
-// $Id: error.php,v 1.3 2008/11/20 11:15:46 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// change log
-// 2008-11-16 K.OHWADA
-// error_in_box()
-// 2008-10-01 K.OHWADA
-// set_error_code()
-// set_error_in_head()
-//---------------------------------------------------------
 
-//=========================================================
-// class webphoto_lib_error
-//=========================================================
 class webphoto_lib_error {
 	public $_error_code = 0;
 	public $_errors = array();
@@ -32,9 +24,9 @@ class webphoto_lib_error {
 // color: red;  background-color: lightyellow;  border: gray;
 	public $_DIV_STYLE_ERROR = 'color: #ff0000; background-color: #ffffe0; border: #808080 1px dotted; padding: 3px 3px 3px 3px;';
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -48,9 +40,9 @@ class webphoto_lib_error {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // error code
-//---------------------------------------------------------
+
 	function clear_error_code() {
 		$this->_error_code = 0;
 	}
@@ -63,9 +55,9 @@ class webphoto_lib_error {
 		return $this->_error_code;
 	}
 
-//---------------------------------------------------------
+
 // error
-//---------------------------------------------------------
+
 	function return_code() {
 		if ( count( $this->_errors ) ) {
 			return false;
@@ -126,9 +118,9 @@ class webphoto_lib_error {
 		array_unshift( $this->_errors, $msg );
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
@@ -161,7 +153,4 @@ class webphoto_lib_error {
 		return $str;
 	}
 
-//----- class end -----
 }
-
-?>

@@ -1,26 +1,20 @@
 <?php
-// $Id: user_agent.php,v 1.3 2009/01/25 10:25:27 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-01-10 K.OHWADA
-// change parse_mobile_carrier()
-// 2008-09-01 K.OHWADA
-// added parse_browser()
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_user_agent
-//=========================================================
+
 class webphoto_lib_user_agent {
 	public $_os = null;
 	public $_browser = null;
@@ -30,9 +24,7 @@ class webphoto_lib_user_agent {
 	public $_FCT_MOBILE = 'i';
 	public $_MOBILE_CARRIER_ARRAY = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -46,7 +38,7 @@ class webphoto_lib_user_agent {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // parse os and browser
 //
 // IE : Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)
@@ -54,7 +46,7 @@ class webphoto_lib_user_agent {
 // Opera : Opera/9.27 (Windows NT 5.1; U; ja)
 // Safari : Mozilla/5.0 (Windows; U; Windows NT 5.1; ja-JP) AppleWebKit/525.19 (KHTML, like Gecko) Version/3.1.2 Safari/525.21
 // Chrome : Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13
-//---------------------------------------------------------
+
 	public function parse_browser( $ua = null ) {
 		if ( empty( $ua ) ) {
 			$ua = $this->get_user_agent();
@@ -115,9 +107,9 @@ class webphoto_lib_user_agent {
 		return $ret;
 	}
 
-//---------------------------------------------------------
+
 // parse mobile
-//---------------------------------------------------------
+
 	public function parse_mobile_carrier( $agent = null ) {
 		if ( empty( $agent ) ) {
 			$agent = $this->get_user_agent();
@@ -151,16 +143,16 @@ class webphoto_lib_user_agent {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	public function set_mobile_carrier_array( $val ) {
 		$this->_MOBILE_CARRIER_ARRAY = $val;
 	}
 
-//---------------------------------------------------------
+
 // get param
-//---------------------------------------------------------
+
 	public function get_os() {
 		return $this->_os;
 	}
@@ -177,7 +169,4 @@ class webphoto_lib_user_agent {
 		return $this->_mobile_model;
 	}
 
-//----- class end -----
 }
-
-?>

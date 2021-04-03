@@ -1,26 +1,25 @@
 <?php
-// $Id: browser.php,v 1.1 2011/05/10 02:59:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2011-05-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_browser
-//=========================================================
+
 class webphoto_lib_browser {
+
 	public $_http_user_agent = null;
 	public $_os = null;
 	public $_browser = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -34,9 +33,9 @@ class webphoto_lib_browser {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // presume os and browser by agent
-//---------------------------------------------------------
+
 	function presume_agent() {
 		$agent = $_SERVER["HTTP_USER_AGENT"];
 
@@ -85,9 +84,9 @@ class webphoto_lib_browser {
 		$this->_browser         = $browser;
 	}
 
-//---------------------------------------------------------
+
 // get param
-//---------------------------------------------------------
+
 	function get_os() {
 		return $this->_os;
 	}
@@ -96,7 +95,4 @@ class webphoto_lib_browser {
 		return $this->_browser;
 	}
 
-// --- class end ---
 }
-
-?>

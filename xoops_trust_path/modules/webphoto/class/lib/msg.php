@@ -1,30 +1,25 @@
 <?php
-// $Id: msg.php,v 1.3 2009/01/24 15:33:44 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-01-10 K.OHWADA
-// change set_msg()
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_error
-//=========================================================
+
 class webphoto_lib_msg {
+
 	public $_msg_array = array();
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -38,9 +33,9 @@ class webphoto_lib_msg {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	public function clear_msg_array() {
 		$this->_msg_array = array();
 	}
@@ -106,9 +101,9 @@ class webphoto_lib_msg {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	public function highlight( $str ) {
 		$val = '<span style="color:#ff0000;">' . $str . '</span>';
 
@@ -142,7 +137,5 @@ class webphoto_lib_msg {
 		return $val;
 	}
 
-//----- class end -----
 }
 
-?>

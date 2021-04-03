@@ -1,26 +1,19 @@
 <?php
-// $Id: cloud.php,v 1.1 2008/06/21 12:22:27 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_cloud
+ * same as Sabai_Cloud except change class name
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
-
-//=========================================================
-// class webphoto_lib_cloud
-// same as Sabai_Cloud except change class name
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-//
-// changed class name
-// added function _ksort_locate_string()
-//---------------------------------------------------------
 
 /**
  * Short description for file

@@ -1,35 +1,26 @@
 <?php
-// $Id: pathinfo.php,v 1.3 2010/01/25 10:03:07 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-01-10 K.OHWADA
-// function get_op_or_0()
-// 2008-07-01 K.OHWADA
-// added isset_param()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_pathinfo
-//=========================================================
+
 class webphoto_lib_pathinfo {
 	public $_get_param = null;
 	public $_pathinfo_array = null;
 
 	public $_PAGE_DEFAULT = 1;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		$this->_init();
 	}
@@ -43,9 +34,9 @@ class webphoto_lib_pathinfo {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // init
-//---------------------------------------------------------
+
 	function _init() {
 		$get = $_GET;
 
@@ -64,9 +55,9 @@ class webphoto_lib_pathinfo {
 		$this->_get_param = $get;
 	}
 
-//---------------------------------------------------------
+
 // function
-//---------------------------------------------------------
+
 	function get_fct_op_0() {
 		$fct = $this->get( 'fct' );
 		if ( $fct ) {
@@ -116,11 +107,11 @@ class webphoto_lib_pathinfo {
 	}
 
 	function get_int( $key, $default = 0 ) {
-		return intval( $this->get( $key, $default ) );
+		return (int) $this->get( $key, $default );
 	}
 
 	function get_float( $key, $default = 0 ) {
-		return floatval( $this->get( $key, $default ) );
+		return (float) $this->get( $key, $default );
 	}
 
 	function get_server_path_info() {
@@ -134,16 +125,12 @@ class webphoto_lib_pathinfo {
 	}
 
 	function get_path( $num ) {
-		if ( isset( $this->_pathinfo_array[ $num ] ) ) {
-			return $this->_pathinfo_array[ $num ];
-		}
-
-		return false;
+		return $this->_pathinfo_array[ $num ] ?? false;
 	}
 
-//---------------------------------------------------------
+
 // utlity
-//---------------------------------------------------------
+
 	function strip_slashes_gpc( $str ) {
 		if ( ! get_magic_quotes_gpc() ) {
 			return $str;
@@ -175,7 +162,4 @@ class webphoto_lib_pathinfo {
 		return $arr2;
 	}
 
-// --- class end ---
 }
-
-?>

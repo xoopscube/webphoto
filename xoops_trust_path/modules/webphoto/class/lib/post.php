@@ -1,23 +1,24 @@
 <?php
-// $Id: post.php,v 1.1 2008/06/21 12:22:29 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_post
-//=========================================================
+
 class webphoto_lib_post {
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -31,11 +32,11 @@ class webphoto_lib_post {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // function
-//---------------------------------------------------------
+
 	function get_post( $key, $default = null ) {
-		$str = isset( $_POST[ $key ] ) ? $_POST[ $key ] : $default;
+		$str = $_POST[ $key ] ?? $default;
 
 		return $str;
 	}
@@ -45,11 +46,11 @@ class webphoto_lib_post {
 	}
 
 	function get_post_int( $key, $default = 0 ) {
-		return intval( $this->get_post( $key, $default ) );
+		return (int) $this->get_post( $key, $default );
 	}
 
 	function get_post_float( $key, $default = 0 ) {
-		return floatval( $this->get_post( $key, $default ) );
+		return (float) $this->get_post( $key, $default );
 	}
 
 	function get_post_url( $key, $default = null ) {
@@ -66,7 +67,7 @@ class webphoto_lib_post {
 	}
 
 	function get_get( $key, $default = null ) {
-		$str = isset( $_GET[ $key ] ) ? $_GET[ $key ] : $default;
+		$str = $_GET[ $key ] ?? $default;
 
 		return $str;
 	}
@@ -76,7 +77,7 @@ class webphoto_lib_post {
 	}
 
 	function get_get_int( $key, $default = 0 ) {
-		return intval( $this->get_get( $key, $default ) );
+		return (int) $this->get_get( $key, $default );
 	}
 
 	function get_post_get( $key, $default = null ) {
@@ -95,12 +96,12 @@ class webphoto_lib_post {
 	}
 
 	function get_post_get_int( $key, $default = 0 ) {
-		return intval( $this->get_post_get( $key, $default ) );
+		return (int) $this->get_post_get( $key, $default );
 	}
 
-//---------------------------------------------------------
+
 // utlity
-//---------------------------------------------------------
+
 	function _strip_slashes_gpc( $str ) {
 		if ( ! get_magic_quotes_gpc() ) {
 			return $str;
@@ -148,7 +149,5 @@ class webphoto_lib_post {
 		return 0;
 	}
 
-// --- class end ---
 }
 
-?>

@@ -1,48 +1,19 @@
 <?php
-// $Id: handler.php,v 1.14 2010/11/16 23:43:38 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// get_value_by_id_name()
-// 2010-03-14 K.OHWADA
-// BUG: echo sql always if error
-// 2010-02-15 K.OHWADA
-// add $flag_admin in check_perm_by_row_name_groups()
-// 2009-11-11 K.OHWADA
-// Notice [PHP]: Undefined index: prefix 
-// 2009-08-08 K.OHWADA
-// build_config_character()
-// 2009-05-30 K.OHWADA
-// perm_read in build_form_select_options()
-// 2009-05-17 K.OHWADA
-// build_form_option_extra()
-// 2009-04-19 K.OHWADA
-// build_form_select_options()
-// 2009-01-25 K.OHWADA
-// debug_print_backtrace()
-// 2008-12-12 K.OHWADA
-// check_perm_by_row_name_groups()
-// 2008-11-16 K.OHWADA
-// check_perms_in_groups()
-// 2008-10-01 K.OHWADA
-// build_form_select_list()
-// 2008-08-01 K.OHWADA
-// added force in query()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_handler
-//=========================================================
+
 class webphoto_lib_handler extends webphoto_lib_error {
 	public $_DIRNAME;
 
@@ -78,13 +49,10 @@ class webphoto_lib_handler extends webphoto_lib_error {
 	public $_FORM_SELECTED = ' selected="selected" ';
 	public $_FORM_DISABLED = ' disabled="disabled" ';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname = null ) {
 
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_db =& Database::getInstance();
 
@@ -170,12 +138,12 @@ class webphoto_lib_handler extends webphoto_lib_error {
 	}
 
 	function set_debug_error( $val ) {
-		$this->_DEBUG_ERROR = intval( $val );
+		$this->_DEBUG_ERROR = (int) $val;
 	}
 
-//---------------------------------------------------------
+
 // config
-//---------------------------------------------------------
+
 	function build_config_character() {
 		$text = '';
 		$rows = $this->get_config_character();
@@ -199,30 +167,30 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $this->get_rows_by_sql( $sql, 0, 0, null, true );
 	}
 
-//---------------------------------------------------------
+
 // insert
-//---------------------------------------------------------
+
 	function insert( $row, $force = false ) {
 		// dummy
 	}
 
-//---------------------------------------------------------
+
 // update
-//---------------------------------------------------------
+
 	function update( $row, $force = false ) {
 		// dummy
 	}
 
-//---------------------------------------------------------
+
 // delete
-//---------------------------------------------------------
+
 	function delete( $row, $force = false ) {
 		return $this->delete_by_id( $this->get_id_from_row( $row ), $force );
 	}
 
 	function delete_by_id( $id, $force = false ) {
 		$sql = 'DELETE FROM ' . $this->_table;
-		$sql .= ' WHERE ' . $this->_id_name . '=' . intval( $id );
+		$sql .= ' WHERE ' . $this->_id_name . '=' . (int) $id;
 
 		return $this->query( $sql, 0, 0, $force );
 	}
@@ -255,9 +223,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $this->query( $sql );
 	}
 
-//---------------------------------------------------------
+
 // count
-//---------------------------------------------------------
+
 	function exists_record() {
 		if ( $this->get_count_all() > 0 ) {
 			return true;
@@ -267,7 +235,7 @@ class webphoto_lib_handler extends webphoto_lib_error {
 	}
 
 	function get_count_by_id( $id ) {
-		$where = $this->_id_name . '=' . intval( $id );
+		$where = $this->_id_name . '=' . (int) $id;
 
 		return $this->get_count_by_where( $where );
 	}
@@ -285,12 +253,12 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $this->get_count_by_sql( $sql );
 	}
 
-//---------------------------------------------------------
+
 // row
-//---------------------------------------------------------
+
 	function get_row_by_id( $id ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
-		$sql .= ' WHERE ' . $this->_id_name . '=' . intval( $id );
+		$sql .= ' WHERE ' . $this->_id_name . '=' . (int) $id;
 
 		return $this->get_row_by_sql( $sql );
 	}
@@ -322,9 +290,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // rows
-//---------------------------------------------------------
+
 	function get_rows_all_asc( $limit = 0, $offset = 0, $key = null ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
 		$sql .= ' ORDER BY ' . $this->_id_name . ' ASC';
@@ -370,9 +338,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $this->get_rows_by_sql( $sql, $limit, $offset );
 	}
 
-//---------------------------------------------------------
+
 // id array
-//---------------------------------------------------------
+
 	function get_id_array_by_where( $where, $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT ' . $this->_id_name . ' FROM ' . $this->_table;
 		$sql .= ' WHERE ' . $where;
@@ -389,9 +357,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $this->get_first_rows_by_sql( $sql, $limit, $offset );
 	}
 
-//---------------------------------------------------------
+
 // cached
-//---------------------------------------------------------
+
 	function get_cached_row_by_id( $id ) {
 		if ( isset( $this->_cached[ $id ] ) ) {
 			return $this->_cached[ $id ];
@@ -421,11 +389,11 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function get_count_by_sql( $sql ) {
-		return intval( $this->get_first_row_by_sql( $sql ) );
+		return (int) $this->get_first_row_by_sql( $sql );
 	}
 
 	function get_first_row_by_sql( $sql ) {
@@ -502,7 +470,7 @@ class webphoto_lib_handler extends webphoto_lib_error {
 			echo $this->sanitize( $sql_full ) . "<br>\n";
 		}
 
-		$res = $this->_db->query( $sql, intval( $limit ), intval( $offset ) );
+		$res = $this->_db->query( $sql, (int) $limit, (int) $offset );
 		if ( ! $res ) {
 			$error = $this->_db->error();
 			if ( empty( $error ) ) {
@@ -528,7 +496,7 @@ class webphoto_lib_handler extends webphoto_lib_error {
 			echo $this->sanitize( $sql ) . ': limit=' . $limit . ' :offset=' . $offset . "<br>\n";
 		}
 
-		$res = $this->_db->queryF( $sql, intval( $limit ), intval( $offset ) );
+		$res = $this->_db->queryF( $sql, (int) $limit, (int) $offset );
 		if ( ! $res ) {
 			$error = $this->_db->error();
 			$this->set_error( $error );
@@ -547,9 +515,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // search
-//---------------------------------------------------------
+
 	function build_where_by_keyword_array( $keyword_array, $name, $andor = 'AND' ) {
 		if ( ! is_array( $keyword_array ) || ! count( $keyword_array ) ) {
 			return null;
@@ -596,9 +564,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // permission
-//---------------------------------------------------------
+
 	function check_cached_perm_by_row_name_groups_key( $row, $name, $groups = null, $key = '0' ) {
 		$id = $row[ $this->_id_name ];
 		if ( isset( $this->_cached_perm_key_array[ $id ][ $key ] ) ) {
@@ -709,9 +677,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return $this->str_to_array( $val, $this->_PERM_SEPARATOR );
 	}
 
-//---------------------------------------------------------
+
 // selbox
-//---------------------------------------------------------
+
 	function build_form_selbox( $name = '', $value = 0, $none = 0, $onchange = '' ) {
 		return $this->build_form_select_list(
 			$this->get_rows_by_orderby( $this->_title_name ),
@@ -899,9 +867,9 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
@@ -941,15 +909,15 @@ class webphoto_lib_handler extends webphoto_lib_error {
 
 		$arr_out = array();
 		foreach ( $arr_in as $in ) {
-			$arr_out[] = intval( $in );
+			$arr_out[] = (int) $in;
 		}
 
 		return $arr_out;
 	}
 
-//---------------------------------------------------------
+
 // xoops param
-//---------------------------------------------------------
+
 	function _get_xoops_groups() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
@@ -979,7 +947,4 @@ class webphoto_lib_handler extends webphoto_lib_error {
 		return false;
 	}
 
-//----- class end -----
 }
-
-?>

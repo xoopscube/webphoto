@@ -1,42 +1,21 @@
 <?php
-// $Id: element.php,v 1.13 2010/09/19 06:43:11 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-12-06 K.OHWADA
-// function build_form_select_extra()
-// 2009-05-15 K.OHWADA
-// typo
-// 2009-04-19 K.OHWADA
-// build_form_option_list()
-// 2008-12-12 K.OHWADA
-// build_form_checkbox_group_perms()
-// 2008-11-16 K.OHWADA
-// build_form_select_multiple()
-// 2008-11-08 K.OHWADA
-// build_caption()
-// 2008-10-01 K.OHWADA
-// build_form_text_color_pickup() etc
-// 2008-08-01 K.OHWADA
-// added build_row_label_time()
-// typo substite_empty() -> substitute_empty()
-// 2008-07-01 K.OHWADA
-// change build_row_url()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_element
-//=========================================================
+
 class webphoto_lib_element extends webphoto_lib_error {
+
 	public $_alternate_class = '';
 	public $_line_count = 0;
 	public $_row = array();
@@ -89,12 +68,12 @@ class webphoto_lib_element extends webphoto_lib_error {
 // base on style sheet of default theme
 	public $_STYLE_CONFIRM_MSG = 'background-color: transparent; color: #136C99; text-align: center; border-top: 1px solid #DDDDFF; border-left: 1px solid #DDDDFF; border-right: 1px solid #AAAAAA; border-bottom: 1px solid #AAAAAA; font-weight: bold; padding: 10px; ';
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
+
 	public function __construct() {
+
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_THIS_URL = xoops_getenv( 'PHP_SELF' );
 	}
@@ -108,9 +87,8 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // header
-//---------------------------------------------------------
 	public function build_html_header( $title = null ) {
 		if ( empty( $title ) ) {
 			$title = $this->_TITLE_HEADER;    // todo
@@ -138,9 +116,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // form box
-//---------------------------------------------------------
+
 	public function build_form_box_with_style( $param, $hidden_array ) {
 		$title = $param['title'] ?? null;
 		$desc  = $param['desc'] ?? null;
@@ -216,9 +194,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // form
-//---------------------------------------------------------
+
 	public function build_form_begin( $name = null, $action = null, $method = 'post', $extra = null ) {
 		if ( empty( $name ) ) {
 			$name = $this->_FORM_NAME;
@@ -513,9 +491,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $name;
 	}
 
-//---------------------------------------------------------
+
 // group perms
-//---------------------------------------------------------
+
 	public function build_form_checkboxs_group_perms( $id_name, $groups, $perms, $all_yes = false, $del = '' ) {
 		$options = $this->build_options_group_perms( $id_name, $groups, $perms, $all_yes );
 
@@ -589,9 +567,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $all_yes;
 	}
 
-//---------------------------------------------------------
+
 // color_pickup
-//---------------------------------------------------------
+
 	public function set_path_color_pickup( $path ) {
 		$this->_path_color_pickup = $path;
 	}
@@ -628,9 +606,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // table form
-//---------------------------------------------------------
+
 	public function build_table_begin() {
 		$text = '<table class="outer" width="100%" cellpadding="4" cellspacing="1">' . "\n";
 
@@ -823,9 +801,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $class;
 	}
 
-//---------------------------------------------------------
+
 // row value
-//---------------------------------------------------------
+
 	public function get_row_label( $name, $flag_sanitaize = true ) {
 		$value = $this->get_row_by_key( $name, $flag_sanitaize );
 		$value = $this->substitute_empty( $value );
@@ -840,9 +818,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $value;
 	}
 
-//---------------------------------------------------------
+
 // element
-//---------------------------------------------------------
+
 	public function build_form_tag( $name, $action = '', $method = 'post', $extra = null ) {
 		$text = '<form name="' . $name . '" action="' . $action . '" method="' . $method . '" ' . $extra . ' >' . "\n";
 
@@ -1010,9 +988,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // caption
-//---------------------------------------------------------
+
 	public function build_caption( $cap, $desc = null ) {
 		$str = $cap;
 		if ( $desc ) {
@@ -1031,9 +1009,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // hidden buffer
-//---------------------------------------------------------
+
 	public function clear_hidden_buffers() {
 		$this->_hidden_buffers = array();
 	}
@@ -1050,9 +1028,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		$this->_hidden_buffers[] = $this->build_input_hidden( $name, $value );
 	}
 
-//---------------------------------------------------------
+
 // keyword
-//---------------------------------------------------------
+
 	public function parse_keywords( $keywords, $andor = 'AND' ) {
 		$keyword_array = array();
 		$ignore_array  = array();
@@ -1084,9 +1062,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // token
-//---------------------------------------------------------
+
 	public function get_token_name() {
 		return 'XOOPS_G_TICKET';
 	}
@@ -1135,9 +1113,9 @@ class webphoto_lib_element extends webphoto_lib_error {
 		return $this->_token_errors;
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	public function set_time_start_name( $val ) {
 		$this->_TIME_START_NAME = $val;
 	}
@@ -1158,10 +1136,10 @@ class webphoto_lib_element extends webphoto_lib_error {
 		$this->_TD_LEFT_WIDTH = $val;
 	}
 
-//---------------------------------------------------------
+
 // base on core's xoops_confirm
 // XLC do not support 'confirmMsg' style class in admin cp
-//---------------------------------------------------------
+
 	public function build_form_confirm( $hiddens, $action, $msg, $submit = '', $cancel = '', $addToken = true ) {
 		$submit = ( $submit != '' ) ? trim( $submit ) : _SUBMIT;
 		$cancel = ( $cancel != '' ) ? trim( $cancel ) : _CANCEL;

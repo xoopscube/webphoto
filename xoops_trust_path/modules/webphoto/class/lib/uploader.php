@@ -1,96 +1,44 @@
 <?php
-// $Id: uploader.php,v 1.5 2009/04/21 15:14:54 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_uploader
+ * base on myalbum's myuploader.php
+ *  myuploader.php,v 1.12+
+ *  Security & Bug fixed version of class XoopsMediaUploader by GIJOE
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_uploader
-// base on myalbum's myuploader.php
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-04-21 K.OHWADA
-//   chmod_file()
-// 2008-11-16
-//   clear error
-// 2008-11-08
-//   getInstance() setUploadDir() etc
-// 2008-04-02
-// add function
-//   setAllowedMimeTypes()
-//   setAllowedExtensions()
-//   setErrorCodes()
-//---------------------------------------------------------
-
-// myuploader.php,v 1.12+
-// Security & Bug fixed version of class XoopsMediaUploader by GIJOE
-
-/*!
-Example
-
-  include_once 'myuploader.php';
-  $allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png');
-  $maxfilesize = 50000;
-  $maxfilewidth = 120;
-  $maxfileheight = 120;
-  $uploader = new XoopsMediaUploader('/home/xoops/uploads', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight, $allowed_exts);
-  if ($uploader->fetchMedia($_POST['uploade_file_name'])) {
-    if (!$uploader->upload()) {
-       echo $uploader->getErrors();
-    } else {
-       echo '<h4>File uploaded successfully!</h4>'
-       echo 'Saved as: ' . $uploader->getSavedFileName() . '<br>';
-       echo 'Full path: ' . $uploader->getSavedDestination();
-    }
-  } else {
-    echo $uploader->getErrors();
-  }
-
-*/
-
 
 class webphoto_lib_uploader {
+
 	public $mediaName;
 	public $mediaType;
 	public $mediaSize;
 	public $mediaTmpName;
 	public $mediaError;
-
 	public $uploadDir = '';
-
 	public $allowedMimeTypes = array();
 	public $allowedExtensions = array();
-
 	public $maxFileSize = 0;
 	public $maxWidth;
 	public $maxHeight;
-
 	public $targetFileName;
-
 	public $prefix;
-
 	public $errors = array();
-
 	public $savedDestination;
-
 	public $savedFileName;
-
-// 2008-04-02
 	public $mediaWidth = 0;
 	public $mediaHeight = 0;
-
-// 2008-04-02
 	public $errorCodes = array();
-
-// 2008-04-02
 	public $errorMsgs = array(
 		1  => 'Uploaded File not found',
 		2  => 'Invalid File Size',
@@ -108,23 +56,9 @@ class webphoto_lib_uploader {
 		14 => 'Failed uploading file: ', // mediaName
 	);
 
-// 2009-04-21
+
 	public $_ini_safe_mode;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	/**
-	 * Constructor
-	 *
-	 * @param string $uploadDir
-	 * @param array $allowedMimeTypes
-	 * @param int $maxFileSize
-	 * @param int $maxWidth
-	 * @param int $maxHeight
-	 * @param int $cmodvalue
-	 * @param array $allowedExtensions
-	 **/
 	public function __construct() {
 		$this->_ini_safe_mode = ini_get( 'safe_mode' );
 	}
@@ -139,27 +73,9 @@ class webphoto_lib_uploader {
 		return $instance;
 	}
 
-//	function MyXoopsMediaUploader($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth=null, $maxHeight=null, $allowedExtensions=null )
-//	{
-//		if (is_array($allowedMimeTypes)) {
-//			$this->allowedMimeTypes =& $allowedMimeTypes;
-//		}
-//		$this->uploadDir = $uploadDir;
-//		$this->maxFileSize = intval($maxFileSize);
-//		if(isset($maxWidth)) {
-//			$this->maxWidth = intval($maxWidth);
-//		}
-//		if(isset($maxHeight)) {
-//			$this->maxHeight = intval($maxHeight);
-//		}
-//		if( isset( $allowedExtensions ) && is_array( $allowedExtensions ) ) {
-//			$this->allowedExtensions =& $allowedExtensions ;
-//		}
-//	}
 
-//---------------------------------------------------------
 // functions
-//---------------------------------------------------------
+
 // added for webphoto
 	function setUploadDir( $uploadDir ) {
 		$this->uploadDir = $uploadDir;
@@ -167,17 +83,17 @@ class webphoto_lib_uploader {
 
 // added for webphoto
 	function setMaxFileSize( $maxFileSize ) {
-		$this->maxFileSize = intval( $maxFileSize );
+		$this->maxFileSize = (int) $maxFileSize;
 	}
 
 // added for webphoto
 	function setMaxWidth( $maxWidth ) {
-		$this->maxWidth = intval( $maxWidth );
+		$this->maxWidth = (int) $maxWidth;
 	}
 
 // added for webphoto
 	function setMaxHeight( $maxHeight ) {
-		$this->maxHeight = intval( $maxHeight );
+		$this->maxHeight = (int) $maxHeight;
 	}
 
 // added for webphoto
@@ -216,7 +132,7 @@ class webphoto_lib_uploader {
 			return false;
 
 		} elseif ( is_array( $_FILES[ $media_name ]['name'] ) && isset( $index ) ) {
-			$index              = intval( $index );
+			$index              = (int) $index;
 			$this->mediaName    = $_FILES[ $media_name ]['name'][ $index ];
 			$this->mediaType    = $_FILES[ $media_name ]['type'][ $index ];
 			$this->mediaSize    = $_FILES[ $media_name ]['size'][ $index ];
@@ -232,29 +148,22 @@ class webphoto_lib_uploader {
 			$this->mediaError   = ! empty( $media_name['error'] ) ? $media_name['error'] : 0;
 		}
 
-		if ( intval( $this->mediaSize ) < 0 ) {
+		if ( (int) $this->mediaSize < 0 ) {
 
-// 2008-04-02
-//			$this->setErrors('Invalid File Size');
 			$this->setErrorCodes( 2 );
 
 			return false;
 		}
 		if ( $this->mediaName == '' ) {
 
-// 2008-04-02
-//			$this->setErrors('Filename Is Empty');
 			$this->setErrorCodes( 3 );
 
 			return false;
 		}
 
-// 2008-04-02
-// brought these sentences up, because not report media error  
+		// brought these sentences up, because not report media error
 		if ( $this->mediaError > 0 ) {
 
-// 2008-04-02
-//			$this->setErrors('Error occurred: Error #'.$this->mediaError);
 			$this->setErrorCodes( 7, $this->mediaError );
 
 			return false;
@@ -262,8 +171,6 @@ class webphoto_lib_uploader {
 
 		if ( $this->mediaTmpName == 'none' || ! is_uploaded_file( $this->mediaTmpName ) || $this->mediaSize == 0 ) {
 
-// 2008-04-02
-//			$this->setErrors('No file uploaded');
 			$this->setErrorCodes( 4 );
 
 			return false;
@@ -278,7 +185,7 @@ class webphoto_lib_uploader {
 	 * @param string $value
 	 **/
 	function setTargetFileName( $value ) {
-		$this->targetFileName = strval( trim( $value ) );
+		$this->targetFileName = (string) trim( $value );
 	}
 
 	/**
@@ -287,7 +194,7 @@ class webphoto_lib_uploader {
 	 * @param string $value
 	 **/
 	function setPrefix( $value ) {
-		$this->prefix = strval( trim( $value ) );
+		$this->prefix = (string) trim( $value );
 	}
 
 	/**
@@ -382,62 +289,46 @@ class webphoto_lib_uploader {
 	function upload( $chmod = 0644 ) {
 		if ( $this->uploadDir == '' ) {
 
-// 2008-04-02
-//			$this->setErrors('Upload directory not set');
 			$this->setErrorCodes( 5 );
 
 			return false;
 		}
 		if ( ! is_dir( $this->uploadDir ) ) {
 
-// 2008-04-02
-//			$this->setErrors('Failed opening directory: '.$this->uploadDir);
 			$this->setErrorCodes( 8, $this->uploadDir );
 
 			return false;
 		}
-		if ( ! is_writeable( $this->uploadDir ) ) {
+		if ( ! is_writable( $this->uploadDir ) ) {
 
-// 2008-04-02
-//			$this->setErrors('Failed opening directory with write permission: '.$this->uploadDir);
 			$this->setErrorCodes( 9, $this->uploadDir );
 
 			return false;
 		}
 		if ( ! $this->checkMimeType() ) {
 
-// 2008-04-02
-//			$this->setErrors('MIME type not allowed: '.$this->mediaType);
 			$this->setErrorCodes( 10, $this->mediaType );
 
 			return false;
 		}
 		if ( ! $this->checkExtension() ) {
 
-// 2008-04-02
-//			$this->setErrors('Extension not allowed');
 			$this->setErrorCodes( 6 );
 
 			return false;
 		}
 		if ( ! $this->checkMaxFileSize() ) {
 
-// 2008-04-02
-//			$this->setErrors('File size too large: '.$this->mediaSize);
 			$this->setErrorCodes( 11, $this->mediaSize );
 
 		}
 		if ( ! $this->checkMaxWidth() ) {
 
-// 2008-04-02
-//			$this->setErrors(sprintf('File width must be smaller than %u', $this->maxWidth));
 			$this->setErrorCodes( 12, $this->maxWidth );
 
 		}
 		if ( ! $this->checkMaxHeight() ) {
 
-// 2008-04-02
-//			$this->setErrors(sprintf('File height must be smaller than %u', $this->maxHeight));
 			$this->setErrorCodes( 13, $this->maxHeight );
 
 		}
@@ -446,8 +337,6 @@ class webphoto_lib_uploader {
 		}
 		if ( ! $this->_copyFile( $chmod ) ) {
 
-// 2008-04-02
-//			$this->setErrors('Failed uploading file: '.$this->mediaName);
 			$this->setErrorCodes( 14, $this->mediaName );
 
 			return false;
@@ -482,7 +371,6 @@ class webphoto_lib_uploader {
 		return true;
 	}
 
-// 2009-04-21
 	function chmod_file( $file, $mode ) {
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $mode );
@@ -513,7 +401,6 @@ class webphoto_lib_uploader {
 		}
 		if ( false !== $dimension = getimagesize( $this->mediaTmpName ) ) {
 
-// 2008-04-02
 			$this->mediaWidth = $dimension[0];
 
 			if ( $this->mediaWidth > $this->maxWidth ) {
@@ -538,7 +425,6 @@ class webphoto_lib_uploader {
 		if ( false !== $dimension = getimagesize( $this->mediaTmpName ) ) {
 			$dimension = @getimagesize( $this->mediaTmpName );
 
-// 2008-04-02
 			$this->mediaHeight = $dimension[1];
 
 			if ( $this->mediaHeight > $this->maxHeight ) {
@@ -580,13 +466,11 @@ class webphoto_lib_uploader {
 		}
 	}
 
-// 2008-04-02
 	function setErrorCodes( $code, $msg = null ) {
 		$this->setErrors( $this->errorMsgs[ $code ] . $msg );
 		$this->errorCodes[] = $code;
 	}
 
-// 2008-04-02
 	function getErrorCodes() {
 		return $this->errorCodes;
 	}
@@ -623,7 +507,4 @@ class webphoto_lib_uploader {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

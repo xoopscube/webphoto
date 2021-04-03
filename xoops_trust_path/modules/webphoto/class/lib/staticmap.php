@@ -1,23 +1,21 @@
 <?php
-// $Id: staticmap.php,v 1.1 2009/09/19 20:45:27 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-09-20 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// http://code.google.com/intl/en/apis/maps/documentation/staticmaps/
-// N903i 240�~270
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ *  N903i 240�~270
+ * http://code.google.com/intl/en/apis/maps/documentation/staticmaps/
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_staticmap
-//=========================================================
+
 class webphoto_lib_staticmap {
 // map param
 	public $_key = null;
@@ -26,9 +24,7 @@ class webphoto_lib_staticmap {
 	public $_maptype = 'mobile';
 	public $_sanitize = true;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -42,19 +38,19 @@ class webphoto_lib_staticmap {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // build url
-//---------------------------------------------------------
+
 	function build_url( $param ) {
 		$latitude  = $param['latitude'];
 		$longitude = $param['longitude'];
 		$zoom      = $param['zoom'];
 
-		$key      = isset( $param['key'] ) ? $param['key'] : $this->_key;
-		$maptype  = isset( $param['maptype'] ) ? $param['maptype'] : $this->_maptype;
-		$markers  = isset( $param['markers'] ) ? $param['markers'] : null;
-		$width    = isset( $param['width'] ) ? intval( $param['width'] ) : $this->_width;
-		$height   = isset( $param['height'] ) ? intval( $param['height'] ) : $this->_height;
+		$key      = $param['key'] ?? $this->_key;
+		$maptype  = $param['maptype'] ?? $this->_maptype;
+		$markers  = $param['markers'] ?? null;
+		$width    = isset( $param['width'] ) ? (int) $param['width'] : $this->_width;
+		$height   = isset( $param['height'] ) ? (int) $param['height'] : $this->_height;
 		$sanitize = isset( $param['sanitize'] ) ? (bool) $param['sanitize'] : $this->_sanitize;
 
 		$static_markers = $this->build_markers( $markers );
@@ -86,8 +82,8 @@ class webphoto_lib_staticmap {
 		foreach ( $markers as $marker ) {
 			$latitude  = $marker['latitude'];
 			$longitude = $marker['longitude'];
-			$color     = isset( $marker['color'] ) ? $marker['color'] : null;
-			$alpha     = isset( $marker['alpha'] ) ? $marker['alpha'] : null;
+			$color     = $marker['color'] ?? null;
+			$alpha     = $marker['alpha'] ?? null;
 
 			$str = $latitude . ',' . $longitude;
 			if ( $color ) {
@@ -109,9 +105,9 @@ class webphoto_lib_staticmap {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	function set_key( $val ) {
 		$this->_key = $val;
 	}
@@ -121,18 +117,15 @@ class webphoto_lib_staticmap {
 	}
 
 	function set_width( $val ) {
-		$this->_width = intval( $val );
+		$this->_width = (int) $val;
 	}
 
 	function set_height( $val ) {
-		$this->_height = intval( $val );
+		$this->_height = (int) $val;
 	}
 
 	function set_sanitize( $val ) {
 		$this->_sanitize = (bool) $val;
 	}
 
-// --- class end ---
 }
-
-?>

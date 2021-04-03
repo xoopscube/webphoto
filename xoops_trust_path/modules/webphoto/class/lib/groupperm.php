@@ -1,19 +1,20 @@
 <?php
-// $Id: groupperm.php,v 1.1 2009/12/16 13:36:20 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_groupperm
+ * refer myalubum's mygroupperm.php
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_groupperm
-// refer myalubum's mygroupperm.php
-//=========================================================
 
 class webphoto_lib_groupperm {
 	public $_db;
@@ -26,9 +27,7 @@ class webphoto_lib_groupperm {
 
 	public $_flag_system = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		$this->_db                =& Database::getInstance();
 		$this->_module_handler    =& xoops_gethandler( 'module' );
@@ -45,9 +44,9 @@ class webphoto_lib_groupperm {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	public function modify( $mod_id, $perms, $flag_system = false ) {
 		$this->_flag_system = $flag_system;
 
@@ -225,9 +224,9 @@ class webphoto_lib_groupperm {
 		       ( $perm_name == 'module_read' );
 	}
 
-//---------------------------------------------------------
+
 // xoops param
-//---------------------------------------------------------
+
 	public function include_language() {
 		global $xoopsConfig;
 		$language = $xoopsConfig['language'];
@@ -271,9 +270,9 @@ class webphoto_lib_groupperm {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // error
-//---------------------------------------------------------
+
 	public function set_error( $msg ) {
 // array type
 		if ( is_array( $msg ) ) {

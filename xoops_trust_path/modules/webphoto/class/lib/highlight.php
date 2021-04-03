@@ -1,33 +1,24 @@
 <?php
-// $Id: highlight.php,v 1.2 2008/07/05 17:12:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2008-07-01 K.OHWADA
-// changed webphoto_highlighter_by_style()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_highlight
+ * same as happy_linux_highlight
+ * original: keyhighlighter
+ * http://www.phpclasses.org/browse/package/1792.html
+ * porting from smartsection <http://smartfactory.ca/>
+ * http://smartfactory.ca/modules/newbb/viewtopic.php?topic_id=1211
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_highlight
-// same as happy_linux_highlight
-//=========================================================
-
-//---------------------------------------------------------
-// original: keyhighlighter
-// http://www.phpclasses.org/browse/package/1792.html
-//
-// porting from smartsection <http://smartfactory.ca/>
-// http://smartfactory.ca/modules/newbb/viewtopic.php?topic_id=1211
-//---------------------------------------------------------
 
 class webphoto_lib_highlight {
 // keyword
@@ -46,9 +37,9 @@ class webphoto_lib_highlight {
 // ex) BIG-5 GB2312 餐 C05C B2CD 遊 B943 904A 
 	public $_flag_remove_control_code = false;
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -62,9 +53,9 @@ class webphoto_lib_highlight {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // function
-//---------------------------------------------------------
+
 	function build_highlight_keywords( $str, $keywords, $flag_singlewords = true ) {
 		if ( $keywords ) {
 			$keywords = $this->_sanitize_keyword( $keywords );
@@ -160,9 +151,9 @@ class webphoto_lib_highlight {
 		return $result;
 	}
 
-//---------------------------------------------------------
+
 // set parameter
-//---------------------------------------------------------
+
 	function set_replace_callback( $val ) {
 		$this->_replace_callback = $val;
 	}
@@ -199,15 +190,11 @@ class webphoto_lib_highlight {
 		return $this->_class;
 	}
 
-// --- class end ---
 }
 
-//=========================================================
 // function
-//=========================================================
-//---------------------------------------------------------
 // porting from smartsection <http://smartfactory.ca/>
-//---------------------------------------------------------
+
 function webphoto_highlighter( $matches ) {
 // background-color: light yellow
 	$STYLE = 'font-weight: bolder; background-color: #ffff80; ';
@@ -240,5 +227,3 @@ function webphoto_highlighter_by_class( $matches ) {
 
 	return $ret;
 }
-
-?>

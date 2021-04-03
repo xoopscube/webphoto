@@ -1,30 +1,23 @@
 <?php
-// $Id: admin_menu.php,v 1.4 2009/12/16 13:32:34 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_admin_menu
+ * base on myalbum's mymenu.php
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// change log
-// 2009-12-06 K.OHWADA
-// $trust_dirname in webphoto_inc_admin_menu
-// 2008-12-12 K.OHWADA
-// getInstance() -> getSingleton()
-// 2008-10-01 K.OHWADA
-// build_sub_menu()
-//---------------------------------------------------------
 
-//=========================================================
-// class webphoto_lib_admin_menu
-// base on myalbum's mymenu.php
-//=========================================================
 class webphoto_lib_admin_menu {
+
 	public $_menu_class;
 
 	public $_DIRNAME;
@@ -34,9 +27,6 @@ class webphoto_lib_admin_menu {
 	public $_TRUST_DIR;
 	public $_MODULE_ID = 0;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME    = $dirname;
 		$this->_MODULE_URL = XOOPS_URL . '/modules/' . $dirname;
@@ -57,9 +47,6 @@ class webphoto_lib_admin_menu {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
 	function build_menu_with_sub( $flag_sub = true ) {
 		$str = $this->build_menu( ! $flag_sub, false );
 
@@ -74,7 +61,7 @@ class webphoto_lib_admin_menu {
 	}
 
 	function build_menu( $flag_default = true, $flag_hr = true ) {
-//	if( defined( 'XOOPS_ORETEKI' ) ) { return null; }
+
 
 		$admin_menu_class
 			        =& webphoto_inc_admin_menu::getSingleton(
@@ -121,7 +108,7 @@ class webphoto_lib_admin_menu {
 
 	function build_hr( $flag_hr = true ) {
 		if ( $flag_hr ) {
-			$str = "<hr style='display:block;' />\n";
+			$str = "<hr>\n";
 
 			return $str;
 		}
@@ -140,28 +127,28 @@ class webphoto_lib_admin_menu {
 
 // mytplsadmin (TODO check if this module has tplfile)
 			if ( file_exists( XOOPS_TRUST_PATH . '/libs/altsys/mytplsadmin.php' ) ) {
-				array_push( $menu_array, array(
+				$menu_array[] = array(
 					'title' => $this->get_title( 'tplsadmin' ),
 					'link'  => 'admin/index.php?mode=admin&lib=altsys&page=mytplsadmin'
-				) );
+				);
 			}
 
 			// myblocksadmin
 			if ( file_exists( XOOPS_TRUST_PATH . '/libs/altsys/myblocksadmin.php' ) ) {
-				array_push( $menu_array, array(
+				$menu_array[] = array(
 					'title' => $this->get_title( 'blocksadmin' ),
 					'link'  => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin'
-				) );
+				);
 			}
 
 			// mypreferences
 			if ( $this->has_xoops_config_this_module() ) {
 				if ( file_exists( XOOPS_TRUST_PATH . '/libs/altsys/mypreferences.php' ) ) {
 					$flag_preferences = true;
-					array_push( $menu_array, array(
+					$menu_array[]     = array(
 						'title' => _PREFERENCES,
 						'link'  => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences'
-					) );
+					);
 				}
 			}
 		}
@@ -178,16 +165,16 @@ class webphoto_lib_admin_menu {
 				$link = XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $this->_MODULE_ID;
 			}
 
-			array_push( $menu_array, array(
+			$menu_array[] = array(
 				'title' => _PREFERENCES,
 				'link'  => $link
-			) );
+			);
 		}
 
-		array_push( $menu_array, array(
+		$menu_array[] = array(
 			'title' => $this->get_title( 'goto_module' ),
 			'link'  => 'index.php',
-		) );
+		);
 
 		return $menu_array;
 	}
@@ -204,7 +191,7 @@ class webphoto_lib_admin_menu {
 			$menu_array[ $i ]['color'] = '';
 		}
 
-		$post_fct = isset( $_POST['fct'] ) ? $_POST['fct'] : null;
+		$post_fct = $_POST['fct'] ?? null;
 		$fct      = preg_replace( '/[^a-zA-Z0-9_-]/', '', $post_fct );
 
 // highlight
@@ -223,8 +210,8 @@ class webphoto_lib_admin_menu {
 		if ( $fct && ! $flag_highlight ) {
 			$uri_fct = $mymenu_uri . '?fct=' . $fct;
 			foreach ( array_keys( $menu_array ) as $i ) {
-				if ( stristr( $uri_fct, $menu_array[ $i ]['link'] ) ) {
-					$menu_array[ $i ]['color'] = '#FFCCCC';
+				if ( false !== stripos( $uri_fct, $menu_array[ $i ]['link'] ) ) {
+					$menu_array[ $i ]['color'] = '#face74';
 					$flag_highlight            = true;
 					break;
 				}
@@ -234,7 +221,7 @@ class webphoto_lib_admin_menu {
 		if ( ! $flag_highlight ) {
 			foreach ( array_keys( $menu_array ) as $i ) {
 				if ( $mymenu_link == $menu_array[ $i ]['link'] ) {
-					$menu_array[ $i ]['color'] = '#FFCCCC';
+					$menu_array[ $i ]['color'] = '#face74';
 					$flag_highlight            = true;
 					break;
 				}
@@ -247,7 +234,7 @@ class webphoto_lib_admin_menu {
 				if ( $link != 'admin/index.php' &&
 				     strpos( $mymenu_link, $link ) === 0 ) {
 
-					$menu_array[ $i ]['color'] = '#FFCCCC';
+					$menu_array[ $i ]['color'] = '#face74';
 					$flag_highlight            = true;
 					break;
 				}
@@ -256,7 +243,7 @@ class webphoto_lib_admin_menu {
 
 		if ( ! $flag_highlight && $flag_default ) {
 			foreach ( array_keys( $menu_array ) as $i ) {
-				if ( stristr( $mymenu_uri, $menu_array[ $i ]['link'] ) ) {
+				if ( false !== stripos( $mymenu_uri, $menu_array[ $i ]['link'] ) ) {
 					$menu_array[ $i ]['color'] = '#FFCCCC';
 					break;
 				}
@@ -265,7 +252,7 @@ class webphoto_lib_admin_menu {
 
 		// link conversion from relative to absolute
 		foreach ( array_keys( $menu_array ) as $i ) {
-			if ( stristr( $menu_array[ $i ]['link'], XOOPS_URL ) === false ) {
+			if ( false === stripos( $menu_array[ $i ]['link'], XOOPS_URL ) ) {
 				$menu_array[ $i ]['link'] = $this->_MODULE_URL . '/' . $menu_array[ $i ]['link'];
 			}
 		}
@@ -274,28 +261,29 @@ class webphoto_lib_admin_menu {
 		$text = "<div style='text-align:left;width:98%;'>\n";
 
 		foreach ( $menu_array as $menuitem ) {
-			$text .= "<div style='float:left;height:1.5em;'><nobr>";
-			$text .= "<a href='" . $this->sanitize( $menuitem['link'] ) . "' style='background-color:" . $menuitem['color'] . ";font:normal normal bold 9pt/12pt;'>";
+			//$text .= "<div style='float:left;height:1.5em;'>";
+			$text .= "<a href='" . $this->sanitize( $menuitem['link'] ) . "' style='border-bottom:2px solid; border-bottom-color:" . $menuitem['color'] . "; color:" . $menuitem['color'] . ";margin:0 .25em'>";
 			$text .= $this->sanitize( $menuitem['title'] );
-			$text .= "</a> | </nobr></div>\n";
+			$text .= "</a>";
+			//| </div>\n";
 		}
 
 		$text .= "</div>\n";
-		$text .= "<br style='clear:left;' />\n";
+		$text .= "<br>\n";
 
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-//---------------------------------------------------------
+
 // language
-//---------------------------------------------------------
+
 	function get_title( $name ) {
 		$const_name = strtoupper( '_AM_' . $this->_TRUST_DIRNAME . '_MYMENU_' . $name );
 		$title      = defined( $const_name ) ? constant( $const_name ) : $name;
@@ -303,9 +291,9 @@ class webphoto_lib_admin_menu {
 		return $title;
 	}
 
-//---------------------------------------------------------
+
 // xoops param
-//---------------------------------------------------------
+
 	function _init_xoops_param() {
 		global $xoopsModule;
 		if ( is_object( $xoopsModule ) ) {
@@ -334,7 +322,4 @@ class webphoto_lib_admin_menu {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

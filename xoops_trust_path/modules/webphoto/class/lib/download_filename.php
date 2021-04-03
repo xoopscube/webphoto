@@ -1,26 +1,24 @@
 <?php
-// $Id: download_filename.php,v 1.1 2011/05/10 02:59:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2011-05-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_download_filename
-//=========================================================
+
 class webphoto_lib_download_filename {
 	public $_CHARSET_LOCAL = 'utf-8';
 	public $_LANGCODE = 'en';
 	public $_is_japanese = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -34,9 +32,6 @@ class webphoto_lib_download_filename {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// set param
-//---------------------------------------------------------
 	function set_charset_local( $val ) {
 		$this->_CHARSET_LOCAL = strtolowr( $val );
 	}
@@ -49,9 +44,6 @@ class webphoto_lib_download_filename {
 		$this->_is_japanese = (bool) $val;
 	}
 
-//---------------------------------------------------------
-// function
-//---------------------------------------------------------
 	function build_encode( $name, $name_alt, $browser ) {
 		$is_rfc2231 = false;
 
@@ -134,9 +126,9 @@ class webphoto_lib_download_filename {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // multibyte
-//---------------------------------------------------------
+
 	function convert_to_utf8( $str ) {
 		return $this->convert_encoding( $str, 'utf-8', $this->_CHARSET_LOCAL );
 	}
@@ -166,7 +158,4 @@ class webphoto_lib_download_filename {
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

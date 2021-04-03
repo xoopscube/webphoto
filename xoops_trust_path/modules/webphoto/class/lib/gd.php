@@ -1,35 +1,28 @@
 <?php
-// $Id: gd.php,v 1.3 2010/10/06 02:22:46 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-11-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-10-01 K.OHWADA
-// file_to_type()
-// 2009-01-10 K.OHWADA
-// version()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_gd
-//=========================================================
+
 class webphoto_lib_gd {
+
 	public $_is_gd2 = false;
+
 	public $_force_gd2 = false;
 
 	public $_JPEG_QUALITY = 75;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		$this->_is_gd2 = $this->is_gd2();
 	}
@@ -43,9 +36,6 @@ class webphoto_lib_gd {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// main
-//---------------------------------------------------------
 	function resize_rotate( $src_file, $dst_file, $max_width = 0, $max_height = 0, $rotate = 0 ) {
 		$image_size = getimagesize( $src_file );
 		if ( ! is_array( $image_size ) ) {
@@ -243,9 +233,9 @@ class webphoto_lib_gd {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
-//---------------------------------------------------------
+
 // set & get param
-//---------------------------------------------------------
+
 	function set_force_gd2( $val ) {
 // force to use imagecreatetruecolor
 		$this->_force_gd2 = (bool) $val;
@@ -276,9 +266,9 @@ class webphoto_lib_gd {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // version
-//---------------------------------------------------------
+
 	function version() {
 		if ( function_exists( 'gd_info' ) ) {
 			$ret     = true;
@@ -293,7 +283,4 @@ class webphoto_lib_gd {
 		return array( $ret, $str );
 	}
 
-// --- class end ---
 }
-
-?>

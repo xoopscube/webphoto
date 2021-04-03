@@ -1,27 +1,26 @@
 <?php
-// $Id: mysql_utility.php,v 1.1 2011/12/26 06:52:14 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2011-12-25 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_mysql_utility
-//=========================================================
+
 class webphoto_lib_mysql_utility {
 	public $_utility_class;
 
 	public $_MYSQL_FMT_DATE = 'Y-m-d';
 	public $_MYSQL_FMT_DATETIME = 'Y-m-d H:i:s';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		$this->_utility_class =& webphoto_lib_utility::getInstance();
 	}
@@ -35,9 +34,9 @@ class webphoto_lib_mysql_utility {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // mysql date
-//---------------------------------------------------------
+
 	function get_mysql_date_today() {
 		return date( $this->_MYSQL_FMT_DATE );
 	}
@@ -233,23 +232,23 @@ class webphoto_lib_mysql_utility {
 
 // ex) 2008-02-03
 		if ( isset( $arr[0] ) && isset( $arr[1] ) && isset( $arr[2] ) ) {
-			$year        = intval( trim( $arr[0] ) );
-			$month       = intval( trim( $arr[1] ) );
-			$day         = intval( trim( $arr[2] ) );
+			$year        = (int) trim( $arr[0] );
+			$month       = (int) trim( $arr[1] );
+			$day         = (int) trim( $arr[2] );
 			$mysql_year  = $year;
 			$mysql_month = $month;
 			$mysql_day   = $day;
 
 // ex) 2008-02 -> 2008-02-00
 		} elseif ( isset( $arr[0] ) && isset( $arr[1] ) ) {
-			$year        = intval( trim( $arr[0] ) );
-			$month       = intval( trim( $arr[1] ) );
+			$year        = (int) trim( $arr[0] );
+			$month       = (int) trim( $arr[1] );
 			$mysql_year  = $year;
 			$mysql_month = $month;
 
 // ex) 2008 -> 2008-00-00
 		} elseif ( isset( $arr[0] ) ) {
-			$year       = intval( trim( $arr[0] ) );
+			$year       = (int) trim( $arr[0] );
 			$mysql_year = $year;
 
 		} else {
@@ -273,18 +272,18 @@ class webphoto_lib_mysql_utility {
 
 // ex) 01:02:03
 		if ( isset( $arr[0] ) && isset( $arr[1] ) && isset( $arr[2] ) ) {
-			$mysql_hour = intval( trim( $arr[0] ) );
-			$mysql_min  = intval( trim( $arr[1] ) );
-			$mysql_sec  = intval( trim( $arr[2] ) );
+			$mysql_hour = (int) trim( $arr[0] );
+			$mysql_min  = (int) trim( $arr[1] );
+			$mysql_sec  = (int) trim( $arr[2] );
 
 // ex) 01:02 -> 01:02:00
 		} elseif ( isset( $arr[0] ) && isset( $arr[1] ) ) {
-			$mysql_hour = intval( trim( $arr[0] ) );
-			$mysql_min  = intval( trim( $arr[1] ) );
+			$mysql_hour = (int) trim( $arr[0] );
+			$mysql_min  = (int) trim( $arr[1] );
 
 // ex) 01 -> 01:00:00
 		} elseif ( isset( $arr[0] ) ) {
-			$mysql_hour = intval( trim( $arr[0] ) );
+			$mysql_hour = (int) trim( $arr[0] );
 
 		} else {
 			return false;
@@ -298,9 +297,9 @@ class webphoto_lib_mysql_utility {
 	}
 
 	function check_time( $hour, $min, $sec ) {
-		$hour = intval( $hour );
-		$min  = intval( $min );
-		$sec  = intval( $sec );
+		$hour = (int) $hour;
+		$min  = (int) $min;
+		$sec  = (int) $sec;
 
 		if ( ( $hour >= 0 ) && ( $hour <= 24 ) &&
 		     ( $min >= 0 ) && ( $min <= 60 ) &&
@@ -323,7 +322,5 @@ class webphoto_lib_mysql_utility {
 		return $str;
 	}
 
-// --- class end ---
 }
 
-?>

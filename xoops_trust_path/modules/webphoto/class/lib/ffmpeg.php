@@ -1,32 +1,19 @@
 <?php
-// $Id: ffmpeg.php,v 1.12 2010/10/09 02:19:20 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-07-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-10-01 K.OHWADA
-// create_wav()
-// 2010-06-06 K.OHWADA
-// is_win_os()
-// 2009-04-21 K.OHWADA
-// chmod_file()
-// 2009-01-10 K.OHWADA
-// version()
-// 2008-08-24 K.OHWADA
-// flag_chmod
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_ffmpeg
-//=========================================================
+
 class webphoto_lib_ffmpeg {
 	public $_ini_safe_mode;
 
@@ -58,9 +45,6 @@ class webphoto_lib_ffmpeg {
 
 	public $_DEBUG = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		$this->_ini_safe_mode = ini_get( 'safe_mode' );
 	}
@@ -74,9 +58,9 @@ class webphoto_lib_ffmpeg {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // set 
-//---------------------------------------------------------
+
 // MUST path has no sapce
 // cannot use windows type's path like the following
 // C:/Program Files/program/
@@ -113,7 +97,7 @@ class webphoto_lib_ffmpeg {
 		$this->_DEBUG = (bool) $val;
 	}
 
-//---------------------------------------------------------
+
 // get duration width height
 //
 // forcible method
@@ -124,7 +108,7 @@ class webphoto_lib_ffmpeg {
 //  Duration: 00:00:09.00, start: 0.000000, bitrate: 9313 kb/s
 //    Stream #0.0: Video: mjpeg, yuvj422p, 640x480, 30.00 tb(r)
 //    Stream #0.1: Audio: pcm_u8, 11024 Hz, mono, 88 kb/s
-//---------------------------------------------------------
+
 	function get_video_info( $file ) {
 		$cmd = $this->_CMD_FFMPEG . sprintf( $this->_PARAM_INFO, $file );
 
@@ -206,9 +190,9 @@ class webphoto_lib_ffmpeg {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // create thumbs 
-//---------------------------------------------------------
+
 	function create_thumbs( $file_in, $max = 5, $start = 0, $step = 1 ) {
 		$this->clear_msg_array();
 
@@ -240,9 +224,9 @@ class webphoto_lib_ffmpeg {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // create flash 
-//---------------------------------------------------------
+
 	function create_flash( $file_in, $file_out, $extra = null ) {
 
 // return input file is same format
@@ -260,9 +244,9 @@ class webphoto_lib_ffmpeg {
 		return $this->chmod_file_out( $file_out );
 	}
 
-//---------------------------------------------------------
+
 // create wav
-//---------------------------------------------------------
+
 	function create_wav( $file_in, $file_out, $extra = null ) {
 
 // return input file is same format
@@ -280,9 +264,9 @@ class webphoto_lib_ffmpeg {
 		return $this->chmod_file_out( $file_out );
 	}
 
-//---------------------------------------------------------
+
 // create mp3 
-//---------------------------------------------------------
+
 	function create_mp3( $file_in, $file_out, $extra = null ) {
 
 // return input file is same format
@@ -300,9 +284,9 @@ class webphoto_lib_ffmpeg {
 		return $this->chmod_file_out( $file_out );
 	}
 
-//---------------------------------------------------------
+
 // version
-//---------------------------------------------------------
+
 	function version( $path ) {
 		$ret = false;
 		$msg = '';
@@ -331,9 +315,9 @@ class webphoto_lib_ffmpeg {
 		return array( $ret, $msg );
 	}
 
-//---------------------------------------------------------
+
 // function
-//---------------------------------------------------------
+
 	function cmd_excute( $cmd ) {
 		$ret_array = null;
 		exec( "$cmd 2>&1", $ret_array );
@@ -380,9 +364,9 @@ class webphoto_lib_ffmpeg {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function is_win_os() {
 		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
 			return true;
@@ -397,9 +381,9 @@ class webphoto_lib_ffmpeg {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_msg_array() {
 		$this->_msg_array = array();
 	}
@@ -418,7 +402,5 @@ class webphoto_lib_ffmpeg {
 		}
 	}
 
-// --- class end ---
 }
 
-?>

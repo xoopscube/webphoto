@@ -1,30 +1,18 @@
 <?php
-// $Id: imagemagick.php,v 1.6 2010/11/16 23:43:38 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-11-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// changed resize_rotate()
-// 2010-05-30 K.OHWADA
-// is_win_os()
-// 2009-11-21 K.OHWADA
-// BUG: Fatal error: Call to undefined method webphoto_lib_imagemagick::get_msg_array()
-// 2009-01-10 K.OHWADA
-// version()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_imagemagick
-//=========================================================
 
 class webphoto_lib_imagemagick {
 	public $_cmd_convert = 'convert';
@@ -37,9 +25,7 @@ class webphoto_lib_imagemagick {
 	public $_CHMOD_MODE = 0777;
 	public $_DEBUG = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -53,9 +39,9 @@ class webphoto_lib_imagemagick {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	function set_cmd_path( $val ) {
 		$this->_cmd_path      = $val;
 		$this->_cmd_convert   = $this->_cmd_path . 'convert';
@@ -155,9 +141,9 @@ class webphoto_lib_imagemagick {
 		}
 	}
 
-//---------------------------------------------------------
+
 // version
-//---------------------------------------------------------
+
 	function version( $path ) {
 		$convert = $path . 'convert';
 		if ( $this->is_win_os() ) {
@@ -178,9 +164,9 @@ class webphoto_lib_imagemagick {
 		return array( $ret, $str );
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function is_win_os() {
 		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
 			return true;
@@ -195,9 +181,9 @@ class webphoto_lib_imagemagick {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_msg_array() {
 		$this->_msg_array = array();
 	}
@@ -217,7 +203,4 @@ class webphoto_lib_imagemagick {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

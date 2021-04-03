@@ -1,32 +1,31 @@
 <?php
-// $Id: remote_image.php,v 1.1 2008/10/30 00:25:51 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
+
 // define constant
-//---------------------------------------------------------
 define( '_C_WEBPHOTO_REMOTE_IMAGE_ERR_WRITE', - 11 );
 
-//=========================================================
-// class webphoto_lib_remote_image
-//=========================================================
+
 class webphoto_lib_remote_image extends webphoto_lib_remote_file {
+
 	public $_dir_work = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
+
 		parent::__construct();
-		//$this->webphoto_lib_remote_file();
 
 		$this->_dir_work = XOOPS_TRUST_PATH . '/tmp';
 	}
@@ -40,14 +39,11 @@ class webphoto_lib_remote_image extends webphoto_lib_remote_file {
 		return $instance;
 	}
 
-//=========================================================
 // public
-//=========================================================
-//---------------------------------------------------------
 // get_image_size
 // return is same as getimagesize()
 // array of width, height, type, attr
-//---------------------------------------------------------
+
 	function get_image_size( $url ) {
 		$this->clear_error_code();
 		$this->clear_errors();
@@ -81,9 +77,9 @@ class webphoto_lib_remote_image extends webphoto_lib_remote_file {
 		return $size;
 	}
 
-//---------------------------------------------------------
+
 // set and get property
-//---------------------------------------------------------
+
 	function set_dir_work( $value ) {
 		$this->_dir_work = $value;
 	}
@@ -92,9 +88,9 @@ class webphoto_lib_remote_image extends webphoto_lib_remote_file {
 		return $this->_dir_work;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function write_file( $file, $data, $mode = 'w', $flag_chmod = true ) {
 		$fp = fopen( $file, $mode );
 		if ( ! $fp ) {
@@ -112,7 +108,4 @@ class webphoto_lib_remote_image extends webphoto_lib_remote_file {
 		return $byte;
 	}
 
-// --- class end ---
 }
-
-?>

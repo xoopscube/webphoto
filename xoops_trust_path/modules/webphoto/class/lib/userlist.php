@@ -1,30 +1,23 @@
 <?php
-// $Id: userlist.php,v 1.2 2010/01/26 08:25:45 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-12-06 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-01-20 K.OHWADA
-// XOOPS_CUBE_LEGACY
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_userlist
-//=========================================================
+
 class webphoto_lib_userlist {
+
 	public $_member_handler;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		$this->_member_handler =& xoops_gethandler( 'member' );
 	}
@@ -38,9 +31,6 @@ class webphoto_lib_userlist {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// function
-//---------------------------------------------------------
 	public function build_param_by_groupid( $group_id, $limit = 0, $start = 0 ) {
 		$arr = array(
 			'group_id'  => $group_id,
@@ -93,7 +83,5 @@ class webphoto_lib_userlist {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-// --- class end ---
 }
 
-?>

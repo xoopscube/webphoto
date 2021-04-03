@@ -1,18 +1,19 @@
 <?php
-// $Id: search.php,v 1.1 2008/06/21 12:22:28 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_search
-//=========================================================
+
 define( '_C_WEBPHOTO_SR_SQL_NO_CAN', 31 );
 define( '_C_WEBPHOTO_SR_SQL_CAN', 32 );
 define( '_C_WEBPHOTO_SR_SQL_MERGE', 33 );
@@ -28,9 +29,9 @@ define( '_C_WEBPHOTO_SR_HANKAKU_EISU', '/[A-Za-z0-9]/' );
 define( '_C_WEBPHOTO_SR_ZENKAKU_KANA', '/\xA5[\xA1-\xF6]/' );
 define( '_C_WEBPHOTO_SR_HANKAKU_KANA', '/\x8E[\xA6-\xDF]/' );
 
-//---------------------------------------------------------
+
 // xoops system files
-//---------------------------------------------------------
+
 global $xoopsConfig;
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
@@ -40,9 +41,7 @@ if ( file_exists( XOOPS_ROOT_PATH . '/language/' . $XOOPS_LANGUAGE . '/search.ph
 	include_once XOOPS_ROOT_PATH . '/language/english/search.php';
 }
 
-//=========================================================
 // class webphoto_lib_search
-//=========================================================
 class webphoto_lib_search {
 
 // post
@@ -90,9 +89,7 @@ class webphoto_lib_search {
 	public $_EXCEPT_COMMA = true;
 	public $_EXCEPT_SLASH = true;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -106,19 +103,17 @@ class webphoto_lib_search {
 		return $instance;
 	}
 
-//--------------------------------------------------------
 // set param
-//--------------------------------------------------------
 	public function set_min_keyword( $value ) {
-		$this->_min_keyword = intval( $value );
+		$this->_min_keyword = (int) $value;
 	}
 
 	public function set_flag_candidate( $value ) {
-		$this->_flag_candidate = intval( $value );
+		$this->_flag_candidate = (int) $value;
 	}
 
 	public function set_flag_candidate_once( $value ) {
-		$this->_flag_candidate_once = intval( $value );
+		$this->_flag_candidate_once = (int) $value;
 	}
 
 	public function set_lang_zenkaku( $value ) {
@@ -133,9 +128,9 @@ class webphoto_lib_search {
 		return $this->_is_japanese = (bool) $val;
 	}
 
-//---------------------------------------------------------
+
 // get $_POST & $_GET
-//---------------------------------------------------------
+
 	public function get_post_get_param() {
 		$this->get_post_get_action();
 		$this->get_post_get_query();
@@ -228,9 +223,7 @@ class webphoto_lib_search {
 		$this->_post_query = trim( $val );
 	}
 
-//--------------------------------------------------------
 // parse query
-//--------------------------------------------------------
 	function parse_query_default() {
 		$ret = $this->parse_query(
 			$this->_post_query,
@@ -334,9 +327,7 @@ class webphoto_lib_search {
 		return $this->_query_raw_array;
 	}
 
-//--------------------------------------------------------
-// build query 
-//--------------------------------------------------------
+// build query
 	function build_sql_query( $field_name ) {
 		$where = '';
 		$code  = $this->check_build_sql_query_array();
@@ -393,9 +384,7 @@ class webphoto_lib_search {
 		$this->_sql_query_array = $this->_merge_unique_array( $query_array, $candidate_keyword_array );
 	}
 
-//--------------------------------------------------------
 // build sql
-//--------------------------------------------------------
 	function build_single_double_where( $field_name, $query_array1, $query_array2 = null, $andor = 'AND' ) {
 		$where  = '';
 		$where1 = '';
@@ -462,9 +451,7 @@ class webphoto_lib_search {
 		return $where;
 	}
 
-//--------------------------------------------------------
 // get query
-//--------------------------------------------------------
 	function get_query_param() {
 		$arr = array(
 			'search_query'              => $this->get_query_raw(),
@@ -533,9 +520,7 @@ class webphoto_lib_search {
 		return $ret;
 	}
 
-//--------------------------------------------------------
 // get param
-//--------------------------------------------------------
 	function get_action( $format = null ) {
 		$ret = $this->_post_action;
 		if ( $format == 's' ) {
@@ -546,7 +531,7 @@ class webphoto_lib_search {
 	}
 
 	function get_start() {
-		return intval( $this->_post_start );
+		return (int) $this->_post_start;
 	}
 
 	function get_andor() {
@@ -633,9 +618,7 @@ class webphoto_lib_search {
 		return sprintf( _SR_IGNOREDWORDS, $this->_min_keyword );
 	}
 
-//--------------------------------------------------------
 // xoops param
-//--------------------------------------------------------
 	function get_xoops_config_search_enable_search() {
 		$config_handler    =& xoops_gethandler( 'config' );
 		$xoopsConfigSearch =& $config_handler->getConfigsByCat( XOOPS_CONF_SEARCH );
@@ -650,10 +633,7 @@ class webphoto_lib_search {
 		return $xoopsConfigSearch['keyword_min'];
 	}
 
-//=========================================================
 // Private
-//=========================================================
-
 //--------------------------------------------------------
 // convert for Japanese EUC-JP
 // porting from suin's search <http://suin.jp/>
@@ -786,9 +766,7 @@ class webphoto_lib_search {
 		}
 	}
 
-//--------------------------------------------------------
 // utility for array
-//--------------------------------------------------------
 	function _merge_unique_array( $arr1, $arr2 ) {
 		$arr = false;
 		if ( is_array( $arr1 ) && is_array( $arr2 ) ) {
@@ -834,9 +812,7 @@ class webphoto_lib_search {
 		return false;
 	}
 
-//--------------------------------------------------------
 // post
-//--------------------------------------------------------
 	function _get_post_get( $key, $default = null ) {
 		$str = $default;
 		if ( isset( $_POST[ $key ] ) ) {
@@ -853,7 +829,7 @@ class webphoto_lib_search {
 	}
 
 	function _get_post_get_int( $key, $default = 0 ) {
-		return intval( $this->_get_post_get( $key, $default ) );
+		return (int) $this->_get_post_get( $key, $default );
 	}
 
 	function _strip_slashes_gpc( $str ) {
@@ -864,9 +840,7 @@ class webphoto_lib_search {
 		return $str;
 	}
 
-//--------------------------------------------------------
 // sanitize
-//--------------------------------------------------------
 	function _sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
@@ -898,8 +872,4 @@ class webphoto_lib_search {
 
 		return $this->_sanitize( $arr_in );
 	}
-
-//----- class end -----
 }
-
-?>

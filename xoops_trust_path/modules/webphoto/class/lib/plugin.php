@@ -1,23 +1,20 @@
 <?php
-// $Id: plugin.php,v 1.2 2009/01/24 07:10:39 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2009-01-04 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// 2009-01-10 K.OHWADA
-// get_cached_class_object()
-//---------------------------------------------------------
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_plugin
-//=========================================================
+
 class webphoto_lib_plugin {
 	public $_utility_class;
 
@@ -33,9 +30,6 @@ class webphoto_lib_plugin {
 	public $_ROOT_PLUGIN_DIR = null;
 	var $_PLUGIN_PREFIX = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME       = $dirname;
 		$this->_MODULE_URL    = XOOPS_URL . '/modules/' . $dirname;
@@ -55,9 +49,9 @@ class webphoto_lib_plugin {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	function set_dirname( $sub_dir ) {
 		$dir                     = '/plugins/' . $sub_dir;
 		$this->_TRUST_PLUGIN_DIR = $this->_TRUST_DIR . $dir;
@@ -68,9 +62,9 @@ class webphoto_lib_plugin {
 		$this->_PLUGIN_PREFIX = $val;
 	}
 
-//---------------------------------------------------------
+
 // plugin
-//---------------------------------------------------------
+
 	function build_list() {
 		$files = $this->_utility_class->get_files_in_dir( $this->_TRUST_PLUGIN_DIR, 'php', false, true );
 		$arr   = array();
@@ -143,7 +137,5 @@ class webphoto_lib_plugin {
 		return false;
 	}
 
-// --- class end ---
-}
 
-?>
+}

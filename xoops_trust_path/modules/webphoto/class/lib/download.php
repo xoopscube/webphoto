@@ -1,29 +1,19 @@
 <?php
-// $Id: download.php,v 1.1 2011/05/10 02:59:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-11-16 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// Notice [PHP]: Undefined index: file_full
-// build_filename_encode()
-// 2010-09-17 K.OHWADA
-// webphoto_lib_download
-// 2008-12-12 K.OHWADA
-// check_perm -> check_item_perm
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_main_download
-//=========================================================
+
 class webphoto_main_download extends webphoto_file_read {
 	public $_readfile_class;
 	public $_browser_class;
@@ -31,12 +21,10 @@ class webphoto_main_download extends webphoto_file_read {
 
 	public $_TIME_FAIL = 5;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_file_read( $dirname, $trust_dirname );
 
 		$this->_readfile_class =& webphoto_lib_readfile::getInstance();
 		$this->_browser_class  =& webphoto_lib_browser::getInstance();
@@ -58,9 +46,9 @@ class webphoto_main_download extends webphoto_file_read {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	function main() {
 		$item_id   = $this->_post_class->get_post_get_int( 'item_id' );
 		$file_kind = $this->_post_class->get_post_get_int( 'file_kind' );
@@ -136,7 +124,4 @@ class webphoto_main_download extends webphoto_file_read {
 		return $this->_filename_class->build_encode( $name, $name_alt, $browser );
 	}
 
-// --- class end ---
 }
-
-?>

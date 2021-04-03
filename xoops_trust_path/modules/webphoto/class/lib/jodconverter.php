@@ -1,30 +1,20 @@
 <?php
-// $Id: jodconverter.php,v 1.4 2011/05/10 20:17:10 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-01-25 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// print_r
-// 2010-06-06 K.OHWADA
-// is_win_os()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_jodconverter
+ * http://www.artofsolving.com/opensource/jodconverter
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_jodconverter
-//=========================================================
-
-//---------------------------------------------------------
-// http://www.artofsolving.com/opensource/jodconverter
-//---------------------------------------------------------
 
 class webphoto_lib_jodconverter {
 	public $_cmd_java = 'java';
@@ -34,9 +24,6 @@ class webphoto_lib_jodconverter {
 	public $_msg_array = array();
 	public $_DEBUG = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -50,9 +37,9 @@ class webphoto_lib_jodconverter {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // set
-//---------------------------------------------------------
+
 	function set_cmd_path_java( $val ) {
 		$this->_CMD_PATH_JAVA = $val;
 		$this->_cmd_java      = $this->_CMD_PATH_JAVA . 'java';
@@ -70,9 +57,9 @@ class webphoto_lib_jodconverter {
 		$this->_DEBUG = (bool) $val;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	function convert( $src_file, $dst_file ) {
 		$this->clear_msg_array();
 
@@ -88,9 +75,9 @@ class webphoto_lib_jodconverter {
 		return $ret_code;
 	}
 
-//---------------------------------------------------------
+
 // version
-//---------------------------------------------------------
+
 	function version() {
 		$cmd = $this->_cmd_java . ' -version';
 		exec( "$cmd 2>&1", $ret_array, $ret_code );
@@ -135,9 +122,9 @@ class webphoto_lib_jodconverter {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function is_win_os() {
 		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
 			return true;
@@ -152,9 +139,9 @@ class webphoto_lib_jodconverter {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // msg
-//---------------------------------------------------------
+
 	function clear_msg_array() {
 		$this->_msg_array = array();
 	}
@@ -173,7 +160,4 @@ class webphoto_lib_jodconverter {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

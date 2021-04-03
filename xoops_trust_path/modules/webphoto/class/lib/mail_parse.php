@@ -1,22 +1,17 @@
 <?php
-// $Id: mail_parse.php,v 1.3 2008/08/25 19:28:05 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_mail_parse
+ * base on mailbbs's pop.php
+ */
 
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
 
-//---------------------------------------------------------
-// change log
-// 2008-08-24 K.OHWADA
-// supported i-phone
-// supported docomo gps
-//---------------------------------------------------------
-
-//=========================================================
-// class webphoto_lib_mail_parse
-// base on mailbbs's pop.php
-//=========================================================
 class webphoto_lib_mail_parse {
 	public $_CHARSET_LOCAL = null;
 	public $_CHARSET_FROM = null;
@@ -26,9 +21,6 @@ class webphoto_lib_mail_parse {
 	public $_attach = null;
 	public $_gps = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -42,16 +34,16 @@ class webphoto_lib_mail_parse {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // set param
-//---------------------------------------------------------
+
 	function set_charset_local( $val ) {
 		$this->_CHARSET_LOCAL = $val;
 	}
 
-//---------------------------------------------------------
+
 // parse_mail
-//---------------------------------------------------------
+
 	function parse_mail( $mail_text ) {
 		$this->_result = null;
 		$this->_bodies = array();
@@ -104,6 +96,7 @@ class webphoto_lib_mail_parse {
 
 	function parse_mailer( $head ) {
 // X-Mailer: XOOPS Cube
+		//!FIX TODO THIS EREGI WAS REMOVED IN PHP 7.0
 		if ( eregi( "(X-Mailer|X-Mail-Agent):[ \t]*([^\r\n]+)", $head, $match ) ) {
 			return $match[2];
 		}
@@ -243,9 +236,9 @@ class webphoto_lib_mail_parse {
 		return null;
 	}
 
-//---------------------------------------------------------
+
 // multipart
-//---------------------------------------------------------
+
 	function split_multipart( $head, $body ) {
 		$part = null;
 		if ( eregi( "\nContent-type:.*multipart/", $head ) ) {
@@ -367,9 +360,9 @@ class webphoto_lib_mail_parse {
 		return preg_replace( "/\?=[\s]+?=\?/", "?==?", $text );
 	}
 
-//---------------------------------------------------------
+
 // gps
-//---------------------------------------------------------
+
 	function parse_gps_docomo( $data ) {
 // http://www.nttdocomo.co.jp/service/imode/make/content/gps/index.html
 // http://www.docomo.co.jp/gps.cgi?lat=%2B35.00.35.600&lon=%2B135.41.35.600&geo=wgs84&x-acc=3
@@ -406,24 +399,24 @@ class webphoto_lib_mail_parse {
 		$arr = explode( '.', $str );
 		$fig = 0;
 		if ( isset( $arr[0] ) ) {
-			$fig += floatval( $arr[0] );
+			$fig += (float) $arr[0];
 		}
 		if ( isset( $arr[1] ) ) {
-			$fig += floatval( $arr[1] ) / 60;
+			$fig += (float) $arr[1] / 60;
 		}
 		if ( isset( $arr[2] ) ) {
-			$fig += floatval( $arr[2] ) / 3600;
+			$fig += (float) $arr[2] / 3600;
 		}
 		if ( isset( $arr[3] ) ) {
-			$fig += floatval( $arr[3] ) / 3600000;
+			$fig += (float) $arr[3] / 3600000;
 		}
 
 		return $fig;
 	}
 
-//---------------------------------------------------------
+
 // attach
-//---------------------------------------------------------
+
 	function parse_multi_attach( $head, $body, $charset, $type ) {
 		$this->_attach = null;
 
@@ -485,9 +478,9 @@ class webphoto_lib_mail_parse {
 		return array( $head, $body );
 	}
 
-//---------------------------------------------------------
+
 // multibyte
-//---------------------------------------------------------
+
 	function set_internal_encoding() {
 		if ( function_exists( 'iconv_get_encoding' ) &&
 		     function_exists( 'iconv_set_encoding' ) ) {
@@ -537,8 +530,4 @@ class webphoto_lib_mail_parse {
 
 		return $str;
 	}
-
-// --- class end ---
 }
-
-?>

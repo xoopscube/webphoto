@@ -1,29 +1,22 @@
 <?php
-// $Id: xml.php,v 1.2 2009/03/06 04:11:37 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-03-01 K.OHWADA
-// sanitize()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_xml
-//=========================================================
+
 class webphoto_lib_xml {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	function __construct() {
 		// dummy
 	}
@@ -121,11 +114,11 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // TAB \x09 \t
 // LF  \xOA \n
 // CR  \xOD \r
-//---------------------------------------------------------
+
 	function replace_control_code( $str, $replace = ' ' ) {
 		$str = preg_replace( '/[\x00-\x08]/', $replace, $str );
 		$str = preg_replace( '/[\x0B-\x0C]/', $replace, $str );
@@ -142,14 +135,11 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // sanitize
-//---------------------------------------------------------
+
 	function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-// --- class end ---
 }
-
-?>

@@ -1,37 +1,34 @@
 <?php
-// $Id: remote_file.php,v 1.1 2008/10/30 00:25:51 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_lib_remote_file
+ * use class snoopy
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
 // define constant
-//---------------------------------------------------------
 define( '_C_WEBPHOTO_REMOTE_FILE_ERR_NOT_FETCH', - 1 );
 define( '_C_WEBPHOTO_REMOTE_FILE_ERR_NO_RESULT', - 2 );
 
-//=========================================================
-// class webphoto_lib_remote_file
-// use class snoopy
-//=========================================================
+
 class webphoto_lib_remote_file extends webphoto_lib_error {
-// class instance
+
 	public $_snoopy;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-	public function __construct() {
-		parent::__construct();
-		//$this->webphoto_lib_error();
 
-// class instance
+	public function __construct() {
+
+		parent::__construct();
+
 		$this->_snoopy = new Snoopy();
 	}
 
@@ -44,16 +41,10 @@ class webphoto_lib_remote_file extends webphoto_lib_error {
 		return $instance;
 	}
 
-//---------------------------------------------------------
-// read_file
-//---------------------------------------------------------
 	public function read_file( $url ) {
 		return $this->snoppy_fetch( $url );
 	}
 
-//---------------------------------------------------------
-// use class spoopy
-//---------------------------------------------------------
 	public function set_snoopy_proxy( $host, $port = '8080', $user = '', $pass = '' ) {
 		$this->_snoopy->proxy_host = $host;
 		$this->_snoopy->proxy_port = $port;

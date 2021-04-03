@@ -1,26 +1,13 @@
 <?php
-// $Id: tree_handler.php,v 1.7 2010/02/17 04:34:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-02-15 K.OHWADA
-// change get_tree_name_list()
-// 2009-12-06 K.OHWADA
-// get_tree_name_list()
-// 2009-11-29
-// remove check_row_perm()
-// 2008-10-01 K.OHWADA
-// used build_form_select_list()
-// 2008-09-20 K.OHWADA
-// Warning : Invalid argument supplied for foreach() 
-// 2008-07-01 K.OHWADA
-// change get_nice_path_from_id()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -28,9 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
-//=========================================================
-// class webphoto_lib_tree_handler
-//=========================================================
+
 class webphoto_lib_tree_handler extends webphoto_lib_handler {
 	public $_xoops_tree_handler;
 
@@ -40,12 +25,10 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 
 	public $_PATH_SEPARATOR = ' : ';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct( $dirname ) {
+
 		parent::__construct( $dirname );
-		//$this->webphoto_lib_handler( $dirname );
+
 		$this->set_use_prefix( true );
 	}
 
@@ -58,9 +41,9 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		$this->_ORDER_DEFAULT = $val;
 	}
 
-//---------------------------------------------------------
+
 // base on XoopsTree::getNicePathFromId 
-//---------------------------------------------------------
+
 	function get_nice_path_from_id( $sel_id, $title_name, $func_url, $flag_short = false ) {
 		$rows = $this->get_parent_path_array( $sel_id );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
@@ -116,9 +99,9 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		$this->_PATH_SEPARATOR = $val;
 	}
 
-//---------------------------------------------------------
+
 // base on XoopsTree::makeMySelBox 
-//---------------------------------------------------------
+
 	function make_my_sel_box( $title_name, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '' ) {
 		return $this->build_sel_box(
 			$this->get_all_tree_array( $order ),
@@ -171,9 +154,9 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $arr;
 	}
 
-//---------------------------------------------------------
+
 // base on XoopsTree::getChildTreeArray 
-//---------------------------------------------------------
+
 // recursible function
 	function get_child_tree_array( $sel_id = 0, $order = '', $parray = array(), $r_prefix = '', $name_perm = null ) {
 		$rows = $this->get_rows_by_pid_order_with_perm( $sel_id, $order, $name_perm );
@@ -219,9 +202,9 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $this->get_rows_by_sql( $sql, $limit, $offset );
 	}
 
-//---------------------------------------------------------
+
 // tree handler
-//---------------------------------------------------------
+
 	function getFirstChild( $sel_id, $order = "" ) {
 		return $this->_xoops_tree_handler->getFirstChild( $sel_id, $order );
 	}
@@ -263,9 +246,9 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $this->_xoops_tree_handler->getChildTreeArray( $sel_id, $order, $parray, $r_prefix );
 	}
 
-//---------------------------------------------------------
+
 // permission
-//---------------------------------------------------------
+
 	function check_cached_perm_in_parents_by_id_name_groups_key( $id, $name, $groups = null, $key = '0' ) {
 		if ( isset( $this->_cached_perm_in_parent_key_array[ $id ][ $key ] ) ) {
 			return $this->_cached_perm_in_parent_key_array[ $id ][ $key ];
@@ -293,7 +276,5 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return true;
 	}
 
-// --- class end ---
 }
 
-?>

@@ -1,33 +1,23 @@
 <?php
-// $Id: readfile.php,v 1.3 2011/05/10 02:56:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2010-09-17 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// $is_rfc2231
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// http://jp.php.net/manual/ja/function.readfile.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * http://jp.php.net/manual/ja/function.readfile.php
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_readfile
-//=========================================================
+
 class webphoto_lib_readfile {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -41,9 +31,9 @@ class webphoto_lib_readfile {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	function readfile_view( $file, $mime ) {
 		$this->zlib_off();
 		$this->http_output_pass();
@@ -71,9 +61,9 @@ class webphoto_lib_readfile {
 		readfile( $file );
 	}
 
-//---------------------------------------------------------
+
 // function
-//---------------------------------------------------------
+
 	function header_view( $file, $mime ) {
 		$size = filesize( $file );
 		header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
@@ -120,9 +110,9 @@ class webphoto_lib_readfile {
 		}
 	}
 
-//---------------------------------------------------------
+
 // multibyte
-//---------------------------------------------------------
+
 	function http_output_pass() {
 		return $this->http_output( 'pass' );
 	}
@@ -139,7 +129,4 @@ class webphoto_lib_readfile {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

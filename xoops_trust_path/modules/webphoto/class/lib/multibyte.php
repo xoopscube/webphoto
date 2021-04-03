@@ -1,36 +1,19 @@
 <?php
-// $Id: multibyte.php,v 1.9 2010/11/16 23:43:38 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-11-11 K.OHWADA
-// @iconv_strlen
-// 2010-06-06 K.OHWADA
-// BUG : forget return
-// 2009-08-08 K.OHWADA
-// build_config_mbstring()
-// 2009-05-17 K.OHWADA
-// changed build_summary_with_search()
-// 2009-01-25 K.OHWADA
-// str_replace_continuous_return_code()
-// 2009-01-10 K.OHWADA
-// build_summary_with_search()
-// 2008-06-26 K.OHWADA
-// fatal error in rss
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_multibyte
-//=========================================================
+
 class webphoto_lib_multibyte {
 	public $_is_japanese = false;
 
@@ -42,9 +25,7 @@ class webphoto_lib_multibyte {
 	public $_TRUST_NAME = 'WEBPHOTO';
 	public $_FUNC_SEL = 1;    // iconv
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		$this->set_encoding( _CHARSET );
 		$this->set_func_sel_by_const();
@@ -59,9 +40,9 @@ class webphoto_lib_multibyte {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // func sel
-//---------------------------------------------------------
+
 	public function set_func_sel_by_const() {
 		$name = strtoupper( '_C_' . $this->_TRUST_NAME . '_MULTIBYTE_FUNC_SEL' );
 		if ( defined( $name ) ) {
@@ -77,9 +58,9 @@ class webphoto_lib_multibyte {
 		return $this->_FUNC_SEL;
 	}
 
-//---------------------------------------------------------
+
 // config
-//---------------------------------------------------------
+
 	public function build_config_priority() {
 		$str = 'multibyte function priority: ';
 		if ( $this->_FUNC_SEL ) {
@@ -145,9 +126,9 @@ class webphoto_lib_multibyte {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // encoding
-//---------------------------------------------------------
+
 	public function set_encoding( $charset ) {
 		$this->i_set_encoding( 'input_encoding', $charset );
 		$this->i_set_encoding( 'output_encoding', $charset );
@@ -256,9 +237,9 @@ class webphoto_lib_multibyte {
 		return false;
 	}
 
-//---------------------------------------------------------
+
 // convert
-//---------------------------------------------------------
+
 	public function convert_to_utf8( $str, $encoding = _CHARSET ) {
 		if ( $this->_FUNC_SEL && function_exists( 'iconv' ) ) {
 			return $this->i_iconv( $encoding, 'UTF-8', $str );
@@ -346,9 +327,9 @@ class webphoto_lib_multibyte {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // strlen
-//---------------------------------------------------------
+
 	function str_len( $str, $charset = null ) {
 		if ( $this->_FUNC_SEL && function_exists( 'iconv_strlen' ) ) {
 			return $this->i_iconv_strlen( $str, $charset );
@@ -387,9 +368,9 @@ class webphoto_lib_multibyte {
 		return strlen( $str );
 	}
 
-//---------------------------------------------------------
+
 // strpos
-//---------------------------------------------------------
+
 	public function str_pos( $haystack, $needle, $offset = 0, $charset = null ) {
 		if ( $this->_FUNC_SEL && function_exists( 'iconv_strpos' ) ) {
 			return $this->i_iconv_strpos( $haystack, $needle, $offset, $charset );
@@ -432,9 +413,9 @@ class webphoto_lib_multibyte {
 		return strpos( $haystack, $needle, $offset );
 	}
 
-//---------------------------------------------------------
+
 // strrpos
-//---------------------------------------------------------
+
 	public function str_rpos( $haystack, $needle, $offset = 0, $charset = null ) {
 		if ( $this->_FUNC_SEL && function_exists( 'iconv_strrpos' ) ) {
 			return $this->i_iconv_strrpos( $haystack, $needle, $offset, $charset );
@@ -473,9 +454,9 @@ class webphoto_lib_multibyte {
 		return strrpos( $haystack, $needle, $offset );
 	}
 
-//---------------------------------------------------------
+
 // substr
-//---------------------------------------------------------
+
 	public function sub_str( $str, $start, $length = 0, $charset = null ) {
 		if ( $this->_FUNC_SEL && function_exists( 'iconv_substr' ) ) {
 			return $this->i_iconv_substr( $str, $start, $length, $charset );
@@ -514,9 +495,9 @@ class webphoto_lib_multibyte {
 		return substr( $str, $start, $length );
 	}
 
-//---------------------------------------------------------
+
 // other
-//---------------------------------------------------------
+
 	public function m_mb_http_output( $encoding = null ) {
 		if ( function_exists( 'mb_http_output' ) ) {
 			if ( $encoding ) {
@@ -558,10 +539,10 @@ class webphoto_lib_multibyte {
 		}
 	}
 
-//---------------------------------------------------------
+
 // shorten strings
 // max: plus=shorten, 0=null, -1=unlimited
-//---------------------------------------------------------
+
 	public function shorten( $str, $max, $tail = ' ...' ) {
 		$text = $str;
 		if ( ( $max > 0 ) && ( $this->str_len( $str ) > $max ) ) {
@@ -573,9 +554,9 @@ class webphoto_lib_multibyte {
 		return $text;
 	}
 
-//---------------------------------------------------------
+
 // build summary
-//---------------------------------------------------------
+
 	public function build_summary( $str, $max, $tail = ' ...', $is_japanese = false ) {
 		$str = $this->build_plane_text( $str, $is_japanese );
 		$str = $this->str_replace_return_code( $str );
@@ -629,11 +610,11 @@ class webphoto_lib_multibyte {
 		return $str;
 	}
 
-//---------------------------------------------------------
+
 // TAB \x09 \t
 // LF  \xOA \n
 // CR  \xOD \r
-//---------------------------------------------------------
+
 	public function str_replace_control_code( $str, $replace = ' ' ) {
 		$str = preg_replace( '/[\x00-\x08]/', $replace, $str );
 		$str = preg_replace( '/[\x0B-\x0C]/', $replace, $str );
@@ -680,9 +661,9 @@ class webphoto_lib_multibyte {
 		return preg_replace( "/[\x20]+/", $replace, $str );
 	}
 
-//---------------------------------------------------------
+
 // summary
-//---------------------------------------------------------
+
 	public function build_summary_with_search( $text, $words, $len = 191, $head = '... ', $tail = ' ...' ) {
 // strip spaces
 		$text = ltrim( preg_replace( '/\s+/', ' ', $text ) );
@@ -745,9 +726,9 @@ class webphoto_lib_multibyte {
 		return $ret;
 	}
 
-//---------------------------------------------------------
+
 // for japanese
-//---------------------------------------------------------
+
 	public function str_add_space_after_punctuation_ja( $str ) {
 		$str = $this->add_space_after_str_ja( $str, $this->_JA_KUTEN );
 		$str = $this->add_space_after_str_ja( $str, $this->_JA_DOKUTEN );

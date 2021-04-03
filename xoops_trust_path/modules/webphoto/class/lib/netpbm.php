@@ -1,26 +1,18 @@
 <?php
-// $Id: netpbm.php,v 1.4 2010/10/06 02:22:46 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-11-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-10-01 K.OHWADA
-// file_to_type()
-// 2009-01-10 K.OHWADA
-// version()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_lib_netpbm
-//=========================================================
 
 class webphoto_lib_netpbm {
 	public $_cmd_path = null;
@@ -38,9 +30,7 @@ class webphoto_lib_netpbm {
 		"pnmflip"
 	);
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
+
 	public function __construct() {
 		// dummy
 	}
@@ -54,9 +44,9 @@ class webphoto_lib_netpbm {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // main
-//---------------------------------------------------------
+
 	function set_cmd_path( $val ) {
 		$this->_cmd_path = $val;
 	}
@@ -201,9 +191,9 @@ class webphoto_lib_netpbm {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
-//---------------------------------------------------------
+
 // version
-//---------------------------------------------------------
+
 	function version( $path ) {
 		$arr = array();
 		foreach ( $this->_NETPBM_PIPES as $pipe ) {
@@ -223,7 +213,4 @@ class webphoto_lib_netpbm {
 		return $arr;
 	}
 
-// --- class end ---
 }
-
-?>

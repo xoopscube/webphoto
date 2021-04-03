@@ -1,19 +1,17 @@
 <?php
-// $Id: mail.php,v 1.1 2011/11/12 17:18:25 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2011-11-11 K.OHWADA
-//=========================================================
 
-//=========================================================
-// class webphoto_lib_mail
-//=========================================================
 class webphoto_lib_mail {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct() {
 		// dummy
 	}
@@ -27,9 +25,9 @@ class webphoto_lib_mail {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // utility
-//---------------------------------------------------------
+
 	function get_valid_addr( $str ) {
 		list( $name, $addr ) = $this->parse_name_addr( $str );
 
@@ -67,7 +65,4 @@ class webphoto_lib_mail {
 		return array( $name, $addr );
 	}
 
-// --- class end ---
 }
-
-?>
