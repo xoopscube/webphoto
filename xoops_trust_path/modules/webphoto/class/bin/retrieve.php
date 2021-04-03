@@ -1,24 +1,22 @@
 <?php
-// $Id: retrieve.php,v 1.3 2009/01/24 07:10:39 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief class webphoto_bin_retrieve
+ * webphoto_mail_retrieve -> webphoto_edit_mail_retrieve
+ */
 
-//=========================================================
-// webphoto module
-// 2008-08-24 K.OHWADA
-//=========================================================
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2009-01-10 K.OHWADA
-// webphoto_mail_retrieve -> webphoto_edit_mail_retrieve
-//---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//=========================================================
-// class webphoto_bin_retrieve
-//=========================================================
-class webphoto_bin_retrieve extends webphoto_bin_base
-{
+class webphoto_bin_retrieve extends webphoto_bin_base {
 	public $_config_class;
 	public $_retrieve_class;
 
@@ -27,72 +25,66 @@ class webphoto_bin_retrieve extends webphoto_bin_base
 	public $_FLAG_MAIL_SEND = true;
 	public $_DEBUG_BIN_RETRIVE = false;
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
-function webphoto_bin_retrieve( $dirname , $trust_dirname )
-{
-	$this->webphoto_bin_base( $dirname , $trust_dirname );
 
-	$this->_config_class =& webphoto_config::getInstance( $dirname );
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_retrieve_class =& webphoto_edit_mail_retrieve::getInstance( $dirname , $trust_dirname );
-	$this->_retrieve_class->set_flag_force_db( true );
-	$this->_retrieve_class->set_flag_print_first_msg( true );
+		$this->_config_class =& webphoto_config::getInstance( $dirname );
+
+		$this->_retrieve_class =& webphoto_edit_mail_retrieve::getInstance( $dirname, $trust_dirname );
+		$this->_retrieve_class->set_flag_force_db( true );
+		$this->_retrieve_class->set_flag_print_first_msg( true );
 
 // preload
-	$this->_retrieve_class->preload_init();
-	$this->_retrieve_class->preload_constant();
-	$this->preload_init();
-	$this->preload_constant();
-}
-
-public static function &getInstance( $dirname = null, $trust_dirname = null )
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_bin_retrieve( $dirname , $trust_dirname );
+		$this->_retrieve_class->preload_init();
+		$this->_retrieve_class->preload_constant();
+		$this->preload_init();
+		$this->preload_constant();
 	}
-	return $instance;
-}
 
-//---------------------------------------------------------
+	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_bin_retrieve( $dirname, $trust_dirname );
+		}
+
+		return $instance;
+	}
+
+
 // main
-//---------------------------------------------------------
-function main()
-{
-	$pass = $this->_config_class->get_by_name( 'bin_pass' );
 
-	$this->set_env_param();
+	public function main() {
+		$pass = $this->_config_class->get_by_name( 'bin_pass' );
 
-	if ( !$this->check_pass($pass) ) {
-		return false;
-	}
+		$this->set_env_param();
 
-	$flag_print = false ;
-	if ( $this->_flag_print || $this->_DEBUG_BIN_RETRIVE ) {
-		$flag_print = true;
-		$this->_retrieve_class->set_msg_level( _C_WEBPHOTO_MSG_LEVEL_ADMIN );
-	}
+		if ( ! $this->check_pass( $pass ) ) {
+			return false;
+		}
 
-	$this->print_write_data( $this->get_html_header() );
+		$flag_print = false;
+		if ( $this->_flag_print || $this->_DEBUG_BIN_RETRIVE ) {
+			$flag_print = true;
+			$this->_retrieve_class->set_msg_level( _C_WEBPHOTO_MSG_LEVEL_ADMIN );
+		}
 
-	$this->_retrieve_class->retrieve();
-	$count = $this->_retrieve_class->get_mail_count();
+		$this->print_write_data( $this->get_html_header() );
 
-	if ( $flag_print ) {
-		echo $this->_retrieve_class->get_msg();
-	}
+		$this->_retrieve_class->retrieve();
+		$count = $this->_retrieve_class->get_mail_count();
 
-	$this->print_write_data( $this->get_html_footer() );
+		if ( $flag_print ) {
+			echo $this->_retrieve_class->get_msg();
+		}
 
-	if ( $this->_FLAG_MAIL_SEND && $count ) {
-		$text = "mail count: $count ";
-		$this->send_mail( $this->_adminmail, $this->_TITLE, $text );
+		$this->print_write_data( $this->get_html_footer() );
+
+		if ( $this->_FLAG_MAIL_SEND && $count ) {
+			$text = "mail count: $count ";
+			$this->send_mail( $this->_adminmail, $this->_TITLE, $text );
+		}
 	}
 }
-
-// --- class end ---
-}
-
-?>

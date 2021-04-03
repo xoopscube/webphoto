@@ -1,24 +1,19 @@
 <?php
-// $Id: small_create.php,v 1.2 2009/11/29 07:34:21 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-04-10 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-11-11 K.OHWADA
-// $trust_dirname
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_edit_small_create
-//=========================================================
+
 class webphoto_edit_small_create extends webphoto_edit_middle_thumb_create {
 	public $_remote_class;
 
@@ -28,12 +23,9 @@ class webphoto_edit_small_create extends webphoto_edit_middle_thumb_create {
 	public $_FLAG_CHMOD = true;
 	public $_FLAG_CREATE_FROM_ICON = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_edit_middle_thumb_create( $dirname , $trust_dirname  );
 
 		$this->_remote_class =& webphoto_lib_remote_file::getInstance();
 	}
@@ -47,9 +39,9 @@ class webphoto_edit_small_create extends webphoto_edit_middle_thumb_create {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // create small image
-//---------------------------------------------------------
+
 // factory_create
 	public function create_small_param_from_external_icon( $row ) {
 		$param = $this->build_small_param_from_external_icon( $row );
@@ -140,16 +132,16 @@ class webphoto_edit_small_create extends webphoto_edit_middle_thumb_create {
 		return $this->is_image_ext( $ext );
 	}
 
-//---------------------------------------------------------
+
 // remote class
-//---------------------------------------------------------
+
 	public function get_remote_file( $url ) {
 		return $this->_remote_class->read_file( $url );
 	}
 
-//---------------------------------------------------------
+
 // utility class
-//---------------------------------------------------------
+
 	public function write_file( $file, $data ) {
 		return $this->_utility_class->write_file( $file, $data, $this->_FOPEN_MODE, $this->_FLAG_CHMOD );
 	}

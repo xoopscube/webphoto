@@ -1,24 +1,20 @@
 <?php
-// $Id: use_item.php,v 1.2 2010/02/17 04:34:47 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2010-02-01 K.OHWADA
-//=========================================================
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
-//---------------------------------------------------------
-// change log
-// 2010-02-15 K.OHWADA
-// check_edit()
-//---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
-
-//=========================================================
-// class webphoto_edit_use_item
-//=========================================================
-class webphoto_edit_use_item extends webphoto_base_this
-{
+class webphoto_edit_use_item extends webphoto_base_this {
 	public $_cfg_gmap_apikey;
 	public $_cfg_perm_item_read;
 
@@ -28,117 +24,80 @@ class webphoto_edit_use_item extends webphoto_base_this
 
 	public $_flag_admin = false;
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
-public function __construct( $dirname, $trust_dirname )
-{
-	parent::__construct( $dirname, $trust_dirname);
-	//$this->webphoto_base_this( $dirname, $trust_dirname );
 
-	$this->_cfg_gmap_apikey    = $this->get_config_by_name( 'gmap_apikey' );
-	$this->_cfg_perm_item_read = $this->get_config_by_name( 'perm_item_read' );
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-	$this->_item_array = $this->explode_ini('submit_item_list');
-	$this->_show_array = $this->explode_ini('submit_show_list');
-	$this->_edit_array = $this->explode_ini('edit_list');
-}
+		$this->_cfg_gmap_apikey    = $this->get_config_by_name( 'gmap_apikey' );
+		$this->_cfg_perm_item_read = $this->get_config_by_name( 'perm_item_read' );
 
-public static function &getInstance( $dirname = null, $trust_dirname = null )
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_edit_use_item( $dirname, $trust_dirname );
+		$this->_item_array = $this->explode_ini( 'submit_item_list' );
+		$this->_show_array = $this->explode_ini( 'submit_show_list' );
+		$this->_edit_array = $this->explode_ini( 'edit_list' );
 	}
-	return $instance;
-}
 
-//---------------------------------------------------------
+	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_edit_use_item( $dirname, $trust_dirname );
+		}
+
+		return $instance;
+	}
+
+
 // set param
-//---------------------------------------------------------
-function set_flag_admin( $val )
-{
-	$this->_flag_admin = (bool)$val;
-}
 
-//---------------------------------------------------------
+	public function set_flag_admin( $val ) {
+		$this->_flag_admin = (bool) $val;
+	}
+
+
 // submit edit form
-//---------------------------------------------------------
-function use_item_perm_read()
-{
-	if (( $this->_cfg_perm_item_read > 0 ) && 
-	      $this->use_item_or_admin('perm_read') ) {
-		return true;
+
+	public function use_item_perm_read() {
+		return ( $this->_cfg_perm_item_read > 0 ) &&
+		       $this->use_item_or_admin( 'perm_read' );
 	}
-	return false;
-}
 
-function use_item_perm_level()
-{
-	if (( $this->_cfg_perm_item_read > 0 ) && 
-		  $this->use_item('perm_level') ) {
-		return true;
+	public function use_item_perm_level() {
+		return ( $this->_cfg_perm_item_read > 0 ) &&
+		       $this->use_item( 'perm_level' );
 	}
-	return false;
-}
 
-function editable_item_perm_level()
-{
-	if ( $this->use_item_perm_level() &&
-	     $this->check_edit_or_admin('perm_level') ) {
-		return true;
+	public function editable_item_perm_level() {
+		return $this->use_item_perm_level() &&
+		       $this->check_edit_or_admin( 'perm_level' );
 	}
-	return false;
-}
 
-function use_gmap()
-{
-	if ( $this->_cfg_gmap_apikey && $this->check_show_or_admin('gmap') ) {
-		return true;
+	public function use_gmap() {
+		return $this->_cfg_gmap_apikey && $this->check_show_or_admin( 'gmap' );
 	}
-	return false;
-}
 
-function use_item_or_admin( $key )
-{
-	if ( $this->_flag_admin || $this->use_item( $key ) ) {
-		return true;
+	function use_item_or_admin( $key ): bool {
+		return $this->_flag_admin || $this->use_item( $key );
 	}
-	return false;
-}
 
-function check_show_or_admin( $key )
-{
-	if ( $this->_flag_admin || $this->check_show( $key ) ) {
-		return true;
+	public function check_show_or_admin( $key ) {
+		return $this->_flag_admin || $this->check_show( $key );
 	}
-	return false;
-}
 
-function check_edit_or_admin( $key )
-{
-	if ( $this->_flag_admin || $this->check_edit( $key ) ) {
-		return true;
+	public function check_edit_or_admin( $key ) {
+		return $this->_flag_admin || $this->check_edit( $key );
 	}
-	return false;
-}
 
-function use_item( $key )
-{
-	return in_array( $key, $this->_item_array );
-}
+	public function use_item( $key ) {
+		return in_array( $key, $this->_item_array );
+	}
 
-function check_show( $key )
-{
-	return in_array( $key, $this->_show_array );
-}
+	public function check_show( $key ) {
+		return in_array( $key, $this->_show_array );
+	}
 
-function check_edit( $key )
-{
-	return in_array( $key, $this->_edit_array );
-}
+	public function check_edit( $key ) {
+		return in_array( $key, $this->_edit_array );
+	}
 
-// --- class end ---
 }
-
-?>

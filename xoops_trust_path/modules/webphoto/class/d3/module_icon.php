@@ -6,6 +6,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_d3_module_icon {
+
 	public $_DIRNAME;
 	public $_TRUST_DIRNAME;
 	public $_MODULE_DIR;

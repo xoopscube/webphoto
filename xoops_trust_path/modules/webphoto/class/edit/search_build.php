@@ -1,31 +1,19 @@
 <?php
-// $Id: search_build.php,v 1.3 2010/01/25 10:03:07 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-01-10 K.OHWADA
-// webphoto_tag -> webphoto_tag_build
-// 2009-11-11 K.OHWADA
-// $trust_dirname
-// 2009-01-10 K.OHWADA
-// webphoto_photo_build -> webphoto_edit_search_build
-// get_text_content()
-// 2008-08-24 K.OHWADA
-// photo_handler -> item_handler
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_edit_search_build
-//=========================================================
+
 class webphoto_edit_search_build {
 	public $_item_handler;
 	public $_file_handler;
@@ -39,9 +27,6 @@ class webphoto_edit_search_build {
 
 	public $_SPACE = ' ';
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME    = $dirname;
 		$this->_MODULE_URL = XOOPS_URL . '/modules/' . $dirname;
@@ -69,9 +54,9 @@ class webphoto_edit_search_build {
 		return $instance;
 	}
 
-//---------------------------------------------------------
+
 // insert
-//---------------------------------------------------------
+
 	public function build_with_tag( $row ) {
 		$tag_array = $this->_tag_build_class->get_tag_name_array_by_photoid( $row['item_id'] );
 
