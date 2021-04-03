@@ -1,260 +1,220 @@
 <?php
-// $Id: maillog_handler.php,v 1.4 2009/11/29 07:34:21 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-11-11 K.OHWADA
-// webphoto_lib_handler -> webphoto_handler_base_ini
-// info_str_to_array( $str )
-// 2008-08-24 K.OHWADA
-// added get_rows_by_photoid()
-//---------------------------------------------------------
-
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_maillog_handler
-//=========================================================
-class webphoto_maillog_handler extends webphoto_handler_base_ini
-{
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-public function __construct( $dirname, $trust_dirname )
-{
-	parent::__construct( $dirname, $trust_dirname );
-	//$this->webphoto_handler_base_ini( $dirname, $trust_dirname );
-	$this->set_table_prefix_dirname( 'maillog' );
-	$this->set_id_name( 'maillog_id' );
+class webphoto_maillog_handler extends webphoto_handler_base_ini {
 
-}
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
 
-public static function &getInstance( $dirname = null, $trust_dirname = null )
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_maillog_handler( $dirname, $trust_dirname );
-	}
-	return $instance;
-}
+		$this->set_table_prefix_dirname( 'maillog' );
+		$this->set_id_name( 'maillog_id' );
 
-
-//---------------------------------------------------------
-// create
-//---------------------------------------------------------
-function create( $flag_new= false )
-{
-	$time_create = 0;
-	$time_update = 0;
-
-	if ( $flag_new ) {
-		$time = time();
-		$time_create = $time;
-		$time_update = $time;
 	}
 
-	$arr = array(
-		'maillog_id'        => 0,
-		'maillog_time_create'  => $time_create,
-		'maillog_time_update'  => $time_update,
-		'maillog_photo_ids' => '',
-		'maillog_status'    => '',
-		'maillog_from'      => '',
-		'maillog_subject'   => '',
-		'maillog_body'      => '',
-		'maillog_file'      => '',
-		'maillog_attach'    => '',
-		'maillog_comment'   => '',
-	);
+	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_maillog_handler( $dirname, $trust_dirname );
+		}
 
-	return $arr;
-}
+		return $instance;
+	}
 
-//---------------------------------------------------------
-// insert
-//---------------------------------------------------------
-function insert( $row, $force=false )
-{
-	extract( $row ) ;
+	function create( $flag_new = false ) {
+		$time_create = 0;
+		$time_update = 0;
 
-	$sql  = 'INSERT INTO '.$this->_table.' (';
+		if ( $flag_new ) {
+			$time        = time();
+			$time_create = $time;
+			$time_update = $time;
+		}
 
-	$sql .= 'maillog_time_create, ';
-	$sql .= 'maillog_time_update, ';
-	$sql .= 'maillog_photo_ids, ';
-	$sql .= 'maillog_status, ';
-	$sql .= 'maillog_subject, ';
-	$sql .= 'maillog_from, ';
-	$sql .= 'maillog_body, ';
-	$sql .= 'maillog_file, ';
-	$sql .= 'maillog_attach, ';
-	$sql .= 'maillog_comment ';
+		return array(
+			'maillog_id'          => 0,
+			'maillog_time_create' => $time_create,
+			'maillog_time_update' => $time_update,
+			'maillog_photo_ids'   => '',
+			'maillog_status'      => '',
+			'maillog_from'        => '',
+			'maillog_subject'     => '',
+			'maillog_body'        => '',
+			'maillog_file'        => '',
+			'maillog_attach'      => '',
+			'maillog_comment'     => '',
+		);
+	}
 
-	$sql .= ') VALUES ( ';
+	function insert( $row, $force = false ) {
+		extract( $row );
 
-	$sql .= intval($maillog_time_create).', ';
-	$sql .= intval($maillog_time_update).', ';
-	$sql .= $this->quote($maillog_photo_ids).', ';
-	$sql .= intval($maillog_status).', ';
-	$sql .= $this->quote($maillog_subject).', ';
-	$sql .= $this->quote($maillog_from).', ';
-	$sql .= $this->quote($maillog_body).', ';
-	$sql .= $this->quote($maillog_file).', ';
-	$sql .= $this->quote($maillog_attach).', ';
-	$sql .= $this->quote($maillog_comment).' ';
+		$sql = 'INSERT INTO ' . $this->_table . ' (';
 
-	$sql .= ')';
+		$sql .= 'maillog_time_create, ';
+		$sql .= 'maillog_time_update, ';
+		$sql .= 'maillog_photo_ids, ';
+		$sql .= 'maillog_status, ';
+		$sql .= 'maillog_subject, ';
+		$sql .= 'maillog_from, ';
+		$sql .= 'maillog_body, ';
+		$sql .= 'maillog_file, ';
+		$sql .= 'maillog_attach, ';
+		$sql .= 'maillog_comment ';
 
-	$ret = $this->query( $sql, 0, 0, $force );
-	if ( !$ret ) { return false; }
+		$sql .= ') VALUES ( ';
 
-	return $this->_db->getInsertId();
-}
+		$sql .= (int) $maillog_time_create . ', ';
+		$sql .= (int) $maillog_time_update . ', ';
+		$sql .= $this->quote( $maillog_photo_ids ) . ', ';
+		$sql .= (int) $maillog_status . ', ';
+		$sql .= $this->quote( $maillog_subject ) . ', ';
+		$sql .= $this->quote( $maillog_from ) . ', ';
+		$sql .= $this->quote( $maillog_body ) . ', ';
+		$sql .= $this->quote( $maillog_file ) . ', ';
+		$sql .= $this->quote( $maillog_attach ) . ', ';
+		$sql .= $this->quote( $maillog_comment ) . ' ';
 
-//---------------------------------------------------------
-// update
-//---------------------------------------------------------
-function update( $row, $force=false )
-{
-	extract( $row ) ;
+		$sql .= ')';
 
-	$sql  = 'UPDATE '.$this->_table.' SET ';
+		$ret = $this->query( $sql, 0, 0, $force );
+		if ( ! $ret ) {
+			return false;
+		}
 
-	$sql .= 'maillog_time_create='.intval($maillog_time_create).', ';
-	$sql .= 'maillog_time_update='.intval($maillog_time_update).', ';
-	$sql .= 'maillog_photo_ids='.$this->quote($maillog_photo_ids).', ';
-	$sql .= 'maillog_status='.intval($maillog_status).', ';
-	$sql .= 'maillog_subject='.$this->quote($maillog_subject).', ';
-	$sql .= 'maillog_from='.$this->quote($maillog_from).', ';
-	$sql .= 'maillog_body='.$this->quote($maillog_body).', ';
-	$sql .= 'maillog_file='.$this->quote($maillog_file).', ';
-	$sql .= 'maillog_attach='.$this->quote($maillog_attach).', ';
-	$sql .= 'maillog_comment='.$this->quote($maillog_comment).' ';
+		return $this->_db->getInsertId();
+	}
 
-	$sql .= ' WHERE maillog_id='.intval($maillog_id);
+	function update( $row, $force = false ) {
+		extract( $row );
 
-	return $this->query( $sql, 0, 0, $force );
-}
+		$sql = 'UPDATE ' . $this->_table . ' SET ';
 
-//---------------------------------------------------------
-// get count
-//---------------------------------------------------------
-function get_count_by_status( $status )
-{
-	$sql  = 'SELECT COUNT(*) FROM '.$this->_table;
-	$sql .= ' WHERE maillog_status='.intval($status);
-	return $this->get_count_by_sql( $sql  );
-}
+		$sql .= 'maillog_time_create=' . (int) $maillog_time_create . ', ';
+		$sql .= 'maillog_time_update=' . (int) $maillog_time_update . ', ';
+		$sql .= 'maillog_photo_ids=' . $this->quote( $maillog_photo_ids ) . ', ';
+		$sql .= 'maillog_status=' . (int) $maillog_status . ', ';
+		$sql .= 'maillog_subject=' . $this->quote( $maillog_subject ) . ', ';
+		$sql .= 'maillog_from=' . $this->quote( $maillog_from ) . ', ';
+		$sql .= 'maillog_body=' . $this->quote( $maillog_body ) . ', ';
+		$sql .= 'maillog_file=' . $this->quote( $maillog_file ) . ', ';
+		$sql .= 'maillog_attach=' . $this->quote( $maillog_attach ) . ', ';
+		$sql .= 'maillog_comment=' . $this->quote( $maillog_comment ) . ' ';
 
-//---------------------------------------------------------
-// get rows
-//---------------------------------------------------------
-function get_rows_desc_by_status( $status, $limit=0, $start=0 )
-{
-	$sql  = 'SELECT * FROM '.$this->_table;
-	$sql .= ' WHERE maillog_status='.intval($status);
-	$sql .= ' ORDER BY maillog_id DESC';
-	return $this->get_rows_by_sql( $sql, $limit, $start  );
-}
+		$sql .= ' WHERE maillog_id=' . (int) $maillog_id;
 
-function get_rows_by_photoid( $photo_id, $limit=0, $start=0 )
-{
+		return $this->query( $sql, 0, 0, $force );
+	}
+
+	function get_count_by_status( $status ) {
+		$sql = 'SELECT COUNT(*) FROM ' . $this->_table;
+		$sql .= ' WHERE maillog_status=' . (int) $status;
+
+		return $this->get_count_by_sql( $sql );
+	}
+
+
+	function get_rows_desc_by_status( $status, $limit = 0, $start = 0 ) {
+		$sql = 'SELECT * FROM ' . $this->_table;
+		$sql .= ' WHERE maillog_status=' . (int) $status;
+		$sql .= ' ORDER BY maillog_id DESC';
+
+		return $this->get_rows_by_sql( $sql, $limit, $start );
+	}
+
+	function get_rows_by_photoid( $photo_id, $limit = 0, $start = 0 ) {
 // %|123|%
-	$like = $this->build_like_separetor( $photo_id );
-	$sql  = 'SELECT * FROM '.$this->_table;
-	$sql .= ' WHERE maillog_photo_ids LIKE '. $this->quote($like) ;
-	$sql .= ' ORDER BY maillog_id DESC';
-	return $this->get_rows_by_sql( $sql, $limit, $start  );
-}
+		$like = $this->build_like_separetor( $photo_id );
+		$sql  = 'SELECT * FROM ' . $this->_table;
+		$sql  .= ' WHERE maillog_photo_ids LIKE ' . $this->quote( $like );
+		$sql  .= ' ORDER BY maillog_id DESC';
 
-function build_like_separetor( $id )
-{
+		return $this->get_rows_by_sql( $sql, $limit, $start );
+	}
+
+	function build_like_separetor( $id ) {
 // %|123|%
-	$like  = '%'. _C_WEBPHOTO_INFO_SEPARATOR ;
-	$like .= intval($id) ;
-	$like .= _C_WEBPHOTO_INFO_SEPARATOR . '%';
-	return $like;
-}
+		$like = '%' . _C_WEBPHOTO_INFO_SEPARATOR;
+		$like .= (int) $id;
+		$like .= _C_WEBPHOTO_INFO_SEPARATOR . '%';
 
-//---------------------------------------------------------
+		return $like;
+	}
+
+
 // get id array
-//---------------------------------------------------------
-function get_id_array_older( $limit=0, $offset=0 )
-{
-	$sql  = 'SELECT maillog_id FROM '.$this->_table;
-	$sql .= ' ORDER BY maillog_id ASC';
-	return $this->get_first_rows_by_sql( $sql, $limit, $offset );
-}
+	function get_id_array_older( $limit = 0, $offset = 0 ) {
+		$sql = 'SELECT maillog_id FROM ' . $this->_table;
+		$sql .= ' ORDER BY maillog_id ASC';
 
-//---------------------------------------------------------
-// build
-//---------------------------------------------------------
-function build_photo_ids_array_to_str( $arr )
-{
-	if ( !is_array($arr) || !count($arr) ) {
-		return null;
+		return $this->get_first_rows_by_sql( $sql, $limit, $offset );
 	}
+
+
+// build
+	function build_photo_ids_array_to_str( $arr ) {
+		if ( ! is_array( $arr ) || ! count( $arr ) ) {
+			return null;
+		}
 
 // array -> |1|2|3|
-	$str = $this->info_array_to_str( $arr );
-	$ret = $this->build_photo_ids_with_separetor( $str ) ;
-	return $ret ;
-}
+		$str = $this->info_array_to_str( $arr );
+		$ret = $this->build_photo_ids_with_separetor( $str );
 
-function build_photo_ids_with_separetor( $str )
-{
-// str -> |1|
-	$ret = _C_WEBPHOTO_INFO_SEPARATOR . $str . _C_WEBPHOTO_INFO_SEPARATOR ;
-	return $ret ;
-}
-
-function build_photo_ids_row_to_array( $row )
-{
-	return $this->info_str_to_array( $row['maillog_photo_ids'] );
-}
-
-function build_attach_array_to_str( $arr )
-{
-	if ( !is_array($arr) || !count($arr) ) {
-		return null;
+		return $ret;
 	}
-	return $this->info_array_to_str( $arr );
-}
 
-function build_attach_row_to_array( $row )
-{
-	return $this->info_str_to_array( $row['maillog_attach'] );
-}
+	function build_photo_ids_with_separetor( $str ) {
+// str -> |1|
+		$ret = _C_WEBPHOTO_INFO_SEPARATOR . $str . _C_WEBPHOTO_INFO_SEPARATOR;
 
-function info_str_to_array( $str )
-{
-	$utility_class =& webphoto_lib_utility::getInstance();
-	return $utility_class->str_to_array( $str, _C_WEBPHOTO_INFO_SEPARATOR );
-}
+		return $ret;
+	}
 
-function info_array_to_str( $arr )
-{
-	$utility_class =& webphoto_lib_utility::getInstance();
-	return $utility_class->array_to_str( $arr, _C_WEBPHOTO_INFO_SEPARATOR );
-}
+	function build_photo_ids_row_to_array( $row ) {
+		return $this->info_str_to_array( $row['maillog_photo_ids'] );
+	}
 
-//---------------------------------------------------------
+	function build_attach_array_to_str( $arr ) {
+		if ( ! is_array( $arr ) || ! count( $arr ) ) {
+			return null;
+		}
+
+		return $this->info_array_to_str( $arr );
+	}
+
+	function build_attach_row_to_array( $row ) {
+		return $this->info_str_to_array( $row['maillog_attach'] );
+	}
+
+	function info_str_to_array( $str ) {
+		$utility_class =& webphoto_lib_utility::getInstance();
+
+		return $utility_class->str_to_array( $str, _C_WEBPHOTO_INFO_SEPARATOR );
+	}
+
+	function info_array_to_str( $arr ) {
+		$utility_class =& webphoto_lib_utility::getInstance();
+
+		return $utility_class->array_to_str( $arr, _C_WEBPHOTO_INFO_SEPARATOR );
+	}
+
+
 // show
-//---------------------------------------------------------
-function build_show_comment( $row )
-{
-	return nl2br( $row['maillog_comment'] );
-}
+	function build_show_comment( $row ) {
+		return nl2br( $row['maillog_comment'] );
+	}
 
-// --- class end ---
 }
-
-?>
