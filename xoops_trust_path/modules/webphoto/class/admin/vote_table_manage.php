@@ -5,9 +5,8 @@
  * @version 2.31 (XCL)
  * @author Gigamaster, 2021-04-02 XCL PHP7
  * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
- * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
- * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -19,6 +18,7 @@ class webphoto_admin_vote_table_manage extends webphoto_lib_manage {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 		$this->set_manage_handler(
 			webphoto_vote_handler::getInstance( $dirname, $trust_dirname ) );
@@ -39,14 +39,15 @@ class webphoto_admin_vote_table_manage extends webphoto_lib_manage {
 	}
 
 
-	function main() {
+	public function main() {
 		$this->_main();
 	}
 
 
 // override for caller
 
-	function _build_row_by_post( $row = array() ) {
+	public function _build_row_by_post( $row = array() ) {
+
 		$row = array(
 			'vote_id'          => $this->_post_class->get_post_get_int( 'vote_id' ),
 			'vote_time_create' => $this->_post_class->get_post_int( 'vote_time_create' ),
@@ -62,9 +63,7 @@ class webphoto_admin_vote_table_manage extends webphoto_lib_manage {
 	}
 
 
-// form
-
-	function _print_form( $row ) {
+	public function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
 
 		echo $this->build_table_begin();
@@ -81,8 +80,6 @@ class webphoto_admin_vote_table_manage extends webphoto_lib_manage {
 
 		echo "</table></form>\n";
 	}
-
-
 }
 
 

@@ -5,11 +5,9 @@
  * @version 2.31 (XCL)
  * @author Gigamaster, 2021-04-02 XCL PHP7
  * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
- * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
- * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
-
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -18,8 +16,8 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_manage_handler(
@@ -48,6 +46,7 @@ class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 // override for caller
 
 	public function _build_row_by_post( $row = array() ) {
+
 		$row = array(
 			'user_id'          => $this->_post_class->get_post_get_int( 'user_id' ),
 			'user_time_create' => $this->_post_class->get_post_int( 'user_time_create' ),
@@ -94,7 +93,6 @@ class webphoto_admin_user_table_manage extends webphoto_lib_manage {
 
 		echo "</table></form>\n";
 	}
-
 
 }
 

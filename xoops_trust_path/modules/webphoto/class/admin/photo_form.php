@@ -5,9 +5,8 @@
  * @version 2.31 (XCL)
  * @author Gigamaster, 2021-04-02 XCL PHP7
  * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
- * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
- * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -32,8 +31,8 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 
 	public $_perpage;
 
-	public $_COLOR_WHITE = '#FFFFFF';
-	public $_COLOR_PINK = '#FFE4E1';    /* mistrose */
+	public $_COLOR_WHITE = 'transparent';
+	public $_COLOR_REDWAIT = '#FFE4E1';    /* mistrose */
 
 
 	public function __construct( $dirname, $trust_dirname ) {
@@ -79,8 +78,8 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 		$url_pictadd = $this->_MODULE_URL . '/admin/index.php?fct=item_manager&amp;op=submit_form&amp;cat_id=' . $this->_get_catid;
 
 // --- print ---
-		echo '<div style="border: 2px solid #2F5376; padding:8px; width:100%;" class="bg4">' . "\n";
-		echo '<p><font color="blue">' . $this->_get_mes . "</font></p>\n";
+		echo '<div class="bg4">' . "\n";
+		echo '<p>' . $this->_get_mes . "</p>\n";
 
 		$this->_print_form_search_table( $photo_count, $perpage );
 
@@ -248,7 +247,7 @@ class webphoto_admin_photo_form extends webphoto_edit_form {
 		}
 
 // pink for wating addmission
-		$bgcolor = $photo_status ? $this->_COLOR_WHITE : $this->_COLOR_PINK;
+		$bgcolor = $photo_status ? $this->_COLOR_WHITE : $this->_COLOR_REDWAIT;
 
 		$editbutton     = $this->_build_edit_button( $photo_id );
 		$deadlinkbutton = $this->_build_deadlink_button( $row );

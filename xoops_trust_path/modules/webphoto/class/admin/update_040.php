@@ -5,9 +5,8 @@
  * @version 2.31 (XCL)
  * @author Gigamaster, 2021-04-02 XCL PHP7
  * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
- * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
- * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -16,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_admin_update_040 extends webphoto_base_this {
+
 	public $_item_create_class;
 	public $_photo_handler;
 	public $_image_class;

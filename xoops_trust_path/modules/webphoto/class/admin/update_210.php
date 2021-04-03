@@ -5,9 +5,8 @@
  * @version 2.31 (XCL)
  * @author Gigamaster, 2021-04-02 XCL PHP7
  * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
- * @license https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
- * @brief $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by calle
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -16,13 +15,16 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_admin_update_210 extends webphoto_base_this {
+
 	public $_form_class;
 
 	public $_THIS_FCT = 'update_210';
+
 	public $_THIS_URL = null;
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_form_class =& webphoto_lib_form::getInstance( $dirname, $trust_dirname );
@@ -65,7 +67,7 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 			if ( ( $item_count == 0 ) || ( $photo_count == 0 ) ) {
 				$msg = 'You dont need update.';
 			} elseif ( $onclick_count > 0 ) {
-				$msg = 'Probably, you dont need update.';
+				$msg = 'Probably, you dont need to update.';
 			} else {
 				$msg = _AM_WEBPHOTO_MUST_UPDATE;
 			}
@@ -77,7 +79,9 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 				$this->get_admin_title( 'UPDATE' ), $this->_THIS_URL );
 		}
 
-		echo "Update v2.00 to v2.10 <br><br>\n";
+		echo '<h4><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+		<path  fill="currentColor" d="M12 16.5l4-4h-3v-9h-2v9H8l4 4zm9-13h-6v1.99h6v14.03H3V5.49h6V3.5H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2z"/>
+		</svg> Update to v2.1.x </h4>';
 
 		switch ( $op ) {
 			case 'update_item':
@@ -96,58 +100,57 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 		exit();
 	}
 
-
 // update_item
 
-	function _update_item() {
+	public function _update_item() {
 		$item_detail_onclick = $this->_post_class->get_post_get( 'item_detail_onclick' );
 
 		$ret = $this->_update_item_detail_onclick( $item_detail_onclick );
 		if ( $ret ) {
-			echo ' OK ';
+			echo '<div class="success"> OK </div>';
 		} else {
-			echo ' failed to update item table <br>';
+			echo '<div class="error"> failed to update item table </div>>';
 			echo $this->_item_handler->get_format_error();
 		}
 
 		$this->_print_finish();
 	}
 
-	function _update_item_detail_onclick( $item_detail_onclick ) {
+	public function _update_item_detail_onclick( $item_detail_onclick ) {
 		$sql = 'UPDATE ' . $this->_item_handler->get_table();
-		$sql .= ' SET item_detail_onclick=' . intval( $item_detail_onclick );
+		$sql .= ' SET item_detail_onclick=' . (int) $item_detail_onclick;
 		$sql .= ' WHERE ' . $this->_item_handler->build_where_ext_photo();
 
 		return $this->_item_handler->query( $sql );
 	}
 
-
 // form
 
-	function _print_finish() {
-		echo "<br><hr />\n";
-		echo "<h4>FINISHED</h4>\n";
-		echo '<a href="index.php">GOTO Admin Menu</a>' . "<br>\n";
+	public function _print_finish() {
+		echo '<hr>';
+		echo '<div class="tips"> <h4>FINISHED</h4>';
+		echo '<p><a href="index.php" class="ui-btn">Admin Menu</a></p></div>';
 	}
 
-	function _form_item() {
+	public function _form_item() {
 		$title = 'Update detail_onclick of item table';
 
 		$form = $this->_form_class->build_form_style(
 			$title, null, $this->_build_form() );
-
+		echo '<div class="ui-card-full">';
 		echo "<h4>" . $title . "</h4>\n";
 		echo $form;
+		echo '</div>';
 	}
 
-	function _build_form() {
+	public function _build_form() {
 		$c_image    = _C_WEBPHOTO_DETAIL_ONCLICK_IMAGE;
 		$c_lightbox = _C_WEBPHOTO_DETAIL_ONCLICK_LIGHTBOX;
 		$l_image    = $this->get_constant( 'ITEM_DETAIL_ONCLICK_IMAGE' );
 		$l_lightbox = $this->get_constant( 'ITEM_DETAIL_ONCLICK_LIGHTBOX' );
 		$token      = $this->_form_class->get_token();
 
-		$str = <<<EOF
+		return <<<EOF
 <form name="webphoto_form_update_210" action="{$this->_ADMIN_URL}" method="post">
 <input type="hidden" name="XOOPS_G_TICKET" value="$token" />
 <input type="hidden" name="fct" value="{$this->_THIS_FCT}" />
@@ -159,11 +162,5 @@ class webphoto_admin_update_210 extends webphoto_base_this {
 <input type="submit" name="submit" value="Update" />
 </form>
 EOF;
-
-		return $str;
 	}
-
-
 }
-
-
