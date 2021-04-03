@@ -75,19 +75,19 @@ function TCGenerateMac() {
 		for (k = 0; k < 3; k ++)
 			for (i = 0; i <= 5; i++){
 				if(j<12){
-				s += this.bldCell( 255-(Math.floor(j / 2) * 51), 255-(k * 51 + (j % 2) * 51 * 3),255-(i * 51), 8, 10);
+				s += this.bldCell( 191-(Math.floor(j / 2) * 51), 191-(k * 51 + (j % 2) * 51 * 3),191-(i * 51), 8, 10);
 				}else{
 					if(n<=14){
-						r = 255-(n * 17);
+						r = 191-(n * 17);
 						g=b=0;
 					}else if(n>14 && n<=28){
-						g = 255-((n-14) * 17);
+						g = 191-((n-14) * 17);
 						r=b=0;
 					}else if(n>28 && n<=42){
-						b = 255-((n-28) * 17);
+						b = 191-((n-28) * 17);
 						r=g=0;
 					}else{
-						r=g=b=255-((n-42) * 17);
+						r=g=b=191-((n-42) * 17);
 					}
 					s += this.bldCell( r, g,b, 8, 10);
 					n++;
