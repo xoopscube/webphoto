@@ -13,18 +13,17 @@
 //---------------------------------------------------------
 
 // === define begin ===
-if( !defined("_EX_WEBPHOTO_LANG_LOADED") ) 
-{
+if ( ! defined( "_EX_WEBPHOTO_LANG_LOADED" ) ) {
 
-define("_EX_WEBPHOTO_LANG_LOADED" , 1 ) ;
+	define( "_EX_WEBPHOTO_LANG_LOADED", 1 );
 
 //=========================================================
 // mobile
 //=========================================================
 
-define("_WEBPHOTO_MYSQL_CHARSET",  "ujis");
-define("_WEBPHOTO_CHARSET_MOBILE", "Shift_JIS");
-define("_WEBPHOTO_MB_LANGUAGE",    "ja");
+	define( "_WEBPHOTO_MYSQL_CHARSET", "ujis" );
+	define( "_WEBPHOTO_CHARSET_MOBILE", "Shift_JIS" );
+	define( "_WEBPHOTO_MB_LANGUAGE", "ja" );
 
 //---------------------------------------------------------
 // http://www.nttdocomo.co.jp/service/imode/make/content/spec/useragent/
@@ -39,18 +38,18 @@ define("_WEBPHOTO_MB_LANGUAGE",    "ja");
 // Vodafone/1.0/V904SH/SHJ001/SN1234
 // SoftBank/1.0/910T/TJ001/SN1234
 //---------------------------------------------------------
-function webphoto_mobile_carrier_array()
-{
-	$arr = array(
-		'DoCoMo'     => 'docomo' ,
-		'KDDI'       => 'au' ,
-		'UP.Browser' => 'au' ,
-		'SoftBank'   => 'softbank' ,
-		'Vodafone'   => 'softbank' ,
-		'J-PHONE'    => 'softbank' ,
-	);
-	return $arr;
-}
+	function webphoto_mobile_carrier_array() {
+		$arr = array(
+			'DoCoMo'     => 'docomo',
+			'KDDI'       => 'au',
+			'UP.Browser' => 'au',
+			'SoftBank'   => 'softbank',
+			'Vodafone'   => 'softbank',
+			'J-PHONE'    => 'softbank',
+		);
+
+		return $arr;
+	}
 
 // === define end ===
 }

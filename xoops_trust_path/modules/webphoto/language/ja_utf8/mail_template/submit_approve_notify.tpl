@@ -6,7 +6,7 @@
 {PHOTO_URL}
 
 -----------
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 管理人
 {X_ADMINMAIL}
 -----------
