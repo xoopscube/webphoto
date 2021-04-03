@@ -5,11 +5,17 @@
 <{foreach item=gmap_photo from=$gmap_photos}>
 
 <script type="text/javascript">
-//<![CDATA[
+    //<![CDATA[
 
-  webphoto_gmap_info[<{$gmap_photo_i}>] = new Array( parseFloat( <{$gmap_photo.gmap_latitude}> ), parseFloat( <{$gmap_photo.gmap_longitude}> ), parseInt( <{$gmap_photo.gmap_icon_id}> ), '<{$gmap_photo.gmap_info}>' );
+    webphoto_gmap_info[<{$gmap_photo_i}>] = new Array( parseFloat( <{$gmap_photo.gmap_latitude} >
+    ),
+    parseFloat(<{$gmap_photo.gmap_longitude}> ), parseInt( <{$gmap_photo.gmap_icon_id} >
+    ),
+    '<{$gmap_photo.gmap_info}>'
+    )
+    ;
 
-//]]>
+    //]]>
 </script>
 
 <{counter name="gmap_photo_i" assign="gmap_photo_i" print=false }>

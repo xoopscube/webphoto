@@ -6,13 +6,14 @@
 // 2008-04-02 K.OHWADA
 //=========================================================
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'not permit' ) ;
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+	die( 'not permit' );
+}
 
 // === define begin ===
-if( !defined("_C_WEBPHOTO_PRELOAD_LOADED") ) 
-{
+if ( ! defined( "_C_WEBPHOTO_PRELOAD_LOADED" ) ) {
 
-define("_C_WEBPHOTO_PRELOAD_LOADED", 1 ) ;
+	define( "_C_WEBPHOTO_PRELOAD_LOADED", 1 );
 
 //=========================================================
 // Constant
