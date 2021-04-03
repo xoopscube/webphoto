@@ -27,34 +27,33 @@
 // $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
 //---------------------------------------------------------
 
-if( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
+if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-include_once WEBPHOTO_TRUST_PATH.'/include/header.php';
+include_once WEBPHOTO_TRUST_PATH . '/include/header.php';
 
-webphoto_include_once( 'class/inc/public.php' ,      $MY_DIRNAME );
+webphoto_include_once( 'class/inc/public.php', $MY_DIRNAME );
 webphoto_include_once( 'class/inc/auto_publish.php', $MY_DIRNAME );
-webphoto_include_once( 'class/inc/uri.php' ,         $MY_DIRNAME );
-webphoto_include_once( 'class/inc/whatsnew.php' ,    $MY_DIRNAME );
+webphoto_include_once( 'class/inc/uri.php', $MY_DIRNAME );
+webphoto_include_once( 'class/inc/whatsnew.php', $MY_DIRNAME );
 
 //=========================================================
 // search functions
 //=========================================================
 // --- eval begin ---
-eval( 'function '.$MY_DIRNAME.'_new( $limit=0 , $offset=0 ){
-	return webphoto_whatsnew_new_base( "'.$MY_DIRNAME.'" , $limit , $offset ) ;
+eval( 'function ' . $MY_DIRNAME . '_new( $limit=0 , $offset=0 ){
+	return webphoto_whatsnew_new_base( "' . $MY_DIRNAME . '" , $limit , $offset ) ;
 }' );
 // --- eval end ---
 
 // === function begin ===
-if( !function_exists( 'webphoto_whatsnew_new_base' ) ) 
-{
+if ( ! function_exists( 'webphoto_whatsnew_new_base' ) ) {
 
-function webphoto_whatsnew_new_base( $dirname , $limit=0 , $offset=0 )
-{
-	$inc_class =& webphoto_inc_whatsnew::getSingleton( 
-		$dirname, WEBPHOTO_TRUST_DIRNAME );
-	return $inc_class->whatsnew( $limit , $offset );
-}
+	function webphoto_whatsnew_new_base( $dirname, $limit = 0, $offset = 0 ) {
+		$inc_class =& webphoto_inc_whatsnew::getSingleton(
+			$dirname, WEBPHOTO_TRUST_DIRNAME );
+
+		return $inc_class->whatsnew( $limit, $offset );
+	}
 }
