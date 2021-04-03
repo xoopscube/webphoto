@@ -1,18 +1,17 @@
 <?php
-// $Id: flash_log.php,v 1.2 2008/12/20 06:11:27 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * class webphoto_flash_log
+ * caller webphoto_main_callback webphoto_admin_item_manager
+ */
 
-//=========================================================
-// webphoto module
-// 2008-11-01 K.OHWADA
-//=========================================================
 
-//---------------------------------------------------------
-// change log
-// 2008-12-12 K.OHWADA
-// getInstance() -> getSingleton()
-//---------------------------------------------------------
-
-//---------------------------------------------------------
 // http://code.jeroenwijering.com/trac/wiki/Flashvars3
 //
 // Only for the mediaplayer. 
@@ -25,148 +24,136 @@
 // The player returns $id, $title, $file, $state, $duration in POST variable
 // $state (start/stop)
 // $duration is set at stop
-//---------------------------------------------------------
 
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_flash_log
-// caller webphoto_main_callback webphoto_admin_item_manager
-//=========================================================
-class webphoto_flash_log
-{
-	public $_config_class ;
-	public $_utility_class ;
+class webphoto_flash_log {
+	public $_config_class;
+	public $_utility_class;
 
-	public $_WORK_DIR ;
-	public $_LOG_FILE ;
+	public $_WORK_DIR;
+	public $_LOG_FILE;
 
-//---------------------------------------------------------
+
 // constructor
-//---------------------------------------------------------
-function __construct( $dirname )
-{
-	$this->_utility_class =& webphoto_lib_utility::getInstance();
-	$this->_post_class    =& webphoto_lib_post::getInstance();
 
-	$this->_init_xoops_config( $dirname );
+	function __construct( $dirname ) {
+		$this->_utility_class =& webphoto_lib_utility::getInstance();
+		$this->_post_class    =& webphoto_lib_post::getInstance();
 
-	$this->_LOG_FILE = $this->_WORK_DIR .'/log/flash.txt' ;
-}
+		$this->_init_xoops_config( $dirname );
 
-public static function &getInstance( $dirname = null, $trust_dirname = null )
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_flash_log( $dirname );
+		$this->_LOG_FILE = $this->_WORK_DIR . '/log/flash.txt';
 	}
-	return $instance;
-}
 
-//---------------------------------------------------------
+	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_flash_log( $dirname );
+		}
+
+		return $instance;
+	}
+
+
 // callback
-//---------------------------------------------------------
-function callback_log()
-{
-	$id       = $this->_post_class->get_post_int('id');
-	$duration = $this->_post_class->get_post_int('duration');
-	$title    = $this->_post_class->get_post_text('title');
-	$file     = $this->_post_class->get_post_text('file');
-	$state    = $this->_post_class->get_post_text('state');
 
-	if ($state != 'start') {
-		return true;	// no action
+	function callback_log() {
+		$id       = $this->_post_class->get_post_int( 'id' );
+		$duration = $this->_post_class->get_post_int( 'duration' );
+		$title    = $this->_post_class->get_post_text( 'title' );
+		$file     = $this->_post_class->get_post_text( 'file' );
+		$state    = $this->_post_class->get_post_text( 'state' );
+
+		if ( $state != 'start' ) {
+			return true;    // no action
+		}
+
+		$http_referer = null;
+		$remote_addr  = null;
+
+		if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+			$http_referer = $_SERVER['HTTP_REFERER'];
+		}
+
+		if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$remote_addr = $_SERVER['REMOTE_ADDR'];
+		}
+
+		$data = formatTimestamp( time(), 'm' ) . ',';
+		$data .= $http_referer . ',';
+		$data .= $remote_addr . ',';
+		$data .= $state . ',';
+		$data .= $id . ',';
+		$data .= $title . ',';
+		$data .= $file . ',';
+		$data .= $duration;
+		$data .= "\r\n";
+
+		return $this->append_log( $data );
 	}
 
-	$http_referer = null;
-	$remote_addr  = null;
 
-	if ( isset($_SERVER['HTTP_REFERER']) ) {
-		$http_referer = $_SERVER['HTTP_REFERER'];
-	}
-
-	if ( isset($_SERVER['REMOTE_ADDR']) ) {
-		$remote_addr = $_SERVER['REMOTE_ADDR'];
-	}
-
-	$data  = formatTimestamp(time(),'m') .',';
-	$data .= $http_referer .',';
-	$data .= $remote_addr .',';
-	$data .= $state .',';
-	$data .= $id .',';
-	$data .= $title .',';
-	$data .= $file .',';
-	$data .= $duration ;
-	$data .= "\r\n";
-
-	return $this->append_log( $data );
-}
-
-//---------------------------------------------------------
 // write read
-//---------------------------------------------------------
-function get_filename()
-{
-	return $this->_LOG_FILE ;
-}
 
-function append_log( $data )
-{
-	return $this->_utility_class->write_file( $this->_LOG_FILE, $data, 'a', true );
-}
-
-function read_log()
-{
-	if ( ! file_exists($this->_LOG_FILE) ) {
-		return false;	// no file
+	function get_filename() {
+		return $this->_LOG_FILE;
 	}
 
-	$lines = $this->_utility_class->read_file_cvs( $this->_LOG_FILE );
-
-	if ( ! is_array($lines) ) {
-		return false ;
+	function append_log( $data ) {
+		return $this->_utility_class->write_file( $this->_LOG_FILE, $data, 'a', true );
 	}
 
-	$count = count($lines);
+	function read_log() {
+		if ( ! file_exists( $this->_LOG_FILE ) ) {
+			return false;    // no file
+		}
+
+		$lines = $this->_utility_class->read_file_cvs( $this->_LOG_FILE );
+
+		if ( ! is_array( $lines ) ) {
+			return false;
+		}
+
+		$count = count( $lines );
 
 // empty file
-	if ( $count == 0 ) {
-		return array() ;	// no data
-	}
+		if ( $count == 0 ) {
+			return array();    // no data
+		}
 
 // one line and empty line
-	if (( $count == 1 ) && empty($lines[0]) ) {
-		return array() ;	// no data
-	}
+		if ( ( $count == 1 ) && empty( $lines[0] ) ) {
+			return array();    // no data
+		}
 
 // remove last line if empty
-	if ( empty($lines[ $count ][0]) ) {
-		array_pop( $lines ) ;
+		if ( empty( $lines[ $count ][0] ) ) {
+			array_pop( $lines );
+		}
+
+		return $lines;
 	}
 
-	return $lines;
-}
+	function empty_log() {
+		if ( ! file_exists( $this->_LOG_FILE ) ) {
+			return false;
+		}
 
-function empty_log()
-{
-	if ( ! file_exists($this->_LOG_FILE) ) {
-		return false;
+		return $this->_utility_class->write_file( $this->_LOG_FILE, '', 'w', true );
 	}
 
-	return $this->_utility_class->write_file( $this->_LOG_FILE, '', 'w', true );
-}
 
-//---------------------------------------------------------
 // xoops_config
-//---------------------------------------------------------
-function _init_xoops_config( $dirname )
-{
-	$config_handler =& webphoto_inc_config::getSingleton( $dirname );
 
-	$this->_WORK_DIR = $config_handler->get_by_name( 'workdir' );
-}
+	function _init_xoops_config( $dirname ) {
+		$config_handler =& webphoto_inc_config::getSingleton( $dirname );
+
+		$this->_WORK_DIR = $config_handler->get_by_name( 'workdir' );
+	}
 
 // --- class end ---
 }

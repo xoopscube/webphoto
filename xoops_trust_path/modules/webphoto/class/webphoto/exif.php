@@ -1,96 +1,80 @@
 <?php
-// $Id: exif.php,v 1.6 2011/12/26 06:51:31 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2009-01-10 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// webphoto_lib_mysql_utility
-// 2010-10-01 K.OHWADA
-// build_row_exif() -> get_exif()
-// 2010-03-18 K.OHWADA
-// nothing to do
-//---------------------------------------------------------
-
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_exif
-// wrapper for webphoto_lib_exif
-//=========================================================
-class webphoto_exif
-{
+
+class webphoto_exif {
 	public $_exif_class;
 	public $_utility_class;
-	public $_mysql_utility_class ;
+	public $_mysql_utility_class;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function __construct()
-{
-	$this->_exif_class    =& webphoto_lib_exif::getInstance();
-	$this->_utility_class =& webphoto_lib_utility::getInstance();
-	$this->_mysql_utility_class =& webphoto_lib_mysql_utility::getInstance();
+	function __construct() {
+		$this->_exif_class          =& webphoto_lib_exif::getInstance();
+		$this->_utility_class       =& webphoto_lib_utility::getInstance();
+		$this->_mysql_utility_class =& webphoto_lib_mysql_utility::getInstance();
 
-}
-
-public static function &getInstance()
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new webphoto_exif();
 	}
-	return $instance;
-}
 
-//---------------------------------------------------------
+	public static function &getInstance() {
+		static $instance;
+		if ( ! isset( $instance ) ) {
+			$instance = new webphoto_exif();
+		}
+
+		return $instance;
+	}
+
+
 // exif
-//---------------------------------------------------------
-function get_exif( $file )
-{
-	$info = $this->_exif_class->read_file( $file );
-	if ( !is_array($info) ) {
-		return null ; // no action
+
+	function get_exif( $file ) {
+		$info = $this->_exif_class->read_file( $file );
+		if ( ! is_array( $info ) ) {
+			return null; // no action
+		}
+
+		$info['datetime_mysql'] = $this->exif_to_mysql_datetime( $info );
+
+		return $info;
 	}
 
-	$info['datetime_mysql'] = $this->exif_to_mysql_datetime( $info ) ;
-	return $info ;
-}
+	function exif_to_mysql_datetime( $exif ) {
+		$datetime     = $exif['datetime'];
+		$datetime_gnu = $exif['datetime_gnu'];
 
-function exif_to_mysql_datetime( $exif )
-{
-	$datetime     = $exif['datetime'];
-	$datetime_gnu = $exif['datetime_gnu'];
+		if ( $datetime_gnu ) {
+			return $datetime_gnu;
+		}
 
-	if ( $datetime_gnu ) {
-		return $datetime_gnu;
+		$time = $this->str_to_time( $datetime );
+		if ( $time <= 0 ) {
+			return false;
+		}
+
+		return $this->time_to_mysql_datetime( $time );
 	}
 
-	$time = $this->str_to_time( $datetime );
-	if ( $time <= 0 ) { return false; }
 
-	return $this->time_to_mysql_datetime( $time );
-}
-
-//---------------------------------------------------------
 // utility class
-//---------------------------------------------------------
-function str_to_time( $str )
-{
-	return $this->_utility_class->str_to_time( $str ) ;
-}
 
-function time_to_mysql_datetime( $time )
-{
-	return $this->_mysql_utility_class->time_to_mysql_datetime( $time ) ;
-}
+	function str_to_time( $str ) {
+		return $this->_utility_class->str_to_time( $str );
+	}
+
+	function time_to_mysql_datetime( $time ) {
+		return $this->_mysql_utility_class->time_to_mysql_datetime( $time );
+	}
 
 // --- class end ---
 }

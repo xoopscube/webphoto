@@ -1,47 +1,42 @@
 <?php
-// $Id: plugin_ini.php,v 1.1 2009/11/29 07:37:03 ohwada Exp $
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
-//=========================================================
-// webphoto module
-// 2009-11-11 K.OHWADA
-//=========================================================
-
-if( ! defined( 'XOOPS_TRUST_PATH' ) ) {
+if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_plugin_ini
-//=========================================================
-class webphoto_plugin_ini extends webphoto_lib_plugin
-{
+
+class webphoto_plugin_ini extends webphoto_lib_plugin {
 	public $_ini_class;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-public function __construct( $dirname, $trust_dirname )
-{
-	parent::__construct( $dirname, $trust_dirname);
-	//$this->webphoto_lib_plugin( $dirname, $trust_dirname );
 
-	$this->_ini_class 
-		=& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
-	$this->_ini_class->read_main_ini();
-}
+	public function __construct( $dirname, $trust_dirname ) {
+		parent::__construct( $dirname, $trust_dirname );
+		//$this->webphoto_lib_plugin( $dirname, $trust_dirname );
 
-//---------------------------------------------------------
+		$this->_ini_class
+			=& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
+		$this->_ini_class->read_main_ini();
+	}
+
+
 // ini class
-//---------------------------------------------------------
-function get_ini( $name )
-{
-	return $this->_ini_class->get_ini( $name );
-}
 
-function explode_ini( $name )
-{
-	return $this->_ini_class->explode_ini( $name );
-}
+	function get_ini( $name ) {
+		return $this->_ini_class->get_ini( $name );
+	}
+
+	function explode_ini( $name ) {
+		return $this->_ini_class->explode_ini( $name );
+	}
 
 // --- class end ---
 }
