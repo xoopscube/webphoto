@@ -70,9 +70,8 @@ class webphoto_bin_base {
 	public $_DEBUG_D3 = false;
 
 
-// constructor
+	public function __construct( $dirname, $trust_dirname ) {
 
-	function webphoto_bin_base( $dirname, $trust_dirname ) {
 		$this->_init( $dirname, $trust_dirname );
 
 		$this->_DIRNAME       = $dirname;

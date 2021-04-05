@@ -28,7 +28,7 @@ class webphoto_lib_mail {
 
 // utility
 
-	function get_valid_addr( $str ) {
+	public function get_valid_addr( $str ) {
 		list( $name, $addr ) = $this->parse_name_addr( $str );
 
 		if ( $this->check_valid_addr( $addr ) ) {
@@ -38,7 +38,7 @@ class webphoto_lib_mail {
 		return null;
 	}
 
-	function check_valid_addr( $addr ) {
+	public function check_valid_addr( $addr ) {
 // same as class/xoopsmailer.php
 		$PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i";
 
@@ -49,7 +49,7 @@ class webphoto_lib_mail {
 		return false;
 	}
 
-	function parse_name_addr( $str ) {
+	public function parse_name_addr( $str ) {
 		$name = '';
 
 // taro <taro@example.com>

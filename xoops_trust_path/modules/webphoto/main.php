@@ -13,7 +13,6 @@ if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-// webphoto
 if ( ! defined( "WEBPHOTO_DIRNAME" ) ) {
 	define( "WEBPHOTO_DIRNAME", $MY_DIRNAME );
 }

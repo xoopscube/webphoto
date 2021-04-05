@@ -1307,11 +1307,11 @@ class webphoto_inc_xoops_version extends webphoto_inc_base_ini {
 	}
 
 	public function _build_config_index_desc() {
-		$str = '<span style="color: #0000ff">';
+		$str = '<details><summary>';
 		$str .= $this->_constant( 'DESC' );
-		$str .= '<br>';
+		$str .= '</summary><p>';
 		$str .= $this->_constant( 'CFG_INDEX_DESC_DEFAULT' );
-		$str .= '</span>';
+		$str .= '</p></details>';
 
 		return $str;
 	}

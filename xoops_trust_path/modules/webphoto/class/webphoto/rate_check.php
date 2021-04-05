@@ -41,15 +41,11 @@ class webphoto_rate_check extends webphoto_lib_base {
 
 // main
 
-	function can_rate( $item_id ) {
-		if ( $this->check( $item_id ) == 0 ) {
-			return true;
-		}
-
-		return false;
+	public function can_rate( $item_id ) {
+		return $this->check( $item_id ) == 0;
 	}
 
-	function check( $item_id ) {
+	public function check( $item_id ) {
 
 // registered user
 		if ( $this->_xoops_uid != 0 ) {
@@ -79,7 +75,7 @@ class webphoto_rate_check extends webphoto_lib_base {
 		return 0;
 	}
 
-	function redirect( $ret, $url, $time ) {
+	public function redirect( $ret, $url, $time ) {
 		switch ( $ret ) {
 			case _C_WEBPHOTO_ERR_VOTE_OWN :
 				redirect_header( $url, $time, $this->get_constant( 'ERR_CANTVOTEOWN' ) );
@@ -91,7 +87,4 @@ class webphoto_rate_check extends webphoto_lib_base {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

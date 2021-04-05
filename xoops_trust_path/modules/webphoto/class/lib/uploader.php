@@ -77,34 +77,34 @@ class webphoto_lib_uploader {
 // functions
 
 // added for webphoto
-	function setUploadDir( $uploadDir ) {
+	public function setUploadDir( $uploadDir ) {
 		$this->uploadDir = $uploadDir;
 	}
 
 // added for webphoto
-	function setMaxFileSize( $maxFileSize ) {
+	public function setMaxFileSize( $maxFileSize ) {
 		$this->maxFileSize = (int) $maxFileSize;
 	}
 
 // added for webphoto
-	function setMaxWidth( $maxWidth ) {
+	public function setMaxWidth( $maxWidth ) {
 		$this->maxWidth = (int) $maxWidth;
 	}
 
 // added for webphoto
-	function setMaxHeight( $maxHeight ) {
+	public function setMaxHeight( $maxHeight ) {
 		$this->maxHeight = (int) $maxHeight;
 	}
 
 // added for webphoto
-	function setAllowedMimeTypes( $allowedMimeTypes ) {
+	public function setAllowedMimeTypes( $allowedMimeTypes ) {
 		if ( isset( $allowedMimeTypes ) && is_array( $allowedMimeTypes ) ) {
 			$this->allowedMimeTypes =& $allowedMimeTypes;
 		}
 	}
 
 // added for webphoto
-	function setAllowedExtensions( $allowedExtensions ) {
+	public function setAllowedExtensions( $allowedExtensions ) {
 		if ( isset( $allowedExtensions ) && is_array( $allowedExtensions ) ) {
 			$this->allowedExtensions =& $allowedExtensions;
 		}
@@ -118,7 +118,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function fetchMedia( $media_name, $index = null ) {
+	public function fetchMedia( $media_name, $index = null ) {
 // clear error
 		$this->errors     = array();
 		$this->errorCodes = array();
@@ -184,7 +184,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @param string $value
 	 **/
-	function setTargetFileName( $value ) {
+	public function setTargetFileName( $value ) {
 		$this->targetFileName = (string) trim( $value );
 	}
 
@@ -193,7 +193,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @param string $value
 	 **/
-	function setPrefix( $value ) {
+	public function setPrefix( $value ) {
 		$this->prefix = (string) trim( $value );
 	}
 
@@ -202,7 +202,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  string
 	 **/
-	function getMediaName() {
+	public function getMediaName() {
 		return $this->mediaName;
 	}
 
@@ -211,7 +211,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  string
 	 **/
-	function getMediaType() {
+	public function getMediaType() {
 		return $this->mediaType;
 	}
 
@@ -220,7 +220,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  int
 	 **/
-	function getMediaSize() {
+	public function getMediaSize() {
 		return $this->mediaSize;
 	}
 
@@ -229,7 +229,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  string
 	 **/
-	function getMediaTmpName() {
+	public function getMediaTmpName() {
 		return $this->mediaTmpName;
 	}
 
@@ -238,7 +238,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  string
 	 **/
-	function getSavedFileName() {
+	public function getSavedFileName() {
 		return $this->savedFileName;
 	}
 
@@ -247,37 +247,31 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  string
 	 **/
-	function getSavedDestination() {
+	public function getSavedDestination() {
 		return $this->savedDestination;
 	}
 
-// 2008-04-02
-	function getMediaError() {
+	public function getMediaError() {
 		return $this->mediaError;
 	}
 
-// 2008-04-02
-	function getUploadDir() {
+	public function getUploadDir() {
 		return $this->uploadDir;
 	}
 
-// 2008-04-02
-	function getMaxWidth() {
+	public function getMaxWidth() {
 		return $this->maxWidth;
 	}
 
-// 2008-04-02
-	function getMaxHeight() {
+	public function getMaxHeight() {
 		return $this->maxHeight;
 	}
 
-// 2008-04-02
-	function getMediaWidth() {
+	public function getMediaWidth() {
 		return $this->mediaWidth;
 	}
 
-// 2008-04-02
-	function getMediaHeight() {
+	public function getMediaHeight() {
 		return $this->mediaHeight;
 	}
 
@@ -286,7 +280,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function upload( $chmod = 0644 ) {
+	public function upload( $chmod = 0644 ) {
 		if ( $this->uploadDir == '' ) {
 
 			$this->setErrorCodes( 5 );
@@ -350,7 +344,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function _copyFile( $chmod ) {
+	public function _copyFile( $chmod ) {
 		$matched = array();
 		if ( ! preg_match( "/\.([a-zA-Z0-9]+)$/", $this->mediaName, $matched ) ) {
 			return false;
@@ -371,7 +365,7 @@ class webphoto_lib_uploader {
 		return true;
 	}
 
-	function chmod_file( $file, $mode ) {
+	public function chmod_file( $file, $mode ) {
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $mode );
 		}
@@ -382,12 +376,8 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function checkMaxFileSize() {
-		if ( $this->mediaSize > $this->maxFileSize ) {
-			return false;
-		}
-
-		return true;
+	public function checkMaxFileSize() {
+		return ! ( $this->mediaSize > $this->maxFileSize );
 	}
 
 	/**
@@ -395,7 +385,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function checkMaxWidth() {
+	public function checkMaxWidth() {
 		if ( ! isset( $this->maxWidth ) ) {
 			return true;
 		}
@@ -418,7 +408,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function checkMaxHeight() {
+	public function checkMaxHeight() {
 		if ( ! isset( $this->maxHeight ) ) {
 			return true;
 		}
@@ -444,7 +434,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function checkMimeType() {
+	public function checkMimeType() {
 		if ( count( $this->allowedMimeTypes ) <= 0 || ! in_array( $this->mediaType, $this->allowedMimeTypes ) ) {
 			return false;
 		} else {
@@ -457,7 +447,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return  bool
 	 **/
-	function checkExtension() {
+	public function checkExtension() {
 		$ext = substr( strrchr( $this->mediaName, '.' ), 1 );
 		if ( ! empty( $this->allowedExtensions ) && ! in_array( strtolower( $ext ), $this->allowedExtensions ) ) {
 			return false;
@@ -466,12 +456,12 @@ class webphoto_lib_uploader {
 		}
 	}
 
-	function setErrorCodes( $code, $msg = null ) {
+	public function setErrorCodes( $code, $msg = null ) {
 		$this->setErrors( $this->errorMsgs[ $code ] . $msg );
 		$this->errorCodes[] = $code;
 	}
 
-	function getErrorCodes() {
+	public function getErrorCodes() {
 		return $this->errorCodes;
 	}
 
@@ -480,7 +470,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @param string $error
 	 **/
-	function setErrors( $error ) {
+	public function setErrors( $error ) {
 		$this->errors[] = trim( $error );
 	}
 
@@ -491,7 +481,7 @@ class webphoto_lib_uploader {
 	 *
 	 * @return    array|string    Array of array messages OR HTML string
 	 */
-	function &getErrors( $ashtml = true ) {
+	public function &getErrors( $ashtml = true ) {
 		if ( ! $ashtml ) {
 			return $this->errors;
 		} else {

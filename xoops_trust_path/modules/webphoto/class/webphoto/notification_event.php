@@ -20,11 +20,8 @@ class webphoto_notification_event extends webphoto_d3_notification_event {
 	public $_uri_class;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct();
-		//$this->webphoto_d3_notification_event();
 		$this->init( $dirname, $trust_dirname );
 
 		$this->_cat_handler
@@ -80,7 +77,4 @@ class webphoto_notification_event extends webphoto_d3_notification_event {
 		$this->trigger_event( 'global', 0, 'waiting', $tags );
 	}
 
-// --- class end ---
 }
-
-?>

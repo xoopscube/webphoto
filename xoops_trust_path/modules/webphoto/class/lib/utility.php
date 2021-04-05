@@ -44,7 +44,7 @@ class webphoto_lib_utility {
 
 
 // utility
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
 		foreach ( $arr1 as $v ) {
@@ -58,7 +58,7 @@ class webphoto_lib_utility {
 		return $arr2;
 	}
 
-	function array_to_str( $arr, $glue ) {
+	public function array_to_str( $arr, $glue ) {
 		$val = false;
 		if ( is_array( $arr ) && count( $arr ) ) {
 			$val = implode( $glue, $arr );
@@ -67,15 +67,15 @@ class webphoto_lib_utility {
 		return $val;
 	}
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
-	function strip_ext( $file ) {
+	public function strip_ext( $file ) {
 		return str_replace( strrchr( $file, '.' ), '', $file );
 	}
 
-	function parse_url_to_filename( $url ) {
+	public function parse_url_to_filename( $url ) {
 		$parsed = parse_url( $url );
 		if ( isset( $parsed['path'] ) ) {
 			$arr = explode( '/', $parsed['path'] );
@@ -87,7 +87,7 @@ class webphoto_lib_utility {
 		return null;
 	}
 
-	function add_slash_to_head( $str ) {
+	public function add_slash_to_head( $str ) {
 // ord : the ASCII value of the first character of string
 // 0x2f slash
 
@@ -98,7 +98,7 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function strip_slash_from_head( $str ) {
+	public function strip_slash_from_head( $str ) {
 // ord : the ASCII value of the first character of string
 // 0x2f slash
 
@@ -109,7 +109,7 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function add_separator_to_tail( $str ) {
+	public function add_separator_to_tail( $str ) {
 // Check the path to binaries of imaging packages
 // DIRECTORY_SEPARATOR is defined by PHP
 
@@ -120,7 +120,7 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function strip_slash_from_tail( $str ) {
+	public function strip_slash_from_tail( $str ) {
 		if ( substr( $str, - 1, 1 ) == '/' ) {
 			$str = substr( $str, 0, - 1 );
 		}
@@ -129,7 +129,7 @@ class webphoto_lib_utility {
 	}
 
 // Checks if string is started from HTTP
-	function check_http_start( $str ) {
+	public function check_http_start( $str ) {
 		if ( preg_match( "|^https?://|", $str ) ) {
 			return true;    // include HTTP
 		}
@@ -138,37 +138,23 @@ class webphoto_lib_utility {
 	}
 
 // Checks if string is HTTP only
-	function check_http_only( $str ) {
-		if ( ( $str == 'http://' ) || ( $str == 'https://' ) ) {
-			return true;    // http only
-		}
-
-		return false;
+	public function check_http_only( $str ) {
+		return ( $str == 'http://' ) || ( $str == 'https://' );
 	}
 
-	function check_http_null( $str ) {
-		if ( ( $str == '' ) || ( $str == 'http://' ) || ( $str == 'https://' ) ) {
-			return true;
-		}
-
-		return false;
+	public function check_http_null( $str ) {
+		return ( $str == '' ) || ( $str == 'http://' ) || ( $str == 'https://' );
 	}
 
-	function check_http_fill( $str ) {
-		$ret = ! $this->check_http_null( $str );
-
-		return $ret;
+	public function check_http_fill( $str ) {
+		return ! $this->check_http_null( $str );
 	}
 
-	function get_array_value_by_key( $array, $key, $default = null ) {
-		if ( isset( $array[ $key ] ) ) {
-			return $array[ $key ];
-		}
-
-		return $default;
+	public function get_array_value_by_key( $array, $key, $default = null ) {
+		return $array[ $key ] ?? $default;
 	}
 
-	function array_merge_unique( $arr1, $arr2, $key_name = null ) {
+	public function array_merge_unique( $arr1, $arr2, $key_name = null ) {
 		if ( $key_name ) {
 			return $this->array_merge_unique_1( $arr1, $arr2, $key_name );
 		} else {
@@ -176,7 +162,7 @@ class webphoto_lib_utility {
 		}
 	}
 
-	function array_merge_unique_1( $arr1, $arr2, $key_name ) {
+	public function array_merge_unique_1( $arr1, $arr2, $key_name ) {
 		$arr_ret = null;
 		if ( is_array( $arr1 ) && count( $arr1 ) ) {
 			$arr_ret = $this->array_to_key_value( $arr1, $key_name );
@@ -197,7 +183,7 @@ class webphoto_lib_utility {
 		return $arr_ret;
 	}
 
-	function array_to_key_value( $arr, $key_name ) {
+	public function array_to_key_value( $arr, $key_name ) {
 		$arr_ret = null;
 
 // BUG : logic was reverse
@@ -214,7 +200,7 @@ class webphoto_lib_utility {
 		return $arr_ret;
 	}
 
-	function array_merge_unique_2( $arr1, $arr2 ) {
+	public function array_merge_unique_2( $arr1, $arr2 ) {
 		if ( ! is_array( $arr1 ) || ! count( $arr1 ) ) {
 			if ( is_array( $arr2 ) ) {
 				return $arr2;
@@ -230,7 +216,7 @@ class webphoto_lib_utility {
 		return array_unique( array_merge( $arr1, $arr2 ) );
 	}
 
-	function array_remove( $arr1, $arr2 ) {
+	public function array_remove( $arr1, $arr2 ) {
 		if ( ! is_array( $arr1 ) || ! count( $arr1 ) ) {
 			return $arr1;
 		}
@@ -251,7 +237,7 @@ class webphoto_lib_utility {
 
 // format
 
-	function format_filesize( $size, $precision = 2 ) {
+	public function format_filesize( $size, $precision = 2 ) {
 		$format = '%.' . (int) $precision . 'f';
 		$bytes  = array( 'B', 'KB', 'MB', 'GB', 'TB' );
 		foreach ( $bytes as $unit ) {
@@ -261,17 +247,16 @@ class webphoto_lib_utility {
 				break;
 			}
 		}
-		$str = sprintf( $format, $size ) . ' ' . $unit;
 
-		return $str;
+		return sprintf( $format, $size ) . ' ' . $unit;
 	}
 
-	function format_time( $time, $str_hour, $str_min, $str_sec, $flag_zero = false ) {
+	public function format_time( $time, $str_hour, $str_min, $str_sec, $flag_zero = false ) {
 		return $this->build_time( $this->parse_time( $time ),
 			$str_hour, $str_min, $str_sec, $flag_zero );
 	}
 
-	function build_time( $time_array, $str_hour, $str_min, $str_sec, $flag_zero = false ) {
+	public function build_time( $time_array, $str_hour, $str_min, $str_sec, $flag_zero = false ) {
 		list( $hour, $min, $sec ) = $time_array;
 
 		$str = null;
@@ -286,7 +271,7 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function parse_time( $time ) {
+	public function parse_time( $time ) {
 		$hour = (int) ( $time / 3600 );
 		$min  = (int) ( ( $time - 3600 * $hour ) / 60 );
 		$sec  = $time - 3600 * $hour - 60 * $min;
@@ -297,14 +282,14 @@ class webphoto_lib_utility {
 
 // file name
 
-	function build_random_file_name( $id, $ext, $extra = null ) {
+	public function build_random_file_name( $id, $ext, $extra = null ) {
 		$str = $this->build_random_file_node( $id, $extra );
 		$str .= '.' . $ext;
 
 		return $str;
 	}
 
-	function build_random_file_node( $id, $extra = null ) {
+	public function build_random_file_node( $id, $extra = null ) {
 		$alphabet = $this->build_random_alphabet();
 		$str      = $alphabet;
 		$str      .= $this->build_format_id( $id );
@@ -316,21 +301,21 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function build_random_alphabet() {
+	public function build_random_alphabet() {
 // one lower alphabet ( a - z )
 		$str = chr( rand( $this->_ASCII_LOWER_A, $this->_ASCII_LOWER_Z ) );
 
 		return $str;
 	}
 
-	function build_format_id( $id, $format = '%05d' ) {
+	public function build_format_id( $id, $format = '%05d' ) {
 		return sprintf( $format, $id );
 	}
 
 
 // file
 
-	function unlink_file( $file ) {
+	public function unlink_file( $file ) {
 		if ( $this->check_file( $file ) ) {
 			return unlink( $file );
 		}
@@ -338,7 +323,7 @@ class webphoto_lib_utility {
 		return false;
 	}
 
-	function copy_file( $src, $dst, $flag_chmod = false ) {
+	public function copy_file( $src, $dst, $flag_chmod = false ) {
 		if ( $this->check_file( $src ) ) {
 			$ret = copy( $src, $dst );
 
@@ -353,7 +338,7 @@ class webphoto_lib_utility {
 		return false;
 	}
 
-	function rename_file( $old, $new ) {
+	public function rename_file( $old, $new ) {
 		if ( $this->check_file( $old ) ) {
 			return rename( $old, $new );
 		}
@@ -361,12 +346,8 @@ class webphoto_lib_utility {
 		return false;
 	}
 
-	function check_file( $file ) {
-		if ( $file && file_exists( $file ) && is_file( $file ) && ! is_dir( $file ) ) {
-			return true;
-		}
-
-		return false;
+	public function check_file( $file ) {
+		return $file && file_exists( $file ) && is_file( $file ) && ! is_dir( $file );
 	}
 
 	function read_file( $file, $mode = 'r' ) {
@@ -381,7 +362,7 @@ class webphoto_lib_utility {
 		return $date;
 	}
 
-	function read_file_cvs( $file, $mode = 'r' ) {
+	public function read_file_cvs( $file, $mode = 'r' ) {
 		$lines = array();
 
 		$fp = fopen( $file, $mode );
@@ -398,7 +379,7 @@ class webphoto_lib_utility {
 		return $lines;
 	}
 
-	function write_file( $file, $data, $mode = 'w', $flag_chmod = false ) {
+	public function write_file( $file, $data, $mode = 'w', $flag_chmod = false ) {
 		$fp = fopen( $file, $mode );
 		if ( ! $fp ) {
 			return false;
@@ -415,7 +396,7 @@ class webphoto_lib_utility {
 		return $byte;
 	}
 
-	function check_file_time( $file, $interval ) {
+	public function check_file_time( $file, $interval ) {
 // if passing interval time
 		if ( file_exists( $file ) ) {
 			$time = (int) trim( file_get_contents( $file ) );
@@ -432,11 +413,11 @@ class webphoto_lib_utility {
 		return false;
 	}
 
-	function renew_file_time( $file, $chmod ) {
+	public function renew_file_time( $file, $chmod ) {
 		$this->write_file( $file, time(), 'w', $chmod );
 	}
 
-	function chmod_file( $file, $mode ) {
+	public function chmod_file( $file, $mode ) {
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $mode );
 		}
@@ -445,7 +426,7 @@ class webphoto_lib_utility {
 
 // dir
 
-	function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
+	public function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
 		$arr = array();
 
 		$lists = $this->get_lists_in_dir( $path );
@@ -487,7 +468,7 @@ class webphoto_lib_utility {
 		return $arr;
 	}
 
-	function get_dirs_in_dir( $path, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
+	public function get_dirs_in_dir( $path, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
 		$arr = array();
 
 		$lists = $this->get_lists_in_dir( $path );
@@ -532,7 +513,7 @@ class webphoto_lib_utility {
 		return $arr;
 	}
 
-	function get_lists_in_dir( $path ) {
+	public function get_lists_in_dir( $path ) {
 		$arr = array();
 
 		$path = $this->strip_slash_from_tail( $path );
@@ -562,7 +543,7 @@ class webphoto_lib_utility {
 
 // image
 
-	function adjust_image_size( $width, $height, $max_width, $max_height ) {
+	public function adjust_image_size( $width, $height, $max_width, $max_height ) {
 		if ( $width > $max_width ) {
 			$mag    = $max_width / $width;
 			$width  = $max_width;
@@ -578,39 +559,36 @@ class webphoto_lib_utility {
 		return array( (int) $width, (int) $height );
 	}
 
-	function is_image_cmyk( $file ) {
+	public function is_image_cmyk( $file ) {
 		$size = getimagesize( $file );
-		if ( isset( $size['channels'] ) &&
-		     ( $size['channels'] == 4 ) ) {
-			return true;
-		}
 
-		return false;
+		return isset( $size['channels'] ) &&
+		       ( $size['channels'] == 4 );
 	}
 
 
 // encode
 
-	function encode_slash( $str ) {
+	public function encode_slash( $str ) {
 		return str_replace( '/', $this->_HTML_SLASH, $str );
 	}
 
-	function encode_colon( $str ) {
+	public function encode_colon( $str ) {
 		return str_replace( ':', $this->_HTML_COLON, $str );
 	}
 
-	function decode_slash( $str ) {
+	public function decode_slash( $str ) {
 		return str_replace( $this->_HTML_SLASH, '/', $str );
 	}
 
-	function decode_colon( $str ) {
+	public function decode_colon( $str ) {
 		return str_replace( $this->_HTML_COLON, ':', $str );
 	}
 
 
 // file name
 
-	function substitute_filename_to_underbar( $name, $char = '_' ) {
+	public function substitute_filename_to_underbar( $name, $char = '_' ) {
 // substitute the characters that cannot be used as the file name to underbar. 
 // \ / : * ? " < > | sapce
 		$search = array( '\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ' );
@@ -625,7 +603,7 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function build_filename_rfc2231( $name, $charset, $langcode ) {
+	public function build_filename_rfc2231( $name, $charset, $langcode ) {
 		$str = strtolower( $charset . "'" . $langcode . "'" );
 		$str .= rawurlencode( $name );
 
@@ -635,13 +613,13 @@ class webphoto_lib_utility {
 
 // group perms
 
-	function convert_group_perms_array_to_str( $perms, $glue = '&' ) {
+	public function convert_group_perms_array_to_str( $perms, $glue = '&' ) {
 		$arr = $this->arrenge_group_perms_array( $perms );
 
 		return $this->array_to_perm( $arr, $glue );
 	}
 
-	function arrenge_group_perms_array( $perms ) {
+	public function arrenge_group_perms_array( $perms ) {
 		if ( ! is_array( $perms ) || ! count( $perms ) ) {
 			return null;
 		}
@@ -656,7 +634,7 @@ class webphoto_lib_utility {
 		return $arr;
 	}
 
-	function array_to_perm( $arr, $glue ) {
+	public function array_to_perm( $arr, $glue ) {
 		$val = $this->array_to_str( $arr, $glue );
 		if ( $val ) {
 			$val = $glue . $val . $glue;
@@ -668,7 +646,7 @@ class webphoto_lib_utility {
 
 // time
 
-	function str_to_time( $str ) {
+	public function str_to_time( $str ) {
 		$str = trim( $str );
 		if ( $str ) {
 			$time = strtotime( $str );
@@ -685,7 +663,7 @@ class webphoto_lib_utility {
 
 // footer
 
-	function build_execution_time( $time_start = 0 ) {
+	public function build_execution_time( $time_start = 0 ) {
 		$str = 'execution time : ';
 		$str .= $this->get_execution_time( $time_start );
 		$str .= ' sec' . "<br>\n";
@@ -693,7 +671,7 @@ class webphoto_lib_utility {
 		return $str;
 	}
 
-	function build_memory_usage() {
+	public function build_memory_usage() {
 		$usage = $this->get_memory_usage();
 		if ( $usage ) {
 			$str = 'memory usage : ' . $usage . ' MB' . "<br>\n";
@@ -704,7 +682,7 @@ class webphoto_lib_utility {
 		return null;
 	}
 
-	function get_execution_time( $time_start = 0 ) {
+	public function get_execution_time( $time_start = 0 ) {
 		list( $usec, $sec ) = explode( " ", microtime() );
 		$time = (float) $sec + (float) $usec - $time_start;
 		$exec = sprintf( "%6.3f", $time );
@@ -712,7 +690,7 @@ class webphoto_lib_utility {
 		return $exec;
 	}
 
-	function get_memory_usage() {
+	public function get_memory_usage() {
 		if ( function_exists( 'memory_get_usage' ) ) {
 			$usage = sprintf( "%6.3f", memory_get_usage() / 1000000 );
 
@@ -722,7 +700,7 @@ class webphoto_lib_utility {
 		return null;
 	}
 
-	function get_happy_linux_url( $is_japanese = false ) {
+	public function get_happy_linux_url( $is_japanese = false ) {
 		if ( $is_japanese ) {
 			return 'http://linux.ohwada.jp/';
 		}
@@ -730,7 +708,7 @@ class webphoto_lib_utility {
 		return 'http://linux2.ohwada.net/';
 	}
 
-	function get_powered_by() {
+	public function get_powered_by() {
 		$str = '<div align="right">';
 		$str .= '<a href="http://linux2.ohwada.net/" target="_blank">';
 		$str .= '<span style="font-size : 80%;">Powered by Happy Linux</span>';
@@ -743,7 +721,7 @@ class webphoto_lib_utility {
 // base on core's xoops_error
 // XLC do not support 'errorMsg' style class in admin cp
 
-	function build_error_msg( $msg, $title = '', $flag_sanitize = true ) {
+	public function build_error_msg( $msg, $title = '', $flag_sanitize = true ) {
 		$str = '<div class="tips">';
 		if ( $title != '' ) {
 			if ( $flag_sanitize ) {
@@ -772,7 +750,7 @@ class webphoto_lib_utility {
 
 // sanitize
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
@@ -786,7 +764,7 @@ class webphoto_lib_utility {
 //   &#039;  =>  '
 //   &apos;  =>  ' (xml format)
 // --------------------------------------------------------
-	function undo_htmlspecialchars( $str ) {
+	public function undo_htmlspecialchars( $str ) {
 		$arr = array(
 			'&amp;'  => '&',
 			'&lt;'   => '<',

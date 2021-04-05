@@ -1,26 +1,24 @@
 <?php
-// $Id: ameba.php,v 1.1 2010/06/16 22:46:22 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2010-06-06 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @deprecated UPDATE PLUGIN / API / JSON
+ * class webphoto_embed_ameba
+ * http://vision.ameba.jp/watch.do?movie=1726761;
+ * <script language="JavaScript" type="text/JavaScript"
+ * src="http://visionmovie.ameba.jp/mcj.php?id=XXX&width=320&height=240&skin=gray"></script>
+ * <meta name="keywords" content="ピグ,裏技,透明人間,動画" />
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_embed_ameba
-//
-// http://vision.ameba.jp/watch.do?movie=1726761;
-//
-// <script language="JavaScript" type="text/JavaScript" 
-// src="http://visionmovie.ameba.jp/mcj.php?id=XXX&width=320&height=240&skin=gray"></script>
-//
-// <meta name="keywords" content="ピグ,裏技,透明人間,動画" />
-//
-//=========================================================
 
 class webphoto_embed_ameba extends webphoto_embed_base {
 
@@ -34,7 +32,7 @@ class webphoto_embed_ameba extends webphoto_embed_base {
 		$this->set_sample( '1726761' );
 	}
 
-	function embed( $src, $width, $height ) {
+	public function embed( $src, $width, $height, $extra = null ) {
 		$item = $this->get_xml_item( $src );
 		if ( ! is_object( $item ) ) {
 			return false;
@@ -45,41 +43,37 @@ class webphoto_embed_ameba extends webphoto_embed_base {
 			return false;
 		}
 
-		$str = $this->build_embed_script( $url, $width, $height );
-
-		return $str;
+		return $this->build_embed_script( $url, $width, $height );
 	}
 
-	function link( $src ) {
+	public function link( $src ) {
 		return $this->build_link( $src );
 	}
 
-	function width() {
+	public function width() {
 		return 320;
 	}
 
-	function height() {
+	public function height() {
 		return 240;
 	}
 
-	function desc() {
+	public function desc() {
 		return $this->build_desc();
 	}
 
-//---------------------------------------------------------
 // xml
-//---------------------------------------------------------
-	function support_params() {
+	public function support_params() {
 		return $this->build_support_params();
 	}
 
-	function get_xml_params( $src ) {
+	public function get_xml_params( $src ) {
 		$item = $this->get_xml_item( $src );
 		if ( ! is_object( $item ) ) {
 			return false;
 		}
 
-		$arr = array(
+		return array(
 			'title'       => $this->get_xml_title( $item ),
 			'description' => $this->get_xml_description( $item ),
 			'url'         => $this->get_xml_url( $item ),
@@ -88,11 +82,9 @@ class webphoto_embed_ameba extends webphoto_embed_base {
 			'tags'        => $this->get_xml_tags( $src ),
 			'script'      => $this->get_xml_script( $item ),
 		);
-
-		return $arr;
 	}
 
-	function get_xml_item( $src ) {
+	public function get_xml_item( $src ) {
 		$url  = 'http://vision.ameba.jp/api/get/detailMovie.do?movie=' . $src;
 		$cont = $this->get_remote_file( $url );
 		if ( empty( $cont ) ) {
@@ -110,46 +102,45 @@ class webphoto_embed_ameba extends webphoto_embed_base {
 		return $item;
 	}
 
-	function get_xml_title( $item ) {
+	public function get_xml_title( $item ) {
 		$str = $this->get_obj_property( $item, 'title' );
-		$str = $this->convert_from_utf8( strval( $str ) );
+		$str = $this->convert_from_utf8( (string) $str );
 
 		return $str;
 	}
 
-	function get_xml_description( $item ) {
+	public function get_xml_description( $item ) {
 		$str = $this->get_obj_property( $item, 'description' );
-		$str = $this->convert_from_utf8( strval( $str ) );
+		$str = $this->convert_from_utf8( (string) $str );
 
 		return $str;
 	}
 
-	function get_xml_url( $item ) {
+	public function get_xml_url( $item ) {
 		$str = $this->get_obj_property( $item, 'link' );
-		$str = strval( $str );
+		$str = (string) $str;
 
 		return $str;
 	}
 
-	function get_xml_thumb( $item ) {
+	public function get_xml_thumb( $item ) {
 		$str = $this->get_obj_property( $item, 'imageUrlLarge' );
-		$str = strval( $str );
+		$str = (string) $str;
 
 		return $str;
 	}
 
-	function get_xml_duration( $item ) {
+	public function get_xml_duration( $item ) {
 		$str = $this->get_obj_property( $item, 'playTimeSecond' );
 		$arr = explode( ':', $str );
 		if ( ! isset( $arr[1] ) ) {
 			return false;
 		}
-		$ret = ( $arr[0] * 60 ) + $arr[1];
 
-		return $ret;
+		return ( $arr[0] * 60 ) + $arr[1];
 	}
 
-	function get_xml_tags( $src ) {
+	public function get_xml_tags( $src ) {
 		$url  = $this->build_link( $src );
 		$tags = $this->get_remote_meta_tags( $url );
 		if ( ! isset( $tags['keywords'] ) ) {
@@ -164,34 +155,29 @@ class webphoto_embed_ameba extends webphoto_embed_base {
 		return $arr;
 	}
 
-	function get_xml_script( $item ) {
+	public function get_xml_script( $item ) {
 		$url = $this->get_xml_script_src( $item );
 		if ( empty( $url ) ) {
 			return false;
 		}
 
-		$str = $this->build_embed_script_with_repalce( $url );
-
-		return $str;
+		return $this->build_embed_script_with_repalce( $url );
 	}
 
-	function get_xml_script_src( $item ) {
+	public function get_xml_script_src( $item ) {
 		$player = $this->get_obj_property( $item, 'player' );
 		$script = $this->get_obj_property( $player, 'script' );
 		$str    = $this->get_obj_attributes( $script, 'src' );
-		$str    = strval( $str );
+		$str    = (string) $str;
 
 		return $str;
 	}
 
-	function build_embed_script( $src, $width, $height ) {
+	public function build_embed_script( $src, $width, $height ) {
 		$url = $src . '&width=' . $width . '&height=' . $height . '&skin=gray';
 		$str = $this->build_script( $url );
 
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

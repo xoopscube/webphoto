@@ -17,6 +17,7 @@ include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 
 class webphoto_lib_tree_handler extends webphoto_lib_handler {
+
 	public $_xoops_tree_handler;
 
 	public $_cached_perm_in_parent_key_array = array();
@@ -32,19 +33,19 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		$this->set_use_prefix( true );
 	}
 
-	function init_xoops_tree() {
+	public function init_xoops_tree() {
 		$this->set_order_default( $this->_id_name );
 		$this->_xoops_tree_handler = new XoopsTree( $this->_table, $this->_id_name, $this->_pid_name );
 	}
 
-	function set_order_default( $val ) {
+	public function set_order_default( $val ) {
 		$this->_ORDER_DEFAULT = $val;
 	}
 
 
 // base on XoopsTree::getNicePathFromId 
 
-	function get_nice_path_from_id( $sel_id, $title_name, $func_url, $flag_short = false ) {
+	public function get_nice_path_from_id( $sel_id, $title_name, $func_url, $flag_short = false ) {
 		$rows = $this->get_parent_path_array( $sel_id );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return '';
@@ -75,7 +76,7 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 	}
 
 // recursible function
-	function get_parent_path_array( $sel_id, $path_array = array() ) {
+	public function get_parent_path_array( $sel_id, $path_array = array() ) {
 		$row = $this->get_cached_row_by_id( $sel_id );
 		if ( ! is_array( $row ) ) {
 			return $path_array;
@@ -95,24 +96,24 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $path_array;
 	}
 
-	function set_path_separator( $val ) {
+	public function set_path_separator( $val ) {
 		$this->_PATH_SEPARATOR = $val;
 	}
 
 
 // base on XoopsTree::makeMySelBox 
 
-	function make_my_sel_box( $title_name, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '' ) {
+	public function make_my_sel_box( $title_name, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '' ) {
 		return $this->build_sel_box(
 			$this->get_all_tree_array( $order ),
 			$title_name, $preset_id, $none, $sel_name, $onchange );
 	}
 
-	function build_sel_box( $tree, $title_name, $preset_id = 0, $none = 0, $sel_name = '', $onchange = '' ) {
+	public function build_sel_box( $tree, $title_name, $preset_id = 0, $none = 0, $sel_name = '', $onchange = '' ) {
 		return $this->build_form_select_list( $tree, $title_name, $preset_id, $none, $sel_name, $onchange );
 	}
 
-	function get_all_tree_array( $order = '', $name_perm = null ) {
+	public function get_all_tree_array( $order = '', $name_perm = null ) {
 		if ( empty( $order ) ) {
 			$order = $this->_ORDER_DEFAULT;
 		}
@@ -138,7 +139,7 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $tree;
 	}
 
-	function get_tree_name_list( $title_name, $none = false, $none_name = '---' ) {
+	public function get_tree_name_list( $title_name, $none = false, $none_name = '---' ) {
 		$rows = $this->get_all_tree_array();
 		$arr  = array();
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
@@ -158,7 +159,7 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 // base on XoopsTree::getChildTreeArray 
 
 // recursible function
-	function get_child_tree_array( $sel_id = 0, $order = '', $parray = array(), $r_prefix = '', $name_perm = null ) {
+	public function get_child_tree_array( $sel_id = 0, $order = '', $parray = array(), $r_prefix = '', $name_perm = null ) {
 		$rows = $this->get_rows_by_pid_order_with_perm( $sel_id, $order, $name_perm );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return $parray;
@@ -179,7 +180,7 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $parray;
 	}
 
-	function get_rows_by_pid_order_with_perm( $pid, $order = '', $name_perm = null, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_pid_order_with_perm( $pid, $order = '', $name_perm = null, $limit = 0, $offset = 0 ) {
 		$rows = $this->get_rows_by_pid_order( $pid, $order, $limit, $offset );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return false;
@@ -192,7 +193,7 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $rows;
 	}
 
-	function get_rows_by_pid_order( $pid, $order = '', $limit = 0, $offset = 0 ) {
+	public function get_rows_by_pid_order( $pid, $order = '', $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
 		$sql .= ' WHERE ' . $this->_pid_name . '=' . $pid;
 		if ( $order != '' ) {
@@ -205,51 +206,51 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 
 // tree handler
 
-	function getFirstChild( $sel_id, $order = "" ) {
+	public function getFirstChild( $sel_id, $order = "" ) {
 		return $this->_xoops_tree_handler->getFirstChild( $sel_id, $order );
 	}
 
-	function getFirstChildId( $sel_id ) {
+	public function getFirstChildId( $sel_id ) {
 		return $this->_xoops_tree_handler->getFirstChildId( $sel_id );
 	}
 
-	function getAllChildId( $sel_id = 0, $order = "", $parray = array() ) {
+	public function getAllChildId( $sel_id = 0, $order = "", $parray = array() ) {
 		return $this->_xoops_tree_handler->getAllChildId( $sel_id, $order, $parray );
 	}
 
-	function getAllParentId( $sel_id, $order = "", $idarray = array() ) {
+	public function getAllParentId( $sel_id, $order = "", $idarray = array() ) {
 		return $this->_xoops_tree_handler->getAllParentId( $sel_id, $order, $idarray );
 	}
 
-	function getPathFromId( $sel_id, $title, $path = "" ) {
+	public function getPathFromId( $sel_id, $title, $path = "" ) {
 		return $this->_xoops_tree_handler->getPathFromId( $sel_id, $title, $path );
 	}
 
-	function makeMySelBox( $title, $order = "", $preset_id = 0, $none = 0, $sel_name = "", $onchange = "" ) {
+	public function makeMySelBox( $title, $order = "", $preset_id = 0, $none = 0, $sel_name = "", $onchange = "" ) {
 		return $this->_xoops_tree_handler->makeMySelBox( $title, $order, $preset_id, $none, $sel_name, $onchange );
 
 	}
 
-	function getNicePathFromId( $sel_id, $title, $funcURL, $path = "" ) {
+	public function getNicePathFromId( $sel_id, $title, $funcURL, $path = "" ) {
 		return $this->_xoops_tree_handler->getNicePathFromId( $sel_id, $title, $funcURL, $path );
 	}
 
-	function getIdPathFromId( $sel_id, $path = "" ) {
+	public function getIdPathFromId( $sel_id, $path = "" ) {
 		return $this->_xoops_tree_handler->getIdPathFromId( $sel_id, $path );
 	}
 
-	function getAllChild( $sel_id = 0, $order = "", $parray = array() ) {
+	public function getAllChild( $sel_id = 0, $order = "", $parray = array() ) {
 		return $this->_xoops_tree_handler->getAllChild( $sel_id, $order, $parray );
 	}
 
-	function getChildTreeArray( $sel_id = 0, $order = "", $parray = array(), $r_prefix = "" ) {
+	public function getChildTreeArray( $sel_id = 0, $order = "", $parray = array(), $r_prefix = "" ) {
 		return $this->_xoops_tree_handler->getChildTreeArray( $sel_id, $order, $parray, $r_prefix );
 	}
 
 
 // permission
 
-	function check_cached_perm_in_parents_by_id_name_groups_key( $id, $name, $groups = null, $key = '0' ) {
+	public function check_cached_perm_in_parents_by_id_name_groups_key( $id, $name, $groups = null, $key = '0' ) {
 		if ( isset( $this->_cached_perm_in_parent_key_array[ $id ][ $key ] ) ) {
 			return $this->_cached_perm_in_parent_key_array[ $id ][ $key ];
 		}
@@ -260,7 +261,7 @@ class webphoto_lib_tree_handler extends webphoto_lib_handler {
 		return $ret;
 	}
 
-	function check_perm_in_parents_by_id_name_groups_key( $id, $name, $groups = null, $key = '0' ) {
+	public function check_perm_in_parents_by_id_name_groups_key( $id, $name, $groups = null, $key = '0' ) {
 		$rows = $this->get_parent_path_array( $id );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return false;    // error

@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_inc_handler {
+
 	public $_db;
 	public $_db_error;
 
@@ -134,7 +135,7 @@ class webphoto_inc_handler {
 		return $this->get_row_by_sql( $sql );
 	}
 
-	function build_show_icon_image( $item_row ) {
+	public function build_show_icon_image( $item_row ) {
 		$url    = null;
 		$name   = $item_row['item_icon_name'];
 		$width  = $item_row['item_icon_width'];
@@ -148,7 +149,7 @@ class webphoto_inc_handler {
 
 
 // file handler
-	function get_file_extend_row_by_kind( $item_row, $kind ) {
+	public function get_file_extend_row_by_kind( $item_row, $kind ) {
 		$id = $this->get_file_id_by_kind( $item_row, $kind );
 		if ( $id > 0 ) {
 			$row = $this->get_file_row_by_id( $id );
@@ -162,7 +163,7 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function get_file_row_by_kind( $item_row, $kind ) {
+	public function get_file_row_by_kind( $item_row, $kind ) {
 		$id = $this->get_file_id_by_kind( $item_row, $kind );
 		if ( $id > 0 ) {
 			return $this->get_file_row_by_id( $id );
@@ -171,24 +172,24 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function get_file_id_by_kind( $item_row, $kind ) {
+	public function get_file_id_by_kind( $item_row, $kind ) {
 		$name = $this->file_kind_to_item_name( $kind );
 
 		return $item_row[ $name ] ?? false;
 	}
 
-	function file_kind_to_item_name( $kind ) {
+	public function file_kind_to_item_name( $kind ) {
 		return 'item_file_id_' . $kind;
 	}
 
-	function get_file_row_by_id( $file_id ) {
+	public function get_file_row_by_id( $file_id ) {
 		$sql = 'SELECT * FROM ' . $this->prefix_dirname( 'file' );
 		$sql .= ' WHERE file_id=' . (int) $file_id;
 
 		return $this->get_row_by_sql( $sql );
 	}
 
-	function build_show_file_image( $file_row ) {
+	public function build_show_file_image( $file_row ) {
 		$url    = null;
 		$width  = 0;
 		$height = 0;
@@ -204,7 +205,7 @@ class webphoto_inc_handler {
 		return array( $url, $width, $height );
 	}
 
-	function build_full_path( $path ) {
+	public function build_full_path( $path ) {
 		if ( $path ) {
 			$str = XOOPS_ROOT_PATH . $path;
 
@@ -214,7 +215,7 @@ class webphoto_inc_handler {
 		return null;
 	}
 
-	function build_full_url( $path ) {
+	public function build_full_url( $path ) {
 		if ( $path ) {
 			$str = XOOPS_URL . $path;
 
@@ -224,11 +225,11 @@ class webphoto_inc_handler {
 		return null;
 	}
 
-	function get_count_by_sql( $sql ) {
+	public function get_count_by_sql( $sql ) {
 		return (int) $this->get_first_row_by_sql( $sql );
 	}
 
-	function get_first_row_by_sql( $sql ) {
+	public function get_first_row_by_sql( $sql ) {
 		$res = $this->query( $sql );
 		if ( ! $res ) {
 			return false;
@@ -239,7 +240,7 @@ class webphoto_inc_handler {
 		return $row[0] ?? false;
 	}
 
-	function get_row_by_sql( $sql ) {
+	public function get_row_by_sql( $sql ) {
 		$res = $this->query( $sql );
 		if ( ! $res ) {
 			return false;
@@ -248,7 +249,7 @@ class webphoto_inc_handler {
 		return $this->_db->fetchArray( $res );
 	}
 
-	function get_rows_by_sql( $sql, $limit = 0, $offset = 0, $key = null ) {
+	public function get_rows_by_sql( $sql, $limit = 0, $offset = 0, $key = null ) {
 		$arr = array();
 
 		$res = $this->query( $sql, $limit, $offset );
@@ -267,7 +268,7 @@ class webphoto_inc_handler {
 		return $arr;
 	}
 
-	function get_first_rows_by_sql( $sql, $limit = 0, $offset = 0 ) {
+	public function get_first_rows_by_sql( $sql, $limit = 0, $offset = 0 ) {
 		$res = $this->query( $sql, $limit, $offset );
 		if ( ! $res ) {
 			return false;
@@ -284,7 +285,7 @@ class webphoto_inc_handler {
 
 
 // update
-	function exists_table( $table ) {
+	public function exists_table( $table ) {
 		$sql = "SHOW TABLES LIKE " . $this->quote( $table );
 
 		$res = $this->query( $sql );
@@ -303,7 +304,7 @@ class webphoto_inc_handler {
 
 
 // handler
-	function query( $sql, $limit = 0, $offset = 0, $force = false ) {
+	public function query( $sql, $limit = 0, $offset = 0, $force = false ) {
 // BUG: echo sql always if error
 		$flag_echo_sql = false;
 
@@ -338,7 +339,7 @@ class webphoto_inc_handler {
 		return $res;
 	}
 
-	function queryF( $sql, $limit = 0, $offset = 0 ) {
+	public function queryF( $sql, $limit = 0, $offset = 0 ) {
 		if ( $this->_DEBUG_SQL ) {
 			echo $this->sanitize( $sql ) . ': limit=' . $limit . ' :offset=' . $offset . "<br>\n";
 		}
@@ -354,11 +355,11 @@ class webphoto_inc_handler {
 		return $res;
 	}
 
-	function prefix_dirname( $name ) {
+	public function prefix_dirname( $name ) {
 		return $this->_db->prefix( $this->_DIRNAME . '_' . $name );
 	}
 
-	function quote( $str ) {
+	public function quote( $str ) {
 		$str = "'" . addslashes( $str ) . "'";
 
 		return $str;
@@ -366,7 +367,7 @@ class webphoto_inc_handler {
 
 
 // column
-	function preg_match_column_type( $table, $column, $type ) {
+	public function preg_match_column_type( $table, $column, $type ) {
 		$pattern = '/' . preg_quote( $type ) . '/i';
 		$subject = $this->get_column_type( $table, $column );
 		if ( preg_match( $pattern, $subject ) ) {
@@ -376,7 +377,7 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function preg_match_column_type_array( $table, $column, $type_array ) {
+	public function preg_match_column_type_array( $table, $column, $type_array ) {
 		$subject = $this->get_column_type( $table, $column );
 		foreach ( $type_array as $type ) {
 			$pattern = '/' . preg_quote( $type ) . '/i';
@@ -388,13 +389,13 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function get_column_type( $table, $column ) {
+	public function get_column_type( $table, $column ) {
 		$row = $this->get_column_row( $table, $column );
 
 		return $row['Type'] ?? false;
 	}
 
-	function exists_column( $table, $column ) {
+	public function exists_column( $table, $column ) {
 		$row = $this->get_column_row( $table, $column );
 		if ( is_array( $row ) ) {
 			return true;
@@ -403,7 +404,7 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function get_column_row( $table, $column ) {
+	public function get_column_row( $table, $column ) {
 		$false = false;
 
 		$sql = "SHOW COLUMNS FROM " . $table . " LIKE " . $this->quote( $column );
@@ -426,7 +427,7 @@ class webphoto_inc_handler {
 // item cat handler
 // require $_xoops_groups $_cfg_perm_item_read
 
-	function build_where_public_with_item_cat( $groups = null ) {
+	public function build_where_public_with_item_cat( $groups = null ) {
 		$where = $this->convert_item_field(
 			$this->build_where_public_with_item() );
 		$where .= ' AND ';
@@ -435,7 +436,7 @@ class webphoto_inc_handler {
 		return $where;
 	}
 
-	function build_where_public_with_item( $groups = null ) {
+	public function build_where_public_with_item( $groups = null ) {
 		$where = ' item_status > 0 ';
 		if ( $this->_cfg_perm_item_read != _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 			$where .= ' AND ';
@@ -445,15 +446,15 @@ class webphoto_inc_handler {
 		return $where;
 	}
 
-	function build_where_cat_perm_read( $groups = null ) {
+	public function build_where_cat_perm_read( $groups = null ) {
 		return $this->build_where_perm_groups( 'c.cat_perm_read', $groups );
 	}
 
-	function build_where_item_perm_read( $groups = null ) {
+	public function build_where_item_perm_read( $groups = null ) {
 		return $this->build_where_perm_groups( 'item_perm_read', $groups );
 	}
 
-	function get_item_count_by_where_with_cat( $where ) {
+	public function get_item_count_by_where_with_cat( $where ) {
 		$sql = 'SELECT COUNT(*) FROM ';
 		$sql .= $this->prefix_dirname( 'item' ) . ' i ';
 		$sql .= ' INNER JOIN ';
@@ -464,7 +465,7 @@ class webphoto_inc_handler {
 		return $this->get_count_by_sql( $sql );
 	}
 
-	function get_item_count_by_where( $where ) {
+	public function get_item_count_by_where( $where ) {
 		$sql = 'SELECT COUNT(*) FROM ';
 		$sql .= $this->prefix_dirname( 'item' );
 		$sql .= ' WHERE ' . $where;
@@ -472,7 +473,7 @@ class webphoto_inc_handler {
 		return $this->get_count_by_sql( $sql );
 	}
 
-	function get_item_rows_by_where_orderby_with_cat(
+	public function get_item_rows_by_where_orderby_with_cat(
 		$where, $orderby, $limit = 0, $offset = 0, $key = null
 	) {
 		$sql = 'SELECT i.* FROM ';
@@ -486,7 +487,7 @@ class webphoto_inc_handler {
 		return $this->get_rows_by_sql( $sql, $limit, $offset, $key );
 	}
 
-	function get_item_rows_by_where_orderby(
+	public function get_item_rows_by_where_orderby(
 		$where, $orderby, $limit = 0, $offset = 0, $key = null
 	) {
 		$sql = 'SELECT * FROM ';
@@ -497,13 +498,13 @@ class webphoto_inc_handler {
 		return $this->get_rows_by_sql( $sql, $limit, $offset, $key );
 	}
 
-	function convert_item_field( $str ) {
+	public function convert_item_field( $str ) {
 		return str_replace( 'item_', 'i.item_', $str );
 	}
 
 
 // permission
-	function build_where_perm_groups( $name, $groups = null ) {
+	public function build_where_perm_groups( $name, $groups = null ) {
 		if ( empty( $groups ) ) {
 			$groups = $this->_xoops_groups;
 		}
@@ -523,7 +524,7 @@ class webphoto_inc_handler {
 		return ' ( ' . $where . ' ) ';
 	}
 
-	function check_perm_by_row_name_groups( $row, $name, $groups = null ) {
+	public function check_perm_by_row_name_groups( $row, $name, $groups = null ) {
 		if ( ! isset( $row[ $name ] ) ) {
 			return false;
 		}
@@ -543,7 +544,7 @@ class webphoto_inc_handler {
 		return $this->check_perms_in_groups( $perms, $groups );
 	}
 
-	function check_perms_in_groups( $perms, $groups = null ) {
+	public function check_perms_in_groups( $perms, $groups = null ) {
 		if ( ! is_array( $perms ) || ! count( $perms ) ) {
 			return false;
 		}
@@ -553,16 +554,13 @@ class webphoto_inc_handler {
 		}
 
 		$arr = array_intersect( $groups, $perms );
-		if ( is_array( $arr ) && count( $arr ) ) {
-			return true;
-		}
 
-		return false;
+		return is_array( $arr ) && count( $arr );
 	}
 
 
 // utility
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
 		foreach ( $arr1 as $v ) {
@@ -576,7 +574,7 @@ class webphoto_inc_handler {
 		return $arr2;
 	}
 
-	function array_to_str( $arr, $glue ) {
+	public function array_to_str( $arr, $glue ) {
 		$val = false;
 		if ( is_array( $arr ) && count( $arr ) ) {
 			$val = implode( $glue, $arr );
@@ -585,7 +583,7 @@ class webphoto_inc_handler {
 		return $val;
 	}
 
-	function is_normal_ext( $ext ) {
+	public function is_normal_ext( $ext ) {
 		if ( in_array( strtolower( $ext ), $this->_NORMAL_EXTS ) ) {
 			return true;
 		}
@@ -593,7 +591,7 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function set_normal_exts( $val ) {
+	public function set_normal_exts( $val ) {
 		if ( is_array( $val ) ) {
 			$this->_NORMAL_EXTS = $val;
 		} else {
@@ -601,7 +599,7 @@ class webphoto_inc_handler {
 		}
 	}
 
-	function is_video_mime( $mime ) {
+	public function is_video_mime( $mime ) {
 		if ( preg_match( '/^video/', $mime ) ) {
 			return true;
 		}
@@ -609,27 +607,27 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function is_image_kind( $kind ) {
+	public function is_image_kind( $kind ) {
 		return $kind == _C_WEBPHOTO_ITEM_KIND_IMAGE;
 	}
 
-	function is_video_kind( $kind ) {
+	public function is_video_kind( $kind ) {
 		return $kind == _C_WEBPHOTO_ITEM_KIND_VIDEO;
 	}
 
-	function is_embed_kind( $kind ) {
+	public function is_embed_kind( $kind ) {
 		return $kind == _C_WEBPHOTO_ITEM_KIND_EMBED;
 	}
 
-	function is_external_image_kind( $kind ) {
+	public function is_external_image_kind( $kind ) {
 		return $kind == _C_WEBPHOTO_ITEM_KIND_EXTERNAL_IMAGE;
 	}
 
-	function check_http_null( $str ) {
+	public function check_http_null( $str ) {
 		return ( $str == '' ) || ( $str == 'http://' ) || ( $str == 'https://' );
 	}
 
-	function check_http_start( $str ) {
+	public function check_http_start( $str ) {
 		if ( preg_match( "|^https?://|", $str ) ) {
 			return true;    // include HTTP
 		}
@@ -637,7 +635,7 @@ class webphoto_inc_handler {
 		return false;
 	}
 
-	function add_slash_to_head( $str ) {
+	public function add_slash_to_head( $str ) {
 // ord : the ASCII value of the first character of string
 // 0x2f slash
 
@@ -650,7 +648,7 @@ class webphoto_inc_handler {
 
 
 // error
-	function get_db_error( $flag_sanitize = true, $flag_highlight = true ) {
+	public function get_db_error( $flag_sanitize = true, $flag_highlight = true ) {
 		$str = $this->_db_error;
 		if ( $flag_sanitize ) {
 			$str = $this->sanitize( $str );
@@ -662,44 +660,44 @@ class webphoto_inc_handler {
 		return $str;
 	}
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-	function highlight( $str ) {
+	public function highlight( $str ) {
 		return '<span style="color:#ff0000;">' . $str . '</span>';
 	}
 
 
 // debug
-	function set_debug_sql_by_const_name( $name ) {
+	public function set_debug_sql_by_const_name( $name ) {
 		$name = strtoupper( $name );
 		if ( defined( $name ) ) {
 			$this->set_debug_sql( constant( $name ) );
 		}
 	}
 
-	function set_debug_error_by_const_name( $name ) {
+	public function set_debug_error_by_const_name( $name ) {
 		$name = strtoupper( $name );
 		if ( defined( $name ) ) {
 			$this->set_debug_error( constant( $name ) );
 		}
 	}
 
-	function set_debug_sql( $val ) {
+	public function set_debug_sql( $val ) {
 		echo " set_debug_sql( $val ) ";
 
 		$this->_DEBUG_SQL = (bool) $val;
 	}
 
-	function set_debug_error( $val ) {
+	public function set_debug_error( $val ) {
 		$this->_DEBUG_ERROR = (int) $val;
 	}
 
 
 // xoops groups
 
-	function _init_xoops_groups() {
+	public function _init_xoops_groups() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			$this->_xoops_groups = $xoopsUser->getGroups();

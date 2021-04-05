@@ -1,32 +1,20 @@
 <?php
-// $Id: optional.php,v 1.4 2008/08/25 19:28:06 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2008-08-24 K.OHWADA
-// webphoto_get_language()
-// 2008-07-01 K.OHWADA
-// added  webphoto_include_once_trust()
-// change webphoto_fct()
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @brief optional functions - DO NOT replace this file
+ * $MY_DIRNAME WEBPHOTO_TRUST_PATH are set by caller
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// optional functions
-// do not replace this file
-//=========================================================
 function webphoto_fct() {
 	$page_array = array(
 		'photo_id' => 'photo',

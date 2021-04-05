@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_lib_error {
+
 	public $_error_code = 0;
 	public $_errors = array();
 
@@ -24,8 +25,6 @@ class webphoto_lib_error {
 // color: red;  background-color: lightyellow;  border: gray;
 	public $_DIV_STYLE_ERROR = 'color: #ff0000; background-color: #ffffe0; border: #808080 1px dotted; padding: 3px 3px 3px 3px;';
 
-
-// constructor
 
 	public function __construct() {
 		// dummy
@@ -43,22 +42,22 @@ class webphoto_lib_error {
 
 // error code
 
-	function clear_error_code() {
+	public function clear_error_code() {
 		$this->_error_code = 0;
 	}
 
-	function set_error_code( $code ) {
-		$this->_error_code = intval( $code );
+	public function set_error_code( $code ) {
+		$this->_error_code = (int) $code;
 	}
 
-	function get_error_code() {
+	public function get_error_code() {
 		return $this->_error_code;
 	}
 
 
 // error
 
-	function return_code() {
+	public function return_code() {
 		if ( count( $this->_errors ) ) {
 			return false;
 		}
@@ -66,7 +65,7 @@ class webphoto_lib_error {
 		return true;
 	}
 
-	function has_error() {
+	public function has_error() {
 		if ( count( $this->_errors ) ) {
 			return true;
 		}
@@ -74,15 +73,15 @@ class webphoto_lib_error {
 		return false;
 	}
 
-	function clear_errors() {
+	public function clear_errors() {
 		$this->_errors = array();
 	}
 
-	function get_errors() {
+	public function get_errors() {
 		return $this->_errors;
 	}
 
-	function get_format_error( $flag_sanitize = true, $flag_highlight = true ) {
+	public function get_format_error( $flag_sanitize = true, $flag_highlight = true ) {
 		$val = '';
 		foreach ( $this->_errors as $msg ) {
 			if ( $flag_sanitize ) {
@@ -98,7 +97,7 @@ class webphoto_lib_error {
 		return $val;
 	}
 
-	function set_error( $msg ) {
+	public function set_error( $msg ) {
 // array type
 		if ( is_array( $msg ) ) {
 			foreach ( $msg as $m ) {
@@ -114,18 +113,18 @@ class webphoto_lib_error {
 		}
 	}
 
-	function set_error_in_head( $msg ) {
+	public function set_error_in_head( $msg ) {
 		array_unshift( $this->_errors, $msg );
 	}
 
 
 // utility
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-	function shorten_strings( $str, $length ) {
+	public function shorten_strings( $str, $length ) {
 		if ( strlen( $str ) > $length ) {
 			$str = webphoto_substr( $str, 0, $length ) . ' ...';
 		}
@@ -133,11 +132,11 @@ class webphoto_lib_error {
 		return $str;
 	}
 
-	function shorten_strings_with_nl2br( $str, $length ) {
+	public function shorten_strings_with_nl2br( $str, $length ) {
 		return nl2br( $this->sanitize( $this->shorten_strings( $str, $length ) ) );
 	}
 
-	function highlight( $msg ) {
+	public function highlight( $msg ) {
 		$str = '<span style="' . $this->_SPAN_STYLE_ERROR . '">';
 		$str .= $msg;
 		$str .= "</span>\n";
@@ -145,7 +144,7 @@ class webphoto_lib_error {
 		return $str;
 	}
 
-	function error_in_box( $msg ) {
+	public function error_in_box( $msg ) {
 		$str = '<div style="' . $this->_DIV_STYLE_ERROR . '">';
 		$str .= $msg;
 		$str .= "</div>\n";

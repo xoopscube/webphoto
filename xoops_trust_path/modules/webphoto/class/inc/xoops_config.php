@@ -32,19 +32,19 @@ class webphoto_inc_xoops_config {
 
 // xoops class
 
-	function get_config_by_dirname( $dirname ) {
+	public function get_config_by_dirname( $dirname ) {
 		$modid = $this->get_modid_by_dirname( $dirname );
 
 		return $this->get_config_by_modid( $modid );
 	}
 
-	function get_config_by_modid( $modid ) {
+	public function get_config_by_modid( $modid ) {
 		$config_handler =& xoops_gethandler( 'config' );
 
 		return $config_handler->getConfigsByCat( 0, $modid );
 	}
 
-	function get_modid_by_dirname( $dirname ) {
+	public function get_modid_by_dirname( $dirname ) {
 		$module_handler =& xoops_gethandler( 'module' );
 		$module         = $module_handler->getByDirname( $dirname );
 		if ( ! is_object( $module ) ) {

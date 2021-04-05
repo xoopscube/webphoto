@@ -22,23 +22,23 @@ class Qrcode_image extends Qrcode {
 		$this->quiet_zone  = 4;
 	}
 
-	function set_module_size( $z ) {
+	public function set_module_size( $z ) {
 		if ( $z > 0 && $z < 9 ) {
 			$this->module_size = $z;
 		}
 	}
 
-	function set_quietzone( $z ) {
+	public function set_quietzone( $z ) {
 		if ( $z > 0 && $z < 9 ) {
 			$this->quiet_zone = $z;
 		}
 	}
 
-	function qrcode_image_out( $org_data, $image_type = 'png', $filename = '' ) {
+	public function qrcode_image_out( $org_data, $image_type = 'png', $filename = '' ) {
 		$this->image_out( $this->cal_qrcode( $org_data ), $image_type, $filename );
 	}
 
-	function image_out( $data, $image_type = 'png', $filename = '' ) {
+	public function image_out( $data, $image_type = 'png', $filename = '' ) {
 		$im = $this->mkimage( $data );
 		if ( $image_type == "jpeg" ) {
 			if ( strlen( $filename ) > 0 ) {
@@ -55,7 +55,7 @@ class Qrcode_image extends Qrcode {
 		}
 	}
 
-	function mkimage( $data ) {
+	public function mkimage( $data ) {
 		$data_array  = explode( "\n", $data );
 		$c           = count( $data_array ) - 1;
 		$image_size  = $c;
@@ -89,5 +89,3 @@ class Qrcode_image extends Qrcode {
 		return ( $im );
 	}
 }
-
-?>

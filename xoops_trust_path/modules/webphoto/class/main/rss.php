@@ -33,11 +33,8 @@ class webphoto_main_rss extends webphoto_rss {
 
 // main
 
-	function main() {
+	public function main() {
 		$this->show_rss();
 	}
 
-// --- class end ---
 }
-
-?>

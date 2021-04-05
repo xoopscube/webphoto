@@ -41,7 +41,7 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 
 // send email
 
-	function send( $param ) {
+	public function send( $param ) {
 		$to_emails  = $param['to_emails'] ?? null;
 		$users      = $param['users'] ?? null;
 		$subject    = $param['subject'] ?? null;
@@ -93,22 +93,22 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 		return true;
 	}
 
-	function get_valid_mail_addr( $addr ) {
+	public function get_valid_mail_addr( $addr ) {
 		return $this->_mail_class->get_valid_addr( $addr );
 	}
 
 
 // msg
 
-	function clear_msg_array() {
+	public function clear_msg_array() {
 		$this->_msg_array = array();
 	}
 
-	function get_msg_array() {
+	public function get_msg_array() {
 		return $this->_msg_array;
 	}
 
-	function set_msg( $msg, $flag_highlight = false ) {
+	public function set_msg( $msg, $flag_highlight = false ) {
 // array type
 		if ( is_array( $msg ) ) {
 			$arr = $msg;
@@ -136,13 +136,13 @@ class webphoto_lib_mail_send extends webphoto_lib_error {
 
 // XOOPS system
 
-	function get_xoops_sitename() {
+	public function get_xoops_sitename() {
 		global $xoopsConfig;
 
 		return $xoopsConfig['sitename'];
 	}
 
-	function get_xoops_adminmail() {
+	public function get_xoops_adminmail() {
 		global $xoopsConfig;
 
 		return $xoopsConfig['adminmail'];

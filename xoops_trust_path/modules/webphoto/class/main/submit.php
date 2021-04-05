@@ -13,6 +13,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
+
 class webphoto_main_submit extends webphoto_edit_submit {
 	public $_header_class;
 
@@ -20,6 +21,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_fct( 'submit' );
@@ -43,7 +45,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 
 // main
 
-	function check_submit() {
+	public function check_submit() {
 		$ret    = 0;
 		$action = $this->_get_action();
 
@@ -72,7 +74,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		}
 	}
 
-	function form_param() {
+	public function form_param() {
 		$this->_header_class->set_flag_css( true );
 		$this->_header_class->assign_for_main();
 
@@ -104,7 +106,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return $ret;
 	}
 
-	function _get_action() {
+	public function _get_action() {
 		$preview = $this->_post_class->get_post_text( 'preview' );
 		$op      = $this->_post_class->get_post_get_text( 'op' );
 		if ( $preview ) {
@@ -114,10 +116,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return $op;
 	}
 
-
-// check 
-
-	function _check( $action ) {
+	public function _check( $action ) {
 		$this->get_post_param();
 
 		switch ( $action ) {
@@ -141,7 +140,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		}
 	}
 
-	function _check_file() {
+	public function _check_file() {
 		$ret = $this->submit_check();
 		if ( ! $ret ) {
 			return $ret;
@@ -157,7 +156,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return true;
 	}
 
-	function _check_exec_file() {
+	public function _check_exec_file() {
 		if ( ! $this->_has_file ) {
 			return _C_WEBPHOTO_ERR_NO_PERM;
 		}
@@ -173,7 +172,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 
 // submit
 
-	function _submit( $action ) {
+	public function _submit( $action ) {
 		if ( ! $this->check_token() ) {
 			$this->set_token_error();
 
@@ -200,7 +199,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		exit();
 	}
 
-	function _submit_exec( $action ) {
+	public function _submit_exec( $action ) {
 		$this->get_post_param();
 
 		switch ( $action ) {
@@ -229,14 +228,14 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return _C_WEBPHOTO_RET_SUCCESS;
 	}
 
-	function _check_token_and_redirect() {
+	public function _check_token_and_redirect() {
 		$this->check_token_and_redirect( $this->_THIS_URL, $this->_TIME_FAILED );
 	}
 
 
 // submit bulk
 
-	function _submit_bulk() {
+	public function _submit_bulk() {
 		$this->set_form_mode( 'bulk' );
 		$this->clear_msg_array();
 
@@ -306,7 +305,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 
 // submit file
 
-	function _submit_file() {
+	public function _submit_file() {
 		$this->set_form_mode( 'file' );
 		$this->clear_msg_array();
 
@@ -380,7 +379,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return 0;
 	}
 
-	function _check_submit_file() {
+	public function _check_submit_file() {
 		$src_file = $this->build_file_dir_file( $this->_post_file );
 		$src_ext  = $this->parse_ext( $this->_post_file );
 
@@ -403,23 +402,16 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return 0;
 	}
 
-	function _check_file_size( $file ) {
-		if ( filesize( $file ) < $this->_cfg_file_size ) {
-			return true;
-		}
-
-		return false;
+	public function _check_file_size( $file ) {
+		return filesize( $file ) < $this->_cfg_file_size;
 	}
 
-	function _move_file( $old ) {
+	public function _move_file( $old ) {
 		$new = $this->build_tmp_dir_file( uniqid( 'file_' ) );
 		rename( $old, $new );
 	}
 
-
-// video
-
-	function _video() {
+	public function _video() {
 		$this->_check_token_and_redirect();
 		$item_row = $this->_get_item_row_or_redirect();
 
@@ -432,7 +424,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		exit();
 	}
 
-	function _get_item_row_or_redirect() {
+	public function _get_item_row_or_redirect() {
 		$item_id  = $this->_post_class->get_post_get_int( 'item_id' );
 		$item_row = $this->_item_handler->get_row_by_id( $item_id );
 		if ( ! is_array( $item_row ) ) {
@@ -447,7 +439,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 
 // preview
 
-	function _build_preview_info( $item_row ) {
+	public function _build_preview_info( $item_row ) {
 		$image_info = null;
 
 // new preview
@@ -478,7 +470,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return array( $item_row, $image_info );
 	}
 
-	function _build_preview_submit( $item_row, $image_info ) {
+	public function _build_preview_submit( $item_row, $image_info ) {
 		$show_class =& webphoto_show_photo::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
@@ -487,15 +479,13 @@ class webphoto_main_submit extends webphoto_edit_submit {
 			$image_info
 		);
 
-		$arr = array(
+		return array(
 			'photo'           => $photo,
 			'show_photo_desc' => true
 		);
-
-		return $arr;
 	}
 
-	function _preview_new( $item_row ) {
+	public function _preview_new( $item_row ) {
 // BUG: Fatal error in upload.php
 		$ret = $this->upload_fetch_photo( true );
 
@@ -507,18 +497,18 @@ class webphoto_main_submit extends webphoto_edit_submit {
 
 	}
 
-	function _preview_old() {
+	public function _preview_old() {
 		return $this->build_preview( $this->_preview_name );
 	}
 
-	function _preview_no_image() {
+	public function _preview_no_image() {
 		return $this->build_no_image_preview();
 	}
 
 
 // get form param
 
-	function _build_form_default( $action ) {
+	public function _build_form_default( $action ) {
 		$flag_embed = false;
 
 		switch ( $action ) {
@@ -581,7 +571,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return $arr;
 	}
 
-	function _build_form_error() {
+	public function _build_form_error() {
 		$param = array(
 			'error'          => $this->get_format_error( true, false ),
 			'show_uploading' => $this->_show_uploading(),
@@ -594,7 +584,7 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return $arr;
 	}
 
-	function _build_form_preview() {
+	public function _build_form_preview() {
 		$item_row = $this->create_item_row_preview();
 
 // set preview name
@@ -621,36 +611,32 @@ class webphoto_main_submit extends webphoto_edit_submit {
 		return $arr;
 	}
 
-	function _build_form_video_thumb() {
+	public function _build_form_video_thumb() {
 		return $this->build_form_video_thumb( $this->get_created_row() );
 	}
 
 
 // menu
 
-	function _show_submit_select() {
+	public function _show_submit_select() {
 		return $this->get_ini( 'submit_show_submit_select' );
 	}
 
-	function _show_menu_select_file() {
+	public function _show_menu_select_file() {
 		$show_menu = $this->get_ini( 'submit_show_menu_select_file' );
 		$show      = ( $show_menu && $this->_cfg_file_dir && $this->_has_file );
 
 		return $show;
 	}
 
-	function _show_menu_select_bulk() {
+	public function _show_menu_select_bulk() {
 		$show_menu = $this->get_ini( 'submit_show_menu_select_bulk' );
 		$show      = ( $show_menu && $this->_has_superinsert );
 
 		return $show;
 	}
 
-	function _show_uploading() {
+	public function _show_uploading() {
 		return $this->get_ini( 'submit_show_uploading' );
 	}
-
-// --- class end ---
 }
-
-?>

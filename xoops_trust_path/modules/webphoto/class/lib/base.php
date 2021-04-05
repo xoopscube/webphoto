@@ -62,7 +62,6 @@ class webphoto_lib_base extends webphoto_lib_error {
 
 		parent::__construct();
 
-
 		$this->_xoops_class   =& webphoto_xoops_base::getInstance();
 		$this->_utility_class =& webphoto_lib_utility::getInstance();
 
@@ -83,7 +82,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 	}
 
 
-	function check_not_owner( $uid ) {
+	public function check_not_owner( $uid ) {
 		if ( $this->_is_module_admin ) {
 			return false;
 		} elseif ( $this->_is_login_user ) {
@@ -100,7 +99,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 
 // header
 
-	function build_bread_crumb( $title, $url ) {
+	public function build_bread_crumb( $title, $url ) {
 		$text = '<a href="' . $this->_MODULE_URL . '/index.php">';
 		$text .= $this->sanitize( $this->_MODULE_NAME );
 		$text .= '</a>';
@@ -116,7 +115,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 
 // for admin
 
-	function build_admin_bread_crumb( $title, $url ) {
+	public function build_admin_bread_crumb( $title, $url ) {
 		$text = '<a href="' . $this->_MODULE_URL . '/admin/index.php">';
 		$text .= $this->sanitize( $this->_MODULE_NAME );
 		$text .= '</a>';
@@ -129,14 +128,14 @@ class webphoto_lib_base extends webphoto_lib_error {
 		return $text;
 	}
 
-	function build_admin_menu() {
+	public function build_admin_menu() {
 		$menu_class =& webphoto_lib_admin_menu::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
 		return $menu_class->build_menu_with_sub( $this->_FLAG_ADMIN_SUB_MENU );
 	}
 
-	function build_admin_title( $name, $format = true ) {
+	public function build_admin_title( $name, $format = true ) {
 		$str = $this->get_admin_title( $name );
 		if ( $format ) {
 			$str = "<h3>" . $str . "</h3>\n";
@@ -145,7 +144,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 		return $str;
 	}
 
-	function get_admin_title( $name ) {
+	public function get_admin_title( $name ) {
 		$const_name_1 = strtoupper( '_MI_' . $this->_DIRNAME . '_ADMENU_' . $name );
 		$const_name_2 = strtoupper( '_AM_' . $this->_TRUST_DIRNAME . '_TITLE_' . $name );
 
@@ -158,11 +157,11 @@ class webphoto_lib_base extends webphoto_lib_error {
 		return $const_name_2;
 	}
 
-	function print_admin_msg( $msg, $flag_highlight = false, $flag_br = false ) {
+	public function print_admin_msg( $msg, $flag_highlight = false, $flag_br = false ) {
 		echo $this->build_admin_msg( $msg, $flag_highlight, $flag_br );
 	}
 
-	function build_admin_msg( $msg, $flag_highlight = false, $flag_br = false ) {
+	public function build_admin_msg( $msg, $flag_highlight = false, $flag_br = false ) {
 		if ( ! $this->_is_module_admin ) {
 			return null;
 		}
@@ -179,83 +178,83 @@ class webphoto_lib_base extends webphoto_lib_error {
 
 // utility
 
-	function array_to_perm( $arr, $glue ) {
+	public function array_to_perm( $arr, $glue ) {
 		return $this->_utility_class->array_to_perm( $arr, $glue );
 	}
 
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		return $this->_utility_class->str_to_array( $str, $pattern );
 	}
 
-	function array_to_str( $arr, $glue ) {
+	public function array_to_str( $arr, $glue ) {
 		return $this->_utility_class->array_to_str( $arr, $glue );
 	}
 
-	function add_slash_to_head( $str ) {
+	public function add_slash_to_head( $str ) {
 		return $this->_utility_class->add_slash_to_head( $str );
 	}
 
-	function strip_slash_from_head( $str ) {
+	public function strip_slash_from_head( $str ) {
 		return $this->_utility_class->strip_slash_from_head( $str );
 	}
 
-	function strip_slash_from_tail( $dir ) {
+	public function strip_slash_from_tail( $dir ) {
 		return $this->_utility_class->strip_slash_from_tail( $dir );
 	}
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return $this->_utility_class->parse_ext( $file );
 	}
 
-	function strip_ext( $file ) {
+	public function strip_ext( $file ) {
 		return $this->_utility_class->strip_ext( $file );
 	}
 
-	function rename_file( $old, $new ) {
+	public function rename_file( $old, $new ) {
 		return $this->_utility_class->rename_file( $old, $new );
 	}
 
-	function copy_file( $src, $dst, $flag = false ) {
+	public function copy_file( $src, $dst, $flag = false ) {
 		return $this->_utility_class->copy_file( $src, $dst, $flag );
 	}
 
-	function unlink_file( $file ) {
+	public function unlink_file( $file ) {
 		return $this->_utility_class->unlink_file( $file );
 	}
 
-	function check_http_start( $str ) {
+	public function check_http_start( $str ) {
 		return $this->_utility_class->check_http_start( $str );
 	}
 
-	function check_http_null( $str ) {
+	public function check_http_null( $str ) {
 		return $this->_utility_class->check_http_null( $str );
 	}
 
-	function adjust_image_size( $width, $height, $max_width, $max_height ) {
+	public function adjust_image_size( $width, $height, $max_width, $max_height ) {
 		return $this->_utility_class->adjust_image_size( $width, $height, $max_width, $max_height );
 	}
 
-	function is_image_cmyk( $file ) {
+	public function is_image_cmyk( $file ) {
 		return $this->_utility_class->is_image_cmyk( $file );
 	}
 
-	function build_error_msg( $msg, $title = '', $flag_sanitize = true ) {
+	public function build_error_msg( $msg, $title = '', $flag_sanitize = true ) {
 		return $this->_utility_class->build_error_msg( $msg, $title, $flag_sanitize );
 	}
 
-	function build_random_file_name( $id, $ext, $extra = null ) {
+	public function build_random_file_name( $id, $ext, $extra = null ) {
 		return $this->_utility_class->build_random_file_name( $id, $ext, $extra );
 	}
 
-	function build_random_file_node( $id, $extra = null ) {
+	public function build_random_file_node( $id, $extra = null ) {
 		return $this->_utility_class->build_random_file_node( $id, $extra );
 	}
 
-	function parse_url_to_filename( $url ) {
+	public function parse_url_to_filename( $url ) {
 		return $this->_utility_class->parse_url_to_filename( $url );
 	}
 
-	function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
+	public function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
 		return $this->_utility_class->get_files_in_dir( $path, $ext, $flag_dir, $flag_sort, $id_as_key );
 	}
 
@@ -265,7 +264,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 // LF  \xOA \n
 // CR  \xOD \r
 
-	function str_replace_control_code( $str, $replace = ' ' ) {
+	public function str_replace_control_code( $str, $replace = ' ' ) {
 		$str = preg_replace( '/[\x00-\x08]/', $replace, $str );
 		$str = preg_replace( '/[\x0B-\x0C]/', $replace, $str );
 		$str = preg_replace( '/[\x0E-\x1F]/', $replace, $str );
@@ -274,25 +273,25 @@ class webphoto_lib_base extends webphoto_lib_error {
 		return $str;
 	}
 
-	function str_replace_tab_code( $str, $replace = ' ' ) {
+	public function str_replace_tab_code( $str, $replace = ' ' ) {
 		return preg_replace( "/\t/", $replace, $str );
 	}
 
-	function str_replace_return_code( $str, $replace = ' ' ) {
+	public function str_replace_return_code( $str, $replace = ' ' ) {
 		$str = preg_replace( "/\n/", $replace, $str );
 		$str = preg_replace( "/\r/", $replace, $str );
 
 		return $str;
 	}
 
-	function sanitize_array_int( $arr_in ) {
+	public function sanitize_array_int( $arr_in ) {
 		if ( ! is_array( $arr_in ) || ! count( $arr_in ) ) {
 			return null;
 		}
 
 		$arr_out = array();
 		foreach ( $arr_in as $in ) {
-			$arr_out[] = intval( $in );
+			$arr_out[] = (int) $in;
 		}
 
 		return $arr_out;
@@ -301,24 +300,20 @@ class webphoto_lib_base extends webphoto_lib_error {
 
 // msg class
 
-	function build_set_msg( $msg, $flag_highlight = false, $flag_br = false ) {
+	public function build_set_msg( $msg, $flag_highlight = false, $flag_br = false ) {
 		$this->set_msg(
 			$this->build_msg( $msg, $flag_highlight, $flag_br ) );
 	}
 
-	function set_msg_level( $val ) {
+	public function set_msg_level( $val ) {
 		$this->_msg_level = (int) $val;
 	}
 
-	function check_msg_level( $level ) {
-		if ( ( $this->_msg_level > 0 ) && ( $this->_msg_level >= $level ) ) {
-			return true;
-		}
-
-		return false;
+	public function check_msg_level( $level ) {
+		return ( $this->_msg_level > 0 ) && ( $this->_msg_level >= $level );
 	}
 
-	function build_msg_level( $level, $msg, $flag_highlight = false, $flag_br = false ) {
+	public function build_msg_level( $level, $msg, $flag_highlight = false, $flag_br = false ) {
 		if ( $this->check_msg_level( $level ) ) {
 			return $this->build_msg( $msg, $flag_highlight, $flag_br );
 		}
@@ -326,7 +321,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 		return null;
 	}
 
-	function build_msg( $msg, $flag_highlight = false, $flag_br = false ) {
+	public function build_msg( $msg, $flag_highlight = false, $flag_br = false ) {
 		if ( $flag_highlight ) {
 			$msg = $this->highlight( $msg );
 		}
@@ -337,7 +332,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 		return $msg;
 	}
 
-	function set_error_in_head_with_admin_info( $msg ) {
+	public function set_error_in_head_with_admin_info( $msg ) {
 		$arr = $this->get_errors();
 		$this->clear_errors();
 		$this->set_error( $msg );

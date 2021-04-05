@@ -16,7 +16,8 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 class webphoto_inc_waiting extends webphoto_inc_base_ini {
 
-	function __construct( $dirname, $trust_dirname ) {
+	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
 
 		$this->init_base_ini( $dirname, $trust_dirname );
@@ -34,7 +35,7 @@ class webphoto_inc_waiting extends webphoto_inc_base_ini {
 
 
 // public
-	function waiting() {
+	public function waiting() {
 		$ret               = array();
 		$ret['adminlink']  = $this->_MODULE_URL . '/admin/index.php?fct=admission';
 		$ret['pendingnum'] = $this->_get_item_count();
@@ -45,7 +46,7 @@ class webphoto_inc_waiting extends webphoto_inc_base_ini {
 		return $ret;
 	}
 
-	function _get_item_count() {
+	public function _get_item_count() {
 		$sql = "SELECT COUNT(*) FROM " . $this->prefix_dirname( 'item' );
 		$sql .= " WHERE item_status=0";
 

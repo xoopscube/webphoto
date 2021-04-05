@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -20,6 +19,7 @@ class webphoto_main_image extends webphoto_file_read {
 	public $_kind_class;
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_readfile_class =& webphoto_lib_readfile::getInstance();
@@ -70,7 +70,4 @@ class webphoto_main_image extends webphoto_file_read {
 		exit();
 	}
 
-// --- class end ---
 }
-
-?>

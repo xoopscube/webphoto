@@ -33,8 +33,6 @@ class webphoto_main_photo extends webphoto_factory {
 	}
 
 
-// init
-
 	public function init() {
 		$this->init_factory();
 		$this->set_mode( 'photo' );
@@ -125,8 +123,4 @@ class webphoto_main_photo extends webphoto_factory {
 	public function comment_view() {
 		$this->_photo_class->comment_view();
 	}
-
-// --- class end ---
 }
-
-?>

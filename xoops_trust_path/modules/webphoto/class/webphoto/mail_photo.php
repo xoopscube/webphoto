@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -33,11 +32,8 @@ class webphoto_mail_photo extends webphoto_photo_create {
 	public $_FLAG_UNLINK_FILE = true;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_photo_create( $dirname , $trust_dirname );
 
 		$this->_user_handler    =& webphoto_user_handler::getInstance( $dirname );
 		$this->_maillog_handler =& webphoto_maillog_handler::getInstance( $dirname );
@@ -575,7 +571,4 @@ class webphoto_mail_photo extends webphoto_photo_create {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

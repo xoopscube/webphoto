@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -161,11 +160,11 @@ class webphoto_lib_user_agent {
 		return $this->_browser;
 	}
 
-	function get_mobile_carrier() {
+	public function get_mobile_carrier() {
 		return $this->_mobile_carrier;
 	}
 
-	function get_mobile_model() {
+	public function get_mobile_model() {
 		return $this->_mobile_model;
 	}
 

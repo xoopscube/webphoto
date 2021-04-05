@@ -33,7 +33,7 @@ class webphoto_syno_handler extends webphoto_handler_base_ini {
 		return $instance;
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 
@@ -53,7 +53,7 @@ class webphoto_syno_handler extends webphoto_handler_base_ini {
 		);
 	}
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -82,7 +82,7 @@ class webphoto_syno_handler extends webphoto_handler_base_ini {
 		return $this->_db->getInsertId();
 	}
 
-	function update( $row, $force = false ) {
+	public function update( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -100,13 +100,13 @@ class webphoto_syno_handler extends webphoto_handler_base_ini {
 
 
 // rows
-	function get_rows_orderby_weight_asc( $limit = 0, $offset = 0 ) {
+	public function get_rows_orderby_weight_asc( $limit = 0, $offset = 0 ) {
 		$orderby = 'syno_weight ASC, syno_id ASC';
 
 		return $this->get_rows_by_orderby( $orderby, $limit = 0, $offset = 0 );
 	}
 
-	function get_rows_orderby_weight_desc( $limit = 0, $offset = 0 ) {
+	public function get_rows_orderby_weight_desc( $limit = 0, $offset = 0 ) {
 		$orderby = 'syno_weight DESC, syno_id DESC';
 
 		return $this->get_rows_by_orderby( $orderby, $limit = 0, $offset = 0 );

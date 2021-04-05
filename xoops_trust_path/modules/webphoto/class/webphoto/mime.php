@@ -42,11 +42,8 @@ class webphoto_mime extends webphoto_base_ini {
 	public $_IMAGE_EXTS;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 		$this->_mime_handler =& webphoto_mime_handler::getInstance(
 			$dirname, $trust_dirname );
@@ -112,7 +109,7 @@ class webphoto_mime extends webphoto_base_ini {
 
 // get ext type
 
-	function get_my_item_kind_group_array( $limit = 0, $offset = 0 ) {
+	public function get_my_item_kind_group_array( $limit = 0, $offset = 0 ) {
 		$ext_array = $this->get_my_item_kind_group_array_groupby_item_kind( $limit, $offset );
 
 		$arr = array();
@@ -136,7 +133,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return $arr;
 	}
 
-	function build_item_kind_group( $k ) {
+	public function build_item_kind_group( $k ) {
 		$str = '';
 		if ( in_array( $k, $this->_item_kind_image_array ) ) {
 			$str = _C_WEBPHOTO_ITEM_KIND_GROUP_IMAGE;
@@ -153,7 +150,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return $str;
 	}
 
-	function get_item_kind_group_name( $kind ) {
+	public function get_item_kind_group_name( $kind ) {
 		$str = '';
 		switch ( $kind ) {
 			case _C_WEBPHOTO_ITEM_KIND_GROUP_IMAGE :
@@ -181,11 +178,11 @@ class webphoto_mime extends webphoto_base_ini {
 		return $str;
 	}
 
-	function get_item_kind_group_value( $v, $glue = ' ' ) {
+	public function get_item_kind_group_value( $v, $glue = ' ' ) {
 		return implode( $glue, $v );
 	}
 
-	function get_my_item_kind_group_array_groupby_item_kind( $limit = 0, $offset = 0 ) {
+	public function get_my_item_kind_group_array_groupby_item_kind( $limit = 0, $offset = 0 ) {
 		$rows = $this->_mime_handler->get_rows_by_mygroups(
 			$this->_xoops_groups, $limit, $offset );
 
@@ -208,7 +205,7 @@ class webphoto_mime extends webphoto_base_ini {
 
 // get mime type
 
-	function get_cached_my_allowed_mimes() {
+	public function get_cached_my_allowed_mimes() {
 		if ( is_array( $this->_cached_my_allowed_mimes ) ) {
 			return $this->_cached_my_allowed_mimes;
 		}
@@ -219,12 +216,12 @@ class webphoto_mime extends webphoto_base_ini {
 		return $ret;
 	}
 
-	function get_my_allowed_mimes( $limit = 0, $offset = 0 ) {
+	public function get_my_allowed_mimes( $limit = 0, $offset = 0 ) {
 		return $this->get_allowed_mimes_by_groups(
 			$this->_xoops_groups, $limit, $offset );
 	}
 
-	function get_allowed_mimes_by_groups( $groups, $limit = 0, $offset = 0 ) {
+	public function get_allowed_mimes_by_groups( $groups, $limit = 0, $offset = 0 ) {
 		$type_arr = array();
 		$ext_arr  = array();
 
@@ -259,7 +256,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return array( $type_arr, $ext_arr );
 	}
 
-	function get_cached_mime_type_by_ext( $ext ) {
+	public function get_cached_mime_type_by_ext( $ext ) {
 		if ( isset( $this->_cached_mime_array[ $ext ] ) ) {
 			return $this->_cached_mime_array[ $ext ];
 		}
@@ -280,7 +277,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return false;
 	}
 
-	function get_cached_mime_kind_by_ext( $ext ) {
+	public function get_cached_mime_kind_by_ext( $ext ) {
 		$row = $this->_mime_handler->get_cached_row_by_ext( $ext );
 		if ( ! is_array( $row ) ) {
 			return false;
@@ -289,7 +286,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return $row['mime_kind'];
 	}
 
-	function get_cached_mime_options_by_ext( $ext ) {
+	public function get_cached_mime_options_by_ext( $ext ) {
 		if ( isset( $this->_cached_mime_options_array[ $ext ] ) ) {
 			return $this->_cached_mime_options_array[ $ext ];
 		}
@@ -321,7 +318,7 @@ class webphoto_mime extends webphoto_base_ini {
 
 // judge mime type
 
-	function ext_to_kind( $ext ) {
+	public function ext_to_kind( $ext ) {
 		if ( isset( $this->_cached_kind_array[ $ext ] ) ) {
 			return $this->_cached_kind_array[ $ext ];
 		}
@@ -345,32 +342,32 @@ class webphoto_mime extends webphoto_base_ini {
 		return $kind;
 	}
 
-	function is_mime_ext_image( $ext ) {
+	public function is_mime_ext_image( $ext ) {
 		return $this->match_mime_ext_in_kind_array(
 			$ext, $this->_mime_kind_image_array );
 	}
 
-	function is_mime_ext_image_other( $ext ) {
+	public function is_mime_ext_image_other( $ext ) {
 		return $this->match_mime_ext_in_kind_array(
 			$ext, $this->_mime_kind_image_other_array );
 	}
 
-	function is_mime_ext_video( $ext ) {
+	public function is_mime_ext_video( $ext ) {
 		return $this->match_mime_ext_in_kind_array(
 			$ext, $this->_mime_kind_video_array );
 	}
 
-	function is_mime_ext_audio( $ext ) {
+	public function is_mime_ext_audio( $ext ) {
 		return $this->match_mime_ext_in_kind_array(
 			$ext, $this->_mime_kind_audio_array );
 	}
 
-	function is_mime_ext_office( $ext ) {
+	public function is_mime_ext_office( $ext ) {
 		return $this->match_mime_ext_in_kind_array(
 			$ext, $this->_mime_kind_office_array );
 	}
 
-	function match_mime_ext_in_kind_array( $ext, $kind_array ) {
+	public function match_mime_ext_in_kind_array( $ext, $kind_array ) {
 		foreach ( $kind_array as $kind ) {
 			if ( $this->get_cached_mime_kind_by_ext( $ext ) == $kind ) {
 				return true;
@@ -380,15 +377,15 @@ class webphoto_mime extends webphoto_base_ini {
 		return false;
 	}
 
-	function ext_to_mime( $ext ) {
+	public function ext_to_mime( $ext ) {
 		return $this->get_cached_mime_type_by_ext( $ext );
 	}
 
-	function ext_to_mime_kind( $ext ) {
+	public function ext_to_mime_kind( $ext ) {
 		return $this->get_cached_mime_kind_by_ext( $ext );
 	}
 
-	function mime_to_medium( $mime ) {
+	public function mime_to_medium( $mime ) {
 		$medium = '';
 		if ( $this->is_image_mime( $mime ) ) {
 			$medium = $this->_IMAGE_MEDIUM;
@@ -399,11 +396,11 @@ class webphoto_mime extends webphoto_base_ini {
 		return $medium;
 	}
 
-	function is_normal_ext( $ext ) {
+	public function is_normal_ext( $ext ) {
 		return $this->is_image_ext( $ext );
 	}
 
-	function is_image_ext( $ext ) {
+	public function is_image_ext( $ext ) {
 		if ( in_array( strtolower( $ext ), $this->_IMAGE_EXTS ) ) {
 			return true;
 		}
@@ -411,7 +408,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return false;
 	}
 
-	function is_video_ext( $ext ) {
+	public function is_video_ext( $ext ) {
 		if ( $ext == $this->_EXT_ASX ) {
 			return false;
 		}
@@ -420,12 +417,12 @@ class webphoto_mime extends webphoto_base_ini {
 			$this->ext_to_mime( $ext ) );
 	}
 
-	function is_audio_ext( $ext ) {
+	public function is_audio_ext( $ext ) {
 		return $this->is_audio_mime(
 			$this->ext_to_mime( $ext ) );
 	}
 
-	function is_image_mime( $mime ) {
+	public function is_image_mime( $mime ) {
 		if ( preg_match( '/^image/', $mime ) ) {
 			return true;
 		}
@@ -433,7 +430,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return false;
 	}
 
-	function is_video_mime( $mime ) {
+	public function is_video_mime( $mime ) {
 		if ( preg_match( '/^video/', $mime ) ) {
 			return true;
 		}
@@ -441,7 +438,7 @@ class webphoto_mime extends webphoto_base_ini {
 		return false;
 	}
 
-	function is_audio_mime( $mime ) {
+	public function is_audio_mime( $mime ) {
 		if ( preg_match( '/^audio/', $mime ) ) {
 			return true;
 		}
@@ -449,44 +446,33 @@ class webphoto_mime extends webphoto_base_ini {
 		return false;
 	}
 
-	function get_image_medium() {
+	public function get_image_medium() {
 		return $this->_IMAGE_MEDIUM;
 	}
 
-	function get_video_medium() {
+	public function get_video_medium() {
 		return $this->_VIDEO_MEDIUM;
 	}
 
-	function get_audio_medium() {
+	public function get_audio_medium() {
 		return $this->_AUDIO_MEDIUM;
 	}
 
 
 // is my allow mime
 
-	function is_my_allow_mime( $mime ) {
+	public function is_my_allow_mime( $mime ) {
 		list ( $allowed_mimes, $allowed_exts )
 			= $this->get_cached_my_allowed_mimes();
 
-		if ( $mime && in_array( strtolower( $mime ), $allowed_mimes ) ) {
-			return true;
-		}
-
-		return false;
+		return $mime && in_array( strtolower( $mime ), $allowed_mimes );
 	}
 
-	function is_my_allow_ext( $ext ) {
+	public function is_my_allow_ext( $ext ) {
 		list ( $allowed_mimes, $allowed_exts )
 			= $this->get_cached_my_allowed_mimes();
 
-		if ( $ext && in_array( strtolower( $ext ), $allowed_exts ) ) {
-			return true;
-		}
-
-		return false;
+		return $ext && in_array( strtolower( $ext ), $allowed_exts );
 	}
 
-// --- class end ---
 }
-
-?>

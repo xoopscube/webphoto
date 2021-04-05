@@ -54,11 +54,9 @@ class webphoto_flash_player extends webphoto_base_ini {
 	public $_SCREENCOLOR_DEFAULT = '#ffffff';    // white
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 		$this->_xoops_class   =& webphoto_xoops_base::getInstance();
 		$this->_utility_class =& webphoto_lib_utility::getInstance();
@@ -1243,7 +1241,4 @@ class webphoto_flash_player extends webphoto_base_ini {
 		return $this->_utility_class->parse_ext( $file );
 	}
 
-// --- class end ---
 }
-
-?>

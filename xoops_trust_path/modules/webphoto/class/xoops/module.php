@@ -27,15 +27,15 @@ class webphoto_xoops_module {
 	}
 
 // my module
-	function get_my_mid( $format = 's' ) {
+	public function get_my_mid( $format = 's' ) {
 		return $this->get_my_value_by_name( 'mid', $format );
 	}
 
-	function get_my_name( $format = 's' ) {
+	public function get_my_name( $format = 's' ) {
 		return $this->get_my_value_by_name( 'name', $format );
 	}
 
-	function get_my_value_by_name( $name, $format = 's' ) {
+	public function get_my_value_by_name( $name, $format = 's' ) {
 		global $xoopsModule;
 		if ( is_object( $xoopsModule ) ) {
 			return $xoopsModule->getVar( $name, $format );
@@ -45,19 +45,19 @@ class webphoto_xoops_module {
 	}
 
 // xoops module
-	function get_mid_by_dirname( $dirname, $format = 's' ) {
+	public function get_mid_by_dirname( $dirname, $format = 's' ) {
 		return $this->get_value_by_dirname( $dirname, 'mid', $format );
 	}
 
-	function get_name_by_dirname( $dirname, $format = 's' ) {
+	public function get_name_by_dirname( $dirname, $format = 's' ) {
 		return $this->get_value_by_dirname( $dirname, 'name', $format );
 	}
 
-	function is_active_by_dirname( $dirname ) {
+	public function is_active_by_dirname( $dirname ) {
 		return $this->get_value_by_dirname( $dirname, 'isactive', $format );
 	}
 
-	function get_value_by_dirname( $dirname, $name, $format = 's' ) {
+	public function get_value_by_dirname( $dirname, $name, $format = 's' ) {
 		$module_handler =& xoops_gethandler( 'module' );
 		$module         = $this->_module_handler->getByDirname( $dirname );
 		if ( is_object( $module ) ) {
@@ -67,19 +67,19 @@ class webphoto_xoops_module {
 		return false;
 	}
 
-	function get_module_by_dirname( $dirname ) {
+	public function get_module_by_dirname( $dirname ) {
 		return $this->_module_handler->getByDirname( $dirname );
 	}
 
-	function get_module_by_mid( $mid ) {
+	public function get_module_by_mid( $mid ) {
 		return $this->_module_handler->get( $mid );
 	}
 
-	function get_module_objects( $criteria = null, $id_as_key = false ) {
+	public function get_module_objects( $criteria = null, $id_as_key = false ) {
 		return $this->_module_handler->getObjects( $criteria, $id_as_key );
 	}
 
-	function get_module_list( $param = null ) {
+	public function get_module_list( $param = null ) {
 		$isactive = $param['isactive'] ?? true;
 		$file     = $param['file'] ?? null;
 		$except   = $param['except'] ?? null;
@@ -112,7 +112,7 @@ class webphoto_xoops_module {
 		return $arr;
 	}
 
-	function get_dirname_list( $mod_objs, $param = null ) {
+	public function get_dirname_list( $mod_objs, $param = null ) {
 // none_key must be string, not integer 0
 // 0 match any stings
 
@@ -185,7 +185,7 @@ class webphoto_xoops_module {
 	}
 
 // utility
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 

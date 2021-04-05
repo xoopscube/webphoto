@@ -1,20 +1,13 @@
 <?php
-// $Id: index.php,v 1.5 2010/01/25 10:03:07 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2009-10-25 K.OHWADA
-// get_template_main()
-// 2009-04-10 K.OHWADA
-// remove get_photo_globals()
-// 2008-08-01 K.OHWADA
-// remove xoops_template.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -23,9 +16,6 @@ if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 webphoto_include_once( 'main/header.php' );
 webphoto_include_once( 'class/main/index.php' );
 
-//=========================================================
-// main
-//=========================================================
 $manage =& webphoto_main_index::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $manage->init();
 
@@ -35,5 +25,3 @@ include XOOPS_ROOT_PATH . "/header.php";
 $xoopsTpl->assign( $manage->main() );
 
 include( XOOPS_ROOT_PATH . "/footer.php" );
-
-?>

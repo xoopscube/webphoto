@@ -107,11 +107,9 @@ class webphoto_base_this extends webphoto_base_ini {
 	public $_PHOTO_LIST_UPDATE_ORDER = 'item_time_update DESC, item_id DESC';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 		$this->_item_handler
 			=& webphoto_item_handler::getInstance( $dirname, $trust_dirname );
@@ -298,129 +296,129 @@ class webphoto_base_this extends webphoto_base_ini {
 		return $this->_kind_class->is_pdf_ext( $ext );
 	}
 
-	function is_mp3_ext( $ext ) {
+	public function is_mp3_ext( $ext ) {
 		return $this->_kind_class->is_mp3_ext( $ext );
 	}
 
-	function is_wav_ext( $ext ) {
+	public function is_wav_ext( $ext ) {
 		return $this->_kind_class->is_wav_ext( $ext );
 	}
 
-	function is_video_audio_kind( $kind ) {
+	public function is_video_audio_kind( $kind ) {
 		return $this->_kind_class->is_video_audio_kind( $kind );
 	}
 
-	function is_external_kind( $kind ) {
+	public function is_external_kind( $kind ) {
 		return $this->_kind_class->is_external_kind( $kind );
 	}
 
-	function is_playlist_kind( $kind ) {
+	public function is_playlist_kind( $kind ) {
 		return $this->_kind_class->is_playlist_kind( $kind );
 	}
 
-	function is_external_embed_playlist_kind( $kind ) {
+	public function is_external_embed_playlist_kind( $kind ) {
 		return $this->_kind_class->is_external_embed_playlist_kind( $kind );
 	}
 
-	function is_undefined_kind( $kind ) {
+	public function is_undefined_kind( $kind ) {
 		return $this->_kind_class->is_undefined_kind( $kind );
 	}
 
-	function is_none_kind( $kind ) {
+	public function is_none_kind( $kind ) {
 		return $this->_kind_class->is_none_kind( $kind );
 	}
 
-	function is_general_kind( $kind ) {
+	public function is_general_kind( $kind ) {
 		return $this->_kind_class->is_general_kind( $kind );
 	}
 
-	function is_image_kind( $kind ) {
+	public function is_image_kind( $kind ) {
 		return $this->_kind_class->is_image_kind( $kind );
 	}
 
-	function is_video_kind( $kind ) {
+	public function is_video_kind( $kind ) {
 		return $this->_kind_class->is_video_kind( $kind );
 	}
 
-	function is_audio_kind( $kind ) {
+	public function is_audio_kind( $kind ) {
 		return $this->_kind_class->is_audio_kind( $kind );
 	}
 
-	function is_embed_kind( $kind ) {
+	public function is_embed_kind( $kind ) {
 		return $this->_kind_class->is_embed_kind( $kind );
 	}
 
-	function is_external_general_kind( $kind ) {
+	public function is_external_general_kind( $kind ) {
 		return $this->_kind_class->is_external_general_kind( $kind );
 	}
 
-	function is_external_image_kind( $kind ) {
+	public function is_external_image_kind( $kind ) {
 		return $this->_kind_class->is_embed_kind( $kind );
 	}
 
-	function is_playlist_feed_kind( $kind ) {
+	public function is_playlist_feed_kind( $kind ) {
 		return $this->_kind_class->is_playlist_feed_kind( $kind );
 	}
 
-	function is_playlist_dir_kind( $kind ) {
+	public function is_playlist_dir_kind( $kind ) {
 		return $this->_kind_class->is_playlist_dir_kind( $kind );
 	}
 
 
 // uri class
 
-	function build_uri_photo_id_title( $id, $title, $target = '_blank', $flag_amp_sanitize = true, $flag_title_sanitize = true ) {
+	public function build_uri_photo_id_title( $id, $title, $target = '_blank', $flag_amp_sanitize = true, $flag_title_sanitize = true ) {
 		return $this->_uri_class->build_photo_id_title(
 			$id, $title, $target, $flag_amp_sanitize, $flag_title_sanitize );
 	}
 
-	function build_uri_photo_id( $id, $target = '_blank', $flag_amp_sanitize = true ) {
+	public function build_uri_photo_id( $id, $target = '_blank', $flag_amp_sanitize = true ) {
 		return $this->_uri_class->build_photo_id(
 			$id, $target, $flag_amp_sanitize );
 	}
 
-	function build_uri_photo_title( $id, $title, $target = '_blank', $flag_amp_sanitize = true, $flag_title_sanitize = true ) {
+	public function build_uri_photo_title( $id, $title, $target = '_blank', $flag_amp_sanitize = true, $flag_title_sanitize = true ) {
 		return $this->_uri_class->build_photo_title(
 			$id, $title, $target, $flag_amp_sanitize, $flag_title_sanitize );
 	}
 
-	function build_uri_operate( $op ) {
+	public function build_uri_operate( $op ) {
 		return $this->_uri_class->build_operate( $op );
 	}
 
-	function build_uri_photo( $id, $flag_amp_sanitize = true ) {
+	public function build_uri_photo( $id, $flag_amp_sanitize = true ) {
 		return $this->_uri_class->build_photo( $id, $flag_amp_sanitize );
 	}
 
-	function build_uri_category( $id, $param = null ) {
+	public function build_uri_category( $id, $param = null ) {
 		return $this->_uri_class->build_category( $id, $param );
 	}
 
-	function build_uri_user( $id ) {
+	public function build_uri_user( $id ) {
 		return $this->_uri_class->build_user( $id );
 	}
 
-	function rawurlencode_uri_encode_str( $str ) {
+	public function rawurlencode_uri_encode_str( $str ) {
 		return $this->_uri_class->rawurlencode_encode_str( $str );
 	}
 
-	function decode_uri_str( $str ) {
+	public function decode_uri_str( $str ) {
 		return $this->_uri_class->decode_str( $str );
 	}
 
 
 // item handler
 
-	function get_item_row_by_id( $item_id ) {
+	public function get_item_row_by_id( $item_id ) {
 		return $this->_item_handler->get_row_by_id( $item_id );
 	}
 
-	function build_show_icon_image( $item_row ) {
+	public function build_show_icon_image( $item_row ) {
 		return $this->_item_handler->build_show_item_image(
 			$item_row, $this->_ROOT_EXTS_URL );
 	}
 
-	function build_item_name_by_file_kind( $kind ) {
+	public function build_item_name_by_file_kind( $kind ) {
 		return $this->_item_handler->build_name_fileid_by_kind( $kind );
 	}
 

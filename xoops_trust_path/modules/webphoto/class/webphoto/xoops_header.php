@@ -37,8 +37,6 @@ class webphoto_xoops_header extends webphoto_base_this {
 	public $_LIGHTBOX_URL;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 
@@ -61,9 +59,7 @@ class webphoto_xoops_header extends webphoto_base_this {
 		return $instance;
 	}
 
-//--------------------------------------------------------
 // public
-//--------------------------------------------------------
 	function assign_for_main() {
 		$this->assign_xoops_module_header(
 			$this->_build_xoops_header() );
@@ -100,10 +96,8 @@ class webphoto_xoops_header extends webphoto_base_this {
 		$this->_rss_limit = $rss_limit;
 	}
 
-//--------------------------------------------------------
 // private
-//--------------------------------------------------------
-	function _build_xoops_header() {
+	private function _build_xoops_header() {
 		$str = '';
 		if ( $this->_flag_rss ) {
 			$str .= $this->_build_header_once_rss(
@@ -136,7 +130,7 @@ class webphoto_xoops_header extends webphoto_base_this {
 		return $str;
 	}
 
-	function _build_header_once( $name ) {
+	private function _build_header_once( $name ) {
 		$const_name = $this->build_const_name( $name );
 		$func_name  = strtolower( '_build_header_' . $name );
 		if ( $this->check_once( $const_name ) ) {
@@ -146,7 +140,7 @@ class webphoto_xoops_header extends webphoto_base_this {
 		return null;
 	}
 
-	function _build_header_once_rss( $mode, $param_encode, $limit ) {
+	private function _build_header_once_rss( $mode, $param_encode, $limit ) {
 		$const_name = $this->build_const_name( 'rss' );
 		if ( $this->check_once( $const_name ) ) {
 			return $this->_build_header_rss( $mode, $param_encode, $limit );
@@ -155,32 +149,32 @@ class webphoto_xoops_header extends webphoto_base_this {
 		return null;
 	}
 
-	function _build_header_css() {
+	private function _build_header_css() {
 		return $this->build_link_css_libs( 'default.css' );
 	}
 
-	function _build_header_lightbox_css() {
+	private function _build_header_lightbox_css() {
 		return $this->build_link_css_libs( 'lightbox/lightbox.css' );
 	}
 
-	function _build_header_prototype_js() {
+	private function _build_header_prototype_js() {
 		return $this->build_script_js_libs( 'prototype.js' );
 	}
 
-	function _build_header_cookiemanager_js() {
+	private function _build_header_cookiemanager_js() {
 		return $this->build_script_js_libs( 'cookiemanager.js' );
 	}
 
-	function _build_header_box_js() {
+	private function _build_header_box_js() {
 		return $this->build_script_js_libs( 'box.js' );
 	}
 
-	function _build_header_scriptaculous_js() {
+	private function _build_header_scriptaculous_js() {
 		return $this->build_script_js_libs(
 			'scriptaculous/scriptaculous.js?load=effects,builder' );
 	}
 
-	function _build_header_rss( $mode, $param_encode, $limit ) {
+	private function _build_header_rss( $mode, $param_encode, $limit ) {
 		$url = $this->_MODULE_URL . '/index.php/rss/' . $mode;
 		if ( $param_encode ) {
 			$url .= '/' . $param_encode;
@@ -190,9 +184,7 @@ class webphoto_xoops_header extends webphoto_base_this {
 		return $this->build_link_rss( $url );
 	}
 
-//--------------------------------------------------------
 // timeline
-//--------------------------------------------------------
 	function _build_once_timeline() {
 		if ( $this->_check_timeline() ) {
 			return $this->_build_timeline();
@@ -224,9 +216,7 @@ EOF;
 		return $str;
 	}
 
-//--------------------------------------------------------
 // lightbox
-//--------------------------------------------------------
 	function _build_once_lightbox() {
 		if ( $this->_check_lightbox() ) {
 			return $this->_build_lightbox();
@@ -268,9 +258,7 @@ EOF;
 		return $str;
 	}
 
-//--------------------------------------------------------
 // webphoto_inc_xoops_header
-//--------------------------------------------------------
 	function assign_xoops_module_header( $val ) {
 		return $this->_header_class->assign_xoops_module_header( $val );
 	}
@@ -317,7 +305,4 @@ EOF;
 		return $this->_header_class->check_once( $const_name );
 	}
 
-// --- class end ---
 }
-
-?>

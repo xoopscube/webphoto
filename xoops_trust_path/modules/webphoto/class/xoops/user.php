@@ -31,12 +31,12 @@ class webphoto_xoops_user {
 		return $instance;
 	}
 
-	function _init() {
+	public function _init() {
 		$this->_MODULE_MID = $this->get_my_module_value_by_name( 'mid' );
 		$this->_USER_UID   = $this->get_my_user_value_by_name( 'uid' );
 	}
 
-	function get_my_user_value_by_name( $name, $format = 's' ) {
+	public function get_my_user_value_by_name( $name, $format = 's' ) {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return $xoopsUser->getVar( $name, $format );
@@ -45,7 +45,7 @@ class webphoto_xoops_user {
 		return false;
 	}
 
-	function get_my_user_groups() {
+	public function get_my_user_groups() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return $xoopsUser->getGroups();
@@ -54,7 +54,7 @@ class webphoto_xoops_user {
 		return false;
 	}
 
-	function get_my_user_is_login() {
+	public function get_my_user_is_login() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return true;
@@ -63,7 +63,7 @@ class webphoto_xoops_user {
 		return false;
 	}
 
-	function get_my_user_is_module_admin() {
+	public function get_my_user_is_module_admin() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			if ( $xoopsUser->isAdmin( $this->_MODULE_MID ) ) {
@@ -76,19 +76,19 @@ class webphoto_xoops_user {
 
 
 // user handler
-	function get_user_by_uid( $uid ) {
+	public function get_user_by_uid( $uid ) {
 		return $this->_user_handler->get( $uid );
 	}
 
-	function get_user_uname_from_id( $uid, $usereal = 0 ) {
+	public function get_user_uname_from_id( $uid, $usereal = 0 ) {
 		return XoopsUser::getUnameFromId( $uid, $usereal );
 	}
 
-	function build_userinfo( $uid, $usereal = 0 ) {
+	public function build_userinfo( $uid, $usereal = 0 ) {
 		$uname = $this->get_user_uname_from_id( $uid, $usereal );
 
 // geust
-		$uid = intval( $uid );
+		$uid = (int) $uid;
 		if ( $uid == 0 ) {
 			return $uname;
 		}
@@ -98,11 +98,11 @@ class webphoto_xoops_user {
 		return $str;
 	}
 
-	function increment_post_by_own() {
+	public function increment_post_by_own() {
 		return $this->increment_post_by_uid( $this->_USER_UID );
 	}
 
-	function increment_post_by_uid( $uid ) {
+	public function increment_post_by_uid( $uid ) {
 		if ( $uid <= 0 ) {
 			return false;
 		}
@@ -115,11 +115,11 @@ class webphoto_xoops_user {
 		return $obj->incrementPost();
 	}
 
-	function increment_post_by_num_own( $num ) {
+	public function increment_post_by_num_own( $num ) {
 		return $this->increment_post_by_num_uid( $num, $this->_USER_UID );
 	}
 
-	function increment_post_by_num_uid( $num, $uid ) {
+	public function increment_post_by_num_uid( $num, $uid ) {
 		if ( $uid <= 0 ) {
 			return false;
 		}
@@ -142,7 +142,7 @@ class webphoto_xoops_user {
 	}
 
 // xoops module
-	function get_my_module_value_by_name( $name, $format = 's' ) {
+	public function get_my_module_value_by_name( $name, $format = 's' ) {
 		global $xoopsModule;
 		if ( is_object( $xoopsModule ) ) {
 			return $xoopsModule->getVar( $name, $format );
@@ -152,7 +152,7 @@ class webphoto_xoops_user {
 	}
 
 // utility
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 

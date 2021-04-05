@@ -37,7 +37,7 @@ class webphoto_inc_oninstall_item extends webphoto_inc_base_ini {
 
 
 // item table
-	function update() {
+	public function update() {
 		$this->_item_add_column_050();
 		$this->_item_add_column_060();
 		$this->_item_add_column_070();
@@ -52,7 +52,7 @@ class webphoto_inc_oninstall_item extends webphoto_inc_base_ini {
 		$this->_item_add_column_230();
 	}
 
-	function _item_add_column_050() {
+	public function _item_add_column_050() {
 
 // return if already exists
 		if ( $this->exists_column( $this->_table_item, 'item_external_url' ) ) {
@@ -101,7 +101,7 @@ class webphoto_inc_oninstall_item extends webphoto_inc_base_ini {
 
 	}
 
-	function _item_add_column_060() {
+	public function _item_add_column_060() {
 
 // return if already exists
 		if ( $this->exists_column( $this->_table_item, 'item_external_middle' ) ) {
@@ -128,7 +128,7 @@ class webphoto_inc_oninstall_item extends webphoto_inc_base_ini {
 
 	}
 
-	function _item_add_column_070() {
+	public function _item_add_column_070() {
 
 // return if already exists
 		if ( $this->exists_column( $this->_table_item, 'item_codeinfo' ) ) {

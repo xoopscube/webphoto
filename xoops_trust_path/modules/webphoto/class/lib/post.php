@@ -17,8 +17,6 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_lib_post {
 
 
-// constructor
-
 	public function __construct() {
 		// dummy
 	}
@@ -35,25 +33,25 @@ class webphoto_lib_post {
 
 // function
 
-	function get_post( $key, $default = null ) {
+	public function get_post( $key, $default = null ) {
 		$str = $_POST[ $key ] ?? $default;
 
 		return $str;
 	}
 
-	function get_post_text( $key, $default = null ) {
+	public function get_post_text( $key, $default = null ) {
 		return $this->_strip_slashes_gpc( $this->get_post( $key, $default ) );
 	}
 
-	function get_post_int( $key, $default = 0 ) {
+	public function get_post_int( $key, $default = 0 ) {
 		return (int) $this->get_post( $key, $default );
 	}
 
-	function get_post_float( $key, $default = 0 ) {
+	public function get_post_float( $key, $default = 0 ) {
 		return (float) $this->get_post( $key, $default );
 	}
 
-	function get_post_url( $key, $default = null ) {
+	public function get_post_url( $key, $default = null ) {
 		$str = $this->get_post_text( $key, $default );
 		if ( $this->check_http_start( $str ) && $this->check_http_fill( $str ) ) {
 			return $str;
@@ -62,25 +60,23 @@ class webphoto_lib_post {
 		return $default;
 	}
 
-	function get_post_time( $key, $default = null ) {
+	public function get_post_time( $key, $default = null ) {
 		return $this->str_to_time( $this->get_post_text( $key, $default ) );
 	}
 
-	function get_get( $key, $default = null ) {
-		$str = $_GET[ $key ] ?? $default;
-
-		return $str;
+	public function get_get( $key, $default = null ) {
+		return $_GET[ $key ] ?? $default;
 	}
 
-	function get_get_text( $key, $default = null ) {
+	public function get_get_text( $key, $default = null ) {
 		return $this->_strip_slashes_gpc( $this->get_get( $key, $default ) );
 	}
 
-	function get_get_int( $key, $default = 0 ) {
+	public function get_get_int( $key, $default = 0 ) {
 		return (int) $this->get_get( $key, $default );
 	}
 
-	function get_post_get( $key, $default = null ) {
+	public function get_post_get( $key, $default = null ) {
 		$str = $default;
 		if ( isset( $_POST[ $key ] ) ) {
 			$str = $_POST[ $key ];
@@ -91,18 +87,18 @@ class webphoto_lib_post {
 		return $str;
 	}
 
-	function get_post_get_text( $key, $default = null ) {
+	public function get_post_get_text( $key, $default = null ) {
 		return $this->_strip_slashes_gpc( $this->get_post_get( $key, $default ) );
 	}
 
-	function get_post_get_int( $key, $default = 0 ) {
+	public function get_post_get_int( $key, $default = 0 ) {
 		return (int) $this->get_post_get( $key, $default );
 	}
 
 
 // utlity
 
-	function _strip_slashes_gpc( $str ) {
+	public function _strip_slashes_gpc( $str ) {
 		if ( ! get_magic_quotes_gpc() ) {
 			return $str;
 		}
@@ -119,7 +115,7 @@ class webphoto_lib_post {
 		return $arr;
 	}
 
-	function check_http_start( $str ) {
+	public function check_http_start( $str ) {
 		if ( preg_match( "|^https?://|", $str ) ) {
 			return true;    // include HTTP
 		}
@@ -127,15 +123,11 @@ class webphoto_lib_post {
 		return false;
 	}
 
-	function check_http_fill( $str ) {
-		if ( ( $str != '' ) && ( $str != 'http://' ) && ( $str != 'https://' ) ) {
-			return true;
-		}
-
-		return false;
+	public function check_http_fill( $str ) {
+		return ( $str != '' ) && ( $str != 'http://' ) && ( $str != 'https://' );
 	}
 
-	function str_to_time( $str ) {
+	public function str_to_time( $str ) {
 		$str = trim( $str );
 		if ( $str ) {
 			$time = strtotime( $str );

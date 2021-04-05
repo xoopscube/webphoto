@@ -59,11 +59,9 @@ class webphoto_factory extends webphoto_base_this {
 	public $_PHOTO_LIMIT;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 		$this->_photo_class
 			=& webphoto_photo::getInstance( $dirname, $trust_dirname );
@@ -113,8 +111,6 @@ class webphoto_factory extends webphoto_base_this {
 		return $instance;
 	}
 
-
-// init
 
 	function init_factory() {
 		$this->_auto_publish_class->auto_publish();
@@ -828,7 +824,4 @@ class webphoto_factory extends webphoto_base_this {
 		return $arr;
 	}
 
-// --- class end ---
 }
-
-?>

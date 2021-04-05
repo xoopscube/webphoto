@@ -31,7 +31,7 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_SORT_HITSA", "Popularité (ordre croissant)" );
 	define( "_WEBPHOTO_SORT_HITSD", "Popularité (ordre décroissant)" );
 	define( "_WEBPHOTO_SORT_TITLEA", "Titre (ordre alphabétique)" );
-	define( "_WEBPHOTO_SORT_TITLED", "Titre (odre ante alhabétique))" );
+	define( "_WEBPHOTO_SORT_TITLED", "Titre (ordre ante alphabétique))" );
 	define( "_WEBPHOTO_SORT_DATEA", "Date de mise à jour (ordre chronologique)" );
 	define( "_WEBPHOTO_SORT_DATED", "Date de mise à jour (ordre ante chronologique)" );
 	define( "_WEBPHOTO_SORT_RATINGA", "Note (des plus basses aux plus hautes)" );
@@ -685,20 +685,20 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_USAGE_PHOTO", "Au clic sur la miniature, afficher dans une Popup la photo grand format" );
 	define( "_WEBPHOTO_USAGE_TITLE", "Au clic sur le titre, déplacer la photo sur la page" );
 	define( "_WEBPHOTO_DATE_NOT_SET", "Ne pas indiquer de date pour la photo" );
-	define( "_WEBPHOTO_PLACE_NOT_SET", "Ne pas indiquer de localisation pour la phot" );
-	define( "_WEBPHOTO_GOTO_ADMIN", "Se rendre dans la zone d'administration" );
+	define( "_WEBPHOTO_PLACE_NOT_SET", "Medias sans géolocalisation" );
+	define( "_WEBPHOTO_GOTO_ADMIN", "Administration" );
 
 //---------------------------------------------------------
 // search for Japanese
 //---------------------------------------------------------
 	define( "_WEBPHOTO_SR_CANDICATE", "Nomminé pour la recherche" );
-	define( "_WEBPHOTO_SR_ZENKAKU", "Zenkaku" );
-	define( "_WEBPHOTO_SR_HANKAKU", "Hanhaku" );
+	define( "_WEBPHOTO_SR_ZENKAKU", "Alphabet Zenkaku" );
+	define( "_WEBPHOTO_SR_HANKAKU", "Alphabet Hanhaku" );
 
-	define( "_WEBPHOTO_JA_KUTEN", "" );
-	define( "_WEBPHOTO_JA_DOKUTEN", "" );
-	define( "_WEBPHOTO_JA_PERIOD", "" );
-	define( "_WEBPHOTO_JA_COMMA", "" );
+	define( "_WEBPHOTO_JA_KUTEN", "JA_KUTEN" );
+	define( "_WEBPHOTO_JA_DOKUTEN", "JA_DOKUTEN" );
+	define( "_WEBPHOTO_JA_PERIOD", "JA_PERIOD" );
+	define( "_WEBPHOTO_JA_COMMA", "JA_COMMA" );
 
 //---------------------------------------------------------
 // v0.20
@@ -845,14 +845,14 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_ITEM_COMMENTS", "Commentaires" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_1", "ID du fichier: Contenu" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_2", "ID du fichier: Miniature" );
-	define( "_WEBPHOTO_ITEM_FILE_ID_3", "ID du fichier: MIddle" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_3", "ID du fichier: Moyen" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_4", "ID du fichier: Vidéo Flash" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_5", "ID du fichier: Vidéo Docomo" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_6", "ID du fichier: PDF" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_7", "ID du fichier: Flash au format swf" );
-	define( "_WEBPHOTO_ITEM_FILE_ID_8", "fichier8" );
-	define( "_WEBPHOTO_ITEM_FILE_ID_9", "fichier9" );
-	define( "_WEBPHOTO_ITEM_FILE_ID_10", "fichier10" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_8", "ID du fichier: Petit" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_9", "ID du fichier: JPEG" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_10", "ID du fichier: MP3" );
 	define( "_WEBPHOTO_ITEM_TEXT_1", "texte1" );
 	define( "_WEBPHOTO_ITEM_TEXT_2", "texte2" );
 	define( "_WEBPHOTO_ITEM_TEXT_3", "texte3" );
@@ -885,14 +885,14 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 // file kind ( for admin checktables )
 	define( "_WEBPHOTO_FILE_KIND_1", "Contenu" );
 	define( "_WEBPHOTO_FILE_KIND_2", "Miniature" );
-	define( "_WEBPHOTO_FILE_KIND_3", "MIddle" );
+	define( "_WEBPHOTO_FILE_KIND_3", "Moyen" );
 	define( "_WEBPHOTO_FILE_KIND_4", "Vidéo Flash" );
 	define( "_WEBPHOTO_FILE_KIND_5", "Vidéo Docomo" );
 	define( "_WEBPHOTO_FILE_KIND_6", "PDF" );
 	define( "_WEBPHOTO_FILE_KIND_7", "Flash au format swf" );
-	define( "_WEBPHOTO_FILE_KIND_8", "fichier8" );
-	define( "_WEBPHOTO_FILE_KIND_9", "fichier9" );
-	define( "_WEBPHOTO_FILE_KIND_10", "fichier10" );
+	define( "_WEBPHOTO_FILE_KIND_8", "Small" );
+	define( "_WEBPHOTO_FILE_KIND_9", "JPG" );
+	define( "_WEBPHOTO_FILE_KIND_10", "MP3" );
 
 // index
 	define( "_WEBPHOTO_MOBILE_MAILTO", "Transmettre l'URL sur téléphone mobile" );
@@ -1346,5 +1346,3 @@ Merci de cliquer <a href="{MODULE_URL}/i.php?op=post" rel="external">Evoyer par 
 
 // === define end ===
 }
-
-?>

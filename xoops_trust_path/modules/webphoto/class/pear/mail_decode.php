@@ -21,8 +21,6 @@ class webphoto_pear_mail_decode {
 	public $_CHARSET_LOCAL = 'utf-8';
 
 
-// constructor
-
 	function webphoto_pear_mail_decode() {
 		$this->_mail_class =& webphoto_lib_mail::getInstance();
 	}
@@ -396,7 +394,4 @@ class webphoto_pear_mail_decode {
 		return $str;
 	}
 
-// === claaa end ===
 }
-
-?>

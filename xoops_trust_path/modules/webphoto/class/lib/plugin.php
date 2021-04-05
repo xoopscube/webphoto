@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -52,20 +51,20 @@ class webphoto_lib_plugin {
 
 // set param
 
-	function set_dirname( $sub_dir ) {
+	public function set_dirname( $sub_dir ) {
 		$dir                     = '/plugins/' . $sub_dir;
 		$this->_TRUST_PLUGIN_DIR = $this->_TRUST_DIR . $dir;
 		$this->_ROOT_PLUGIN_DIR  = $this->_MODULE_DIR . $dir;
 	}
 
-	function set_prefix( $val ) {
+	public function set_prefix( $val ) {
 		$this->_PLUGIN_PREFIX = $val;
 	}
 
 
 // plugin
 
-	function build_list() {
+	public function build_list() {
 		$files = $this->_utility_class->get_files_in_dir( $this->_TRUST_PLUGIN_DIR, 'php', false, true );
 		$arr   = array();
 		foreach ( $files as $file ) {
@@ -75,7 +74,7 @@ class webphoto_lib_plugin {
 		return $arr;
 	}
 
-	function &get_cached_class_object( $type ) {
+	public function &get_cached_class_object( $type ) {
 		if ( isset( $this->_cached_by_type[ $type ] ) ) {
 			return $this->_cached_by_type[ $type ];
 		}
@@ -88,7 +87,7 @@ class webphoto_lib_plugin {
 		return $obj;
 	}
 
-	function &get_class_object( $type ) {
+	public function &get_class_object( $type ) {
 		$false = false;
 
 		if ( empty( $type ) ) {
@@ -107,14 +106,14 @@ class webphoto_lib_plugin {
 		return $class;
 	}
 
-	function include_once_file( $type ) {
+	public function include_once_file( $type ) {
 		$file = $this->get_file_name( $type );
 		if ( $file ) {
 			include_once $file;
 		}
 	}
 
-	function get_file_name( $type ) {
+	public function get_file_name( $type ) {
 		$type_php   = $type . '.php';
 		$file_trust = $this->_TRUST_PLUGIN_DIR . '/' . $type_php;
 		$file_root  = $this->_ROOT_PLUGIN_DIR . '/' . $type_php;
@@ -128,7 +127,7 @@ class webphoto_lib_plugin {
 		return false;
 	}
 
-	function get_class_name( $type ) {
+	public function get_class_name( $type ) {
 		$class = $this->_PLUGIN_PREFIX . $type;
 		if ( class_exists( $class ) ) {
 			return $class;

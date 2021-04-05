@@ -33,7 +33,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $instance;
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 
@@ -58,7 +58,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		);
 	}
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -97,7 +97,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $this->_db->getInsertId();
 	}
 
-	function update( $row, $force = false ) {
+	public function update( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -118,7 +118,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql, 0, 0, $force );
 	}
 
-	function get_count_by_status( $status ) {
+	public function get_count_by_status( $status ) {
 		$sql = 'SELECT COUNT(*) FROM ' . $this->_table;
 		$sql .= ' WHERE maillog_status=' . (int) $status;
 
@@ -126,7 +126,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 	}
 
 
-	function get_rows_desc_by_status( $status, $limit = 0, $start = 0 ) {
+	public function get_rows_desc_by_status( $status, $limit = 0, $start = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
 		$sql .= ' WHERE maillog_status=' . (int) $status;
 		$sql .= ' ORDER BY maillog_id DESC';
@@ -134,7 +134,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $this->get_rows_by_sql( $sql, $limit, $start );
 	}
 
-	function get_rows_by_photoid( $photo_id, $limit = 0, $start = 0 ) {
+	public function get_rows_by_photoid( $photo_id, $limit = 0, $start = 0 ) {
 // %|123|%
 		$like = $this->build_like_separetor( $photo_id );
 		$sql  = 'SELECT * FROM ' . $this->_table;
@@ -144,7 +144,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $this->get_rows_by_sql( $sql, $limit, $start );
 	}
 
-	function build_like_separetor( $id ) {
+	public function build_like_separetor( $id ) {
 // %|123|%
 		$like = '%' . _C_WEBPHOTO_INFO_SEPARATOR;
 		$like .= (int) $id;
@@ -155,7 +155,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 
 
 // get id array
-	function get_id_array_older( $limit = 0, $offset = 0 ) {
+	public function get_id_array_older( $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT maillog_id FROM ' . $this->_table;
 		$sql .= ' ORDER BY maillog_id ASC';
 
@@ -164,7 +164,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 
 
 // build
-	function build_photo_ids_array_to_str( $arr ) {
+	public function build_photo_ids_array_to_str( $arr ) {
 		if ( ! is_array( $arr ) || ! count( $arr ) ) {
 			return null;
 		}
@@ -176,18 +176,18 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $ret;
 	}
 
-	function build_photo_ids_with_separetor( $str ) {
+	public function build_photo_ids_with_separetor( $str ) {
 // str -> |1|
 		$ret = _C_WEBPHOTO_INFO_SEPARATOR . $str . _C_WEBPHOTO_INFO_SEPARATOR;
 
 		return $ret;
 	}
 
-	function build_photo_ids_row_to_array( $row ) {
+	public function build_photo_ids_row_to_array( $row ) {
 		return $this->info_str_to_array( $row['maillog_photo_ids'] );
 	}
 
-	function build_attach_array_to_str( $arr ) {
+	public function build_attach_array_to_str( $arr ) {
 		if ( ! is_array( $arr ) || ! count( $arr ) ) {
 			return null;
 		}
@@ -195,17 +195,17 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 		return $this->info_array_to_str( $arr );
 	}
 
-	function build_attach_row_to_array( $row ) {
+	public function build_attach_row_to_array( $row ) {
 		return $this->info_str_to_array( $row['maillog_attach'] );
 	}
 
-	function info_str_to_array( $str ) {
+	public function info_str_to_array( $str ) {
 		$utility_class =& webphoto_lib_utility::getInstance();
 
 		return $utility_class->str_to_array( $str, _C_WEBPHOTO_INFO_SEPARATOR );
 	}
 
-	function info_array_to_str( $arr ) {
+	public function info_array_to_str( $arr ) {
 		$utility_class =& webphoto_lib_utility::getInstance();
 
 		return $utility_class->array_to_str( $arr, _C_WEBPHOTO_INFO_SEPARATOR );
@@ -213,7 +213,7 @@ class webphoto_maillog_handler extends webphoto_handler_base_ini {
 
 
 // show
-	function build_show_comment( $row ) {
+	public function build_show_comment( $row ) {
 		return nl2br( $row['maillog_comment'] );
 	}
 

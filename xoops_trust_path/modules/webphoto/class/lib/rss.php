@@ -91,7 +91,7 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 
 // modify from backend.php
 
-	function build_rss( $cache_id = null, $cache_time = 3600 ) {
+	public function build_rss( $cache_id = null, $cache_time = 3600 ) {
 		$this->http_output( 'pass' );
 
 		header( 'Content-Type:text/xml; charset=utf-8' );
@@ -110,14 +110,14 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 		return $tpl->fetch( $this->_template, $cache_id );
 	}
 
-	function set_template( $val ) {
+	public function set_template( $val ) {
 		$this->_template = $val;
 	}
 
 
 // template
 
-	function assign_tpl( &$tpl ) {
+	public function assign_tpl( &$tpl ) {
 		$channel = $this->build_channel_array();
 		$tpl->assign( $this->utf8_array( $channel ) );
 
@@ -130,7 +130,7 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 
 // channel
 
-	function build_channel_array() {
+	public function build_channel_array() {
 		$image_url = XOOPS_URL . '/' . $this->_SITE_LOGO;
 
 		$dimention = getimagesize( XOOPS_ROOT_PATH . '/' . $this->_SITE_LOGO );
@@ -157,7 +157,7 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 		$atom_link = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		$lastbuild = date( 'r', time() );
 
-		$arr = array(
+		return array(
 			'channel_title'          => $xoops_sitename_xml,
 			'channel_link'           => $link_xml,
 			'channel_atom_link'      => $this->xml_url( $atom_link ),
@@ -175,21 +175,19 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 			'image_width'            => (int) $width,
 			'image_height'           => (int) $height,
 		);
-
-		return $arr;
 	}
 
 
 // items
 
-	function build_items() {
+	public function build_items() {
 		// dummy
 	}
 
 
 // clear template
 
-	function clear_compiled_tpl_for_admin( $cache_id = null, $flag_msg = false ) {
+	public function clear_compiled_tpl_for_admin( $cache_id = null, $flag_msg = false ) {
 		if ( $this->_is_module_admin ) {
 			$tpl = new XoopsTpl();
 			$tpl->clear_compiled_tpl( $this->_template );
@@ -200,7 +198,7 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 		}
 	}
 
-	function clear_compiled_tpl( $cache_id = null ) {
+	public function clear_compiled_tpl( $cache_id = null ) {
 		$tpl = new XoopsTpl();
 		$tpl->clear_compiled_tpl( $this->_template );
 		$tpl->clear_cache( $this->_template, $cache_id );
@@ -209,7 +207,7 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 
 // head
 
-	function view_rss() {
+	public function view_rss() {
 		$this->http_output( 'pass' );
 
 		echo $this->build_header_content_type();
@@ -221,11 +219,11 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 		echo $this->build_html_body_end();
 	}
 
-	function build_header_content_type() {
+	public function build_header_content_type() {
 		header( 'Content-Type:text/html; charset=UTF-8' );
 	}
 
-	function build_html_head( $title = null ) {
+	public function build_html_head( $title = null ) {
 		if ( empty( $title ) ) {
 			$title = $this->utf8( $this->_xoops_sitename . ' - ' . $this->_MODULE_NAME );
 		}
@@ -238,25 +236,19 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 		return $str;
 	}
 
-	function build_html_body_begin() {
-		$str = '<body>' . "\n";
-
-		return $str;
+	public function build_html_body_begin() {
+		return '<body>' . "\n";
 	}
 
-	function build_html_body_end() {
-		$str = '</body></html>' . "\n";
-
-		return $str;
+	public function build_html_body_end() {
+		return '</body></html>' . "\n";
 	}
 
-	function build_close_button() {
-		$str = '<input class="formButton" value="' . $this->utf8( _CLOSE ) . '" type="button" onclick="javascript:window.close();" />';
-
-		return $str;
+	public function build_close_button() {
+		return '<input class="formButton" value="' . $this->utf8( _CLOSE ) . '" type="button" onclick="javascript:window.close();" />';
 	}
 
-	function build_view_rss( $cache_id = null ) {
+	public function build_view_rss( $cache_id = null ) {
 		$tpl = new XoopsTpl();
 		$this->assign_tpl( $tpl );
 		$str = $tpl->fetch( $this->_template, $cache_id );
@@ -267,15 +259,15 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 
 // multibyte
 
-	function http_output( $encoding ) {
+	public function http_output( $encoding ) {
 		return $this->_multibyte_class->m_mb_http_output( $encoding );
 	}
 
-	function utf8( $str ) {
+	public function utf8( $str ) {
 		return $this->_multibyte_class->convert_to_utf8( $str );
 	}
 
-	function utf8_array( $arr_in ) {
+	public function utf8_array( $arr_in ) {
 		$arr = array();
 		foreach ( $arr_in as $k => $v ) {
 			$arr[ $k ] = $this->utf8( $v );
@@ -287,7 +279,7 @@ class webphoto_lib_rss extends webphoto_lib_xml {
 
 // xoops class
 
-	function _init_xoops_param() {
+	public function _init_xoops_param() {
 		$xoops_class =& webphoto_xoops_base::getInstance();
 
 		$this->_xoops_language  = $xoops_class->get_config_by_name( 'language' );

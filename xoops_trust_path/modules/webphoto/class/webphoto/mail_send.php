@@ -19,11 +19,8 @@ class webphoto_mail_send extends webphoto_base_this {
 	public $_mail_send_class;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_mail_template_class
 			=& webphoto_d3_mail_template::getInstance( $dirname, $trust_dirname );
@@ -175,7 +172,4 @@ class webphoto_mail_send extends webphoto_base_this {
 		return $this->_mail_template_class->replace_tag_array_by_template( $template );
 	}
 
-// --- class end ---
 }
-
-?>

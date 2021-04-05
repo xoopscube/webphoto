@@ -9,16 +9,13 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-// xoops system files
 include_once XOOPS_ROOT_PATH . '/class/template.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
-// webphoto files
 include_once WEBPHOTO_TRUST_PATH . '/class/d3/optional.php';
 include_once WEBPHOTO_TRUST_PATH . '/include/optional.php';
 

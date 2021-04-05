@@ -39,11 +39,9 @@ class webphoto_ext_base extends webphoto_base_ini {
 	public $_FLAG_DEBUG = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 		$this->_mime_handler =& webphoto_mime_handler::getInstance(
 			$dirname, $trust_dirname );
@@ -259,7 +257,4 @@ class webphoto_ext_base extends webphoto_base_ini {
 		$this->_flag_chmod = (bool) $val;
 	}
 
-// --- class end ---
 }
-
-?>

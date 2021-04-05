@@ -76,7 +76,4 @@ class webphoto_exif {
 		return $this->_mysql_utility_class->time_to_mysql_datetime( $time );
 	}
 
-// --- class end ---
 }
-
-?>

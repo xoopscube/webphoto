@@ -38,8 +38,6 @@ class webphoto_lib_highlight {
 	public $_flag_remove_control_code = false;
 
 
-// constructor
-
 	public function __construct() {
 		// dummy
 	}
@@ -53,10 +51,7 @@ class webphoto_lib_highlight {
 		return $instance;
 	}
 
-
-// function
-
-	function build_highlight_keywords( $str, $keywords, $flag_singlewords = true ) {
+	public function build_highlight_keywords( $str, $keywords, $flag_singlewords = true ) {
 		if ( $keywords ) {
 			$keywords = $this->_sanitize_keyword( $keywords );
 
@@ -77,7 +72,7 @@ class webphoto_lib_highlight {
 		return $str;
 	}
 
-	function build_highlight_keyword_array( $str, $keyword_array ) {
+	public function build_highlight_keyword_array( $str, $keyword_array ) {
 		$ret = $str;
 
 		if ( is_array( $keyword_array ) && count( $keyword_array ) ) {
@@ -86,7 +81,7 @@ class webphoto_lib_highlight {
 			foreach ( $keyword_array as $k ) {
 				$keyword = $this->_sanitize_keyword( $k );
 
-// not empty
+				// not empty
 				if ( $keyword ) {
 					$arr[] = '/(?' . '>' . preg_quote( $keyword, '/' ) . ')/si';
 				}
@@ -101,7 +96,7 @@ class webphoto_lib_highlight {
 		return $ret;
 	}
 
-	function _sanitize_keyword( $str ) {
+	public function _sanitize_keyword( $str ) {
 		if ( $this->_flag_trim ) {
 			$str = trim( $str );
 		}
@@ -121,18 +116,38 @@ class webphoto_lib_highlight {
 		return $str;
 	}
 
-	function _replace_content( $str ) {
+	public function _replace_content( $str ) {
 		$str = '>' . $str . '<';
-		$str = preg_replace_callback( "/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array(
-			&$this,
-			'_replace_with_callback'
-		), $str );
+		//!Fix this with a closure (for PHP 7.2)
+//		$str = preg_replace_callback( "/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array(
+//			&$this,
+//			'_replace_with_callback'
+//		), $str );
+
+		$str = preg_replace_callback(
+			'/&#x([a-f0-9]+);/mi',
+			function ($m) { return chr(hexdec('0x'.$m[1])); }, // Now it's a Closure !
+			$str
+		);
+
+/**
+ * closure for PHP 7.4
+     $str = preg_replace_callback(
+		'/&#x([a-f0-9]+);/mi',
+		fn($m) => chr(hexdec('0x'.$m[1])),
+		$str
+	);
+ * Note : The inline string replacement of \\1 to give a valid PHP hexadecimal, like 0x21, no longer works
+ * that way in the callable: PHP7++ requires a hexdec call to accomplish the same.
+ */
+
+
 		$str = substr( $str, 1, - 1 );
 
 		return $str;
 	}
 
-	function _replace_with_callback( $matches ) {
+	public function _replace_with_callback( $matches ) {
 		$replacement = '<span class="' . $this->_class . '">\\0</span>';
 		$result      = false;
 
@@ -154,76 +169,78 @@ class webphoto_lib_highlight {
 
 // set parameter
 
-	function set_replace_callback( $val ) {
+	public function set_replace_callback( $val ) {
 		$this->_replace_callback = $val;
 	}
 
-	function set_flag_sanitize( $val ) {
+	public function set_flag_sanitize( $val ) {
 		$this->_flag_sanitize = (bool) $val;
 	}
 
-	function set_flag_trim( $val ) {
+	public function set_flag_trim( $val ) {
 		$this->_flag_trim = (bool) $val;
 	}
 
-	function set_flag_remove_control_code( $val ) {
+	public function set_flag_remove_control_code( $val ) {
 		$this->_flag_remove_control_code = (bool) $val;
 	}
 
-	function set_flag_remove_not_word( $val ) {
+	public function set_flag_remove_not_word( $val ) {
 		$this->_flag_remove_not_word = (bool) $val;
 	}
 
-	function set_style( $val ) {
+	public function set_style( $val ) {
 		$this->_style = $val;
 	}
 
-	function set_class( $val ) {
+	public function set_class( $val ) {
 		$this->_class = $val;
 	}
 
-	function get_style() {
+	public function get_style() {
 		return $this->_style;
 	}
 
-	function get_class() {
+	public function get_class() {
 		return $this->_class;
 	}
 
-}
+
+
 
 // function
 // porting from smartsection <http://smartfactory.ca/>
 
-function webphoto_highlighter( $matches ) {
+	public function webphoto_highlighter( $matches ) {
 // background-color: light yellow
-	$STYLE = 'font-weight: bolder; background-color: #ffff80; ';
-	$ret   = false;
-	if ( is_array( $matches ) && isset( $matches[0] ) ) {
-		$ret = '<span style="' . $STYLE . '">' . $matches[0] . '</span>';
+		$STYLE = 'font-weight: bolder; background-color: #ffff80; ';
+		$ret   = false;
+		if ( is_array( $matches ) && isset( $matches[0] ) ) {
+			$ret = '<span style="' . $STYLE . '">' . $matches[0] . '</span>';
+		}
+
+		return $ret;
 	}
 
-	return $ret;
-}
+	public function webphoto_highlighter_by_style( $matches ) {
+		$highlight =& webphoto_lib_highlight::getInstance();
+		$style     = $highlight->get_style();
+		$ret       = false;
+		if ( is_array( $matches ) && isset( $matches[0] ) ) {
+			$ret = '<span style="' . $style . '">' . $matches[0] . '</span>';
+		}
 
-function webphoto_highlighter_by_style( $matches ) {
-	$highlight =& webphoto_lib_highlight::getInstance();
-	$style     = $highlight->get_style();
-	$ret       = false;
-	if ( is_array( $matches ) && isset( $matches[0] ) ) {
-		$ret = '<span style="' . $style . '">' . $matches[0] . '</span>';
+		return $ret;
 	}
 
-	return $ret;
-}
+	public function webphoto_highlighter_by_class( $matches ) {
+		$highlight =& webphoto_lib_highlight::getInstance();
+		$class     = $highlight->get_class();
+		$ret       = false;
+		if ( is_array( $matches ) && isset( $matches[0] ) ) {
+			$ret = '<span class="' . $class . '">' . $matches[0] . '</span>';
+		}
 
-function webphoto_highlighter_by_class( $matches ) {
-	$highlight =& webphoto_lib_highlight::getInstance();
-	$class     = $highlight->get_class();
-	$ret       = false;
-	if ( is_array( $matches ) && isset( $matches[0] ) ) {
-		$ret = '<span class="' . $class . '">' . $matches[0] . '</span>';
+		return $ret;
 	}
-
-	return $ret;
 }

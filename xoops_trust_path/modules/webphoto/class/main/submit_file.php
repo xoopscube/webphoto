@@ -48,7 +48,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		$this->_factory_create_class =& webphoto_edit_factory_create::getInstance(
 			$dirname, $trust_dirname );
 
-		$this->_cfg_file_size = intval( $this->get_config_by_name( 'file_size' ) );
+		$this->_cfg_file_size = (int) $this->get_config_by_name( 'file_size' );
 		$this->_has_file      = $this->_perm_class->has_file();
 		$this->_has_resize    = $this->_factory_create_class->has_image_resize();
 
@@ -67,7 +67,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 
 // main
 
-	function check_action() {
+	public function check_action() {
 		$this->_check();
 		$this->_is_video_thumb_form = false;
 
@@ -83,7 +83,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		}
 	}
 
-	function form_param() {
+	public function form_param() {
 		if ( $this->_is_video_thumb_form ) {
 			$param = $this->_build_form_video_thumb();
 		} else {
@@ -96,7 +96,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 
 // check 
 
-	function _check() {
+	public function _check() {
 		$this->_post_item_cat_id = $this->_post_class->get_post_get_int( 'item_cat_id' );
 		$this->_post_file        = $this->_post_class->get_post_text( 'file' );
 
@@ -125,7 +125,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		}
 	}
 
-	function _exec_check() {
+	public function _exec_check() {
 		if ( ! $this->_has_file ) {
 			return _C_WEBPHOTO_ERR_NO_PERM;
 		}
@@ -157,7 +157,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		return 0;
 	}
 
-	function _check_token_and_redirect() {
+	public function _check_token_and_redirect() {
 		$this->check_token_and_redirect(
 			$this->_THIS_URL, $this->_TIME_FAILED );
 	}
@@ -165,7 +165,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 
 // submit
 
-	function _submit() {
+	public function _submit() {
 		$this->_check_token_and_redirect();
 		$ret1 = $this->_exec_submit();
 
@@ -189,7 +189,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		exit();
 	}
 
-	function _check_submit() {
+	public function _check_submit() {
 		$ext      = $this->parse_ext( $this->_post_file );
 		$src_file = $this->_FILE_DIR . '/' . $this->_post_file;
 
@@ -221,15 +221,11 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		return 0;
 	}
 
-	function check_file_size( $file ) {
-		if ( filesize( $file ) < $this->_cfg_file_size ) {
-			return true;
-		}
-
-		return false;
+	public function check_file_size( $file ) {
+		return filesize( $file ) < $this->_cfg_file_size;
 	}
 
-	function _exec_submit() {
+	public function _exec_submit() {
 		$this->clear_msg_array();
 
 		$ret = $this->_check_submit();
@@ -306,12 +302,12 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		return 0;
 	}
 
-	function _move_file( $old ) {
+	public function _move_file( $old ) {
 		$new = $this->_TMP_DIR . '/' . uniqid( 'file_' );
 		rename( $old, $new );
 	}
 
-	function _build_url_success( $item_row ) {
+	public function _build_url_success( $item_row ) {
 		$cat_id = $item_row['item_cat_id'];
 
 		$url_param = array(
@@ -324,7 +320,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 
 // video
 
-	function _video() {
+	public function _video() {
 		$this->_check_token_and_redirect();
 
 		$item_id  = $this->_post_class->get_post_int( 'item_id' );
@@ -354,7 +350,7 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 
 // build_redirect
 
-	function build_failed_msg( $ret ) {
+	public function build_failed_msg( $ret ) {
 		$this->_redirect_class->set_error( $this->get_errors() );
 		$ret = $this->_redirect_class->build_failed_msg( $ret );
 		$this->clear_errors();
@@ -363,21 +359,21 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		return $ret;
 	}
 
-	function build_redirect( $param ) {
+	public function build_redirect( $param ) {
 		$this->_redirect_class->set_error( $this->get_errors() );
 
 		return $this->_redirect_class->build_redirect( $param );
 	}
 
-	function get_redirect_url() {
+	public function get_redirect_url() {
 		return $this->_redirect_class->get_redirect_url();
 	}
 
-	function get_redirect_time() {
+	public function get_redirect_time() {
 		return $this->_redirect_class->get_redirect_time();
 	}
 
-	function get_redirect_msg() {
+	public function get_redirect_msg() {
 		return $this->_redirect_class->get_redirect_msg();
 	}
 
@@ -431,7 +427,4 @@ class webphoto_main_submit_file extends webphoto_edit_base {
 		return $form_class->build_form_param( $action, 'submit_file' );
 	}
 
-// --- class end ---
 }
-
-?>

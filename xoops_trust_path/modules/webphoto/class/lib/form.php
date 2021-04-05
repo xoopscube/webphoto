@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -48,8 +47,6 @@ class webphoto_lib_form extends webphoto_lib_element {
 
 	public $_FLAG_ADMIN_SUB_MENU = true;
 
-
-// constructor
 
 	public function __construct( $dirname, $trust_dirname ) {
 
@@ -102,11 +99,11 @@ class webphoto_lib_form extends webphoto_lib_element {
 
 // paginavi
 
-	function init_pagenavi() {
+	public function init_pagenavi() {
 		$this->_pagenavi_class =& webphoto_lib_pagenavi::getInstance();
 	}
 
-	function build_form_pagenavi_perpage() {
+	public function build_form_pagenavi_perpage() {
 		$form_name = $this->_FORM_NAME . '_perpage';
 
 		$text = '<div align="center">';

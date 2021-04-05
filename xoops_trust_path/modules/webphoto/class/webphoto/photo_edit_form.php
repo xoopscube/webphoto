@@ -70,17 +70,14 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 
 	public $_DETAIL_DIV_NAME = 'webphoto_detail';
 	public $_GMAP_DIV_NAME = 'webphoto_gmap_iframe';
-	public $_GMAP_STYLE = 'background-color: #ffffff; ';
+	public $_GMAP_STYLE = 'background: transparent; ';
 	public $_GMAP_WIDTH = '100%';
 	public $_GMAP_HEIGHT = '650px';
 	public $_ICON_DIV_STYLE = 'border: #808080 1px solid; padding: 1px; width:80%; ';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_form_this( $dirname, $trust_dirname );
 
 		$this->_embed_class    =& webphoto_embed::getInstance( $dirname, $trust_dirname );
 		$this->_editor_class   =& webphoto_editor::getInstance( $dirname, $trust_dirname );
@@ -106,7 +103,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 
 // submit edit form
 
-	function print_form_common( $item_row, $param ) {
+	public function print_form_common( $item_row, $param ) {
 		$this->init_preload();
 
 		$mode         = $param['mode'];
@@ -114,7 +111,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		$has_resize   = $param['has_resize'];
 		$has_rotate   = $param['has_rotate'];
 		$allowed_exts = $param['allowed_exts'];
-		$type         = isset( $param['type'] ) ? $param['type'] : null;
+		$type         = $param['type'] ?? null;
 		$is_video     = isset( $param['is_video'] ) ? (bool) $param['is_video'] : false;
 
 		$this->_param_type      = $type;
@@ -169,8 +166,10 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		echo $this->build_input_hidden( 'item_id', $item_row['item_id'] );
 		echo $this->build_input_hidden( 'photo_id', $item_row['item_id'] );
 
-		if ( $is_submit ) {
-			echo $this->build_input_hidden( 'preview_name', $preview_name, true );
+		if ( $is_submit && $isXCL22) {
+			// XCL sanitize Preview
+			// echo $this->build_input_hidden( 'preview_name', $preview_name, true );
+			echo $this->build_input_hidden( 'preview_name', $preview_name, false );
 		}
 
 // -- basic --
@@ -365,7 +364,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		echo "<br>\n";
 	}
 
-	function _is_upload_type() {
+	public function _is_upload_type() {
 		if ( $this->_is_embed_type() ) {
 			return false;
 		}
@@ -373,7 +372,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return true;
 	}
 
-	function _is_embed_type() {
+	public function _is_embed_type() {
 		$type = $this->get_row_by_key( 'item_embed_type' );
 		if ( $this->_param_type == 'embed' ) {
 			return true;
@@ -385,30 +384,23 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return false;
 	}
 
-	function _is_embed_general_type() {
+	public function _is_embed_general_type() {
 		$type = $this->get_row_by_key( 'item_embed_type' );
-		if ( $this->_is_embed_type() && ( $type == 'general' ) ) {
-			return true;
-		}
 
-		return false;
+		return $this->_is_embed_type() && ( $type == 'general' );
 	}
 
-	function _is_in_array( $name ) {
-		if ( is_array( $this->_ARRAY_PHOTO_ITEM ) && in_array( $name, $this->_ARRAY_PHOTO_ITEM ) ) {
-			return true;
-		}
-
-		return false;
+	public function _is_in_array( $name ) {
+		return is_array( $this->_ARRAY_PHOTO_ITEM ) && in_array( $name, $this->_ARRAY_PHOTO_ITEM );
 	}
 
-	function _print_row_text_is_in_array( $name ) {
+	public function _print_row_text_is_in_array( $name ) {
 		if ( $this->_is_in_array( $name ) ) {
 			echo $this->build_row_text( $this->get_constant( $name ), $name );
 		}
 	}
 
-	function _build_ele_datetime( $size = 50 ) {
+	public function _build_ele_datetime( $size = 50 ) {
 		$name           = 'item_datetime';
 		$name_checkbox  = $name . '_checkbox';
 		$value_checkbox = $this->_get_checkbox_by_name( $name_checkbox );
@@ -423,7 +415,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $text;
 	}
 
-	function _build_cap_duration() {
+	public function _build_cap_duration() {
 		$cap = $this->get_constant( 'FILE_DURATION' );
 		$cap .= ' ( ';
 		$cap .= $this->get_constant( 'second' );
@@ -432,17 +424,13 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $cap;
 	}
 
-	function _build_ele_duration( $cont_row, $size = 50 ) {
-		$value = 0;
-		if ( isset( $cont_row['file_duration'] ) ) {
-			$value = $cont_row['file_duration'];
-		}
-		$ele = $this->build_input_text( 'photo_duration', $value, $size );
+	public function _build_ele_duration( $cont_row, $size = 50 ) {
+		$value = $cont_row['file_duration'] ?? 0;
 
-		return $ele;
+		return $this->build_input_text( 'photo_duration', $value, $size );
 	}
 
-	function _build_ele_rotate() {
+	public function _build_ele_rotate() {
 		$arr = array(
 			'rot0'   => $this->get_constant( 'RADIO_ROTATE0' ),
 			'rot90'  => $this->_build_ele_img_rot( '90' ),
@@ -453,7 +441,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $this->build_form_radio( 'rotate', 'rot0', array_flip( $arr ), ' &nbsp; ' );
 	}
 
-	function _build_ele_img_rot( $rot ) {
+	public function _build_ele_img_rot( $rot ) {
 		$src  = $this->_ICON_ROTATE_URL . '/icon_rotate' . $rot . '.png';
 		$alt  = $this->get_constant( 'RADIO_ROTATE' . $rot );
 		$text = '<img src="' . $src . '" alt="' . $alt . '" title="' . $alt . '" />';
@@ -461,7 +449,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $text;
 	}
 
-	function _build_ele_photo_file_external( $cont_row ) {
+	public function _build_ele_photo_file_external( $cont_row ) {
 		$name = 'item_external_url';
 
 		$ele = $this->_build_file_external(
@@ -472,7 +460,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $ele;
 	}
 
-	function _build_ele_thumb_file_external( $thumb_row ) {
+	public function _build_ele_thumb_file_external( $thumb_row ) {
 		$name_external = 'item_external_thumb';
 		$name_icon     = 'item_icon_name';
 		$value_icon    = $this->get_row_by_key( $name_icon );
@@ -509,7 +497,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $ele;
 	}
 
-	function _build_ele_middle_file_external( $middle_row ) {
+	public function _build_ele_middle_file_external( $middle_row ) {
 		$name = 'item_external_middle';
 
 		$ele = $this->_build_file_external(
@@ -524,7 +512,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $ele;
 	}
 
-	function _build_file_external( $name, $field, $file_row ) {
+	public function _build_file_external( $name, $field, $file_row ) {
 		$url   = $this->build_file_url_size( $file_row );
 		$value = $this->get_row_by_key( $name );
 
@@ -542,7 +530,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $ele;
 	}
 
-	function _build_file_link( $name, $field, $file_row ) {
+	public function _build_file_link( $name, $field, $file_row ) {
 		$url = $this->build_file_url_size( $file_row );
 
 // BUG: sanitize twice
@@ -563,7 +551,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $ele;
 	}
 
-	function _build_ele_tags( $param ) {
+	public function _build_ele_tags( $param ) {
 		$value = $this->_tag_class->tag_name_array_to_str( $param['tag_name_array'] );
 		$text  = $this->build_input_text( 'tags', $value, $this->_TAGS_SIZE );
 		$text  .= "<br>\n";
@@ -572,23 +560,19 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $text;
 	}
 
-	function _build_input_checkbox_by_post( $name ) {
+	public function _build_input_checkbox_by_post( $name ) {
 		return $this->build_input_checkbox_yes( $name, $this->_get_checkbox_by_name( $name ) );
 	}
 
-	function _set_checkbox( $val ) {
+	public function _set_checkbox( $val ) {
 		$this->_checkbox_array = $val;
 	}
 
-	function _get_checkbox_by_name( $name ) {
-		if ( isset( $this->_checkbox_array[ $name ] ) ) {
-			return $this->_checkbox_array[ $name ];
-		}
-
-		return null;
+	public function _get_checkbox_by_name( $name ) {
+		return $this->_checkbox_array[ $name ] ?? null;
 	}
 
-	function _build_ele_button( $mode ) {
+	public function _build_ele_button( $mode ) {
 		$is_submit = false;
 		$is_edit   = false;
 
@@ -625,7 +609,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $button;
 	}
 
-	function _build_ele_gicon() {
+	public function _build_ele_gicon() {
 		$name    = 'item_gicon_id';
 		$value   = $this->get_row_by_key( $name );
 		$options = $this->_gicon_handler->get_sel_options();
@@ -633,7 +617,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $this->build_form_select( $name, $value, $options, $this->_SELECT_SIZE );
 	}
 
-	function _build_ele_kind() {
+	public function _build_ele_kind() {
 		$name    = 'item_kind';
 		$value   = $this->get_row_by_key( $name );
 		$options = $this->_item_handler->get_kind_options();
@@ -641,7 +625,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $this->build_form_select( $name, $value, $options, $this->_SELECT_SIZE );
 	}
 
-	function _build_ele_displaytype() {
+	public function _build_ele_displaytype() {
 		$name    = 'item_displaytype';
 		$value   = $this->get_row_by_key( $name );
 		$options = $this->_item_handler->get_displaytype_options();
@@ -649,7 +633,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $this->build_form_select( $name, $value, $options, $this->_SELECT_SIZE );
 	}
 
-	function _build_ele_onclick() {
+	public function _build_ele_onclick() {
 		$name    = 'item_onclick';
 		$value   = $this->get_row_by_key( $name );
 		$options = $this->_item_handler->get_onclick_options();
@@ -657,22 +641,22 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $this->build_form_select( $name, $value, $options, $this->_SELECT_SIZE );
 	}
 
-	function _build_ele_player() {
+	public function _build_ele_player() {
 		$name  = 'item_player_id';
 		$value = $this->get_row_by_key( 'item_player_id' );
 
 		return $this->_player_handler->build_form_selbox( $name, $value, $this->_SELECT_SIZE );
 	}
 
-	function _build_ele_perm_read() {
+	public function _build_ele_perm_read() {
 		return $this->build_ele_group_perms_by_key( 'item_perm_read' );
 	}
 
-	function _build_ele_perm_down() {
+	public function _build_ele_perm_down() {
 		return $this->build_ele_group_perms_by_key( 'item_perm_down' );
 	}
 
-	function _build_ele_showinfo() {
+	public function _build_ele_showinfo() {
 		$name    = 'item_showinfo';
 		$values  = $this->_item_handler->get_showinfo_array( $this->get_row() );
 		$options = $this->_item_handler->get_showinfo_options();
@@ -681,7 +665,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 			$name, $values, $options, $this->_SELECT_INFO_SIZE );
 	}
 
-	function _build_ele_codeinfo() {
+	public function _build_ele_codeinfo() {
 		$name    = 'item_codeinfo';
 		$values  = $this->_item_handler->get_codeinfo_array( $this->get_row() );
 		$options = $this->_item_handler->get_codeinfo_options();
@@ -693,7 +677,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 
 // embed
 
-	function _build_ele_embed_type() {
+	public function _build_ele_embed_type() {
 		$val = $this->get_item_embed_type( true );
 		$str = $val . ' ';
 		$str .= $this->build_input_hidden( 'item_embed_type', $val );
@@ -701,7 +685,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $str;
 	}
 
-	function _build_ele_embed_src() {
+	public function _build_ele_embed_src() {
 		$value_src  = $this->get_row_by_key( 'item_embed_src' );
 		$value_type = $this->get_item_embed_type( true );
 
@@ -715,7 +699,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $text;
 	}
 
-	function _build_embed_thumb_desc() {
+	public function _build_embed_thumb_desc() {
 		$desc = null;
 		$type = $this->get_item_embed_type( false );
 		if ( $type ) {
@@ -731,7 +715,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 
 // editor
 
-	function _init_editor() {
+	public function _init_editor() {
 		$name   = 'item_description';
 		$value  = $this->get_row_by_key( $name );
 		$editor = $this->get_item_editor();
@@ -745,7 +729,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		}
 	}
 
-	function _build_ele_editor() {
+	public function _build_ele_editor() {
 		$val = $this->get_item_editor();
 		$str = $val . ' ';
 		$str .= $this->build_input_hidden( 'item_editor', $val );
@@ -753,7 +737,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $str;
 	}
 
-	function _build_ele_description_options() {
+	public function _build_ele_description_options() {
 		$str = $this->_build_ele_description_option_single(
 			'item_description_html', $this->get_constant( 'CAP_HTML' ) );
 		$str .= $this->_build_ele_description_option_single(
@@ -768,12 +752,12 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $str;
 	}
 
-	function _build_ele_description_option_single( $name, $cap ) {
+	public function _build_ele_description_option_single( $name, $cap ) {
 		$value = $this->get_row_by_key( $name );
 		$str   = $this->build_input_checkbox_yes( $name, $value );
 		$str   .= ' ';
 		$str   .= $cap;
-		$str   .= "<br /\n>";
+		$str   .= "<hr>123456789<br /\n>";
 
 		return $str;
 	}
@@ -781,33 +765,29 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 
 // java script
 
-	function _build_ele_detail_onoff() {
+	public function _build_ele_detail_onoff() {
 		$str = '<input type="checkbox" id="webphoto_form_detail_onoff" onclick="webphoto_detail_disp_onoff(this)" />' . "\n";
 		$str .= $this->get_constant( 'CAP_DETAIL_ONOFF' );
 
 		return $str;
 	}
 
-	function _build_detail_div() {
-		$str = '<div id="' . $this->_DETAIL_DIV_NAME . '" style="display:none;">' . "\n";
-
-		return $str;
+	public function _build_detail_div() {
+		return '<div id="' . $this->_DETAIL_DIV_NAME . '" style="display:none;">' . "\n";
 	}
 
-	function _build_ele_gmap_onoff() {
+	public function _build_ele_gmap_onoff() {
 		$str = '<input type="checkbox" id="webphoto_form_gmap_onoff" checked="checked" onclick="webphoto_gmap_disp_onoff(this)" />' . "\n";
 		$str .= $this->get_constant( 'CAP_DETAIL_ONOFF' );
 
 		return $str;
 	}
 
-	function _build_gmap_div() {
-		$str = '<div id="' . $this->_GMAP_DIV_NAME . '"></div>';
-
-		return $str;
+	public function _build_gmap_div() {
+		return '<div id="' . $this->_GMAP_DIV_NAME . '"></div>';
 	}
 
-	function _build_script() {
+	public function _build_script() {
 		$js  = $this->build_js_check_all();
 		$js  .= $this->_build_detail_js();
 		$js  .= $this->_build_iframe_js();
@@ -817,7 +797,7 @@ class webphoto_photo_edit_form extends webphoto_form_this {
 		return $str;
 	}
 
-	function _build_detail_js() {
+	public function _build_detail_js() {
 		$DIV_NAME = $this->_DETAIL_DIV_NAME;
 
 		$gmap_disp_on = '';
@@ -841,7 +821,7 @@ END_OF_TEXT;
 		return $text . "\n";
 	}
 
-	function _build_iframe_js() {
+	public function _build_iframe_js() {
 		$DIV_NAME = $this->_GMAP_DIV_NAME;
 		$iframe   = $this->_build_gmap_iframe();
 
@@ -865,12 +845,12 @@ END_OF_TEXT;
 		return $text . "\n";
 	}
 
-	function _build_gmap_iframe() {
+	public function _build_gmap_iframe() {
 		$item_id = $this->get_row_by_key( 'item_id' );
 
 		$src = $this->_MODULE_URL . '/index.php?fct=gmap_location';
 		if ( $item_id ) {
-			$src .= '&amp;photo_id=' . intval( $item_id );
+			$src .= '&amp;photo_id=' . (int) $item_id;
 		}
 
 		$str = '<iframe src="' . $src . '" width="' . $this->_GMAP_WIDTH . '" height="' . $this->_GMAP_HEIGHT . '" frameborder="0" scrolling="yes" >';
@@ -879,8 +859,4 @@ END_OF_TEXT;
 
 		return $str;
 	}
-
-// --- class end ---
 }
-
-?>

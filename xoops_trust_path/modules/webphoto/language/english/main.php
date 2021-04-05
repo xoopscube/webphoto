@@ -632,7 +632,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_ITEM_COMMENTS", "Comments" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_1", "File ID: Content" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_2", "File ID: Thumbnail" );
-	define( "_WEBPHOTO_ITEM_FILE_ID_3", "File ID: MIddle" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_3", "File ID: Middle" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_4", "File ID: Flash Video" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_5", "File ID: Docomo Video" );
 	define( "_WEBPHOTO_ITEM_FILE_ID_6", "File ID: PDF" );

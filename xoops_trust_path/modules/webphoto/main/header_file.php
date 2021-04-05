@@ -1,32 +1,18 @@
 <?php
-// $Id: header_file.php,v 1.6 2011/05/10 02:56:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-12-12 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// class/webphoto/multibyte.php
-// 2010-09-17 K.OHWADA
-// class/lib/readfile.php
-// 2009-11-11 K.OHWADA
-// main/header_item_handler.php
-// 2009-01-25 K.OHWADA
-// webphoto_include_once_preload_trust()
-// 2009-01-10 K.OHWADA
-// msg.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'main/header_item_handler.php' );
 
 webphoto_include_once( 'class/xoops/base.php' );
@@ -54,5 +40,3 @@ webphoto_include_language( 'main.php' );
 
 webphoto_include_once_preload_trust();
 webphoto_include_once_preload();
-
-?>

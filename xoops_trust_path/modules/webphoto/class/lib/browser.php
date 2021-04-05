@@ -36,7 +36,7 @@ class webphoto_lib_browser {
 
 // presume os and browser by agent
 
-	function presume_agent() {
+	public function presume_agent() {
 		$agent = $_SERVER["HTTP_USER_AGENT"];
 
 		if ( empty( $agent ) ) {
@@ -45,37 +45,37 @@ class webphoto_lib_browser {
 
 // presume OS
 		$os = 'unknown';
-		if ( preg_match( "/Win/i", $agent ) ) {
+		if ( false !== stripos( $agent, "Win" ) ) {
 			$os = 'win';
-		} elseif ( preg_match( "/Mac/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "Mac" ) ) {
 			$os = 'mac';
-		} elseif ( preg_match( "/Linux/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "Linux" ) ) {
 			$os = 'linux';
-		} elseif ( preg_match( "/BSD/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "BSD" ) ) {
 			$os = 'bsd';
-		} elseif ( preg_match( "/IRIX/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "IRIX" ) ) {
 			$os = 'irix';
-		} elseif ( preg_match( "/Sun/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "Sun" ) ) {
 			$os = 'sun';
-		} elseif ( preg_match( "/HP-UX/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "HP-UX" ) ) {
 			$os = 'hpux';
-		} elseif ( preg_match( "/AIX/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "AIX" ) ) {
 			$os = 'aix';
-		} elseif ( preg_match( "/X11/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "X11" ) ) {
 			$os = 'x11';
 		}
 
 // presume Browser
 		$brawser = 'unknown';
-		if ( preg_match( "/Opera/i", $agent ) ) {
+		if ( false !== stripos( $agent, "Opera" ) ) {
 			$browser = 'opera';
-		} elseif ( preg_match( "/MSIE/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "MSIE" ) ) {
 			$browser = 'msie';
-		} elseif ( preg_match( "/Firefox/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "Firefox" ) ) {
 			$browser = 'firefox';
-		} elseif ( preg_match( "/Chrome/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "Chrome" ) ) {
 			$browser = 'chrome';
-		} elseif ( preg_match( "/Safari/i", $agent ) ) {
+		} elseif ( false !== stripos( $agent, "Safari" ) ) {
 			$browser = 'safari';
 		}
 
@@ -87,11 +87,11 @@ class webphoto_lib_browser {
 
 // get param
 
-	function get_os() {
+	public function get_os() {
 		return $this->_os;
 	}
 
-	function get_browser() {
+	public function get_browser() {
 		return $this->_browser;
 	}
 

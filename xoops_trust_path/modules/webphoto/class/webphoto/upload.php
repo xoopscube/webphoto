@@ -33,8 +33,6 @@ class webphoto_upload extends webphoto_base_this {
 	public $_UPLOADER_ERRORS = array();
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 
@@ -64,7 +62,7 @@ class webphoto_upload extends webphoto_base_this {
 
 // public
 
-	function fetch_media( $field, $flag_allow_all ) {
+	public function fetch_media( $field, $flag_allow_all ) {
 		$this->_tmp_name = null;
 		$this->clear_errors();
 
@@ -98,7 +96,7 @@ class webphoto_upload extends webphoto_base_this {
 		return 1;    // success
 	}
 
-	function fetch_image( $field ) {
+	public function fetch_image( $field ) {
 		$this->_tmp_name = null;
 		$this->clear_errors();
 
@@ -126,21 +124,21 @@ class webphoto_upload extends webphoto_base_this {
 		return 1;    // success
 	}
 
-	function get_tmp_name() {
+	public function get_tmp_name() {
 		return $this->_tmp_name;
 	}
 
 
 // set param
 
-	function set_max_filesize( $val ) {
-		$this->_max_filesize = intval( $val );
+	public function set_max_filesize( $val ) {
+		$this->_max_filesize = (int) $val;
 	}
 
 
 // uploader class
 
-	function uploader_fetch( $media_name, $index = null ) {
+	public function uploader_fetch( $media_name, $index = null ) {
 // http://www.php.net/manual/en/features.file-upload.errors.php
 // UPLOAD_ERR_NO_FILE = 4
 
@@ -176,19 +174,19 @@ class webphoto_upload extends webphoto_base_this {
 		return 1;    // Succeed
 	}
 
-	function get_uploader_file_name() {
+	public function get_uploader_file_name() {
 		return $this->_uploader_file_name;
 	}
 
-	function get_uploader_media_name() {
+	public function get_uploader_media_name() {
 		return $this->_uploader_media_name;
 	}
 
-	function get_uploader_media_type() {
+	public function get_uploader_media_type() {
 		return $this->_uploader_media_type;
 	}
 
-	function is_readable_files_tmp_name( $field ) {
+	public function is_readable_files_tmp_name( $field ) {
 // Notice [PHP]: Undefined index: file_photo
 		if ( isset( $_FILES[ $field ]['tmp_name'] ) ) {
 			return is_readable( $_FILES[ $field ]['tmp_name'] );
@@ -197,31 +195,24 @@ class webphoto_upload extends webphoto_base_this {
 		return false;
 	}
 
-	function is_readable_in_tmp_dir( $name ) {
+	public function is_readable_in_tmp_dir( $name ) {
 		$file = $this->_TMP_DIR . '/' . $name;
-		if ( $name && file_exists( $file ) && is_readable( $file ) ) {
-			return true;
-		}
 
-		return false;
+		return $name && file_exists( $file ) && is_readable( $file );
 	}
 
-	function exist_file_param( $field ) {
-		if ( isset( $_FILES[ $field ] ) && $_FILES[ $field ]['name'] && $_FILES[ $field ]['tmp_name'] ) {
-			return true;
-		}
-
-		return false;
+	public function exist_file_param( $field ) {
+		return isset( $_FILES[ $field ] ) && $_FILES[ $field ]['name'] && $_FILES[ $field ]['tmp_name'];
 	}
 
-	function build_uploader_errors() {
+	public function build_uploader_errors() {
 		$codes = array_unique( $this->_uploader_class->getErrorCodes() );
 		foreach ( $codes as $code ) {
 			$this->build_uploader_error_single( $code );
 		}
 	}
 
-	function build_uploader_error_single( $code ) {
+	public function build_uploader_error_single( $code ) {
 		$err1 = $this->get_uploader_error_msg( $code );
 		$err2 = '';
 
@@ -277,7 +268,7 @@ class webphoto_upload extends webphoto_base_this {
 
 // error msg
 
-	function _init_errors() {
+	public function _init_errors() {
 		$err_2 = sprintf( $this->get_constant( 'PHP_UPLOAD_ERR_FORM_SIZE' ),
 			$this->_utility_class->format_filesize( $this->_max_filesize ) );
 
@@ -311,23 +302,13 @@ class webphoto_upload extends webphoto_base_this {
 		);
 	}
 
-	function get_php_upload_error_msg( $num ) {
-		if ( isset( $this->_PHP_UPLOAD_ERRORS[ $num ] ) ) {
-			return $this->_PHP_UPLOAD_ERRORS[ $num ];
-		}
-
-		return 'Other Error';
+	public function get_php_upload_error_msg( $num ) {
+		return $this->_PHP_UPLOAD_ERRORS[ $num ] ?? 'Other Error';
 	}
 
-	function get_uploader_error_msg( $num ) {
-		if ( isset( $this->_UPLOADER_ERRORS[ $num ] ) ) {
-			return $this->_UPLOADER_ERRORS[ $num ];
-		}
-
-		return 'Other Error';
+	public function get_uploader_error_msg( $num ) {
+		return $this->_UPLOADER_ERRORS[ $num ] ?? 'Other Error';
 	}
 
-// --- class end ---
 }
 
-?>

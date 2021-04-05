@@ -76,9 +76,6 @@ if ( ! empty( $_GET['lib'] ) ) {
 }
 
 // load language files (main.php & admin.php)
-//	$langman->read( 'admin.php' , $mydirname , $mytrustdirname ) ;
-//	$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
-// webphoto
 if ( ! defined( "WEBPHOTO_DIRNAME" ) ) {
 	define( "WEBPHOTO_DIRNAME", $MY_DIRNAME );
 }
@@ -108,10 +105,6 @@ if ( file_exists( $file_root_fct ) ) {
 } elseif ( file_exists( $file_trust_fct ) ) {
 	webphoto_debug_msg( $file_trust_fct );
 	include_once $file_trust_fct;
-
-//} elseif ( file_exists( $file_root_index ) ) {
-//	webphoto_debug_msg( $file_root_index );
-//	include_once $file_root_index;
 
 } elseif ( file_exists( $file_root_main ) ) {
 	webphoto_debug_msg( $file_root_main );

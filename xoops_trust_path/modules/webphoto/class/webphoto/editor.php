@@ -24,8 +24,7 @@ class webphoto_editor extends webphoto_plugin_ini {
 		$this->set_dirname( 'editors' );
 		$this->set_prefix( 'webphoto_editor_' );
 
-		$this->_perm_class
-			             =& webphoto_permission::getInstance( $dirname, $trust_dirname );
+		$this->_perm_class =& webphoto_permission::getInstance( $dirname, $trust_dirname );
 		$this->_has_html = $this->_perm_class->has_html();
 	}
 
@@ -41,7 +40,7 @@ class webphoto_editor extends webphoto_plugin_ini {
 
 // editor
 
-	function display_options( $type, $has_html ) {
+	public function display_options( $type, $has_html ) {
 		if ( empty( $type ) ) {
 			$type = $this->get_ini( 'item_editor_default' );
 		}
@@ -54,22 +53,20 @@ class webphoto_editor extends webphoto_plugin_ini {
 		return $class->display_options( $has_html );
 	}
 
-	function init_form( $type, $id, $name, $value, $rows, $cols, $item_row ) {
+	public function init_form( $type, $id, $name, $value, $rows, $cols, $item_row ) {
 		$class =& $this->get_class_object( $type );
 		if ( ! is_object( $class ) ) {
 			return false;
 		}
 
-		$arr = array(
+		return array(
 			'js'   => $class->build_js(),
 			'show' => $class->show_display_options(),
 			'desc' => $class->build_textarea( $id, $name, $value, $rows, $cols, $item_row ),
 		);
-
-		return $arr;
 	}
 
-	function build_list_options( $flag ) {
+	public function build_list_options( $flag ) {
 		$list = $this->build_list();
 		$arr  = array();
 		foreach ( $list as $type ) {
@@ -87,7 +84,7 @@ class webphoto_editor extends webphoto_plugin_ini {
 		return $arr;
 	}
 
-	function exists( $type ) {
+	public function exists( $type ) {
 		$class =& $this->get_class_object( $type );
 		if ( ! is_object( $class ) ) {
 			return false;
@@ -101,7 +98,4 @@ class webphoto_editor extends webphoto_plugin_ini {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

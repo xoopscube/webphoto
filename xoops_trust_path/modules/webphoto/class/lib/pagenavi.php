@@ -66,8 +66,6 @@ class webphoto_lib_pagenavi {
 	public $_FLAG_DEBUG_TRACE = false;
 
 
-// constructor
-
 	public function __construct() {
 		// dummy
 	}
@@ -85,7 +83,7 @@ class webphoto_lib_pagenavi {
 // same as XoopsPageNav
 // use positon (start offset 0.10.20...)
 
-	function XoopsPageNav( $total, $perpage, $position, $start_name = 'start', $extra_arg = '' ) {
+	public function XoopsPageNav( $total, $perpage, $position, $start_name = 'start', $extra_arg = '' ) {
 		$this->_total    = (int) $total;
 		$this->_perpage  = (int) $perpage;
 		$this->_position = (int) $position;
@@ -99,7 +97,7 @@ class webphoto_lib_pagenavi {
 		$this->_script = $this->_sanitize_url( $url );
 	}
 
-	function renderNav( $offset = 4 ) {
+	public function renderNav( $offset = 4 ) {
 		$navi = '';
 
 		if ( $this->_total <= $this->_perpage ) {

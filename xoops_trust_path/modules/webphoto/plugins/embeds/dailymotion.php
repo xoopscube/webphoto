@@ -1,16 +1,14 @@
 <?php
-// $Id: dailymotion.php,v 1.2 2010/06/16 22:24:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-06-06 K.OHWADA
-// get_xml_params()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @deprecated UPDATE PLUGIN / API / JSON
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -57,9 +55,7 @@ class webphoto_embed_dailymotion extends webphoto_embed_base {
 		return $this->build_desc_span( $this->_url_head, 'x3y6yk', '_no-more-keyboardsmicrosoft_tech' );
 	}
 
-//---------------------------------------------------------
 // xml
-//---------------------------------------------------------
 	public function support_params() {
 		return $this->build_support_params();
 	}
@@ -80,7 +76,7 @@ class webphoto_embed_dailymotion extends webphoto_embed_base {
 			return false;
 		}
 
-		$arr = array(
+		return array(
 			'title'       => $this->get_xml_title( $item ),
 			'description' => $this->get_xml_description( $item ),
 			'url'         => $this->get_xml_url( $item ),
@@ -89,8 +85,6 @@ class webphoto_embed_dailymotion extends webphoto_embed_base {
 			'tags'        => $this->get_xml_tags( $item ),
 			'script'      => $this->get_xml_script( $item ),
 		);
-
-		return $arr;
 	}
 
 	public function get_xml_title( $item ) {

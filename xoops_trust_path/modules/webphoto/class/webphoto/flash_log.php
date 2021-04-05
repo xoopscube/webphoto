@@ -11,7 +11,6 @@
  * caller webphoto_main_callback webphoto_admin_item_manager
  */
 
-
 // http://code.jeroenwijering.com/trac/wiki/Flashvars3
 //
 // Only for the mediaplayer. 
@@ -38,9 +37,7 @@ class webphoto_flash_log {
 	public $_LOG_FILE;
 
 
-// constructor
-
-	function __construct( $dirname ) {
+	public function __construct( $dirname ) {
 		$this->_utility_class =& webphoto_lib_utility::getInstance();
 		$this->_post_class    =& webphoto_lib_post::getInstance();
 
@@ -155,7 +152,4 @@ class webphoto_flash_log {
 		$this->_WORK_DIR = $config_handler->get_by_name( 'workdir' );
 	}
 
-// --- class end ---
 }
-
-?>

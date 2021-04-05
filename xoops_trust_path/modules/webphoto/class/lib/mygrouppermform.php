@@ -81,7 +81,7 @@ class MyXoopsGroupPermForm extends XoopsForm {
 	 *
 	 * @access public
 	 */
-	function addItem( $itemId, $itemName, $itemParent = 0 ) {
+	public function addItem( $itemId, $itemName, $itemParent = 0 ) {
 		$this->_itemTree[ $itemParent ]['children'][] = $itemId;
 		$this->_itemTree[ $itemId ]['parent']         = $itemParent;
 		$this->_itemTree[ $itemId ]['name']           = $itemName;
@@ -93,7 +93,7 @@ class MyXoopsGroupPermForm extends XoopsForm {
 	 *
 	 * @access public
 	 */
-	function addAppendix( $permName, $itemId, $itemName ) {
+	public function addAppendix( $permName, $itemId, $itemName ) {
 		$this->_appendix[] = array(
 			'permname' => $permName,
 			'itemid'   => $itemId,
@@ -110,7 +110,7 @@ class MyXoopsGroupPermForm extends XoopsForm {
 	 *
 	 * @access private
 	 */
-	function _loadAllChildItemIds( $itemId, &$childIds ) {
+	private function _loadAllChildItemIds( $itemId, &$childIds ) {
 		if ( ! empty( $this->_itemTree[ $itemId ]['children'] ) ) {
 			$first_child = $this->_itemTree[ $itemId ]['children'];
 			foreach ( $first_child as $fcid ) {
@@ -131,7 +131,7 @@ class MyXoopsGroupPermForm extends XoopsForm {
 	 * @return string
 	 * @access public
 	 */
-	function render() {
+	public function render() {
 		global $xoopsGTicket;
 
 		// load all child ids for javascript codes
@@ -246,7 +246,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement {
 	 *
 	 * @access public
 	 */
-	function setValue( $value ) {
+	public function setValue( $value ) {
 		if ( is_array( $value ) ) {
 			foreach ( $value as $v ) {
 				$this->setValue( $v );
@@ -263,7 +263,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement {
 	 *
 	 * @access public
 	 */
-	function setOptionTree( &$optionTree ) {
+	public function setOptionTree( &$optionTree ) {
 		$this->_optionTree =& $optionTree;
 	}
 
@@ -272,7 +272,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement {
 	 *
 	 * @access public
 	 */
-	function setAppendix( $appendix ) {
+	public function setAppendix( $appendix ) {
 		$this->_appendix = $appendix;
 	}
 
@@ -282,10 +282,10 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement {
 	 * @return string
 	 * @access public
 	 */
-	function render() {
+	public function render() {
 		$ret = '';
 
-		if ( sizeof( $this->_appendix ) > 0 ) {
+		if ( count( $this->_appendix ) > 0 ) {
 			$ret  .= '<table class="outer"><tr>';
 			$cols = 1;
 			foreach ( $this->_appendix as $append ) {
@@ -333,7 +333,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement {
 	 *
 	 * @access private
 	 */
-	function _renderOptionTree( &$tree, $option, $prefix, $parentIds = array() ) {
+	public function _renderOptionTree( &$tree, $option, $prefix, $parentIds = array() ) {
 		$tree .= $prefix . "<input type=\"checkbox\" name=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" id=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" onclick=\"";
 		// If there are parent elements, add javascript that will
 		// make them selecteded when this element is checked to make

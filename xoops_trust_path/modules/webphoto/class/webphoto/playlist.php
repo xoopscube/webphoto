@@ -53,11 +53,9 @@ class webphoto_playlist extends webphoto_lib_error {
 	public $_lang_err_fetch = "Failed to fetch the web feed. <br>Please confirm the web feed location and refresh the cache.";
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_DIRNAME    = $dirname;
 		$this->_MODULE_URL = XOOPS_URL . '/modules/' . $dirname;
@@ -96,7 +94,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // refresh_cache
 
-	function refresh_cache_by_item_row( $item_row ) {
+	public function refresh_cache_by_item_row( $item_row ) {
 		$cache = $item_row['item_playlist_cache'];
 		$time  = $item_row['item_playlist_time'];
 
@@ -114,7 +112,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // build cache file name
 
-	function build_name( $item_id ) {
+	public function build_name( $item_id ) {
 		return $this->build_random_file_name( $item_id, $this->_XML_EXT );
 	}
 
@@ -124,7 +122,7 @@ class webphoto_playlist extends webphoto_lib_error {
 // http://www.php.net/manual/en/function.date.php
 // U = Unix Epoch
 
-	function check_expired( $cache, $time ) {
+	public function check_expired( $cache, $time ) {
 		$filename = $this->_PLAYLIST_DIR . '/' . $cache;
 		if ( file_exists( $filename ) ) {
 			$filetime = date( "U", filemtime( $filename ) );
@@ -139,13 +137,13 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // create
 
-	function create_cache_by_item_id( $item_id ) {
+	public function create_cache_by_item_id( $item_id ) {
 		$row = $this->_item_handler->get_row_by_id( $item_id );
 
 		return $this->create_cache_by_item_row( $row );
 	}
 
-	function create_cache_by_item_row( $row ) {
+	public function create_cache_by_item_row( $row ) {
 		if ( ! is_array( $row ) ) {
 			return false;
 		}
@@ -169,7 +167,7 @@ class webphoto_playlist extends webphoto_lib_error {
 		return $ret;
 	}
 
-	function get_report() {
+	public function get_report() {
 		$msg = null;
 		if ( $this->_report ) {
 			$msg = $this->_lang_status_report . '<br>';
@@ -182,7 +180,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // fetch
 
-	function _fetch_feed( $row ) {
+	public function _fetch_feed( $row ) {
 		$feed  = $row['item_playlist_feed'];
 		$cache = $row['item_playlist_cache'];
 
@@ -210,7 +208,7 @@ class webphoto_playlist extends webphoto_lib_error {
 		return false;
 	}
 
-	function _write_cache( $cache, $data ) {
+	public function _write_cache( $cache, $data ) {
 		$file = $this->_PLAYLIST_DIR . '/' . $cache;
 
 		$byte = $this->write_file( $file, $data );
@@ -224,7 +222,7 @@ class webphoto_playlist extends webphoto_lib_error {
 		return false;
 	}
 
-	function _build_error( $error, $param ) {
+	public function _build_error( $error, $param ) {
 		$msg = $_lang_err_cache . '<br>';
 		$msg .= $error . '<br>';
 		$msg .= $param;
@@ -235,7 +233,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // create from directory
 
-	function _create_list( $row ) {
+	public function _create_list( $row ) {
 		$this->_report = '';
 		$msg           = '';
 
@@ -304,7 +302,7 @@ class webphoto_playlist extends webphoto_lib_error {
 		return false;
 	}
 
-	function _parse_entry( $file, $type ) {
+	public function _parse_entry( $file, $type ) {
 		$file_ext = strtolower( $this->parse_ext( $file ) );
 
 		$item    = false;
@@ -328,7 +326,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 	}
 
-	function _type_to_exts( $type ) {
+	public function _type_to_exts( $type ) {
 		$exts = null;
 
 		switch ( $type ) {
@@ -353,7 +351,7 @@ class webphoto_playlist extends webphoto_lib_error {
 // we'll first add an xml header and the opening tags .. 
 // header(\"content-type:text/xml;charset=utf-8\"); //NEEDS WORK
 
-	function _build_playlist_xml( $media_url, $row, $params ) {
+	public function _build_playlist_xml( $media_url, $row, $params ) {
 		$item_id   = $row['item_id'];
 		$siteurl   = $row['item_siteurl'];
 		$artist    = $row['item_artist'];
@@ -424,7 +422,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // refresh_all
 
-	function refresh_cache_all() {
+	public function refresh_cache_all() {
 		$rows = $this->_item_handler->get_rows_public_by_kind( _C_WEBPHOTO_ITEM_KIND_PLAYLIST_FEED );
 		if ( is_array( $rows ) && count( $rows ) ) {
 			foreach ( $rows as $row ) {
@@ -442,7 +440,7 @@ class webphoto_playlist extends webphoto_lib_error {
 		}
 	}
 
-	function _update_item_cache( $row ) {
+	public function _update_item_cache( $row ) {
 		$item_id = $row['item_id'];
 		$cache   = $row['item_playlist_cache'];
 
@@ -455,7 +453,7 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // delete
 
-	function delete( $item_id ) {
+	public function delete( $item_id ) {
 		$cache = '';
 
 		$row = $this->_item_handler->get_row_by_id( $item_id );
@@ -474,53 +472,49 @@ class webphoto_playlist extends webphoto_lib_error {
 
 // utility
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return $this->_utility_class->parse_ext( $file );
 	}
 
-	function strip_ext( $file ) {
+	public function strip_ext( $file ) {
 		return $this->_utility_class->strip_ext( $file );
 	}
 
-	function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
+	public function get_files_in_dir( $path, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false ) {
 		return $this->_utility_class->get_files_in_dir( $path, $ext, $flag_dir, $flag_sort, $id_as_key );
 	}
 
-	function write_file( $file, $data, $mode = 'w' ) {
+	public function write_file( $file, $data, $mode = 'w' ) {
 		return $this->_utility_class->write_file( $file, $data, $mode, $this->_flag_chmod );
 	}
 
-	function build_random_file_name( $id, $ext, $extra = null ) {
+	public function build_random_file_name( $id, $ext, $extra = null ) {
 		return $this->_utility_class->build_random_file_name( $id, $ext, $extra );
 	}
 
 
 // remote
 
-	function read_remote_file( $url ) {
+	public function read_remote_file( $url ) {
 		return $this->_remote_class->read_file( $url );
 	}
 
 
 // xml
 
-	function _xml( $str ) {
+	public function _xml( $str ) {
 		return $this->_xml_class->xml_text( $str );
 	}
 
-	function _xml_url( $str ) {
+	public function _xml_url( $str ) {
 		return $this->_xml_class->xml_url( $str );
 	}
 
 
 // multibyte
 
-	function _utf8( $str ) {
+	public function _utf8( $str ) {
 		return $this->_multibyte_class->convert_to_utf8( $str );
 	}
 
-
-// --- class end ---
 }
-
-?>

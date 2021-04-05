@@ -97,11 +97,9 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 	public $_FLAG_ADMIN = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_photo_class    =& webphoto_photo_create::getInstance( $dirname, $trust_dirname );
 		$this->_build_class    =& webphoto_photo_build::getInstance( $dirname );
@@ -148,17 +146,17 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 
 // post param 
 
-	function get_post_param() {
+	public function get_post_param() {
 		$this->get_post_param_basic();
 	}
 
-	function get_post_param_basic() {
+	public function get_post_param_basic() {
 		$this->get_post_item_id();
 		$this->get_post_cat_id();
 		$this->_item_title = $this->_post_class->get_post_text( 'item_title' );
 	}
 
-	function get_post_item_id() {
+	public function get_post_item_id() {
 		$key1 = 'item_id';
 		$key2 = 'photo_id';
 
@@ -172,12 +170,12 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 			$str = $_GET[ $key2 ];
 		}
 
-		$this->_post_item_id = intval( $str );
+		$this->_post_item_id = (int) $str;
 
 		return $this->_post_item_id;
 	}
 
-	function get_post_cat_id() {
+	public function get_post_cat_id() {
 		$key1 = 'item_cat_id';
 		$key2 = 'cat_id';
 
@@ -191,14 +189,14 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 			$str = $_GET[ $key2 ];
 		}
 
-		$this->_item_cat_id = intval( $str );
+		$this->_item_cat_id = (int) $str;
 	}
 
-	function build_row_by_post( $row, $is_submit = false, $flag_title = true ) {
+	public function build_row_by_post( $row, $is_submit = false, $flag_title = true ) {
 		return $this->build_row_basic_by_post( $row, $is_submit, $flag_title );
 	}
 
-	function build_row_basic_by_post( $row, $is_submit = false, $flag_title = true ) {
+	public function build_row_basic_by_post( $row, $is_submit = false, $flag_title = true ) {
 // overwrite if title is blank
 		if ( $flag_title ) {
 			$this->overwrite_item_title_if_empty( $this->_NO_TITLE );
@@ -235,17 +233,17 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 
 // item
 
-	function overwrite_item_title_if_empty( $val ) {
+	public function overwrite_item_title_if_empty( $val ) {
 		if ( empty( $this->_item_title ) && $val ) {
 			$this->_item_title = $val;
 		}
 	}
 
-	function is_item_undefined_kind() {
+	public function is_item_undefined_kind() {
 		return $this->is_undefined_kind( $this->_item_kind );
 	}
 
-	function overwrite_item_gmap( $latitude, $longitude, $zoom ) {
+	public function overwrite_item_gmap( $latitude, $longitude, $zoom ) {
 		if ( ( $this->_item_gmap_latitude > 0 ) &&
 		     ( $this->_item_gmap_longitude > 0 ) ) {
 			return;
@@ -262,14 +260,14 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 // is type
 
 // dummy
-	function is_upload_type() {
+	public function is_upload_type() {
 		return true;
 	}
 
 
 // submit check 
 
-	function submit_check() {
+	public function submit_check() {
 		$ret = $this->submit_check_exec();
 		if ( $ret < 0 ) {
 			$this->submit_check_redirect( $ret );
@@ -280,7 +278,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return true;
 	}
 
-	function submit_check_redirect( $ret ) {
+	public function submit_check_redirect( $ret ) {
 		$url = null;
 		$msg = null;
 
@@ -314,7 +312,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		$this->_redirect_time = $this->_TIME_FAILED;
 	}
 
-	function submit_check_exec() {
+	public function submit_check_exec() {
 		if ( ! $this->_has_insertable ) {
 			return _C_WEBPHOTO_ERR_NO_PERM;
 		}
@@ -344,11 +342,11 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 
 // submit form
 
-	function build_submit_default_row() {
+	public function build_submit_default_row() {
 		return $this->build_submit_default_row_basic();
 	}
 
-	function build_submit_default_row_basic() {
+	public function build_submit_default_row_basic() {
 		$this->get_post_cat_id();
 
 		$this->_item_kind        = $this->_post_class->get_post_text( 'item_kind' );
@@ -366,7 +364,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 
 // submit
 
-	function submit() {
+	public function submit() {
 		$this->get_post_param();
 		$ret1 = $this->submit_exec();
 
@@ -382,7 +380,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return _C_WEBPHOTO_RET_SUCCESS;
 	}
 
-	function submit_exec() {
+	public function submit_exec() {
 		$this->clear_msg_array();
 
 		$ret = $this->submit_exec_check();
@@ -424,7 +422,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return 0;
 	}
 
-	function submit_exec_check() {
+	public function submit_exec_check() {
 // Check if cid is valid
 		if ( empty( $this->_item_cat_id ) ) {
 			return _C_WEBPHOTO_ERR_EMPTY_CAT;
@@ -442,11 +440,11 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return 0;
 	}
 
-	function submit_exec_fetch() {
+	public function submit_exec_fetch() {
 		return $this->submit_exec_fetch_photo();
 	}
 
-	function submit_exec_fetch_photo() {
+	public function submit_exec_fetch_photo() {
 		$ret = $this->upload_fetch_photo( $this->_FLAG_FETCH_ALLOW_ALL );
 		if ( $ret < 0 ) {
 			return $ret;    // failed
@@ -463,7 +461,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return 0;
 	}
 
-	function submit_exec_set_item_param() {
+	public function submit_exec_set_item_param() {
 		if ( $this->is_item_undefined_kind() ) {
 			$this->_item_kind = $this->get_new_kind();
 		}
@@ -472,11 +470,11 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		$this->_item_onclick     = $this->get_new_onclick();
 	}
 
-	function submit_exec_fetch_check() {
+	public function submit_exec_fetch_check() {
 		return $this->submit_exec_fetch_check_basic();
 	}
 
-	function submit_exec_fetch_check_basic() {
+	public function submit_exec_fetch_check_basic() {
 // check title
 		if ( empty( $this->_item_title ) ) {
 			return _C_WEBPHOTO_ERR_NO_TITLE;
@@ -492,7 +490,7 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return _C_WEBPHOTO_ERR_NO_IMAGE;
 	}
 
-	function submit_exec_item_save() {
+	public function submit_exec_item_save() {
 		$photo_tmp_name  = $this->_photo_tmp_name;
 		$thumb_tmp_name  = $this->_thumb_tmp_name;
 		$middle_tmp_name = $this->_middle_tmp_name;
@@ -533,24 +531,24 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return 0;
 	}
 
-	function submit_exec_tag_save( $item_id ) {
+	public function submit_exec_tag_save( $item_id ) {
 		// dummy
 		return 0;
 	}
 
-	function submit_exec_playlist_save( $row ) {
+	public function submit_exec_playlist_save( $row ) {
 		// dummy
 	}
 
-	function submit_exec_post_count() {
+	public function submit_exec_post_count() {
 		// dummy
 	}
 
-	function submit_exec_notify( $row ) {
+	public function submit_exec_notify( $row ) {
 		// dummy
 	}
 
-	function build_insert_item_row() {
+	public function build_insert_item_row() {
 		$item_row = $this->_item_handler->create( true );
 		$item_row = $this->build_row_by_post( $item_row, true );
 
@@ -960,7 +958,5 @@ class webphoto_imagemanager_submit extends webphoto_base_this {
 		return true;
 	}
 
-// --- class end ---
 }
 
-?>

@@ -1,28 +1,20 @@
 <?php
-// $Id: include_mail.php,v 1.4 2011/11/12 17:17:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2011-05-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// class/lib/mail.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * caller main/mail_retrieve.php i_post.php admin/maillog_manager.php
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// caller main/mail_retrieve.php i_post.php admin/maillog_manager.php
-//---------------------------------------------------------
-
-//---------------------------------------------------------
 // PEAR
-//---------------------------------------------------------
 if ( ! defined( '_WEBPHOTO_PEAR_LOADED' ) ) {
 	define( '_WEBPHOTO_PEAR_LOADED', '1' );
 
@@ -39,9 +31,6 @@ if ( ! defined( '_WEBPHOTO_PEAR_LOADED' ) ) {
 require_once 'Net/POP3.php';
 require_once 'Mail/mimeDecode.php';
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'class/pear/mail_pop3.php' );
 webphoto_include_once( 'class/pear/mail_decode.php' );
 webphoto_include_once( 'class/pear/mail_parse.php' );
@@ -52,5 +41,3 @@ webphoto_include_once( 'class/edit/mail_check.php' );
 webphoto_include_once( 'class/edit/mail_photo.php' );
 webphoto_include_once( 'class/edit/mail_unlink.php' );
 webphoto_include_once( 'class/edit/mail_retrieve.php' );
-
-?>

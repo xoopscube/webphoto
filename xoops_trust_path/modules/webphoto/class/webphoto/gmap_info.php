@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -18,11 +17,9 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_gmap_info extends webphoto_base_this {
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname  );
 
 		$this->_IMG_EDIT = '<img src="' . $this->_ICONS_URL . '/edit.png" width="18" height="15" border="0" alt="' . _WEBPHOTO_TITLE_EDIT . '" title="' . _WEBPHOTO_TITLE_EDIT . '" />';
 	}
@@ -172,7 +169,4 @@ class webphoto_gmap_info extends webphoto_base_this {
 		return $this->is_normal_ext( $param['item_ext'] );
 	}
 
-// --- class end ---
 }
-
-?>

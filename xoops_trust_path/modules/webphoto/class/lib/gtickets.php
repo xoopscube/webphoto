@@ -56,27 +56,27 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 		}
 
 		// returns an object of XoopsFormHidden including theh ticket
-		function getTicketXoopsForm( $salt = '', $timeout = 1800, $area = '' ) {
+		public function getTicketXoopsForm( $salt = '', $timeout = 1800, $area = '' ) {
 			return new XoopsFormHidden( 'XOOPS_G_TICKET', $this->issue( $salt, $timeout, $area ) );
 		}
 
 		// add a ticket as Hidden Element into XoopsForm
-		function addTicketXoopsFormElement( &$form, $salt = '', $timeout = 1800, $area = '' ) {
+		public function addTicketXoopsFormElement( &$form, $salt = '', $timeout = 1800, $area = '' ) {
 			$form->addElement( new XoopsFormHidden( 'XOOPS_G_TICKET', $this->issue( $salt, $timeout, $area ) ) );
 		}
 
 		// returns an array for xoops_confirm() ;
-		function getTicketArray( $salt = '', $timeout = 1800, $area = '' ) {
+		public function getTicketArray( $salt = '', $timeout = 1800, $area = '' ) {
 			return array( 'XOOPS_G_TICKET' => $this->issue( $salt, $timeout, $area ) );
 		}
 
 		// return GET parameter string.
-		function getTicketParamString( $salt = '', $noamp = false, $timeout = 1800, $area = '' ) {
+		public function getTicketParamString( $salt = '', $noamp = false, $timeout = 1800, $area = '' ) {
 			return ( $noamp ? '' : '&amp;' ) . 'XOOPS_G_TICKET=' . $this->issue( $salt, $timeout, $area );
 		}
 
 		// issue a ticket
-		function issue( $salt = '', $timeout = 1800, $area = '' ) {
+		public function issue( $salt = '', $timeout = 1800, $area = '' ) {
 			global $xoopsModule;
 
 			// create a token
@@ -115,7 +115,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 		}
 
 		// check a ticket
-		function check( $post = true, $area = '', $allow_repost = true ) {
+		public function check( $post = true, $area = '', $allow_repost = true ) {
 			global $xoopsModule;
 
 			$this->_errors = array();
@@ -173,7 +173,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 				if ( @$found_stub['area'] == $area ) {
 					$area_check = true;
 				}
-				if ( ! empty( $found_stub['referer'] ) && strstr( @$_SERVER['HTTP_REFERER'], $found_stub['referer'] ) ) {
+				if ( ! empty( $found_stub['referer'] ) && false !== strpos( @$_SERVER['HTTP_REFERER'], $found_stub['referer'] ) ) {
 					$referer_check = true;
 				}
 
@@ -200,7 +200,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 		}
 
 		// draw form for repost
-		function draw_repost_form( $area = '' ) {
+		public function draw_repost_form( $area = '' ) {
 			// Notify which file is broken
 			if ( headers_sent() ) {
 				restore_error_handler();
@@ -242,7 +242,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 			echo '<html><head><title>' . $this->messages['err_general'] . '</title><style>table,td,th {border:solid black 1px; border-collapse:collapse;}</style></head><body>' . sprintf( $this->messages['fmt_prompt4repost'], $this->getErrors() ) . $table . $form . '</body></html>';
 		}
 
-		function extract_post_recursive( $key_name, $tmp_array ) {
+		public function extract_post_recursive( $key_name, $tmp_array ) {
 			$table = '';
 			$form  = '';
 			foreach ( $tmp_array as $key => $val ) {
@@ -267,13 +267,13 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 
 
 		// clear all stubs
-		function clear() {
+		public function clear() {
 			$_SESSION['XOOPS_G_STUBS'] = array();
 		}
 
 
 		// Ticket Using
-		function using() {
+		public function using() {
 			if ( ! empty( $_SESSION['XOOPS_G_STUBS'] ) ) {
 				return true;
 			} else {
@@ -283,7 +283,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 
 
 		// return errors
-		function getErrors( $ashtml = true ) {
+		public function getErrors( $ashtml = true ) {
 			if ( $ashtml ) {
 				$ret = '';
 				foreach ( $this->_errors as $msg ) {
@@ -296,7 +296,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 			return $ret;
 		}
 
-// end of class
+
 	}
 
 	function GTicket_ErrorHandler4FindOutput( $errNo, $errStr, $errFile, $errLine ) {
@@ -309,7 +309,7 @@ if ( ! class_exists( 'XoopsGTicket' ) ) {
 		return;
 	}
 
-// create a instance in global scope
+	// create a instance in global scope
 	$GLOBALS['xoopsGTicket'] = new XoopsGTicket();
 
 }
@@ -327,11 +327,8 @@ if ( ! function_exists( 'admin_refcheck' ) ) {
 		if ( $chkref != "" ) {
 			$cr .= $chkref;
 		}
-		if ( strpos( $ref, $cr ) !== 0 ) {
-			return false;
-		}
 
-		return true;
+		return ! ( strpos( $ref, $cr ) !== 0 );
 	}
 
 }

@@ -1,34 +1,13 @@
 <?php
-// $Id: constants.php,v 1.34 2011/12/28 16:16:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-05-01 K.OHWADA
-// JW Player 5.2
-// 2010-09-20 K.OHWADA
-// _C_WEBPHOTO_FILE_KIND_WAV
-// 2009-10-25 K.OHWADA
-// _C_WEBPHOTO_FILE_KIND_JPEG
-// 2009-01-04 K.OHWADA
-// _C_WEBPHOTO_EDITOR_DEFAULT
-// 2008-11-29 K.OHWADA
-// _C_WEBPHOTO_VODEO_THUMB_PLURAL_MAX
-// 2008-10-08 K.OHWADA
-// _C_WEBPHOTO_UPLOAD_FIELD_PHOTO
-// 2008-10-01 K.OHWADA
-// added _C_WEBPHOTO_SWFOBJECT_EXTS
-// 2008-08-24 K.OHWADA
-// added _C_WEBPHOTO_MAX_ITEM_FILE_ID
-// 2008-08-01 K.OHWADA
-// added _B_WEBPHOTO_GPERM_MAIL
-// 2008-07-01 K.OHWADA
-// added _C_WEBPHOTO_VIDEO_THUMB_PREFIX
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -38,10 +17,6 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 if ( ! defined( "_C_WEBPHOTO_LOADED" ) ) {
 
 	define( "_C_WEBPHOTO_LOADED", 1 );
-
-//=========================================================
-// Constant
-//=========================================================
 
 // System Constants (Dont Edit)
 // group_permission's gperm_itemid is MEDIUMINT 
@@ -557,7 +532,4 @@ if ( ! defined( "_C_WEBPHOTO_LOADED" ) ) {
 // for Japanese
 	define( "_C_WEBPHOTO_JPAPANESE", "japanese|japaneseutf|ja_utf8" );
 
-// === define end ===
 }
-
-?>

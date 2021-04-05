@@ -39,9 +39,9 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-//	$wp = new webphoto_inc_base_ini();
-//	$this->$wp;
+
 		$this->init_base_ini( $dirname, $trust_dirname );
 		$this->init_handler( $dirname );
 		$this->_init_xoops_config( $dirname );
@@ -96,19 +96,15 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return false;
 	}
 
-	function _is_perm_cat_read_no_cat() {
-		if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_NO_CAT ) {
-			return true;
-		}
-
-		return false;
+	public function _is_perm_cat_read_no_cat() {
+		return $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_NO_CAT;
 	}
 
 
 // cat list
 // webphoto_inc_blocks webphoto_category
 
-	function calc_width( $cols ) {
+	public function calc_width( $cols ) {
 		if ( $cols <= 0 ) {
 			$cols = 1;
 		}
@@ -121,7 +117,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return array( $cols, $width );
 	}
 
-	function build_catlist( $parent_id, $flag_sub ) {
+	public function build_catlist( $parent_id, $flag_sub ) {
 		$catlist = array();
 
 		$name_perm = $this->_get_name_perm();
@@ -150,7 +146,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $catlist;
 	}
 
-	function _build_subcat( $cat_row, $flag_shub ) {
+	public function _build_subcat( $cat_row, $flag_shub ) {
 		$subcat = array();
 
 		if ( ! $flag_shub ) {
@@ -181,7 +177,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 	}
 
 // show main
-	function build_cat_show( $cat_row ) {
+	public function build_cat_show( $cat_row ) {
 		$img_name = $cat_row['cat_img_name'];
 		if ( $img_name ) {
 			$url = $this->_CATS_URL . '/' . $img_name;
@@ -198,7 +194,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $show;
 	}
 
-	function _build_cat_img_path( $cat_row ) {
+	public function _build_cat_img_path( $cat_row ) {
 		$img_path = $cat_row['cat_img_path'];
 		if ( $this->check_http_null( $img_path ) ) {
 			$url = '';
@@ -211,13 +207,13 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $url;
 	}
 
-	function _get_photo_count_in_parent_all_children( $cat_row ) {
+	public function _get_photo_count_in_parent_all_children( $cat_row ) {
 		$id_arr = $this->get_cat_parent_all_child_id_by_row( $cat_row );
 
 		return $this->_get_item_count_by_catid_array( $id_arr );
 	}
 
-	function _get_photo_count_by_cat_row( $cat_row ) {
+	public function _get_photo_count_by_cat_row( $cat_row ) {
 		if ( ! $this->_is_perm_cat_read_all() ) {
 			if ( ! $this->_check_cat_perm_by_cat_row( $cat_row ) ) {
 				return 0;
@@ -227,12 +223,12 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $this->_get_item_count_by_catid( $cat_row[ $this->_CAT_ID_NAME ] );
 	}
 
-	function _build_cat_summary( $desc ) {
+	public function _build_cat_summary( $desc ) {
 		return $this->_multibyte_class->build_summary(
 			$this->_build_cat_desc_disp( $desc ), $this->_cfg_cat_summary, $this->_SUMMARY_TAIL );
 	}
 
-	function _build_cat_desc_disp( $desc ) {
+	public function _build_cat_desc_disp( $desc ) {
 		return $this->_myts->displayTarea( $desc, 0, 1, 1, 1, 1, 1 );
 	}
 
@@ -240,7 +236,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 // cat tree
 // webphoto_inc_weblinks
 
-	function get_cat_titles() {
+	public function get_cat_titles() {
 		$rows = $this->get_cat_all_tree_array();
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return null;
@@ -254,14 +250,14 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $arr;
 	}
 
-	function get_cat_all_tree_array() {
+	public function get_cat_all_tree_array() {
 		$name_perm = $this->_get_name_perm();
 
 		return $this->get_cat_all_tree_array_perm(
 			$this->_CAT_ORDER, $name_perm );
 	}
 
-	function get_cat_parent_all_child_id_by_id( $cat_id ) {
+	public function get_cat_parent_all_child_id_by_id( $cat_id ) {
 		$cat_row = $this->_get_cat_row_by_id( $cat_id );
 		if ( is_array( $cat_row ) ) {
 			return $this->get_cat_parent_all_child_id_by_row( $cat_row );
@@ -270,7 +266,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return null;
 	}
 
-	function get_cat_parent_all_child_id_by_row( $cat_row ) {
+	public function get_cat_parent_all_child_id_by_row( $cat_row ) {
 		if ( ! is_array( $cat_row ) ) {
 			return null;
 		}
@@ -297,7 +293,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $id_arr;
 	}
 
-	function get_cat_all_child_tree_array( $cat_id = 0 ) {
+	public function get_cat_all_child_tree_array( $cat_id = 0 ) {
 		$name_perm = $this->_get_name_perm();
 
 		return $this->_get_cat_child_tree_array_recusible(
@@ -305,7 +301,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 	}
 
 // XoopsTree::makeMySelBox
-	function get_cat_all_tree_array_perm( $order, $name_perm = null ) {
+	public function get_cat_all_tree_array_perm( $order, $name_perm = null ) {
 		$pid_rows = $this->_get_cat_rows_by_pid_order_perm( 0, $order, $name_perm );
 		if ( ! is_array( $pid_rows ) ) {
 			return false;
@@ -330,7 +326,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 
 // cat handler
 
-	function get_cat_row_by_catid_perm( $cat_id ) {
+	public function get_cat_row_by_catid_perm( $cat_id ) {
 		$cat_row = $this->_get_cat_row_by_id( $cat_id );
 		if ( ! is_array( $cat_row ) ) {
 			return false;
@@ -342,7 +338,7 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return $cat_row;
 	}
 
-	function check_cat_perm_by_catid( $cat_id ) {
+	public function check_cat_perm_by_catid( $cat_id ) {
 		$cat_row = $this->_get_cat_row_by_id( $cat_id );
 		if ( is_array( $cat_row ) ) {
 			return $this->_check_cat_perm_by_cat_row( $cat_row );
@@ -351,14 +347,14 @@ class webphoto_inc_catlist extends webphoto_inc_base_ini {
 		return false;
 	}
 
-	function _check_cat_perm_by_cat_row( $cat_row, $name_perm = 'cat_perm_read' ) {
+	public function _check_cat_perm_by_cat_row( $cat_row, $name_perm = 'cat_perm_read' ) {
 		return $this->check_perm_by_row_name_groups( $cat_row, $name_perm );
 
 	}
 
 // recursible function
 // XoopsTree::getChildTreeArray
-	function _get_cat_child_tree_array_recusible(
+	public function _get_cat_child_tree_array_recusible(
 		$sel_id, $order, $name_perm = null, $parray = array(), $r_prefix = ''
 	) {
 		$rows = $this->_get_cat_rows_by_pid_order_perm( $sel_id, $order, $name_perm );

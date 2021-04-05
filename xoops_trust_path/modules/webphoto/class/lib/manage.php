@@ -59,53 +59,53 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		}
 	}
 
-	function set_manage_handler( &$handler ) {
+	public function set_manage_handler( &$handler ) {
 		$this->_manage_handler =& $handler;
 		$this->_manage_id_name = $handler->get_id_name();
 	}
 
-	function set_manage_title( $val ) {
+	public function set_manage_title( $val ) {
 		$this->_manage_title = $val;
 	}
 
-	function set_manage_desc( $val ) {
+	public function set_manage_desc( $val ) {
 		$this->_manage_desc = $val;
 	}
 
-	function set_manage_start_time( $val ) {
-		$this->_manage_start_time = floatval( $val );
+	public function set_manage_start_time( $val ) {
+		$this->_manage_start_time = (float) $val;
 	}
 
-	function set_manage_sub_title_array( $arr ) {
+	public function set_manage_sub_title_array( $arr ) {
 		if ( is_array( $arr ) ) {
 			$this->_manage_sub_title_array = $arr;
 			$this->_pagenavi_class->set_max_sortid( count( $this->_manage_sub_title_array ) );
 		}
 	}
 
-	function set_manage_list_column_array( $arr ) {
+	public function set_manage_list_column_array( $arr ) {
 		if ( is_array( $arr ) ) {
 			$this->_manage_list_column_array = $arr;
 		}
 	}
 
-	function set_manage_title_by_name( $name ) {
+	public function set_manage_title_by_name( $name ) {
 		$this->set_manage_title( $this->get_admin_title( $name ) );
 	}
 
-	function set_lang_show_list( $val ) {
+	public function set_lang_show_list( $val ) {
 		$this->_LANG_SHOW_LIST = $val;
 	}
 
-	function set_lang_add_record( $val ) {
+	public function set_lang_add_record( $val ) {
 		$this->_LANG_ADD_RECORD = $val;
 	}
 
-	function set_lang_no_record( $val ) {
+	public function set_lang_no_record( $val ) {
 		$this->_LANG_NO_RECORD = $val;
 	}
 
-	function set_lang_there_are( $val ) {
+	public function set_lang_there_are( $val ) {
 		$this->_LANG_THERE_ARE = $val;
 	}
 

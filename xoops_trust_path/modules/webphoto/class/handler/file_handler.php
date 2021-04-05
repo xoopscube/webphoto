@@ -341,7 +341,7 @@ class webphoto_file_handler extends webphoto_handler_base_ini {
 		return $arr;
 	}
 
-	function get_file_kind_image_options() {
+	public function get_file_kind_image_options() {
 		return array(
 //		_C_WEBPHOTO_FILE_KIND_CONT   => 'cont',
 			_C_WEBPHOTO_FILE_KIND_THUMB  => 'thumb',

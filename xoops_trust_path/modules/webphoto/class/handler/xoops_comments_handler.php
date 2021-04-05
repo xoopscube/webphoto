@@ -36,7 +36,7 @@ class webphoto_xoops_comments_handler extends webphoto_lib_handler {
 		return $instance;
 	}
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = "INSERT INTO " . $this->_table . " (";
@@ -54,7 +54,7 @@ class webphoto_xoops_comments_handler extends webphoto_lib_handler {
 		return $this->_db->getInsertId();
 	}
 
-	function update_rootid_pid( $com_id, $com_rootid, $com_pid ) {
+	public function update_rootid_pid( $com_id, $com_rootid, $com_pid ) {
 		$sql = "UPDATE " . $this->_table . " SET ";
 		$sql .= "com_rootid=" . $com_rootid . ", ";
 		$sql .= "com_pid=" . $com_pid . " ";
@@ -63,7 +63,7 @@ class webphoto_xoops_comments_handler extends webphoto_lib_handler {
 		return $this->query( $sql );
 	}
 
-	function move( $src_mid, $src_id, $dst_mid, $dst_lid ) {
+	public function move( $src_mid, $src_id, $dst_mid, $dst_lid ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= ' com_modid=' . (int) $dst_mid;
 		$sql .= ' com_itemid=' . (int) $dst_id;
@@ -73,20 +73,20 @@ class webphoto_xoops_comments_handler extends webphoto_lib_handler {
 		return $this->query( $sql );
 	}
 
-	function delete_all_by_modid( $modid ) {
+	public function delete_all_by_modid( $modid ) {
 		$sql = 'DELETE FROM ' . $this->_table;
 		$sql .= ' WHERE com_modid=' . (int) $modid;
 		$res = $this->query( $sql );
 	}
 
-	function get_count_by_modid( $modid ) {
+	public function get_count_by_modid( $modid ) {
 		$sql = 'SELECT COUNT(com_id) FROM ' . $this->_table;
 		$sql .= ' WHERE com_modid=' . (int) $modid;
 
 		return $this->get_count_by_sql( $sql );
 	}
 
-	function get_rows_by_modid( $modid ) {
+	public function get_rows_by_modid( $modid ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
 		$sql .= ' WHERE com_modid=' . (int) $modid;
 		$sql .= ' ORDER BY com_id';
@@ -94,7 +94,7 @@ class webphoto_xoops_comments_handler extends webphoto_lib_handler {
 		return $this->get_rows_by_sql( $sql );
 	}
 
-	function get_rows_by_modid_itemid( $modid, $itemid ) {
+	public function get_rows_by_modid_itemid( $modid, $itemid ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
 		$sql .= ' WHERE com_modid=' . (int) $modid;
 		$sql .= ' AND com_itemid=' . (int) $itemid;

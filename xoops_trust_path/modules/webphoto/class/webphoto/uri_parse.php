@@ -60,22 +60,20 @@ class webphoto_uri_parse {
 			$this->_pathinfo_class->get_text( 'kind' ) );
 	}
 
-	function get_sort_orderby() {
+	public function get_sort_orderby() {
 		$get_sort = $this->_sort_class->get_photo_sort_name(
 			$this->_pathinfo_class->get_text( 'sort' ) );
 		$sort     = $this->_sort_class->get_photo_sort_name( $get_sort, true );
 		$orderby  = $this->_sort_class->sort_to_orderby( $sort );
 
-		$arr = array(
+		return array(
 			'get_sort' => $get_sort,
 			'sort'     => $sort,
 			'orderby'  => $orderby,
 		);
-
-		return $arr;
 	}
 
-	function get_param_by_mode( $mode ) {
+	public function get_param_by_mode( $mode ) {
 		$input       = $this->get_pathinfo_param();
 		$isset       = $this->isset_pathinfo_param();
 		$path_second = $this->get_pathinfo_path_second();
@@ -89,18 +87,18 @@ class webphoto_uri_parse {
 			$mode, $input, $second, $cat_id, $uid, $my_uid );
 	}
 
-	function get_uid( $input, $isset, $path_second ) {
+	public function get_uid( $input, $isset, $path_second ) {
 		$uid = _C_WEBPHOTO_UID_DEFAULT;    // not set
 		if ( $isset ) {
 			$uid = $input;
 		} elseif ( ! $isset && ( $path_second !== false ) ) {
-			$uid = intval( $path_second );
+			$uid = (int) $path_second;
 		}
 
 		return $uid;
 	}
 
-	function get_second( $input, $path_second ) {
+	public function get_second( $input, $path_second ) {
 		if ( $input ) {
 			$ret = $input;
 		} else {
@@ -113,12 +111,12 @@ class webphoto_uri_parse {
 
 // photo
 
-	function get_photo_orderby() {
+	public function get_photo_orderby() {
 		return $this->_sort_class->sort_to_orderby(
 			$this->get_by_key( 'order' ) );
 	}
 
-	function get_photo_keyword_array() {
+	public function get_photo_keyword_array() {
 		$keywords = $this->_pathinfo_class->get_text( 'keywords' );
 		$arr      = preg_split( "/[\s|\+]/", $keywords );
 
@@ -128,51 +126,48 @@ class webphoto_uri_parse {
 
 // utility
 
-	function get_id_by_key( $id_name ) {
+	public function get_id_by_key( $id_name ) {
 // POST
-		$id = isset( $_POST[ $id_name ] ) ? intval( $_POST[ $id_name ] ) : 0;
+		$id = isset( $_POST[ $id_name ] ) ? (int) $_POST[ $id_name ] : 0;
 		if ( $id > 0 ) {
 			return $id;
 		}
 
 // GET
-		$id = isset( $_GET[ $id_name ] ) ? intval( $_GET[ $id_name ] ) : 0;
+		$id = isset( $_GET[ $id_name ] ) ? (int) $_GET[ $id_name ] : 0;
 		if ( $id > 0 ) {
 			return $id;
 		}
 
 // PATH_INFO
-		$id = intval( $this->get_pathinfo_param() );
+		$id = (int) $this->get_pathinfo_param();
 		if ( $id > 0 ) {
 			return $id;
 		}
 
-		$id = intval( $this->get_pathinfo_path_second() );
+		$id = (int) $this->get_pathinfo_path_second();
 
 		return $id;
 	}
 
-	function isset_pathinfo_param() {
+	public function isset_pathinfo_param() {
 		return $this->_pathinfo_class->isset_param( _C_WEBPHOTO_URI_PARAM_NAME );
 	}
 
-	function get_pathinfo_param() {
+	public function get_pathinfo_param() {
 		return $this->_pathinfo_class->get( _C_WEBPHOTO_URI_PARAM_NAME );
 	}
 
-	function get_pathinfo_path_second() {
+	public function get_pathinfo_path_second() {
 		return $this->_pathinfo_class->get_path( _C_WEBPHOTO_URI_PATH_SECOND );
 	}
 
-	function get_by_key( $key ) {
+	public function get_by_key( $key ) {
 		return $this->_pathinfo_class->get( $key );
 	}
 
-	function get_int_by_key( $key ) {
+	public function get_int_by_key( $key ) {
 		return $this->_pathinfo_class->get_int( $key );
 	}
 
-// --- class end ---
 }
-
-?>

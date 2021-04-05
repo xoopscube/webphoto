@@ -38,9 +38,7 @@ class webphoto_show_image {
 	public $_PIXEL_ICON_SRC;
 
 
-// constructor
-
-	function __construct( $dirname, $trust_dirname ) {
+	public function __construct( $dirname, $trust_dirname ) {
 		$this->_config_class  =& webphoto_config::getInstance( $dirname );
 		$this->_kind_class    =& webphoto_kind::getInstance();
 		$this->_utility_class =& webphoto_lib_utility::getInstance();
@@ -81,7 +79,7 @@ class webphoto_show_image {
 
 // image
 
-	function build_img_tag_by_item_row( $item_row ) {
+	public function build_img_tag_by_item_row( $item_row ) {
 		$arr = $this->build_image_title_by_item_row( $item_row );
 
 		$title_s = $arr['title_s'];
@@ -100,7 +98,7 @@ class webphoto_show_image {
 		return $str;
 	}
 
-	function build_image_title_by_item_row( $item_row, $default = true ) {
+	public function build_image_title_by_item_row( $item_row, $default = true ) {
 		$item_id   = $item_row['item_id'];
 		$title     = $item_row['item_title'];
 		$thumb_src = null;
@@ -126,7 +124,7 @@ class webphoto_show_image {
 		return $arr;
 	}
 
-	function build_image_by_item_row( $item_row, $default ) {
+	public function build_image_by_item_row( $item_row, $default ) {
 		if ( ! is_array( $item_row ) ) {
 			return false;
 		}
@@ -159,7 +157,7 @@ class webphoto_show_image {
 		return $this->build_image_by_param( $param );
 	}
 
-	function build_image_by_param( $param ) {
+	public function build_image_by_param( $param ) {
 		if ( ! is_array( $param ) ) {
 			return false;
 		}
@@ -392,7 +390,7 @@ class webphoto_show_image {
 		return $arr;
 	}
 
-	function get_cached_file_extend_row_by_name( $item_row, $item_name ) {
+	public function get_cached_file_extend_row_by_name( $item_row, $item_name ) {
 		if ( isset( $item_row[ $item_name ] ) ) {
 			$file_id = $item_row[ $item_name ];
 		} else {
@@ -406,38 +404,38 @@ class webphoto_show_image {
 		return false;
 	}
 
-	function build_show_icon_image( $item_row ) {
+	public function build_show_icon_image( $item_row ) {
 		return $this->_item_handler->build_show_icon_image(
 			$item_row, $this->_ROOT_EXTS_URL );
 	}
 
-	function build_show_file_image( $file_row ) {
+	public function build_show_file_image( $file_row ) {
 		return $this->_file_handler->build_show_file_image( $file_row );
 	}
 
 
 // kind class
 
-	function is_src_image_kind( $kind ) {
+	public function is_src_image_kind( $kind ) {
 		return $this->_kind_class->is_src_image_kind( $kind );
 	}
 
 
 // adjust
 
-	function adjust_thumb_size( $width, $height ) {
+	public function adjust_thumb_size( $width, $height ) {
 		return $this->adjust_image_size( $width, $height, $this->_max_thumb_width, $this->_max_thumb_height );
 	}
 
-	function adjust_large_size( $width, $height ) {
+	public function adjust_large_size( $width, $height ) {
 		return $this->adjust_image_size( $width, $height, $this->_max_large_width, $this->_max_large_height );
 	}
 
-	function adjust_middle_size( $width, $height ) {
+	public function adjust_middle_size( $width, $height ) {
 		return $this->adjust_image_size( $width, $height, $this->_max_middle_width, $this->_max_middle_height );
 	}
 
-	function adjust_image_size( $width, $height, $max_width, $max_height ) {
+	public function adjust_image_size( $width, $height, $max_width, $max_height ) {
 		if ( $width && $height && $max_width && $max_height ) {
 			return $this->_utility_class->adjust_image_size( $width, $height, $max_width, $max_height );
 		}
@@ -448,11 +446,8 @@ class webphoto_show_image {
 
 // sanitize
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-// --- class end ---
 }
-
-?>

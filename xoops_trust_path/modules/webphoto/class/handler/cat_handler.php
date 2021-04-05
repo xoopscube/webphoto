@@ -17,6 +17,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_cat_handler extends webphoto_handler_base_ini {
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_table_prefix_dirname( 'cat' );

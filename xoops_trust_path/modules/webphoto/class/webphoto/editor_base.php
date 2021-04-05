@@ -92,7 +92,4 @@ class webphoto_editor_base {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-// --- class end ---
 }
-
-?>

@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -19,8 +18,9 @@ class webphoto_main_category extends webphoto_show_list {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_show_list( $dirname , $trust_dirname );
+
 		$this->set_mode( 'category' );
 
 		$this->set_navi_mode( $this->get_ini( 'navi_mode' ) );
@@ -154,7 +154,4 @@ class webphoto_main_category extends webphoto_show_list {
 		return $this->add_show_js_windows( $arr );
 	}
 
-// --- class end ---
 }
-
-?>

@@ -23,11 +23,8 @@ class webphoto_place extends webphoto_base_this {
 	public $_PHOTO_LIST_PLACE_GROUP = 'item_place';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_public_class
 			=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
@@ -49,7 +46,7 @@ class webphoto_place extends webphoto_base_this {
 
 // list
 
-	function build_rows_for_list() {
+	public function build_rows_for_list() {
 		$list_rows = $this->_item_handler->get_rows_by_groupby_orderby(
 			$this->_PHOTO_LIST_PLACE_GROUP, $this->_PHOTO_LIST_PLACE_ORDER );
 		if ( ! is_array( $list_rows ) || ! count( $list_rows ) ) {
@@ -99,7 +96,7 @@ class webphoto_place extends webphoto_base_this {
 
 // page detail
 
-	function build_total_for_detail( $place_in ) {
+	public function build_total_for_detail( $place_in ) {
 		list( $mode, $place_arr )
 			= $this->get_mode_for_detail( $place_in );
 
@@ -126,7 +123,7 @@ class webphoto_place extends webphoto_base_this {
 		return array( $mode, $place_arr, $title, $total );
 	}
 
-	function get_mode_for_detail( $place_in ) {
+	public function get_mode_for_detail( $place_in ) {
 		$place_str = $this->decode_uri_str( $place_in );
 		$place_arr = $this->_search_class->query_to_array( $place_str );
 
@@ -144,7 +141,7 @@ class webphoto_place extends webphoto_base_this {
 		return array( $mode, $place_arr );
 	}
 
-	function build_rows_for_detail( $mode, $place_arr, $orderby, $limit = 0, $start = 0 ) {
+	public function build_rows_for_detail( $mode, $place_arr, $orderby, $limit = 0, $start = 0 ) {
 		$rows = null;
 
 		switch ( $mode ) {
@@ -166,14 +163,11 @@ class webphoto_place extends webphoto_base_this {
 
 // rss
 
-	function build_rows_for_rss( $place_in, $orderby, $limit = 0, $start = 0 ) {
+	public function build_rows_for_rss( $place_in, $orderby, $limit = 0, $start = 0 ) {
 		list( $mode, $place_arr )
 			= $this->get_mode_for_detail( $place_in );
 
 		return $this->build_rows_for_detail( $mode, $place_arr, $orderby, $limit, $start );
 	}
 
-// --- class end ---
 }
-
-?>

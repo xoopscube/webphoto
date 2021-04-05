@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 class webphoto_mail_check {
 	public $_config_class;
 	public $_user_handler;
@@ -65,8 +64,6 @@ class webphoto_mail_check {
 	public $_allowed_exts = null;
 	public $_allowed_charsets = null;
 
-
-// constructor
 
 	public function __construct( $dirname ) {
 		$this->set_deny_title_preg( _WEBPHOTO_MAIL_DENY_TITLE_PREG );
@@ -613,7 +610,4 @@ class webphoto_mail_check {
 		return $this->_reject_msg_arr;
 	}
 
-// --- class end ---
 }
-
-?>

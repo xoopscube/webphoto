@@ -39,7 +39,7 @@ class webphoto_main_visit extends webphoto_item_public {
 
 // main
 
-	function main() {
+	public function main() {
 		$item_id  = $this->_post_class->get_get_int( 'item_id' );
 		$item_row = $this->get_item_row( $item_id );
 		if ( ! is_array( $item_row ) ) {
@@ -64,7 +64,4 @@ class webphoto_main_visit extends webphoto_item_public {
 		exit();
 	}
 
-// --- class end ---
 }
-
-?>

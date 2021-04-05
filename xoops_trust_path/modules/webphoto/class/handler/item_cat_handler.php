@@ -28,8 +28,6 @@ class webphoto_item_cat_handler extends webphoto_handler_base_ini {
 	public $_FLAG_PERM_ADMIN = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 

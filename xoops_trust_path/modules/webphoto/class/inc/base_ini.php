@@ -25,9 +25,9 @@ class webphoto_inc_base_ini extends webphoto_inc_handler {
 	public $_TRUST_DIR;
 
 	public function __construct() {
+
 		parent::__construct();
-//	$wp = new webphoto_inc_handler();
-//	$this->$wp;
+
 	}
 
 	public function init_base_ini( $dirname, $trust_dirname ) {
@@ -44,15 +44,15 @@ class webphoto_inc_base_ini extends webphoto_inc_handler {
 		$this->set_debug_error_by_ini_name( _C_WEBPHOTO_NAME_DEBUG_ERROR );
 	}
 
-	function get_ini( $name ) {
+	public function get_ini( $name ) {
 		return $this->_ini_class->get_ini( $name );
 	}
 
-	function explode_ini( $name ) {
+	public function explode_ini( $name ) {
 		return $this->_ini_class->explode_ini( $name );
 	}
 
-	function set_msg( $msg ) {
+	public function set_msg( $msg ) {
 // array type
 		if ( is_array( $msg ) ) {
 			foreach ( $msg as $m ) {
@@ -68,19 +68,19 @@ class webphoto_inc_base_ini extends webphoto_inc_handler {
 		}
 	}
 
-	function get_msg_array() {
+	public function get_msg_array() {
 		return $this->_msg_array;
 	}
 
 // debug
-	function set_debug_sql_by_ini_name( $name ) {
+	public function set_debug_sql_by_ini_name( $name ) {
 		$val = $this->get_ini( $name );
 		if ( $val ) {
 			$this->set_debug_sql( $val );
 		}
 	}
 
-	function set_debug_error_by_ini_name( $name ) {
+	public function set_debug_error_by_ini_name( $name ) {
 		$val = $this->get_ini( $name );
 		if ( $val ) {
 			$this->set_debug_error( $val );

@@ -46,7 +46,7 @@ class webphoto_main_i_post extends webphoto_imode {
 
 // main
 
-	function main() {
+	public function main() {
 		$this->output_header();
 		$this->_post();
 	}
@@ -54,7 +54,7 @@ class webphoto_main_i_post extends webphoto_imode {
 
 // post
 
-	function _post() {
+	public function _post() {
 		$text = $this->build_html_head( $this->_TITLE_S, $this->_MOBILE_CHARSET_OUTPUT );
 		$text .= $this->build_html_body_begin();
 		$text .= $this->_post_exec();
@@ -64,7 +64,7 @@ class webphoto_main_i_post extends webphoto_imode {
 		echo $this->conv( $text );
 	}
 
-	function _post_exec() {
+	public function _post_exec() {
 		$text = '';
 
 		if ( ! $this->check_perm() ) {
@@ -112,7 +112,7 @@ class webphoto_main_i_post extends webphoto_imode {
 		return $text;
 	}
 
-	function _build_retry() {
+	public function _build_retry() {
 		$url  = $this->_MODULE_URL . '/index.php?fct=i_post';
 		$text = $this->get_constant( 'TEXT_MAIL_ACCESS_TIME' );
 		$text .= "<br>\n";
@@ -125,7 +125,4 @@ class webphoto_main_i_post extends webphoto_imode {
 		return $text;
 	}
 
-// --- class end ---
 }
-
-?>

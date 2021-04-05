@@ -28,9 +28,7 @@ class webphoto_pear_mail_pop3 {
 	public $_error_arr = array();
 
 
-// constructor
-
-	function webphoto_pear_mail_pop3() {
+	public function __construct() {
 		// dummy
 	}
 
@@ -154,7 +152,5 @@ class webphoto_pear_mail_pop3 {
 		return $this->_error_arr;
 	}
 
-// --- class end ---
 }
 
-?>

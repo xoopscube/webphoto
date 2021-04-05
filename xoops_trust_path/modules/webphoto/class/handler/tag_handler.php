@@ -33,7 +33,7 @@ class webphoto_tag_handler extends webphoto_handler_base_ini {
 		return $instance;
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 
@@ -54,7 +54,7 @@ class webphoto_tag_handler extends webphoto_handler_base_ini {
 
 // insert
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -79,7 +79,7 @@ class webphoto_tag_handler extends webphoto_handler_base_ini {
 		return $this->_db->getInsertId();
 	}
 
-	function update( $row, $force = false ) {
+	public function update( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -93,7 +93,7 @@ class webphoto_tag_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql );
 	}
 
-	function get_row_by_name( $name ) {
+	public function get_row_by_name( $name ) {
 		$sql = 'SELECT * FROM ' . $this->_table;
 		$sql .= ' WHERE tag_name=' . $this->quote( $name );
 

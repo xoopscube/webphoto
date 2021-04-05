@@ -25,11 +25,8 @@ class webphoto_photo_build extends webphoto_lib_error {
 	public $_MODULE_DIR;
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_DIRNAME    = $dirname;
 		$this->_MODULE_URL = XOOPS_URL . '/modules/' . $dirname;
@@ -92,7 +89,4 @@ class webphoto_photo_build extends webphoto_lib_error {
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

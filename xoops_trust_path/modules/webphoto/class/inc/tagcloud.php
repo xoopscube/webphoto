@@ -30,12 +30,10 @@ class webphoto_inc_tagcloud extends webphoto_inc_base_ini {
 	public $_PERM_SEPARATOR = _C_WEBPHOTO_PERM_SEPARATOR;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-//	$wp = new webphoto_inc_base_ini();
-//	$this->$wp;
+
 		$this->init_base_ini( $dirname, $trust_dirname );
 		$this->init_handler( $dirname );
 

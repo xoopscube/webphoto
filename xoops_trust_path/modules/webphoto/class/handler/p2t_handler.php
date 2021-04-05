@@ -29,7 +29,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $instance;
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 
@@ -51,7 +51,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $arr;
 	}
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -80,7 +80,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $this->_db->getInsertId();
 	}
 
-	function update( $row, $force = false ) {
+	public function update( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -96,27 +96,27 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql );
 	}
 
-	function delete_by_photoid( $photo_id ) {
+	public function delete_by_photoid( $photo_id ) {
 		$sql = 'DELETE FROM ' . $this->_table;
 		$sql .= ' WHERE p2t_photo_id=' . (int) $photo_id;
 
 		return $this->query( $sql );
 	}
 
-	function delete_by_photoid_tagid_array( $photo_id, $tag_id_array ) {
+	public function delete_by_photoid_tagid_array( $photo_id, $tag_id_array ) {
 		$where = $this->build_sql_tagid_in_array( $tag_id_array );
 		if ( ! $where ) {
 			return true;    // no action
 		}
 
 		$sql = 'DELETE FROM ' . $this->_table;
-		$sql .= ' WHERE p2t_photo_id=' . intval( $photo_id );
+		$sql .= ' WHERE p2t_photo_id=' . (int) $photo_id;
 		$sql .= ' AND ' . $where;
 
 		return $this->query( $sql );
 	}
 
-	function delete_by_photoid_uid_tagid_array( $photo_id, $uid, $tag_id_array ) {
+	public function delete_by_photoid_uid_tagid_array( $photo_id, $uid, $tag_id_array ) {
 		$where = $this->build_sql_tagid_in_array( $tag_id_array );
 		if ( ! $where ) {
 			return true;    // no action
@@ -130,7 +130,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql );
 	}
 
-	function build_sql_tagid_in_array( $tag_id_array ) {
+	public function build_sql_tagid_in_array( $tag_id_array ) {
 		if ( ! is_array( $tag_id_array ) || ! count( $tag_id_array ) ) {
 			return false;
 		}
@@ -143,7 +143,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 
 
 // get count
-	function get_count_by_photoid_tagid( $photo_id, $tag_id ) {
+	public function get_count_by_photoid_tagid( $photo_id, $tag_id ) {
 		$where = 'p2t_photo_id=' . (int) $photo_id;
 		$where .= ' AND p2t_tag_id=' . (int) $tag_id;
 
@@ -152,7 +152,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 
 
 // get id array
-	function get_tag_id_array_by_photoid( $photo_id, $limit = 0, $offset = 0 ) {
+	public function get_tag_id_array_by_photoid( $photo_id, $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT p2t_tag_id FROM ' . $this->_table;
 		$sql .= ' WHERE p2t_photo_id=' . (int) $photo_id;
 		$sql .= ' ORDER BY p2t_id ASC';
@@ -160,7 +160,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $this->get_first_rows_by_sql( $sql, $limit, $offset );
 	}
 
-	function get_tag_id_array_by_photoid_uid( $photo_id, $uid, $limit = 0, $offset = 0 ) {
+	public function get_tag_id_array_by_photoid_uid( $photo_id, $uid, $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT p2t_tag_id FROM ' . $this->_table;
 		$sql .= ' WHERE p2t_photo_id=' . (int) $photo_id;
 		$sql .= ' AND   p2t_uid=' . (int) $uid;
@@ -169,7 +169,7 @@ class webphoto_p2t_handler extends webphoto_handler_base_ini {
 		return $this->get_first_rows_by_sql( $sql, $limit, $offset );
 	}
 
-	function get_tag_id_array_by_photoid_without_uid( $photo_id, $uid, $limit = 0, $offset = 0 ) {
+	public function get_tag_id_array_by_photoid_without_uid( $photo_id, $uid, $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT p2t_tag_id FROM ' . $this->_table;
 		$sql .= ' WHERE p2t_photo_id=' . (int) $photo_id;
 		$sql .= ' AND   p2t_uid <> ' . (int) $uid;

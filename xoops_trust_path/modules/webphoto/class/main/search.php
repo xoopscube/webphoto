@@ -45,7 +45,7 @@ class webphoto_main_search extends webphoto_show_list {
 // main
 
 // overwrite
-	function list_sel() {
+	public function list_sel() {
 		return true;
 	}
 
@@ -53,7 +53,7 @@ class webphoto_main_search extends webphoto_show_list {
 // detail list
 
 // overwrite
-	function list_build_detail( $query_in ) {
+	public function list_build_detail( $query_in ) {
 
 		$rows    = null;
 		$limit   = $this->_MAX_PHOTOS;
@@ -91,7 +91,7 @@ class webphoto_main_search extends webphoto_show_list {
 		return $this->add_show_js_windows( $ret );
 	}
 
-	function _get_photos( $query, $orderby, $limit, $start ) {
+	public function _get_photos( $query, $orderby, $limit, $start ) {
 		$rows = null;
 
 		$this->_search_class->get_post_get_param();
@@ -124,7 +124,4 @@ class webphoto_main_search extends webphoto_show_list {
 		return $arr;
 	}
 
-// --- class end ---
 }
-
-?>

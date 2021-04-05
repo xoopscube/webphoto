@@ -55,11 +55,8 @@ class webphoto_photo_create extends webphoto_base_this {
 	public $_GMAP_ZOOM = _C_WEBPHOTO_GMAP_ZOOM;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_build_class =& webphoto_photo_build::getInstance( $dirname );
 		$this->_mime_class  =& webphoto_mime::getInstance( $dirname );
@@ -88,14 +85,14 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // video thumb
 
-	function video_thumb( $item_row ) {
+	public function video_thumb( $item_row ) {
 		$num = $this->_post_class->get_post_text( 'num' );
 		$ret = $this->video_thumb_exec( $item_row, $num );
 
 		return $this->build_failed_msg( $ret );
 	}
 
-	function video_thumb_exec( $item_row, $num ) {
+	public function video_thumb_exec( $item_row, $num ) {
 		$this->clear_msg_array();
 
 		$ret = $this->update_video_thumb_by_item_row( $item_row, $num );
@@ -111,7 +108,7 @@ class webphoto_photo_create extends webphoto_base_this {
 	}
 
 // Fatal error: Call to undefined method build_failed_msg()
-	function build_failed_msg( $ret ) {
+	public function build_failed_msg( $ret ) {
 		switch ( $ret ) {
 			case _C_WEBPHOTO_ERR_DB:
 				$this->set_error_in_head_with_admin_info( 'DB Error' );
@@ -125,11 +122,11 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // create from file
 
-	function create_from_file( $param ) {
+	public function create_from_file( $param ) {
 		$this->_item_newid = 0;
 		$this->_item_row   = null;
 
-		$title = isset( $param['title'] ) ? $param['title'] : $this->_TITLE_DEFAULT;
+		$title = $param['title'] ?? $this->_TITLE_DEFAULT;
 
 		$ret = $this->check_item( $param );
 		if ( $ret < 0 ) {
@@ -208,13 +205,13 @@ class webphoto_photo_create extends webphoto_base_this {
 		return 0;
 	}
 
-	function print_first_msg( $item_id, $title ) {
+	public function print_first_msg( $item_id, $title ) {
 		if ( $this->_flag_print_first_msg ) {
 			$this->print_msg_level_user( $this->build_msg_photo_title( $item_id, $title ) );
 		}
 	}
 
-	function build_msg_photo_title( $item_id, $title ) {
+	public function build_msg_photo_title( $item_id, $title ) {
 		if ( $this->_cfg_use_pathinfo ) {
 			$url = $this->_MODULE_URL . '/index.php/photo/' . $item_id . '/';
 		} else {
@@ -233,7 +230,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // create item
 
-	function check_item( $param ) {
+	public function check_item( $param ) {
 		if ( ! isset( $param['src_file'] ) ) {
 			$this->print_msg_level_admin( ' Empty file, ', true );
 
@@ -255,22 +252,22 @@ class webphoto_photo_create extends webphoto_base_this {
 		return 0;
 	}
 
-	function create_item_row( $param ) {
+	public function create_item_row( $param ) {
 		$this->_flag_resized = false;
 		$this->_video_param  = null;
 		$this->_msg_item     = null;
 
 		$src_file    = $param['src_file'];
-		$cat_id      = intval( $param['cat_id'] );
-		$uid         = isset( $param['uid'] ) ? intval( $param['uid'] ) : $this->_xoops_uid;
-		$status      = isset( $param['status'] ) ? intval( $param['status'] ) : _C_WEBPHOTO_STATUS_APPROVED;
-		$time_create = isset( $param['time_create'] ) ? intval( $param['time_create'] ) : time();
-		$time_update = isset( $param['time_update'] ) ? intval( $param['time_update'] ) : time();
-		$latitude    = isset( $param['latitude'] ) ? floatval( $param['latitude'] ) : 0;
-		$longitude   = isset( $param['longitude'] ) ? floatval( $param['longitude'] ) : 0;
-		$zoom        = isset( $param['zoom'] ) ? intval( $param['zoom'] ) : 0;
-		$title       = isset( $param['title'] ) ? $param['title'] : $this->_TITLE_DEFAULT;
-		$description = isset( $param['description'] ) ? $param['description'] : null;
+		$cat_id      = (int) $param['cat_id'];
+		$uid         = isset( $param['uid'] ) ? (int) $param['uid'] : $this->_xoops_uid;
+		$status      = isset( $param['status'] ) ? (int) $param['status'] : _C_WEBPHOTO_STATUS_APPROVED;
+		$time_create = isset( $param['time_create'] ) ? (int) $param['time_create'] : time();
+		$time_update = isset( $param['time_update'] ) ? (int) $param['time_update'] : time();
+		$latitude    = isset( $param['latitude'] ) ? (float) $param['latitude'] : 0;
+		$longitude   = isset( $param['longitude'] ) ? (float) $param['longitude'] : 0;
+		$zoom        = isset( $param['zoom'] ) ? (int) $param['zoom'] : 0;
+		$title       = $param['title'] ?? $this->_TITLE_DEFAULT;
+		$description = $param['description'] ?? null;
 
 // item row
 		$row                        = $this->_item_handler->create( true );
@@ -293,7 +290,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $row;
 	}
 
-	function get_item_param_extention( $src_file, $src_ext = null ) {
+	public function get_item_param_extention( $src_file, $src_ext = null ) {
 		if ( empty( $src_ext ) ) {
 			$src_ext = $this->parse_ext( $src_file );
 		}
@@ -354,7 +351,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $param;
 	}
 
-	function get_displaytype( $src_ext ) {
+	public function get_displaytype( $src_ext ) {
 		$displaytype = _C_WEBPHOTO_DISPLAYTYPE_GENERAL;
 
 		if ( $this->is_image_ext( $src_ext ) ) {
@@ -370,7 +367,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $displaytype;
 	}
 
-	function get_onclick( $src_ext ) {
+	public function get_onclick( $src_ext ) {
 		$onclick = _C_WEBPHOTO_ONCLICK_PAGE;
 
 		if ( $this->is_image_ext( $src_ext ) ) {
@@ -380,7 +377,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $onclick;
 	}
 
-	function get_exif_info( $file ) {
+	public function get_exif_info( $file ) {
 		$info = $this->_exif_class->read_file( $file );
 		if ( ! is_array( $info ) ) {
 			return null;
@@ -397,18 +394,18 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $info;
 	}
 
-	function get_duration_size( $file ) {
+	public function get_duration_size( $file ) {
 		return $this->_video_class->get_duration_size( $file );
 	}
 
-	function get_video_param() {
+	public function get_video_param() {
 		return $this->_video_param;
 	}
 
 
 // updete item 
 
-	function build_update_item_row( $item_row, $file_id_array, $playlist_cache = null, $specail_ext = null ) {
+	public function build_update_item_row( $item_row, $file_id_array, $playlist_cache = null, $specail_ext = null ) {
 		$row = $item_row;
 
 		if ( is_array( $file_id_array ) ) {
@@ -467,15 +464,14 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $row;
 	}
 
-	function get_array_value_by_key( $array, $key ) {
-		return intval(
-			$this->_utility_class->get_array_value_by_key( $array, $key, 0 ) );
+	public function get_array_value_by_key( $array, $key ) {
+		return (int) $this->_utility_class->get_array_value_by_key( $array, $key, 0 );
 	}
 
 
 // create cont
 
-	function create_insert_cont( $item_id, $param ) {
+	public function create_insert_cont( $item_id, $param ) {
 		$this->_cont_param = null;
 
 		$ret = $this->create_cont_param( $item_id, $param );
@@ -496,10 +492,10 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $newid;
 	}
 
-	function create_cont_param( $item_id, $param ) {
+	public function create_cont_param( $item_id, $param ) {
 		$src_file = $param['src_file'];
 		$src_ext  = $param['src_ext'];
-		$rotate   = isset( $param['rotate'] ) ? intval( $param['rotate'] ) : 0;
+		$rotate   = isset( $param['rotate'] ) ? (int) $param['rotate'] : 0;
 
 		$this->_cont_param = null;
 
@@ -527,10 +523,10 @@ class webphoto_photo_create extends webphoto_base_this {
 		return 0;
 	}
 
-	function build_cont_param( $cont_param, $param ) {
+	public function build_cont_param( $cont_param, $param ) {
 		$src_ext     = $param['src_ext'];
-		$mime_in     = isset( $param['mime'] ) ? $param['mime'] : null;
-		$video_param = isset( $param['video_param'] ) ? $param['video_param'] : null;
+		$mime_in     = $param['mime'] ?? null;
+		$video_param = $param['video_param'] ?? null;
 
 		if ( is_array( $video_param ) ) {
 			$cont_param['width']    = $video_param['width'];
@@ -553,14 +549,14 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $cont_param;
 	}
 
-	function get_cont_param() {
+	public function get_cont_param() {
 		return $this->_cont_param;
 	}
 
 
 // create thumb middle
 
-	function create_insert_thumb_middle( $item_id, $param ) {
+	public function create_insert_thumb_middle( $item_id, $param ) {
 		$thumb_id  = 0;
 		$middle_id = 0;
 
@@ -584,7 +580,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return array( $thumb_id, $middle_id );
 	}
 
-	function create_thumb_middle_param( $item_id, $param ) {
+	public function create_thumb_middle_param( $item_id, $param ) {
 		$src_file = $param['src_file'];
 		$src_ext  = $param['src_ext'];
 		$src_kind = $param['src_kind'];
@@ -653,7 +649,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // create video flash
 
-	function create_insert_video_flash( $item_id, $param ) {
+	public function create_insert_video_flash( $item_id, $param ) {
 		$flash_param = $this->create_video_flash_param( $item_id, $param );
 		if ( ! is_array( $flash_param ) ) {
 			return 0;
@@ -667,11 +663,11 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $ret;    // newid
 	}
 
-	function create_video_flash_param( $item_id, $param ) {
+	public function create_video_flash_param( $item_id, $param ) {
 		$src_file = $param['src_file'];
 		$src_kind = $param['src_kind'];
 
-		$video_param = isset( $param['video_param'] ) ? $param['video_param'] : null;
+		$video_param = $param['video_param'] ?? null;
 
 		if ( ! $this->_cfg_use_ffmpeg ) {
 			return null;
@@ -696,7 +692,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $flash_param;
 	}
 
-	function create_video_flash( $item_id, $src_file ) {
+	public function create_video_flash( $item_id, $src_file ) {
 		$this->_flag_video_flash_created = false;
 		$this->_flag_video_flash_failed  = false;
 
@@ -726,7 +722,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // create video thumb
 
-	function create_video_thumb( $item_id, $param ) {
+	public function create_video_thumb( $item_id, $param ) {
 		$this->_flag_video_thumb_created = false;
 		$this->_flag_video_thumb_failed  = false;
 
@@ -735,7 +731,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		$src_kind = $param['src_kind'];
 
 		$mode_video_thumb = isset( $param['mode_video_thumb'] ) ?
-			intval( $param['mode_video_thumb'] ) : _C_WEBPHOTO_VIDEO_THUMB_SINGLE;
+			(int) $param['mode_video_thumb'] : _C_WEBPHOTO_VIDEO_THUMB_SINGLE;
 
 		if ( ! $this->_cfg_makethumb ) {
 			return null;
@@ -759,7 +755,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return null;    // dummy
 	}
 
-	function create_video_plural_thumbs( $item_id, $src_file, $src_ext ) {
+	public function create_video_plural_thumbs( $item_id, $src_file, $src_ext ) {
 		$count = $this->_video_class->create_plural_thumbs( $item_id, $src_file );
 		if ( $count ) {
 			$this->_flag_video_thumb_created = true;
@@ -772,7 +768,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return false;
 	}
 
-	function create_video_single_thumb( $item_id, $src_file ) {
+	public function create_video_single_thumb( $item_id, $src_file ) {
 		$video_thumb_file = $this->_video_class->create_single_thumb( $item_id, $src_file );
 		if ( $video_thumb_file ) {
 			$param = array(
@@ -790,7 +786,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // create video docomo
 
-	function create_insert_video_docomo( $item_id, $cont_param ) {
+	public function create_insert_video_docomo( $item_id, $cont_param ) {
 		$docomo_param = $this->create_video_docomo_param( $item_id, $cont_param );
 		if ( ! is_array( $docomo_param ) ) {
 			return 0;
@@ -804,7 +800,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $ret;    // newid
 	}
 
-	function create_video_docomo_param( $item_id, $cont_param ) {
+	public function create_video_docomo_param( $item_id, $cont_param ) {
 		if ( ! $this->is_video_docomo_ext( $cont_param['ext'] ) ) {
 			return null;
 		}
@@ -819,7 +815,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // update video thumb
 
-	function update_video_thumb_by_item_row( $item_row, $num ) {
+	public function update_video_thumb_by_item_row( $item_row, $num ) {
 		if ( ! is_array( $item_row ) ) {
 			return 0;    // no action
 		}
@@ -872,7 +868,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return 0;
 	}
 
-	function create_update_video_thumb_common( $item_row, $src_file, $kind ) {
+	public function create_update_video_thumb_common( $item_row, $src_file, $kind ) {
 		if ( ! is_file( $src_file ) ) {
 			return 0;    // no action
 		}
@@ -927,7 +923,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $file_id;
 	}
 
-	function create_video_thumb_for_update( $item_id, $src_file, $src_ext = null ) {
+	public function create_video_thumb_for_update( $item_id, $src_file, $src_ext = null ) {
 		$this->create_thumb_from_image_file( $src_file, $item_id, $src_ext );
 		$param = $this->get_thumb_param();
 
@@ -941,14 +937,14 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $param;
 	}
 
-	function create_video_middle_for_update( $item_id, $src_file ) {
+	public function create_video_middle_for_update( $item_id, $src_file ) {
 		$this->create_middle_from_image_file( $src_file, $item_id );
 		$param = $this->get_middle_param();
 
 		return $param;
 	}
 
-	function unlink_current_file( $file_row, $param ) {
+	public function unlink_current_file( $file_row, $param ) {
 		$file_path = $file_row['file_path'];
 		$path      = $param['path'];
 
@@ -957,22 +953,22 @@ class webphoto_photo_create extends webphoto_base_this {
 		}
 	}
 
-	function unlink_video_thumb_temp_files( $item_id ) {
+	public function unlink_video_thumb_temp_files( $item_id ) {
 		for ( $i = 1; $i <= $this->_VIDEO_THUMB_MAX; $i ++ ) {
 			$file = $this->build_video_thumb_file( $item_id, $i );
 			$this->unlink_file( $file );
 		}
 	}
 
-	function get_item_cat_id() {
+	public function get_item_cat_id() {
 		return $this->_item_cat_id;
 	}
 
-	function build_video_thumb_name( $item_id, $num ) {
+	public function build_video_thumb_name( $item_id, $num ) {
 		return $this->_video_class->build_thumb_name( $item_id, $num );
 	}
 
-	function build_video_thumb_file( $item_id, $num ) {
+	public function build_video_thumb_file( $item_id, $num ) {
 		$file = null;
 		$name = $this->_video_class->build_thumb_name( $item_id, $num );
 		if ( $name ) {
@@ -985,7 +981,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // file handler
 
-	function insert_files_from_params( $item_id, $params ) {
+	public function insert_files_from_params( $item_id, $params ) {
 		if ( ! is_array( $params ) ) {
 			return false;
 		}
@@ -1001,7 +997,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $arr;
 	}
 
-	function insert_file_by_params( $item_id, $params, $name ) {
+	public function insert_file_by_params( $item_id, $params, $name ) {
 		if ( isset( $params[ $name ] ) && is_array( $params[ $name ] ) ) {
 			return $this->insert_file( $item_id, $params[ $name ] );
 		}
@@ -1009,7 +1005,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return 0;
 	}
 
-	function insert_file( $item_id, $param ) {
+	public function insert_file( $item_id, $param ) {
 		$row                 = $this->_file_handler->create();
 		$row                 = $this->build_file_row( $row, $param );
 		$row['file_item_id'] = $item_id;
@@ -1025,7 +1021,7 @@ class webphoto_photo_create extends webphoto_base_this {
 		return $newid;
 	}
 
-	function update_file( $row, $param ) {
+	public function update_file( $row, $param ) {
 		$row                     = $this->build_file_row( $row, $param );
 		$row['file_time_update'] = time();
 
@@ -1041,10 +1037,10 @@ class webphoto_photo_create extends webphoto_base_this {
 		return true;
 	}
 
-	function build_file_row( $row, $param ) {
-		$width    = isset( $param['width'] ) ? intval( $param['width'] ) : 0;
-		$height   = isset( $param['height'] ) ? intval( $param['height'] ) : 0;
-		$duration = isset( $param['duration'] ) ? intval( $param['duration'] ) : 0;
+	public function build_file_row( $row, $param ) {
+		$width    = isset( $param['width'] ) ? (int) $param['width'] : 0;
+		$height   = isset( $param['height'] ) ? (int) $param['height'] : 0;
+		$duration = isset( $param['duration'] ) ? (int) $param['duration'] : 0;
 
 		$row['file_url']      = $param['url'];
 		$row['file_path']     = $param['path'];
@@ -1064,14 +1060,14 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // msg
 
-	function print_msg_level_admin( $msg, $flag_highlight = false, $flag_br = false ) {
+	public function print_msg_level_admin( $msg, $flag_highlight = false, $flag_br = false ) {
 		$str = $this->build_msg_level( _C_WEBPHOTO_MSG_LEVEL_ADMIN, $msg, $flag_highlight, $flag_br );
 		if ( $str ) {
 			echo $str;
 		}
 	}
 
-	function print_msg_level_user( $msg, $flag_highlight = false, $flag_br = false ) {
+	public function print_msg_level_user( $msg, $flag_highlight = false, $flag_br = false ) {
 		$str = $this->build_msg_level( _C_WEBPHOTO_MSG_LEVEL_USER, $msg, $flag_highlight, $flag_br );
 		if ( $str ) {
 			echo $str;
@@ -1081,7 +1077,7 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // icon
 
-	function build_icon_image( $ext ) {
+	public function build_icon_image( $ext ) {
 		$name   = null;
 		$width  = 0;
 		$height = 0;
@@ -1106,23 +1102,23 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // image class
 
-	function build_photo_name( $id, $ext, $extra = null ) {
+	public function build_photo_name( $id, $ext, $extra = null ) {
 		return $this->_image_class->build_photo_name( $id, $ext, $extra );
 	}
 
-	function create_thumb_from_image_file( $src_file, $photo_id, $src_ext = null ) {
+	public function create_thumb_from_image_file( $src_file, $photo_id, $src_ext = null ) {
 		return $this->_image_class->create_thumb_from_image_file( $src_file, $photo_id, $src_ext );
 	}
 
-	function get_thumb_param() {
+	public function get_thumb_param() {
 		return $this->_image_class->get_thumb_param();
 	}
 
-	function create_middle_from_image_file( $src_file, $photo_id, $src_ext = null ) {
+	public function create_middle_from_image_file( $src_file, $photo_id, $src_ext = null ) {
 		return $this->_image_class->create_middle_from_image_file( $src_file, $photo_id, $src_ext );
 	}
 
-	function get_middle_param() {
+	public function get_middle_param() {
 		return $this->_image_class->get_middle_param();
 	}
 
@@ -1137,26 +1133,26 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // mime class
 
-	function get_my_allowed_mimes() {
+	public function get_my_allowed_mimes() {
 		return $this->_mime_class->get_cached_my_allowed_mimes();
 	}
 
-	function is_my_allow_ext( $ext ) {
+	public function is_my_allow_ext( $ext ) {
 		return $this->_mime_class->is_my_allow_ext( $ext );
 	}
 
 
 // set param
 
-	function set_flag_force_db( $val ) {
+	public function set_flag_force_db( $val ) {
 		$this->_flag_force_db = (bool) $val;
 	}
 
-	function set_flag_print_first_msg( $val ) {
+	public function set_flag_print_first_msg( $val ) {
 		$this->_flag_print_first_msg = (bool) $val;
 	}
 
-	function set_image_video_flag_chmod( $val ) {
+	public function set_image_video_flag_chmod( $val ) {
 		$this->_image_class->set_flag_chmod( $val );
 		$this->_video_class->set_flag_chmod( $val );
 	}
@@ -1164,43 +1160,40 @@ class webphoto_photo_create extends webphoto_base_this {
 
 // get param
 
-	function has_resize() {
+	public function has_resize() {
 		return $this->_has_resize;
 	}
 
-	function has_rotate() {
+	public function has_rotate() {
 		return $this->_has_rotate;
 	}
 
-	function get_newid() {
+	public function get_newid() {
 		return $this->_item_newid;
 	}
 
-	function get_row() {
+	public function get_row() {
 		return $this->_item_row;
 	}
 
-	function get_resized() {
+	public function get_resized() {
 		return $this->_flag_resized;
 	}
 
-	function get_video_flash_created() {
+	public function get_video_flash_created() {
 		return $this->_flag_video_flash_created;
 	}
 
-	function get_video_flash_failed() {
+	public function get_video_flash_failed() {
 		return $this->_flag_video_flash_failed;
 	}
 
-	function get_video_thumb_created() {
+	public function get_video_thumb_created() {
 		return $this->_flag_video_thumb_created;
 	}
 
-	function get_video_thumb_failed() {
+	public function get_video_thumb_failed() {
 		return $this->_flag_video_thumb_failed;
 	}
 
-// --- class end ---
 }
-
-?>

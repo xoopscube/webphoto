@@ -1,37 +1,23 @@
 <?php
-// $Id: include_submit_base.php,v 1.2 2011/12/26 06:51:31 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2011-05-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// class/lib/mysql_utility.php
-// 2011-11-11 K.OHWADA
-// change file name
-// include_submit.php -> include_submit_base.php
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// caller main/header_submit_imagemanager.php 
-//   admin/header_edit.php bin/retrieve.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * caller main/header_submit_imagemanager.php
+ * admin/header_edit.php bin/retrieve.php
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
 // xoops system files
-//---------------------------------------------------------
 include_once XOOPS_ROOT_PATH . '/class/snoopy.php';
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'include/constants.php' );
 
 webphoto_include_once( 'class/inc/xoops_config.php' );

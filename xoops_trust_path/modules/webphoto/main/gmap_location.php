@@ -1,31 +1,24 @@
 <?php
-// $Id: gmap_location.php,v 1.1 2008/06/21 12:22:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// xoops system files
-//---------------------------------------------------------
 include_once XOOPS_ROOT_PATH . '/class/template.php';
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'main/header.php' );
 webphoto_include_once( 'class/main/gmap_location.php' );
 
-//=========================================================
-// main
-//=========================================================
 $manage =& webphoto_main_gmap_location::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $manage->main();
 exit();
 
-?>

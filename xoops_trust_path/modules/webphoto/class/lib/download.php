@@ -49,7 +49,7 @@ class webphoto_main_download extends webphoto_file_read {
 
 // main
 
-	function main() {
+	public function main() {
 		$item_id   = $this->_post_class->get_post_get_int( 'item_id' );
 		$file_kind = $this->_post_class->get_post_get_int( 'file_kind' );
 
@@ -88,7 +88,7 @@ class webphoto_main_download extends webphoto_file_read {
 		exit();
 	}
 
-	function build_filename_by_row( $item_row, $file_row ) {
+	public function build_filename_by_row( $item_row, $file_row ) {
 		$item_title = $item_row['item_title'];
 		$file_name  = $file_row['file_name'];
 		$file_ext   = $file_row['file_ext'];
@@ -113,7 +113,7 @@ class webphoto_main_download extends webphoto_file_read {
 		return array( $name, $file_name );
 	}
 
-	function build_filename_encode( $name, $name_alt ) {
+	public function build_filename_encode( $name, $name_alt ) {
 		if ( ! $this->get_ini( 'download_filename_encode' ) ) {
 			return array( $name_alt, false );
 		}

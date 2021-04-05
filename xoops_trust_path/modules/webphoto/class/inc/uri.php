@@ -56,19 +56,19 @@ class webphoto_inc_uri {
 
 
 // public
-	function get_separator() {
+	public function get_separator() {
 		return $this->_SEPARATOR;
 	}
 
-	function build_photo( $id, $flag_amp_sanitize = true ) {
+	public function build_photo( $id, $flag_amp_sanitize = true ) {
 		return $this->build_full_uri_mode_param( 'photo', $id, $flag_amp_sanitize );
 	}
 
-	function build_category( $id, $flag_amp_sanitize = true ) {
+	public function build_category( $id, $flag_amp_sanitize = true ) {
 		return $this->build_full_uri_mode_param( 'category', $id, $flag_amp_sanitize );
 	}
 
-	function build_tag( $tag ) {
+	public function build_tag( $tag ) {
 		return $this->build_full_uri_mode_param(
 			'tag', $this->rawurlencode_encode_str( $tag ) );
 	}

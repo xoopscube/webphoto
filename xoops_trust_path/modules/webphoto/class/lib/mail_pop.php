@@ -42,22 +42,22 @@ class webphoto_lib_mail_pop {
 
 // set param
 
-	function set_host( $val ) {
+	public function set_host( $val ) {
 		$this->_HOST = $val;
 	}
 
-	function set_user( $val ) {
+	public function set_user( $val ) {
 		$this->_USER = $val;
 	}
 
-	function set_pass( $val ) {
+	public function set_pass( $val ) {
 		$this->_PASS = $val;
 	}
 
 
 // pop mail
 
-	function recv_mails() {
+	public function recv_mails() {
 		$this->clear_mails();
 		$this->clear_msgs();
 		$this->clear_errors();
@@ -146,18 +146,18 @@ class webphoto_lib_mail_pop {
 		return $num;
 	}
 
-	function send_recv( $cmd ) {
+	public function send_recv( $cmd ) {
 		$this->send( $cmd );
 
 		return $this->recv();
 	}
 
-	function send( $cmd ) {
+	public function send( $cmd ) {
 		$this->set_msg( $cmd );
 		fputs( $this->_fp, $cmd . "\r\n" );
 	}
 
-	function recv() {
+	public function recv() {
 		$buf = fgets( $this->_fp, 512 );
 		$this->set_msg( $buf );
 		if ( substr( $buf, 0, 3 ) == '+OK' ) {
@@ -168,7 +168,7 @@ class webphoto_lib_mail_pop {
 		return false;
 	}
 
-	function recv_body() {
+	public function recv_body() {
 		$line = fgets( $this->_fp, 512 );
 		$dat  = '';
 
@@ -186,39 +186,39 @@ class webphoto_lib_mail_pop {
 
 // msg
 
-	function clear_mails() {
+	public function clear_mails() {
 		$this->_mail_arr = array();
 	}
 
-	function set_mail( $mail ) {
+	public function set_mail( $mail ) {
 		$this->_mail_arr[] = $mail;
 	}
 
-	function get_mails() {
+	public function get_mails() {
 		return $this->_mail_arr;
 	}
 
-	function clear_msgs() {
+	public function clear_msgs() {
 		$this->_msg_arr = array();
 	}
 
-	function set_msg( $msg ) {
+	public function set_msg( $msg ) {
 		$this->_msg_arr[] = $msg;
 	}
 
-	function get_msgs() {
+	public function get_msgs() {
 		return $this->_msg_arr;
 	}
 
-	function clear_errors() {
+	public function clear_errors() {
 		$this->_error_arr = array();
 	}
 
-	function set_error( $err ) {
+	public function set_error( $err ) {
 		$this->_error_arr[] = $err;
 	}
 
-	function get_errors() {
+	public function get_errors() {
 		return $this->_error_arr;
 	}
 

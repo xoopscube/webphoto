@@ -79,11 +79,9 @@ class webphoto_form_this extends webphoto_lib_form {
 	public $_THIS_FILE_FCT = 'submit_file';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_lib_form( $dirname , $trust_dirname );
 
 		$this->_config_class =& webphoto_config::getInstance( $dirname );
 		$this->_item_handler =& webphoto_item_handler::getInstance( $dirname );
@@ -147,24 +145,24 @@ class webphoto_form_this extends webphoto_lib_form {
 
 // config
 
-	function get_config_by_name( $name ) {
+	public function get_config_by_name( $name ) {
 		return $this->_config_class->get_by_name( $name );
 	}
 
 
 // photo form
 
-	function build_input_hidden_max_file_size() {
+	public function build_input_hidden_max_file_size() {
 		return $this->build_input_hidden( 'max_file_size', $this->_cfg_fsize );
 	}
 
-	function build_line_maxpixel( $has_resize ) {
+	public function build_line_maxpixel( $has_resize ) {
 		return $this->build_line_ele(
 			$this->get_constant( 'CAP_MAXPIXEL' ),
 			$this->_build_ele_maxpixel( $has_resize ) );
 	}
 
-	function _build_ele_maxpixel( $has_resize ) {
+	public function _build_ele_maxpixel( $has_resize ) {
 		$text = $this->_cfg_width . ' x ' . $this->_cfg_height . "<br>\n";
 
 		if ( $has_resize ) {
@@ -176,13 +174,13 @@ class webphoto_form_this extends webphoto_lib_form {
 		return $text;
 	}
 
-	function build_line_maxsize() {
+	public function build_line_maxsize() {
 		return $this->build_line_ele(
 			$this->get_constant( 'CAP_MAXSIZE' ),
 			$this->_build_ele_maxsize() );
 	}
 
-	function _build_ele_maxsize() {
+	public function _build_ele_maxsize() {
 		$size_desc = '';
 		if ( ! ini_get( 'file_uploads' ) ) {
 			$size_desc = ' &nbsp; <b>"file_uploads" off</b>';
@@ -194,38 +192,38 @@ class webphoto_form_this extends webphoto_lib_form {
 		return $text;
 	}
 
-	function build_line_allowed_exts( $allowed_exts ) {
+	public function build_line_allowed_exts( $allowed_exts ) {
 		return $this->build_line_ele(
 			$this->get_constant( 'CAP_ALLOWED_EXTS' ),
 			$this->_build_ele_allowed_exts( $allowed_exts ) );
 	}
 
-	function _build_ele_allowed_exts( $allowed_exts ) {
+	public function _build_ele_allowed_exts( $allowed_exts ) {
 		$text = implode( ' ', $allowed_exts );
 
 		return $text;
 	}
 
-	function build_line_category() {
+	public function build_line_category() {
 		return $this->build_line_ele(
 			$this->get_constant( 'CATEGORY' ),
 			$this->_build_ele_category() );
 	}
 
-	function _build_ele_category() {
+	public function _build_ele_category() {
 		$name  = 'item_cat_id';
 		$value = $this->get_row_by_key( $name );
 
 		return $this->_cat_handler->build_selbox_with_perm_post( $value, $name );
 	}
 
-	function build_line_item_title() {
+	public function build_line_item_title() {
 		return $this->build_line_ele(
 			$this->get_constant( 'ITEM_TITLE' ),
 			$this->_build_ele_title() );
 	}
 
-	function _build_ele_title( $size = 50 ) {
+	public function _build_ele_title( $size = 50 ) {
 		$value = $this->get_row_by_key( 'item_title' );
 		$ele   = $this->build_input_text( 'item_title', $value, $size );
 		$ele   .= "<br>\n";
@@ -234,13 +232,13 @@ class webphoto_form_this extends webphoto_lib_form {
 		return $ele;
 	}
 
-	function build_line_photo_file( $cont_row ) {
+	public function build_line_photo_file( $cont_row ) {
 		return $this->build_line_ele(
 			$this->get_constant( 'CAP_PHOTO_SELECT' ),
 			$this->_build_ele_photo_file( $cont_row ) );
 	}
 
-	function _build_ele_photo_file( $cont_row ) {
+	public function _build_ele_photo_file( $cont_row ) {
 		$url = $this->build_file_url_size( $cont_row );
 
 		$ele = $this->build_form_file( $this->_PHOTO_FIELD_NAME );
@@ -253,14 +251,14 @@ class webphoto_form_this extends webphoto_lib_form {
 		return $ele;
 	}
 
-	function build_file_url_size( $file_row ) {
+	public function build_file_url_size( $file_row ) {
 		list( $url, $width, $height ) =
 			$this->_file_handler->build_show_file_image( $file_row, true );
 
 		return $url;
 	}
 
-	function build_link_blank( $url ) {
+	public function build_link_blank( $url ) {
 		if ( empty( $url ) ) {
 			return '';
 		}
@@ -271,7 +269,7 @@ class webphoto_form_this extends webphoto_lib_form {
 		return $str;
 	}
 
-	function build_photo_delete_button( $name ) {
+	public function build_photo_delete_button( $name ) {
 		if ( $this->_has_deletable ) {
 			return $this->build_input_submit( $name, _DELETE );
 		}
@@ -279,7 +277,7 @@ class webphoto_form_this extends webphoto_lib_form {
 		return null;
 	}
 
-	function get_item_editor( $flag = true ) {
+	public function get_item_editor( $flag = true ) {
 		$value = $this->get_row_by_key( 'item_editor' );
 		if ( $flag && empty( $value ) ) {
 			$value = $this->_EDITOR_DEFAULT;
@@ -288,7 +286,7 @@ class webphoto_form_this extends webphoto_lib_form {
 		return $value;
 	}
 
-	function get_item_embed_type( $flag ) {
+	public function get_item_embed_type( $flag ) {
 		$value = $this->get_row_by_key( 'item_embed_type' );
 		if ( $flag && empty( $value ) ) {
 			$value = $this->_EMBED_TYPE_DEFAULT;
@@ -300,40 +298,28 @@ class webphoto_form_this extends webphoto_lib_form {
 
 // build image
 
-	function build_img_pictadd() {
-		$str = '<img src="' . $this->_ICONS_URL . '/pictadd.png" width="18" height="15" border="0" alt="' . _WEBPHOTO_TITLE_ADDPHOTO . '" title="' . _WEBPHOTO_TITLE_ADDPHOTO . '" />' . "\n";
-
-		return $str;
+	public function build_img_pictadd() {
+		return '<img src="' . $this->_ICONS_URL . '/pictadd.png" width="18" height="15" border="0" alt="' . _WEBPHOTO_TITLE_ADDPHOTO . '" title="' . _WEBPHOTO_TITLE_ADDPHOTO . '" />' . "\n";
 	}
 
-	function build_img_edit() {
-		$str = '<img src="' . $this->_ICONS_URL . '/edit.png" width="18" height="15" border="0" alt="' . _WEBPHOTO_TITLE_EDIT . '" title="' . _WEBPHOTO_TITLE_EDIT . '" />' . "\n";
-
-		return $str;
+	public function build_img_edit() {
+		return '<img src="' . $this->_ICONS_URL . '/edit.png" width="18" height="15" border="0" alt="' . _WEBPHOTO_TITLE_EDIT . '" title="' . _WEBPHOTO_TITLE_EDIT . '" />' . "\n";
 	}
 
-	function build_img_deadlink() {
-		$str = '<img src="' . $this->_ICONS_URL . '/deadlink.png"  width="16" height="16" border="0" alt="' . _AM_WEBPHOTO_DEADLINKMAINPHOTO . '" title="' . _AM_WEBPHOTO_DEADLINKMAINPHOTO . '" />' . "\n";
-
-		return $str;
+	public function build_img_deadlink() {
+		return '<img src="' . $this->_ICONS_URL . '/deadlink.png"  width="16" height="16" border="0" alt="' . _AM_WEBPHOTO_DEADLINKMAINPHOTO . '" title="' . _AM_WEBPHOTO_DEADLINKMAINPHOTO . '" />' . "\n";
 	}
 
-	function build_img_pixel( $width, $height ) {
-		$str = '<img src="' . $this->_ICONS_URL . '/pixel_trans.png" width="' . $width . '" height="' . $height . '" border="0" alt="" />';
-
-		return $str;
+	public function build_img_pixel( $width, $height ) {
+		return '<img src="' . $this->_ICONS_URL . '/pixel_trans.png" width="' . $width . '" height="' . $height . '" border="0" alt="" />';
 	}
 
-	function build_img_catadd() {
-		$str = '<img src="' . $this->_ICONS_URL . '/cat_add.png" width="18" height="15"  border="0" alt="' . _AM_WEBPHOTO_CAT_LINK_MAKESUBCAT . '" title="' . _AM_WEBPHOTO_CAT_LINK_MAKESUBCAT . '" />' . "\n";
-
-		return $str;
+	public function build_img_catadd() {
+		return '<img src="' . $this->_ICONS_URL . '/cat_add.png" width="18" height="15"  border="0" alt="' . _AM_WEBPHOTO_CAT_LINK_MAKESUBCAT . '" title="' . _AM_WEBPHOTO_CAT_LINK_MAKESUBCAT . '" />' . "\n";
 	}
 
-	function build_img_catedit() {
-		$str = '<img src="' . $this->_ICONS_URL . '/cat_edit.png" width="18" height="15"  border="0" alt="' . _AM_WEBPHOTO_CAT_LINK_EDIT . '" title="' . _AM_WEBPHOTO_CAT_LINK_EDIT . '" />' . "\n";
-
-		return $str;
+	public function build_img_catedit() {
+		return '<img src="' . $this->_ICONS_URL . '/cat_edit.png" width="18" height="15"  border="0" alt="' . _AM_WEBPHOTO_CAT_LINK_EDIT . '" title="' . _AM_WEBPHOTO_CAT_LINK_EDIT . '" />' . "\n";
 	}
 
 	function exists_photo( $item_row ) {
@@ -500,7 +486,4 @@ END_OF_TEXT;
 
 	}
 
-// --- class end ---
 }
-
-?>

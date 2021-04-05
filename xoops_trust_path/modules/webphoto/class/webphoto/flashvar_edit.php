@@ -31,9 +31,8 @@ class webphoto_flashvar_edit extends webphoto_base_this {
 	public $_NORMAL_EXTS = null;
 
 
-// constructor
+	public function __construct( $dirname, $trust_dirname ) {
 
-	function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_flashvar_handler =& webphoto_flashvar_handler::getInstance( $dirname );
@@ -228,7 +227,4 @@ class webphoto_flashvar_edit extends webphoto_base_this {
 		return 0;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -17,11 +17,9 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_multibyte extends webphoto_lib_multibyte {
 
 
-// constructor
-
 	public function __construct() {
+
 		parent::__construct();
-		//$this->webphoto_lib_multibyte();
 
 		$xoops_class =& webphoto_xoops_base::getInstance();
 		$is_japanese = $xoops_class->is_japanese( _C_WEBPHOTO_JPAPANESE );
@@ -42,7 +40,4 @@ class webphoto_multibyte extends webphoto_lib_multibyte {
 		return $instance;
 	}
 
-// --- class end ---
 }
-
-?>

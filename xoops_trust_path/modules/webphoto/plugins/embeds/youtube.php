@@ -1,18 +1,14 @@
 <?php
-// $Id: youtube.php,v 1.3 2010/06/16 22:24:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-06-06 K.OHWADA
-// get_xml_params()
-// 2008-11-16 K.OHWADA
-// width()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @deprecated UPDATE PLUGIN / API / JSON
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -66,9 +62,8 @@ class webphoto_embed_youtube extends webphoto_embed_base {
 		return $this->build_desc();
 	}
 
-//---------------------------------------------------------
-// xml
-//---------------------------------------------------------
+
+	// xml
 	public function support_params() {
 		return $this->build_support_params();
 	}
@@ -97,7 +92,7 @@ class webphoto_embed_youtube extends webphoto_embed_base {
 			return false;
 		}
 
-		$arr = array(
+		return array(
 			'title'       => $this->get_xml_title( $entry ),
 			'description' => $this->get_xml_description( $entry ),
 			'url'         => $this->get_xml_url( $entry ),
@@ -106,8 +101,6 @@ class webphoto_embed_youtube extends webphoto_embed_base {
 			'tags'        => $this->get_xml_tags( $entry ),
 			'script'      => $this->build_xml_script( $src ),
 		);
-
-		return $arr;
 	}
 
 	public function get_xml_title( $entry ) {
@@ -176,5 +169,4 @@ class webphoto_embed_youtube extends webphoto_embed_base {
 		return $str;
 	}
 
-// --- class end ---
 }

@@ -21,8 +21,6 @@ class webphoto_notification_select {
 	public $_cfg_use_pathinfo;
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		$this->_notification_select_class =& webphoto_d3_notification_select::getInstance();
 		$this->_notification_select_class->init( $dirname );

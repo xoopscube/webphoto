@@ -66,11 +66,8 @@ class webphoto_rss extends webphoto_lib_rss {
 	public $_DEBUG_FLAG_CACHE_TIME = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_lib_rss( $dirname ) ;
 		$this->set_template( 'db:' . $dirname . '_main_rss.html' );
 
 		$this->_cat_handler
@@ -118,7 +115,7 @@ class webphoto_rss extends webphoto_lib_rss {
 
 // main
 
-	function show_rss() {
+	public function show_rss() {
 		$this->_mode  = $this->_get_mode();
 		$this->_param = $this->_get_param( $this->_mode );
 		$this->_limit = $this->_get_limit();
@@ -135,7 +132,7 @@ class webphoto_rss extends webphoto_lib_rss {
 		echo $this->build_rss( $cache_id, $cache_time );
 	}
 
-	function _get_mode() {
+	public function _get_mode() {
 		$mode_input = $this->_pathinfo_class->get( 'mode' );
 		if ( empty( $mode_input ) ) {
 			$mode_input = $this->_pathinfo_class->get_path( 1 );
@@ -156,7 +153,7 @@ class webphoto_rss extends webphoto_lib_rss {
 		return $mode;
 	}
 
-	function _get_param( $mode ) {
+	public function _get_param( $mode ) {
 		$param_input = $this->_pathinfo_class->get( 'param' );
 		if ( empty( $param_input ) ) {
 			$param_input = $this->_pathinfo_class->get_path( 2 );
@@ -167,7 +164,7 @@ class webphoto_rss extends webphoto_lib_rss {
 		return $param;
 	}
 
-	function _get_limit() {
+	public function _get_limit() {
 		$limit = $this->_pathinfo_class->get_int( 'limit' );
 		if ( $limit <= 0 ) {
 			$limit = $this->_LIMIT_DEFAULT;
@@ -178,17 +175,17 @@ class webphoto_rss extends webphoto_lib_rss {
 		return $limit;
 	}
 
-	function _get_clear() {
+	public function _get_clear() {
 		return $this->_pathinfo_class->get_int( 'clear' );
 	}
 
-	function _get_cache_id( $mode, $param ) {
+	public function _get_cache_id( $mode, $param ) {
 		$cache_id = md5( $mode . $param );
 
 		return $cache_id;
 	}
 
-	function _get_cache_time( $mode ) {
+	public function _get_cache_time( $mode ) {
 		if ( $this->_DEBUG_FLAG_CACHE_TIME ) {
 			return $this->_CACHE_TIME_DEBUG;
 		}
@@ -209,7 +206,7 @@ class webphoto_rss extends webphoto_lib_rss {
 
 // items
 
-	function build_items() {
+	public function build_items() {
 		$ret = array();
 
 		$rows = $this->_get_photo_rows();
@@ -301,18 +298,18 @@ class webphoto_rss extends webphoto_lib_rss {
 				'media_title'                  => $media_title_xml,
 				'media_description'            => $this->xml_text( $media_description ),
 				'media_content_url'            => $this->xml_url( $media_content_url ),
-				'media_content_filesize'       => intval( $media_content_filesize ),
-				'media_content_height'         => intval( $media_content_height ),
-				'media_content_width'          => intval( $media_content_width ),
+				'media_content_filesize'       => (int) $media_content_filesize,
+				'media_content_height'         => (int) $media_content_height,
+				'media_content_width'          => (int) $media_content_width,
 				'media_content_type'           => $this->xml_text( $media_content_type ),
 				'media_content_medium'         => $this->xml_text( $media_content_medium ),
-				'media_content_duration'       => intval( $media_content_duration ),
+				'media_content_duration'       => (int) $media_content_duration,
 				'media_thumbnail_url'          => $this->xml_url( $media_thumbnail_url ),
-				'media_thumbnail_height'       => intval( $media_thumbnail_height ),
-				'media_thumbnail_width'        => intval( $media_thumbnail_width ),
+				'media_thumbnail_height'       => (int) $media_thumbnail_height,
+				'media_thumbnail_width'        => (int) $media_thumbnail_width,
 				'media_thumbnail_large_url'    => $this->xml_url( $media_thumbnail_large_url ),
-				'media_thumbnail_large_height' => intval( $media_thumbnail_large_height ),
-				'media_thumbnail_large_width'  => intval( $media_thumbnail_large_width ),
+				'media_thumbnail_large_height' => (int) $media_thumbnail_large_height,
+				'media_thumbnail_large_width'  => (int) $media_thumbnail_large_width,
 
 			);
 
@@ -322,7 +319,7 @@ class webphoto_rss extends webphoto_lib_rss {
 		return $ret;
 	}
 
-	function _build_description( $row, $thumb_row ) {
+	public function _build_description( $row, $thumb_row ) {
 		$context = $this->_build_context( $row );
 		$summary = $this->_multibyte_class->build_summary( $context, $this->_MAX_SUMMARY );
 
@@ -355,31 +352,23 @@ class webphoto_rss extends webphoto_lib_rss {
 		return array( $context, $summary, $desc );
 	}
 
-	function _build_context( $row ) {
+	public function _build_context( $row ) {
 		return $this->_item_handler->build_show_description_disp( $row );
 	}
 
-	function _build_link( $row ) {
+	public function _build_link( $row ) {
 		return $this->_uri_class->build_photo( $row['item_id'], false );
 	}
 
-	function _is_kind_image( $row ) {
-		if ( $row['item_kind'] == _C_WEBPHOTO_ITEM_KIND_IMAGE ) {
-			return true;
-		}
-
-		return false;
+	public function _is_kind_image( $row ) {
+		return $row['item_kind'] == _C_WEBPHOTO_ITEM_KIND_IMAGE;
 	}
 
-	function _is_kind_video( $row ) {
-		if ( $row['item_kind'] == _C_WEBPHOTO_ITEM_KIND_VIDEO ) {
-			return true;
-		}
-
-		return false;
+	public function _is_kind_video( $row ) {
+		return $row['item_kind'] == _C_WEBPHOTO_ITEM_KIND_VIDEO;
 	}
 
-	function _get_file_row_by_kind( $row, $kind ) {
+	public function _get_file_row_by_kind( $row, $kind ) {
 		$file_id = $this->_item_handler->build_value_fileid_by_kind( $row, $kind );
 		if ( $file_id > 0 ) {
 			return $this->_file_handler->get_row_by_id( $file_id );
@@ -388,18 +377,18 @@ class webphoto_rss extends webphoto_lib_rss {
 		return null;
 	}
 
-	function _build_file_image( $file_row ) {
+	public function _build_file_image( $file_row ) {
 		return $this->_file_handler->build_show_file_image( $file_row );
 	}
 
 
 // handler
 
-	function _get_photo_rows() {
+	public function _get_photo_rows() {
 		$limit = $this->_limit;
 
 		$param        = $this->_param;
-		$param_int    = intval( $param );
+		$param_int    = (int) $param;
 		$param_decode = $this->_multibyte_class->convert_from_utf8( $param );
 
 		$where   = null;
@@ -474,7 +463,7 @@ class webphoto_rss extends webphoto_lib_rss {
 		return $rows;
 	}
 
-	function _build_rows_randomphotos( $param_int, $limit ) {
+	public function _build_rows_randomphotos( $param_int, $limit ) {
 		if ( $param_int > 0 ) {
 			$rows = $this->_public_class->get_rows_photo_by_catid_orderby(
 				$param_int, $this->_ORDERBY_RANDOM, $limit );
@@ -487,7 +476,4 @@ class webphoto_rss extends webphoto_lib_rss {
 		return $rows;
 	}
 
-// --- class end ---
 }
-
-?>

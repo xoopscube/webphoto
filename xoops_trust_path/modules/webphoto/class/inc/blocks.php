@@ -177,11 +177,11 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 
 
 // rphoto
-	function rphoto_show( $options ) {
+	public function rphoto_show( $options ) {
 		return $this->_top_show_common( 'rphoto', $options );
 	}
 
-	function rphoto_edit( $options ) {
+	public function rphoto_edit( $options ) {
 		return $this->_top_edit_common( 'rphoto', $options );
 	}
 
@@ -195,7 +195,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 //   3 : show_sub_img  (1)
 //   4 : cols (3)
 
-	function catlist_show( $options ) {
+	public function catlist_show( $options ) {
 		$show_sub      = $this->_get_option_int( $options, 1 );
 		$show_main_img = $this->_get_option_int( $options, 2 );
 		$show_sub_img  = $this->_get_option_int( $options, 3 );
@@ -227,7 +227,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $this->_assign_block( 'catlist', $block );
 	}
 
-	function _assign_block( $mode, $block ) {
+	public function _assign_block( $mode, $block ) {
 		$template = 'db:' . $this->_DIRNAME . '_block_' . $mode . '.html';
 		$tpl      = new XoopsTpl();
 		$tpl->assign( 'block', $block );
@@ -237,7 +237,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $ret;
 	}
 
-	function catlist_edit( $options ) {
+	public function catlist_edit( $options ) {
 		$show_sub      = $this->_get_option_int( $options, 1 );
 		$show_main_img = $this->_get_option_int( $options, 2 );
 		$show_sub_img  = $this->_get_option_int( $options, 3 );
@@ -276,7 +276,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 // options
 //   0 : dirname
 //   1 : limit (100)
-	function tagcloud_show( $options ) {
+	public function tagcloud_show( $options ) {
 		$limit = $this->_get_option_int( $options, 1 );
 
 		$block             = array();
@@ -286,7 +286,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $this->_assign_block( 'tagcloud', $block );
 	}
 
-	function tagcloud_edit( $options ) {
+	public function tagcloud_edit( $options ) {
 		$limit = $this->_get_option_int( $options, 1 );
 
 		$ret = '<table border="0"><tr><td>' . "\n";
@@ -314,7 +314,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 //   3 : height (300) px
 //   4 : scale  (month)
 
-	function timeline_show( $options ) {
+	public function timeline_show( $options ) {
 		$latest = $this->_get_option_int( $options, 1 );
 		$random = $this->_get_option_int( $options, 2 );
 		$height = $this->_get_option_int( $options, 3 );
@@ -346,7 +346,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $this->_assign_block( 'timeline', $block );
 	}
 
-	function timeline_edit( $options ) {
+	public function timeline_edit( $options ) {
 		$latest = $this->_get_option_int( $options, 1 );
 		$random = $this->_get_option_int( $options, 2 );
 		$height = $this->_get_option_int( $options, 3 );
@@ -388,7 +388,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 
 // show common
 
-	function _top_show_common( $mode, $options ) {
+	public function _top_show_common( $mode, $options ) {
 		$cache_time       = $this->_get_option_int( $options, 6 );
 		$disable_renderer = $this->_get_option( $options, 'disable_renderer', false );
 		$show_popbox      = $this->_get_option( $options, 'show_popbox', true );
@@ -430,7 +430,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $ret;
 	}
 
-	function _build_block( $mode, $options ) {
+	public function _build_block( $mode, $options ) {
 		$cols = $this->_get_option_cols( $options, 5 );
 
 		$block = array(
@@ -457,7 +457,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $block;
 	}
 
-	function _build_photos( $options, $item_rows, $flag_amp_sanitize = true ) {
+	public function _build_photos( $options, $item_rows, $flag_amp_sanitize = true ) {
 		$title_max_length = $this->_get_option_int( $options, 4, 20 );
 
 		if ( ! is_array( $item_rows ) || ! count( $item_rows ) ) {
@@ -498,7 +498,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 
 // edit common
 
-	function _top_edit_common( $mode, $options ) {
+	public function _top_edit_common( $mode, $options ) {
 		$photos_num          = $this->_get_option_int( $options, 1, 5 );
 		$cat_limitation      = $this->_get_option_int( $options, 2, 0 );
 		$cat_limit_recursive = $this->_get_option_int( $options, 3, 0 );
@@ -548,7 +548,7 @@ class webphoto_inc_blocks extends webphoto_inc_public {
 		return $ret;
 	}
 
-	function _top_edit_gmap( $options ) {
+	public function _top_edit_gmap( $options ) {
 		$gmap_latitude  = $this->_get_option_float( $options, 8 );
 		$gmap_longitude = $this->_get_option_float( $options, 9 );
 		$gmap_zoom      = $this->_get_option_int( $options, 10 );

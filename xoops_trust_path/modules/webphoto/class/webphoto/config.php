@@ -34,8 +34,6 @@ class webphoto_config {
 	}
 
 
-// init
-
 	public function _init( $dirname ) {
 		$xoops_class         =& webphoto_xoops_base::getInstance();
 		$this->_config_array = $xoops_class->get_module_config_by_dirname( $dirname );
@@ -156,7 +154,4 @@ class webphoto_config {
 		return $this->_utility_class->add_separator_to_tail( $str );
 	}
 
-// --- class end ---
 }
-
-?>

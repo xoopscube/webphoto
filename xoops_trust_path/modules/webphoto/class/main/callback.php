@@ -7,10 +7,8 @@
  * @author K. OHWADA, 2008-04-02
  * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * http://code.jeroenwijering.com/trac/wiki/Flashvars3
  */
-
-// http://code.jeroenwijering.com/trac/wiki/Flashvars3
-
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -19,12 +17,9 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 class webphoto_main_callback extends webphoto_flash_log {
 
-
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname );
-		//$this->webphoto_flash_log( $dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
@@ -36,10 +31,7 @@ class webphoto_main_callback extends webphoto_flash_log {
 		return $instance;
 	}
 
-
-// main
-
-	function main() {
+	public function main() {
 		$this->callback_log();
 	}
 

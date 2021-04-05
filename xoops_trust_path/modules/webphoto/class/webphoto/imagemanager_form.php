@@ -17,11 +17,8 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_imagemanager_form extends webphoto_form_this {
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_form_this( $dirname, $trust_dirname );
 		$this->init_preload();
 	}
 
@@ -68,7 +65,4 @@ class webphoto_imagemanager_form extends webphoto_form_this {
 		echo $this->build_form_end();
 	}
 
-// --- class end ---
 }
-
-?>

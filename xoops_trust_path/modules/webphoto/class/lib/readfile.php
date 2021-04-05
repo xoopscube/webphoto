@@ -34,7 +34,7 @@ class webphoto_lib_readfile {
 
 // main
 
-	function readfile_view( $file, $mime ) {
+	public function readfile_view( $file, $mime ) {
 		$this->zlib_off();
 		$this->http_output_pass();
 		$this->header_view( $file, $mime );
@@ -43,7 +43,7 @@ class webphoto_lib_readfile {
 		readfile( $file );
 	}
 
-	function readfile_down( $file, $mime, $name, $is_rfc2231 = false ) {
+	public function readfile_down( $file, $mime, $name, $is_rfc2231 = false ) {
 		$this->zlib_off();
 		$this->http_output_pass();
 		$this->header_down( $file, $mime, $name, $is_rfc2231 );
@@ -52,7 +52,7 @@ class webphoto_lib_readfile {
 		readfile( $file );
 	}
 
-	function readfile_xml( $file ) {
+	public function readfile_xml( $file ) {
 		$this->zlib_off();
 		$this->http_output_pass();
 		$this->header_xml();

@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -33,7 +32,7 @@ class webphoto_inc_weblinks extends webphoto_inc_public {
 
 // public
 
-	function albums( $opts ) {
+	public function albums( $opts ) {
 		$dirname = isset( $opts['dirname'] ) ? $opts['dirname'] : '';
 
 		if ( empty( $dirname ) ) {
@@ -45,7 +44,7 @@ class webphoto_inc_weblinks extends webphoto_inc_public {
 		return $inc_class->get_cat_titles();
 	}
 
-	function photos( $opts ) {
+	public function photos( $opts ) {
 		$dirname     = isset( $opts['dirname'] ) ? $opts['dirname'] : '';
 		$width       = isset( $opts['width'] ) ? (int) $opts['width'] : 140;
 		$album_limit = isset( $opts['album_limit'] ) ? (int) $opts['album_limit'] : 1;

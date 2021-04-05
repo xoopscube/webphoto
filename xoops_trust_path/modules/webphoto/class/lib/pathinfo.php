@@ -34,10 +34,7 @@ class webphoto_lib_pathinfo {
 		return $instance;
 	}
 
-
-// init
-
-	function _init() {
+	public function _init() {
 		$get = $_GET;
 
 		$path_info = $this->get_server_path_info();
@@ -46,7 +43,7 @@ class webphoto_lib_pathinfo {
 			$this->_pathinfo_array = $this->str_to_array( $path_info, '/' );
 			foreach ( $this->_pathinfo_array as $path ) {
 				$qs = $this->str_to_array( $path, '=' );
-				if ( isset( $qs[0] ) && isset( $qs[1] ) ) {
+				if ( isset( $qs[0], $qs[1] ) ) {
 					$get[ $qs[0] ] = $qs[1];
 				}
 			}
@@ -55,10 +52,7 @@ class webphoto_lib_pathinfo {
 		$this->_get_param = $get;
 	}
 
-
-// function
-
-	function get_fct_op_0() {
+	public function get_fct_op_0() {
 		$fct = $this->get( 'fct' );
 		if ( $fct ) {
 			return $fct;
@@ -72,7 +66,7 @@ class webphoto_lib_pathinfo {
 		return $this->get_path( 0 );
 	}
 
-	function get_op_or_0() {
+	public function get_op_or_0() {
 		$op = $this->get( 'op' );
 		if ( $op ) {
 			return $op;
@@ -81,7 +75,7 @@ class webphoto_lib_pathinfo {
 		return $this->get_path( 0 );
 	}
 
-	function get_page() {
+	public function get_page() {
 		$page = $this->get_int( 'page' );
 		if ( $page < $this->_PAGE_DEFAULT ) {
 			$page = $this->_PAGE_DEFAULT;
@@ -90,48 +84,44 @@ class webphoto_lib_pathinfo {
 		return $page;
 	}
 
-	function isset_param( $key ) {
-		$ret = isset( $this->_get_param[ $key ] ) ? true : false;
-
-		return $ret;
+	public function isset_param( $key ) {
+		return isset( $this->_get_param[ $key ] );
 	}
 
-	function get( $key, $default = null ) {
-		$str = isset( $this->_get_param[ $key ] ) ? $this->_get_param[ $key ] : $default;
-
-		return $str;
+	public function get( $key, $default = null ) {
+		return $this->_get_param[ $key ] ?? $default;
 	}
 
-	function get_text( $key, $default = null ) {
+	public function get_text( $key, $default = null ) {
 		return $this->strip_slashes_gpc( $this->get( $key, $default ) );
 	}
 
-	function get_int( $key, $default = 0 ) {
+	public function get_int( $key, $default = 0 ) {
 		return (int) $this->get( $key, $default );
 	}
 
-	function get_float( $key, $default = 0 ) {
+	public function get_float( $key, $default = 0 ) {
 		return (float) $this->get( $key, $default );
 	}
 
-	function get_server_path_info() {
+	public function get_server_path_info() {
 		$str = isset( $_SERVER["PATH_INFO"] ) ? $_SERVER["PATH_INFO"] : null;
 
 		return $str;
 	}
 
-	function get_param() {
+	public function get_param() {
 		return $this->_get_param;
 	}
 
-	function get_path( $num ) {
+	public function get_path( $num ) {
 		return $this->_pathinfo_array[ $num ] ?? false;
 	}
 
 
 // utlity
 
-	function strip_slashes_gpc( $str ) {
+	public function strip_slashes_gpc( $str ) {
 		if ( ! get_magic_quotes_gpc() ) {
 			return $str;
 		}
@@ -148,7 +138,7 @@ class webphoto_lib_pathinfo {
 		return $arr;
 	}
 
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
 		foreach ( $arr1 as $v ) {

@@ -20,11 +20,8 @@ class webphoto_main extends webphoto_base_this {
 	public $_sort_class;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_public_class
 			=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
@@ -69,7 +66,4 @@ class webphoto_main extends webphoto_base_this {
 		return $this->build_rows_for_detail( $mode, $sort, $limit, $start );
 	}
 
-// --- class end ---
 }
-
-?>

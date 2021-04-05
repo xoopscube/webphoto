@@ -17,6 +17,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_lib_jodconverter {
+
 	public $_cmd_java = 'java';
 
 	public $_CMD_PATH_JAVA = '';
@@ -40,7 +41,7 @@ class webphoto_lib_jodconverter {
 
 // set
 
-	function set_cmd_path_java( $val ) {
+	public function set_cmd_path_java( $val ) {
 		$this->_CMD_PATH_JAVA = $val;
 		$this->_cmd_java      = $this->_CMD_PATH_JAVA . 'java';
 
@@ -49,18 +50,18 @@ class webphoto_lib_jodconverter {
 		}
 	}
 
-	function set_jodconverter_jar( $val ) {
+	public function set_jodconverter_jar( $val ) {
 		$this->_jodconverter_jar = $val;
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
 
 // main
 
-	function convert( $src_file, $dst_file ) {
+	public function convert( $src_file, $dst_file ) {
 		$this->clear_msg_array();
 
 		$cmd = $this->_cmd_java . ' -jar ' . $this->_jodconverter_jar . ' ' . $src_file . ' ' . $dst_file;
@@ -78,7 +79,7 @@ class webphoto_lib_jodconverter {
 
 // version
 
-	function version() {
+	public function version() {
 		$cmd = $this->_cmd_java . ' -version';
 		exec( "$cmd 2>&1", $ret_array, $ret_code );
 		if ( $this->_DEBUG ) {
@@ -98,7 +99,7 @@ class webphoto_lib_jodconverter {
 		return array( $ret, $msg );
 	}
 
-	function get_version_jodconverter() {
+	public function get_version_jodconverter() {
 		$ret = false;
 
 		if ( file_exists( $this->_jodconverter_jar ) ) {
@@ -113,7 +114,7 @@ class webphoto_lib_jodconverter {
 		return array( $ret, $msg );
 	}
 
-	function parse_version_jodconverter() {
+	public function parse_version_jodconverter() {
 		preg_match( '/jodconverter-cli-(.*)\.jar/i', $this->_jodconverter_jar, $matches );
 		if ( isset( $matches[1] ) ) {
 			return $matches[1];
@@ -125,7 +126,7 @@ class webphoto_lib_jodconverter {
 
 // utility
 
-	function is_win_os() {
+	public function is_win_os() {
 		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
 			return true;
 		}
@@ -133,7 +134,7 @@ class webphoto_lib_jodconverter {
 		return false;
 	}
 
-	function conv_win_cmd( $cmd ) {
+	public function conv_win_cmd( $cmd ) {
 		$str = '"' . $cmd . '.exe"';
 
 		return $str;
@@ -142,15 +143,15 @@ class webphoto_lib_jodconverter {
 
 // msg
 
-	function clear_msg_array() {
+	public function clear_msg_array() {
 		$this->_msg_array = array();
 	}
 
-	function get_msg_array() {
+	public function get_msg_array() {
 		return $this->_msg_array;
 	}
 
-	function set_msg( $ret_array ) {
+	public function set_msg( $ret_array ) {
 		if ( is_array( $ret_array ) ) {
 			foreach ( $ret_array as $line ) {
 				$this->_msg_array[] = $line;

@@ -41,7 +41,7 @@ class webphoto_lib_staticmap {
 
 // build url
 
-	function build_url( $param ) {
+	public function build_url( $param ) {
 		$latitude  = $param['latitude'];
 		$longitude = $param['longitude'];
 		$zoom      = $param['zoom'];
@@ -73,7 +73,7 @@ class webphoto_lib_staticmap {
 		return $str;
 	}
 
-	function build_markers( $markers ) {
+	public function build_markers( $markers ) {
 		if ( ! is_array( $markers ) || ! count( $markers ) ) {
 			return null;
 		}
@@ -99,7 +99,7 @@ class webphoto_lib_staticmap {
 		return implode( '|', $arr );
 	}
 
-	function sanitize_url( $str ) {
+	public function sanitize_url( $str ) {
 		$str = str_replace( '|', '%7C', $str );
 
 		return htmlspecialchars( $str, ENT_QUOTES );
@@ -108,23 +108,23 @@ class webphoto_lib_staticmap {
 
 // set param
 
-	function set_key( $val ) {
+	public function set_key( $val ) {
 		$this->_key = $val;
 	}
 
-	function set_maptype( $val ) {
+	public function set_maptype( $val ) {
 		$this->_maptype = $val;
 	}
 
-	function set_width( $val ) {
+	public function set_width( $val ) {
 		$this->_width = (int) $val;
 	}
 
-	function set_height( $val ) {
+	public function set_height( $val ) {
 		$this->_height = (int) $val;
 	}
 
-	function set_sanitize( $val ) {
+	public function set_sanitize( $val ) {
 		$this->_sanitize = (bool) $val;
 	}
 

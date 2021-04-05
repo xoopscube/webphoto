@@ -49,8 +49,6 @@ class webphoto_video extends webphoto_lib_error {
 	public $_DEBUG = false;
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		parent::__construct();
 
@@ -88,14 +86,14 @@ class webphoto_video extends webphoto_lib_error {
 
 // set param
 
-	function set_flag_chmod( $val ) {
+	public function set_flag_chmod( $val ) {
 		$this->_ffmpeg_class->set_flag_chmod( $val );
 	}
 
 
 // duration
 
-	function get_duration_size( $file ) {
+	public function get_duration_size( $file ) {
 		if ( ! $this->_cfg_use_ffmpeg ) {
 			return null;
 		}
@@ -106,7 +104,7 @@ class webphoto_video extends webphoto_lib_error {
 
 // thumb
 
-	function create_plural_thumbs( $id, $file ) {
+	public function create_plural_thumbs( $id, $file ) {
 		if ( ! $this->_cfg_use_ffmpeg ) {
 			return false;
 		}
@@ -120,7 +118,7 @@ class webphoto_video extends webphoto_lib_error {
 			$file, $this->_PLURAL_MAX, $this->_PLURAL_SECOND );
 	}
 
-	function create_single_thumb( $id, $file ) {
+	public function create_single_thumb( $id, $file ) {
 		$path = null;
 
 		if ( ! $this->_cfg_use_ffmpeg ) {
@@ -144,39 +142,39 @@ class webphoto_video extends webphoto_lib_error {
 		return $path;
 	}
 
-	function build_ffmpeg_prefix( $id ) {
+	public function build_ffmpeg_prefix( $id ) {
 // prefix_123_
 		$str = $this->_THUMB_PREFIX . $id . '_';
 
 		return $str;
 	}
 
-	function build_thumb_name( $id, $num ) {
+	public function build_thumb_name( $id, $num ) {
 // prefix_123_456.jpg
 		$str = $this->build_thumb_node( $id, $num ) . '.' . $this->_THUMB_EXT;
 
 		return $str;
 	}
 
-	function build_thumb_node( $id, $num ) {
+	public function build_thumb_node( $id, $num ) {
 // prefix_123_456
 		$str = $this->build_ffmpeg_prefix( $id ) . $num;
 
 		return $str;
 	}
 
-	function get_first_thumb_node() {
+	public function get_first_thumb_node() {
 		return $this->build_thumb_node( $this->_thumb_id, $this->_PLURAL_FIRST );
 	}
 
-	function get_thumb_ext() {
+	public function get_thumb_ext() {
 		return $this->_THUMB_EXT;
 	}
 
 
 // flash
 
-	function create_flash( $file_in, $name_out ) {
+	public function create_flash( $file_in, $name_out ) {
 		$this->_flash_param = null;
 
 		$ext = $this->_utility_class->parse_ext( $file_in );
@@ -220,18 +218,18 @@ class webphoto_video extends webphoto_lib_error {
 		return _C_WEBPHOTO_VIDEO_CREATED;
 	}
 
-	function get_flash_param() {
+	public function get_flash_param() {
 		return $this->_flash_param;
 	}
 
-	function get_flash_ext() {
+	public function get_flash_ext() {
 		return $this->_FLASH_EXT;
 	}
 
 
 // mime
 
-	function get_cached_extra_by_ext( $ext ) {
+	public function get_cached_extra_by_ext( $ext ) {
 		if ( isset( $this->_cached_extra_array[ $ext ] ) ) {
 			return $this->_cached_extra_array[ $ext ];
 		}
@@ -250,7 +248,7 @@ class webphoto_video extends webphoto_lib_error {
 
 // debug
 
-	function set_debug_by_const_name( $name ) {
+	public function set_debug_by_const_name( $name ) {
 		if ( defined( $name ) ) {
 			$val = constant( $name );
 			$this->set_debug( $val );
@@ -258,11 +256,8 @@ class webphoto_video extends webphoto_lib_error {
 		}
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
-// --- class end ---
 }
-
-?>

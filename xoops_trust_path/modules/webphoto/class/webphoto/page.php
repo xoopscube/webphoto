@@ -27,11 +27,8 @@ class webphoto_page extends webphoto_base_this {
 	public $_has_file;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_timeline_class =& webphoto_inc_timeline::getSingleton( $dirname );
 		$this->_public_class
@@ -118,19 +115,17 @@ class webphoto_page extends webphoto_base_this {
 			$show_tellafriend = $this->_perm_class->has_tellafriend();
 		}
 
-		$arr = array(
+		return array(
 			'show_rateview'    => $show_rateview,
 			'show_ratevote'    => $show_ratevote,
 			'show_tellafriend' => $show_tellafriend,
 		);
-
-		return $arr;
 	}
 
 	public function build_menu_param() {
 		$total = $this->get_public_total();
 
-		$arr = array(
+		return array(
 			'photo_total_all'    => $total,
 			'lang_thereare'      => $this->build_lang_thereare( $total ),
 			'show_menu_mail'     => $this->get_show_menu_mail(),
@@ -138,55 +133,44 @@ class webphoto_page extends webphoto_base_this {
 			'show_menu_map'      => $this->get_show_menu_map(),
 			'show_menu_timeline' => $this->timeline_check_exist(),
 		);
-
-		return $arr;
 	}
 
 	public function build_footer_param() {
-		$arr = array(
+		return array(
 			'is_module_admin' => $this->xoops_is_module_admin(),
 			'happy_linux_url' => $this->get_happy_linux_url(),
 		);
-
-		return $arr;
 	}
 
 	public function build_qrs_param() {
 		$qrs_path = $this->_cfg_uploads_path . '/qrs';
 		$qrs_url  = XOOPS_URL . $qrs_path;
 
-		$arr = array(
+		return array(
 			'qrs_path' => $qrs_path,
 			'qrs_url'  => $qrs_url,
 		);
-
-		return $arr;
 	}
 
-	function build_lang_thereare( $total_all ) {
+	public function build_lang_thereare( $total_all ) {
 		return sprintf( $this->get_constant( 'S_THEREARE' ), $total_all );
 	}
 
-	function get_show_menu_mail() {
-		$show = ( $this->_cfg_is_set_mail && $this->_has_mail );
-
-		return $show;
+	public function get_show_menu_mail() {
+		return $this->_cfg_is_set_mail && $this->_has_mail;
 	}
 
-	function get_show_menu_file() {
-		$show = ( $this->_cfg_file_dir && $this->_has_file );
-
-		return $show;
+	public function get_show_menu_file() {
+		return $this->_cfg_file_dir && $this->_has_file;
 	}
 
-	function get_show_menu_map() {
+	public function get_show_menu_map() {
 		$gmap_apikey = $this->_config_class->get_by_name( 'gmap_apikey' );
-		$ret         = empty( $gmap_apikey ) ? false : true;
 
-		return $ret;
+		return empty( $gmap_apikey ) ? false : true;
 	}
 
-	function get_is_taf_module() {
+	public function get_is_taf_module() {
 		$file = XOOPS_ROOT_PATH . '/modules/tellafriend/index.php';
 		if ( file_exists( $file ) ) {
 			return true;
@@ -198,11 +182,11 @@ class webphoto_page extends webphoto_base_this {
 
 // show JavaScript
 
-	function add_show_js_windows( $param ) {
+	public function add_show_js_windows( $param ) {
 		return array_merge( $param, $this->build_show_js_windows( $param ) );
 	}
 
-	function build_show_js_windows( $param ) {
+	public function build_show_js_windows( $param ) {
 		$use_box_js    = isset( $param['use_box_js'] ) ? (bool) $param['use_box_js'] : false;
 		$show_gmap     = isset( $param['show_gmap'] ) ? (bool) $param['show_gmap'] : false;
 		$show_timeline = isset( $param['show_timeline'] ) ? (bool) $param['show_timeline'] : false;
@@ -259,7 +243,7 @@ class webphoto_page extends webphoto_base_this {
 
 		$boxlist = $this->build_box_list( $param );
 
-		$arr = array(
+		return array(
 			'box_list'        => $boxlist,
 			'js_boxlist'      => $boxlist,
 			'show_js_window'  => $show_js_window,
@@ -269,11 +253,9 @@ class webphoto_page extends webphoto_base_this {
 			'js_load'         => $js_load,
 			'js_unload'       => 'GUnload',
 		);
-
-		return $arr;
 	}
 
-	function build_box_list( $param ) {
+	public function build_box_list( $param ) {
 		if ( ! isset( $param['use_box_js'] ) || ! $param['use_box_js'] ) {
 			return '';
 		}
@@ -307,14 +289,14 @@ class webphoto_page extends webphoto_base_this {
 
 // preload
 
-	function init_preload() {
+	public function init_preload() {
 		$this->_preload_class =& webphoto_d3_preload::getInstance();
 		$this->_preload_class->init( $this->_DIRNAME, $this->_TRUST_DIRNAME );
 
 		$this->preload_constant();
 	}
 
-	function preload_constant() {
+	public function preload_constant() {
 		$arr = $this->_preload_class->get_preload_const_array();
 
 		if ( ! is_array( $arr ) || ! count( $arr ) ) {
@@ -342,52 +324,52 @@ class webphoto_page extends webphoto_base_this {
 
 // d3 language
 
-	function _init_d3_language( $dirname, $trust_dirname ) {
+	public function _init_d3_language( $dirname, $trust_dirname ) {
 		$this->_language_class =& webphoto_d3_language::getInstance();
 		$this->_language_class->init( $dirname, $trust_dirname );
 	}
 
-	function get_lang_array() {
+	public function get_lang_array() {
 		return $this->_language_class->get_lang_array();
 	}
 
-	function get_constant( $name ) {
+	public function get_constant( $name ) {
 		return $this->_language_class->get_constant( $name );
 	}
 
 
 // xoops class
 
-	function xoops_is_module_admin() {
+	public function xoops_is_module_admin() {
 		return $this->_xoops_class->get_my_user_is_module_admin();
 	}
 
-	function xoops_is_japanese() {
+	public function xoops_is_japanese() {
 		return $this->_xoops_class->is_japanese( _C_WEBPHOTO_JPAPANESE );
 	}
 
-	function xoops_module_name( $format = 's' ) {
+	public function xoops_module_name( $format = 's' ) {
 		return $this->_xoops_class->get_my_module_name( $format );
 	}
 
 
 // config class
 
-	function get_config_array() {
+	public function get_config_array() {
 		return $this->_config_class->get_config_array();
 	}
 
 
 // public class
 
-	function get_public_total() {
+	public function get_public_total() {
 		return $this->_public_class->get_count();
 	}
 
 
 // timeline class
 
-	function timeline_check_exist() {
+	public function timeline_check_exist() {
 		$timeline_dirname = $this->_config_class->get_by_name( 'timeline_dirname' );
 
 		return $this->_timeline_class->check_exist( $timeline_dirname );
@@ -396,23 +378,20 @@ class webphoto_page extends webphoto_base_this {
 
 // utility class
 
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		return $this->_utility_class->str_to_array( $str, $pattern );
 	}
 
-	function get_execution_time() {
+	public function get_execution_time() {
 		return $this->_utility_class->get_execution_time( WEBPHOTO_TIME_START );
 	}
 
-	function get_memory_usage() {
+	public function get_memory_usage() {
 		return $this->_utility_class->get_memory_usage();
 	}
 
-	function get_happy_linux_url() {
+	public function get_happy_linux_url() {
 		return $this->_utility_class->get_happy_linux_url( $this->xoops_is_japanese() );
 	}
 
-// --- class end ---
 }
-
-?>

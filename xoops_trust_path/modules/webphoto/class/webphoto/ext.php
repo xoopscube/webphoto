@@ -109,7 +109,4 @@ class webphoto_ext extends webphoto_lib_plugin {
 		return $class;
 	}
 
-// --- class end ---
 }
-
-?>

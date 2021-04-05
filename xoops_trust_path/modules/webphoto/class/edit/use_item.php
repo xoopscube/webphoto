@@ -25,8 +25,6 @@ class webphoto_edit_use_item extends webphoto_base_this {
 	public $_flag_admin = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 

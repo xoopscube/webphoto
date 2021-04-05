@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -25,11 +24,8 @@ class webphoto_imagemagick extends webphoto_cmd_base {
 	public $_CMYK_OPTION = '-colorspace RGB';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 		$this->_imagemagick_class =& webphoto_lib_imagemagick::getInstance();
 
@@ -86,7 +82,4 @@ class webphoto_imagemagick extends webphoto_cmd_base {
 		return - 1;    // fail
 	}
 
-// --- class end ---
 }
-
-?>

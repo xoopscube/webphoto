@@ -154,7 +154,7 @@ class webphoto_main_gmap_location extends webphoto_base_this {
 		return $this->_gmap_class->get_gmap_center( $get_photo_id, $get_cat_id );
 	}
 
-	function _build_list_location() {
+	public function _build_list_location() {
 		$get_photo_id = $this->_post_class->get_get_int( 'photo_id' );
 
 		$show_gmap   = false;
@@ -213,7 +213,7 @@ class webphoto_main_gmap_location extends webphoto_base_this {
 		return array( $show_gmap, $gmap_list );
 	}
 
-	function _get_item_rows_by_gmap_area( $item_row, $ns, $ew ) {
+	public function _get_item_rows_by_gmap_area( $item_row, $ns, $ew ) {
 		$id  = $item_row['item_id'];
 		$lat = $item_row['item_gmap_latitude'];
 		$lon = $item_row['item_gmap_longitude'];
@@ -222,7 +222,7 @@ class webphoto_main_gmap_location extends webphoto_base_this {
 			$id, $lat, $lon, $ns, $ew, $this->_AREA_NUM, 0, true );
 	}
 
-	function _merge_item_rows( $arr1, $arr2 ) {
+	public function _merge_item_rows( $arr1, $arr2 ) {
 		$arr = $arr1;
 		foreach ( $arr2 as $k => $v ) {
 			if ( ! isset( $arr[ $k ] ) ) {
@@ -233,14 +233,14 @@ class webphoto_main_gmap_location extends webphoto_base_this {
 		return $arr;
 	}
 
-	function _constant( $name ) {
+	public function _constant( $name ) {
 		return $this->_utf8( $this->get_constant( $name ) );
 	}
 
 
 // show error
 
-	function _show_error() {
+	public function _show_error() {
 		header( 'Content-Type:text/html; charset=' . _CHARSET );
 
 // --- raw HTML begin ---
@@ -264,11 +264,11 @@ class webphoto_main_gmap_location extends webphoto_base_this {
 
 // multibyte
 
-	function _http_output( $encoding ) {
+	public function _http_output( $encoding ) {
 		return $this->_multibyte_class->m_mb_http_output( $encoding );
 	}
 
-	function _utf8( $str ) {
+	public function _utf8( $str ) {
 		return $this->_multibyte_class->convert_to_utf8( $str );
 	}
 

@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -70,7 +69,4 @@ class webphoto_lame extends webphoto_cmd_base {
 		return - 1;    // fail
 	}
 
-// --- class end ---
 }
-
-?>

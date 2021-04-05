@@ -33,12 +33,11 @@ class webphoto_cmd_base extends webphoto_base_ini {
 	public $_DEBUG = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
+
 		$this->_DIRNAME = $dirname;
-		//$this->webphoto_base_ini( $dirname, $trust_dirname );
 
 		$this->_mime_class
 			=& webphoto_mime::getInstance( $dirname, $trust_dirname );
@@ -50,14 +49,14 @@ class webphoto_cmd_base extends webphoto_base_ini {
 
 	}
 
-	function set_command_class( $class ) {
+	public function set_command_class( $class ) {
 		$this->_command_class =& $class;
 	}
 
 
 // create
 
-	function get_cmd_option( $file, $cmd ) {
+	public function get_cmd_option( $file, $cmd ) {
 		$ext = $this->parse_ext( $file );
 
 		$options = $this->_mime_class->get_cached_mime_options_by_ext( $ext );
@@ -68,33 +67,33 @@ class webphoto_cmd_base extends webphoto_base_ini {
 		return '';
 	}
 
-	function build_jpeg_file( $item_id ) {
+	public function build_jpeg_file( $item_id ) {
 		return $this->build_file_by_prefix_ext(
 			$this->build_prefix( $item_id ), $this->_JPEG_EXT );
 	}
 
-	function build_mp3_file( $item_id ) {
+	public function build_mp3_file( $item_id ) {
 		return $this->build_file_by_prefix_ext(
 			$this->build_prefix( $item_id ), $this->_MP3_EXT );
 	}
 
-	function build_prefix( $item_id ) {
+	public function build_prefix( $item_id ) {
 		$prefix = 'tmp_' . sprintf( "%04d", $item_id );
 
 		return $prefix;
 	}
 
-	function build_file_by_prefix_ext( $prefix, $ext ) {
+	public function build_file_by_prefix_ext( $prefix, $ext ) {
 		$file = $this->_TMP_DIR . '/' . $prefix . '.' . $ext;
 
 		return $file;
 	}
 
-	function is_file_in_array( $file, $arr ) {
+	public function is_file_in_array( $file, $arr ) {
 		return $this->is_ext_in_array( $this->parse_ext( $file ), $arr );
 	}
 
-	function is_ext_in_array( $ext, $arr ) {
+	public function is_ext_in_array( $ext, $arr ) {
 		if ( in_array( strtolower( $ext ), $arr ) ) {
 			return true;
 		}
@@ -102,17 +101,17 @@ class webphoto_cmd_base extends webphoto_base_ini {
 		return false;
 	}
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
-	function chmod_file( $file ) {
+	public function chmod_file( $file ) {
 		if ( $this->_flag_chmod && ! $this->_ini_safe_mode && is_file( $file ) ) {
 			chmod( $file, $this->_CHMOD_MODE );
 		}
 	}
 
-	function set_get_errors( $msg ) {
+	public function set_get_errors( $msg ) {
 		$this->set_error( $msg );
 
 		return $this->get_errors();
@@ -121,18 +120,18 @@ class webphoto_cmd_base extends webphoto_base_ini {
 
 // config
 
-	function get_config_by_name( $name ) {
+	public function get_config_by_name( $name ) {
 		return $this->_config_class->get_by_name( $name );
 	}
 
-	function get_config_dir_by_name( $name ) {
+	public function get_config_dir_by_name( $name ) {
 		return $this->_config_class->get_dir_by_name( $name );
 	}
 
 
 // debug
 
-	function set_debug_by_const_name( $class, $name_in ) {
+	public function set_debug_by_const_name( $class, $name_in ) {
 		$name = strtoupper( '_P_' . $this->_DIRNAME . '_' . $name_in );
 		if ( defined( $name ) ) {
 			$val          = constant( $name );
@@ -143,7 +142,7 @@ class webphoto_cmd_base extends webphoto_base_ini {
 		}
 	}
 
-	function set_debug_by_ini_name( $class, $name = 'debug_cmd' ) {
+	public function set_debug_by_ini_name( $class, $name = 'debug_cmd' ) {
 		$val = $this->get_ini( $name );
 		if ( $val ) {
 			$this->set_debug( $val );
@@ -153,11 +152,8 @@ class webphoto_cmd_base extends webphoto_base_ini {
 		}
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
-// --- class end ---
 }
-
-?>

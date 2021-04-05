@@ -41,11 +41,11 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $instance;
 	}
 
-	function item_explode_ini( $name ) {
+	public function item_explode_ini( $name ) {
 		return $this->explode_ini( $name, '|', 'item_' );
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 
@@ -142,19 +142,19 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $arr;
 	}
 
-	function file_id_to_item_name( $id ) {
+	public function file_id_to_item_name( $id ) {
 		$str = 'item_file_id_' . $id;
 
 		return $str;
 	}
 
-	function text_id_to_item_name( $id ) {
+	public function text_id_to_item_name( $id ) {
 		$str = 'item_text_' . $id;
 
 		return $str;
 	}
 
-	function build_name_fileid_by_kind( $kind ) {
+	public function build_name_fileid_by_kind( $kind ) {
 		return $this->file_id_to_item_name( $kind );
 	}
 
@@ -162,7 +162,7 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $this->text_id_to_item_name( $kind );
 	}
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -351,7 +351,7 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $this->_db->getInsertId();
 	}
 
-	function update( $row, $force = false ) {
+	public function update( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -449,7 +449,7 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql );
 	}
 
-	function update_rating_by_id( $item_id, $votes, $rating ) {
+	public function update_rating_by_id( $item_id, $votes, $rating ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= 'item_rating=' . (float) $rating . ', ';
 		$sql .= 'item_votes=' . (int) $votes . ' ';
@@ -485,7 +485,7 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql, 0, 0, $force );
 	}
 
-	function update_status( $item_id, $status, $force = false ) {
+	public function update_status( $item_id, $status, $force = false ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= ' item_status = ' . (int) $status;
 		$sql .= ' WHERE item_id=' . (int) $item_id;
@@ -493,7 +493,7 @@ class webphoto_item_handler extends webphoto_handler_base_ini {
 		return $this->query( $sql, 0, 0, $force );
 	}
 
-	function update_playlist_cache( $item_id, $cache, $force = false ) {
+	public function update_playlist_cache( $item_id, $cache, $force = false ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= 'item_playlist_cache =' . $this->quote( $cache );
 		$sql .= 'WHERE item_id=' . (int) $item_id;

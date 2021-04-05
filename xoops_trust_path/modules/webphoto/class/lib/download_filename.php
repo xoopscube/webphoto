@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_lib_download_filename {
+
 	public $_CHARSET_LOCAL = 'utf-8';
 	public $_LANGCODE = 'en';
 	public $_is_japanese = false;
@@ -32,19 +33,19 @@ class webphoto_lib_download_filename {
 		return $instance;
 	}
 
-	function set_charset_local( $val ) {
+	public function set_charset_local( $val ) {
 		$this->_CHARSET_LOCAL = strtolowr( $val );
 	}
 
-	function set_langcode( $val ) {
+	public function set_langcode( $val ) {
 		$this->_LANGCODE = strtolowr( $val );
 	}
 
-	function set_is_japanese( $val ) {
+	public function set_is_japanese( $val ) {
 		$this->_is_japanese = (bool) $val;
 	}
 
-	function build_encode( $name, $name_alt, $browser ) {
+	public function build_encode( $name, $name_alt, $browser ) {
 		$is_rfc2231 = false;
 
 		$name = $this->substitute_filename( $name );
@@ -83,7 +84,7 @@ class webphoto_lib_download_filename {
 		return array( $name, $is_rfc2231 );
 	}
 
-	function get_kind( $name, $browser ) {
+	public function get_kind( $name, $browser ) {
 		$ascii = $this->convert_encoding(
 			$name, 'us-ascii', $this->_CHARSET_LOCAL );
 		if ( $ascii == $name ) {
@@ -101,21 +102,21 @@ class webphoto_lib_download_filename {
 		return $browser;
 	}
 
-	function build_filename_rfc2231( $name, $charset, $langcode ) {
+	public function build_filename_rfc2231( $name, $charset, $langcode ) {
 		$str = strtolower( $charset . "'" . $langcode . "'" );
 		$str .= rawurlencode( $name );
 
 		return $str;
 	}
 
-	function substitute_filename( $str ) {
+	public function substitute_filename( $str ) {
 		$str = $this->convert_space_zen_to_han( $str );
 		$str = $this->substitute_filename_to_underbar( $str );
 
 		return $str;
 	}
 
-	function substitute_filename_to_underbar( $name ) {
+	public function substitute_filename_to_underbar( $name ) {
 // substitute the characters that cannot be used as the file name to underbar. 
 // \ / : * ? " < > | sapce
 		$search  = array( '\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ' );
@@ -129,11 +130,11 @@ class webphoto_lib_download_filename {
 
 // multibyte
 
-	function convert_to_utf8( $str ) {
+	public function convert_to_utf8( $str ) {
 		return $this->convert_encoding( $str, 'utf-8', $this->_CHARSET_LOCAL );
 	}
 
-	function convert_encoding( $str, $charset_to, $charset_from ) {
+	public function convert_encoding( $str, $charset_to, $charset_from ) {
 
 // no action when same charset
 		if ( $charset_from == $charset_to ) {
@@ -150,7 +151,7 @@ class webphoto_lib_download_filename {
 		return $str;
 	}
 
-	function convert_space_zen_to_han( $str ) {
+	public function convert_space_zen_to_han( $str ) {
 		if ( function_exists( 'mb_convert_kana' ) ) {
 			return mb_convert_kana( $str, 's' );
 		}

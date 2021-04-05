@@ -103,19 +103,15 @@ class webphoto_edit_form extends webphoto_lib_form {
 
 		$this->_config_class =& webphoto_config::getInstance( $dirname );
 
-		$this->_cat_handler
-			                        =& webphoto_cat_handler::getInstance( $dirname, $trust_dirname );
-		$this->_item_handler
-			                        =& webphoto_item_handler::getInstance( $dirname, $trust_dirname );
-		$this->_file_handler
-			                        =& webphoto_file_handler::getInstance( $dirname, $trust_dirname );
-		$this->_perm_class
-			                        =& webphoto_permission::getInstance( $dirname, $trust_dirname );
-		$this->_embed_class
-			                        =& webphoto_embed::getInstance( $dirname, $trust_dirname );
+		$this->_cat_handler  =& webphoto_cat_handler::getInstance( $dirname, $trust_dirname );
+		$this->_item_handler =& webphoto_item_handler::getInstance( $dirname, $trust_dirname );
+		$this->_file_handler =& webphoto_file_handler::getInstance( $dirname, $trust_dirname );
+		$this->_perm_class   =& webphoto_permission::getInstance( $dirname, $trust_dirname );
+		$this->_embed_class  =& webphoto_embed::getInstance( $dirname, $trust_dirname );
+
 		$this->_mysql_utility_class =& webphoto_lib_mysql_utility::getInstance();
-		$this->_ini_class
-			                        =& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
+
+		$this->_ini_class =& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
 
 		$this->_ini_class->read_main_ini();
 

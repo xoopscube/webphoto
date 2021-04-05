@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -44,11 +43,9 @@ class webphoto_imode extends webphoto_show_photo {
 	public $_ARRAY_MOBILE_TEXT = null;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_show_photo( $dirname , $trust_dirname );
 
 		$this->_agent_class        =& webphoto_lib_user_agent::getInstance();
 		$this->_pagenavi_class     =& webphoto_lib_pagenavi::getInstance();
@@ -82,7 +79,7 @@ class webphoto_imode extends webphoto_show_photo {
 
 // set param
 
-	function set_charset_output() {
+	public function set_charset_output() {
 		if ( defined( "_WEBPHOTO_CHARSET_MOBILE" ) ) {
 			if ( constant( "_WEBPHOTO_CHARSET_MOBILE" ) ) {
 				$this->_MOBILE_CHARSET_OUTPUT = _WEBPHOTO_CHARSET_MOBILE;
@@ -90,7 +87,7 @@ class webphoto_imode extends webphoto_show_photo {
 		}
 	}
 
-	function set_mobile_carrier_array() {
+	public function set_mobile_carrier_array() {
 		if ( function_exists( 'webphoto_mobile_carrier_array' ) ) {
 			$arr = webphoto_mobile_carrier_array();
 			if ( isset( $arr ) ) {
@@ -99,7 +96,7 @@ class webphoto_imode extends webphoto_show_photo {
 		}
 	}
 
-	function get_encode_type_array() {
+	public function get_encode_type_array() {
 		$encode_type_array = $this->_item_handler->get_encode_type_array();
 
 		$arr = array( 'uname' );
@@ -123,12 +120,12 @@ class webphoto_imode extends webphoto_show_photo {
 
 // common
 
-	function output_header() {
+	public function output_header() {
 		$this->http_output( 'pass' );
 		header( 'Content-Type:text/html; charset=' . $this->_MOBILE_CHARSET_OUTPUT );
 	}
 
-	function check_perm() {
+	public function check_perm() {
 		if ( ! $this->_is_set_mail ) {
 			return false;
 		}
@@ -142,7 +139,7 @@ class webphoto_imode extends webphoto_show_photo {
 		return false;
 	}
 
-	function build_goto() {
+	public function build_goto() {
 		$url  = $this->_MODULE_URL . '/i.php?op=latest';
 		$text = "<br><br>\n";
 		$text .= '<a href="' . $url . '">';
@@ -155,16 +152,13 @@ class webphoto_imode extends webphoto_show_photo {
 
 // multibyte
 
-	function http_output( $encoding ) {
+	public function http_output( $encoding ) {
 		return $this->_multibyte_class->m_mb_http_output( $encoding );
 	}
 
-	function conv( $str ) {
+	public function conv( $str ) {
 		return $this->_multibyte_class->convert_encoding(
 			$str, $this->_MOBILE_CHARSET_OUTPUT, $this->_MOBILE_CHARSET_INTERNAL );
 	}
-
-// --- class end ---
 }
 
-?>

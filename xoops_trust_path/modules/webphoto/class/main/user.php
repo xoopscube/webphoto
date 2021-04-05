@@ -35,22 +35,16 @@ class webphoto_main_user extends webphoto_show_list {
 
 
 // main
-
 // overwrite
-	function list_sel() {
-		if ( ( $this->_param != $this->_UID_DEFAULT ) &&
-		     ( $this->_param >= 0 ) ) {
-			return true;
-		}
-
-		return false;
+	public function list_sel() {
+		return ( $this->_param != $this->_UID_DEFAULT ) &&
+		       ( $this->_param >= 0 );
 	}
 
 
 // list
-
 // overwrite
-	function list_get_photo_list() {
+	public function list_get_photo_list() {
 		$groupby   = 'item_uid';
 		$orderby   = 'item_uid ASC, item_id DESC';
 		$list_rows = $this->_item_handler->get_rows_by_groupby_orderby( $groupby, $orderby );
@@ -60,7 +54,7 @@ class webphoto_main_user extends webphoto_show_list {
 
 		$arr = array();
 		foreach ( $list_rows as $row ) {
-			$uid = intval( $row['item_uid'] );
+			$uid = (int) $row['item_uid'];
 
 			$photo_row = null;
 
@@ -85,9 +79,8 @@ class webphoto_main_user extends webphoto_show_list {
 
 
 // detail list
-
 // overwrite
-	function list_build_detail( $uid ) {
+	public function list_build_detail( $uid ) {
 		$rows    = null;
 		$limit   = $this->_MAX_PHOTOS;
 		$start   = $this->pagenavi_calc_start( $limit );
@@ -113,7 +106,4 @@ class webphoto_main_user extends webphoto_show_list {
 		return $this->add_show_js_windows( $ret );
 	}
 
-// --- class end ---
 }
-
-?>

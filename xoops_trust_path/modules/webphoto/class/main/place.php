@@ -26,8 +26,6 @@ class webphoto_main_place extends webphoto_show_list {
 	public $_GMAP_SHOW = true;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 		$this->set_mode( 'place' );
@@ -64,7 +62,7 @@ class webphoto_main_place extends webphoto_show_list {
 	}
 
 // overwrite
-	function list_get_photo_list() {
+	public function list_get_photo_list() {
 		$groupby   = 'item_place';
 		$orderby   = 'item_place ASC, item_id DESC';
 		$list_rows = $this->_item_handler->get_rows_by_groupby_orderby( $groupby, $orderby );
@@ -114,7 +112,7 @@ class webphoto_main_place extends webphoto_show_list {
 		return $arr;
 	}
 
-	function _get_gmap_param( $rows ) {
+	public function _get_gmap_param( $rows ) {
 		return $this->build_gmap_param( $rows );
 	}
 
@@ -122,7 +120,7 @@ class webphoto_main_place extends webphoto_show_list {
 // detail list
 
 // overwrite
-	function list_build_detail( $place_in ) {
+	public function list_build_detail( $place_in ) {
 		$rows    = null;
 		$limit   = $this->_MAX_PHOTOS;
 		$start   = $this->pagenavi_calc_start( $limit );
@@ -171,7 +169,4 @@ class webphoto_main_place extends webphoto_show_list {
 		return $this->add_show_js_windows( $ret );
 	}
 
-// --- class end ---
 }
-
-?>

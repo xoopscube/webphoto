@@ -1,62 +1,21 @@
 <?php
-// $Id: header.php,v 1.23 2011/12/28 16:16:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-12-25 K.OHWADA
-// class/lib/mysql_utility.php
-// 2011-11-11 K.OHWAD
-// remove class/inc/config.php
-// 2010-01-10 K.OHWADA
-// class/webphoto/factory.php
-// 2009-11-11 K.OHWADA
-// main/header_item_handler.php
-// 2009-10-25 K.OHWADA
-// class/xoops/groupperm.php
-// 2009-04-10 K.OHWADA
-// page.php
-// 2009-03-15 K.OHWADA
-// timeline.php
-// 2009-01-25 K.OHWADA
-// gmap_api.php
-// 2009-01-10 K.OHWADA
-// multibyte.php
-// 2009-01-04 K.OHWADA
-// plugin.php
-// 2008-12-12 K.OHWADA
-// photo_public.php
-// 2008-12-07 K.OHWADA
-// rate_check.php
-// 2008-11-29 K.OHWADA
-// auto_publish.php etc
-// 2008-11-16 K.OHWADA
-// show_image.php
-// 2008-10-01 K.OHWADA
-// player_handler.php  flashvar_handler.php
-// 2008-08-24 K.OHWADA
-// added item_handler.php qrcode_img.php
-// 2008-07-01 K.OHWADA
-// added uri.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// xoops system files
-//---------------------------------------------------------
 include_once XOOPS_ROOT_PATH . '/class/template.php';
 include_once XOOPS_ROOT_PATH . '/class/snoopy.php';
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 define( "QRCODE_DATA_PATH", WEBPHOTO_TRUST_PATH . '/class/qrcode/qrcode_data' );
 
 webphoto_include_once( 'main/header_item_handler.php' );

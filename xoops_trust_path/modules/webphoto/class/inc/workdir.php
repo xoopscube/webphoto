@@ -25,8 +25,6 @@ class webphoto_inc_workdir {
 	public $_CHMOD_MODE = 0777;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME       = $dirname;
 		$this->_TRUST_DIRNAME = $trust_dirname;
@@ -52,7 +50,7 @@ class webphoto_inc_workdir {
 
 // main
 
-	function get_config_workdir() {
+	public function get_config_workdir() {
 		$name = $this->_DIRNAME;
 
 		for ( $i = 0; $i < 10; $i ++ ) {
@@ -70,7 +68,7 @@ class webphoto_inc_workdir {
 		return $workdir;
 	}
 
-	function read_workdir( $workdir ) {
+	public function read_workdir( $workdir ) {
 		$match = 0;
 
 		if ( ! file_exists( $this->_FILE_WORKDIR ) ) {
@@ -101,7 +99,7 @@ class webphoto_inc_workdir {
 		return $match;
 	}
 
-	function write_workdir( $workdir ) {
+	public function write_workdir( $workdir ) {
 		$data = $workdir;
 		$data .= ', ';
 		$data .= XOOPS_DB_NAME;
@@ -116,7 +114,7 @@ class webphoto_inc_workdir {
 		return $this->write_file( $this->_FILE_WORKDIR, $data, 'a', true );
 	}
 
-	function read_file_cvs( $file, $mode = 'r' ) {
+	public function read_file_cvs( $file, $mode = 'r' ) {
 		$lines = array();
 
 		$fp = fopen( $file, $mode );
@@ -133,7 +131,7 @@ class webphoto_inc_workdir {
 		return $lines;
 	}
 
-	function write_file( $file, $data, $mode = 'w', $flag_chmod = false ) {
+	public function write_file( $file, $data, $mode = 'w', $flag_chmod = false ) {
 		$fp = fopen( $file, $mode );
 		if ( ! $fp ) {
 			return false;
@@ -150,13 +148,13 @@ class webphoto_inc_workdir {
 		return $byte;
 	}
 
-	function chmod_file( $file, $mode ) {
+	public function chmod_file( $file, $mode ) {
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $mode );
 		}
 	}
 
-	function get_filename() {
+	public function get_filename() {
 		return $this->_FILE_WORKDIR;
 	}
 

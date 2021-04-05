@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -36,9 +35,8 @@ class webphoto_gmap extends webphoto_base_this {
 	public $_KEY_TRUE = true;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_gicon_handler
@@ -466,7 +464,4 @@ class webphoto_gmap extends webphoto_base_this {
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

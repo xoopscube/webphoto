@@ -30,8 +30,6 @@ class webphoto_photo_public {
 	public $_SHOW_CAT_SUB_IMG = true;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_item_cat_handler
 			=& webphoto_item_cat_handler::getInstance( $dirname, $trust_dirname );
@@ -57,39 +55,39 @@ class webphoto_photo_public {
 
 // count
 
-	function get_count() {
+	public function get_count() {
 		return $this->get_count_by_name_param( 'public', null );
 	}
 
-	function get_count_imode() {
+	public function get_count_imode() {
 		return $this->get_count_by_name_param( 'imode', null );
 	}
 
-	function get_count_by_catid_array( $param ) {
+	public function get_count_by_catid_array( $param ) {
 		return $this->get_count_by_name_param( 'catid_array', $param );
 	}
 
-	function get_count_by_like_datetime( $param ) {
+	public function get_count_by_like_datetime( $param ) {
 		return $this->get_count_by_name_param( 'like_datetime', $param );
 	}
 
-	function get_count_by_place( $param ) {
+	public function get_count_by_place( $param ) {
 		return $this->get_count_by_name_param( 'place', $param );
 	}
 
-	function get_count_by_place_array( $param ) {
+	public function get_count_by_place_array( $param ) {
 		return $this->get_count_by_name_param( 'place_array', $param );
 	}
 
-	function get_count_by_search( $param ) {
+	public function get_count_by_search( $param ) {
 		return $this->get_count_by_name_param( 'search', $param );
 	}
 
-	function get_count_by_uid( $param ) {
+	public function get_count_by_uid( $param ) {
 		return $this->get_count_by_name_param( 'uid', $param );
 	}
 
-	function get_count_by_name_param( $name, $param ) {
+	public function get_count_by_name_param( $name, $param ) {
 		if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 			return $this->_item_cat_handler->get_count_item_by_name_param(
 				$name, $param );
@@ -103,72 +101,72 @@ class webphoto_photo_public {
 
 // rows
 
-	function get_rows_by_orderby( $orderby, $limit = 0, $offset = 0, $key = false ) {
+	public function get_rows_by_orderby( $orderby, $limit = 0, $offset = 0, $key = false ) {
 		return $this->get_rows_by_name_param_orderby(
 			'public', null, $orderby, $limit, $offset, $key );
 	}
 
-	function get_rows_imode_by_orderby( $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_imode_by_orderby( $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'imode', null, $orderby, $limit, $offset );
 	}
 
-	function get_rows_photo_by_orderby( $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_photo_by_orderby( $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'photo', null, $orderby, $limit, $offset );
 	}
 
-	function get_rows_photo_by_catid_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_photo_by_catid_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'photo_catid', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_catid_array_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_catid_array_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'catid_array', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_like_datetime_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_like_datetime_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'like_datetime', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_place_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_place_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'place', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_place_array_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_place_array_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'place_array', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_uid_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_uid_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'uid', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_search_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_search_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'search', $param, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_gmap_catid_array( $catid_array, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_rows_by_gmap_catid_array( $catid_array, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->get_rows_by_name_param_orderby(
 			'gmap_catid_array', $catid_array, $orderby, $limit, $offset );
 	}
 
-	function get_rows_by_gmap_latest( $limit = 0, $offset = 0, $key = false ) {
+	public function get_rows_by_gmap_latest( $limit = 0, $offset = 0, $key = false ) {
 		return $this->get_rows_by_name_param_orderby(
 			'gmap_latest', null, $this->_ORDERBY_LATEST, $limit, $offset, $key );
 	}
 
-	function get_rows_by_gmap_area( $id, $lat, $lon, $ns, $ew, $limit = 0, $offset = 0, $key = false ) {
+	public function get_rows_by_gmap_area( $id, $lat, $lon, $ns, $ew, $limit = 0, $offset = 0, $key = false ) {
 		return $this->get_rows_by_name_param_orderby(
 			'gmap_area', array( $id, $lat, $lon, $ns, $ew ), $this->_ORDERBY_ASC, $limit, $offset, $key );
 	}
 
-	function get_rows_by_name_param_orderby( $name, $param, $orderby, $limit = 0, $offset = 0, $key = false ) {
+	public function get_rows_by_name_param_orderby( $name, $param, $orderby, $limit = 0, $offset = 0, $key = false ) {
 		$item_key = null;
 		if ( $key ) {
 			$item_key = 'item_id';
@@ -190,12 +188,9 @@ class webphoto_photo_public {
 
 // get id array
 
-	function get_id_array_by_catid_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
+	public function get_id_array_by_catid_orderby( $param, $orderby, $limit = 0, $offset = 0 ) {
 		return $this->_item_cat_handler->get_id_array_item_by_name_param_orderby(
 			'catid', $param, $orderby, $limit, $offset );
 	}
 
-// --- class end ---
 }
-
-?>

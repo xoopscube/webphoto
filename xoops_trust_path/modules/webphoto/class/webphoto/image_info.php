@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -27,11 +26,8 @@ class webphoto_image_info extends webphoto_base_this {
 	public $_ASCII_LOWER_Z = 122;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		list( $this->_max_middle_width, $this->_max_middle_height )
 			= $this->_config_class->get_middle_wh();
@@ -201,7 +197,4 @@ class webphoto_image_info extends webphoto_base_this {
 		return $ret;
 	}
 
-// --- class end ---
 }
-
-?>

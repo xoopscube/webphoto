@@ -54,7 +54,7 @@ class webphoto_inc_whatsnew extends webphoto_inc_public {
 
 // public
 
-	function whatsnew( $limit = 0, $offset = 0 ) {
+	public function whatsnew( $limit = 0, $offset = 0 ) {
 		$item_rows = $this->get_item_rows_for_whatsnew( $limit, $offset );
 		if ( ! is_array( $item_rows ) ) {
 			return array();
@@ -158,14 +158,10 @@ class webphoto_inc_whatsnew extends webphoto_inc_public {
 
 // private
 
-	function _is_gmap( $row ) {
-		if ( ( (float) $row['item_gmap_latitude'] != 0 ) ||
-		     ( (float) $row['item_gmap_longitude'] != 0 ) ||
-		     ( (int) $row['item_gmap_zoom'] != 0 ) ) {
-			return true;
-		}
-
-		return false;
+	private function _is_gmap( $row ) {
+		return ( (float) $row['item_gmap_latitude'] != 0 ) ||
+		       ( (float) $row['item_gmap_longitude'] != 0 ) ||
+		       ( (int) $row['item_gmap_zoom'] != 0 );
 	}
 
 }

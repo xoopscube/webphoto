@@ -40,7 +40,7 @@ class webphoto_main_tag extends webphoto_show_list {
 
 
 // overwrite
-	function list_build_list() {
+	public function list_build_list() {
 		$this->assign_xoops_header_default();
 
 		$param1 = $this->list_build_list_common();
@@ -52,7 +52,7 @@ class webphoto_main_tag extends webphoto_show_list {
 	}
 
 // overwrite
-	function list_get_photo_list() {
+	public function list_get_photo_list() {
 		$list_rows = $this->_public_class->get_tag_rows( $this->_LIST_LIMIT, $this->_LIST_START );
 		if ( ! is_array( $list_rows ) ) {
 			return false;
@@ -81,7 +81,7 @@ class webphoto_main_tag extends webphoto_show_list {
 		return $arr;
 	}
 
-	function _get_tagcloud_param() {
+	public function _get_tagcloud_param() {
 		$show     = false;
 		$tagcloud = null;
 		$error    = null;
@@ -110,7 +110,7 @@ class webphoto_main_tag extends webphoto_show_list {
 // detail list
 
 // overwrite
-	function list_build_detail( $tag_in ) {
+	public function list_build_detail( $tag_in ) {
 		$rows    = null;
 		$limit   = $this->_MAX_PHOTOS;
 		$start   = $this->pagenavi_calc_start( $limit );
@@ -138,7 +138,4 @@ class webphoto_main_tag extends webphoto_show_list {
 		return $this->add_show_js_windows( $ret );
 	}
 
-// --- class end ---
 }
-
-?>

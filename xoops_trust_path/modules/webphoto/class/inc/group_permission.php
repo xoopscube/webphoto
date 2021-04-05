@@ -20,7 +20,7 @@ class webphoto_inc_group_permission extends webphoto_inc_base_ini {
 	public $_xoops_mid = 0;
 	public $_xoops_uid = 0;
 	public $_xoops_groups = null;
-	public $_is_module_adimin = false;
+	public $_is_module_admin = false;
 
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct();
@@ -45,7 +45,7 @@ class webphoto_inc_group_permission extends webphoto_inc_base_ini {
 
 // has permit
 	public function has_perm( $name, $flag_admin = false ) {
-		if ( $flag_admin && $this->_is_module_adimin ) {
+		if ( $flag_admin && $this->_is_module_admin ) {
 			return true;
 		}
 		$bit = constant( strtoupper( '_B_WEBPHOTO_GPERM_' . $name ) );
@@ -115,7 +115,7 @@ class webphoto_inc_group_permission extends webphoto_inc_base_ini {
 		if ( is_object( $xoopsUser ) ) {
 			$this->_xoops_uid        = $xoopsUser->getVar( 'uid' );
 			$this->_xoops_groups     = $xoopsUser->getGroups();
-			$this->_is_module_adimin = $xoopsUser->isAdmin( $this->_xoops_mid );
+			$this->_is_module_admin = $xoopsUser->isAdmin( $this->_xoops_mid );
 		}
 	}
 }

@@ -22,8 +22,8 @@ class webphoto_file_read extends webphoto_item_public {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_item_public( $dirname, $trust_dirname );
 
 		$this->_file_handler    =& webphoto_file_handler::getInstance(
 			$dirname, $trust_dirname );
@@ -73,7 +73,4 @@ class webphoto_file_read extends webphoto_item_public {
 		return $file_row;
 	}
 
-// --- class end ---
 }
-
-?>

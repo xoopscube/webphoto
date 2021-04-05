@@ -18,8 +18,6 @@ class webphoto_cat_selbox {
 	public $_item_handler;
 
 
-// constructor
-
 	public function __construct() {
 		// dummy
 	}
@@ -33,7 +31,7 @@ class webphoto_cat_selbox {
 		return $instance;
 	}
 
-	function init( $dirname, $trust_dirname ) {
+	public function init( $dirname, $trust_dirname ) {
 		$this->_item_handler = new webphoto_item_handler(
 			$dirname, $trust_dirname );
 		$this->_cat_handler  = new webphoto_cat_handler(
@@ -43,7 +41,7 @@ class webphoto_cat_selbox {
 
 // selbox
 
-	function build_selbox(
+	public function build_selbox(
 		$order = 'cat_title', $preset_id = 0, $none_title = '--', $sel_name = 'cat_id', $onchange = ''
 	) {
 		$options = $this->build_selbox_options(
@@ -65,7 +63,7 @@ class webphoto_cat_selbox {
 		return $str;
 	}
 
-	function build_selbox_options(
+	public function build_selbox_options(
 		$order = 'cat_title', $preset_id = 0, $none_title = '--', $sel_name = 'cat_id'
 	) {
 		$tree = $this->_cat_handler->get_all_tree_array( $order );
@@ -103,11 +101,8 @@ class webphoto_cat_selbox {
 		return $str;
 	}
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-// --- class end ---
 }
-
-?>

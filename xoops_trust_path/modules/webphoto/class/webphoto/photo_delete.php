@@ -26,11 +26,8 @@ class webphoto_photo_delete extends webphoto_lib_error {
 	public $_MODULE_ID = 0;
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_item_handler      =& webphoto_item_handler::getInstance( $dirname );
 		$this->_file_handler      =& webphoto_file_handler::getInstance( $dirname );
@@ -54,13 +51,13 @@ class webphoto_photo_delete extends webphoto_lib_error {
 
 // delete
 
-	function delete_photo_by_item_id( $item_id ) {
+	public function delete_photo_by_item_id( $item_id ) {
 		$item_row = $this->_item_handler->get_row_by_id( $item_id );
 
 		return $this->delete_photo_by_item_row( $item_row );
 	}
 
-	function delete_photo_by_item_row( $item_row ) {
+	public function delete_photo_by_item_row( $item_row ) {
 		if ( ! is_array( $item_row ) ) {
 			return true;    // no action
 		}
@@ -91,7 +88,7 @@ class webphoto_photo_delete extends webphoto_lib_error {
 		return $this->return_code();
 	}
 
-	function delete_files_with_file( $item_row ) {
+	public function delete_files_with_file( $item_row ) {
 		$item_id = $item_row['item_id'];
 
 // unlink files
@@ -112,7 +109,7 @@ class webphoto_photo_delete extends webphoto_lib_error {
 		return $ret;
 	}
 
-	function delete_maillogs( $photo_id ) {
+	public function delete_maillogs( $photo_id ) {
 		$maillog_rows = $this->_maillog_handler->get_rows_by_photoid( $photo_id );
 		if ( ! is_array( $maillog_rows ) ) {
 			return true;    // no action
@@ -123,7 +120,7 @@ class webphoto_photo_delete extends webphoto_lib_error {
 		}
 	}
 
-	function delete_maillog_single( $photo_id, $maillog_row ) {
+	public function delete_maillog_single( $photo_id, $maillog_row ) {
 		$photo_id_array = $this->_maillog_handler->build_photo_ids_row_to_array( $maillog_row );
 		if ( is_array( $photo_id_array ) && ( count( $photo_id_array ) > 1 ) ) {
 			return $this->remove_maillog_photoid( $photo_id, $photo_id_array, $maillog_row );
@@ -132,7 +129,7 @@ class webphoto_photo_delete extends webphoto_lib_error {
 		return $this->delete_maillog_with_file( $maillog_row );
 	}
 
-	function remove_maillog_photoid( $photo_id, $photo_id_array, $maillog_row ) {
+	public function remove_maillog_photoid( $photo_id, $photo_id_array, $maillog_row ) {
 		$arr = array();
 		foreach ( $photo_id_array as $id ) {
 			if ( $id != $photo_id ) {
@@ -152,7 +149,7 @@ class webphoto_photo_delete extends webphoto_lib_error {
 		return $ret;
 	}
 
-	function delete_maillog_with_file( $maillog_row ) {
+	public function delete_maillog_with_file( $maillog_row ) {
 		$this->_mail_unlink_class->unlink_by_maillog_row( $maillog_row );
 
 		$ret = $this->_maillog_handler->delete( $maillog_row );
@@ -163,7 +160,7 @@ class webphoto_photo_delete extends webphoto_lib_error {
 		return $ret;
 	}
 
-	function unlink_path( $path ) {
+	public function unlink_path( $path ) {
 		$file = XOOPS_ROOT_PATH . $path;
 		if ( $path && $file && file_exists( $file ) && is_file( $file ) && ! is_dir( $file ) ) {
 			unlink( $file );
@@ -173,14 +170,11 @@ class webphoto_photo_delete extends webphoto_lib_error {
 
 // xoops param
 
-	function _init_xoops_param() {
+	public function _init_xoops_param() {
 		global $xoopsModule;
 		if ( is_object( $xoopsModule ) ) {
 			$this->_MODULE_ID = $xoopsModule->mid();
 		}
 	}
 
-// --- class end ---
 }
-
-?>

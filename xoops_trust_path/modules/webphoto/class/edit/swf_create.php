@@ -26,8 +26,6 @@ class webphoto_edit_swf_create extends webphoto_edit_base_create {
 	public $_msg_failed = 'fail to create swf';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 

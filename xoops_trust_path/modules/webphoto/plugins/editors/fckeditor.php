@@ -16,9 +16,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// class webphoto_editor_fckeditor
-//=========================================================
+
 class webphoto_editor_fckeditor extends webphoto_editor_base {
 	public $_js_base = 'common/fckeditor';
 	public $_js_file = 'fckeditor.js';
@@ -28,19 +26,19 @@ class webphoto_editor_fckeditor extends webphoto_editor_base {
 	public $_value = '';
 
 	public function __construct() {
+
 		parent::__construct();
-		//$this->webphoto_editor_base();
 
 		$this->set_display_html( 1 );
 	}
 
-	function exists() {
+	public function exists() {
 		$file = XOOPS_ROOT_PATH . '/' . $this->_js_base . '/' . $this->_js_file;
 
 		return file_exists( $file );
 	}
 
-	function build_js() {
+	public function build_js() {
 		$base = XOOPS_URL . '/' . $this->_js_base . '/';
 		$file = $base . $this->_js_file;
 
@@ -60,14 +58,11 @@ function fckeditor_exec( instanceName ) {
 		return $str;
 	}
 
-	function build_textarea( $id, $name, $value, $rows, $cols, $item_row ) {
+	public function build_textarea( $id, $name, $value, $rows, $cols, $item_row ) {
 		$str = '<textarea id="' . $id . '" name="' . $name . '">' . $value . '</textarea>';
 		$str .= '<script>fckeditor_exec("' . $id . '");</script>';
 
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

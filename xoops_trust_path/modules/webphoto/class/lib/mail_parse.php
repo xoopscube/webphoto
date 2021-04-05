@@ -37,14 +37,14 @@ class webphoto_lib_mail_parse {
 
 // set param
 
-	function set_charset_local( $val ) {
+	public function set_charset_local( $val ) {
 		$this->_CHARSET_LOCAL = $val;
 	}
 
 
 // parse_mail
 
-	function parse_mail( $mail_text ) {
+	public function parse_mail( $mail_text ) {
 		$this->_result = null;
 		$this->_bodies = array();
 		$this->_gps    = null;
@@ -90,11 +90,11 @@ class webphoto_lib_mail_parse {
 		return true;
 	}
 
-	function get_result() {
+	public function get_result() {
 		return $this->_result;
 	}
 
-	function parse_mailer( $head ) {
+	public function parse_mailer( $head ) {
 // X-Mailer: XOOPS Cube
 		//!FIX TODO THIS EREGI WAS REMOVED IN PHP 7.0
 		if ( eregi( "(X-Mailer|X-Mail-Agent):[ \t]*([^\r\n]+)", $head, $match ) ) {
@@ -104,7 +104,7 @@ class webphoto_lib_mail_parse {
 		return null;
 	}
 
-	function parse_charset( $head ) {
+	public function parse_charset( $head ) {
 // normal
 //   Content-Type: text/plain; charset="iso-2022-jp"
 // i-phone
@@ -122,8 +122,9 @@ class webphoto_lib_mail_parse {
 		return null;
 	}
 
-	function parse_date( $head ) {
+	public function parse_date( $head ) {
 // Date: Fri, 1 Aug 2008 10:44:39 +0900 (JST)
+		//!FIX TODO FIX THIS DEPRECATED
 		if ( eregi( "Date:[ \t]*([^\r\n]+)", $head, $match ) ) {
 			return $match[1];
 		}
@@ -131,7 +132,7 @@ class webphoto_lib_mail_parse {
 		return null;
 	}
 
-	function build_datetime( $date ) {
+	public function build_datetime( $date ) {
 		$time = strtotime( $date );
 		if ( $time <= 0 ) {
 			$time = time();
@@ -140,7 +141,7 @@ class webphoto_lib_mail_parse {
 		return $time;
 	}
 
-	function parse_subject( $head ) {
+	public function parse_subject( $head ) {
 // Subject: abc
 		if ( preg_match( "/\nSubject:[ \t]*(.+?)(\n[\w-_]+:|$)/is", $head, $match ) ) {
 			$subject = str_replace( array( "\r", "\n" ), "", $match[1] );
@@ -157,9 +158,10 @@ class webphoto_lib_mail_parse {
 		return null;
 	}
 
-	function decode_if_mime_b( $str ) {
+	public function decode_if_mime_b( $str ) {
 		$flag               = false;
 		$MIME_B_FORMAT_EREG = "(.*)=\?(iso-[^\?]+)\?B\?([^\?]+)\?=(.*)";
+		//!FIX TODO FIX THIS DEPRECATED
 		while ( eregi( $MIME_B_FORMAT_EREG, $str, $regs ) ) {
 			$flag   = true;
 			$decode = $this->convert_to_local( base64_decode( $regs[3] ), $regs[2] );
@@ -169,9 +171,10 @@ class webphoto_lib_mail_parse {
 		return array( $str, $flag );
 	}
 
-	function decode_if_mime_q( $str ) {
+	public function decode_if_mime_q( $str ) {
 		$flag               = false;
 		$MIME_Q_FORMAT_EREG = "(.*)=\?(iso-[^\?]+)\?Q\?([^\?]+)\?=(.*)";
+		//!FIX TODO FIX THIS DEPRECATED
 		while ( eregi( $MIME_Q_FORMAT_EREG, $str, $regs ) ) {
 			$flag   = true;
 			$decode = $this->convert_to_local( quoted_printable_parse( $regs[3] ), $regs[2] );

@@ -21,11 +21,8 @@ class webphoto_pagenavi extends webphoto_base_this {
 	public $_FLAG_DEBUG_TRACE = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 		$this->_pagenavi_class =& webphoto_lib_pagenavi::getInstance();
 		$this->_pagenavi_class->set_mark_id_prev( '<b>' . $this->get_constant( 'NAVI_PREVIOUS' ) . '</b>' );
@@ -57,7 +54,7 @@ class webphoto_pagenavi extends webphoto_base_this {
 
 // pagenavi class
 
-	function build_navi( $mode, $total, $param_out, $sort, $kind, $page, $limit ) {
+	public function build_navi( $mode, $total, $param_out, $sort, $kind, $page, $limit ) {
 		$url = $this->_uri_class->build_navi_url(
 			$mode, $param_out, $sort, $kind );
 
@@ -72,30 +69,27 @@ class webphoto_pagenavi extends webphoto_base_this {
 		return $arr;
 	}
 
-	function build_navi_page( $url, $page, $limit, $total ) {
+	public function build_navi_page( $url, $page, $limit, $total ) {
 		return $this->_pagenavi_class->build( $url, $page, $limit, $total );
 	}
 
-	function build_navi_info( $page, $limit, $total ) {
+	public function build_navi_info( $page, $limit, $total ) {
 		$start = $this->calc_navi_start( $page, $limit );
 		$end   = $this->calc_navi_end( $start, $limit, $total );
 
 		return sprintf( $this->get_constant( 'S_NAVINFO' ), $start + 1, $end, $total );
 	}
 
-	function calc_navi_page( $page, $limit, $total ) {
+	public function calc_navi_page( $page, $limit, $total ) {
 		return $this->_pagenavi_class->calc_page( $page, $limit, $total );
 	}
 
-	function calc_navi_start( $page, $limit ) {
+	public function calc_navi_start( $page, $limit ) {
 		return $this->_pagenavi_class->calc_start( $page, $limit );
 	}
 
-	function calc_navi_end( $start, $limit, $total ) {
+	public function calc_navi_end( $start, $limit, $total ) {
 		return $this->_pagenavi_class->calc_end( $start, $limit, $total );
 	}
 
-// --- class end ---
 }
-
-?>

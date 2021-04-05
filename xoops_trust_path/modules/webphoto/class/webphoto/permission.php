@@ -33,11 +33,9 @@ class webphoto_permission extends webphoto_inc_group_permission {
 	public $_has_html;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_inc_group_permission( $dirname , $trust_dirname );
 
 		$this->_has_insertable       = $this->has_perm( 'insertable' );
 		$this->_has_superinsert      = $this->has_perm( 'superinsert' );
@@ -128,7 +126,4 @@ class webphoto_permission extends webphoto_inc_group_permission {
 		return $this->_has_html;
 	}
 
-// --- class end ---
 }
-
-?>

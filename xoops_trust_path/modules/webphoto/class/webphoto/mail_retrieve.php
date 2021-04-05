@@ -33,11 +33,8 @@ class webphoto_mail_retrieve extends webphoto_mail_photo {
 	public $_DEBUG_MAIL_FILE = null;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_mail_photo( $dirname , $trust_dirname );
 		$this->set_mail_groups( XOOPS_GROUP_USERS );
 		$this->set_flag_chmod( true );
 
@@ -248,7 +245,4 @@ class webphoto_mail_retrieve extends webphoto_mail_photo {
 
 	}
 
-// --- class end ---
 }
-
-?>

@@ -28,7 +28,7 @@ class Qrcode {
 	public $qrcode_structureappend_parity;
 	public $qrcode_structureappend_originaldata;
 
-	function Qrcode() {
+	public function __construct() {
 		$this->qrcode_error_correct = "M";
 		$this->qrcode_version       = 0;
 
@@ -38,21 +38,21 @@ class Qrcode {
 		$this->qrcode_structureappend_originaldata = "";
 	}
 
-	function set_qrcode_version( $z ) {
+	public function set_qrcode_version( $z ) {
 		if ( $z >= 0 && $z <= 40 ) {
 			$this->qrcode_version = $z;
 		}
 	}
 
-	function set_qrcode_error_correct( $z ) {
+	public function set_qrcode_error_correct( $z ) {
 		$this->qrcode_error_correct = $z;
 	}
 
-	function get_qrcode_version() {
+	public function get_qrcode_version() {
 		return ( $this->qrcode_version );
 	}
 
-	function set_structureappend( $m, $n, $p ) {
+	public function set_structureappend( $m, $n, $p ) {
 		if ( $n > 1 && $n <= 16 && $m > 0 && $m <= 16 && $p >= 0 && $p <= 191 ) {
 			$this->qrcode_structureappend_m      = $m;
 			$this->qrcode_structureappend_n      = $n;
@@ -60,7 +60,7 @@ class Qrcode {
 		}
 	}
 
-	function cal_structureappend_parity( $originaldata ) {
+	public function cal_structureappend_parity( $originaldata ) {
 		$originaldata_length = strlen( $originaldata );
 		if ( $originaldata_length > 1 ) {
 			$structureappend_parity = 0;
@@ -75,7 +75,7 @@ class Qrcode {
 	}
 
 
-	function cal_qrcode( $qrcode_data_string ) {
+	public function cal_qrcode( $qrcode_data_string ) {
 
 		$data_length = strlen( $qrcode_data_string );
 		if ( $data_length <= 0 ) {
@@ -1020,5 +1020,3 @@ class Qrcode {
 
 	}
 }
-
-?>

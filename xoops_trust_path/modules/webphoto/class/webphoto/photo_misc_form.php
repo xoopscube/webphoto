@@ -23,11 +23,8 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 	public $_VIDEO_THUMB_MAX = _C_WEBPHOTO_VIDEO_THUMB_PLURAL_MAX;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_form_this( $dirname, $trust_dirname );
 
 		$this->_embed_class  =& webphoto_embed::getInstance( $dirname, $trust_dirname );
 		$this->_editor_class =& webphoto_editor::getInstance( $dirname, $trust_dirname );
@@ -47,7 +44,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 // editor
 
-	function print_form_editor( $row, $param ) {
+	public function print_form_editor( $row, $param ) {
 		$mode    = $param['mode'];
 		$type    = $param['type'];
 		$options = $param['options'];
@@ -102,7 +99,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 		echo "<br>\n";
 	}
 
-	function _build_ele_editor_option( $options ) {
+	public function _build_ele_editor_option( $options ) {
 		$value = $this->get_item_editor();
 
 		return $this->build_form_select( 'item_editor', $value, $options, 1 );
@@ -111,7 +108,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 // embed
 
-	function print_form_embed( $mode, $row ) {
+	public function print_form_embed( $mode, $row ) {
 		$editor_form = $this->_post_class->get_post_int( 'editor_form' );
 
 		switch ( $mode ) {
@@ -153,7 +150,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 		echo "<br>\n";
 	}
 
-	function _build_ele_embed_type_option() {
+	public function _build_ele_embed_type_option() {
 		$value   = $this->get_item_embed_type( true );
 		$options = $this->_embed_class->build_type_options( $this->_is_module_admin );
 
@@ -163,7 +160,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 // delete confirm
 
-	function print_form_delete_confirm( $mode, $item_id ) {
+	public function print_form_delete_confirm( $mode, $item_id ) {
 		switch ( $mode ) {
 			case 'admin':
 				$url = $this->_MODULE_URL . '/admin/index.php';
@@ -192,7 +189,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 // video thumb
 
-	function print_form_video_thumb( $mode, $row ) {
+	public function print_form_video_thumb( $mode, $row ) {
 		$item_id = $row['item_id'];
 		$ext     = $row['item_ext'];
 
@@ -265,7 +262,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 	}
 
-	function print_form_video_thumb_single( $url, $width, $num ) {
+	public function print_form_video_thumb_single( $url, $width, $num ) {
 		echo '<td align="center" class="odd">';
 		echo '<img src="' . $this->sanitize( $url ) . '" width="' . $width . '"><br>';
 		echo '<input type="radio" name="num" value="' . $num . '" />';
@@ -275,7 +272,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 // redo
 
-	function print_form_redo( $mode, $item_row, $flash_row ) {
+	public function print_form_redo( $mode, $item_row, $flash_row ) {
 		$item_id = $item_row['item_id'];
 
 		switch ( $mode ) {
@@ -315,14 +312,14 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 	}
 
-	function _build_ele_redo_thumb() {
+	public function _build_ele_redo_thumb() {
 		$text = $this->build_input_checkbox_yes( 'redo_thumb', 1 );
 		$text .= ' ' . $this->get_constant( 'CAP_REDO_THUMB' );
 
 		return $text;
 	}
 
-	function _build_ele_redo_flash( $flash_row ) {
+	public function _build_ele_redo_flash( $flash_row ) {
 		$url = '';
 		if ( is_array( $flash_row ) ) {
 			$url = $flash_row['file_url'];
@@ -344,7 +341,7 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 // form file
 
-	function print_form_file( $param ) {
+	public function print_form_file( $param ) {
 		$has_resize   = $param['has_resize'];
 		$allowed_exts = $param['allowed_exts'];
 
@@ -376,11 +373,11 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 
 	}
 
-	function _build_ele_file_maxsize() {
+	public function _build_ele_file_maxsize() {
 		return $this->format_filesize( $this->_cfg_file_size );
 	}
 
-	function _build_ele_file_file() {
+	public function _build_ele_file_file() {
 		$options = $this->_utility_class->get_files_in_dir(
 			$this->_FILE_DIR, null, false, true, true );
 
@@ -391,7 +388,4 @@ class webphoto_photo_misc_form extends webphoto_form_this {
 		return $this->build_form_select( 'file', null, $options );
 	}
 
-// --- class end ---
 }
-
-?>

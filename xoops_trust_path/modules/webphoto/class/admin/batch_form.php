@@ -32,6 +32,7 @@ class webphoto_admin_batch_form extends webphoto_edit_form {
 	}
 
 	public function print_form_batch( $cat_selbox ) {
+
 		$post_catid = $this->_post_class->get_post_int( 'cat_id' );
 
 		echo $this->build_form_begin();

@@ -1,30 +1,18 @@
 <?php
-// $Id: mail_register.php,v 1.5 2011/11/12 17:17:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-08-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// class/lib/mail.php
-// 2011-05-16 K.OHWADA
-// class/edit/mail_check.php
-// 2010-04-28 K.OHWADA
-// class/edit/item_create.php
-// 2008-01-10 K.OHWADA
-// class/edit/xxx
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'main/header.php' );
 webphoto_include_once( 'class/xoops/user.php' );
 webphoto_include_once( 'class/lib/gtickets.php' );
@@ -41,9 +29,6 @@ webphoto_include_once( 'class/edit/icon_build.php' );
 webphoto_include_once( 'class/edit/mail_register_form.php' );
 webphoto_include_once( 'class/main/mail_register.php' );
 
-//=========================================================
-// main
-//=========================================================
 $manage =& webphoto_main_mail_register::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 
 // exit if execute edit
@@ -55,5 +40,3 @@ $manage->print_form();
 
 include( XOOPS_ROOT_PATH . '/footer.php' );
 exit();
-
-?>

@@ -20,7 +20,8 @@ class webphoto_photo_tag_handler extends webphoto_handler_base_ini {
 	public $_p2t_table;
 
 
-	function __construct( $dirname, $trust_dirname ) {
+	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_item_table = $this->prefix_dirname( 'item' );
@@ -41,14 +42,14 @@ class webphoto_photo_tag_handler extends webphoto_handler_base_ini {
 
 // count
 
-	function get_photo_count_public_by_tag( $tag_name, $limit = 0, $offset = 0 ) {
+	public function get_photo_count_public_by_tag( $tag_name, $limit = 0, $offset = 0 ) {
 		$where = 'i.item_status > 0';
 		$where .= ' AND t.tag_name=' . $this->quote( $tag_name );
 
 		return $this->get_photo_count_by_where( $where );
 	}
 
-	function get_photo_count_by_where( $where ) {
+	public function get_photo_count_by_where( $where ) {
 		$sql = 'SELECT COUNT(DISTINCT i.item_id) ';
 		$sql .= ' FROM ' . $this->_p2t_table . ' p2t ';
 		$sql .= ' INNER JOIN ' . $this->_item_table . ' i ';

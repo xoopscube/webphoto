@@ -72,8 +72,6 @@ class webphoto_admin_update_040 extends webphoto_base_this {
 	}
 
 
-// init
-
 	function _init_image_cmd() {
 		$this->_image_cmd_class =& webphoto_lib_image_cmd::getInstance();
 

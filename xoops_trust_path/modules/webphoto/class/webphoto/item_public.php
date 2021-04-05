@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -97,7 +96,4 @@ class webphoto_item_public extends webphoto_base_ini {
 		return $this->_item_handler->check_perm_by_perm_groups( $perm );
 	}
 
-// --- class end ---
 }
-
-?>

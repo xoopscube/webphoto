@@ -13,10 +13,8 @@ if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-// xoops system files
 include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
-// webphoto files
 include_once WEBPHOTO_TRUST_PATH . '/class/d3/optional.php';
 include_once WEBPHOTO_TRUST_PATH . '/include/optional.php';
 
@@ -35,7 +33,6 @@ webphoto_include_once( 'class/inc/catlist.php', $MY_DIRNAME );
 webphoto_include_once( 'class/inc/xoops_version.php', $MY_DIRNAME );
 webphoto_include_language( 'modinfo.php', $MY_DIRNAME );
 
-// main
 $webphoto_inc_xoops_version =& webphoto_inc_xoops_version::getSingleton(
 	$MY_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $modversion                 = $webphoto_inc_xoops_version->build_modversion();

@@ -208,7 +208,4 @@ class webphoto_date extends webphoto_base_this {
 			$datetime, $orderby, $limit, $start );
 	}
 
-// --- class end ---
 }
-
-?>

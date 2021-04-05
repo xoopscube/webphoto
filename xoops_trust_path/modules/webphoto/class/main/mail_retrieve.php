@@ -116,7 +116,4 @@ class webphoto_main_mail_retrieve extends webphoto_edit_mail_retrieve {
 		echo $form_class->build_form_box_with_style( $param, $hidden_array );
 	}
 
-// --- class end ---
 }
-
-?>

@@ -65,13 +65,13 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 
 // main
 
-	function get_template() {
+	public function get_template() {
 		$str = 'db:' . $this->_DIRNAME . '_main_imagemanager.html';
 
 		return $str;
 	}
 
-	function check() {
+	public function check() {
 		if ( $this->_xoops_mid == 0 ) {
 			die( _MODULENOEXIST );
 		}
@@ -88,13 +88,13 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		}
 	}
 
-	function main() {
+	public function main() {
 
 // Get variables
 		$target = $this->sanitize( $_GET['target'] );
-		$cat_id = isset( $_GET['cat_id'] ) ? intval( $_GET['cat_id'] ) : 0;
-		$num    = isset( $_GET['num'] ) ? intval( $_GET['num'] ) : 10;
-		$start  = isset( $_GET['start'] ) ? intval( $_GET['start'] ) : 0;
+		$cat_id = isset( $_GET['cat_id'] ) ? (int) $_GET['cat_id'] : 0;
+		$num    = isset( $_GET['num'] ) ? (int) $_GET['num'] : 10;
+		$start  = isset( $_GET['start'] ) ? (int) $_GET['start'] : 0;
 
 		$xsize       = $this->_XSIZE_SAMLL;
 		$ysize       = $this->_YSIZE_SAMLL;
@@ -234,7 +234,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		return array( $param, $photos );
 	}
 
-	function _build_file_image( $file_row ) {
+	public function _build_file_image( $file_row ) {
 		$url    = null;
 		$width  = 0;
 		$height = 0;
@@ -271,7 +271,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		return array( $src, $tag, $width, $height );
 	}
 
-	function _build_can_edit( $item_uid ) {
+	public function _build_can_edit( $item_uid ) {
 		if ( ! $this->_has_editable ) {
 			return false;
 		}
@@ -285,7 +285,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		return false;
 	}
 
-	function _strip_slash_from_head( $str ) {
+	public function _strip_slash_from_head( $str ) {
 // ord : the ASCII value of the first character of string
 // 0x2f slash
 
@@ -299,7 +299,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 
 // handler
 
-	function _build_cat_options( $cat_id, $cat_tree ) {
+	public function _build_cat_options( $cat_id, $cat_tree ) {
 		if ( ! is_array( $cat_tree ) || ! count( $cat_tree ) ) {
 			return null;
 		}
@@ -334,7 +334,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 
 // xoops param
 
-	function _init_xoops_module( $dirname ) {
+	public function _init_xoops_module( $dirname ) {
 		$module_handler =& xoops_gethandler( 'module' );
 		$module         = $module_handler->getByDirname( $dirname );
 		if ( is_object( $module ) ) {
@@ -344,7 +344,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		}
 	}
 
-	function _init_xoops_param() {
+	public function _init_xoops_param() {
 		global $xoopsConfig, $xoopsUser;
 
 		$this->_xoops_sitename = $xoopsConfig['sitename'];
@@ -358,7 +358,7 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		}
 	}
 
-	function _init_xoops_config( $dirname ) {
+	public function _init_xoops_config( $dirname ) {
 		$config_handler =& webphoto_inc_config::getSingleton( $dirname );
 
 		$this->_cfg_uploadspath = $config_handler->get_path_by_name( 'uploadspath' );
@@ -366,15 +366,11 @@ class webphoto_main_imagemanager extends webphoto_inc_public {
 		$this->_cfg_usesiteimg  = $config_handler->get_by_name( 'usesiteimg' );
 	}
 
-	function _init_xoops_group_permission( $dirname, $trust_dirname ) {
+	public function _init_xoops_group_permission( $dirname, $trust_dirname ) {
 		$perm_class =& webphoto_inc_group_permission::getSingleton(
 			$dirname, $trust_dirname );
 
 		$this->_has_insertable = $perm_class->has_perm( 'insertable' );
 		$this->_has_editable   = $perm_class->has_perm( 'editable' );
 	}
-
-// --- class end ---
 }
-
-?>

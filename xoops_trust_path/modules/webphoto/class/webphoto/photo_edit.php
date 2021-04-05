@@ -113,11 +113,9 @@ class webphoto_photo_edit extends webphoto_base_this {
 	public $_MSG_FIRST = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$this->_photo_class =& webphoto_photo_create::getInstance( $dirname, $trust_dirname );
 		$this->_embed_class =& webphoto_embed::getInstance( $dirname, $trust_dirname );
@@ -161,7 +159,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // preload
 
-	function init_preload() {
+	public function init_preload() {
 		$this->preload_init();
 		$this->preload_constant();
 	}
@@ -169,14 +167,14 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // set param
 
-	function set_flag_admin( $val ) {
+	public function set_flag_admin( $val ) {
 		$this->_FLAG_ADMIN = (bool) $val;
 	}
 
 
 // post param
 
-	function get_post_param() {
+	public function get_post_param() {
 		$this->get_post_item_id();
 		$this->get_post_cat_id();
 
@@ -213,7 +211,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		$this->set_preview_name( $this->_post_class->get_post_text( 'preview_name' ) );
 	}
 
-	function get_post_item_id() {
+	public function get_post_item_id() {
 		$key1 = 'item_id';
 		$key2 = 'photo_id';
 
@@ -227,12 +225,12 @@ class webphoto_photo_edit extends webphoto_base_this {
 			$str = $_GET[ $key2 ];
 		}
 
-		$this->_post_item_id = intval( $str );
+		$this->_post_item_id = (int) $str;
 
 		return $this->_post_item_id;
 	}
 
-	function get_post_cat_id() {
+	public function get_post_cat_id() {
 		$key1 = 'item_cat_id';
 		$key2 = 'cat_id';
 
@@ -246,10 +244,10 @@ class webphoto_photo_edit extends webphoto_base_this {
 			$str = $_GET[ $key2 ];
 		}
 
-		$this->_post_item_cat_id = intval( $str );
+		$this->_post_item_cat_id = (int) $str;
 	}
 
-	function build_row_by_post( $row, $is_submit = false, $flag_title = true ) {
+	public function build_row_by_post( $row, $is_submit = false, $flag_title = true ) {
 // overwrite if title is blank
 		if ( $flag_title ) {
 			$this->overwrite_item_title_if_empty( $this->_NO_TITLE );
@@ -296,7 +294,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return $row;
 	}
 
-	function build_row_extend_by_post( $row, $is_submit = false ) {
+	public function build_row_extend_by_post( $row, $is_submit = false ) {
 
 		$row['item_gicon_id']    = $this->_post_class->get_post_int( 'item_gicon_id' );
 		$row['item_place']       = $this->_post_class->get_post_text( 'item_place' );
@@ -334,53 +332,49 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return $row;
 	}
 
-	function build_info_by_post( $name ) {
+	public function build_info_by_post( $name ) {
 		return $this->_item_handler->build_info(
 			$this->_post_class->get_post( $name ) );
 	}
 
-	function set_checkbox_by_post( $name ) {
+	public function set_checkbox_by_post( $name ) {
 		$this->set_checkbox_by_name( $name, $this->_post_class->get_post_int( $name ) );
 	}
 
-	function set_checkbox_by_name( $name, $value ) {
+	public function set_checkbox_by_name( $name, $value ) {
 		$this->_checkbox_array[ $name ] = $value;
 	}
 
-	function get_checkbox_array() {
+	public function get_checkbox_array() {
 		return $this->_checkbox_array;
 	}
 
-	function get_checkbox_by_name( $name ) {
-		if ( isset( $this->_checkbox_array[ $name ] ) ) {
-			return $this->_checkbox_array[ $name ];
-		}
-
-		return null;
+	public function get_checkbox_by_name( $name ) {
+		return $this->_checkbox_array[ $name ] ?? null;
 	}
 
-	function set_preview_name( $val ) {
+	public function set_preview_name( $val ) {
 		$this->_preview_name = $val;
 	}
 
-	function get_preview_name() {
+	public function get_preview_name() {
 		return $this->_preview_name;
 	}
 
-	function set_tag_name_array( $val ) {
+	public function set_tag_name_array( $val ) {
 		if ( is_array( $val ) ) {
 			$this->_tag_name_array = $val;
 		}
 	}
 
-	function get_tag_name_array() {
+	public function get_tag_name_array() {
 		return $this->_tag_name_array;
 	}
 
 
 // check
 
-	function check_edit_perm( $item_row ) {
+	public function check_edit_perm( $item_row ) {
 		if ( $this->_is_module_admin ) {
 			return true;
 		}
@@ -396,7 +390,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // is type
 
-	function is_embed_type() {
+	public function is_embed_type() {
 		if ( $this->_post_type == 'embed' ) {
 			return true;
 		}
@@ -407,11 +401,11 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return false;
 	}
 
-	function is_external_type() {
+	public function is_external_type() {
 		return $this->is_fill_item_external_url();
 	}
 
-	function is_post_playlist_type() {
+	public function is_post_playlist_type() {
 		if ( $this->_post_type == 'playlist' ) {
 			return true;
 		}
@@ -422,45 +416,37 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return false;
 	}
 
-	function is_admin_playlist_type() {
-		if ( $this->_FLAG_ADMIN && $this->is_post_playlist_type() ) {
-			return true;
-		}
-
-		return false;
+	public function is_admin_playlist_type() {
+		return $this->_FLAG_ADMIN && $this->is_post_playlist_type();
 	}
 
-	function is_flashvar_form() {
-		if ( $this->_form_action == 'flashvar_form' ) {
-			return true;
-		}
-
-		return false;
+	public function is_flashvar_form() {
+		return $this->_form_action == 'flashvar_form';
 	}
 
 
 // photo title
 
-	function set_item_title( $val ) {
+	public function set_item_title( $val ) {
 		$this->_item_title = $val;
 	}
 
-	function get_item_title() {
+	public function get_item_title() {
 		return $this->_item_title;
 	}
 
-	function overwrite_item_title_by_media_name_if_empty() {
+	public function overwrite_item_title_by_media_name_if_empty() {
 		$this->overwrite_item_title_if_empty(
 			$this->strip_ext( $this->upload_media_name() ) );
 	}
 
-	function overwrite_item_title_if_empty( $val ) {
+	public function overwrite_item_title_if_empty( $val ) {
 		if ( ! $this->is_fill_item_title() && $val ) {
 			$this->_item_title = $val;
 		}
 	}
 
-	function is_fill_item_title() {
+	public function is_fill_item_title() {
 		if ( $this->_item_title ) {
 			return true;
 		}
@@ -471,15 +457,15 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // photo equipment
 
-	function set_item_equipment( $val ) {
+	public function set_item_equipment( $val ) {
 		$this->_item_equipment = $val;
 	}
 
-	function get_item_equipment() {
+	public function get_item_equipment() {
 		return $this->_item_equipment;
 	}
 
-	function overwrite_item_equipment( $val ) {
+	public function overwrite_item_equipment( $val ) {
 		if ( $val ) {
 			$this->_item_equipment = $val;
 		}
@@ -488,7 +474,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // photo datetime
 
-	function set_item_datetime_by_post() {
+	public function set_item_datetime_by_post() {
 		$flag = false;
 
 		$this->set_checkbox_by_post( 'item_datetime_checkbox' );
@@ -507,23 +493,23 @@ class webphoto_photo_edit extends webphoto_base_this {
 		$this->set_item_datetime_flag( $flag );
 	}
 
-	function set_item_datetime( $val ) {
+	public function set_item_datetime( $val ) {
 		$this->_item_datetime = $val;
 	}
 
-	function set_item_datetime_flag( $val ) {
+	public function set_item_datetime_flag( $val ) {
 		$this->_item_datetime_flag = (bool) $val;
 	}
 
-	function get_item_datetime() {
+	public function get_item_datetime() {
 		return $this->_item_datetime;
 	}
 
-	function get_item_datetime_flag() {
+	public function get_item_datetime_flag() {
 		return $this->_item_datetime_flag;
 	}
 
-	function overwrite_item_datetime( $datetime ) {
+	public function overwrite_item_datetime( $datetime ) {
 		if ( empty( $datetime ) ) {
 			return false;
 		}
@@ -533,7 +519,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 	}
 
-	function is_fill_item_datetime() {
+	public function is_fill_item_datetime() {
 		if ( $this->_item_datetime_flag ) {
 			return true;
 		}
@@ -544,7 +530,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // photo exif
 
-	function overwrite_item_exif( $val ) {
+	public function overwrite_item_exif( $val ) {
 		if ( $val ) {
 			$this->_item_exif = $val;
 		}
@@ -554,7 +540,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 // photo gmap
 
 // BUG: Undefined variable: exif
-	function overwrite_item_gmap( $latitude, $longitude, $zoom ) {
+	public function overwrite_item_gmap( $latitude, $longitude, $zoom ) {
 		if ( ( $this->_item_gmap_latitude > 0 ) &&
 		     ( $this->_item_gmap_longitude > 0 ) ) {
 			return;
@@ -570,17 +556,17 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // photo duration
 
-	function set_item_duration( $val ) {
-		$this->_item_duration = intval( $val );
+	public function set_item_duration( $val ) {
+		$this->_item_duration = (int) $val;
 	}
 
-	function get_item_duration() {
+	public function get_item_duration() {
 		return $this->_item_duration;
 	}
 
-	function overwrite_item_duration( $val ) {
+	public function overwrite_item_duration( $val ) {
 		if ( $val ) {
-			$this->_item_duration = intval( $val );
+			$this->_item_duration = (int) $val;
 		}
 
 	}
@@ -588,15 +574,15 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // photo ext 
 
-	function set_item_ext( $val ) {
+	public function set_item_ext( $val ) {
 		$this->_item_ext = $val;
 	}
 
-	function get_item_ext() {
+	public function get_item_ext() {
 		return $this->_item_ext;
 	}
 
-	function is_fill_item_ext() {
+	public function is_fill_item_ext() {
 		if ( $this->_item_ext ) {
 			return true;
 		}
@@ -607,55 +593,55 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // photo kind
 
-	function set_item_kind( $val ) {
-		$this->_item_kind = intval( $val );
+	public function set_item_kind( $val ) {
+		$this->_item_kind = (int) $val;
 	}
 
-	function get_item_kind() {
+	public function get_item_kind() {
 		return $this->_item_kind;
 	}
 
-	function is_item_undefined_kind() {
+	public function is_item_undefined_kind() {
 		return $this->is_undefined_kind( $this->_item_kind );
 	}
 
 
 // displaytype
 
-	function set_item_displaytype( $val ) {
-		$this->_item_displaytype = intval( $val );
+	public function set_item_displaytype( $val ) {
+		$this->_item_displaytype = (int) $val;
 	}
 
-	function get_item_displaytype() {
+	public function get_item_displaytype() {
 		return $this->_item_displaytype;
 	}
 
 
 // onclick
 
-	function set_item_onclick( $val ) {
-		$this->_item_onclick = intval( $val );
+	public function set_item_onclick( $val ) {
+		$this->_item_onclick = (int) $val;
 	}
 
-	function get_item_onclick() {
+	public function get_item_onclick() {
 		return $this->_item_onclick;
 	}
 
 
 // palyer id
 
-	function set_item_player_id( $val ) {
-		$this->_item_player_id = intval( $val );
+	public function set_item_player_id( $val ) {
+		$this->_item_player_id = (int) $val;
 	}
 
-	function get_item_player_id() {
+	public function get_item_player_id() {
 		return $this->_item_player_id;
 	}
 
 
 // external thumb
 
-	function is_fill_item_external_url() {
+	public function is_fill_item_external_url() {
 		if ( $this->_item_external_url ) {
 			return true;
 		}
@@ -666,22 +652,22 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // external thumb
 
-	function overwrite_item_external_thumb_if_empty( $val ) {
+	public function overwrite_item_external_thumb_if_empty( $val ) {
 		if ( ! $this->is_fill_item_external_thumb() && $val ) {
 			$this->_item_external_thumb = $val;
 		}
 	}
 
 // Fatal error: Call to undefined method set_item_external_thumb()
-	function set_item_external_thumb( $val ) {
+	public function set_item_external_thumb( $val ) {
 		$this->_item_external_thumb = $val;
 	}
 
-	function get_item_external_thumb() {
+	public function get_item_external_thumb() {
 		return $this->_item_external_thumb;
 	}
 
-	function is_fill_item_external_thumb() {
+	public function is_fill_item_external_thumb() {
 		if ( $this->_item_external_thumb ) {
 			return true;
 		}
@@ -692,17 +678,17 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // external middle
 
-	function overwrite_item_external_middle_if_empty( $val ) {
+	public function overwrite_item_external_middle_if_empty( $val ) {
 		if ( ! $this->is_fill_item_external_middle() && $val ) {
 			$this->_item_external_middle = $val;
 		}
 	}
 
-	function get_item_external_middle() {
+	public function get_item_external_middle() {
 		return $this->_item_external_middle;
 	}
 
-	function is_fill_item_external_middle() {
+	public function is_fill_item_external_middle() {
 		if ( $this->_item_external_middle ) {
 			return true;
 		}
@@ -713,7 +699,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // embed
 
-	function is_fill_item_embed_src() {
+	public function is_fill_item_embed_src() {
 		if ( $this->_item_embed_src ) {
 			return true;
 		}
@@ -721,7 +707,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return false;
 	}
 
-	function is_fill_item_embed_text() {
+	public function is_fill_item_embed_text() {
 		if ( $this->_item_embed_text ) {
 			return true;
 		}
@@ -732,7 +718,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // playlist
 
-	function is_fill_item_playlist_feed() {
+	public function is_fill_item_playlist_feed() {
 		if ( $this->_item_playlist_feed ) {
 			return true;
 		}
@@ -740,7 +726,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return false;
 	}
 
-	function is_fill_item_playlist_dir() {
+	public function is_fill_item_playlist_dir() {
 		if ( $this->_item_playlist_dir ) {
 			return true;
 		}
@@ -751,7 +737,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // upload
 
-	function upload_fetch_photo( $flag_allow_all = false ) {
+	public function upload_fetch_photo( $flag_allow_all = false ) {
 		$this->_photo_tmp_name   = null;
 		$this->_photo_media_type = null;
 		$this->_video_param      = null;
@@ -778,7 +764,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return $ret;
 	}
 
-	function set_values_for_fetch_photo( $photo_tmp_name ) {
+	public function set_values_for_fetch_photo( $photo_tmp_name ) {
 		$src_file = $this->_TMP_DIR . '/' . $photo_tmp_name;
 
 		$item_param  = $this->_photo_class->get_item_param_extention( $src_file );
@@ -819,7 +805,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 	}
 
-	function upload_fetch_thumb() {
+	public function upload_fetch_thumb() {
 		$this->_thumb_tmp_name   = null;
 		$this->_thumb_media_type = null;
 
@@ -835,7 +821,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		}
 	}
 
-	function upload_fetch_middle() {
+	public function upload_fetch_middle() {
 		$this->_middle_tmp_name   = null;
 		$this->_middle_media_type = null;
 
@@ -852,7 +838,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // create photo
 
-	function create_photo_param_by_param( $photo_param ) {
+	public function create_photo_param_by_param( $photo_param ) {
 		$this->_photo_class->set_msg_level( $this->_MSG_LEVEL );
 		$this->_photo_class->set_flag_print_first_msg( $this->_MSG_FIRST );
 
@@ -921,7 +907,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // create thumb
 
-	function create_thumb_param_by_tmp( $item_id, $thumb_name ) {
+	public function create_thumb_param_by_tmp( $item_id, $thumb_name ) {
 		if ( empty( $thumb_name ) ) {
 			return null;
 		}
@@ -934,7 +920,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return $thumb_param;
 	}
 
-	function create_thumb_param_by_param( $param ) {
+	public function create_thumb_param_by_param( $param ) {
 		if ( ! is_array( $param ) ) {
 			return null;
 		}
@@ -952,7 +938,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // create middle
 
-	function create_middle_param_by_tmp( $item_id, $middle_name ) {
+	public function create_middle_param_by_tmp( $item_id, $middle_name ) {
 		if ( empty( $middle_name ) ) {
 			return null;
 		}
@@ -965,7 +951,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return $middle_param;
 	}
 
-	function create_middle_param_by_param( $param ) {
+	public function create_middle_param_by_param( $param ) {
 		if ( ! is_array( $param ) ) {
 			return null;
 		}
@@ -980,11 +966,11 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return $middle_param;
 	}
 
-	function get_file_params() {
+	public function get_file_params() {
 		return $this->_file_params;
 	}
 
-	function conv_rotate( $rotate ) {
+	public function conv_rotate( $rotate ) {
 		$rot = 0;
 		switch ( $rotate ) {
 			case 'rot270' :
@@ -1010,7 +996,7 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // mime type
 
-	function add_mime_if_empty( $photo_param ) {
+	public function add_mime_if_empty( $photo_param ) {
 // no image  info
 		if ( ! is_array( $photo_param ) || ! count( $photo_param ) ) {
 			return $photo_param;
@@ -1039,45 +1025,45 @@ class webphoto_photo_edit extends webphoto_base_this {
 
 // insert
 
-	function build_search_for_edit( $photo_row, $tag_name_array = null ) {
+	public function build_search_for_edit( $photo_row, $tag_name_array = null ) {
 		return $this->_build_class->build_search( $photo_row, $tag_name_array );
 	}
 
 
 // tag class
 
-	function tag_handler_update_tags( $item_id, $tag_name_array ) {
+	public function tag_handler_update_tags( $item_id, $tag_name_array ) {
 		return $this->_tag_class->update_tags( $item_id, $this->_xoops_uid, $tag_name_array );
 	}
 
-	function tag_handler_tag_name_array( $item_id ) {
+	public function tag_handler_tag_name_array( $item_id ) {
 		return $this->_tag_class->get_tag_name_array_by_photoid_uid( $item_id, $this->_xoops_uid );
 	}
 
 
 // upload class
 
-	function upload_media_name() {
+	public function upload_media_name() {
 		return $this->_upload_class->get_uploader_media_name();
 	}
 
-	function is_readable_files_tmp_name( $filed ) {
+	public function is_readable_files_tmp_name( $filed ) {
 		return $this->_upload_class->is_readable_files_tmp_name( $filed );
 	}
 
-	function is_readable_in_tmp_dir( $name ) {
+	public function is_readable_in_tmp_dir( $name ) {
 		return $this->_upload_class->is_readable_in_tmp_dir( $name );
 	}
 
-	function is_readable_new_photo() {
+	public function is_readable_new_photo() {
 		return $this->is_readable_files_tmp_name( $this->_PHOTO_FIELD_NAME );
 	}
 
-	function is_readable_preview() {
+	public function is_readable_preview() {
 		return $this->is_readable_in_tmp_dir( $this->get_preview_name() );
 	}
 
-	function check_xoops_upload_file( $flag_thumb = true ) {
+	public function check_xoops_upload_file( $flag_thumb = true ) {
 		$post_xoops_upload_file = $this->_post_class->get_post( 'xoops_upload_file' );
 		if ( ! is_array( $post_xoops_upload_file ) || ! count( $post_xoops_upload_file ) ) {
 			return false;
@@ -1092,7 +1078,4 @@ class webphoto_photo_edit extends webphoto_base_this {
 		return true;
 	}
 
-// --- class end ---
 }
-
-?>

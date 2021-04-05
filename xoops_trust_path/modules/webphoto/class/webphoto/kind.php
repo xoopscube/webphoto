@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -30,9 +29,7 @@ class webphoto_kind {
 	public $_WAV_EXTS = array( 'wav' );
 
 
-// constructor
-
-	function __construct() {
+	public function __construct() {
 		$this->_IMAGE_EXTS             = explode( '|', _C_WEBPHOTO_IMAGE_EXTS );
 		$this->_SWFOBJECT_EXTS         = explode( '|', _C_WEBPHOTO_SWFOBJECT_EXTS );
 		$this->_MEDIAPLAYER_AUDIO_EXTS = explode( '|', _C_WEBPHOTO_MEDIAPLAYER_AUDIO_EXTS );
@@ -52,11 +49,11 @@ class webphoto_kind {
 
 // exts
 
-	function get_image_exts() {
+	public function get_image_exts() {
 		return $this->_IMAGE_EXTS;
 	}
 
-	function is_mediaplayer_ext( $ext ) {
+	public function is_mediaplayer_ext( $ext ) {
 		if ( $this->is_mediaplayer_audio_ext( $ext ) ) {
 			return true;
 		}
@@ -67,35 +64,35 @@ class webphoto_kind {
 		return false;
 	}
 
-	function is_image_ext( $ext ) {
+	public function is_image_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_IMAGE_EXTS );
 	}
 
-	function is_jpeg_ext( $ext ) {
+	public function is_jpeg_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_JPEG_EXTS );
 	}
 
-	function is_swfobject_ext( $ext ) {
+	public function is_swfobject_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_SWFOBJECT_EXTS );
 	}
 
-	function is_mediaplayer_audio_ext( $ext ) {
+	public function is_mediaplayer_audio_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_MEDIAPLAYER_AUDIO_EXTS );
 	}
 
-	function is_mediaplayer_video_ext( $ext ) {
+	public function is_mediaplayer_video_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_MEDIAPLAYER_VIDEO_EXTS );
 	}
 
-	function is_video_docomo_ext( $ext ) {
+	public function is_video_docomo_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_VIDEO_DOCOMO_EXTS );
 	}
 
-	function is_flash_ext( $ext ) {
+	public function is_flash_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_FLASH_EXTS );
 	}
 
-	function is_pdf_ext( $ext ) {
+	public function is_pdf_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_PDF_EXTS );
 	}
 
@@ -230,7 +227,4 @@ class webphoto_kind {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

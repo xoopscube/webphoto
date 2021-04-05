@@ -81,7 +81,7 @@ class webphoto_main_rate extends webphoto_base_this {
 
 // rate
 
-	function rate() {
+	public function rate() {
 		$this->_check();
 
 		if ( $this->_is_rate() ) {
@@ -95,7 +95,7 @@ class webphoto_main_rate extends webphoto_base_this {
 		}
 	}
 
-	function _check() {
+	public function _check() {
 		$this->_photo_id = $this->_post_class->get_post_get_int( 'photo_id' );
 
 		$url = $this->_INDEX_PHP;
@@ -124,11 +124,11 @@ class webphoto_main_rate extends webphoto_base_this {
 		$this->_item_row = $row;
 	}
 
-	function _is_rate() {
+	public function _is_rate() {
 		return $this->_post_class->get_post_text( 'submit' );
 	}
 
-	function _rate() {
+	public function _rate() {
 		$url_rate = $this->_MODULE_URL . '/index.php?fct=rate&amp;photo_id=' . $this->_photo_id;
 
 		$ret = $this->_exec_rate();
@@ -171,7 +171,7 @@ class webphoto_main_rate extends webphoto_base_this {
 		exit();
 	}
 
-	function _exec_rate() {
+	public function _exec_rate() {
 		if ( ! $this->check_token() ) {
 			return _C_WEBPHOTO_ERR_TOKEN;
 		}
@@ -205,7 +205,7 @@ class webphoto_main_rate extends webphoto_base_this {
 		return 0;
 	}
 
-	function update_rating_by_photoid( $photo_id ) {
+	public function update_rating_by_photoid( $photo_id ) {
 		list( $votes, $total, $rating )
 			= $this->_vote_handler->calc_rating_by_photoid( $photo_id );
 
@@ -226,7 +226,7 @@ class webphoto_main_rate extends webphoto_base_this {
 
 // main
 
-	function main() {
+	public function main() {
 // Parse error: syntax error
 		$ret = array_merge(
 			$this->_page_class->build_main_param(),
@@ -236,11 +236,11 @@ class webphoto_main_rate extends webphoto_base_this {
 		return $ret;
 	}
 
-	function get_photo() {
+	public function get_photo() {
 		$show_class =& webphoto_show_image::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
-		$arr = array(
+		return array(
 			'photo'          => $show_class->build_image_title_by_item_row( $this->_item_row ),
 			'token_name'     => $this->get_token_name(),
 			'token_value'    => $this->get_token(),
@@ -249,11 +249,9 @@ class webphoto_main_rate extends webphoto_base_this {
 			'select_delmita' => $this->_RATE_SELECT_DELMITA,
 			'radio_delmita'  => $this->_RATE_RADIO_DELMITA,
 		);
-
-		return $arr;
 	}
 
-	function _build_rating_options() {
+	public function _build_rating_options() {
 		$arr = array();
 		foreach ( $this->_ARRAY_RATING_OPTIONS as $key ) {
 			$arr[] = array(
@@ -265,7 +263,4 @@ class webphoto_main_rate extends webphoto_base_this {
 		return $arr;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -26,9 +26,8 @@ class webphoto_embed extends webphoto_lib_plugin {
 	public $_TMP_DIR;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_dirname( 'embeds' );
@@ -218,7 +217,4 @@ class webphoto_embed extends webphoto_lib_plugin {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

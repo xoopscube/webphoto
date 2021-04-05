@@ -54,7 +54,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 
 
 // timeline
-		function init( $timeline_dirname ) {
+		public function init( $timeline_dirname ) {
 			$check = $this->check_exist( $timeline_dirname );
 			if ( ! $check ) {
 				return false;
@@ -66,7 +66,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return true;
 		}
 
-		function check_exist( $timeline_dirname ) {
+		public function check_exist( $timeline_dirname ) {
 			$file = XOOPS_ROOT_PATH . '/modules/' . $timeline_dirname . '/include/api_timeline.php';
 			if ( ! file_exists( $file ) ) {
 				return false;
@@ -77,7 +77,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return class_exists( 'timeline_compo_timeline' );
 		}
 
-		function fetch_timeline( $mode, $unit, $date, $photos ) {
+		public function fetch_timeline( $mode, $unit, $date, $photos ) {
 			if ( ! $this->_init_timeline ) {
 				return false;
 			}
@@ -124,7 +124,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 
 // event
 
-		function build_event( $photo ) {
+		public function build_event( $photo ) {
 			$param = $this->build_start( $photo );
 			if ( ! is_array( $param ) ) {
 				return false;
@@ -139,7 +139,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return $param;
 		}
 
-		function build_start( $photo ) {
+		public function build_start( $photo ) {
 			if ( $photo['item_datetime'] ) {
 				$param = $this->build_start_param( $photo['item_datetime'] );
 				if ( is_array( $param ) ) {
@@ -158,7 +158,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return false;
 		}
 
-		function build_start_param( $datetime ) {
+		public function build_start_param( $datetime ) {
 			$p = $this->_mysql_utility_class->mysql_datetime_to_date_param( $datetime );
 			if ( ! is_array( $p ) ) {
 				return false;
@@ -176,21 +176,21 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return $param;
 		}
 
-		function build_title( $photo ) {
+		public function build_title( $photo ) {
 			return $this->sanitize( $photo['item_title'] );
 		}
 
-		function build_description( $photo ) {
+		public function build_description( $photo ) {
 			return $this->escape_quotation(
 				$this->build_summary( $photo['description_disp'] ) );
 		}
 
-		function build_link( $photo ) {
+		public function build_link( $photo ) {
 // no sanitize
 			return $photo['photo_uri'];
 		}
 
-		function build_image( $photo ) {
+		public function build_image( $photo ) {
 // no sanitize
 			if ( $photo['thumb_url'] ) {
 				return $photo['thumb_url'];
@@ -199,7 +199,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return $this->build_icon( $photo );
 		}
 
-		function build_icon( $photo ) {
+		public function build_icon( $photo ) {
 // no sanitize
 			if ( $photo['small_url'] ) {
 				return $photo['small_url'];
@@ -213,7 +213,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 
 // timeline class
 
-		function build_painter_events( $id, $unit, $date, $events ) {
+		public function build_painter_events( $id, $unit, $date, $events ) {
 			$this->_timeline_class->init_painter_events();
 			$this->_timeline_class->set_band_unit( $unit );
 			$this->_timeline_class->set_center_date( $date );
@@ -227,7 +227,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return array( $param['element'], $js );
 		}
 
-		function build_simple_events( $id, $unit, $date, $events ) {
+		public function build_simple_events( $id, $unit, $date, $events ) {
 			$this->_timeline_class->init_simple_events();
 			$param = $this->_timeline_class->build_simple_events( $id, $events );
 			$js    = $this->_timeline_class->fetch_simple_events( $param );
@@ -235,22 +235,22 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return array( $param['element'], $js );
 		}
 
-		function build_summary( $str ) {
+		public function build_summary( $str ) {
 			return $this->_timeline_class->build_summary( $str );
 		}
 
-		function unixtime_to_datetime( $time ) {
+		public function unixtime_to_datetime( $time ) {
 			return $this->_timeline_class->unixtime_to_datetime( $time );
 		}
 
-		function escape_quotation( $str ) {
+		public function escape_quotation( $str ) {
 			return $this->_timeline_class->escape_quotation( $str );
 		}
 
 
 // options
 
-		function get_scale_options() {
+		public function get_scale_options() {
 			if ( ! $this->_init_timeline ) {
 				return false;
 			}
@@ -267,7 +267,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 			return $arr;
 		}
 
-		function get_int_unit_array() {
+		public function get_int_unit_array() {
 			if ( ! $this->_init_timeline ) {
 				return array();
 			}

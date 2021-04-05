@@ -1,10 +1,14 @@
 <?php
-// $Id: ustream.php,v 1.1 2010/06/16 22:46:22 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2010-06-06 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @deprecated UPDATE PLUGIN / API / JSON
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -26,13 +30,13 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 //=========================================================
 class webphoto_embed_ustream extends webphoto_embed_base {
 
-	function webphoto_embed_ustream() {
-		$this->webphoto_embed_base( 'ustream' );
+	public function __construct() {
+		parent::__construct( 'ustream' );
 		$this->set_url( 'http://www.ustream.tv/recorded/' );
 		$this->set_sample( '6996774' );
 	}
 
-	function embed( $src, $width, $height ) {
+	public function embed( $src, $width, $height, $extra = null ) {
 		$movie = 'http://www.ustream.tv/flash/video/' . $src;
 
 		$flashvars         = 'autoplay=false';
@@ -55,30 +59,28 @@ class webphoto_embed_ustream extends webphoto_embed_base {
 		return $str;
 	}
 
-	function link( $src ) {
+	public function link( $src ) {
 		return $this->build_link( $src );
 	}
 
-	function width() {
+	public function width() {
 		return 320;
 	}
 
-	function height() {
+	public function height() {
 		return 260;
 	}
 
-	function desc() {
+	public function desc() {
 		return $this->build_desc();
 	}
 
-//---------------------------------------------------------
 // xml
-//---------------------------------------------------------
-	function support_params() {
+	public function support_params() {
 		return $this->build_support_params();
 	}
 
-	function get_xml_params( $src ) {
+	public function get_xml_params( $src ) {
 		$url  = 'http://api.ustream.tv/xml/video/' . $src . '/getinfo';
 		$cont = $this->get_remote_file( $url );
 		if ( empty( $cont ) ) {
@@ -96,7 +98,7 @@ class webphoto_embed_ustream extends webphoto_embed_base {
 			return false;
 		}
 
-		$arr = array(
+		return array(
 			'title'       => $this->get_xml_title( $results ),
 			'description' => $this->get_xml_description( $results ),
 			'url'         => $this->get_xml_url( $results ),
@@ -106,47 +108,45 @@ class webphoto_embed_ustream extends webphoto_embed_base {
 			'script'      => $this->get_xml_script( $results ),
 
 		);
-
-		return $arr;
 	}
 
-	function get_xml_title( $results ) {
+	public function get_xml_title( $results ) {
 		$str = $this->get_obj_property( $results, 'title' );
-		$str = $this->convert_from_utf8( strval( $str ) );
+		$str = $this->convert_from_utf8( (string) $str );
 
 		return $str;
 	}
 
-	function get_xml_description( $results ) {
+	public function get_xml_description( $results ) {
 		$str = $this->get_obj_property( $results, 'description' );
-		$str = $this->convert_from_utf8( strval( $str ) );
+		$str = $this->convert_from_utf8( (string) $str );
 
 		return $str;
 	}
 
-	function get_xml_url( $results ) {
+	public function get_xml_url( $results ) {
 		$str = $this->get_obj_property( $results, 'url' );
-		$str = strval( $str );
+		$str = (string) $str;
 
 		return $str;
 	}
 
-	function get_xml_thumb( $results ) {
+	public function get_xml_thumb( $results ) {
 		$url = $this->get_obj_property( $results, 'imageUrl' );
 		$str = $this->get_obj_property( $url, 'small' );
-		$str = strval( $str );
+		$str = (string) $str;
 
 		return $str;
 	}
 
-	function get_xml_duration( $results ) {
+	public function get_xml_duration( $results ) {
 		$str = $this->get_obj_property( $results, 'lengthInSecond' );
 		$str = floor( $str );
 
 		return $str;
 	}
 
-	function get_xml_tags( $results ) {
+	public function get_xml_tags( $results ) {
 		$tags = $this->get_obj_property( $results, 'tags' );
 		$arr  = $this->get_obj_property( $tags, 'array' );
 		$arr  = $this->obj_array_to_str_array( $arr );
@@ -155,14 +155,11 @@ class webphoto_embed_ustream extends webphoto_embed_base {
 		return $arr;
 	}
 
-	function get_xml_script( $results ) {
+	public function get_xml_script( $results ) {
 		$str = $this->get_obj_property( $results, 'embedTag' );
 		$str = $this->replace_width_height( $str );
 
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

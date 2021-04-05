@@ -21,6 +21,7 @@ class webphoto_tag extends webphoto_base_this {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_tagcloud_class
@@ -137,7 +138,4 @@ class webphoto_tag extends webphoto_base_this {
 		return $rows;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -36,7 +36,7 @@ class webphoto_lib_gd {
 		return $instance;
 	}
 
-	function resize_rotate( $src_file, $dst_file, $max_width = 0, $max_height = 0, $rotate = 0 ) {
+	public function resize_rotate( $src_file, $dst_file, $max_width = 0, $max_height = 0, $rotate = 0 ) {
 		$image_size = getimagesize( $src_file );
 		if ( ! is_array( $image_size ) ) {
 			return false;
@@ -94,7 +94,7 @@ class webphoto_lib_gd {
 		return $ret;
 	}
 
-	function image_create( $file, $type ) {
+	public function image_create( $file, $type ) {
 		$img = null;
 
 		switch ( $type ) {
@@ -123,7 +123,7 @@ class webphoto_lib_gd {
 		return $img;
 	}
 
-	function image_output( $img, $file, $type ) {
+	public function image_output( $img, $file, $type ) {
 		switch ( $type ) {
 			// GIF
 			// GD 2.0.28 or later
@@ -148,7 +148,7 @@ class webphoto_lib_gd {
 		}
 	}
 
-	function image_rotate( $src_img, $angle ) {
+	public function image_rotate( $src_img, $angle ) {
 // PHP 4.3.0
 		if ( $this->can_rotate() ) {
 			return imagerotate( $src_img, $angle, 0 );
@@ -157,7 +157,7 @@ class webphoto_lib_gd {
 		return null;
 	}
 
-	function image_resize( $src_img, $src_width, $src_height, $new_width, $new_height ) {
+	public function image_resize( $src_img, $src_width, $src_height, $new_width, $new_height ) {
 		if ( $this->can_truecolor() ) {
 			$img = imagecreatetruecolor( $new_width, $new_height );
 
@@ -165,7 +165,7 @@ class webphoto_lib_gd {
 			$img = imagecreate( $new_width, $new_height );
 		}
 
-// PHP 4.0.6
+// PHP legacy
 		if ( function_exists( 'imagecopyresampled' ) ) {
 			$ret = imagecopyresampled( $img, $src_img, 0, 0, 0, 0, $new_width, $new_height, $src_width, $src_height );
 
@@ -177,8 +177,8 @@ class webphoto_lib_gd {
 		return $img;
 	}
 
-	function is_gd2() {
-// PHP 4.3.0
+	public function is_gd2() {
+// PHP legacy
 		if ( function_exists( 'gd_info' ) ) {
 			$gd_info = gd_info();
 			if ( substr( $gd_info['GD Version'], 0, 10 ) == 'bundled (2' ) {
@@ -189,23 +189,23 @@ class webphoto_lib_gd {
 		return false;
 	}
 
-	function image_adjust( $width, $height, $max_width, $max_height ) {
+	public function image_adjust( $width, $height, $max_width, $max_height ) {
 		if ( $width > $max_width ) {
 			$mag    = $max_width / $width;
 			$width  = $max_width;
-			$height = $height * $mag;
+			$height *= $mag;
 		}
 
 		if ( $height > $max_height ) {
 			$mag    = $max_height / $height;
 			$height = $max_height;
-			$width  = $width * $mag;
+			$width  *= $mag;
 		}
 
 		return array( intval( $width ), intval( $height ) );
 	}
 
-	function file_to_type( $file, $type_default ) {
+	public function file_to_type( $file, $type_default ) {
 		$ext = $this->parse_ext( $file );
 
 		switch ( $ext ) {
@@ -229,23 +229,23 @@ class webphoto_lib_gd {
 		return $type;
 	}
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
 
 // set & get param
 
-	function set_force_gd2( $val ) {
+	public function set_force_gd2( $val ) {
 // force to use imagecreatetruecolor
 		$this->_force_gd2 = (bool) $val;
 	}
 
-	function set_jpeg_quality( $val ) {
-		$this->_JPEG_QUALITY = intval( $val );
+	public function set_jpeg_quality( $val ) {
+		$this->_JPEG_QUALITY = (int) $val;
 	}
 
-	function can_rotate() {
+	public function can_rotate() {
 // PHP 4.3.0
 		if ( function_exists( 'imagerotate' ) ) {
 			return true;
@@ -254,22 +254,17 @@ class webphoto_lib_gd {
 		return false;
 	}
 
-	function can_truecolor() {
-// PHP 4.0.6 and GD 2.0.1
-// fatal error in PHP 4.0.6 through 4.1.x without GD2
+	public function can_truecolor() {
+// PHP and GD 2.x
 // http://www.php.net/manual/en/function.imagecreatetruecolor.php
 
-		if ( ( $this->_is_gd2 || $this->_force_gd2 ) && function_exists( 'imagecreatetruecolor' ) ) {
-			return true;
-		}
-
-		return false;
+		return ( $this->_is_gd2 || $this->_force_gd2 ) && function_exists( 'imagecreatetruecolor' );
 	}
 
 
 // version
 
-	function version() {
+	public function version() {
 		if ( function_exists( 'gd_info' ) ) {
 			$ret     = true;
 			$gd_info = gd_info();

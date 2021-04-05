@@ -64,7 +64,7 @@ class webphoto_lib_ffmpeg {
 // MUST path has no sapce
 // cannot use windows type's path like the following
 // C:/Program Files/program/
-	function set_cmd_path( $val ) {
+	public function set_cmd_path( $val ) {
 		$this->_CMD_PATH   = $val;
 		$this->_CMD_FFMPEG = $this->_CMD_PATH . 'ffmpeg';
 
@@ -73,27 +73,27 @@ class webphoto_lib_ffmpeg {
 		}
 	}
 
-	function set_tmp_path( $val ) {
+	public function set_tmp_path( $val ) {
 		$this->_TMP_PATH = $val;
 	}
 
-	function set_prefix( $val ) {
+	public function set_prefix( $val ) {
 		$this->_prefix = $val;
 	}
 
-	function set_ext( $val ) {
+	public function set_ext( $val ) {
 		$this->_ext = $val;
 	}
 
-	function set_offset( $val ) {
+	public function set_offset( $val ) {
 		$this->_offset = $val;
 	}
 
-	function set_flag_chmod( $val ) {
+	public function set_flag_chmod( $val ) {
 		$this->_flag_chmod = (bool) $val;
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
@@ -109,7 +109,7 @@ class webphoto_lib_ffmpeg {
 //    Stream #0.0: Video: mjpeg, yuvj422p, 640x480, 30.00 tb(r)
 //    Stream #0.1: Audio: pcm_u8, 11024 Hz, mono, 88 kb/s
 
-	function get_video_info( $file ) {
+	public function get_video_info( $file ) {
 		$cmd = $this->_CMD_FFMPEG . sprintf( $this->_PARAM_INFO, $file );
 
 		$this->clear_msg_array();
@@ -165,7 +165,7 @@ class webphoto_lib_ffmpeg {
 		return $arr;
 	}
 
-	function is_h264_aac( $video, $audio ) {
+	public function is_h264_aac( $video, $audio ) {
 		if ( $this->is_video_h264( $video ) &&
 		     $this->is_audio_aac( $audio ) ) {
 			return true;
@@ -174,7 +174,7 @@ class webphoto_lib_ffmpeg {
 		return false;
 	}
 
-	function is_video_h264( $video ) {
+	public function is_video_h264( $video ) {
 		if ( in_array( $video, $this->_video_h264_array ) ) {
 			return true;
 		}
@@ -182,7 +182,7 @@ class webphoto_lib_ffmpeg {
 		return false;
 	}
 
-	function is_audio_aac( $audio ) {
+	public function is_audio_aac( $audio ) {
 		if ( in_array( $audio, $this->_audio_aac_array ) ) {
 			return true;
 		}
@@ -193,7 +193,7 @@ class webphoto_lib_ffmpeg {
 
 // create thumbs 
 
-	function create_thumbs( $file_in, $max = 5, $start = 0, $step = 1 ) {
+	public function create_thumbs( $file_in, $max = 5, $start = 0, $step = 1 ) {
 		$this->clear_msg_array();
 
 		$count = 0;
@@ -211,14 +211,14 @@ class webphoto_lib_ffmpeg {
 		return $count;
 	}
 
-	function create_single_thumb( $file_in, $file_out, $sec ) {
+	public function create_single_thumb( $file_in, $file_out, $sec ) {
 		$cmd = $this->_CMD_FFMPEG . sprintf( $this->_PARAM_CREATE_THUMBS, $sec, $file_in, $file_out );
 		$this->cmd_excute( $cmd );
 
 		return $this->chmod_file_out( $file_out );
 	}
 
-	function build_thumb_name( $num ) {
+	public function build_thumb_name( $num ) {
 		$str = $this->_prefix . $num . '.' . $this->_ext;
 
 		return $str;
@@ -227,7 +227,7 @@ class webphoto_lib_ffmpeg {
 
 // create flash 
 
-	function create_flash( $file_in, $file_out, $extra = null ) {
+	public function create_flash( $file_in, $file_out, $extra = null ) {
 
 // return input file is same format
 		$ret = $this->check_file_in( $file_in, $this->_EXT_FLV );
@@ -247,7 +247,7 @@ class webphoto_lib_ffmpeg {
 
 // create wav
 
-	function create_wav( $file_in, $file_out, $extra = null ) {
+	public function create_wav( $file_in, $file_out, $extra = null ) {
 
 // return input file is same format
 		$ret = $this->check_file_in( $file_in, $this->_EXT_WAV );
@@ -267,7 +267,7 @@ class webphoto_lib_ffmpeg {
 
 // create mp3 
 
-	function create_mp3( $file_in, $file_out, $extra = null ) {
+	public function create_mp3( $file_in, $file_out, $extra = null ) {
 
 // return input file is same format
 		$ret = $this->check_file_in( $file_in, $this->_EXT_MP3 );
@@ -287,7 +287,7 @@ class webphoto_lib_ffmpeg {
 
 // version
 
-	function version( $path ) {
+	public function version( $path ) {
 		$ret = false;
 		$msg = '';
 
@@ -318,7 +318,7 @@ class webphoto_lib_ffmpeg {
 
 // function
 
-	function cmd_excute( $cmd ) {
+	public function cmd_excute( $cmd ) {
 		$ret_array = null;
 		exec( "$cmd 2>&1", $ret_array );
 		if ( $this->_DEBUG ) {
@@ -337,7 +337,7 @@ class webphoto_lib_ffmpeg {
 		return $ret_array;
 	}
 
-	function check_file_in( $file, $ext ) {
+	public function check_file_in( $file, $ext ) {
 // file matches ext
 		if ( $this->parse_ext( $file ) == $ext ) {
 			return true;
@@ -346,7 +346,7 @@ class webphoto_lib_ffmpeg {
 		return false;
 	}
 
-	function chmod_file_out( $file ) {
+	public function chmod_file_out( $file ) {
 // file exists ?
 		if ( ! file_exists( $file ) || ( filesize( $file ) == 0 ) ) {
 			return false;
@@ -360,14 +360,14 @@ class webphoto_lib_ffmpeg {
 		return true;
 	}
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
 
 // utility
 
-	function is_win_os() {
+	public function is_win_os() {
 		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
 			return true;
 		}

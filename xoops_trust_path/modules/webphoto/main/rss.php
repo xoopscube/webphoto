@@ -1,52 +1,21 @@
 <?php
-// $Id: rss.php,v 1.11 2011/11/12 11:05:02 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// call form XOOPS_ROOT_PATH/modules/xxx/rss.php
-//---------------------------------------------------------
-
-//---------------------------------------------------------
-// change log
-// 2011-11-11 K.OHWADA
-// remove class/inc/config.php
-// 2010-11-03 K.OHWADA
-// class/webphoto/main.php
-// 2010-01-10 K.OHWADA
-// class/webphoto/tag.php
-// 2009-11-11 K.OHWADA
-// main/header_item_handler.php
-// 2009-03-01 K.OHWADA
-// class/webphoto/rss.php
-// 2008-12-12 K.OHWADA
-// photo_public.php
-// 2008-12-09 K.OHWADA
-// class/inc/uri.php
-// 2008-10-01 K.OHWADA
-// added xml.php
-// 2008-08-24 K.OHWADA
-// added item_handler.php
-// 2008-07-01 K.OHWADA
-// added uri.php
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//---------------------------------------------------------
-// xoops system files
-//---------------------------------------------------------
 include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 include_once XOOPS_ROOT_PATH . '/class/template.php';
 
-//---------------------------------------------------------
-// webphoto files
-//---------------------------------------------------------
 webphoto_include_once( 'main/header_item_handler.php' );
 
 webphoto_include_once( 'class/xoops/base.php' );
@@ -101,11 +70,6 @@ webphoto_include_once( 'class/main/rss.php' );
 
 webphoto_include_language( 'main.php' );
 
-//=========================================================
-// main
-//=========================================================
 $webphoto_manage =& webphoto_main_rss::getInstance( WEBPHOTO_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $webphoto_manage->main();
 exit();
-
-?>

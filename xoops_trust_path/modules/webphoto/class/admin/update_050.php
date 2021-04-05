@@ -58,8 +58,6 @@ class webphoto_admin_update_050 extends webphoto_base_this {
 	}
 
 
-// init
-
 	function get_post_offset() {
 		$this->_post_offset = $this->_post_class->get_post_get( 'offset' );
 		$this->_next        = $this->_post_offset + $this->_LIMIT;

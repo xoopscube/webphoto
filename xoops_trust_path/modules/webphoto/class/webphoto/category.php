@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -28,11 +27,9 @@ class webphoto_category extends webphoto_show_photo {
 	public $_cfg_cat_sub_width = null;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_show_photo( $dirname , $trust_dirname );
 
 		$this->_public_class
 			=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
@@ -134,15 +131,13 @@ class webphoto_category extends webphoto_show_photo {
 		$row = $this->_catlist_class->get_cat_row_by_catid_perm( $cat_id );
 
 		if ( ! is_array( $row ) ) {
-			$arr = array(
+			return array(
 				'cat_title'       => '',
 				'photo_total'     => 0,
 				'photo_total_sum' => 0,
 				'photo_small_sum' => 0,
 				'sum_mode'        => 0,
 			);
-
-			return $arr;
 		}
 
 		$cat_title = $row['cat_title'];
@@ -150,15 +145,13 @@ class webphoto_category extends webphoto_show_photo {
 		list( $sum_mode, $total, $total_sum, $small_sum ) =
 			$this->get_total_by_catid( $this->_cfg_cat_child, $cat_id );
 
-		$arr = array(
+		return array(
 			'cat_title'       => $cat_title,
 			'photo_total'     => $total,
 			'photo_total_sum' => $total_sum,
 			'photo_small_sum' => $small_sum,
 			'sum_mode'        => $sum_mode,
 		);
-
-		return $arr;
 
 	}
 
@@ -312,15 +305,9 @@ class webphoto_category extends webphoto_show_photo {
 			'sub_width'     => $this->_cfg_cat_sub_width,
 		);
 
-		$arr = array(
+		return array(
 			'show_catlist' => $show,
 			'catlist'      => $catlist,
 		);
-
-		return $arr;
 	}
-
-// --- class end ---
 }
-
-?>

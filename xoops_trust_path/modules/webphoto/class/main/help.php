@@ -20,6 +20,7 @@ class webphoto_main_help extends webphoto_base_this {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_page_class =& webphoto_page::getInstance( $dirname, $trust_dirname );
@@ -37,9 +38,6 @@ class webphoto_main_help extends webphoto_base_this {
 
 		return $instance;
 	}
-
-
-// function
 
 	public function main() {
 		$this->_assign_xoops_header();

@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -44,7 +43,7 @@ class webphoto_inc_notification extends webphoto_inc_base_ini {
 
 // public
 
-	function notify( $category, $id ) {
+	public function notify( $category, $id ) {
 		$info = array();
 
 		switch ( $category ) {
@@ -67,20 +66,20 @@ class webphoto_inc_notification extends webphoto_inc_base_ini {
 		return $info;
 	}
 
-	function _get_url( $category, $id ) {
+	public function _get_url( $category, $id ) {
 		return $this->_uri_claas->build_full_uri_mode_param( $category, $id );
 	}
 
 
 // handler
 
-	function _get_item_title( $item_id ) {
+	public function _get_item_title( $item_id ) {
 		$row = $this->get_item_row_by_id( $item_id );
 
 		return $row['item_title'] ?? false;
 	}
 
-	function _get_cat_title( $cat_id ) {
+	public function _get_cat_title( $cat_id ) {
 		$row = $this->get_cat_row_by_id( $cat_id );
 		if ( isset( $row['cat_title'] ) ) {
 			return $row['cat_title'];

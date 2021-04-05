@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -96,8 +95,6 @@ class webphoto_edit_import extends webphoto_edit_base {
 		return $instance;
 	}
 
-
-// init
 
 	public function init_myalbum( $dirname ) {
 		$mid = $this->_myalbum_handler->init( $dirname );

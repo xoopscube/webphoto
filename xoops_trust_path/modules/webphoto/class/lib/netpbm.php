@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_lib_netpbm {
+
 	public $_cmd_path = null;
 	public $_DEBUG = false;
 
@@ -47,11 +48,11 @@ class webphoto_lib_netpbm {
 
 // main
 
-	function set_cmd_path( $val ) {
+	public function set_cmd_path( $val ) {
 		$this->_cmd_path = $val;
 	}
 
-	function resize_rotate( $src, $dst, $max_width = 0, $max_height = 0, $rotate = 0 ) {
+	public function resize_rotate( $src, $dst, $max_width = 0, $max_height = 0, $rotate = 0 ) {
 		$image_size = getimagesize( $src );
 		if ( ! is_array( $image_size ) ) {
 			return false;
@@ -98,7 +99,7 @@ class webphoto_lib_netpbm {
 		return true;
 	}
 
-	function build_cmd_in( $type ) {
+	public function build_cmd_in( $type ) {
 		$cmd_in = null;
 
 		switch ( $type ) {
@@ -124,7 +125,7 @@ class webphoto_lib_netpbm {
 		return $cmd_in;
 	}
 
-	function build_cmd_out( $type ) {
+	public function build_cmd_out( $type ) {
 		$cmd_out = null;
 
 		switch ( $type ) {
@@ -151,19 +152,19 @@ class webphoto_lib_netpbm {
 		return $cmd_out;
 	}
 
-	function build_cmd_resize( $max_width, $max_height ) {
+	public function build_cmd_resize( $max_width, $max_height ) {
 		$cmd = $this->_cmd_path . 'pnmscale -xysize ' . $max_width . ' ' . $max_height;
 
 		return $cmd;
 	}
 
-	function build_cmd_rotate( $angle ) {
+	public function build_cmd_rotate( $angle ) {
 		$cmd = $this->_cmd_path . 'pnmflip -r' . $angle . ' ';
 
 		return $cmd;
 	}
 
-	function file_to_type( $file, $type_default ) {
+	public function file_to_type( $file, $type_default ) {
 		$ext = $this->parse_ext( $file );
 
 		switch ( $ext ) {
@@ -187,14 +188,14 @@ class webphoto_lib_netpbm {
 		return $type;
 	}
 
-	function parse_ext( $file ) {
+	public function parse_ext( $file ) {
 		return strtolower( substr( strrchr( $file, '.' ), 1 ) );
 	}
 
 
 // version
 
-	function version( $path ) {
+	public function version( $path ) {
 		$arr = array();
 		foreach ( $this->_NETPBM_PIPES as $pipe ) {
 			$ret_array = array();

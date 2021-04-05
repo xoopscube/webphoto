@@ -30,11 +30,8 @@ class webphoto_tag_build extends webphoto_lib_error {
 	public $_MODULE_DIR;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_tag_handler
 			=& webphoto_tag_handler::getInstance( $dirname, $trust_dirname );
@@ -287,7 +284,4 @@ class webphoto_tag_build extends webphoto_lib_error {
 		$this->_is_japanese = (bool) $val;
 	}
 
-// --- class end ---
 }
-
-?>

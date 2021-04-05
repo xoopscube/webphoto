@@ -7,9 +7,8 @@
  * @author K. OHWADA, 2008-04-02
  * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
- * class webphoto_lib_exif
- * http://it.jeita.or.jp/document/publica/standard/exif/japanese/jeida49ja.htm
- * http://park2.wakwak.com/~tsuruzoh/Computer/Digicams/exif.html
+ * @brief (PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+ * https://www.php.net/manual/en/function.exif-read-data.php
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -56,7 +55,7 @@ class webphoto_lib_exif {
 		list( $gps_docomo, $lat, $lon ) = $this->parse_gps_docomo( $exif );
 		$all_data = $this->parse_all_data( $exif );
 
-		$arr = array(
+		return array(
 			'datetime'     => $datetime,
 			'maker'        => $maker,
 			'model'        => $model,
@@ -67,8 +66,6 @@ class webphoto_lib_exif {
 			'gps_docomo'   => $gps_docomo,
 			'all_data'     => $all_data,
 		);
-
-		return $arr;
 	}
 
 	public function parse_datetime( $exif ) {
@@ -82,8 +79,8 @@ class webphoto_lib_exif {
 		}
 
 		if ( $datetime ) {
-// yyyy:mm:dd -> yyy-mm-dd
-// http://www.gnu.org/software/tar/manual/html_node/General-date-syntax.html
+			// yyyy:mm:dd -> yyy-mm-dd
+			// http://www.gnu.org/software/tar/manual/html_node/General-date-syntax.html
 			$datetime_gnu = preg_replace( '/(\d{4}):(\d{2}):(\d{2})(.*)/', '$1-$2-$3$4', $datetime );
 		}
 
@@ -219,9 +216,9 @@ class webphoto_lib_exif {
 		$arr = explode( '/', $val );
 		$fig = 0;
 		if ( isset( $arr[0] ) ) {
-			$numerator = intval( $arr[0] );
+			$numerator = (int) $arr[0];
 			if ( isset( $arr[1] ) ) {
-				$denominator = intval( $arr[1] );
+				$denominator = (int) $arr[1];
 				if ( $denominator > 0 ) {
 					$fig = $numerator / $denominator;
 				} else {

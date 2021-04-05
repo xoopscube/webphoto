@@ -9,6 +9,7 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
+
 class webphoto_lib_server_info {
 
 	public function __construct() {
@@ -26,7 +27,7 @@ class webphoto_lib_server_info {
 
 // server info
 
-	function build_server() {
+	public function build_server() {
 		$db              = XoopsDatabaseFactory::getDatabaseConnection();
 		$get_server_info = ( is_object( $db->conn ) && get_class( $db->conn ) === 'mysqli' ) ? 'mysqli_get_server_info' : 'mysql_get_server_info';
 		$str             = "OS: " . php_uname() . "<br>\n";
@@ -37,14 +38,14 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-	function build_php_secure( $dsc ) {
+	public function build_php_secure( $dsc ) {
 		$str = $this->build_ini_on_off( 'register_globals' ) . $dsc . "<br>\n";
 		$str .= $this->build_ini_on_off( 'allow_url_fopen' ) . $dsc . "<br>\n";
 
 		return $str;
 	}
 
-	function build_php_etc() {
+	public function build_php_etc() {
 		$str = "error_reporting: " . error_reporting() . "<br>\n";
 		$str .= $this->build_ini_int( 'display_errors' ) . "<br>\n";
 		$str .= $this->build_ini_int( 'memory_limit' ) . "<br>\n";
@@ -55,13 +56,13 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-	function build_php_exif() {
+	public function build_php_exif() {
 		$str = "exif extention: " . $this->build_func_load( 'exif_read_data' ) . "<br>\n";
 
 		return $str;
 	}
 
-	function build_php_upload( $dsc = null ) {
+	public function build_php_upload( $dsc = null ) {
 		$str = $this->build_ini_on_off( 'file_uploads' ) . $dsc . "<br>\n";
 		$str .= $this->build_ini_val( 'upload_max_filesize' ) . "<br>\n";
 		$str .= $this->build_ini_val( 'post_max_size' ) . "<br>\n";
@@ -70,7 +71,7 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-	function build_php_upload_tmp_dir() {
+	public function build_php_upload_tmp_dir() {
 		$upload_tmp_dir = ini_get( 'upload_tmp_dir' );
 
 		$str = "upload_tmp_dir : " . $upload_tmp_dir . "<br>\n";
@@ -86,7 +87,7 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-	function build_ini_int( $key ) {
+	public function build_ini_int( $key ) {
 		$str = $key . ': ' . (int) ini_get( $key );
 
 		return $str;
@@ -98,13 +99,13 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-	function build_ini_on_off( $key ) {
+	public function build_ini_on_off( $key ) {
 		$str = $key . ': ' . $this->build_on_off( ini_get( $key ) );
 
 		return $str;
 	}
 
-	function build_func_load( $func ) {
+	public function build_func_load( $func ) {
 		if ( function_exists( $func ) ) {
 			$str = 'loaded';
 		} else {
@@ -117,7 +118,7 @@ class webphoto_lib_server_info {
 
 // utility
 
-	function build_on_off( $val, $flag_red = false ) {
+	public function build_on_off( $val, $flag_red = false ) {
 		$str = '';
 		if ( $val ) {
 			$str = $this->font_green( 'on' );
@@ -130,13 +131,13 @@ class webphoto_lib_server_info {
 		return $str;
 	}
 
-	function font_red( $str ) {
+	public function font_red( $str ) {
 		$str = '<span style="color:#FF0000"><b>' . $str . '</b></span>';
 
 		return $str;
 	}
 
-	function font_green( $str ) {
+	public function font_green( $str ) {
 		$str = '<span style="color:#00FF00"><b>' . $str . '</b></span>';
 
 		return $str;

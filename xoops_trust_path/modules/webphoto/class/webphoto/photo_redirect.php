@@ -30,11 +30,8 @@ class webphoto_photo_redirect extends webphoto_base_this {
 	public $_MSG_FAILED = 'failed';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 		$this->preload_init();
 		$this->preload_constant();
@@ -157,39 +154,32 @@ class webphoto_photo_redirect extends webphoto_base_this {
 		$has_extra_msg = isset( $param['has_extra_msg'] ) ?
 			(bool) $param['has_extra_msg'] : $this->has_msg_array();
 
-		$url_success = isset( $param['url_success'] ) ?
-			$param['url_success'] : $this->_URL_SUCCESS;
+		$url_success = $param['url_success'] ?? $this->_URL_SUCCESS;
 
-		$url_pending = isset( $param['url_pending'] ) ?
-			$param['url_pending'] : $this->_URL_PENDING;
+		$url_pending = $param['url_pending'] ?? $this->_URL_PENDING;
 
-		$url_failed = isset( $param['url_failed'] ) ?
-			$param['url_failed'] : $this->_URL_FAILED;
+		$url_failed = $param['url_failed'] ?? $this->_URL_FAILED;
 
 		$time_success = isset( $param['time_success'] ) ?
-			intval( $param['time_success'] ) : $this->_TIME_SUCCESS;
+			(int) $param['time_success'] : $this->_TIME_SUCCESS;
 
 		$time_pending = isset( $param['time_pending'] ) ?
-			intval( $param['time_pending'] ) : $this->_TIME_PENDING;
+			(int) $param['time_pending'] : $this->_TIME_PENDING;
 
 		$time_failed = isset( $param['time_failed'] ) ?
-			intval( $param['time_failed'] ) : $this->_TIME_FAILED;
+			(int) $param['time_failed'] : $this->_TIME_FAILED;
 
-		$msg_success = isset( $param['msg_success'] ) ?
-			$param['msg_success'] : $this->_MSG_SUCCESS;
+		$msg_success = $param['msg_success'] ?? $this->_MSG_SUCCESS;
 
-		$msg_pending = isset( $param['msg_pending'] ) ?
-			$param['msg_pending'] : $this->_MSG_PENDING;
+		$msg_pending = $param['msg_pending'] ?? $this->_MSG_PENDING;
 
-		$msg_failed = isset( $param['msg_failed'] ) ?
-			$param['msg_failed'] : $this->get_format_error();
+		$msg_failed = $param['msg_failed'] ?? $this->get_format_error();
 
 		if ( empty( $msg_failed ) ) {
 			$msg_failed = $this->_MSG_FAILED;
 		}
 
-		$msg_extra = isset( $param['msg_extra'] ) ?
-			$param['msg_extra'] : $this->get_format_msg_array() . '<br>' . $msg_success;
+		$msg_extra = $param['msg_extra'] ?? ( $this->get_format_msg_array() . '<br>' . $msg_success );
 
 // pending
 		if ( $is_failed ) {
@@ -239,7 +229,4 @@ class webphoto_photo_redirect extends webphoto_base_this {
 		$this->set_error( $this->get_constant( $name ) );
 	}
 
-// --- class end ---
 }
-
-?>

@@ -33,11 +33,9 @@ class webphoto_photo_navi extends webphoto_lib_error {
 	public $_max_current_height = _C_WEBPHOTO_SMALL_CURRENT_HEIGHT;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-		//$this->webphoto_lib_error();
 
 		$this->_item_handler =& webphoto_item_handler::getInstance(
 			$dirname, $trust_dirname );
@@ -57,11 +55,11 @@ class webphoto_photo_navi extends webphoto_lib_error {
 
 // set parameter
 
-	function set_mark_id_prev( $val ) {
+	public function set_mark_id_prev( $val ) {
 		$this->_MARK_ID_PREV = $val;
 	}
 
-	function set_mark_id_next( $val ) {
+	public function set_mark_id_next( $val ) {
 		$this->_MARK_ID_NEXT = $val;
 	}
 
@@ -69,7 +67,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 // build pagenavi
 // use id (1.2.3...)
 
-	function build_navi( $script, $id_array, $id_current, $window = 7 ) {
+	public function build_navi( $script, $id_array, $id_current, $window = 7 ) {
 		if ( ! is_array( $id_array ) ) {
 			return '';
 		}
@@ -128,7 +126,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return $navi;
 	}
 
-	function build_link_photo( $num, $flag_current ) {
+	public function build_link_photo( $num, $flag_current ) {
 		$title = null;
 
 		$item_id  = $this->get_id_from_array( $num );
@@ -154,7 +152,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return $this->build_link( $item_id, $img, $title );
 	}
 
-	function build_img( $param, $title, $flag_current ) {
+	public function build_img( $param, $title, $flag_current ) {
 		$thumb_src    = $param['img_thumb_src'];
 		$thumb_width  = $param['img_thumb_width'];
 		$thumb_height = $param['img_thumb_height'];
@@ -178,7 +176,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return $img;
 	}
 
-	function build_link_id( $num, $name ) {
+	public function build_link_id( $num, $name ) {
 		$title = null;
 
 		$item_id  = $this->get_id_from_array( $num );
@@ -190,7 +188,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return $this->build_link( $item_id, $name, $title );
 	}
 
-	function build_link( $extra, $name, $title ) {
+	public function build_link( $extra, $name, $title ) {
 		$href = $this->_script . $extra;
 
 		if ( $title ) {
@@ -204,18 +202,14 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return $str;
 	}
 
-	function get_id_from_array( $num ) {
-		if ( isset( $this->_id_array[ $num ] ) ) {
-			return $this->_id_array[ $num ];
-		}
-
-		return false;
+	public function get_id_from_array( $num ) {
+		return $this->_id_array[ $num ] ?? false;
 	}
 
 
 // adjust
 
-	function adjust_size( $width, $height, $flag_current ) {
+	public function adjust_size( $width, $height, $flag_current ) {
 		if ( $flag_current ) {
 			return $this->adjust_current_size( $width, $height );
 		}
@@ -223,7 +217,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return $this->adjust_small_size( $width, $height );
 	}
 
-	function adjust_small_size( $width, $height ) {
+	public function adjust_small_size( $width, $height ) {
 		list( $new_width, $new_height ) =
 			$this->_image_class->adjust_image_size(
 				$width, $height, $this->_max_small_width, $this->_max_small_height );
@@ -235,7 +229,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return array( $this->_max_small_width, 0 );
 	}
 
-	function adjust_current_size( $width, $height ) {
+	public function adjust_current_size( $width, $height ) {
 		list( $new_width, $new_height ) =
 			$this->_image_class->adjust_image_size(
 				$width, $height, $this->_max_current_width, $this->_max_current_height );
@@ -247,7 +241,4 @@ class webphoto_photo_navi extends webphoto_lib_error {
 		return array( $this->_max_current_width, 0 );
 	}
 
-// --- class end ---
 }
-
-?>

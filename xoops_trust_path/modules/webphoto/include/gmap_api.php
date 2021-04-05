@@ -1,19 +1,18 @@
 <?php
-// $Id: gmap_api.php,v 1.1 2009/01/31 19:14:12 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2009-01-25 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ */
 
 if ( ! defined( 'XOOPS_ROOT_PATH' ) ) {
 	die( 'not permit' );
 }
 
-//=========================================================
-// happy_linux_build_once_gmap_api
-//=========================================================
-// === function begin ===
 if ( ! function_exists( 'happy_linux_build_once_gmap_api' ) ) {
 
 	function happy_linux_build_once_gmap_api( $apikey, $langcode = null ) {
@@ -46,7 +45,4 @@ if ( ! function_exists( 'happy_linux_build_once_gmap_api' ) ) {
 		return $str;
 	}
 
-// === function end ===
 }
-
-?>

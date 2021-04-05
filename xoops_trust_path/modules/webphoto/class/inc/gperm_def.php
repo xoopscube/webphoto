@@ -32,7 +32,7 @@ class webphoto_inc_gperm_def {
 
 // group
 
-	function get_perms_admin() {
+	public function get_perms_admin() {
 		return array(
 			_B_WEBPHOTO_GPERM_INSERTABLE,
 			_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE,
@@ -48,7 +48,7 @@ class webphoto_inc_gperm_def {
 		);
 	}
 
-	function get_perms_user() {
+	public function get_perms_user() {
 		return array(
 			_B_WEBPHOTO_GPERM_INSERTABLE,
 //		_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE ,
@@ -64,7 +64,7 @@ class webphoto_inc_gperm_def {
 		);
 	}
 
-	function get_perm_list() {
+	public function get_perm_list() {
 		return array(
 			_B_WEBPHOTO_GPERM_INSERTABLE => _AM_WEBPHOTO_GPERM_INSERTABLE,
 			_B_WEBPHOTO_GPERM_SUPERINSERT | _B_WEBPHOTO_GPERM_INSERTABLE

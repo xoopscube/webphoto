@@ -56,11 +56,9 @@ class webphoto_show_main_photo extends webphoto_show_main {
 	public $_get_viewtype = null;
 
 
-// constructor
+	public function __construct( $dirname, $trust_dirname ) {
 
-	function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_show_main( $dirname , $trust_dirname );
 
 		$this->_flash_class
 			=& webphoto_flash_player::getInstance( $dirname, $trust_dirname );
@@ -101,7 +99,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 // check
 
-	function check_photo_edittag() {
+	public function check_photo_edittag() {
 		$this->check_photo_init();
 
 		if ( $this->is_photo_edittag() ) {
@@ -111,7 +109,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 	}
 
-	function check_photo_init() {
+	public function check_photo_init() {
 		$this->_get_photo_id = $this->_uri_class->get_pathinfo_id( 'photo_id' );
 		$this->_get_cat_id   = $this->_pathinfo_class->get_int( 'cat_id' );
 		$this->_get_order    = $this->_pathinfo_class->get( 'order' );
@@ -129,7 +127,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 // edittag
 
-	function is_photo_edittag() {
+	public function is_photo_edittag() {
 		if ( $this->_post_class->get_post( 'op' ) == 'tagedit' ) {
 			return true;
 		}
@@ -137,7 +135,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return false;
 	}
 
-	function photo_edittag() {
+	public function photo_edittag() {
 		$redirect_this_url = $this->build_uri_photo( $this->_get_photo_id );
 
 		$ret = $this->excute_photo_edittag();
@@ -171,7 +169,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		exit();
 	}
 
-	function excute_photo_edittag() {
+	public function excute_photo_edittag() {
 		if ( ! $this->_has_tagedit ) {
 			return _C_WEBPHOTO_ERR_NO_PERM;
 		}
@@ -199,7 +197,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 // show main
 
-	function build_photo_show_photo( $row ) {
+	public function build_photo_show_photo( $row ) {
 		$arr1 = $this->build_photo_show_main( $row );
 
 		$this->_perm_download = $arr1['perm_download'];
@@ -216,7 +214,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 // flash player
 
-	function build_photo_flash_player( $item_row, $show_arr ) {
+	public function build_photo_flash_player( $item_row, $show_arr ) {
 		$item_id     = $item_row['item_id'];
 		$displaytype = $item_row['item_displaytype'];
 		$uid         = $item_row['item_uid'];
@@ -240,20 +238,18 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		$flash = $this->_flash_class->build_movie_by_item_row( $item_row );
 		list( $embed, $js ) = $this->_flash_class->build_code_embed_by_item_row( $item_row );
 
-		$arr = array(
+		return array(
 			'displaytype_flash' => $flag,
 			'flash_player'      => $flash,
 			'code_embed'        => $embed,
 			'code_js'           => $js,
 		);
-
-		return $arr;
 	}
 
 
 // embed
 
-	function build_photo_embed_link( $item_row ) {
+	public function build_photo_embed_link( $item_row ) {
 		$kind    = $item_row['item_kind'];
 		$siteurl = $item_row['item_siteurl'];
 		$type    = $item_row['item_embed_type'];
@@ -294,7 +290,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 // code
 
-	function build_photo_code( $item_row, $show_arr, $flash_arr, $embed_arr ) {
+	public function build_photo_code( $item_row, $show_arr, $flash_arr, $embed_arr ) {
 		$item_id = $item_row['item_id'];
 		$title   = $item_row['item_title'];
 		$siteurl = $item_row['item_siteurl'];
@@ -343,7 +339,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_file_link( $item_row, $show_arr, $name ) {
+	public function build_photo_file_link( $item_row, $show_arr, $name ) {
 		$show     = false;
 		$show_img = false;
 		$url      = null;
@@ -424,7 +420,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_page_link( $item_id ) {
+	public function build_photo_page_link( $item_id ) {
 		$name  = 'page';
 		$url   = $this->build_uri_photo( $item_id );
 		$title = $this->get_constant( 'page_view' );
@@ -432,7 +428,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $this->build_photo_code_result_link( $name, $url, $title, '_self' );
 	}
 
-	function build_photo_site_link( $item_id, $item_siteurl, $embed_arr ) {
+	public function build_photo_site_link( $item_id, $item_siteurl, $embed_arr ) {
 		$show = false;
 		$url  = null;
 		$href = null;
@@ -462,7 +458,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_play_link( $item_id, $kind, $item_title, $feed, $cache ) {
+	public function build_photo_play_link( $item_id, $kind, $item_title, $feed, $cache ) {
 		$show = false;
 		$url  = null;
 
@@ -501,7 +497,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $this->build_photo_code_result_link( $name, $url, $title );
 	}
 
-	function build_photo_code_embed_link( $item_row, $flash_arr, $embed_arr ) {
+	public function build_photo_code_embed_link( $item_row, $flash_arr, $embed_arr ) {
 		$embed = null;
 		$js    = null;
 
@@ -524,7 +520,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 	}
 
-	function build_photo_code_result_link( $name, $url, $title, $target = '_blank' ) {
+	public function build_photo_code_result_link( $name, $url, $title, $target = '_blank' ) {
 		$arr            = $this->build_photo_code_result_value( $name, $url );
 		$arr['href']    = $url;
 		$arr['href_s']  = $this->sanitize( $url );
@@ -535,7 +531,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_code_result_value( $name, $value ) {
+	public function build_photo_code_result_value( $name, $value ) {
 		$caption = $this->build_photo_code_caption( $name );
 
 		$arr = array(
@@ -550,17 +546,17 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_code_caption( $name ) {
+	public function build_photo_code_caption( $name ) {
 		return $this->get_constant( strtoupper( 'ITEM_CODEINFO_' . $name ) );
 	}
 
-	function is_photo_code_show_by_name( $name, $value ) {
+	public function is_photo_code_show_by_name( $name, $value ) {
 		$const = constant( strtoupper( '_C_WEBPHOTO_CODEINFO_' . $name ) );
 
 		return $this->is_photo_code_show_by_const( $const, $value );
 	}
 
-	function is_photo_code_show_by_const( $const, $value ) {
+	public function is_photo_code_show_by_const( $const, $value ) {
 		if ( in_array( $const, $this->_codeinfo_array ) && $value ) {
 			$this->_show_codebox = true;
 
@@ -570,13 +566,13 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return false;
 	}
 
-	function get_photo_catid_row_or_post( $row ) {
+	public function get_photo_catid_row_or_post( $row ) {
 		$cat_id = ( $row['item_cat_id'] > 0 ) ? $row['item_cat_id'] : $this->_get_cat_id;
 
 		return $cat_id;
 	}
 
-	function build_photo_gmap_param( $row ) {
+	public function build_photo_gmap_param( $row ) {
 		$show  = false;
 		$icons = null;
 
@@ -599,7 +595,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_navi( $photo_id, $cat_id ) {
+	public function build_photo_navi( $photo_id, $cat_id ) {
 		$script   = $this->_uri_class->build_photo_pagenavi();
 		$orderby  = $this->_sort_class->sort_to_orderby( $this->_get_order );
 		$id_array = $this->_public_class->get_id_array_by_catid_orderby( $cat_id, $orderby );
@@ -607,7 +603,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $this->_photo_navi_class->build_navi( $script, $id_array, $photo_id );
 	}
 
-	function build_photo_tags_param( $photo_id ) {
+	public function build_photo_tags_param( $photo_id ) {
 		if ( ! $this->_has_tagedit ) {
 			$arr = array(
 				'show_tagedit' => false
@@ -627,21 +623,19 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $arr;
 	}
 
-	function build_photo_tags( $photo_id ) {
+	public function build_photo_tags( $photo_id ) {
 		return $this->_tag_class->build_tags_for_photo( $photo_id, $this->_xoops_uid );
 	}
 
 
 // xoops comment
 
-	function comment_view() {
+	public function comment_view() {
 		$this->_comment_view_class->assgin_tmplate();
 	}
 
-//=========================================================
 // category
-//=========================================================
-	function build_photos_param_in_category( $cat_id ) {
+	public function build_photos_param_in_category( $cat_id ) {
 		$limit = $this->_MAX_PHOTOS;
 		$start = $this->pagenavi_calc_start( $limit );
 
@@ -676,11 +670,11 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return array_merge( $cat_param, $photo_param, $navi_param );
 	}
 
-	function build_photos_in_category( $cat_id, $limit, $start ) {
+	public function build_photos_in_category( $cat_id, $limit, $start ) {
 		$row = $this->_public_class->get_cat_row( $cat_id );
 
 		if ( ! is_array( $row ) ) {
-			$arr = array(
+			return array(
 				'cat_title'       => '',
 				'cat_photo_total' => 0,
 				'cat_photo_rows'  => null,
@@ -691,8 +685,6 @@ class webphoto_show_main_photo extends webphoto_show_main {
 				'catpath'       => '',
 				'cat_desc_disp' => '',
 			);
-
-			return $arr;
 		}
 
 		$cat_title = $row['cat_title'];
@@ -713,7 +705,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			$show_catpath = true;
 		}
 
-		$arr = array(
+		return array(
 			'cat_title'       => $cat_title,
 			'cat_photo_total' => $total,
 			'cat_photo_rows'  => $photo_rows,
@@ -725,11 +717,9 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			'cat_desc_disp' => $this->build_cat_desc_disp( $row ),
 		);
 
-		return $arr;
-
 	}
 
-	function get_rows_total_by_catid( $cat_id, $limit = 0, $offset = 0 ) {
+	public function get_rows_total_by_catid( $cat_id, $limit = 0, $offset = 0 ) {
 		$rows     = null;
 		$total    = 0;
 		$this_sum = 0;
@@ -772,7 +762,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return array( $rows, $total, $this_sum );
 	}
 
-	function check_cat_perm_read_by_catid( $cat_id ) {
+	public function check_cat_perm_read_by_catid( $cat_id ) {
 		if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 			return true;
 		}
@@ -783,7 +773,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return false;
 	}
 
-	function build_photos_navi_in_category( $cat_id, $total, $limit ) {
+	public function build_photos_navi_in_category( $cat_id, $total, $limit ) {
 		if ( $this->_navi_mode == 'kind' ) {
 			$url = $this->build_uri_list_navi_url_kind( 'category', $cat_id, $this->_get_kind );
 		} else {
@@ -793,7 +783,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $this->build_navi( $url, $total, $limit, $this->_get_page );
 	}
 
-	function get_name_in_category() {
+	public function get_name_in_category() {
 		$kind = null;
 		if ( $this->_navi_mode == 'kind' ) {
 			$kind = $this->_get_kind;
@@ -814,7 +804,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $name;
 	}
 
-	function get_orderby_in_category() {
+	public function get_orderby_in_category() {
 		$sort = $this->_get_sort;
 		if ( $this->_navi_mode == 'kind' ) {
 			$sort = $this->_sort_class->mode_to_sort( $this->_get_kind );
@@ -823,7 +813,4 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		return $this->_sort_class->sort_to_orderby( $sort );
 	}
 
-// --- class end ---
 }
-
-?>

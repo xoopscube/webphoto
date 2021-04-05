@@ -36,7 +36,7 @@ class webphoto_inc_comment extends webphoto_inc_base_ini {
 
 // public
 
-	function update_photo_comments( $item_id, $comments ) {
+	public function update_photo_comments( $item_id, $comments ) {
 		$sql = 'UPDATE ' . $this->prefix_dirname( 'item' );
 		$sql .= ' SET ';
 		$sql .= 'item_comments=' . (int) $comments . ' ';

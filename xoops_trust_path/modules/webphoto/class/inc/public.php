@@ -40,27 +40,27 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // item rows
 
-	function get_item_rows_for_block( $options, $orderby, $limit = 0, $offset = 0, $key = false ) {
+	public function get_item_rows_for_block( $options, $orderby, $limit = 0, $offset = 0, $key = false ) {
 		return $this->get_item_rows_by_name_param_orderby(
 			'block', $options, $orderby, $limit, $offset, $key );
 	}
 
-	function get_item_rows_for_imagemanager( $cat_id, $limit = 0, $offset = 0 ) {
+	public function get_item_rows_for_imagemanager( $cat_id, $limit = 0, $offset = 0 ) {
 		return $this->get_item_rows_by_name_param_orderby(
 			'imagemanager_catid', $cat_id, $this->_ITEM_ORDERBY, $limit, $offset );
 	}
 
-	function get_item_rows_for_search( $query_array, $andor, $uid, $limit = 0, $offset = 0 ) {
+	public function get_item_rows_for_search( $query_array, $andor, $uid, $limit = 0, $offset = 0 ) {
 		return $this->get_item_rows_by_name_param_orderby(
 			'search', array( $query_array, $andor, $uid ), $this->_ITEM_ORDERBY, $limit, $offset );
 	}
 
-	function get_item_rows_for_whatsnew( $limit = 0, $offset = 0 ) {
+	public function get_item_rows_for_whatsnew( $limit = 0, $offset = 0 ) {
 		return $this->get_item_rows_by_name_param_orderby(
 			'whatsnew', null, $this->_ITEM_ORDERBY, $limit, $offset );
 	}
 
-	function get_item_rows_by_name_param_orderby(
+	public function get_item_rows_by_name_param_orderby(
 		$name, $param, $orderby, $limit = 0, $offset = 0, $key = false
 	) {
 		$item_key = null;
@@ -81,7 +81,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		}
 	}
 
-	function get_item_rows_item_cat_by_name_param_orderby(
+	public function get_item_rows_item_cat_by_name_param_orderby(
 		$name, $param, $orderby, $limit = 0, $offset = 0, $key = null
 	) {
 		$where = $this->build_where_item_cat_by_name_param( $name, $param );
@@ -89,7 +89,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $this->get_item_rows_by_where_orderby_with_cat( $where, $orderby, $limit, $offset, $key );
 	}
 
-	function get_item_rows_item_by_name_param_orderby(
+	public function get_item_rows_item_by_name_param_orderby(
 		$name, $param, $orderby, $limit = 0, $offset = 0, $key = null
 	) {
 		$where = $this->build_where_by_name_param( $name, $param );
@@ -100,12 +100,12 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // item count
 
-	function get_item_count_for_imagemanager( $cat_id ) {
+	public function get_item_count_for_imagemanager( $cat_id ) {
 		return $this->get_item_count_by_name_param(
 			'imagemanager_catid', $cat_id );
 	}
 
-	function get_item_count_by_name_param( $name, $param ) {
+	public function get_item_count_by_name_param( $name, $param ) {
 		if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 			return $this->get_item_count_item_by_name_param(
 				$name, $param );
@@ -116,13 +116,13 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		}
 	}
 
-	function get_item_count_item_cat_by_name_param( $name, $param ) {
+	public function get_item_count_item_cat_by_name_param( $name, $param ) {
 		$where = $this->build_where_item_cat_by_name_param( $name, $param );
 
 		return $this->get_item_count_by_where_with_cat( $where );
 	}
 
-	function get_item_count_item_by_name_param( $name, $param ) {
+	public function get_item_count_item_by_name_param( $name, $param ) {
 		$where = $this->build_where_by_name_param( $name, $param );
 
 		return $this->get_item_count_by_where( $where );
@@ -131,7 +131,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // imagemanager
 
-	function get_item_catlist_for_imagemanager( $limit = 0, $offset = 0 ) {
+	public function get_item_catlist_for_imagemanager( $limit = 0, $offset = 0 ) {
 		if ( $this->_cfg_perm_cat_read == _C_WEBPHOTO_OPT_PERM_READ_ALL ) {
 			return $this->get_item_catlist_for_imagemanager_with_item( $limit, $offset );
 
@@ -140,7 +140,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		}
 	}
 
-	function get_item_catlist_for_imagemanager_with_item_cat( $limit = 0, $offset = 0 ) {
+	public function get_item_catlist_for_imagemanager_with_item_cat( $limit = 0, $offset = 0 ) {
 		$where = $this->build_where_item_cat_by_name_param( 'imagemanager_catlist', null );
 
 		$sql = 'SELECT i.item_cat_id, COUNT(i.item_id) AS photo_sum ';
@@ -156,7 +156,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $this->get_rows_by_sql( $sql, $limit, $offset );
 	}
 
-	function get_item_catlist_for_imagemanager_with_item( $limit = 0, $offset = 0 ) {
+	public function get_item_catlist_for_imagemanager_with_item( $limit = 0, $offset = 0 ) {
 		$where = $this->build_where_by_name_param( 'imagemanager_catlist', null );
 
 		$sql = 'SELECT item_cat_id, COUNT(item_id) AS photo_sum ';
@@ -172,7 +172,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // item cat where
 
-	function build_where_item_cat_by_name_param( $name, $param ) {
+	public function build_where_item_cat_by_name_param( $name, $param ) {
 		$where = $this->convert_item_field(
 			$this->build_where_by_name_param( $name, $param ) );
 		$where .= ' AND ' . $this->build_where_cat_perm_read();
@@ -180,14 +180,14 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $where;
 	}
 
-	function convert_item_field( $str ) {
+	public function convert_item_field( $str ) {
 		return str_replace( 'item_', 'i.item_', $str );
 	}
 
 
 // item where
 
-	function build_where_by_name_param( $name, $param ) {
+	public function build_where_by_name_param( $name, $param ) {
 		$where = null;
 
 		switch ( $name ) {
@@ -219,11 +219,11 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $where;
 	}
 
-	function build_where_for_whatsnew() {
+	public function build_where_for_whatsnew() {
 		return $this->build_where_public_with_item();
 	}
 
-	function build_where_for_block( $options ) {
+	public function build_where_for_block( $options ) {
 // defined in block.php
 		$where_limitation = $this->build_where_block_cat_limitation( $options );
 
@@ -235,18 +235,18 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $where;
 	}
 
-	function build_where_for_imagemanager_catlist() {
+	public function build_where_for_imagemanager_catlist() {
 		return $this->build_where_for_imagemanager_image();
 	}
 
-	function build_where_for_imagemanager_catid( $cat_id ) {
+	public function build_where_for_imagemanager_catid( $cat_id ) {
 		$where = $this->build_where_for_imagemanager_image();
 		$where .= ' AND item_cat_id=' . (int) $cat_id;
 
 		return $where;
 	}
 
-	function build_where_for_imagemanager_image() {
+	public function build_where_for_imagemanager_image() {
 		$where = $this->build_where_public_with_item();
 		$where .= ' AND item_file_id_1 > 0';
 		$where .= ' AND item_file_id_2 > 0';

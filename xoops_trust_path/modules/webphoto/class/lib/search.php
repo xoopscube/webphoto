@@ -142,7 +142,7 @@ class webphoto_lib_search {
 		$this->get_post_get_showcontext();
 	}
 
-	function get_post_get_action( $default = 'search' ) {
+	public function get_post_get_action( $default = 'search' ) {
 		$action = $this->_get_post_get_text( 'action' );
 
 		switch ( $action ) {
@@ -163,7 +163,7 @@ class webphoto_lib_search {
 		return $ret;
 	}
 
-	function get_post_get_andor( $default = 'AND' ) {
+	public function get_post_get_andor( $default = 'AND' ) {
 		$andor = $this->_get_post_get_text( 'andor' );
 
 		switch ( $andor ) {
@@ -183,48 +183,48 @@ class webphoto_lib_search {
 		return $ret;
 	}
 
-	function get_post_get_query() {
+	public function get_post_get_query() {
 		$this->_post_query = trim( $this->_get_post_get_text( 'query' ) );
 
 		return $this->_post_query;
 	}
 
-	function get_post_get_uid() {
+	public function get_post_get_uid() {
 		$this->_post_uid = $this->_get_post_get_int( 'uid' );
 
 		return $this->_post_uid;
 	}
 
-	function get_post_get_mid() {
+	public function get_post_get_mid() {
 		$this->_post_mid = $this->_get_post_get_int( 'mid' );
 
 		return $this->_post_mid;
 	}
 
-	function get_post_get_start() {
+	public function get_post_get_start() {
 		$this->_post_start = $this->_get_post_get_int( 'start' );
 
 		return $this->_post_start;
 	}
 
-	function get_post_get_mids() {
+	public function get_post_get_mids() {
 		$this->_post_mids = $this->_get_post_get( 'mids' );
 
 		return $this->_post_mids;
 	}
 
-	function get_post_get_showcontext( $default = 1 ) {
+	public function get_post_get_showcontext( $default = 1 ) {
 		$this->_post_showcontext = $this->_get_post_get_int( 'showcontext', $default );
 
 		return $this->_post_showcontext;
 	}
 
-	function set_query( $val ) {
+	public function set_query( $val ) {
 		$this->_post_query = trim( $val );
 	}
 
 // parse query
-	function parse_query_default() {
+	public function parse_query_default() {
 		$ret = $this->parse_query(
 			$this->_post_query,
 			$this->_post_andor,
@@ -234,7 +234,7 @@ class webphoto_lib_search {
 		return $ret;
 	}
 
-	function parse_query( $query = '', $andor = '', $gpc = true ) {
+	public function parse_query( $query = '', $andor = '', $gpc = true ) {
 		if ( $query && $gpc ) {
 			$query = $this->_strip_slashes_gpc( $query );
 		} elseif ( empty( $query ) ) {
@@ -291,7 +291,7 @@ class webphoto_lib_search {
 		return true;
 	}
 
-	function query_to_array( $query ) {
+	public function query_to_array( $query ) {
 		$this->_query_raw_array         = array();
 		$this->_query_array             = array();
 		$this->_ignore_array            = array();
@@ -328,7 +328,7 @@ class webphoto_lib_search {
 	}
 
 // build query
-	function build_sql_query( $field_name ) {
+	public function build_sql_query( $field_name ) {
 		$where = '';
 		$code  = $this->check_build_sql_query_array();
 		switch ( $code ) {
@@ -349,7 +349,7 @@ class webphoto_lib_search {
 		return $where;
 	}
 
-	function check_build_sql_query_array( $query_array = '', $candidate_keyword_array = '', $andor = '' ) {
+	public function check_build_sql_query_array( $query_array = '', $candidate_keyword_array = '', $andor = '' ) {
 		if ( empty( $candidate_keyword_array ) ) {
 			$candidate_keyword_array = $this->_candidate_keyword_array;
 		}
@@ -379,13 +379,13 @@ class webphoto_lib_search {
 		return _C_WEBPHOTO_SR_SQL_NO_CAN;
 	}
 
-	function _build_sql_query_array( $query_array, $candidate_keyword_array, $andor ) {
+	public function _build_sql_query_array( $query_array, $candidate_keyword_array, $andor ) {
 		$this->_sql_andor       = 'OR';
 		$this->_sql_query_array = $this->_merge_unique_array( $query_array, $candidate_keyword_array );
 	}
 
 // build sql
-	function build_single_double_where( $field_name, $query_array1, $query_array2 = null, $andor = 'AND' ) {
+	public function build_single_double_where( $field_name, $query_array1, $query_array2 = null, $andor = 'AND' ) {
 		$where  = '';
 		$where1 = '';
 		$where2 = '';
@@ -409,7 +409,7 @@ class webphoto_lib_search {
 		return $where;
 	}
 
-	function build_multi_where( $field_name_array, $query_array, $andor = 'AND' ) {
+	public function build_multi_where( $field_name_array, $query_array, $andor = 'AND' ) {
 		$where = '';
 		$arr   = array();
 
@@ -428,7 +428,7 @@ class webphoto_lib_search {
 		return $where;
 	}
 
-	function build_single_where( $field_name, $query_array, $andor = 'AND' ) {
+	public function build_single_where( $field_name, $query_array, $andor = 'AND' ) {
 		$where = '';
 
 		if ( is_array( $query_array ) ) {
@@ -452,8 +452,8 @@ class webphoto_lib_search {
 	}
 
 // get query
-	function get_query_param() {
-		$arr = array(
+	public function get_query_param() {
+		return array(
 			'search_query'              => $this->get_query_raw(),
 			'search_query_array'        => $this->get_query_array(),
 			'search_keywords'           => $this->get_query_array(),
@@ -468,11 +468,9 @@ class webphoto_lib_search {
 			'search_lang_searchresults' => _SR_SEARCHRESULTS,
 			'search_lang_keywords'      => _SR_KEYWORDS,
 		);
-
-		return $arr;
 	}
 
-	function get_query_raw( $format = null ) {
+	public function get_query_raw( $format = null ) {
 		$ret = $this->_array_to_str( $this->_query_raw_array, ' ' );
 		if ( $format == 's' ) {
 			$ret = $this->_sanitize( $ret );
@@ -481,19 +479,19 @@ class webphoto_lib_search {
 		return $ret;
 	}
 
-	function get_query_for_form( $glue = ' ', $format = 's' ) {
+	public function get_query_for_form( $glue = ' ', $format = 's' ) {
 		return $this->implode_query_array( $this->_query_array, $glue, $format );
 	}
 
-	function get_query_for_google( $glue = '+', $format = null ) {
+	public function get_query_for_google( $glue = '+', $format = null ) {
 		return $this->implode_query_array( $this->_query_array, $glue, $format );
 	}
 
-	function get_query_urlencode() {
+	public function get_query_urlencode() {
 		return $this->urlencode_implode_array( $this->_query_array );
 	}
 
-	function get_query_array( $format = 's' ) {
+	public function get_query_array( $format = 's' ) {
 		if ( $format ) {
 			$arr = $this->_sanitize_array( $this->_query_array );
 		} else {
@@ -503,15 +501,15 @@ class webphoto_lib_search {
 		return $arr;
 	}
 
-	function get_merged_query_array() {
+	public function get_merged_query_array() {
 		return $this->_merged_query_array;
 	}
 
-	function get_merged_urlencode() {
+	public function get_merged_urlencode() {
 		return $this->_urlencode_from_array( $this->_merged_query_array );
 	}
 
-	function implode_query_array( $arr, $glue = ' ', $format = null ) {
+	public function implode_query_array( $arr, $glue = ' ', $format = null ) {
 		$ret = $this->_array_to_str( $arr, $glue );
 		if ( $format == 's' ) {
 			$ret = $this->_sanitize( $ret );
@@ -521,7 +519,7 @@ class webphoto_lib_search {
 	}
 
 // get param
-	function get_action( $format = null ) {
+	public function get_action( $format = null ) {
 		$ret = $this->_post_action;
 		if ( $format == 's' ) {
 			$ret = $this->_sanitize( $ret );
@@ -530,27 +528,27 @@ class webphoto_lib_search {
 		return $ret;
 	}
 
-	function get_start() {
+	public function get_start() {
 		return (int) $this->_post_start;
 	}
 
-	function get_andor() {
+	public function get_andor() {
 		return $this->_mode_andor;
 	}
 
-	function get_and() {
+	public function get_and() {
 		return $this->_sel_and;
 	}
 
-	function get_or() {
+	public function get_or() {
 		return $this->_sel_or;
 	}
 
-	function get_exact() {
+	public function get_exact() {
 		return $this->_sel_exact;
 	}
 
-	function get_ignore_array( $format = 's' ) {
+	public function get_ignore_array( $format = 's' ) {
 		if ( $format ) {
 			$arr = $this->_sanitize_array( $this->_ignore_array );
 		} else {
@@ -560,7 +558,7 @@ class webphoto_lib_search {
 		return $arr;
 	}
 
-	function get_candidate_array( $format = 's' ) {
+	public function get_candidate_array( $format = 's' ) {
 		if ( $format ) {
 			$arr = $this->_sanitize_array( $this->_candidate_array );
 		} else {
@@ -570,11 +568,11 @@ class webphoto_lib_search {
 		return $arr;
 	}
 
-	function get_candidate_keyword_array() {
+	public function get_candidate_keyword_array() {
 		return $this->_candidate_keyword_array;
 	}
 
-	function get_count_query_array() {
+	public function get_count_query_array() {
 		if ( is_array( $this->_query_array ) ) {
 			return count( $this->_query_array );
 		}
@@ -582,7 +580,7 @@ class webphoto_lib_search {
 		return false;
 	}
 
-	function get_count_ignore_array() {
+	public function get_count_ignore_array() {
 		if ( is_array( $this->_ignore_array ) ) {
 			return count( $this->_ignore_array );
 		}
@@ -590,7 +588,7 @@ class webphoto_lib_search {
 		return false;
 	}
 
-	function get_count_candidate_array() {
+	public function get_count_candidate_array() {
 		if ( is_array( $this->_candidate_array ) ) {
 			return count( $this->_candidate_array );
 		}
@@ -598,35 +596,35 @@ class webphoto_lib_search {
 		return false;
 	}
 
-	function get_sql_andor() {
+	public function get_sql_andor() {
 		return $this->_sql_andor;
 	}
 
-	function get_sql_query_array() {
+	public function get_sql_query_array() {
 		return $this->_sql_query_array;
 	}
 
-	function get_lang_keytooshort() {
+	public function get_lang_keytooshort() {
 		return sprintf( _SR_KEYTOOSHORT, $this->_min_keyword );
 	}
 
-	function get_lang_keyignore() {
+	public function get_lang_keyignore() {
 		return sprintf( _SR_KEYIGNORE, $this->_min_keyword );
 	}
 
-	function get_lang_ignoredwords() {
+	public function get_lang_ignoredwords() {
 		return sprintf( _SR_IGNOREDWORDS, $this->_min_keyword );
 	}
 
 // xoops param
-	function get_xoops_config_search_enable_search() {
+	public function get_xoops_config_search_enable_search() {
 		$config_handler    =& xoops_gethandler( 'config' );
 		$xoopsConfigSearch =& $config_handler->getConfigsByCat( XOOPS_CONF_SEARCH );
 
 		return $xoopsConfigSearch['enable_search'];
 	}
 
-	function get_xoops_config_search_keyword_min() {
+	public function get_xoops_config_search_keyword_min() {
 		$config_handler    =& xoops_gethandler( 'config' );
 		$xoopsConfigSearch =& $config_handler->getConfigsByCat( XOOPS_CONF_SEARCH );
 
@@ -634,11 +632,9 @@ class webphoto_lib_search {
 	}
 
 // Private
-//--------------------------------------------------------
 // convert for Japanese EUC-JP
 // porting from suin's search <http://suin.jp/>
-//--------------------------------------------------------
-	function _convert_space_zen_to_han( $str ) {
+	private function _convert_space_zen_to_han( $str ) {
 		if ( $this->_is_japanese && function_exists( 'mb_convert_kana' ) ) {
 			return mb_convert_kana( $str, "s" );
 		}
@@ -646,7 +642,7 @@ class webphoto_lib_search {
 		return $str;
 	}
 
-	function _build_candidate( $q ) {
+	private function _build_candidate( $q ) {
 		if ( ! $this->_flag_candidate ) {
 			return;
 		}
@@ -739,7 +735,7 @@ class webphoto_lib_search {
 		}
 	}
 
-	function _set_candidate_array( $q, $keyword, $type ) {
+	public function _set_candidate_array( $q, $keyword, $type ) {
 		if ( strlen( $keyword ) < $this->_min_keyword ) {
 			return;
 		}
@@ -767,7 +763,7 @@ class webphoto_lib_search {
 	}
 
 // utility for array
-	function _merge_unique_array( $arr1, $arr2 ) {
+	public function _merge_unique_array( $arr1, $arr2 ) {
 		$arr = false;
 		if ( is_array( $arr1 ) && is_array( $arr2 ) ) {
 			$arr = array_merge( $arr1, $arr2 );
@@ -777,7 +773,7 @@ class webphoto_lib_search {
 		return $arr;
 	}
 
-	function _implode_array( $glue, $arr ) {
+	public function _implode_array( $glue, $arr ) {
 		$val = false;
 		if ( is_array( $arr ) && count( $arr ) ) {
 			$val = implode( $glue, $arr );
@@ -786,11 +782,11 @@ class webphoto_lib_search {
 		return $val;
 	}
 
-	function _urlencode_from_array( $arr, $glue = ' ' ) {
+	public function _urlencode_from_array( $arr, $glue = ' ' ) {
 		return urlencode( $this->_array_to_str( $arr, $glue ) );
 	}
 
-	function _str_to_array( $str, $pattern ) {
+	public function _str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
 		foreach ( $arr1 as $v ) {
@@ -804,7 +800,7 @@ class webphoto_lib_search {
 		return $arr2;
 	}
 
-	function _array_to_str( $arr, $glue ) {
+	public function _array_to_str( $arr, $glue ) {
 		if ( is_array( $arr ) && count( $arr ) ) {
 			return implode( $glue, $arr );
 		}
@@ -813,7 +809,7 @@ class webphoto_lib_search {
 	}
 
 // post
-	function _get_post_get( $key, $default = null ) {
+	public function _get_post_get( $key, $default = null ) {
 		$str = $default;
 		if ( isset( $_POST[ $key ] ) ) {
 			$str = $_POST[ $key ];
@@ -824,15 +820,15 @@ class webphoto_lib_search {
 		return $str;
 	}
 
-	function _get_post_get_text( $key, $default = null ) {
+	public function _get_post_get_text( $key, $default = null ) {
 		return $this->_strip_slashes_gpc( $this->_get_post_get( $key, $default ) );
 	}
 
-	function _get_post_get_int( $key, $default = 0 ) {
+	public function _get_post_get_int( $key, $default = 0 ) {
 		return (int) $this->_get_post_get( $key, $default );
 	}
 
-	function _strip_slashes_gpc( $str ) {
+	public function _strip_slashes_gpc( $str ) {
 		if ( get_magic_quotes_gpc() && ! is_array( $str ) ) {
 			$str = stripslashes( $str );
 		}
@@ -841,15 +837,15 @@ class webphoto_lib_search {
 	}
 
 // sanitize
-	function _sanitize( $str ) {
+	public function _sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-	function _sanitize_array( $arr_in ) {
+	public function _sanitize_array( $arr_in ) {
 		return $this->_sanitize_array_recursive( 0, $arr_in );
 	}
 
-	function _sanitize_array_recursive( $num, $arr_in ) {
+	public function _sanitize_array_recursive( $num, $arr_in ) {
 		$num ++;
 		if ( $num > $this->_MAX_ARRAY_DEPTH ) {
 			return false;

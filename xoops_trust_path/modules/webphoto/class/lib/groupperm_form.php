@@ -109,7 +109,7 @@ class webphoto_lib_groupperm_form {
 		return '';
 	}
 
-	function build_checked( $val ) {
+	public function build_checked( $val ) {
 		if ( $val ) {
 			return $this->_CHECKED;
 		}
@@ -117,7 +117,7 @@ class webphoto_lib_groupperm_form {
 		return '';
 	}
 
-	function get_dirname( $id ) {
+	public function get_dirname( $id ) {
 		$obj = $this->_module_handler->get( $id );
 		if ( is_object( $obj ) ) {
 			return $obj->getVar( 'dirname', 'n' );
@@ -126,7 +126,7 @@ class webphoto_lib_groupperm_form {
 		return false;
 	}
 
-	function get_group_name( $id ) {
+	public function get_group_name( $id ) {
 		$obj = $this->_member_handler->getGroup( $id );
 		if ( is_object( $obj ) ) {
 			return $obj->getVar( 'name' );
@@ -135,7 +135,7 @@ class webphoto_lib_groupperm_form {
 		return false;
 	}
 
-	function get_token() {
+	public function get_token() {
 		global $xoopsGTicket;
 		if ( is_object( $xoopsGTicket ) ) {
 			return $xoopsGTicket->issue( __LINE__ );
@@ -144,15 +144,13 @@ class webphoto_lib_groupperm_form {
 		return false;
 	}
 
-	function get_lang() {
-		$arr = array(
+	public function get_lang() {
+		return array(
 			'lang_none'   => _NONE,
 			'lang_all'    => _ALL,
 			'lang_submit' => _SUBMIT,
 			'lang_cancel' => _CANCEL,
 		);
-
-		return $arr;
 	}
 
 }

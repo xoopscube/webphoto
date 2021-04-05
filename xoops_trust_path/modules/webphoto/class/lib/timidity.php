@@ -36,7 +36,7 @@ class webphoto_lib_timidity {
 	}
 
 
-	function set_cmd_path( $val ) {
+	public function set_cmd_path( $val ) {
 		$this->_cmd_path     = $val;
 		$this->_cmd_timidity = $this->_cmd_path . 'timidity';
 
@@ -45,17 +45,17 @@ class webphoto_lib_timidity {
 		}
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
-	function mid_to_wav( $mid, $wav, $option = '' ) {
+	public function mid_to_wav( $mid, $wav, $option = '' ) {
 		$cmd_option = ' -Ow -o ' . $wav . ' ' . $option;
 
 		return $this->timidity( $mid, $cmd_option );
 	}
 
-	function timidity( $mid, $option = '' ) {
+	public function timidity( $mid, $option = '' ) {
 		$cmd = $this->_cmd_timidity . ' ' . $option . ' ' . $mid;
 		exec( "$cmd 2>&1", $ret_array, $ret_code );
 		if ( $this->_DEBUG ) {
@@ -70,7 +70,7 @@ class webphoto_lib_timidity {
 
 // version
 
-	function version( $path ) {
+	public function version( $path ) {
 // TiMidity++ version 2.13.1
 
 		$timidity = $path . 'timidity';
@@ -95,7 +95,7 @@ class webphoto_lib_timidity {
 
 // utility
 
-	function is_win_os() {
+	public function is_win_os() {
 		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
 			return true;
 		}
@@ -103,7 +103,7 @@ class webphoto_lib_timidity {
 		return false;
 	}
 
-	function conv_win_cmd( $cmd ) {
+	public function conv_win_cmd( $cmd ) {
 		$str = '"' . $cmd . '.exe"';
 
 		return $str;

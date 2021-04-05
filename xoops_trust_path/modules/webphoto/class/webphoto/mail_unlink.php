@@ -24,8 +24,6 @@ class webphoto_mail_unlink {
 	public $_SEPARATOR = '|';
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		$this->_config_class  =& webphoto_config::getInstance( $dirname );
 		$this->_utility_class =& webphoto_lib_utility::getInstance();
@@ -72,7 +70,4 @@ class webphoto_mail_unlink {
 		}
 	}
 
-// --- class end ---
 }
-
-?>

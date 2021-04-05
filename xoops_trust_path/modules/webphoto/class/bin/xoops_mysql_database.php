@@ -28,8 +28,6 @@ class mysql_database extends Database {
 	public $flag_print_error = 1;
 
 
-// constructor
-
 	public function __construct() {
 		parent::__construct();
 		$this->setPrefix( XOOPS_DB_PREFIX );

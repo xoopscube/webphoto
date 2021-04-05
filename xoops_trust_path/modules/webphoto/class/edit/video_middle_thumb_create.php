@@ -36,8 +36,6 @@ class webphoto_edit_video_middle_thumb_create extends webphoto_edit_base_create 
 	public $_SUB_DIR_JPEGS = 'jpegs';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 

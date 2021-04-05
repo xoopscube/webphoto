@@ -47,11 +47,8 @@ class webphoto_import extends webphoto_base_this {
 	public $_EXT_GIF = 'gif';
 
 
-// constructor
-
 	function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_base_this( $dirname , $trust_dirname );
 
 		$constpref       = strtoupper( '_P_' . $dirname . '_' );
 		$CONST_DEBUG_SQL = $constpref . 'DEBUG_SQL';
@@ -98,8 +95,6 @@ class webphoto_import extends webphoto_base_this {
 		return $instance;
 	}
 
-
-// init
 
 	function init_myalbum( $dirname ) {
 		$mid = $this->_myalbum_handler->init( $dirname );
@@ -573,7 +568,4 @@ class webphoto_import extends webphoto_base_this {
 		echo '<a href="index.php">GOTO Admin Menu</a>' . "<br>\n";
 	}
 
-// --- class end ---
 }
-
-?>

@@ -18,9 +18,9 @@ class webphoto_inc_oninstall_cat extends webphoto_inc_base_ini {
 	public $_table_cat;
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-//	$wp = new webphoto_inc_base_ini();
-//	$this->$wp;
+
 		$this->init_base_ini( $dirname, $trust_dirname );
 		$this->init_handler( $dirname );
 

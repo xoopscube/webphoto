@@ -37,11 +37,11 @@ class webphoto_inc_config {
 
 // cache 
 
-	function get_by_name( $name ) {
+	public function get_by_name( $name ) {
 		return $this->_cached_config[ $name ] ?? false;
 	}
 
-	function get_path_by_name( $name ) {
+	public function get_path_by_name( $name ) {
 		$path = $this->get_by_name( $name );
 		if ( $path ) {
 			return $this->_add_slash_to_head( $path );
@@ -50,7 +50,7 @@ class webphoto_inc_config {
 		return null;
 	}
 
-	function _add_slash_to_head( $str ) {
+	public function _add_slash_to_head( $str ) {
 // ord : the ASCII value of the first character of string
 // 0x2f slash
 
@@ -64,7 +64,7 @@ class webphoto_inc_config {
 
 // xoops class
 
-	function _get_xoops_config( $dirname ) {
+	public function _get_xoops_config( $dirname ) {
 		if ( defined( "WEBPHOTO_COMMOND_MODE" ) && ( WEBPHOTO_COMMOND_MODE == 1 ) ) {
 			$config =& webphoto_bin_config::getInstance();
 		} else {

@@ -43,8 +43,6 @@ class webphoto_edit_action extends webphoto_edit_submit {
 	}
 
 
-// modify check
-
 	public function check_edit_perm( $item_row ) {
 		if ( $this->_is_module_admin ) {
 			return true;

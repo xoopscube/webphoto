@@ -33,11 +33,8 @@ if ( ! class_exists( 'webphoto_timeline' ) ) {
 		public $_SHOW_FALSE = array( 'show_timeline' => false );
 
 
-// constructor
-
 		public function __construct( $dirname, $trust_dirname ) {
 			parent::__construct( $dirname, $trust_dirname );
-			//$this->webphoto_base_this( $dirname, $trust_dirname );
 
 			$this->_public_class
 				=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
@@ -181,7 +178,7 @@ if ( ! class_exists( 'webphoto_timeline' ) ) {
 				$show    = true;
 			}
 
-			$arr = array(
+			return array(
 				'show_timeline'       => $show,
 				'show_timeline_large' => ! $flag_large,
 				'show_timeline_unit'  => $flag_large,
@@ -189,8 +186,6 @@ if ( ! class_exists( 'webphoto_timeline' ) ) {
 				'timeline_js'         => $js,
 				'timeline_element'    => $element,
 			);
-
-			return $arr;
 		}
 
 		public function get_timeline_class( $flag_large ) {
@@ -223,9 +218,7 @@ if ( ! class_exists( 'webphoto_timeline' ) ) {
 
 			$arr2 = $this->_image_class->build_image_by_item_row( $row, true );
 
-			$arr = $row + $arr1 + $arr2;
-
-			return $arr;
+			return $row + $arr1 + $arr2;
 		}
 
 
@@ -250,10 +243,6 @@ if ( ! class_exists( 'webphoto_timeline' ) ) {
 			return $this->_utility_class->array_merge_unique( $arr1, $arr2, $this->_KEY_NAME );
 		}
 
-// --- class end ---
 	}
 
-// === class end ===
 }
-
-?>

@@ -50,13 +50,11 @@ class webphoto_qr extends webphoto_base_this {
 	}
 
 	public function build_mobile_param( $photo_id ) {
-		$arr = array(
+		return array(
 			'mobile_email'    => $this->get_mobile_email(),
 			'mobile_url'      => $this->build_mobile_url( $photo_id ),
 			'mobile_qr_image' => $this->build_mobile_filename( $photo_id )
 		);
-
-		return $arr;
 	}
 
 	public function build_mobile_url( $id ) {
@@ -86,7 +84,4 @@ class webphoto_qr extends webphoto_base_this {
 		return null;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -41,20 +41,20 @@ class webphoto_inc_admin_menu {
 		return $singletons[ $dirname ];
 	}
 
-	function build_menu() {
+	public function build_menu() {
 		$menu_array = $this->explode_ini( 'admin_menu_list' );
 
 		return $this->build_menu_array( $menu_array );
 	}
 
-	function build_sub_menu() {
+	public function build_sub_menu() {
 		$menu_array = $this->explode_ini( 'admin_sub_menu_list' );
 
 		return $this->build_menu_array( $menu_array );
 	}
 
 // utility
-	function build_menu_array( $array ) {
+	public function build_menu_array( $array ) {
 		$arr = array();
 		foreach ( $array as $fct ) {
 			$arr[] = array(
@@ -66,11 +66,11 @@ class webphoto_inc_admin_menu {
 		return $arr;
 	}
 
-	function build_title( $fct ) {
+	public function build_title( $fct ) {
 		return $this->get_constant( $fct );
 	}
 
-	function build_link( $fct ) {
+	public function build_link( $fct ) {
 		$link = 'admin/index.php';
 		if ( $this->file_fct_exists( $fct ) ) {
 			$link .= '?fct=' . $fct;
@@ -79,7 +79,7 @@ class webphoto_inc_admin_menu {
 		return $link;
 	}
 
-	function file_fct_exists( $fct ) {
+	public function file_fct_exists( $fct ) {
 		$file = $this->_TRUST_DIR . '/admin/' . $fct . '.php';
 
 		return file_exists( $file );
@@ -87,7 +87,7 @@ class webphoto_inc_admin_menu {
 
 
 // language
-	function get_constant( $name ) {
+	public function get_constant( $name ) {
 		$const_name = $this->get_constant_name( $name );
 		if ( defined( $const_name ) ) {
 			return constant( $const_name );
@@ -96,17 +96,17 @@ class webphoto_inc_admin_menu {
 		return $const_name;
 	}
 
-	function get_constant_name( $name ) {
+	public function get_constant_name( $name ) {
 		return strtoupper( '_MI_' . $this->_DIRNAME . '_ADMENU_' . $name );
 	}
 
 
 // ini class
-	function get_ini( $name ) {
+	public function get_ini( $name ) {
 		return $this->_ini_class->get_ini( $name );
 	}
 
-	function explode_ini( $name ) {
+	public function explode_ini( $name ) {
 		return $this->_ini_class->explode_ini( $name );
 	}
 

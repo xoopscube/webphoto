@@ -42,7 +42,7 @@ class webphoto_lib_imagemagick {
 
 // main
 
-	function set_cmd_path( $val ) {
+	public function set_cmd_path( $val ) {
 		$this->_cmd_path      = $val;
 		$this->_cmd_convert   = $this->_cmd_path . 'convert';
 		$this->_cmd_composite = $this->_cmd_path . 'composite';
@@ -54,15 +54,15 @@ class webphoto_lib_imagemagick {
 
 	}
 
-	function set_flag_chmod( $val ) {
+	public function set_flag_chmod( $val ) {
 		$this->_flag_chmod = (bool) $val;
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
-	function resize_rotate( $src, $dst, $max_width = 0, $max_height = 0, $rorate = 0 ) {
+	public function resize_rotate( $src, $dst, $max_width = 0, $max_height = 0, $rorate = 0 ) {
 		$option = '';
 
 		if ( ( $max_width > 0 ) && ( $max_height > 0 ) ) {
@@ -78,17 +78,17 @@ class webphoto_lib_imagemagick {
 		return true;
 	}
 
-	function add_watermark( $src, $dst, $mark ) {
+	public function add_watermark( $src, $dst, $mark ) {
 		$option = '-compose plus ';
 		$this->composite( $src, $dst, $mark, $option );
 	}
 
-	function add_icon( $src, $dst, $icon ) {
+	public function add_icon( $src, $dst, $icon ) {
 		$option = ' -gravity southeast ';
 		$this->composite( $src, $dst, $icon, $option );
 	}
 
-	function convert( $src, $dst, $option = '' ) {
+	public function convert( $src, $dst, $option = '' ) {
 		$cmd       = $this->_cmd_convert . ' ' . $option . ' ' . $src . ' ' . $dst;
 		$ret_array = null;
 		exec( "$cmd 2>&1", $ret_array );
@@ -111,7 +111,7 @@ class webphoto_lib_imagemagick {
 		return false;
 	}
 
-	function composite( $src, $dst, $change, $option = '' ) {
+	public function composite( $src, $dst, $change, $option = '' ) {
 		$cmd = $this->_cmd_composite . ' ' . $option . ' ' . $change . ' ' . $src . ' ' . $dst;
 
 		$ret_array = null;
@@ -135,7 +135,7 @@ class webphoto_lib_imagemagick {
 		return false;
 	}
 
-	function chmod_file( $file, $mode ) {
+	public function chmod_file( $file, $mode ) {
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $mode );
 		}
@@ -144,7 +144,7 @@ class webphoto_lib_imagemagick {
 
 // version
 
-	function version( $path ) {
+	public function version( $path ) {
 		$convert = $path . 'convert';
 		if ( $this->is_win_os() ) {
 			$convert = $this->conv_win_cmd( $convert );
@@ -167,15 +167,11 @@ class webphoto_lib_imagemagick {
 
 // utility
 
-	function is_win_os() {
-		if ( strpos( PHP_OS, "WIN" ) === 0 ) {
-			return true;
-		}
-
-		return false;
+	public function is_win_os() {
+		return strpos( PHP_OS, "WIN" ) === 0;
 	}
 
-	function conv_win_cmd( $cmd ) {
+	public function conv_win_cmd( $cmd ) {
 		$str = '"' . $cmd . '.exe"';
 
 		return $str;
@@ -184,12 +180,12 @@ class webphoto_lib_imagemagick {
 
 // msg
 
-	function clear_msg_array() {
+	public function clear_msg_array() {
 		$this->_msg_array = array();
 	}
 
 // BUG: Fatal error: Call to undefined method webphoto_lib_imagemagick::get_msg_array()
-	function get_msg_array() {
+	public function get_msg_array() {
 		return $this->_msg_array;
 	}
 

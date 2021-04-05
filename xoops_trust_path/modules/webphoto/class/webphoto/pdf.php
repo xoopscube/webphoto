@@ -30,11 +30,8 @@ class webphoto_pdf extends webphoto_cmd_base {
 	public $_PS_EXT = 'ps';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 		$this->_xpdf_class        =& webphoto_lib_xpdf::getInstance();
 		$this->_imagemagick_class =& webphoto_lib_imagemagick::getInstance();
@@ -61,7 +58,7 @@ class webphoto_pdf extends webphoto_cmd_base {
 
 // create jpeg
 
-	function create_jpeg( $pdf_file, $jpeg_file ) {
+	public function create_jpeg( $pdf_file, $jpeg_file ) {
 		if ( ! $this->_cfg_use_xpdf ) {
 			return 0;
 		}
@@ -83,11 +80,11 @@ class webphoto_pdf extends webphoto_cmd_base {
 		return - 1;
 	}
 
-	function pdftoppm_exists() {
+	public function pdftoppm_exists() {
 		return $this->_xpdf_class->pdftoppm_exists();
 	}
 
-	function create_jpeg_by_pdftoppm( $pdf_file, $jpeg_file ) {
+	public function create_jpeg_by_pdftoppm( $pdf_file, $jpeg_file ) {
 		$root     = $this->_TMP_DIR . '/' . uniqid( 'ppm_' );
 		$ppm_file = $this->_xpdf_class->pdf_to_ppm( $pdf_file, $root );
 
@@ -102,7 +99,7 @@ class webphoto_pdf extends webphoto_cmd_base {
 		return true;
 	}
 
-	function create_jpeg_by_pdftops( $pdf_file, $jpeg_file ) {
+	public function create_jpeg_by_pdftops( $pdf_file, $jpeg_file ) {
 		$ps_file = $this->build_file_by_prefix_ext( uniqid( 'ps_' ), $this->_PS_EXT );
 		$this->_xpdf_class->pdf_to_ps( $pdf_file, $ps_file );
 
@@ -117,7 +114,7 @@ class webphoto_pdf extends webphoto_cmd_base {
 		return true;
 	}
 
-	function convert_to_jpeg( $src_file, $jpeg_file ) {
+	public function convert_to_jpeg( $src_file, $jpeg_file ) {
 		$this->_imagemagick_class->convert( $src_file, $jpeg_file );
 
 // remove temp file
@@ -131,7 +128,7 @@ class webphoto_pdf extends webphoto_cmd_base {
 
 // text content
 
-	function get_text_content( $pdf_file ) {
+	public function get_text_content( $pdf_file ) {
 		$this->_content = null;
 
 		if ( empty( $pdf_file ) ) {
@@ -170,7 +167,7 @@ class webphoto_pdf extends webphoto_cmd_base {
 		return $arr;
 	}
 
-	function pdf_to_text( $pdf_file, $txt_file ) {
+	public function pdf_to_text( $pdf_file, $txt_file ) {
 		if ( ! $this->_cfg_use_xpdf ) {
 			return false;
 		}
@@ -189,7 +186,4 @@ class webphoto_pdf extends webphoto_cmd_base {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -1,10 +1,14 @@
 <?php
-// $Id: aoluncut.php,v 1.1 2008/10/30 00:24:19 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @deprecated UPDATE PLUGIN / API / JSON
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -24,13 +28,13 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 //=========================================================
 class webphoto_embed_aoluncut extends webphoto_embed_base {
 
-	function webphoto_embed_aoluncut() {
-		$this->webphoto_embed_base( 'aoluncut' );
+	public function __construct() {
+		parent::__construct( 'aoluncut' );
 		$this->set_url( 'http://uncutvideo.aol.com/videos/' );
 		$this->set_sample( '180d646d2bf149c6d04aa5989fcc85d6d' );
 	}
 
-	function embed( $src, $width, $height ) {
+	public function embed( $src, $width, $height, $extra = null ) {
 		$movie      = 'http://uncutvideo.aol.com/v6.334/en-US/uc_videoplayer.swf';
 		$flash_vars = 'aID=' . $src . '&amp;site=http://uncutvideo.aol.com/';
 		$wmode      = 'opaque';
@@ -46,15 +50,12 @@ class webphoto_embed_aoluncut extends webphoto_embed_base {
 		return $str;
 	}
 
-	function link( $src ) {
+	public function link( $src ) {
 		return $this->build_link( $src );
 	}
 
-	function desc() {
+	public function desc() {
 		return $this->build_desc();
 	}
 
-// --- class end ---
 }
-
-?>

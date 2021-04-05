@@ -105,11 +105,8 @@ class webphoto_show_main extends webphoto_show_photo {
 	public $_DEBUG_PRELOAD = false;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_show_photo( $dirname, $trust_dirname );
 
 		$this->_user_handler
 			=& webphoto_user_handler::getInstance( $dirname, $trust_dirname );
@@ -165,7 +162,7 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // preload
 
-	function init_preload() {
+	public function init_preload() {
 		$this->preload_init();
 		$this->preload_error( $this->_DEBUG_PRELOAD );
 		$this->preload_constant();
@@ -177,7 +174,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		$this->_init_timeline  = $this->_timeline_class->init( $this->_cfg_timeline_dirname );
 	}
 
-	function _preload_photo_sort_array() {
+	public function _preload_photo_sort_array() {
 		if ( $this->_preload_class->exists_class( 'show_main' ) ) {
 			$arr = $this->_preload_class->exec_class_method(
 				'show_main', 'get_photo_sort_array_extend' );
@@ -190,29 +187,29 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // mode
 
-	function set_mode( $val ) {
+	public function set_mode( $val ) {
 		$this->_mode      = $val;
 		$this->_list_mode = $val;
 	}
 
 // for myphoto
-	function set_list_mode( $val ) {
+	public function set_list_mode( $val ) {
 		$this->_list_mode = $val;
 	}
 
 // for photo
-	function set_navi_mode( $val ) {
+	public function set_navi_mode( $val ) {
 		$this->_navi_mode = $val;
 	}
 
 
 // template
 
-	function set_template_main( $val ) {
+	public function set_template_main( $val ) {
 		$this->_TEMPLATE_MAIN = $val;
 	}
 
-	function get_template_main() {
+	public function get_template_main() {
 		$str = $this->_DIRNAME . '_' . $this->_TEMPLATE_MAIN;
 
 		return $str;
@@ -221,7 +218,7 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // build param
 
-	function build_main_param( $mode, $show_summary = false ) {
+	public function build_main_param( $mode, $show_summary = false ) {
 // BUG: not show description
 		$param               = $this->build_common_param( $mode, $show_summary );
 		$param['param_sort'] = $this->build_uri_main_sort( $mode );
@@ -229,7 +226,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $param;
 	}
 
-	function build_common_param( $mode, $show_summary = false, $cat_id = 0 ) {
+	public function build_common_param( $mode, $show_summary = false, $cat_id = 0 ) {
 		$param                       = array_merge(
 			$this->page_build_main_param( $mode, $cat_id ),
 			$this->build_get_param( $mode )
@@ -239,29 +236,27 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $param;
 	}
 
-	function build_get_param( $mode ) {
-		$arr = array(
+	public function build_get_param( $mode ) {
+		return array(
 			'op'               => $this->_get_op,
 			'page'             => $this->_get_page,
 			'sort'             => $this->_get_sort,
 			'lang_cursortedby' => $this->get_lang_sortby( $this->_get_sort ),
 		);
-
-		return $arr;
 	}
 
-	function build_param_viewtype( $mode ) {
+	public function build_param_viewtype( $mode ) {
 		return null;    // dummy
 	}
 
 
 // build list
 
-	function build_list_common( $const_name, $show_photo_desc = false ) {
+	public function build_list_common( $const_name, $show_photo_desc = false ) {
 		$title_s   = $this->sanitize( $this->get_constant( $const_name ) );
 		$total_all = $this->_public_class->get_count();
 
-		$arr = array(
+		return array(
 			'xoops_pagetitle'   => $title_s,
 			'title_bread_crumb' => $title_s,
 			'sub_title_s'       => $title_s,
@@ -272,19 +267,17 @@ class webphoto_show_main extends webphoto_show_photo {
 			'lang_thereare'     => sprintf( $this->get_constant( 'S_THEREARE' ), $total_all ),
 			'photo_list'        => $this->get_photo_list(),
 		);
-
-		return $arr;
 	}
 
 // for overwrite
-	function get_photo_list() {
+	public function get_photo_list() {
 		// dummy
 	}
 
 
 // show
 
-	function build_photo_show_from_rows( $rows ) {
+	public function build_photo_show_from_rows( $rows ) {
 		$arr = array();
 		foreach ( $rows as $row ) {
 			$arr[] = $this->build_photo_show_main( $row );
@@ -293,7 +286,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $arr;
 	}
 
-	function build_photo_show_from_id_array( $id_array ) {
+	public function build_photo_show_from_id_array( $id_array ) {
 		$arr = array();
 		foreach ( $id_array as $id ) {
 			$arr[] = $this->build_photo_show_main(
@@ -303,33 +296,25 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $arr;
 	}
 
-	function build_photo_show_main( $row ) {
+	public function build_photo_show_main( $row ) {
 		$arr             = $this->build_photo_show( $row );
 		$arr['can_rate'] = $this->_rate_check_class->can_rate( $row['item_id'] );
 
 		return $arr;
 	}
 
-	function build_show_sort( $total ) {
-		if ( $total > 1 ) {
-			return true;
-		}
-
-		return false;
+	public function build_show_sort( $total ) {
+		return $total > 1;
 	}
 
-	function build_show_nomatch( $total ) {
-		if ( $total == 0 ) {
-			return true;
-		}
-
-		return false;
+	public function build_show_nomatch( $total ) {
+		return $total == 0;
 	}
 
 
 // catlist
 
-	function build_catlist( $cat_id, $cols, $delmita ) {
+	public function build_catlist( $cat_id, $cols, $delmita ) {
 		$show = false;
 
 		list( $cats, $cols, $width ) =
@@ -365,7 +350,7 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // cat handler
 
-	function build_cat_path( $cat_id ) {
+	public function build_cat_path( $cat_id ) {
 		$rows = $this->_cat_handler->get_parent_path_array( $cat_id );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return false;
@@ -387,14 +372,14 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $ret;
 	}
 
-	function build_cat_desc_disp( $row ) {
+	public function build_cat_desc_disp( $row ) {
 		return $this->_cat_handler->build_show_desc_disp( $row );
 	}
 
 
 // random more
 
-	function list_build_random_more( $total, $url = null ) {
+	public function list_build_random_more( $total, $url = null ) {
 		if ( empty( $url ) ) {
 			$url = $this->build_uri_list_link( $this->_param_out );
 		}
@@ -402,7 +387,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $this->build_random_more_url_with_check_sort( $url, $total );
 	}
 
-	function build_random_more_url_with_check_sort( $url, $total, $get_sort = null, $flag_sanitize = true ) {
+	public function build_random_more_url_with_check_sort( $url, $total, $get_sort = null, $flag_sanitize = true ) {
 		if ( $total == 0 ) {
 			return null;
 		}
@@ -427,26 +412,26 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // sort class
 
-	function get_orderby_by_post() {
+	public function get_orderby_by_post() {
 		return $this->_sort_class->sort_to_orderby( $this->_get_sort );
 	}
 
-	function get_orderby_default() {
+	public function get_orderby_default() {
 		return $this->_sort_class->sort_to_orderby( null );
 	}
 
-	function get_lang_sortby( $name ) {
+	public function get_lang_sortby( $name ) {
 		return $this->_sort_class->get_lang_sortby( $name );
 	}
 
-	function convert_orderby_join( $str ) {
+	public function convert_orderby_join( $str ) {
 		return $this->_sort_class->convert_orderby_join( $str );
 	}
 
 
 // pagenavi class
 
-	function build_navi( $url, $total, $limit, $get_page = null ) {
+	public function build_navi( $url, $total, $limit, $get_page = null ) {
 		if ( empty( $get_page ) ) {
 			$get_page = $this->_get_page;
 		}
@@ -470,18 +455,18 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $arr;
 	}
 
-	function build_navi_page( $url, $page, $limit, $total ) {
+	public function build_navi_page( $url, $page, $limit, $total ) {
 		return $this->_pagenavi_class->build( $url, $page, $limit, $total );
 	}
 
-	function build_navi_info( $page, $limit, $total ) {
+	public function build_navi_info( $page, $limit, $total ) {
 		$start = $this->pagenavi_calc_start( $limit, $page );
 		$end   = $this->pagenavi_calc_end( $start, $limit, $total );
 
 		return sprintf( $this->get_constant( 'S_NAVINFO' ), $start + 1, $end, $total );
 	}
 
-	function pagenavi_calc_start( $limit, $page = null ) {
+	public function pagenavi_calc_start( $limit, $page = null ) {
 		if ( empty( $page ) ) {
 			$page = $this->_get_page;
 		}
@@ -489,20 +474,20 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $this->_pagenavi_class->calc_start( $page, $limit );
 	}
 
-	function pagenavi_calc_end( $start, $limit, $total ) {
+	public function pagenavi_calc_end( $start, $limit, $total ) {
 		return $this->_pagenavi_class->calc_end( $start, $limit, $total );
 	}
 
 
 // gmap class
 
-	function build_gmap( $cat_id = 0, $limit ) {
+	public function build_gmap( $cat_id = 0, $limit ) {
 		$rows = $this->_public_class->get_rows_by_gmap( $cat_id, $limit );
 
 		return $this->build_gmap_from_rows( $rows, $cat_id );
 	}
 
-	function build_gmap_param( $rows ) {
+	public function build_gmap_param( $rows ) {
 		$latest_rows = $this->_public_class->get_rows_by_gmap_latest( $this->_MAX_GMAPS, $this->_OFFSET_ZERO, $this->_KEY_TRUE );
 
 		$all_rows = $this->_gmap_class->array_merge_unique( $latest_rows, $rows );
@@ -518,7 +503,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $arr;
 	}
 
-	function build_gmap_from_rows( $rows, $cat_id = 0 ) {
+	public function build_gmap_from_rows( $rows, $cat_id = 0 ) {
 		$mode  = $this->_mode;
 		$show  = false;
 		$icons = null;
@@ -537,7 +522,7 @@ class webphoto_show_main extends webphoto_show_photo {
 			}
 		}
 
-		$arr = array(
+		return array(
 			'show_gmap'                => $show,
 			'gmap_photos'              => $photos,
 			'gmap_icons'               => $icons,
@@ -548,11 +533,9 @@ class webphoto_show_main extends webphoto_show_photo {
 			'show_map_large'           => ! $this->is_map_mode( $mode ),
 			'gmap_lang_not_compatible' => $this->get_constant( 'GMAP_NOT_COMPATIBLE' ),
 		);
-
-		return $arr;
 	}
 
-	function get_gmap_class( $mode ) {
+	public function get_gmap_class( $mode ) {
 		if ( $this->is_map_mode( $mode ) ) {
 			return 'webphoto_gmap_large';
 		}
@@ -560,7 +543,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return 'webphoto_gmap_normal';
 	}
 
-	function is_map_mode( $mode ) {
+	public function is_map_mode( $mode ) {
 		if ( $mode == 'map' ) {
 			return true;
 		}
@@ -571,7 +554,7 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // timeline class
 
-	function build_timeline_param( $unit, $date, $rows ) {
+	public function build_timeline_param( $unit, $date, $rows ) {
 		$latest = $this->get_config_by_name( 'timeline_latest' );
 		$random = $this->get_config_by_name( 'timeline_random' );
 
@@ -597,7 +580,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $arr;
 	}
 
-	function build_timeline( $unit, $date, $photos ) {
+	public function build_timeline( $unit, $date, $photos ) {
 		$mode    = $this->_mode;
 		$show    = false;
 		$js      = null;
@@ -625,7 +608,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $arr;
 	}
 
-	function get_timeline_class( $mode ) {
+	public function get_timeline_class( $mode ) {
 		if ( $this->is_timeline_mode( $mode ) ) {
 			return 'webphoto_timeline_large';
 		}
@@ -633,7 +616,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return 'webphoto_timeline_normal';
 	}
 
-	function is_timeline_mode( $mode ) {
+	public function is_timeline_mode( $mode ) {
 		if ( $mode == 'timeline' ) {
 			return true;
 		}
@@ -644,7 +627,7 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // notification select class
 
-	function build_notification_select( $cat_id = 0 ) {
+	public function build_notification_select( $cat_id = 0 ) {
 		$show  = false;
 		$param = null;
 
@@ -670,43 +653,43 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // uri class
 
-	function build_uri_main_navi_url( $mode ) {
+	public function build_uri_main_navi_url( $mode ) {
 		return $this->_uri_class->build_main_navi_url( $mode, $this->_get_sort );
 	}
 
-	function build_uri_main_sort( $mode ) {
+	public function build_uri_main_sort( $mode ) {
 		return $this->_uri_class->build_main_sort( $mode );
 	}
 
-	function get_uri_list_pathinfo_param() {
+	public function get_uri_list_pathinfo_param() {
 // list_mode for myphoto
 		return $this->_uri_class->get_list_pathinfo_param( $this->_list_mode );
 	}
 
 // Fatal error: Call to undefined method build_uri_list_navi_url()
-	function build_uri_list_navi_url( $mode, $param, $kind ) {
+	public function build_uri_list_navi_url( $mode, $param, $kind ) {
 		return $this->_uri_class->build_list_navi_url(
 			$mode, $param, $kind );
 	}
 
-	function build_uri_list_navi_url_kind( $mode, $param, $kind ) {
+	public function build_uri_list_navi_url_kind( $mode, $param, $kind ) {
 		return $this->_uri_class->build_list_navi_url_kind(
 			$mode, $param, $kind );
 	}
 
-	function build_uri_list_kind( $mode, $param, $viewtype = null ) {
+	public function build_uri_list_kind( $mode, $param, $viewtype = null ) {
 		return $this->_uri_class->build_list_sort(
 			$mode, $param, $viewtype );
 	}
 
-	function build_uri_list_link( $param ) {
+	public function build_uri_list_link( $param ) {
 		return $this->_uri_class->build_list_link( $this->_mode, $param );
 	}
 
 
 // get pathinfo param
 
-	function get_pathinfo_param() {
+	public function get_pathinfo_param() {
 		$this->_get_op   = $this->get_pathinfo_op();
 		$this->_get_page = $this->get_pathinfo_page();
 		$this->_get_sort = $this->get_photo_sort_name_by_pathinfo();
@@ -715,7 +698,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		$this->set_param_out( $this->_param );
 	}
 
-	function get_pathinfo_op() {
+	public function get_pathinfo_op() {
 		$op = $this->_pathinfo_class->get( 'op' );
 		if ( $op ) {
 			return $op;
@@ -724,7 +707,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $this->_pathinfo_class->get_path( 0 );
 	}
 
-	function get_pathinfo_page() {
+	public function get_pathinfo_page() {
 		$page = $this->_pathinfo_class->get_int( 'page' );
 		if ( $page < $this->_PAGE_DEFAULT ) {
 			$page = $this->_PAGE_DEFAULT;
@@ -733,17 +716,17 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $page;
 	}
 
-	function get_photo_sort_name_by_pathinfo() {
+	public function get_photo_sort_name_by_pathinfo() {
 		return $this->_sort_class->get_photo_sort_name(
 			$this->_pathinfo_class->get_text( 'sort' ) );
 	}
 
-	function get_photo_kind_name_by_pathinfo() {
+	public function get_photo_kind_name_by_pathinfo() {
 		return $this->get_photo_kind_name(
 			$this->_pathinfo_class->get_text( 'kind' ) );
 	}
 
-	function get_photo_kind_name( $name ) {
+	public function get_photo_kind_name( $name ) {
 		if ( $name && in_array( $name, $this->_PHOTO_KIND_ARRAY ) ) {
 			return $name;
 		} elseif ( in_array( $this->_PHOTO_KIND_DEFAULT, $this->_PHOTO_KIND_ARRAY ) ) {
@@ -753,38 +736,38 @@ class webphoto_show_main extends webphoto_show_photo {
 		return false;
 	}
 
-	function set_param_out( $val ) {
+	public function set_param_out( $val ) {
 		$this->_param_out = $val;
 	}
 
 
 // page class
 
-	function check_show_catlist( $mode ) {
+	public function check_show_catlist( $mode ) {
 		return $this->check_show_common( $mode, 'catlist' );
 	}
 
-	function check_show_tagcloud( $mode ) {
+	public function check_show_tagcloud( $mode ) {
 		return $this->check_show_common( $mode, 'tagcloud' );
 	}
 
-	function check_show_gmap( $mode ) {
+	public function check_show_gmap( $mode ) {
 		return $this->check_show_common( $mode, 'gmap' );
 	}
 
-	function check_show_timeline( $mode ) {
+	public function check_show_timeline( $mode ) {
 		return $this->check_show_common( $mode, 'timeline' );
 	}
 
-	function check_show_notification( $mode ) {
+	public function check_show_notification( $mode ) {
 		return $this->check_show_common( $mode, 'notification' );
 	}
 
-	function check_show_desc( $mode ) {
+	public function check_show_desc( $mode ) {
 		return $this->check_show_common( $mode, 'desc' );
 	}
 
-	function check_show_navi_sort( $sort ) {
+	public function check_show_navi_sort( $sort ) {
 		return $this->check_show_common( $sort, 'navi_sort' );
 	}
 
@@ -792,27 +775,27 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $this->_page_class->check_show_navi( $mode, $sort );
 	}
 
-	function check_show_common( $mode, $name ) {
+	public function check_show_common( $mode, $name ) {
 		return $this->_page_class->check_show_common( $mode, $name );
 	}
 
 // BUG : not show cat_id
-	function page_build_main_param( $mode, $cat_id = 0 ) {
+	public function page_build_main_param( $mode, $cat_id = 0 ) {
 		return $this->_page_class->build_main_param( $mode, $cat_id );
 	}
 
-	function add_show_js_windows( $param ) {
+	public function add_show_js_windows( $param ) {
 		return $this->_page_class->add_show_js_windows( $param );
 	}
 
-	function build_box_list( $param ) {
+	public function build_box_list( $param ) {
 		return $this->_page_class->build_box_list( $param );
 	}
 
 
 // auto plublish
 
-	function auto_publish() {
+	public function auto_publish() {
 		$publish_class =& webphoto_inc_auto_publish::getSingleton(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 		$publish_class->set_workdir( $this->_WORK_DIR );
@@ -822,7 +805,7 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // qr code
 
-	function create_mobile_qr( $id ) {
+	public function create_mobile_qr( $id ) {
 		$file = $this->_QRS_DIR . '/' . $this->build_mobile_filename( $id );
 		if ( ! is_file( $file ) ) {
 			$qrimage = new Qrcode_image;
@@ -831,7 +814,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		}
 	}
 
-	function build_mobile_url( $id ) {
+	public function build_mobile_url( $id ) {
 		$url = $this->_MODULE_URL . '/i.php';
 		if ( $id > 0 ) {
 			$url .= '?id=' . $id;
@@ -840,7 +823,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $url;
 	}
 
-	function build_mobile_filename( $id ) {
+	public function build_mobile_filename( $id ) {
 		$file = 'qr_index.png';
 		if ( $id > 0 ) {
 			$file = 'qr_id_' . $id . '.png';
@@ -849,7 +832,7 @@ class webphoto_show_main extends webphoto_show_photo {
 		return $file;
 	}
 
-	function get_mobile_email() {
+	public function get_mobile_email() {
 		$row = $this->_user_handler->get_row_by_uid( $this->_xoops_uid );
 		if ( is_array( $row ) ) {
 			return $row['user_email'];
@@ -861,11 +844,11 @@ class webphoto_show_main extends webphoto_show_photo {
 
 // xoops header
 
-	function assign_xoops_header_default() {
+	public function assign_xoops_header_default() {
 		$this->assign_xoops_header( $this->_MODE_DEFAULT );
 	}
 
-	function assign_xoops_header( $mode, $rss_param = null, $flag_gmap = false ) {
+	public function assign_xoops_header( $mode, $rss_param = null, $flag_gmap = false ) {
 		$param = array(
 			'dirname'            => $this->_DIRNAME,
 			'flag_css'           => true,
@@ -883,7 +866,4 @@ class webphoto_show_main extends webphoto_show_photo {
 		$this->_header_class->assign_for_main( $param );
 	}
 
-// --- class end ---
 }
-
-?>

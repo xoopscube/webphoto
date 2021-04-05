@@ -102,7 +102,7 @@ class webphoto_lib_cloud {
 	 * @return Sabai_Cloud
 	 */
 
-//  function Sabai_Cloud($sizeMin = 10, $sizeRange = 12)
+	//  public function Sabai_Cloud($sizeMin = 10, $sizeRange = 12)
 	public function __construct( $sizeMin = 10, $sizeRange = 12 ) {
 		$this->_sizeMin   = (int) $sizeMin;
 		$this->_sizeRange = (int) $sizeRange;
@@ -159,8 +159,6 @@ class webphoto_lib_cloud {
 		switch ( $this->_sort ) {
 			case WEBPHOTO_CLOUD_SORT_NAME_ASC:
 
-// changed for PHP 4.3 or previous
-//              ksort($this->_elements, SORT_LOCALE_STRING);
 				$this->_ksort_locate_string( $this->_elements );
 
 				break;

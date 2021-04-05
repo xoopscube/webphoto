@@ -20,7 +20,7 @@ if ( ! class_exists( 'webphoto_timeline_init' ) ) {
 		public $_init_timeline;
 
 
-		function __construct( $dirname ) {
+		public function __construct( $dirname ) {
 			$this->_config_class   =& webphoto_config::getInstance( $dirname );
 			$this->_timeline_class =& webphoto_inc_timeline::getSingleton( $dirname );
 
@@ -42,7 +42,7 @@ if ( ! class_exists( 'webphoto_timeline_init' ) ) {
 
 // webphoto_inc_timeline
 
-		function fetch_timeline( $mode, $unit, $date, $photos ) {
+		public function fetch_timeline( $mode, $unit, $date, $photos ) {
 			return $this->_timeline_class->fetch_timeline(
 				$mode, $unit, $date, $photos );
 		}
@@ -50,15 +50,15 @@ if ( ! class_exists( 'webphoto_timeline_init' ) ) {
 
 // function
 
-		function get_timeline_dirname() {
+		public function get_timeline_dirname() {
 			return $this->_timeline_dirname;
 		}
 
-		function get_init() {
+		public function get_init() {
 			return $this->_init_timeline;
 		}
 
-		function get_scale_options( $flag_none = false ) {
+		public function get_scale_options( $flag_none = false ) {
 			$arr1 = array(
 				'none' => _WEBPHOTO_TIMELINE_OFF,
 			);
@@ -79,32 +79,24 @@ if ( ! class_exists( 'webphoto_timeline_init' ) ) {
 			return $arr;
 		}
 
-		function scale_to_unit( $scale, $default = 'month' ) {
+		public function scale_to_unit( $scale, $default = 'month' ) {
 			if ( $scale == 0 ) {
 				return $default;
 			}
 
 			$arr = $this->_timeline_class->get_int_unit_array();
 
-			if ( isset( $arr[ $scale ] ) ) {
-				return $arr[ $scale ];
-			}
-
-			return $default;
+			return $arr[ $scale ] ?? $default;
 		}
 
-		function unit_to_scale( $unit, $default = 6 ) {
+		public function unit_to_scale( $unit, $default = 6 ) {
 			$arr1 = $this->_timeline_class->get_int_unit_array();
 			$arr2 = array_flip( $arr1 );
 
-			if ( isset( $arr2[ $unit ] ) ) {
-				return $arr2[ $unit ];
-			}
-
-			return $default;
+			return $arr2[ $unit ] ?? $default;
 		}
 
-		function get_lang_param() {
+		public function get_lang_param() {
 			$param = $this->_timeline_class->get_scale_options();
 			if ( ! is_array( $param ) ) {
 				return false;
@@ -118,10 +110,6 @@ if ( ! class_exists( 'webphoto_timeline_init' ) ) {
 			return $arr;
 		}
 
-// --- class end ---
 	}
 
-// === class end ===
 }
-
-?>

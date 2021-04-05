@@ -185,11 +185,7 @@ class webphoto_lib_dir {
 	}
 
 	public function check_dir( $dir ) {
-		if ( $dir && is_dir( $dir ) && is_writable( $dir ) && is_readable( $dir ) ) {
-			return true;
-		}
-
-		return false;
+		return $dir && is_dir( $dir ) && is_writable( $dir ) && is_readable( $dir );
 	}
 
 
@@ -250,9 +246,7 @@ class webphoto_lib_dir {
 	}
 
 	public function highlight( $str ) {
-		$val = '<span style="color:#ff0000;">' . $str . '</span>';
-
-		return $val;
+		return '<span style="color:#ff0000;">' . $str . '</span>';
 	}
 
 }

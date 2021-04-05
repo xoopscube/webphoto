@@ -44,7 +44,7 @@ class webphoto_lib_remote_image extends webphoto_lib_remote_file {
 // return is same as getimagesize()
 // array of width, height, type, attr
 
-	function get_image_size( $url ) {
+	public function get_image_size( $url ) {
 		$this->clear_error_code();
 		$this->clear_errors();
 
@@ -80,18 +80,18 @@ class webphoto_lib_remote_image extends webphoto_lib_remote_file {
 
 // set and get property
 
-	function set_dir_work( $value ) {
+	public function set_dir_work( $value ) {
 		$this->_dir_work = $value;
 	}
 
-	function get_dir_work() {
+	public function get_dir_work() {
 		return $this->_dir_work;
 	}
 
 
 // utility
 
-	function write_file( $file, $data, $mode = 'w', $flag_chmod = true ) {
+	public function write_file( $file, $data, $mode = 'w', $flag_chmod = true ) {
 		$fp = fopen( $file, $mode );
 		if ( ! $fp ) {
 			return false;

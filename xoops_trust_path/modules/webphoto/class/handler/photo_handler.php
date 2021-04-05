@@ -19,6 +19,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 	public $_AREA_EW = 1.0;
 
 	public function __construct( $dirname ) {
+
 		parent::__construct( $dirname );
 
 		$this->set_table_prefix_dirname( 'photo' );
@@ -39,7 +40,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $instance;
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 
@@ -113,7 +114,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 
 // insert
 
-	function insert( $row, $force = false ) {
+	public function insert( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -250,7 +251,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $this->_db->getInsertId();
 	}
 
-	function update( $row, $force = false ) {
+	public function update( $row, $force = false ) {
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -315,7 +316,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $this->query( $sql, 0, 0, $force );
 	}
 
-	function update_status_by_id_array( $id_array ) {
+	public function update_status_by_id_array( $id_array ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= 'photo_status=1 ';
 		$sql .= 'WHERE ' . $this->build_where_by_photoid_array( $id_array );
@@ -323,7 +324,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $this->query( $sql );
 	}
 
-	function update_rating_by_id( $photo_id, $rating, $votes ) {
+	public function update_rating_by_id( $photo_id, $rating, $votes ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= 'photo_rating=' . (float) $rating . ', ';
 		$sql .= 'photo_votes=' . (int) $votes . ' ';
@@ -332,7 +333,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $this->query( $sql );
 	}
 
-	function clear_gicon_id( $gicon_id ) {
+	public function clear_gicon_id( $gicon_id ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= 'photo_gicon_id=0 ';
 		$sql .= 'WHERE photo_gicon_id=' . (int) $gicon_id;
@@ -341,7 +342,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 	}
 
 // when GET request
-	function update_hits( $photo_id ) {
+	public function update_hits( $photo_id ) {
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
 		$sql .= 'photo_hits = photo_hits+1 ';
 		$sql .= 'WHERE ' . $this->build_where_public();
@@ -350,35 +351,35 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $this->queryF( $sql );
 	}
 
-	function get_count_public() {
+	public function get_count_public() {
 		$where = $this->build_where_public();
 
 		return $this->get_count_by_where( $where );
 	}
 
-	function get_count_waiting() {
+	public function get_count_waiting() {
 		return $this->get_count_by_where( $this->build_where_waiting() );
 	}
 
-	function get_count_by_catid( $cat_id ) {
+	public function get_count_by_catid( $cat_id ) {
 		$where = 'photo_cat_id=' . (int) $cat_id;
 
 		return $this->get_count_by_where( $where );
 	}
 
-	function get_count_public_by_catid( $cat_id ) {
+	public function get_count_public_by_catid( $cat_id ) {
 		$where = $this->build_where_public_by_catid( $cat_id );
 
 		return $this->get_count_by_where( $where );
 	}
 
-	function get_count_public_by_catid_array( $catid_array ) {
+	public function get_count_public_by_catid_array( $catid_array ) {
 		$where = $this->build_where_public_by_catid_array( $catid_array );
 
 		return $this->get_count_by_where( $where );
 	}
 
-	function get_count_public_by_uid( $uid ) {
+	public function get_count_public_by_uid( $uid ) {
 		$where = $this->build_where_public_by_uid( $uid );
 
 		return $this->get_count_by_where( $where );

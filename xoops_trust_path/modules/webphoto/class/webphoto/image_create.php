@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -25,9 +24,7 @@ class webphoto_image_create {
 	public $_flag_chmod = true;
 
 
-// constructor
-
-	function __construct( $dirname ) {
+	public function __construct( $dirname ) {
 		$this->_kind_class   =& webphoto_kind::getInstance();
 		$this->_config_class =& webphoto_config::getInstance( $dirname );
 
@@ -43,8 +40,6 @@ class webphoto_image_create {
 		return $instance;
 	}
 
-
-// init
 
 	function _init_image_cmd() {
 		$this->_image_cmd_class =& webphoto_lib_image_cmd::getInstance();
@@ -117,7 +112,4 @@ class webphoto_image_create {
 			$src_file, $dst_file, $option );
 	}
 
-// --- class end ---
 }
-
-?>

@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -37,11 +36,10 @@ class webphoto_flashvar_form extends webphoto_form_this {
 	public $_SIZE_DISPLAY = 4;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_form_this( $dirname , $trust_dirname );
+
 		$this->set_path_color_pickup( $this->_MODULE_URL . '/libs' );
 
 		$this->_flashvar_handler =& webphoto_flashvar_handler::getInstance( $dirname );
@@ -379,7 +377,4 @@ class webphoto_flashvar_form extends webphoto_form_this {
 		return null;
 	}
 
-// --- class end ---
 }
-
-?>

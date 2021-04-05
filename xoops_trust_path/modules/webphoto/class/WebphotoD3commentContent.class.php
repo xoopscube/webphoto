@@ -42,15 +42,13 @@ class WebphotoD3commentContent extends D3commentAbstract {
 		// dare to convert it irregularly
 		$summary = str_replace( '&amp;', '&', htmlspecialchars( xoops_substr( strip_tags( $item_row['item_description'] ), 0, 191 ), ENT_QUOTES ) );
 
-		$ret = array(
+		return array(
 			'dirname'     => $mydirname,
 			'module_name' => $module->getVar( 'name' ),
 			'subject'     => $myts->makeTboxData4Show( $item_row['item_title'] ),
 			'uri'         => XOOPS_URL . '/modules/' . $mydirname . '/index.php?fct=photo&photo_id=' . (int) $link_id,
 			'summary'     => $summary,
 		);
-
-		return $ret;
 	}
 
 	public function validate_id( $link_id ) {

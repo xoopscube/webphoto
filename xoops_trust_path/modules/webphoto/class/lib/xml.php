@@ -40,15 +40,15 @@ class webphoto_lib_xml {
 //   "  -> &quot;
 //   '  -> &apos;
 // --------------------------------------------------------
-	function xml_text( $str ) {
+	public function xml_text( $str ) {
 		return $this->xml_htmlspecialchars_strict( $str );
 	}
 
-	function xml_url( $str ) {
+	public function xml_url( $str ) {
 		return $this->xml_htmlspecialchars_url( $str );
 	}
 
-	function xml_htmlspecialchars( $str ) {
+	public function xml_htmlspecialchars( $str ) {
 		$str = $this->replace_control_code( $str, '' );
 		$str = $this->replace_return_code( $str );
 		$str = htmlspecialchars( $str );
@@ -57,7 +57,7 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-	function xml_htmlspecialchars_strict( $str ) {
+	public function xml_htmlspecialchars_strict( $str ) {
 		$str = $this->xml_strip_html_entity_char( $str );
 		$str = $this->xml_htmlspecialchars( $str );
 		$str = str_replace( '?', '&#063;', $str );
@@ -65,7 +65,7 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-	function xml_htmlspecialchars_url( $str ) {
+	public function xml_htmlspecialchars_url( $str ) {
 		$str = preg_replace( "/&amp;/sU", '&', $str );
 		$str = $this->xml_strip_html_entity_char( $str );
 		$str = $this->xml_htmlspecialchars( $str );
@@ -73,7 +73,7 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-	function xml_cdata( $str, $flag_control = true, $flag_undo = true ) {
+	public function xml_cdata( $str, $flag_control = true, $flag_undo = true ) {
 		$str = $this->replace_control_code( $str, '' );
 		$str = $this->xml_undo_html_special_chars( $str );
 
@@ -83,7 +83,7 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-	function xml_convert_cdata( $str ) {
+	public function xml_convert_cdata( $str ) {
 		return preg_replace( "/]]>/", ']]&gt;', $str );
 	}
 
@@ -91,7 +91,7 @@ class webphoto_lib_xml {
 // strip html entities
 //   &abc; -> ' '
 // --------------------------------------------------------
-	function xml_strip_html_entity_char( $str ) {
+	public function xml_strip_html_entity_char( $str ) {
 		return preg_replace( "/&[0-9a-zA-z]+;/sU", ' ', $str );
 	}
 
@@ -104,7 +104,7 @@ class webphoto_lib_xml {
 //   &amp;  -> &
 //   &amp;nbsp; -> &nbsp;
 // --------------------------------------------------------
-	function xml_undo_html_special_chars( $str ) {
+	public function xml_undo_html_special_chars( $str ) {
 		$str = preg_replace( "/&gt;/i", '>', $str );
 		$str = preg_replace( "/&lt;/i", '<', $str );
 		$str = preg_replace( "/&quot;/i", '"', $str );
@@ -119,7 +119,7 @@ class webphoto_lib_xml {
 // LF  \xOA \n
 // CR  \xOD \r
 
-	function replace_control_code( $str, $replace = ' ' ) {
+	public function replace_control_code( $str, $replace = ' ' ) {
 		$str = preg_replace( '/[\x00-\x08]/', $replace, $str );
 		$str = preg_replace( '/[\x0B-\x0C]/', $replace, $str );
 		$str = preg_replace( '/[\x0E-\x1F]/', $replace, $str );
@@ -128,7 +128,7 @@ class webphoto_lib_xml {
 		return $str;
 	}
 
-	function replace_return_code( $str, $replace = ' ' ) {
+	public function replace_return_code( $str, $replace = ' ' ) {
 		$str = preg_replace( "/\n/", $replace, $str );
 		$str = preg_replace( "/\r/", $replace, $str );
 
@@ -138,7 +138,7 @@ class webphoto_lib_xml {
 
 // sanitize
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 

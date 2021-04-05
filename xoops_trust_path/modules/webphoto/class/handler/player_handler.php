@@ -17,6 +17,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_player_handler extends webphoto_handler_base_ini {
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->set_table_prefix_dirname( 'player' );
@@ -34,7 +35,7 @@ class webphoto_player_handler extends webphoto_handler_base_ini {
 		return $instance;
 	}
 
-	function create( $flag_new = false ) {
+	public function create( $flag_new = false ) {
 		$time_create = 0;
 		$time_update = 0;
 

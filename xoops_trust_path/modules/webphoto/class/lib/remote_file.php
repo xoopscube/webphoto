@@ -69,7 +69,7 @@ class webphoto_lib_remote_file extends webphoto_lib_error {
 		}
 	}
 
-	function snoppy_fetch( $url ) {
+	public function snoppy_fetch( $url ) {
 		$this->clear_error_code();
 		$this->clear_errors();
 

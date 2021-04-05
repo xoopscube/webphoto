@@ -40,18 +40,18 @@ class webphoto_xoops_base {
 		return $instance;
 	}
 
-	function _init() {
+	public function _init() {
 		$this->_MY_MODULE_ID = $this->get_my_module_id();
 		$this->_LANGUAGE     = $this->get_config_by_name( 'language' );
 	}
 
-	function get_config_by_name( $name ) {
+	public function get_config_by_name( $name ) {
 		global $xoopsConfig;
 
 		return $xoopsConfig[ $name ] ?? false;
 	}
 
-	function is_japanese( $str = null ) {
+	public function is_japanese( $str = null ) {
 		if ( empty( $str ) ) {
 			$str = $this->_STR_JPAPANESE;
 		}
@@ -63,22 +63,22 @@ class webphoto_xoops_base {
 		return false;
 	}
 
-	function get_xoops_themecss() {
+	public function get_xoops_themecss() {
 		return getcss( $this->get_config_by_name( 'theme_set' ) );
 	}
 
 
 // my module
 
-	function get_my_module_id( $format = 's' ) {
+	public function get_my_module_id( $format = 's' ) {
 		return $this->get_my_module_value_by_name( 'mid', $format );
 	}
 
-	function get_my_module_name( $format = 's' ) {
+	public function get_my_module_name( $format = 's' ) {
 		return $this->get_my_module_value_by_name( 'name', $format );
 	}
 
-	function get_my_module_version( $flag_format = false ) {
+	public function get_my_module_version( $flag_format = false ) {
 		$ver = $this->get_my_module_value_by_name( 'version' );
 		if ( $flag_format ) {
 			$ver = $this->convertVersionIntToFloat( $ver );
@@ -87,7 +87,7 @@ class webphoto_xoops_base {
 		return $ver;
 	}
 
-	function get_my_module_value_by_name( $name, $format = 's' ) {
+	public function get_my_module_value_by_name( $name, $format = 's' ) {
 		global $xoopsModule;
 		if ( is_object( $xoopsModule ) ) {
 			return $xoopsModule->getVar( $name, $format );
@@ -99,15 +99,15 @@ class webphoto_xoops_base {
 
 // my user
 
-	function get_my_user_uid( $format = 's' ) {
+	public function get_my_user_uid( $format = 's' ) {
 		return $this->get_my_user_value_by_name( 'uid', $format );
 	}
 
-	function get_my_user_uname( $format = 's' ) {
+	public function get_my_user_uname( $format = 's' ) {
 		return $this->get_my_user_value_by_name( 'uname', $format );
 	}
 
-	function get_my_user_value_by_name( $name, $format = 's' ) {
+	public function get_my_user_value_by_name( $name, $format = 's' ) {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return $xoopsUser->getVar( $name, $format );
@@ -116,7 +116,7 @@ class webphoto_xoops_base {
 		return false;
 	}
 
-	function get_my_user_groups() {
+	public function get_my_user_groups() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return $xoopsUser->getGroups();
@@ -125,7 +125,7 @@ class webphoto_xoops_base {
 		return array( XOOPS_GROUP_ANONYMOUS );
 	}
 
-	function get_my_user_is_login() {
+	public function get_my_user_is_login() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return true;
@@ -134,7 +134,7 @@ class webphoto_xoops_base {
 		return false;
 	}
 
-	function get_my_user_is_module_admin() {
+	public function get_my_user_is_module_admin() {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			if ( $xoopsUser->isAdmin( $this->_MY_MODULE_ID ) ) {
@@ -148,25 +148,25 @@ class webphoto_xoops_base {
 
 // config handler
 
-	function has_my_module_config() {
+	public function has_my_module_config() {
 		$config_handler =& xoops_gethandler( 'config' );
 
 		return count( $config_handler->getConfigs(
 			new Criteria( 'conf_modid', $this->_MY_MODULE_ID ) ) );
 	}
 
-	function get_module_config_by_dirname( $dirname ) {
+	public function get_module_config_by_dirname( $dirname ) {
 		return $this->get_module_config_by_mid(
 			$this->get_module_mid_by_dirname( $dirname ) );
 	}
 
-	function get_module_config_by_mid( $mid ) {
+	public function get_module_config_by_mid( $mid ) {
 		$config_handler =& xoops_gethandler( 'config' );
 
 		return $config_handler->getConfigsByCat( 0, $mid );
 	}
 
-	function get_search_config() {
+	public function get_search_config() {
 		$config_handler                    =& xoops_gethandler( 'config' );
 		$conf                              = $config_handler->getConfigsByCat( XOOPS_CONF_SEARCH );
 		$this->_cached_config_search_array = $conf;
@@ -174,7 +174,7 @@ class webphoto_xoops_base {
 		return $conf;
 	}
 
-	function get_search_config_by_name( $name ) {
+	public function get_search_config_by_name( $name ) {
 		if ( ! is_array( $this->_cached_config_search_array ) ) {
 			$this->_cached_config_search_array = $this->get_search_config();
 		}
@@ -188,15 +188,15 @@ class webphoto_xoops_base {
 
 // module handler
 
-	function get_module_mid_by_dirname( $dirname, $format = 's' ) {
+	public function get_module_mid_by_dirname( $dirname, $format = 's' ) {
 		return $this->get_module_value_by_dirname( $dirname, 'mid', $format );
 	}
 
-	function get_module_name_by_dirname( $dirname, $format = 's' ) {
+	public function get_module_name_by_dirname( $dirname, $format = 's' ) {
 		return $this->get_module_value_by_dirname( $dirname, 'name', $format );
 	}
 
-	function get_module_value_by_dirname( $dirname, $name, $format = 's' ) {
+	public function get_module_value_by_dirname( $dirname, $name, $format = 's' ) {
 		$module_handler =& xoops_gethandler( 'module' );
 		$module         = $module_handler->getByDirname( $dirname );
 		if ( is_object( $module ) ) {
@@ -206,7 +206,7 @@ class webphoto_xoops_base {
 		return false;
 	}
 
-	function get_module_info_version_by_dirname( $dirname, $flag_format = false ) {
+	public function get_module_info_version_by_dirname( $dirname, $flag_format = false ) {
 		$ver = $this->get_module_info_value_by_dirname( $dirname, 'version' );
 		if ( $ver && $flag_format ) {
 			$ver = $this->convertVersionFromModinfoToInt( $ver );
@@ -215,7 +215,7 @@ class webphoto_xoops_base {
 		return $ver;
 	}
 
-	function get_module_info_value_by_dirname( $dirname, $name ) {
+	public function get_module_info_value_by_dirname( $dirname, $name ) {
 		$module_handler =& xoops_gethandler( 'module' );
 		$module         = $module_handler->getByDirname( $dirname );
 		if ( is_object( $module ) ) {
@@ -228,11 +228,11 @@ class webphoto_xoops_base {
 
 // user handler
 
-	function get_user_uname_from_id( $uid, $usereal = 0 ) {
+	public function get_user_uname_from_id( $uid, $usereal = 0 ) {
 		return XoopsUser::getUnameFromId( $uid, $usereal );
 	}
 
-	function get_user_email_from_id( $uid ) {
+	public function get_user_email_from_id( $uid ) {
 		$user_handler =& xoops_gethandler( 'user' );
 		$obj          = $user_handler->get( $uid );
 		if ( is_object( $obj ) ) {
@@ -242,11 +242,11 @@ class webphoto_xoops_base {
 		return false;
 	}
 
-	function build_userinfo( $uid, $usereal = 0 ) {
+	public function build_userinfo( $uid, $usereal = 0 ) {
 		$uname = $this->get_user_uname_from_id( $uid, $usereal );
 
 // geust
-		$uid = intval( $uid );
+		$uid = (int) $uid;
 		if ( $uid == 0 ) {
 			return $uname;
 		}
@@ -259,14 +259,14 @@ class webphoto_xoops_base {
 
 // group handler
 
-	function get_group_obj() {
+	public function get_group_obj() {
 		$group_handler = xoops_gethandler( "group" );
 		$objs          = $group_handler->getObjects( null, true );
 
 		return $objs;
 	}
 
-	function get_cached_group_obj() {
+	public function get_cached_group_obj() {
 		if ( ! is_array( $this->_cached_group_objs ) ) {
 			$this->_cached_group_objs = $this->get_group_obj();
 		}
@@ -274,7 +274,7 @@ class webphoto_xoops_base {
 		return $this->_cached_group_objs;
 	}
 
-	function get_cached_groups( $none = false, $none_name = '---', $format = 's' ) {
+	public function get_cached_groups( $none = false, $none_name = '---', $format = 's' ) {
 		$objs = $this->get_cached_group_obj();
 		$arr  = array();
 		if ( $none ) {
@@ -289,7 +289,7 @@ class webphoto_xoops_base {
 		return $arr;
 	}
 
-	function get_cached_group_by_id_name( $id, $name, $format = 's' ) {
+	public function get_cached_group_by_id_name( $id, $name, $format = 's' ) {
 		$objs = $this->get_cached_group_obj();
 
 		if ( isset( $objs[ $id ] ) ) {
@@ -299,11 +299,11 @@ class webphoto_xoops_base {
 		return false;
 	}
 
-	function get_system_groups() {
+	public function get_system_groups() {
 		return $this->_SYSTEM_GROUPS;
 	}
 
-	function is_system_group( $id ) {
+	public function is_system_group( $id ) {
 		if ( in_array( $id, $this->_SYSTEM_GROUPS ) ) {
 			return true;
 		}
@@ -314,7 +314,7 @@ class webphoto_xoops_base {
 
 // member handler
 
-	function get_member_user_list( $limit = 0, $start = 0 ) {
+	public function get_member_user_list( $limit = 0, $start = 0 ) {
 		$criteria = new CriteriaCompo();
 		$criteria->setStart( $start );
 		$criteria->setLimit( $limit );
@@ -325,26 +325,26 @@ class webphoto_xoops_base {
 		return $member_handler->getUserList( $criteria );
 	}
 
-	function get_member_user( $id ) {
+	public function get_member_user( $id ) {
 		$member_handler =& xoops_gethandler( 'member' );
 
 		return $member_handler->getUser( $id );
 	}
 
-	function get_member_users_by_group( $group_id, $asobject = false, $limit = 0, $start = 0 ) {
+	public function get_member_users_by_group( $group_id, $asobject = false, $limit = 0, $start = 0 ) {
 		$member_handler =& xoops_gethandler( 'member' );
 
 		return $member_handler->getUsersByGroup( $group_id, $asobject, $limit, $start );
 	}
 
-	function get_member_user_count( $criteria = null ) {
+	public function get_member_user_count( $criteria = null ) {
 		$member_handler =& xoops_gethandler( 'member' );
 
 		return $member_handler->getUserCount( $criteria );
 	}
 
 // xoops block handler
-	function get_block_options_by_bid( $bid ) {
+	public function get_block_options_by_bid( $bid ) {
 		$obj = $this->get_block_by_bid( $bid );
 		if ( is_object( $obj ) ) {
 			$options = explode( '|', $obj->getVar( 'options' ) );
@@ -355,7 +355,7 @@ class webphoto_xoops_base {
 		return null;
 	}
 
-	function get_block_by_bid( $bid ) {
+	public function get_block_by_bid( $bid ) {
 		$block_handler =& xoops_gethandler( 'block' );
 
 		return $block_handler->get( $bid );
@@ -364,7 +364,7 @@ class webphoto_xoops_base {
 
 // timestamp
 
-	function user_to_server_time( $time, $default = 0 ) {
+	public function user_to_server_time( $time, $default = 0 ) {
 		if ( $time <= 0 ) {
 			return $default;
 		}
@@ -383,11 +383,11 @@ class webphoto_xoops_base {
 
 // same as Legacy_Utils
 
-	function convertVersionFromModinfoToInt( $version ) {
+	public function convertVersionFromModinfoToInt( $version ) {
 		return round( 100 * (float) $version );
 	}
 
-	function convertVersionIntToFloat( $version ) {
+	public function convertVersionIntToFloat( $version ) {
 		return round( (float) ( (int) $version / 100 ), 2 );
 	}
 

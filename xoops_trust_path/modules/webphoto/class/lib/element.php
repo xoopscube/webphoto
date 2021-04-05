@@ -69,8 +69,6 @@ class webphoto_lib_element extends webphoto_lib_error {
 	public $_STYLE_CONFIRM_MSG = 'background-color: transparent; color: #136C99; text-align: center; border-top: 1px solid #DDDDFF; border-left: 1px solid #DDDDFF; border-right: 1px solid #AAAAAA; border-bottom: 1px solid #AAAAAA; font-weight: bold; padding: 10px; ';
 
 
-// constructor
-
 	public function __construct() {
 
 		parent::__construct();
@@ -242,7 +240,7 @@ class webphoto_lib_element extends webphoto_lib_error {
 
 	public function build_form_dhtml( $name, $value, $rows = 5, $cols = 50, $hiddentext = 'xoopsHiddenText' ) {
 		$ele = new XoopsFormDhtmlTextArea( '', $name, $value, $rows, $cols, $hiddentext );
-		if ( defined( 'LEGACY_BASE_VERSION' ) && version_compare( LEGACY_BASE_VERSION, '2.2.2.1', '>=' ) ) {
+		if ( defined( 'LEGACY_BASE_VERSION' ) && version_compare( LEGACY_BASE_VERSION, '2.2', '>=' ) ) {
 			$ele->setEditor( 'bbcode' );
 		}
 		$text = $ele->render();

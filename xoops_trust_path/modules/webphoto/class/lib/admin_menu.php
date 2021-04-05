@@ -47,7 +47,7 @@ class webphoto_lib_admin_menu {
 		return $instance;
 	}
 
-	function build_menu_with_sub( $flag_sub = true ) {
+	public function build_menu_with_sub( $flag_sub = true ) {
 		$str = $this->build_menu( ! $flag_sub, false );
 
 		if ( $flag_sub ) {
@@ -60,7 +60,7 @@ class webphoto_lib_admin_menu {
 		return $str;
 	}
 
-	function build_menu( $flag_default = true, $flag_hr = true ) {
+	public function build_menu( $flag_default = true, $flag_hr = true ) {
 
 
 		$admin_menu_class
@@ -90,7 +90,7 @@ class webphoto_lib_admin_menu {
 		return null;
 	}
 
-	function build_sub_menu( $flag_default = true, $flag_hr = true ) {
+	public function build_sub_menu( $flag_default = true, $flag_hr = true ) {
 		$admin_menu_class
 			        =& webphoto_inc_admin_menu::getSingleton(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
@@ -106,7 +106,7 @@ class webphoto_lib_admin_menu {
 		return null;
 	}
 
-	function build_hr( $flag_hr = true ) {
+	public function build_hr( $flag_hr = true ) {
 		if ( $flag_hr ) {
 			$str = "<hr>\n";
 
@@ -116,7 +116,7 @@ class webphoto_lib_admin_menu {
 		return null;
 	}
 
-	function _build_additinal_menu() {
+	public function _build_additinal_menu() {
 		// with XOOPS_TRUST_PATH and altsys
 
 		$flag_preferences = false;
@@ -179,7 +179,7 @@ class webphoto_lib_admin_menu {
 		return $menu_array;
 	}
 
-	function _build_highlight( $menu_array, $flag_default = true ) {
+	public function _build_highlight( $menu_array, $flag_default = true ) {
 		$mymenu_uri  = $_SERVER['REQUEST_URI'];
 		$mymenu_link = substr( strstr( $mymenu_uri, '/admin/' ), 1 );
 
@@ -277,14 +277,14 @@ class webphoto_lib_admin_menu {
 
 // utility
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
 
 // language
 
-	function get_title( $name ) {
+	public function get_title( $name ) {
 		$const_name = strtoupper( '_AM_' . $this->_TRUST_DIRNAME . '_MYMENU_' . $name );
 		$title      = defined( $const_name ) ? constant( $const_name ) : $name;
 
@@ -294,26 +294,26 @@ class webphoto_lib_admin_menu {
 
 // xoops param
 
-	function _init_xoops_param() {
+	public function _init_xoops_param() {
 		global $xoopsModule;
 		if ( is_object( $xoopsModule ) ) {
 			$this->_MODULE_ID = $xoopsModule->mid();
 		}
 	}
 
-	function has_xoops_config_this_module() {
+	public function has_xoops_config_this_module() {
 		$config_handler =& xoops_gethandler( 'config' );
 
 		return count( $config_handler->getConfigs( new Criteria( 'conf_modid', $this->_MODULE_ID ) ) );
 	}
 
-	function get_xoops_module_by_dirname( $dirname ) {
+	public function get_xoops_module_by_dirname( $dirname ) {
 		$module_handler =& xoops_gethandler( 'module' );
 
 		return $module_handler->getByDirname( $dirname );
 	}
 
-	function is_installed_altsys() {
+	public function is_installed_altsys() {
 		$module = $this->get_xoops_module_by_dirname( 'altsys' );
 		if ( is_object( $module ) ) {
 			return true;

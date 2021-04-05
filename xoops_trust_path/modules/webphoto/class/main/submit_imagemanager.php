@@ -13,6 +13,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
 
+
 class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submit {
 	public $_THIS_CLOSE_FCT = 'close';
 	public $_THIS_CLOSE_URL;
@@ -39,7 +40,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 
 // main
 
-	function main() {
+	public function main() {
 		$ret = $this->submit_check();
 		if ( ! $ret ) {
 			redirect_header(
@@ -63,14 +64,14 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 
 // create item row
 
-	function _create_item_row_default() {
+	public function _create_item_row_default() {
 		$row                = $this->_item_create_class->create( true );
 		$row['item_cat_id'] = $this->get_post_cat_id();
 
 		return $row;
 	}
 
-	function _create_item_row_by_post() {
+	public function _create_item_row_by_post() {
 		$row                = $this->_item_create_class->create( true );
 		$row['item_cat_id'] = $this->get_post_cat_id();
 		$row['item_title']  = $this->get_post_text( 'item_title' );
@@ -81,7 +82,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 
 // submit
 
-	function _submit() {
+	public function _submit() {
 		$is_failed = false;
 
 // exit if error
@@ -100,7 +101,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 		exit();
 	}
 
-	function _submit_exec() {
+	public function _submit_exec() {
 		$this->clear_msg_array();
 
 		$item_row = $this->_create_item_row_by_post();
@@ -145,7 +146,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 		$this->unlink_uploaded_files();
 	}
 
-	function _submit_exec_fetch( $item_row ) {
+	public function _submit_exec_fetch( $item_row ) {
 		$this->_row_fetch = $item_row;
 
 // Check if upload file name specified
@@ -164,7 +165,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 		return 0;
 	}
 
-	function _build_redirect_param( $is_failed ) {
+	public function _build_redirect_param( $is_failed ) {
 		$param = array(
 			'is_failed'   => $is_failed,
 			'url_success' => $this->_THIS_CLOSE_URL,
@@ -178,7 +179,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 
 // media files 
 
-	function _insert_media_files( $item_row ) {
+	public function _insert_media_files( $item_row ) {
 		$ret = $this->_create_media_file_params( $item_row );
 		if ( $ret < 0 ) {
 			return $ret;
@@ -190,7 +191,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 		return 0;
 	}
 
-	function _create_media_file_params( $item_row ) {
+	public function _create_media_file_params( $item_row ) {
 		$item_ext = $item_row['item_ext'];
 
 		$this->init_photo_create();
@@ -220,7 +221,7 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 
 // print form
 
-	function _print_form_imagemanager() {
+	public function _print_form_imagemanager() {
 		$form_class =& webphoto_edit_imagemanager_form::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
@@ -241,7 +242,4 @@ class webphoto_main_submit_imagemanager extends webphoto_edit_imagemanager_submi
 		$tpl->display( $template );
 	}
 
-// --- class end ---
 }
-
-?>

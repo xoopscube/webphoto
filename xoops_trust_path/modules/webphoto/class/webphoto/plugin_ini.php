@@ -30,15 +30,12 @@ class webphoto_plugin_ini extends webphoto_lib_plugin {
 
 // ini class
 
-	function get_ini( $name ) {
+	public function get_ini( $name ) {
 		return $this->_ini_class->get_ini( $name );
 	}
 
-	function explode_ini( $name ) {
+	public function explode_ini( $name ) {
 		return $this->_ini_class->explode_ini( $name );
 	}
 
-// --- class end ---
 }
-
-?>

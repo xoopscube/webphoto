@@ -30,8 +30,6 @@ class webphoto_xoops_base extends webphoto_lib_handler {
 	public $_xoops_config = null;
 
 
-// constructor
-
 	public function __construct() {
 		parent::__construct();
 

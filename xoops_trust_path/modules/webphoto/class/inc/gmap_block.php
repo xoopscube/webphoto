@@ -24,8 +24,6 @@ class webphoto_inc_gmap_block {
 	public $_GMAP_TYPE_CONTROL = 0;
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		$this->_DIRNAME = $dirname;
 
@@ -44,7 +42,7 @@ class webphoto_inc_gmap_block {
 
 // gmap
 
-	function build_gmap( $param ) {
+	public function build_gmap( $param ) {
 		$block_mode = $param['block_mode'];
 		$gmap_mode  = $param['gmap_mode'];
 		$apikey     = $param['apikey'];
@@ -99,7 +97,7 @@ class webphoto_inc_gmap_block {
 		return array( $show, $map );
 	}
 
-	function build_center( $param ) {
+	public function build_center( $param ) {
 		$gmap_mode = $param['gmap_mode'];
 		$latitude  = $param['default_latitude'];
 		$longitude = $param['default_longitude'];
@@ -121,7 +119,7 @@ class webphoto_inc_gmap_block {
 		return $arr;
 	}
 
-	function fetch_template( $template, $param ) {
+	public function fetch_template( $template, $param ) {
 		$tpl = new XoopsTpl();
 		$tpl->assign( $param );
 		$text = $tpl->fetch( $template );

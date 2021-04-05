@@ -17,8 +17,6 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_uri extends webphoto_inc_uri {
 
 
-// constructor
-
 	public function __construct( $dirname ) {
 		parent::__construct( $dirname );
 
@@ -74,7 +72,7 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-	function build_photo_a_href( $id, $target = '_blank', $flag_amp_sanitize = true ) {
+	public function build_photo_a_href( $id, $target = '_blank', $flag_amp_sanitize = true ) {
 		$url = $this->build_photo( $id, $flag_amp_sanitize );
 		if ( $target ) {
 			$str = '<a href="' . $url . '" target="' . $target . '">';
@@ -88,7 +86,7 @@ class webphoto_uri extends webphoto_inc_uri {
 
 // buiid uri
 
-	function build_operate( $op ) {
+	public function build_operate( $op ) {
 		if ( $this->_cfg_use_pathinfo ) {
 			$str = $this->_MODULE_URL . '/index.php/' . $this->sanitize( $op ) . '/';
 		} else {
@@ -98,36 +96,36 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-	function build_photo_pagenavi() {
+	public function build_photo_pagenavi() {
 		$str = $this->build_full_uri_mode( 'photo' );
 		$str .= $this->build_part_uri_param_name();
 
 		return $str;
 	}
 
-	function build_photo( $id, $flag_amp_sanitize = true ) {
-		return $this->build_full_uri_mode_param( 'photo', intval( $id ), $flag_amp_sanitize );
+	public function build_photo( $id, $flag_amp_sanitize = true ) {
+		return $this->build_full_uri_mode_param( 'photo', (int) $id, $flag_amp_sanitize );
 	}
 
-	function build_category( $id, $param = null ) {
-		$str = $this->build_full_uri_mode_param( 'category', intval( $id ) );
+	public function build_category( $id, $param = null ) {
+		$str = $this->build_full_uri_mode_param( 'category', (int) $id );
 		$str .= $this->build_param( $param );
 
 		return $str;
 	}
 
-	function build_user( $id ) {
-		return $this->build_full_uri_mode_param( 'user', intval( $id ) );
+	public function build_user( $id ) {
+		return $this->build_full_uri_mode_param( 'user', (int) $id );
 	}
 
-	function build_param( $param ) {
+	public function build_param( $param ) {
 		return $this->build_uri_extention( $param );
 	}
 
 
 // buiid uri for show_main
 
-	function build_navi_url( $mode, $param, $sort, $kind, $viewtype = null ) {
+	public function build_navi_url( $mode, $param, $sort, $kind, $viewtype = null ) {
 		$str = $this->_MODULE_URL . '/index.php';
 		$str .= $this->build_mode_param( $mode, $param, true );
 		$str .= $this->build_sort( $sort );
@@ -137,7 +135,7 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-	function build_param_sort( $mode, $param, $kind, $viewtype = null ) {
+	public function build_param_sort( $mode, $param, $kind, $viewtype = null ) {
 		$str = $this->build_mode_param( $mode, $param, true );
 		$str .= $this->build_kind( $kind );
 		$str .= $this->build_viewtype( $viewtype );
@@ -146,12 +144,12 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-	function build_mode_param( $mode, $param, $flag_head_slash = false ) {
+	public function build_mode_param( $mode, $param, $flag_head_slash = false ) {
 		switch ( $mode ) {
 			case 'category':
 			case 'user':
-				$str_1 = $mode . '/' . intval( $param );
-				$str_2 = '?fct=' . $mode . '&amp;p=' . intval( $param );
+				$str_1 = $mode . '/' . (int) $param;
+				$str_2 = '?fct=' . $mode . '&amp;p=' . (int) $param;
 				break;
 
 			case 'tag':
@@ -181,23 +179,23 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-	function build_sort( $val ) {
+	public function build_sort( $val ) {
 		return $this->build_param_str( 'sort', $val );
 	}
 
-	function build_kind( $val ) {
+	public function build_kind( $val ) {
 		return $this->build_param_str( 'kind', $val );
 	}
 
-	function build_viewtype( $val ) {
+	public function build_viewtype( $val ) {
 		return $this->build_param_str( 'viewtype', $val );
 	}
 
-	function build_page( $val ) {
+	public function build_page( $val ) {
 		return $this->build_param_int( 'page', $val );
 	}
 
-	function build_param_str( $name, $val ) {
+	public function build_param_str( $name, $val ) {
 		$str = '';
 		if ( $val ) {
 			$str = $this->_SEPARATOR . $name . '=' . $this->sanitize( $val );
@@ -206,10 +204,10 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-	function build_param_int( $name, $val ) {
+	public function build_param_int( $name, $val ) {
 		$str = '';
 		if ( $val ) {
-			$str = $this->_SEPARATOR . $name . '=' . intval( $val );
+			$str = $this->_SEPARATOR . $name . '=' . (int) $val;
 		}
 
 		return $str;
@@ -218,7 +216,7 @@ class webphoto_uri extends webphoto_inc_uri {
 
 // buiid uri for show_list
 
-	function build_list_link( $mode, $param ) {
+	public function build_list_link( $mode, $param ) {
 // not sanitize
 		if ( $this->_cfg_use_pathinfo ) {
 			$str = 'index.php/' . $mode . '/' . rawurlencode( $param ) . '/';
@@ -229,7 +227,4 @@ class webphoto_uri extends webphoto_inc_uri {
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

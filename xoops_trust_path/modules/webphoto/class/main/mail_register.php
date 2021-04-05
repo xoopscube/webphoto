@@ -339,7 +339,4 @@ class webphoto_main_mail_register extends webphoto_edit_base {
 		return false;
 	}
 
-// --- class end ---
 }
-
-?>

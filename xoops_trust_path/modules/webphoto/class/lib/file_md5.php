@@ -23,8 +23,6 @@ class webphoto_lib_file_md5 {
 	public $_TRUST_DIR;
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME       = $dirname;
 		$this->_MODULE_DIR    = XOOPS_ROOT_PATH . '/modules/' . $dirname;
@@ -43,10 +41,7 @@ class webphoto_lib_file_md5 {
 		return $instance;
 	}
 
-
-// function
-
-	function create_md5( $name ) {
+	public function create_md5( $name ) {
 		$data = '';
 		$dir  = $this->build_dir( $name );
 
@@ -66,7 +61,7 @@ class webphoto_lib_file_md5 {
 		return $data;
 	}
 
-	function check_md5( $name, $flag_md5 = false ) {
+	public function check_md5( $name, $flag_md5 = false ) {
 		$msg  = '';
 		$dir  = $this->build_dir( $name );
 		$data = $this->read_file( $name );
@@ -87,7 +82,7 @@ class webphoto_lib_file_md5 {
 		return $msg;
 	}
 
-	function build_dir( $name ) {
+	public function build_dir( $name ) {
 		switch ( $name ) {
 			case 'trust':
 				$dir = $this->_TRUST_DIR;
@@ -101,7 +96,7 @@ class webphoto_lib_file_md5 {
 		return $dir;
 	}
 
-	function write_file( $name, $data, $mode = 'w', $flag_chmod = true ) {
+	public function write_file( $name, $data, $mode = 'w', $flag_chmod = true ) {
 		$file = XOOPS_TRUST_PATH . '/tmp/' . $this->build_filename( $name );
 		$fp   = fopen( $file, $mode );
 		if ( ! $fp ) {
@@ -119,19 +114,19 @@ class webphoto_lib_file_md5 {
 		return $byte;
 	}
 
-	function read_file( $name ) {
+	public function read_file( $name ) {
 		$file = $this->_TRUST_DIR . '/include/' . $this->build_filename( $name );
 
 		return file_get_contents( $file );
 	}
 
-	function build_filename( $name ) {
+	public function build_filename( $name ) {
 		$file = $this->_TRUST_DIRNAME . '_md5_' . $name . '.txt';
 
 		return $file;
 	}
 
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
 		foreach ( $arr1 as $v ) {

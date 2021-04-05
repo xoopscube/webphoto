@@ -36,7 +36,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 		return $instance;
 	}
 
-	function init( $myalbum_dirname ) {
+	public function init( $myalbum_dirname ) {
 		$module = $this->_get_module_by_dirname( $myalbum_dirname );
 		if ( ! is_object( $module ) ) {
 			return false;
@@ -62,7 +62,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // photos thumbs dir
-	function get_photos_thumbs_dir() {
+	public function get_photos_thumbs_dir() {
 		$config     = $this->_get_xoops_config( $this->_MYALBUM_MID );
 		$photos_dir = XOOPS_ROOT_PATH . $this->_add_slash_to_head( $config['myalbum_photospath'] );
 		$thumbs_dir = XOOPS_ROOT_PATH . $this->_add_slash_to_head( $config['myalbum_thumbspath'] );
@@ -72,14 +72,14 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // cat table
-	function get_cat_row_by_id( $cid ) {
+	public function get_cat_row_by_id( $cid ) {
 		$sql = 'SELECT * FROM ' . $this->_cat_table;
 		$sql .= ' WHERE cid=' . (int) $cid;
 
 		return $this->get_row_by_sql( $sql );
 	}
 
-	function get_cat_rows( $limit = 0, $offset = 0 ) {
+	public function get_cat_rows( $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_cat_table;
 		$sql .= ' ORDER BY cid';
 
@@ -88,20 +88,20 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // photos table
-	function get_photos_count_all() {
+	public function get_photos_count_all() {
 		$sql = 'SELECT count(*) FROM ' . $this->_photos_table;
 
 		return $this->get_count_by_sql( $sql );
 	}
 
-	function get_photos_rows( $limit = 0, $offset = 0 ) {
+	public function get_photos_rows( $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_photos_table;
 		$sql .= ' ORDER BY lid';
 
 		return $this->get_rows_by_sql( $sql, $limit, $offset );
 	}
 
-	function get_photos_rows_by_cid( $cid, $limit = 0, $offset = 0 ) {
+	public function get_photos_rows_by_cid( $cid, $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_photos_table;
 		$sql .= ' WHERE cid=' . (int) $cid;
 		$sql .= ' ORDER BY lid';
@@ -111,7 +111,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // text table
-	function get_text_row_by_id( $lid ) {
+	public function get_text_row_by_id( $lid ) {
 		$sql = "SELECT * FROM " . $this->_text_table . " WHERE lid=" . $lid;
 
 		return $this->get_row_by_sql( $sql );
@@ -119,14 +119,14 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // votedata table
-	function get_votedata_row_by_lid( $lid ) {
+	public function get_votedata_row_by_lid( $lid ) {
 		$sql = 'SELECT * FROM ' . $this->_votedata_table;
 		$sql .= ' WHERE lid=' . (int) $lid;
 
 		return $this->get_row_by_sql( $sql );
 	}
 
-	function get_votedata_rows( $limit = 0, $offset = 0 ) {
+	public function get_votedata_rows( $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_votedata_table;
 		$sql .= ' ORDER BY ratingid';
 
@@ -135,7 +135,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // selbox
-	function build_cat_selbox( $number, $sel_name = 'cid' ) {
+	public function build_cat_selbox( $number, $sel_name = 'cid' ) {
 		$myalbum_cat_table    = $this->db_prefix( 'myalbum' . $number . '_cat' );
 		$myalbum_photos_table = $this->db_prefix( 'myalbum' . $number . '_photos' );
 
@@ -151,7 +151,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // myalbum module
-	function get_myalbum_module_array() {
+	public function get_myalbum_module_array() {
 		$arr1 = $this->_get_modules_myalbum_dirname_array();
 		$arr2 = $this->_get_newblocks_myalbum_dirname_array();
 		$arr3 = null;
@@ -202,7 +202,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 // modules  table
 
-	function _get_modules_myalbum_dirname_array( $limit = 0, $offset = 0 ) {
+	public function _get_modules_myalbum_dirname_array( $limit = 0, $offset = 0 ) {
 		$rows = $this->_get_modules_myalbum_rows( $limit, $offset );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return null;
@@ -216,7 +216,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 		return $arr;
 	}
 
-	function _get_modules_myalbum_rows( $limit = 0, $offset = 0 ) {
+	public function _get_modules_myalbum_rows( $limit = 0, $offset = 0 ) {
 // From myalbum*
 		$sql = 'SELECT * FROM ' . $this->db_prefix( 'modules' );
 		$sql .= ' WHERE dirname LIKE ' . $this->quote( 'myalbum%' );
@@ -227,7 +227,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 // newblocks  table
 
-	function _get_newblocks_myalbum_dirname_array( $limit = 0, $offset = 0 ) {
+	public function _get_newblocks_myalbum_dirname_array( $limit = 0, $offset = 0 ) {
 		$rows = $this->_get_newblocks_myalbum_rows( $limit, $offset );
 		if ( ! is_array( $rows ) || ! count( $rows ) ) {
 			return null;
@@ -241,7 +241,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 		return $arr;
 	}
 
-	function _get_newblocks_myalbum_rows( $limit = 0, $offset = 0 ) {
+	public function _get_newblocks_myalbum_rows( $limit = 0, $offset = 0 ) {
 // get all instances of TinyD using newblocks table
 		$sql = 'SELECT distinct dirname FROM ' . $this->db_prefix( 'newblocks' );
 		$sql .= ' WHERE func_file=' . $this->quote( 'myalbum_rphoto.php' );
@@ -251,7 +251,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // module handler
-	function _get_module_by_dirname( $dirname ) {
+	public function _get_module_by_dirname( $dirname ) {
 		$module_handler =& xoops_gethandler( 'module' );
 
 		return $module_handler->getByDirname( $dirname );
@@ -259,7 +259,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // config handler
-	function _get_xoops_config( $mid ) {
+	public function _get_xoops_config( $mid ) {
 		$config_handler =& xoops_gethandler( 'config' );
 
 		return $config_handler->getConfigsByCat( 0, $mid );
@@ -267,7 +267,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // utlity class
-	function _add_slash_to_head( $str ) {
+	public function _add_slash_to_head( $str ) {
 // ord : the ASCII value of the first character of string
 // 0x2f slash
 
@@ -280,7 +280,7 @@ class webphoto_myalbum_handler extends webphoto_lib_handler {
 
 
 // xoops param
-	function _is_xoops_user_admin( $mid ) {
+	public function _is_xoops_user_admin( $mid ) {
 		global $xoopsUser;
 		if ( is_object( $xoopsUser ) ) {
 			return $xoopsUser->isAdmin( $mid );

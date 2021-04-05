@@ -48,10 +48,7 @@ class webphoto_lib_file_check {
 		return $instance;
 	}
 
-
-// function
-
-	function create_list( $name ) {
+	public function create_list( $name ) {
 		$data = '';
 		$dir  = $this->build_dir( $name );
 
@@ -73,7 +70,7 @@ class webphoto_lib_file_check {
 		return $data;
 	}
 
-	function check_list( $name ) {
+	public function check_list( $name ) {
 		$msg     = '';
 		$dir     = $this->build_dir( $name );
 		$data    = $this->read_file( $name );
@@ -108,7 +105,7 @@ class webphoto_lib_file_check {
 		return $msg;
 	}
 
-	function build_dir( $name ) {
+	public function build_dir( $name ) {
 		switch ( $name ) {
 			case 'trust':
 				$dir = $this->_TRUST_DIR;
@@ -122,7 +119,7 @@ class webphoto_lib_file_check {
 		return $dir;
 	}
 
-	function write_file( $name, $data, $mode = 'w', $flag_chmod = true ) {
+	public function write_file( $name, $data, $mode = 'w', $flag_chmod = true ) {
 		$file = XOOPS_TRUST_PATH . '/tmp/' . $this->build_filename( $name );
 		$fp   = fopen( $file, $mode );
 		if ( ! $fp ) {
@@ -140,25 +137,25 @@ class webphoto_lib_file_check {
 		return $byte;
 	}
 
-	function chmod_file( $file, $mode ) {
+	public function chmod_file( $file, $mode ) {
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $mode );
 		}
 	}
 
-	function read_file( $name ) {
+	public function read_file( $name ) {
 		$file = $this->_TRUST_DIR . '/include/' . $this->build_filename( $name );
 
 		return file_get_contents( $file );
 	}
 
-	function build_filename( $name ) {
+	public function build_filename( $name ) {
 		$file = $this->_TRUST_DIRNAME . '_check_' . $name . '.txt';
 
 		return $file;
 	}
 
-	function str_to_array( $str, $pattern ) {
+	public function str_to_array( $str, $pattern ) {
 		$arr1 = explode( $pattern, $str );
 		$arr2 = array();
 		foreach ( $arr1 as $v ) {

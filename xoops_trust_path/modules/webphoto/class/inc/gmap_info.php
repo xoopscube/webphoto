@@ -33,7 +33,7 @@ class webphoto_inc_gmap_info {
 	public $_IMG_EDIT;
 	public $_IMAGE_EXTS;
 
-	function __construct( $dirname, $trust_dirname ) {
+	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME    = $dirname;
 		$this->_MODULE_URL = XOOPS_URL . '/modules/' . $dirname;
 		$this->_MODULE_DIR = XOOPS_ROOT_PATH . '/modules/' . $dirname;
@@ -61,11 +61,11 @@ class webphoto_inc_gmap_info {
 
 // gmap
 
-	function build_info( $param ) {
+	public function build_info( $param ) {
 		return $this->build_info_default( $param );
 	}
 
-	function build_info_default( $param ) {
+	public function build_info_default( $param ) {
 		$info = '<div style="text-align:center; font-size: 80%; ">';
 		$info .= $this->build_info_thumb( $param );
 		$info .= $this->build_info_title( $param );
@@ -77,7 +77,7 @@ class webphoto_inc_gmap_info {
 		return $info;
 	}
 
-	function build_info_thumb( $param ) {
+	public function build_info_thumb( $param ) {
 		$a_photo   = $this->build_a_photo( $param );
 		$img_thumb = $this->build_img_thumb( $param );
 
@@ -91,7 +91,7 @@ class webphoto_inc_gmap_info {
 		return $str;
 	}
 
-	function build_info_title( $param ) {
+	public function build_info_title( $param ) {
 		$str = '';
 
 		$title_s = $this->sanitize( $param['item_title'] );
@@ -113,7 +113,7 @@ class webphoto_inc_gmap_info {
 		return $str;
 	}
 
-	function build_info_author( $param ) {
+	public function build_info_author( $param ) {
 		$uid   = (int) $param['item_uid'];
 		$href  = $this->build_uri_user( $uid );
 		$uname = $this->get_xoops_uname_by_uid( $uid );
@@ -127,7 +127,7 @@ class webphoto_inc_gmap_info {
 		return $str;
 	}
 
-	function build_info_datetime( $param ) {
+	public function build_info_datetime( $param ) {
 		$datetime_disp = $this->mysql_datetime_to_str( $param['item_datetime'] );
 		if ( $datetime_disp ) {
 			$str = $datetime_disp . '<br>';
@@ -138,7 +138,7 @@ class webphoto_inc_gmap_info {
 		return null;
 	}
 
-	function build_info_place( $param ) {
+	public function build_info_place( $param ) {
 		$place_s = $this->sanitize( $param['item_place'] );
 		if ( $place_s ) {
 			$str = $place_s . '<br>';
@@ -149,7 +149,7 @@ class webphoto_inc_gmap_info {
 		return null;
 	}
 
-	function build_img_thumb( $param ) {
+	public function build_img_thumb( $param ) {
 		$title_s = $this->sanitize( $param['item_title'] );
 		$url_s   = $this->sanitize( $param['thumb_url'] );
 		$width   = (int) $param['thumb_width'];
@@ -176,7 +176,7 @@ class webphoto_inc_gmap_info {
 		return $img;
 	}
 
-	function build_a_photo( $param ) {
+	public function build_a_photo( $param ) {
 		$href   = $this->build_href_photo( $param );
 		$target = $this->build_target_photo( $param );
 		if ( $href && $target ) {
@@ -188,11 +188,11 @@ class webphoto_inc_gmap_info {
 		return null;
 	}
 
-	function build_href_photo( $param ) {
+	public function build_href_photo( $param ) {
 		return $this->build_uri_photo( $param['item_id'] );
 	}
 
-	function build_target_photo( $param ) {
+	public function build_target_photo( $param ) {
 		$str = '_top';
 		if ( ! $this->check_normal_ext( $param ) ) {
 			$str = '_blank';
@@ -201,45 +201,41 @@ class webphoto_inc_gmap_info {
 		return $str;
 	}
 
-	function check_normal_ext( $param ) {
+	public function check_normal_ext( $param ) {
 		return $this->is_image_ext( $param['item_ext'] );
 	}
 
-	function is_embed_kind( $kind ) {
-		if ( $kind == _C_WEBPHOTO_ITEM_KIND_EMBED ) {
-			return true;
-		}
-
-		return false;
+	public function is_embed_kind( $kind ) {
+		return $kind == _C_WEBPHOTO_ITEM_KIND_EMBED;
 	}
 
 
 // uri
 
-	function build_uri_photo( $item_id ) {
+	public function build_uri_photo( $item_id ) {
 		return $this->build_uri( 'photo', (int) $item_id );
 	}
 
-	function build_uri_user( $uid ) {
+	public function build_uri_user( $uid ) {
 		return $this->build_uri( 'user', (int) $uid );
 	}
 
-	function build_uri_search( $query ) {
+	public function build_uri_search( $query ) {
 		return $this->build_uri( 'search', rawurlencode( $query ) );
 	}
 
-	function build_uri( $fct, $param ) {
+	public function build_uri( $fct, $param ) {
 // BUG: wrong url
 		return $this->_uri_class->build_full_uri_mode_param( $fct, $param );
 	}
 
-	function build_uri_edit( $item_id ) {
+	public function build_uri_edit( $item_id ) {
 		$str = $this->_MODULE_URL . '/index.php?fct=edit&amp;photo_id=' . $item_id;
 
 		return $str;
 	}
 
-	function build_img_edit() {
+	public function build_img_edit() {
 		$str = '<img src="' . $this->_ICONS_URL . '/edit.png" width="18" height="15" border="0" alt="' . $this->_lang_title_edit . '" title="' . $this->_lang_title_edit . '" />';
 
 		return $str;
@@ -248,15 +244,15 @@ class webphoto_inc_gmap_info {
 
 // utility
 
-	function sanitize( $str ) {
+	public function sanitize( $str ) {
 		return htmlspecialchars( $str, ENT_QUOTES );
 	}
 
-	function is_image_ext( $ext ) {
+	public function is_image_ext( $ext ) {
 		return $this->is_ext_in_array( $ext, $this->_IMAGE_EXTS );
 	}
 
-	function is_ext_in_array( $ext, $arr ) {
+	public function is_ext_in_array( $ext, $arr ) {
 		if ( in_array( strtolower( $ext ), $arr ) ) {
 			return true;
 		}
@@ -267,14 +263,14 @@ class webphoto_inc_gmap_info {
 
 // utility class
 
-	function mysql_datetime_to_str( $date ) {
+	public function mysql_datetime_to_str( $date ) {
 		return $this->_mysql_utility_class->mysql_datetime_to_str( $date );
 	}
 
 
 // xoops permission class
 
-	function has_editable_by_uid( $uid ) {
+	public function has_editable_by_uid( $uid ) {
 		if ( ! $this->_has_editable ) {
 			return false;
 		}
@@ -285,7 +281,7 @@ class webphoto_inc_gmap_info {
 		return true;
 	}
 
-	function is_photo_owner( $uid ) {
+	public function is_photo_owner( $uid ) {
 		if ( $this->_xoops_uid == $uid ) {
 			return true;
 		}
@@ -299,7 +295,7 @@ class webphoto_inc_gmap_info {
 
 // group_permission
 
-	function _init_permission( $dirname, $trust_dirname ) {
+	public function _init_permission( $dirname, $trust_dirname ) {
 		$permission_handler =& webphoto_inc_group_permission::getSingleton(
 			$dirname, $trust_dirname );
 

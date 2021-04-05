@@ -33,11 +33,9 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 	public $_CMD_FFMPEG = 'ffmpeg';
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 		$this->_cfg_use_ffmpeg = $this->_config_class->get_by_name( 'use_ffmpeg' );
 		$cfg_ffmpegpath        = $this->_config_class->get_dir_by_name( 'ffmpegpath' );
@@ -63,7 +61,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 
 // duration
 
-	function get_video_info( $file ) {
+	public function get_video_info( $file ) {
 		if ( ! $this->_cfg_use_ffmpeg ) {
 			return null;
 		}
@@ -74,7 +72,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 
 // create jpeg
 
-	function create_jpeg( $src_file, $dst_file ) {
+	public function create_jpeg( $src_file, $dst_file ) {
 		if ( ! $this->_cfg_use_ffmpeg ) {
 			return 0;
 		}
@@ -90,7 +88,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 
 // plural images
 
-	function create_plural_images( $id, $file ) {
+	public function create_plural_images( $id, $file ) {
 		if ( ! $this->_cfg_use_ffmpeg ) {
 			return false;
 		}
@@ -110,7 +108,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 		return 1;
 	}
 
-	function build_ffmpeg_prefix( $id ) {
+	public function build_ffmpeg_prefix( $id ) {
 // prefix_123_
 		$str = $this->_THUMB_PREFIX . $id . '_';
 
@@ -118,14 +116,14 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 	}
 
 // for misc_form
-	function build_thumb_name( $id, $num ) {
+	public function build_thumb_name( $id, $num ) {
 // prefix_123_456.jpg
 		$str = $this->build_thumb_node( $id, $num ) . '.' . $this->_JPEG_EXT;
 
 		return $str;
 	}
 
-	function build_thumb_node( $id, $num ) {
+	public function build_thumb_node( $id, $num ) {
 // prefix_123_456
 		$str = $this->build_ffmpeg_prefix( $id ) . $num;
 
@@ -135,7 +133,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 
 // flash
 
-	function create_flash( $src_file, $dst_file, $option = null ) {
+	public function create_flash( $src_file, $dst_file, $option = null ) {
 		if ( empty( $option ) ) {
 			$option = $this->get_cmd_option( $src_file, $this->_CMD_FFMPEG );
 		}
@@ -151,7 +149,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 
 // mp3
 
-	function create_mp3( $src_file, $dst_file, $option = null ) {
+	public function create_mp3( $src_file, $dst_file, $option = null ) {
 		if ( empty( $option ) ) {
 			$option = $this->get_cmd_option( $src_file, $this->_CMD_FFMPEG );
 		}
@@ -167,7 +165,7 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 
 // wav
 
-	function create_wav( $src_file, $dst_file, $option = null ) {
+	public function create_wav( $src_file, $dst_file, $option = null ) {
 		if ( empty( $option ) ) {
 			$option = $this->get_cmd_option( $src_file, $this->_CMD_FFMPEG );
 		}
@@ -180,7 +178,4 @@ class webphoto_ffmpeg extends webphoto_cmd_base {
 		return $ret;
 	}
 
-// --- class end ---
 }
-
-?>

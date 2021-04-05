@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -42,11 +41,9 @@ class webphoto_jodconverter extends webphoto_cmd_base {
 	);
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_cmd_base( $dirname, $trust_dirname );
 
 		$this->_config_class    =& webphoto_config::getInstance( $dirname );
 		$this->_jod_class       =& webphoto_lib_jodconverter::getInstance();
@@ -89,21 +86,21 @@ class webphoto_jodconverter extends webphoto_cmd_base {
 
 // create pdf
 
-	function create_pdf( $src_file, $dst_file ) {
+	public function create_pdf( $src_file, $dst_file ) {
 		return $this->convert_single( $src_file, $dst_file );
 	}
 
 
 // create swf
 
-	function create_swf( $src_file, $dst_file ) {
+	public function create_swf( $src_file, $dst_file ) {
 		return $this->convert_single( $src_file, $dst_file );
 	}
 
 
 // text content
 
-	function get_text_content_for_doc( $src_file ) {
+	public function get_text_content_for_doc( $src_file ) {
 		if ( empty( $src_file ) ) {
 			return null;    // no action
 		}
@@ -139,7 +136,7 @@ class webphoto_jodconverter extends webphoto_cmd_base {
 		return $arr;
 	}
 
-	function get_text_content_for_xls_ppt( $src_file ) {
+	public function get_text_content_for_xls_ppt( $src_file ) {
 		if ( empty( $src_file ) ) {
 			return null;    // no action
 		}
@@ -237,7 +234,7 @@ class webphoto_jodconverter extends webphoto_cmd_base {
 		return $arr;
 	}
 
-	function remove_junk( $text ) {
+	public function remove_junk( $text ) {
 		foreach ( $this->_junk_words as $word ) {
 			$text = str_replace( '>' . $word . '<', '> <', $text );
 			$text = str_replace( '>' . $word . ' ', '>  ', $text );
@@ -252,7 +249,7 @@ class webphoto_jodconverter extends webphoto_cmd_base {
 
 // convert
 
-	function convert_single( $src_file, $dst_file ) {
+	public function convert_single( $src_file, $dst_file ) {
 		if ( ! $this->_use_jod ) {
 			return 0;    // no action
 		}
@@ -272,19 +269,15 @@ class webphoto_jodconverter extends webphoto_cmd_base {
 
 // version
 
-	function use_jod() {
+	public function use_jod() {
 		return $this->_use_jod;
 	}
 
-	function java_path() {
+	public function java_path() {
 		return $this->_java_path;
 	}
 
-	function version() {
+	public function version() {
 		return $this->_jod_class->version();
 	}
-
-// --- class end ---
 }
-
-?>

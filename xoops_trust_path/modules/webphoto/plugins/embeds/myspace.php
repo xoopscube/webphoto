@@ -1,16 +1,14 @@
 <?php
-// $Id: myspace.php,v 1.2 2010/06/16 22:24:47 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-10-01 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-06-06 K.OHWADA
-// get_xml_params()
-//---------------------------------------------------------
+/**
+ * WebPhoto module for XCL
+ * @package Webphoto
+ * @version 2.31 (XCL)
+ * @author Gigamaster, 2021-04-02 XCL PHP7
+ * @author K. OHWADA, 2008-04-02
+ * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
+ * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @deprecated UPDATE PLUGIN / API / JSON
+ */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
@@ -41,25 +39,23 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 		$this->set_sample( '57094809' );
 	}
 
-	function embed( $src, $width, $height ) {
+	public function embed( $src, $width, $height, $extra = null ) {
 		$str = $this->build_embed_script( $src, $width, $height );
 
 		return $str;
 	}
 
-	function link( $src ) {
+	public function link( $src ) {
 		return $this->build_link( $src );
 	}
 
-	function desc() {
+	public function desc() {
 		return $this->build_desc();
 	}
 
-//---------------------------------------------------------
 // xml
-//---------------------------------------------------------
-	function build_support_params() {
-		$arr = array(
+	public function build_support_params() {
+		return array(
 			'title'       => true,
 			'description' => true,
 			'url'         => true,
@@ -68,11 +64,9 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 			'tags'        => true,
 			'script'      => true,
 		);
-
-		return $arr;
 	}
 
-	function get_xml_params( $src ) {
+	public function get_xml_params( $src ) {
 		$url  = 'http://vids.myspace.com/index.cfm?fuseaction=oembed&format=xml&';
 		$url  .= 'url=http%3a%2f%2fvids.myspace.com%2findex.cfm%3ffuseaction%3dvids.individual%26videoid%3d' . $src;
 		$cont = $this->get_remote_file( $url );
@@ -90,7 +84,7 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 
 		$title = $this->get_xml_title( $xml );
 
-		$arr = array(
+		return array(
 			'title'       => $title,
 			'description' => $this->get_xml_description( $meta_tags, $title ),
 			'url'         => $this->build_link( $src ),
@@ -99,11 +93,9 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 //		'duration'    => 0 ,
 			'script'      => $this->get_xml_script( $xml ),
 		);
-
-		return $arr;
 	}
 
-	function get_xml_title( $xml ) {
+	public function get_xml_title( $xml ) {
 		$str1 = $this->get_obj_property( $xml, 'title' );
 		$arr  = $this->str_to_array( $str1, $this->_TITLE_SPLIT );
 		if ( ! isset( $arr[1] ) ) {
@@ -116,12 +108,13 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 		return $str2;
 	}
 
-	function get_xml_description( $tags, $title ) {
+	public function get_xml_description( $tags, $title ) {
 		if ( ! isset( $tags['description'] ) ) {
 			return false;
 		}
 
-		$pat  = '. ' . $title . ' by ';
+		$pat = '. ' . $title . ' by ';
+		//!FIX THIS
 		$str1 = ereg_replace( $this->_DESCRIPTION_REMOVE, '', $tags['description'] );
 		$arr  = $this->str_to_array( $str1, $pat );
 		if ( ! isset( $arr[0] ) ) {
@@ -134,14 +127,14 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 		return $str2;
 	}
 
-	function get_xml_thumb( $xml ) {
+	public function get_xml_thumb( $xml ) {
 		$str = $this->get_obj_property( $xml, 'thumbnail_url' );
-		$str = strval( $str );
+		$str = (string) $str;
 
 		return $str;
 	}
 
-	function get_xml_tags( $tags ) {
+	public function get_xml_tags( $tags ) {
 		if ( ! isset( $tags['keywords'] ) ) {
 			return false;
 		}
@@ -152,14 +145,14 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 		return $arr;
 	}
 
-	function get_xml_script( $xml ) {
+	public function get_xml_script( $xml ) {
 		$str = $this->get_obj_property( $xml, 'html' );
 		$str = $this->replace_width_height( $str );
 
 		return $str;
 	}
 
-	function build_embed_script( $src, $width, $height ) {
+	public function build_embed_script( $src, $width, $height ) {
 		$movie = 'http://mediaservices.myspace.com/services/media/embed.aspx/m=' . $src;
 		$extra = 'allowFullScreen="true" wmode="transparent"';
 
@@ -173,7 +166,4 @@ class webphoto_embed_myspace extends webphoto_embed_base {
 		return $str;
 	}
 
-// --- class end ---
 }
-
-?>

@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -47,7 +46,7 @@ class webphoto_lib_xpdf {
 
 // main
 
-	function set_cmd_path( $val ) {
+	public function set_cmd_path( $val ) {
 		$this->_cmd_path      = $val;
 		$this->_cmd_pdftoppm  = $this->_cmd_path . 'pdftoppm';
 		$this->_cmd_pdftops   = $this->_cmd_path . 'pdftops';
@@ -61,11 +60,11 @@ class webphoto_lib_xpdf {
 
 	}
 
-	function set_debug( $val ) {
+	public function set_debug( $val ) {
 		$this->_DEBUG = (bool) $val;
 	}
 
-	function pdf_to_ppm( $pdf, $root, $first = 1, $last = 1, $dpi = 100 ) {
+	public function pdf_to_ppm( $pdf, $root, $first = 1, $last = 1, $dpi = 100 ) {
 		$this->clear_msg_array();
 		$src    = $root . '-000001.ppm';
 		$option = '-f ' . $first . ' -l ' . $last . ' -r ' . $dpi;
@@ -78,7 +77,7 @@ class webphoto_lib_xpdf {
 		return false;
 	}
 
-	function pdf_to_ps( $pdf, $ps, $first = 1, $last = 1 ) {
+	public function pdf_to_ps( $pdf, $ps, $first = 1, $last = 1 ) {
 		$this->clear_msg_array();
 		$option = '-f ' . $first . ' -l ' . $last;
 		$ret    = $this->pdftops( $pdf, $ps, $option );
@@ -89,7 +88,7 @@ class webphoto_lib_xpdf {
 		return false;
 	}
 
-	function pdf_to_text( $pdf, $txt, $enc = 'UTF-8' ) {
+	public function pdf_to_text( $pdf, $txt, $enc = 'UTF-8' ) {
 		$this->clear_msg_array();
 		$option = '-enc ' . $enc;
 
@@ -101,11 +100,11 @@ class webphoto_lib_xpdf {
 		return false;
 	}
 
-	function pdftoppm_exists() {
+	public function pdftoppm_exists() {
 		return $this->cmd_exists( 'pdftoppm' );
 	}
 
-	function cmd_exists( $name ) {
+	public function cmd_exists( $name ) {
 		$cmd = $this->_cmd_path . $name;
 		if ( $this->is_win_os() ) {
 			$cmd = $this->conv_win_cmd_exe( $cmd );
@@ -118,25 +117,25 @@ class webphoto_lib_xpdf {
 		return false;
 	}
 
-	function pdftoppm( $pdf, $root, $option = '' ) {
+	public function pdftoppm( $pdf, $root, $option = '' ) {
 		$cmd = $this->_cmd_pdftoppm . ' ' . $option . ' ' . $pdf . ' ' . $root;
 
 		return $this->exec_cmd( $cmd );
 	}
 
-	function pdftops( $pdf, $ps, $option = '' ) {
+	public function pdftops( $pdf, $ps, $option = '' ) {
 		$cmd = $this->_cmd_pdftops . ' ' . $option . ' ' . $pdf . ' ' . $ps;
 
 		return $this->exec_cmd( $cmd );
 	}
 
-	function pdftotext( $pdf, $txt, $option = '' ) {
+	public function pdftotext( $pdf, $txt, $option = '' ) {
 		$cmd = $this->_cmd_pdftotext . ' ' . $option . ' ' . $pdf . ' ' . $txt;
 
 		return $this->exec_cmd( $cmd );
 	}
 
-	function exec_cmd( $cmd ) {
+	public function exec_cmd( $cmd ) {
 		exec( "$cmd 2>&1", $ret_array, $ret_code );
 		if ( $this->_DEBUG ) {
 			echo $cmd . "<br>\n";
@@ -150,7 +149,7 @@ class webphoto_lib_xpdf {
 
 // version
 
-	function version( $path ) {
+	public function version( $path ) {
 		$pdftotext = $path . 'pdftotext';
 		if ( $this->is_win_os() ) {
 			$pdftotext = $this->conv_win_cmd( $pdftotext );
@@ -173,24 +172,24 @@ class webphoto_lib_xpdf {
 
 // utility
 
-	function is_win_os() {
+	public function is_win_os() {
 		return strpos( PHP_OS, "WIN" ) === 0;
 	}
 
-	function conv_win_cmd( $cmd ) {
+	public function conv_win_cmd( $cmd ) {
 		$str = $this->conv_win_cmd_exe( $cmd );
 		$str = $this->conv_win_cmd_quot( $str );
 
 		return $str;
 	}
 
-	function conv_win_cmd_exe( $cmd ) {
+	public function conv_win_cmd_exe( $cmd ) {
 		$str = $cmd . '.exe';
 
 		return $str;
 	}
 
-	function conv_win_cmd_quot( $cmd ) {
+	public function conv_win_cmd_quot( $cmd ) {
 		$str = '"' . $cmd . '"';
 
 		return $str;
@@ -199,15 +198,15 @@ class webphoto_lib_xpdf {
 
 // msg
 
-	function clear_msg_array() {
+	public function clear_msg_array() {
 		$this->_msg_array = array();
 	}
 
-	function get_msg_array() {
+	public function get_msg_array() {
 		return $this->_msg_array;
 	}
 
-	function set_msg( $ret_array ) {
+	public function set_msg( $ret_array ) {
 		if ( is_array( $ret_array ) ) {
 			foreach ( $ret_array as $line ) {
 				$this->_msg_array[] = $line;

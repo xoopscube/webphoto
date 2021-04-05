@@ -11,7 +11,6 @@
  * substitute for clsss/webphoto/permission.php
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -34,8 +33,6 @@ class webphoto_permission {
 	public $_has_file = true;
 	public $_has_html = true;
 
-
-// constructor
 
 	public function __construct( $dirname ) {
 		// dummy

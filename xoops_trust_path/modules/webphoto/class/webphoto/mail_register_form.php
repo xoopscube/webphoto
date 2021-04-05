@@ -9,7 +9,6 @@
  * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
-
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 	die( 'not permit' );
 }
@@ -18,11 +17,8 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 class webphoto_mail_register_form extends webphoto_form_this {
 
 
-// constructor
-
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
-		//$this->webphoto_form_this( $dirname, $trust_dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
@@ -122,7 +118,4 @@ class webphoto_mail_register_form extends webphoto_form_this {
 		return $text;
 	}
 
-// --- class end ---
 }
-
-?>

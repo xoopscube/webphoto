@@ -273,8 +273,8 @@ Mot de passe: xxx<br>" );
 	define( $constpref . "CFG_COM_VIEW", "Apparence des commentaires intégrés" );
 
 	define( $constpref . "ADMENU_UPDATE", "Mettre à jour" );
-	define( $constpref . "ADMENU_ITEM_TABLE_MANAGE", "Détail des éléments" );
-	define( $constpref . "ADMENU_FILE_TABLE_MANAGE", "Détail des fichiers" );
+	define( $constpref . "ADMENU_ITEM_TABLE_MANAGE", "Gestion des medias" );
+	define( $constpref . "ADMENU_FILE_TABLE_MANAGE", "Gestion des fichiers" );
 
 //---------------------------------------------------------
 // v0.50
@@ -290,8 +290,8 @@ Mot de passe: xxx<br>" );
 	define( $constpref . "ADMENU_ITEM_MANAGER", "Gestion des éléments" );
 	define( $constpref . "ADMENU_PLAYER_MANAGER", "Gestion des lecteurs" );
 	define( $constpref . "ADMENU_FLASHVAR_MANAGER", "Gestion des Flashvar" );
-	define( $constpref . "ADMENU_PLAYER_TABLE_MANAGE", "Détails des lecteurs" );
-	define( $constpref . "ADMENU_FLASHVAR_TABLE_MANAGE", "Détails des Flashvar" );
+	define( $constpref . "ADMENU_PLAYER_TABLE_MANAGE", "Gestion des lecteurs" );
+	define( $constpref . "ADMENU_FLASHVAR_TABLE_MANAGE", "Gestion des Flashvar" );
 
 //---------------------------------------------------------
 // v0.60
@@ -314,12 +314,12 @@ Mot de passe: xxx<br>" );
 // v0.90
 //---------------------------------------------------------
 	define( $constpref . "CFG_PERM_CAT_READ", "Permissions de la Catégorie" );
-	define( $constpref . "CFG_PERM_CAT_READ_DSC", "A activer depuis la rubrique Détails des Catégories" );
+	define( $constpref . "CFG_PERM_CAT_READ_DSC", "A activer depuis la rubrique Gestion des Catégories" );
 	define( $constpref . "CFG_PERM_ITEM_READ", "Permissions des éléments" );
-	define( $constpref . "CFG_PERM_ITEM_READ_DSC", "A activer depuis la rubrique Détails des éléments" );
+	define( $constpref . "CFG_PERM_ITEM_READ_DSC", "A activer depuis la rubrique Gestion des médias" );
 	define( $constpref . "OPT_PERM_READ_ALL", "Tout afficher" );
-	define( $constpref . "OPT_PERM_READ_NO_ITEM", "Ne pas afficher les éléments" );
-	define( $constpref . "OPT_PERM_READ_NO_CAT", "Ne pas afficher les éléments et les catégories" );
+	define( $constpref . "OPT_PERM_READ_NO_ITEM", "Ne pas afficher les médias" );
+	define( $constpref . "OPT_PERM_READ_NO_CAT", "Ne pas afficher les médias et les catégories" );
 
 //---------------------------------------------------------
 // v1.10
@@ -360,6 +360,3 @@ Mot de passe: xxx<br>" );
 	define( $constpref . "CFG_TAGS", "Nombre de balises dans tagcloud" );
 
 }
-// === define begin ===
-
-?>

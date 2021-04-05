@@ -32,46 +32,43 @@ class webphoto_lib_file_log {
 		return $instance;
 	}
 
-	function set_file( $file ) {
+	public function set_file( $file ) {
 		$this->_file = $file;
 	}
 
-
-// function
-
-	function backtrace() {
+	public function backtrace() {
 		ob_start();
 		debug_print_backtrace();
 		$this->write( ob_get_contents() );
 		ob_end_clean();
 	}
 
-	function printr( $val ) {
+	public function printr( $val ) {
 		ob_start();
 		print_r( $val );
 		$this->write( ob_get_contents() );
 		ob_end_clean();
 	}
 
-	function time() {
+	public function time() {
 		$this->write( date( "Y-m-d H:i:s" ) );
 	}
 
-	function url() {
+	public function url() {
 		$protocol = ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] == 'on' ) ) ? 'https' : 'http';
 		$url      = $protocol . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		$this->write( "URL: " . $url );
 	}
 
-	function request_uri() {
+	public function request_uri() {
 		$this->write( "REQUEST_URI: " . $_SERVER["REQUEST_URI"] );
 	}
 
-	function request_method() {
+	public function request_method() {
 		$this->write( "REQUEST_METHOD: " . $_SERVER["REQUEST_METHOD"] );
 	}
 
-	function write( $data ) {
+	public function write( $data ) {
 		file_put_contents( $this->_file, $data . "\n", FILE_APPEND );
 	}
 

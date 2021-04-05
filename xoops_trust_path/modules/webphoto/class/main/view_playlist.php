@@ -46,7 +46,7 @@ class webphoto_main_view_playlist extends webphoto_file_read {
 
 // public
 
-	function main() {
+	public function main() {
 		$item_id  = $this->_post_class->get_post_get_int( 'item_id' );
 		$item_row = $this->get_item_row( $item_id );
 		if ( ! is_array( $item_row ) ) {
@@ -70,7 +70,4 @@ class webphoto_main_view_playlist extends webphoto_file_read {
 		exit();
 	}
 
-// --- class end ---
 }
-
-?>

@@ -27,9 +27,9 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 	public $_CHMOD_MODE = 0777;
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-		/*	$wp = new webphoto_inc_base_ini();
-			$this->$wp;*/
+
 		$this->init_base_ini( $dirname, $trust_dirname );
 		$this->init_handler( $dirname );
 
@@ -47,12 +47,12 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 		return $singletons[ $dirname ];
 	}
 
-	function set_workdir( $workdir ) {
+	public function set_workdir( $workdir ) {
 		$this->_FILE_AUTO_PUBLISH = $workdir . '/log/auto_publish';
 	}
 
 // public
-	function auto_publish() {
+	public function auto_publish() {
 		if ( $this->check_auto_publish_time() ) {
 			$this->item_auto_publish( true );
 			$this->item_auto_expire( true );
@@ -64,17 +64,17 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 
 
 // private
-	function check_auto_publish_time() {
+	private function check_auto_publish_time() {
 		return $this->check_file_time(
 			$this->_FILE_AUTO_PUBLISH, $this->_TIME_AUTO_PUBLISH );
 	}
 
-	function renew_auto_publish_time() {
+	private function renew_auto_publish_time() {
 		$this->write_file(
 			$this->_FILE_AUTO_PUBLISH, time(), 'w', $this->_FLAG_AUTO_PUBLISH_CHMOD );
 	}
 
-	function check_file_time( $file, $interval ) {
+	private function check_file_time( $file, $interval ) {
 // if passing interval time
 		if ( file_exists( $file ) ) {
 			$time = (int) trim( file_get_contents( $file ) );
@@ -91,7 +91,7 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 		return false;
 	}
 
-	function write_file( $file, $data, $mode = 'w', $flag_chmod = false ) {
+	private function write_file( $file, $data, $mode = 'w', $flag_chmod = false ) {
 		$fp = fopen( $file, $mode );
 		if ( ! $fp ) {
 			return false;
@@ -108,7 +108,7 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 		return $byte;
 	}
 
-	function chmod_file( $file ) {
+	private function chmod_file( $file ) {
 // Warning: chmod()
 		if ( ! $this->_ini_safe_mode ) {
 			chmod( $file, $this->_CHMOD_MODE );
@@ -117,7 +117,7 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 
 
 // item handler
-	function item_auto_publish( $force = false ) {
+	public function item_auto_publish( $force = false ) {
 		$rows = $this->get_item_rows_coming_publish();
 		if ( is_array( $rows ) && count( $rows ) ) {
 			foreach ( $rows as $row ) {
@@ -127,7 +127,7 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 		}
 	}
 
-	function item_auto_expire( $force = false ) {
+	public function item_auto_expire( $force = false ) {
 		$rows = $this->get_item_rows_coming_expire();
 		if ( is_array( $rows ) && count( $rows ) ) {
 			foreach ( $rows as $row ) {
@@ -137,7 +137,7 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 		}
 	}
 
-	function get_item_rows_coming_publish( $limit = 0, $offset = 0 ) {
+	public function get_item_rows_coming_publish( $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_table_item;
 		$sql .= ' WHERE item_status = ' . _C_WEBPHOTO_STATUS_OFFLINE;
 		$sql .= ' AND item_time_publish > 0 ';
@@ -147,7 +147,7 @@ class webphoto_inc_auto_publish extends webphoto_inc_base_ini {
 		return $this->get_rows_by_sql( $sql, $limit, $offset );
 	}
 
-	function get_item_rows_coming_expire( $limit = 0, $offset = 0 ) {
+	public function get_item_rows_coming_expire( $limit = 0, $offset = 0 ) {
 		$sql = 'SELECT * FROM ' . $this->_table_item;
 		$sql .= ' WHERE item_status > 0 ';
 		$sql .= ' AND item_time_expire > 0 ';

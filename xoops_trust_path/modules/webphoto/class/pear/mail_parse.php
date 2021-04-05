@@ -15,10 +15,9 @@ class webphoto_pear_mail_parse extends webphoto_pear_mail_decode {
 	public $_MAILER_LIST = array( 'x_mailer', 'x_mail_agent', 'user_agent' );
 
 
-// constructor
+	public function __construct() {
 
-	function webphoto_pear_mail_parse() {
-		$this->webphoto_pear_mail_decode();
+		parent::__construct();
 	}
 
 	public static function &getInstance() {
@@ -231,7 +230,4 @@ class webphoto_pear_mail_parse extends webphoto_pear_mail_decode {
 		return $fig;
 	}
 
-// --- class end ---
 }
-
-?>
