@@ -10,6 +10,14 @@
 
 **Maintainer** : Gigamaster, XCL PHP7, 2021-04-02
 
+**TODO**   
+
+:books: Documentation  
+:fire: Remove plugins discontinued   
+:construction: Module Templates   
+:package: X-Update Manager Store  
+🐞 Sanitizer (HTML)
+
 ---
   
 
