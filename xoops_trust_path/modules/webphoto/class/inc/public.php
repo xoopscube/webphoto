@@ -260,12 +260,12 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // item where search
 
-	function build_where_for_search( $param ) {
+	public function build_where_for_search( $param ) {
 		if ( ! is_array( $param ) ) {
 			return null;
 		}
 
-		list( $query_array, $andor, $uid ) = $param;
+		[ $query_array, $andor, $uid ] = $param;
 
 		$where_search = $this->build_where_for_search_query( $query_array, $andor, $uid );
 
@@ -277,7 +277,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $where;
 	}
 
-	function build_where_for_search_query( $keyword_array, $andor, $uid ) {
+	public function build_where_for_search_query( $keyword_array, $andor, $uid ) {
 		$where_key = $this->build_where_by_keyword_array( $keyword_array, $andor );
 
 		$where_uid = null;
@@ -297,7 +297,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return $where;
 	}
 
-	function build_where_by_keyword_array( $keyword_array, $andor = 'AND' ) {
+	public function build_where_by_keyword_array( $keyword_array, $andor = 'AND' ) {
 		if ( ! is_array( $keyword_array ) || ! count( $keyword_array ) ) {
 			return null;
 		}
@@ -337,7 +337,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return null;
 	}
 
-	function build_where_search_single( $str ) {
+	public function build_where_search_single( $str ) {
 		$text = "item_search LIKE '%" . addslashes( $str ) . "%'";
 
 		return $text;
@@ -346,7 +346,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // item filed
 
-	function build_item_description( $row ) {
+	public function build_item_description( $row ) {
 		$editor = $row['item_editor'];
 		$text   = $row['item_description'];
 
@@ -374,7 +374,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // cat handler
 
-	function get_cat_cached_row_by_id( $id ) {
+	public function get_cat_cached_row_by_id( $id ) {
 		if ( isset( $this->_cat_cached[ $id ] ) ) {
 			return $this->_cat_cached[ $id ];
 		}
@@ -392,7 +392,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // build_img_url
 
-	function build_img_url( $item_row, $show_image = false, $show_icon = false ) {
+	public function build_img_url( $item_row, $show_image = false, $show_icon = false ) {
 		$img_url    = null;
 		$img_width  = 0;
 		$img_height = 0;
@@ -405,10 +405,10 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 		$thumb_row = $this->get_file_row_by_kind( $item_row, _C_WEBPHOTO_FILE_KIND_THUMB );
 
-		list( $thumb_url, $thumb_width, $thumb_height ) =
+		[ $thumb_url, $thumb_width, $thumb_height ] =
 			$this->build_show_file_image( $thumb_row );
 
-		list( $icon_url, $icon_width, $icon_height ) =
+		[ $icon_url, $icon_width, $icon_height ] =
 			$this->build_show_icon_image( $item_row );
 
 		if ( ( $is_image || $show_image ) && $thumb_url ) {
@@ -428,19 +428,15 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 		return array( $img_url, $img_width, $img_height );
 	}
 
-	function is_kind_external_thumb( $kind ) {
-		if ( $this->is_embed_kind( $kind ) ||
-		     $this->is_external_image_kind( $kind ) ) {
-			return true;
-		}
-
-		return false;
+	public function is_kind_external_thumb( $kind ) {
+		return $this->is_embed_kind( $kind ) ||
+		       $this->is_external_image_kind( $kind );
 	}
 
 
 // auto publish
 
-	function auto_publish() {
+	public function auto_publish() {
 		$publish_class =& webphoto_inc_auto_publish::getSingleton(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 		$publish_class->set_workdir( $this->_cfg_workdir );
@@ -450,7 +446,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 // xoops config
 
-	function _init_xoops_config( $dirname ) {
+	public function _init_xoops_config( $dirname ) {
 		$config_handler =& webphoto_inc_config::getSingleton( $dirname );
 
 		$this->_cfg_workdir        = $config_handler->get_by_name( 'workdir' );

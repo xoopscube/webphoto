@@ -278,15 +278,15 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 
 // utility
 
-		function sanitize( $str ) {
+		public function sanitize( $str ) {
 			return htmlspecialchars( $str, ENT_QUOTES );
 		}
 
-		function is_image_ext( $ext ) {
+		public function is_image_ext( $ext ) {
 			return $this->is_ext_in_array( $ext, $this->_IMAGE_EXTS );
 		}
 
-		function is_ext_in_array( $ext, $arr ) {
+		public function is_ext_in_array( $ext, $arr ) {
 			if ( in_array( strtolower( $ext ), $arr ) ) {
 				return true;
 			}
@@ -297,19 +297,19 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 
 // set param
 
-		function set_show_onload( $val ) {
+		public function set_show_onload( $val ) {
 			$this->_show_onload = (bool) $val;
 		}
 
-		function set_show_onresize( $val ) {
+		public function set_show_onresize( $val ) {
 			$this->_show_onresize = (bool) $val;
 		}
 
-		function set_show_timeout( $val ) {
+		public function set_show_timeout( $val ) {
 			$this->_show_timeout = (bool) $val;
 		}
 
-		function set_timeout( $val ) {
+		public function set_timeout( $val ) {
 			$this->_timeout = (int) $val;
 		}
 

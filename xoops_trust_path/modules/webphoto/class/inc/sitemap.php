@@ -15,12 +15,13 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_inc_sitemap extends webphoto_inc_base_ini {
+
 	public $_uri_class;
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
-//	$wp = new webphoto_inc_base_ini();
-//	$this->$wp;
+
 		$this->init_base_ini( $dirname, $trust_dirname );
 		$this->init_handler( $dirname );
 
@@ -39,14 +40,14 @@ class webphoto_inc_sitemap extends webphoto_inc_base_ini {
 
 // public
 
-	function sitemap() {
+	public function sitemap() {
 		$table_cat = $this->prefix_dirname( 'cat' );
 
 		$link = $this->_uri_class->build_sitemap_category();
 
 // this function is defined in sitemap module
-		if ( function_exists( 'sitemap_get_categoires_map' ) ) {
-			return sitemap_get_categoires_map(
+		if ( function_exists( 'sitemap_get_categories_map' ) ) {
+			return sitemap_get_categories_map(
 				$table_cat, 'cat_id', 'cat_pid', 'cat_title', $link, 'cat_title' );
 		}
 

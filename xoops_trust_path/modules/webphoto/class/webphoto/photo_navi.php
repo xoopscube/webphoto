@@ -161,7 +161,7 @@ class webphoto_photo_navi extends webphoto_lib_error {
 			return false;
 		}
 
-		list( $width, $height )
+		[ $width, $height ]
 			= $this->adjust_size( $thumb_width, $thumb_height, $flag_current );
 
 		$title_s = $this->sanitize( $title );
@@ -218,7 +218,8 @@ class webphoto_photo_navi extends webphoto_lib_error {
 	}
 
 	public function adjust_small_size( $width, $height ) {
-		list( $new_width, $new_height ) =
+
+		[ $new_width, $new_height ] =
 			$this->_image_class->adjust_image_size(
 				$width, $height, $this->_max_small_width, $this->_max_small_height );
 
@@ -230,7 +231,8 @@ class webphoto_photo_navi extends webphoto_lib_error {
 	}
 
 	public function adjust_current_size( $width, $height ) {
-		list( $new_width, $new_height ) =
+
+		[ $new_width, $new_height ] =
 			$this->_image_class->adjust_image_size(
 				$width, $height, $this->_max_current_width, $this->_max_current_height );
 

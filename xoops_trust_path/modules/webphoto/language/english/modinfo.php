@@ -1,19 +1,4 @@
 <?php
-// $Id: modinfo.php,v 1.27 2011/12/28 16:16:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-10-01 K.OHWADA
-// Photo -> Photo Video Media
-// 2010-04-04 K.OHWADA
-// remove echo
-//---------------------------------------------------------
-
 // test
 if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) {
 	$MY_DIRNAME = 'webphoto';
@@ -56,14 +41,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "BNAME_RECENT_P", "Recent Photo Video Media with thumbnails" );
 	define( $constpref . "BNAME_HITS_P", "Top Photo Video Media with thumbnails" );
 
-// Config Items
-//define($constpref."CFG_PHOTOSPATH" , "Path to photos" ) ;
-//define($constpref."CFG_DESCPHOTOSPATH" , "Path from the directory installed XOOPS.<br>(The first character must be '/'. The last character should not be '/'.)<br>This directory's permission is 777 or 707 in unix." ) ;
-//define($constpref."CFG_THUMBSPATH" , "Path to thumbnails" ) ;
-//define($constpref."CFG_DESCTHUMBSPATH" , "Same as 'Path to photos'." ) ;
-//define($constpref."CFG_USEIMAGICK" , "Use ImageMagick for treating images" ) ;
-//define($constpref."CFG_DESCIMAGICK" , "Not use ImageMagick cause Not work resize or rotate the main photo, and make thumbnails by GD.<br>You'd better use ImageMagick if you can." ) ;
-
 	define( $constpref . "CFG_IMAGINGPIPE", "Package treating images" );
 	define( $constpref . "CFG_DESCIMAGINGPIPE", "Almost all PHP environments can use GD. But GD is functionally inferior than 2 other packages.<br>It is best to use ImageMagick or NetPBM if you can." );
 	define( $constpref . "CFG_FORCEGD2", "Force GD2 conversion" );
@@ -75,86 +52,33 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CFG_POPULAR", "Hits to be Popular" );
 	define( $constpref . "CFG_NEWDAYS", "Days between displaying icon of 'new'&'update'" );
 	define( $constpref . "CFG_NEWPHOTOS", "Number of Photo Video Media as New on Top Page" );
-
-//define($constpref."CFG_DEFAULTORDER" , "Default order in category's view" ) ;
-
 	define( $constpref . "CFG_PERPAGE", "Displayed Photo Video Media per Page" );
 	define( $constpref . "CFG_DESCPERPAGE", "Input selectable numbers separated with '|'<br>eg) 10|20|50|100" );
 	define( $constpref . "CFG_ALLOWNOIMAGE", "Allow a submit without images" );
 	define( $constpref . "CFG_MAKETHUMB", "Make Thumbnail Image" );
 	define( $constpref . "CFG_DESCMAKETHUMB", "When you change 'No' to 'Yes', You'd better 'Redo thumbnails'." );
 
-//define($constpref."CFG_THUMBWIDTH" , "Thumb Image Width" ) ;
-//define($constpref."CFG_DESCTHUMBWIDTH" , "The height of thumbs will be decided from the width automatically." ) ;
-//define($constpref."CFG_THUMBSIZE" , "Size of thumbnails (pixel)" ) ;
-//define($constpref."CFG_THUMBRULE" , "Calculation rule for building thumbnails" ) ;
-
 // v2.30
-//define($constpref."CFG_WIDTH" , "Max photo width" ) ;
-//define($constpref."CFG_DESCWIDTH" , "This means the photo's width to be resized.<br>If you use GD without truecolor, this means the limitation of width." ) ;
-//define($constpref."CFG_HEIGHT" , "Max photo height" ) ;
-//define($constpref."CFG_DESCHEIGHT" , "This means the photo's height to be resized.<br>If you use GD without truecolor, this means the limitation of height." ) ;
-	define( $constpref . "CFG_WIDTH", "Image Width in popup" );
-	define( $constpref . "CFG_DESCWIDTH", "Image size when popup. <br><br>In old version, this parameter was the limitation of the image size when upload. <br>This limitation was abolished. <br>The specification was changed in V2.30. 
-" );
-	define( $constpref . "CFG_HEIGHT", "Image Height in popup" );
-	define( $constpref . "CFG_DESCHEIGHT", "Same as Image Width" );
+define( $constpref . "CFG_WIDTH", "Image Width in popup" );
+define( $constpref . "CFG_DESCWIDTH", "Image size when popup. <br><br>In old version, this parameter was the limitation of the image size when upload. <br>This limitation was abolished. <br>The specification was changed in V2.30." );
+define( $constpref . "CFG_HEIGHT", "Image Height in popup" );
+define( $constpref . "CFG_DESCHEIGHT", "Same as Image Width" );
 
-	define( $constpref . "CFG_FSIZE", "Max file size" );
-	define( $constpref . "CFG_DESCFSIZE", "The limitation of the size of uploading file.(bytes)" );
-
-//define($constpref."CFG_MIDDLEPIXEL" , "Max image size in single view" ) ;
-//define($constpref."CFG_DESCMIDDLEPIXEL" , "Specify (width)x(height)<br>(eg. 480x480)" ) ;
-
+define( $constpref . "CFG_FSIZE", "Max file size" );
+define( $constpref . "CFG_DESCFSIZE", "The limitation of the size of uploading file.(bytes)" );
 	define( $constpref . "CFG_ADDPOSTS", "The number added User's posts by posting a photo." );
 	define( $constpref . "CFG_DESCADDPOSTS", "Normally, 0 or 1. Under 0 mean 0" );
 	define( $constpref . "CFG_CATONSUBMENU", "Register top categories into submenu" );
 	define( $constpref . "CFG_NAMEORUNAME", "Poster name displayed" );
 	define( $constpref . "CFG_DESCNAMEORUNAME", "Select which 'name' is displayed" );
-
-//define($constpref."CFG_VIEWCATTYPE" , "Type of view in category" ) ;
 	define( $constpref . "CFG_VIEWTYPE", "Type of view " );
-
-//define($constpref."CFG_COLSOFTABLEVIEW" , "Number of columns in table view" ) ;
-	define( $constpref . "CFG_COLSOFTABLE", "Number of columns in table view" );
-
-//define($constpref."CFG_ALLOWEDEXTS" , "File extensions that can be uploaded" ) ;
-//define($constpref."CFG_DESCALLOWEDEXTS" , "Input extensions with separator '|'. (eg 'jpg|jpeg|gif|png') .<br>All characters must be lowercase. Don't insert periods or spaces<br>Never add php or phtml etc." ) ;
-//define($constpref."CFG_ALLOWEDMIME" , "MIME Types can be uploaded" ) ;
-//define($constpref."CFG_DESCALLOWEDMIME" , "Input MIME Types with separator '|'. (eg 'image/gif|image/jpeg|image/png')<br>If you want to be checked by MIME Type, leave this blank" ) ;
-
+define( $constpref . "CFG_COLSOFTABLE", "Number of columns in table view" );
 	define( $constpref . "CFG_USESITEIMG", "Use [siteimg] in ImageManager Integration" );
 	define( $constpref . "CFG_DESCUSESITEIMG", "The Integrated Image Manager input [siteimg] instead of [img].<br>You have to hack module.textsanitizer.php for each module to enable tag of [siteimg]" );
-
 	define( $constpref . "OPT_USENAME", "Real Name" );
 	define( $constpref . "OPT_USEUNAME", "Login Name" );
-
-//define($constpref."OPT_CALCFROMWIDTH" , "width:specified  height:auto" ) ;
-//define($constpref."OPT_CALCFROMHEIGHT" , "width:auto  width:specified" ) ;
-//define($constpref."OPT_CALCWHINSIDEBOX" , "put in specified size squre" ) ;
-
 	define( $constpref . "OPT_VIEWLIST", "List View" );
 	define( $constpref . "OPT_VIEWTABLE", "Table View" );
-
-// Sub menu titles
-//define($constpref."TEXT_SMNAME1","Submit");
-//define($constpref."TEXT_SMNAME2","Popular");
-//define($constpref."TEXT_SMNAME3","Top Rated");
-//define($constpref."TEXT_SMNAME4","My Photo Video Media");
-
-// Names of admin menu items
-//define($constpref."ADMENU0","Submitted Photo Video Media");
-//define($constpref."ADMENU1","Photo Video Media Management");
-//define($constpref."ADMENU2","Add/Edit Categories");
-//define($constpref."ADMENU_GPERM","Global Permissions");
-//define($constpref."ADMENU3","Check Configuration & Environment");
-//define($constpref."ADMENU4","Batch Register");
-//define($constpref."ADMENU5","Rebuild Thumbnails");
-//define($constpref."ADMENU_IMPORT","Import Images");
-//define($constpref."ADMENU_EXPORT","Export Images");
-//define($constpref."ADMENU_MYBLOCKSADMIN","Blocks & Groups Admin");
-//define($constpref."ADMENU_MYTPLSADMIN","Templates");
-
 
 // Text for notifications
 	define( $constpref . "GLOBAL_NOTIFY", "Global" );
@@ -174,7 +98,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYDSC", "Receive notification when a new photo description is posted to the current category" );
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE}: auto-notify : New photo" );
 
-
 //=========================================================
 // add for webphoto
 //=========================================================
@@ -192,10 +115,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "OPT_SORT_RATINGA", "Rating (Lowest Score to Highest Score)" );
 	define( $constpref . "OPT_SORT_RATINGD", "Rating (Highest Score to Lowest Score)" );
 	define( $constpref . "OPT_SORT_RANDOM", "Random" );
-
-//define($constpref."CFG_GICONSPATH" , "Path to Google Icons" ) ;
-//define($constpref."CFG_TMPPATH" ,   "Path to temporary" ) ;
-
 	define( $constpref . "CFG_MIDDLE_WIDTH", "Image Width in single view" );
 	define( $constpref . "CFG_MIDDLE_HEIGHT", "Image Height in single view" );
 	define( $constpref . "CFG_THUMB_WIDTH", "Thumb Image Width" );
@@ -219,13 +138,10 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "SMNAME_MYPHOTO", "My Photo Video Media" );
 
 // Names of admin menu items
-//define($constpref."ADMENU_ADMISSION","Admitting images");
-
 	define( $constpref . "ADMENU_PHOTOMANAGER", "Photo Video Media Management" );
 	define( $constpref . "ADMENU_CATMANAGER", "Add/Edit Categories" );
 	define( $constpref . "ADMENU_CHECKCONFIGS", "Check Configuration" );
 	define( $constpref . "ADMENU_BATCH", "Batch Register" );
-//define($constpref."ADMENU_REDOTHUMB","Rebuild Thumbnails");
 	define( $constpref . "ADMENU_GROUPPERM", "Global Permissions" );
 	define( $constpref . "ADMENU_IMPORT", "Import Images" );
 	define( $constpref . "ADMENU_EXPORT", "Export Images" );
@@ -254,16 +170,13 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 //---------------------------------------------------------
 // v0.30
 //---------------------------------------------------------
-//define($constpref."CFG_TMPDIR" ,   "Path to temporary" ) ;
-//define($constpref."CFG_TMPDIR_DSC" , "Fill the fullpath (The first character must be '/'. The last character should not be '/'.)<br>Recommend to set to this out of the document route.");
-
 	define( $constpref . "CFG_MAIL_HOST", "Mail Server Hostname" );
 	define( $constpref . "CFG_MAIL_USER", "Mail User ID" );
 	define( $constpref . "CFG_MAIL_PASS", "Mail Password" );
 	define( $constpref . "CFG_MAIL_ADDR", "Mail Addresss" );
 	define( $constpref . "CFG_MAIL_CHARSET", "Mail Charset" );
 	define( $constpref . "CFG_MAIL_CHARSET_DSC", "Input Charset with separator '|'.<br>If you want not to be checked by MIME Type, leave this blank" );
-	define( $constpref . "CFG_MAIL_CHARSET_LIST", "ISO-8859-1|US-ASCII" );
+	define( $constpref . "CFG_MAIL_CHARSET_LIST", "ISO-8859-1|US-ASCII|UTF-8" );
 	define( $constpref . "CFG_FILE_DIR", "Path to files by FTP" );
 	define( $constpref . "CFG_FILE_DIR_DSC", "Fill the fullpath (The first character must be '/'. The last character should not be '/'.)Recommend to set to this out of the document route." );
 	define( $constpref . "CFG_FILE_SIZE", "Max file size by FTP (byte)" );
@@ -447,6 +360,5 @@ FTP Password: xxx<br>" );
 	define( $constpref . "OPT_TIMELINE_SCALE_DAY", "Day" );
 	define( $constpref . "OPT_TIMELINE_SCALE_CENTURY", "Century" );
 	define( $constpref . "OPT_TIMELINE_SCALE_MILLENNIUM", "Millennium" );
-
 }
 // === define begin ===

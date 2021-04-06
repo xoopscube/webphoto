@@ -52,7 +52,7 @@ class webphoto_inc_xoops_header {
 	}
 
 // for block
-	function assign_or_get_popbox_js( $lang_popbox_revert ) {
+	public function assign_or_get_popbox_js( $lang_popbox_revert ) {
 		if ( ! $this->check_popbox_js() ) {
 			return null;
 		}
@@ -68,7 +68,7 @@ class webphoto_inc_xoops_header {
 		return null;
 	}
 
-	function assign_or_get_gmap_api_js( $apikey ) {
+	public function assign_or_get_gmap_api_js( $apikey ) {
 		if ( ! $this->check_gmap_api() ) {
 			return null;
 		}
@@ -83,7 +83,7 @@ class webphoto_inc_xoops_header {
 		return null;
 	}
 
-	function assign_or_get_gmap_block_js() {
+	public function assign_or_get_gmap_block_js() {
 		if ( ! $this->check_gmap_block_js() ) {
 			return null;
 		}
@@ -99,7 +99,7 @@ class webphoto_inc_xoops_header {
 	}
 
 // for main
-	function build_once_popbox_js( $lang_popbox_revert ) {
+	public function build_once_popbox_js( $lang_popbox_revert ) {
 		if ( $this->check_popbox_js() ) {
 			return $this->build_popbox_js( $lang_popbox_revert );
 		}
@@ -107,7 +107,7 @@ class webphoto_inc_xoops_header {
 		return null;
 	}
 
-	function build_once_gmap_js() {
+	public function build_once_gmap_js() {
 		if ( $this->check_gmap_js() ) {
 			return $this->build_gmap_js();
 		}
@@ -115,27 +115,27 @@ class webphoto_inc_xoops_header {
 		return null;
 	}
 
-	function check_gmap_js() {
+	public function check_gmap_js() {
 		return $this->check_once( $this->build_const_name( 'gmap_js' ) );
 	}
 
-	function check_gmap_block_js() {
+	public function check_gmap_block_js() {
 		return $this->check_once( $this->build_const_name( 'gmap_block_js' ) );
 	}
 
-	function check_popbox_js() {
+	public function check_popbox_js() {
 		return $this->check_once( $this->build_const_name( 'popbox_js' ) );
 	}
 
-	function build_gmap_js() {
+	public function build_gmap_js() {
 		return $this->build_script_js_libs( 'gmap.js' );
 	}
 
-	function build_gmap_block_js() {
+	public function build_gmap_block_js() {
 		return $this->build_script_js_libs( 'gmap_block.js' );
 	}
 
-	function build_popbox_js( $lang_popbox_revert = null ) {
+	public function build_popbox_js( $lang_popbox_revert = null ) {
 		if ( empty( $lang_popbox_revert ) ) {
 			$lang_popbox_revert = $this->_LANG_POPBOX_REVERT;
 		}
@@ -153,13 +153,11 @@ class webphoto_inc_xoops_header {
 	}
 
 // utility
-	function build_const_name( $name ) {
-		$str = strtoupper( '_C_WEBPHOTO_HEADER_LOADED_' . $name );
-
-		return $str;
+	public function build_const_name( $name ) {
+		return strtoupper( '_C_WEBPHOTO_HEADER_LOADED_' . $name );
 	}
 
-	function check_once( $const_name ) {
+	public function check_once( $const_name ) {
 		if ( ! defined( $const_name ) ) {
 			define( $const_name, 1 );
 
@@ -169,57 +167,47 @@ class webphoto_inc_xoops_header {
 		return false;
 	}
 
-	function build_link_css_libs( $css ) {
+	public function build_link_css_libs( $css ) {
 		return $this->build_link_css( $this->_LIBS_URL . '/' . $css );
 	}
 
-	function build_link_css( $herf ) {
-		$str = '<link rel="stylesheet" type="text/css" href="' . $herf . '" />' . "\n";
-
-		return $str;
+	public function build_link_css( $herf ) {
+		return '<link rel="stylesheet" type="text/css" href="' . $herf . '" />' . "\n";
 	}
 
-	function build_script_js_libs( $js ) {
+	public function build_script_js_libs( $js ) {
 		return $this->build_script_js( $this->_LIBS_URL . '/' . $js );
 	}
 
-	function build_script_js( $src ) {
-		$str = '<script src="' . $src . '" type="text/javascript"></script>' . "\n";
-
-		return $str;
+	public function build_script_js( $src ) {
+		return '<script src="' . $src . '" type="text/javascript"></script>' . "\n";
 	}
 
-	function build_link_rss( $url ) {
-		$str = '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . $url . '" />' . "\n";
-
-		return $str;
+	public function build_link_rss( $url ) {
+		return '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . $url . '" />' . "\n";
 	}
 
-	function build_envelop_js( $text ) {
-		$ret = <<< EOF
+	public function build_envelop_js( $text ) {
+		return <<< EOF
 <script type="text/javascript">
 //<![CDATA[
 $text 
 //]]>
 </script> 
 EOF;
-
-		return $ret;
 	}
 
 	function build_envelop_css( $text ) {
-		$ret = <<< EOF
+		return <<< EOF
 <style type="text/css">
 $text 
 </style> 
 EOF;
-
-		return $ret;
 	}
 
 // template
 // some block use xoops_module_header
-	function assign_xoops_module_header( $var ) {
+	public function assign_xoops_module_header( $var ) {
 		global $xoopsTpl;
 		if ( $var ) {
 			$xoopsTpl->assign(
@@ -229,22 +217,22 @@ EOF;
 		}
 	}
 
-	function get_xoops_module_header() {
+	public function get_xoops_module_header() {
 		global $xoopsTpl;
 
 		return $xoopsTpl->get_template_vars( $this->_XOOPS_MODULE_HADER );
 	}
 
 // common with weblinks
-	function build_once_gmap_api( $apikey ) {
+	public function build_once_gmap_api( $apikey ) {
 		return happy_linux_build_once_gmap_api( $apikey );
 	}
 
-	function check_gmap_api() {
+	public function check_gmap_api() {
 		return happy_linux_check_once_gmap_api();
 	}
 
-	function build_gmap_api( $apikey ) {
+	public function build_gmap_api( $apikey ) {
 		return happy_linux_build_gmap_api( $apikey );
 	}
 

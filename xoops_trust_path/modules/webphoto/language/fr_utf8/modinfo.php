@@ -1,27 +1,20 @@
 <?php
-// $Id: modinfo.php,v 1.2 2009/05/17 08:24:26 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
 // test
 if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) {
 	$MY_DIRNAME = 'webphoto';
+}
 
-// normal
-} elseif ( isset( $GLOBALS['MY_DIRNAME'] ) ) {
-	$MY_DIRNAME = $GLOBALS['MY_DIRNAME'];
-
-// call by altsys/mytplsadmin.php
-} elseif ( $mydirname ) {
-	$MY_DIRNAME = $mydirname;
+if ( ! isset( $MY_DIRNAME ) ) {
+// call by altsys D3LanguageManager
+	if ( isset( $mydirname ) ) {
+		$MY_DIRNAME = $mydirname;
 
 // probably error
-} else {
-	echo "not set dirname in " . __FILE__ . " <br>\n";
-	$MY_DIRNAME = 'webphoto';
+	} elseif ( isset( $GLOBALS['MY_DIRNAME'] ) ) {
+		$MY_DIRNAME = $GLOBALS['MY_DIRNAME'];
+	} else {
+		$MY_DIRNAME = 'webphoto';
+	}
 }
 
 $constpref = strtoupper( '_MI_' . $MY_DIRNAME . '_' );
@@ -48,14 +41,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "BNAME_RECENT_P", "Photos récentes avec miniatures" );
 	define( $constpref . "BNAME_HITS_P", "Photos populaires avec miniatures" );
 
-// Config Items
-//define($constpref."CFG_PHOTOSPATH" , "Path to photos" ) ;
-//define($constpref."CFG_DESCPHOTOSPATH" , "Path from the directory installed XOOPS.<br>(The first character must be '/'. The last character should not be '/'.)<br>This directory's permission is 777 or 707 in unix." ) ;
-//define($constpref."CFG_THUMBSPATH" , "Path to thumbnails" ) ;
-//define($constpref."CFG_DESCTHUMBSPATH" , "Same as 'Path to photos'." ) ;
-//define($constpref."CFG_USEIMAGICK" , "Use ImageMagick for treating images" ) ;
-//define($constpref."CFG_DESCIMAGICK" , "Not use ImageMagick cause Not work resize or rotate the main photo, and make thumbnails by GD.<br>You'd better use ImageMagick if you can." ) ;
-
 	define( $constpref . "CFG_IMAGINGPIPE", "Librairie de traitement des images" );
 	define( $constpref . "CFG_DESCIMAGINGPIPE", "La plupart des environnements PHP sont en mesure d'utiliser la librairie GD. Cependant ImageMagick et NetPBM sont plus performantes." );
 	define( $constpref . "CFG_FORCEGD2", "Forcer la conversion GD2" );
@@ -67,79 +52,33 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CFG_POPULAR", "Nombre d'affichages pour qu'une photo soit signalée comme Populaire" );
 	define( $constpref . "CFG_NEWDAYS", "Nombre de jour pour qu'une photo soit signalée comme Nouvelle ou Mise à jour" );
 	define( $constpref . "CFG_NEWPHOTOS", "Nombre de photosNumber of Photos à afficher sur la page d'accueil du module" );
-
-//define($constpref."CFG_DEFAULTORDER" , "Default order in category's view" ) ;
-
 	define( $constpref . "CFG_PERPAGE", "Nombre de photos pouvant être affichées sur la page" );
 	define( $constpref . "CFG_DESCPERPAGE", "Les choix proposés aux utilisateurs doivent être séparés par '|'<br>exemples : 10|20|50|100" );
 	define( $constpref . "CFG_ALLOWNOIMAGE", "Permission de valider le formulaire de soumission sans photo" );
 	define( $constpref . "CFG_MAKETHUMB", "Générer des miniatures à partir des photos" );
 	define( $constpref . "CFG_DESCMAKETHUMB", "Il est recommandé de cocher Oui. Vous pourrez toujours regénérer les vignettes par la suite." );
 
-//define($constpref."CFG_THUMBWIDTH" , "Thumb Image Width" ) ;
-//define($constpref."CFG_DESCTHUMBWIDTH" , "The height of thumbs will be decided from the width automatically." ) ;
-//define($constpref."CFG_THUMBSIZE" , "Size of thumbnails (pixel)" ) ;
-//define($constpref."CFG_THUMBRULE" , "Calculation rule for building thumbnails" ) ;
+// v2.30
+define( $constpref . "CFG_WIDTH", "Image Width in popup" );
+define( $constpref . "CFG_DESCWIDTH", "Image size when popup. <br><br>In old version, this parameter was the limitation of the image size when upload. <br>This limitation was abolished. <br>The specification was changed in V2.30." );
+define( $constpref . "CFG_HEIGHT", "Image Height in popup" );
+define( $constpref . "CFG_DESCHEIGHT", "Same as Image Width" );
 
-	define( $constpref . "CFG_WIDTH", "Largeur maximale de la photo" );
-	define( $constpref . "CFG_DESCWIDTH", "Si la largeur de la photo originale excède cette limite, elle sera redimensionnée.<br>Si vous utilisez la librairie GD sans forcer la conversion des miniatures (GD2) aucune redimension n'est opérée, l'image ne sera pas acceptée." );
-	define( $constpref . "CFG_HEIGHT", "Hauteur maximale de la photo" );
-	define( $constpref . "CFG_DESCHEIGHT", "Si la hauteur de la photo originale excède cette limite, elle sera redimensionnée.<br>Si vous utilisez la librairie GD sans forcer la conversion des miniatures (GD2) aucune redimension n'est opérée, l'image ne sera pas acceptée." );
-	define( $constpref . "CFG_FSIZE", "Poids maximal de la photo" );
-	define( $constpref . "CFG_DESCFSIZE", "Les fichiers chargés ne pourront pas dépasser cette valeur (exprimée en bytes)" );
-
-//define($constpref."CFG_MIDDLEPIXEL" , "Max image size in single view" ) ;
-//define($constpref."CFG_DESCMIDDLEPIXEL" , "Specify (width)x(height)<br>(eg. 480x480)" ) ;
-
+define( $constpref . "CFG_FSIZE", "Poids maximal de la photo" );
+define( $constpref . "CFG_DESCFSIZE", "Les fichiers chargés ne pourront pas dépasser cette valeur (exprimée en bytes)" );
 	define( $constpref . "CFG_ADDPOSTS", "Incrémentation du compteur de Posts de l'utilisateur lorsqu'il ajoute une photo." );
 	define( $constpref . "CFG_DESCADDPOSTS", "La valeur normale est 1." );
 	define( $constpref . "CFG_CATONSUBMENU", "Faire apparaître les Catégories principales dans le Menu principal" );
 	define( $constpref . "CFG_NAMEORUNAME", "Identité de l'utilisateur ayant ajouté la photo" );
 	define( $constpref . "CFG_DESCNAMEORUNAME", "Choisir d'afficher le Pseudo ou le Nom véritable" );
-
-//define($constpref."CFG_VIEWCATTYPE" , "Type of view in category" ) ;
 	define( $constpref . "CFG_VIEWTYPE", "Type de vue" );
-
-//define($constpref."CFG_COLSOFTABLEVIEW" , "Number of columns in table view" ) ;
 	define( $constpref . "CFG_COLSOFTABLE", "Nombre de colonne dans la vue Tableau" );
-
-//define($constpref."CFG_ALLOWEDEXTS" , "File extensions that can be uploaded" ) ;
-//define($constpref."CFG_DESCALLOWEDEXTS" , "Input extensions with separator '|'. (eg 'jpg|jpeg|gif|png') .<br>All characters must be lowercase. Don't insert periods or spaces<br>Never add php or phtml etc." ) ;
-//define($constpref."CFG_ALLOWEDMIME" , "MIME Types can be uploaded" ) ;
-//define($constpref."CFG_DESCALLOWEDMIME" , "Input MIME Types with separator '|'. (eg 'image/gif|image/jpeg|image/png')<br>If you want to be checked by MIME Type, leave this blank" ) ;
-
 	define( $constpref . "CFG_USESITEIMG", "Utiliser le xoopsCode [siteimg] pour insérer des images" );
 	define( $constpref . "CFG_DESCUSESITEIMG", "[siteimg] remplacera [img] instead of [img].<br>Pour ce faire, vous devez modifier le fichier module.textsanitizer.php pour chacun des modules employant [siteimg]" );
-
 	define( $constpref . "OPT_USENAME", "Nom véritable" );
 	define( $constpref . "OPT_USEUNAME", "Pseudo" );
-
-//define($constpref."OPT_CALCFROMWIDTH" , "width:specified  height:auto" ) ;
-//define($constpref."OPT_CALCFROMHEIGHT" , "width:auto  width:specified" ) ;
-//define($constpref."OPT_CALCWHINSIDEBOX" , "put in specified size squre" ) ;
-
 	define( $constpref . "OPT_VIEWLIST", "Vue Liste" );
 	define( $constpref . "OPT_VIEWTABLE", "Vue Table" );
-
-// Sub menu titles
-//define($constpref."TEXT_SMNAME1","Submit");
-//define($constpref."TEXT_SMNAME2","Popular");
-//define($constpref."TEXT_SMNAME3","Top Rated");
-//define($constpref."TEXT_SMNAME4","My Photos");
-
-// Names of admin menu items
-//define($constpref."ADMENU0","Submitted Photos");
-//define($constpref."ADMENU1","Photo Management");
-//define($constpref."ADMENU2","Add/Edit Categories");
-//define($constpref."ADMENU_GPERM","Global Permissions");
-//define($constpref."ADMENU3","Check Configuration & Environment");
-//define($constpref."ADMENU4","Batch Register");
-//define($constpref."ADMENU5","Rebuild Thumbnails");
-//define($constpref."ADMENU_IMPORT","Import Images");
-//define($constpref."ADMENU_EXPORT","Export Images");
-//define($constpref."ADMENU_MYBLOCKSADMIN","Blocks & Groups Admin");
-//define($constpref."ADMENU_MYTPLSADMIN","Templates");
-
 
 // Text for notifications
 	define( $constpref . "GLOBAL_NOTIFY", "Globale" );
@@ -159,7 +98,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYDSC", "M'alerter lorsque une nouvelle description de photo est publiée dans cette Catégorie" );
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE}: auto-notify : Nouvelle photo" );
 
-
 //=========================================================
 // add for webphoto
 //=========================================================
@@ -177,10 +115,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "OPT_SORT_RATINGA", "Note (Ordre croissant)" );
 	define( $constpref . "OPT_SORT_RATINGD", "Note (Ordre décroissant)" );
 	define( $constpref . "OPT_SORT_RANDOM", "Au hasard" );
-
-//define($constpref."CFG_GICONSPATH" , "Path to Google Icons" ) ;
-//define($constpref."CFG_TMPPATH" ,   "Path to temporary" ) ;
-
 	define( $constpref . "CFG_MIDDLE_WIDTH", "Largeur de l'image affichée seule" );
 	define( $constpref . "CFG_MIDDLE_HEIGHT", "Hauteur de l'image affichée seule" );
 	define( $constpref . "CFG_THUMB_WIDTH", "Largeur de la miniature" );
@@ -204,13 +138,10 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "SMNAME_MYPHOTO", "Mes photos" );
 
 // Names of admin menu items
-//define($constpref."ADMENU_ADMISSION","Admitting images");
-
 	define( $constpref . "ADMENU_PHOTOMANAGER", "Gestion des photos" );
 	define( $constpref . "ADMENU_CATMANAGER", "Gestion des Catégories" );
 	define( $constpref . "ADMENU_CHECKCONFIGS", "Configuration" );
 	define( $constpref . "ADMENU_BATCH", "Batch" );
-	define( $constpref . "ADMENU_REDOTHUMB", "Génération des miniatures" );
 	define( $constpref . "ADMENU_GROUPPERM", "Permissions globales" );
 	define( $constpref . "ADMENU_IMPORT", "Import images" );
 	define( $constpref . "ADMENU_EXPORT", "Export images" );
@@ -239,9 +170,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 //---------------------------------------------------------
 // v0.30
 //---------------------------------------------------------
-//define($constpref."CFG_TMPDIR" ,   "Path to temporary" ) ;
-//define($constpref."CFG_TMPDIR_DSC" , "Fill the fullpath (The first character must be '/'. The last character should not be '/'.)<br>Recommend to set to this out of the document route.");
-
 	define( $constpref . "CFG_MAIL_HOST", "Nom du serveur d'e-mails" );
 	define( $constpref . "CFG_MAIL_USER", "ID de l'e-mail utilisateur" );
 	define( $constpref . "CFG_MAIL_PASS", "Mot de passe de l'e-mail" );
@@ -359,4 +287,78 @@ Mot de passe: xxx<br>" );
 	define( $constpref . "CFG_GMAP_PHOTOS", "Nombre de photos sur la carte" );
 	define( $constpref . "CFG_TAGS", "Nombre de balises dans tagcloud" );
 
+//---------------------------------------------------------
+// v1.70
+//---------------------------------------------------------
+	define( $constpref . "CFG_ITEM_SUMMARY", "Max characters of photo description" );
+	define( $constpref . "CFG_ITEM_SUMMARY_DSC", "Enter the maximum number of characters of photo description in the photo list.<br>-1 is unlimited" );
+	define( $constpref . "CFG_CAT_SUMMARY", "Max characters of category description" );
+	define( $constpref . "CFG_CAT_SUMMARY_DSC", "Enter the maximum number of characters of category description in the category list.<br>-1 is unlimited" );
+	define( $constpref . "CFG_CAT_CHILD", "Show photos of subcategoies" );
+	define( $constpref . "CFG_CAT_CHILD_DSC", "Enter to show or not photos of subcategoies in category list" );
+	define( $constpref . "OPT_CAT_CHILD_NON", "Photo Video Media of this category only. Not show photos of subcategoies" );
+	define( $constpref . "OPT_CAT_CHILD_EMPTY", "When no photo in this category, show photos of subcategoies" );
+	define( $constpref . "OPT_CAT_CHILD_ALWAYS", "Show alwayas photos of subcategoies" );
+
+//---------------------------------------------------------
+// v1.80
+//---------------------------------------------------------
+	define( $constpref . "CFG_USE_LAME", "Use lame" );
+	define( $constpref . "CFG_LAMEPATH", "Path to lame" );
+	define( $constpref . "CFG_LAMEPATH_DSC", "Alhough the full path to 'lame' should be written, leave it blank in most environments.<br>This configuration is significant only when using lame" );
+
+	define( $constpref . "CFG_USE_TIMIDITY", "Use timidity" );
+	define( $constpref . "CFG_TIMIDITYPATH", "Path to timidity" );
+	define( $constpref . "CFG_TIMIDITYPATH_DSC", "Alhough the full path to 'timidity' should be written, leave it blank in most environments.<br>This configuration is significant only when using timidity" );
+
+	define( $constpref . "SMNAME_SEARCH", "Search" );
+
+//---------------------------------------------------------
+// v2.00
+//---------------------------------------------------------
+// config
+	define( $constpref . "CFG_GROUPID_ADMIN", "Admin Group ID" );
+	define( $constpref . "CFG_GROUPID_ADMIN_DSC", "The user group ID of the administrator of this module. <br>This value is set in module installation. <br>Don't change rashly. " );
+	define( $constpref . "CFG_GROUPID_USER", "User Group ID" );
+	define( $constpref . "CFG_GROUPID_USER_DSC", "The user group ID of the user of this module. <br>This value is set in module installation. <br>Don't change rashly. " );
+
+// admin menu
+	define( $constpref . "ADMENU_INVITE", "Invite a friend" );
+
+// notifications
+	define( $constpref . "GLOBAL_WAITING_NOTIFY", "Waiting Approval" );
+	define( $constpref . "GLOBAL_WAITING_NOTIFYCAP", "Notify me when any new photos waiting approval are posted (Admin)" );
+	define( $constpref . "GLOBAL_WAITING_NOTIFYDSC", "Notify me when any new photos waiting approval are posted" );
+	define( $constpref . "GLOBAL_WAITING_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE}: auto-notify : Waiting Approval" );
+
+//---------------------------------------------------------
+// v2.10
+//---------------------------------------------------------
+	define( $constpref . "CFG_USE_LIGHTBOX", "Use LightBox" );
+
+//---------------------------------------------------------
+// v2.11
+//---------------------------------------------------------
+	define( $constpref . "ADMENU_REDOTHUMBS", "Rebuild Thumbnails" );
+
+//---------------------------------------------------------
+// v2.20
+//---------------------------------------------------------
+	define( $constpref . "CFG_EMBED_WIDTH", "Screen width of video site" );
+	define( $constpref . "CFG_EMBED_HEIGHT", "Screen height of video site" );
+
+//---------------------------------------------------------
+// v2.40
+//---------------------------------------------------------
+	define( $constpref . "CFG_PEAR_PATH", 'Path of PEAR libraly' );
+	define( $constpref . "CFG_PEAR_PATH_DSC", 'Enter the absolute path in the PEAR library with Net_POP3.<br>When not enter, modules/webphoto/PEAR is used.' );
+
+//---------------------------------------------------------
+// v2.60
+//---------------------------------------------------------
+	define( $constpref . "OPT_TIMELINE_SCALE_HOUR", "Hour" );
+	define( $constpref . "OPT_TIMELINE_SCALE_DAY", "Day" );
+	define( $constpref . "OPT_TIMELINE_SCALE_CENTURY", "Century" );
+	define( $constpref . "OPT_TIMELINE_SCALE_MILLENNIUM", "Millennium" );
 }
+// === define begin ===

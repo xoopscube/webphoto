@@ -1,11 +1,4 @@
 <?php
-// $Id: admin.php,v 1.2 2009/05/17 08:24:26 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
 // === define begin ===
 if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
@@ -19,23 +12,14 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( '_AM_WEBPHOTO_MYMENU_TPLSADMIN', 'Templates' );
 	define( '_AM_WEBPHOTO_MYMENU_BLOCKSADMIN', 'Blocs/Permissions' );
 
-//define('_AM_WEBPHOTO_MYMENU_MYPREFERENCES','Préférences');
-
 // add for webphoto
 	define( "_AM_WEBPHOTO_MYMENU_GOTO_MODULE", "Page d'accueil du module" );
 
-
 // Index (Categories)
-//define( "_AM_WEBPHOTO_H3_FMT_CATEGORIES" , "Gestion des Catégories (%s)" ) ;
-//define( "_AM_WEBPHOTO_CAT_TH_TITLE" , "Nom" ) ;
-
 	define( "_AM_WEBPHOTO_CAT_TH_PHOTOS", "Images" );
 	define( "_AM_WEBPHOTO_CAT_TH_OPERATION", "Actions" );
 	define( "_AM_WEBPHOTO_CAT_TH_IMAGE", "Bannière" );
 	define( "_AM_WEBPHOTO_CAT_TH_PARENT", "Parent" );
-
-//define( "_AM_WEBPHOTO_CAT_TH_IMGURL" , "URL de la bannière" ) ;
-
 	define( "_AM_WEBPHOTO_CAT_MENU_NEW", "Nouvelle Catégorie" );
 	define( "_AM_WEBPHOTO_CAT_MENU_EDIT", "Editer une Catégorie" );
 	define( "_AM_WEBPHOTO_CAT_INSERTED", "Une nouvelle Catégorie a été ajoutée" );
@@ -48,39 +32,18 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_CAT_FMT_NEEDADMISSION", "%s images sont nécessaires pour être admises" );
 	define( "_AM_WEBPHOTO_CAT_FMT_CATDELCONFIRM", "%s sera éffacée avec ses sous-catégories, images et commentaires. Etes-vous certain de vouloir continuer ?" );
 
-
 // Admission
-//define( "_AM_WEBPHOTO_H3_FMT_ADMISSION" , "Images admises (%s)" ) ;
-//define( "_AM_WEBPHOTO_TH_SUBMITTER" , "Proposé par" ) ;
-//define( "_AM_WEBPHOTO_TH_TITLE" , "Titre" ) ;
-//define( "_AM_WEBPHOTO_TH_DESCRIPTION" , "Description" ) ;
-//define( "_AM_WEBPHOTO_TH_CATEGORIES" , "Catégorie" ) ;
-//define( "_AM_WEBPHOTO_TH_DATE" , "Dernière mise à jour" ) ;
-
-
-// Photo Manager
-//define( "_AM_WEBPHOTO_H3_FMT_PHOTOMANAGER" , "Gestion des photos (%s)" ) ;
-
 	define( "_AM_WEBPHOTO_TH_BATCHUPDATE", "Mise à jour par lot" );
 	define( "_AM_WEBPHOTO_OPT_NOCHANGE", "- AUCUN CHANGEMENT -" );
 	define( "_AM_WEBPHOTO_JS_UPDATECONFIRM", "Les éléments cochés seront mis à jour. Souhaitez-vous continuer ?" );
 
-
 // Module Checker
-//define( "_AM_WEBPHOTO_H3_FMT_MODULECHECKER" , "myAlbum-P checker (%s)" ) ;
-
 	define( "_AM_WEBPHOTO_H4_ENVIRONMENT", "Contrôle de l'environnement" );
 	define( "_AM_WEBPHOTO_PHPDIRECTIVE", "Spécifications PHP" );
 	define( "_AM_WEBPHOTO_BOTHOK", "Les deux ok" );
 	define( "_AM_WEBPHOTO_NEEDON", "Nécessite on" );
 
 	define( "_AM_WEBPHOTO_H4_TABLE", "Contrôle des Tables" );
-
-//define( "_AM_WEBPHOTO_PHOTOSTABLE" , "Table des photos" ) ;
-//define( "_AM_WEBPHOTO_DESCRIPTIONTABLE" , "Table des descriptions" ) ;
-//define( "_AM_WEBPHOTO_CATEGORIESTABLE" , "Table des catégories" ) ;
-//define( "_AM_WEBPHOTO_VOTEDATATABLE" , "Table des votes" ) ;
-
 	define( "_AM_WEBPHOTO_COMMENTSTABLE", "Table des commentaires" );
 	define( "_AM_WEBPHOTO_NUMBEROFPHOTOS", "Nombre de photos" );
 	define( "_AM_WEBPHOTO_NUMBEROFDESCRIPTIONS", "Nombre de descriptions" );
@@ -90,9 +53,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
 	define( "_AM_WEBPHOTO_H4_CONFIG", "Contrôle de la Configuration" );
 	define( "_AM_WEBPHOTO_PIPEFORIMAGES", "Script pour les images / vidéos" );
-
-//define( "_AM_WEBPHOTO_DIRECTORYFORPHOTOS" , "Répertoire des photos" ) ;
-//define( "_AM_WEBPHOTO_DIRECTORYFORTHUMBS" , "Répertoire des miniatures" ) ;
 
 	define( "_AM_WEBPHOTO_ERR_LASTCHAR", "Erreur: le dernier caractère ne doit pas être '/'" );
 	define( "_AM_WEBPHOTO_ERR_FIRSTCHAR", "Erreur: le premier caractère doit être '/'" );
@@ -107,22 +67,15 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_H4_PHOTOLINK", "Vérifier les liens des photos et des miniatures" );
 	define( "_AM_WEBPHOTO_NOWCHECKING", "Vérification en cours." );
 
-//define( "_AM_WEBPHOTO_FMT_PHOTONOTREADABLE" , "Photo principale (%s) ne peut être lue." ) ;
-//define( "_AM_WEBPHOTO_FMT_THUMBNOTREADABLE" , "Miniature (%s) ne peut être lue." ) ;
-
 	define( "_AM_WEBPHOTO_FMT_NUMBEROFDEADPHOTOS", "%s fichiers de photos obsolètes ont été trouvés." );
 	define( "_AM_WEBPHOTO_FMT_NUMBEROFDEADTHUMBS", "%s miniatures devraient être re-générées." );
 	define( "_AM_WEBPHOTO_FMT_NUMBEROFREMOVEDTMPS", "%s fichiers obsolètes ont été supprimés." );
 	define( "_AM_WEBPHOTO_LINK_REDOTHUMBS", "Reconstruire les miniatures" );
 	define( "_AM_WEBPHOTO_LINK_TABLEMAINTENANCE", "Vérifier les tables" );
 
-
 // Redo Thumbnail
-//define( "_AM_WEBPHOTO_H3_FMT_RECORDMAINTENANCE" , "myAlbum-P photo maintenance (%s)" ) ;
-
 	define( "_AM_WEBPHOTO_FMT_CHECKING", "Vérification %s ..." );
 	define( "_AM_WEBPHOTO_FORM_RECORDMAINTENANCE", "Maintenance des photos, re-génération des miniatures etc." );
-
 	define( "_AM_WEBPHOTO_FAILEDREADING", "Erreur de lecture." );
 	define( "_AM_WEBPHOTO_CREATEDTHUMBS", "Miniature créée." );
 	define( "_AM_WEBPHOTO_BIGTHUMBS", "Echec dans création des miniatures. Copiées." );
@@ -144,30 +97,17 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_LINK_RESTART", "Redémarre" );
 	define( "_AM_WEBPHOTO_SUBMIT_NEXT", "Suivant" );
 
-
-// Batch Register
-//define( "_AM_WEBPHOTO_H3_FMT_BATCHREGISTER" , "myAlbum-P batch enregistrement (%s)" ) ;
-
-
 // GroupPerm Global
-//define( "_AM_WEBPHOTO_GROUPPERM_GLOBAL" , "Permissions globales" ) ;
-
 	define( "_AM_WEBPHOTO_GROUPPERM_GLOBALDESC", "Configuration des permissions affectées aux Groupes" );
 	define( "_AM_WEBPHOTO_GPERMUPDATED", "Les permissions ont été correctement mises à jour" );
-
 
 // Import
 	define( "_AM_WEBPHOTO_H3_FMT_IMPORTTO", "Importation de photos depuis un autre module %s" );
 	define( "_AM_WEBPHOTO_FMT_IMPORTFROMMYALBUMP", "Importation vers %s à partir d'un module de type myAlbum-P" );
 	define( "_AM_WEBPHOTO_FMT_IMPORTFROMIMAGEMANAGER", "Importation depuis le Gestionnaire d'images de Xoops" );
 
-//define( "_AM_WEBPHOTO_CB_IMPORTRECURSIVELY" , 'Importation incluant les sous-catégories' ) ;
-//define( "_AM_WEBPHOTO_RADIO_IMPORTCOPY" , 'Copier les images (les commentaires ne seront pas copiés)' ) ;
-//define( "_AM_WEBPHOTO_RADIO_IMPORTMOVE" , 'Déplacer les images (avec les commentaires)' ) ;
-
 	define( "_AM_WEBPHOTO_IMPORTCONFIRM", "Confirmer l'importaion ?" );
 	define( "_AM_WEBPHOTO_FMT_IMPORTSUCCESS", "%s images ont été importées." );
-
 
 // Export
 	define( "_AM_WEBPHOTO_H3_FMT_EXPORTTO", "Exportation de photos depuis %s vers un autre modules" );
@@ -178,7 +118,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_CB_EXPORTTHUMB", "Exporter les miniatures au lieu des images principales" );
 	define( "_AM_WEBPHOTO_EXPORTCONFIRM", "Confirmer l'importation ?" );
 	define( "_AM_WEBPHOTO_FMT_EXPORTSUCCESS", "%s images ont été exportées" );
-
 
 //---------------------------------------------------------
 // move from main.php
@@ -232,7 +171,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_MES_BATCHDONE", "%s photo(s) ont été enregistrées." );
 	define( "_AM_WEBPHOTO_MES_BATCHNONE", "Aucune photo n'a été détectée dans le répertoire." );
 
-
 //---------------------------------------------------------
 // move from myalbum_constants.php
 //---------------------------------------------------------
@@ -281,7 +219,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_GICON_SHADOW_DEL", 'Icône Supprimer une ombre' );
 	define( "_AM_WEBPHOTO_GICON_DELCONFIRM", "Confirmer la suppression de l'icône %s ?" );
 
-
 //---------------------------------------------------------
 // mime type
 // modify from wfdownloads
@@ -308,10 +245,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_MIME_ICO_ONLINE", "En ligne" );
 	define( "_AM_WEBPHOTO_MIME_ICO_OFFLINE", "Hors ligne" );
 
-// find mine type
-//define("_AM_WEBPHOTO_MIME_FINDMIMETYPE", "Chercher de nouveaux Mimetype:");
-//define("_AM_WEBPHOTO_MIME_FINDIT", "Obtenir une extension");
-
 // added for webphoto
 	define( "_AM_WEBPHOTO_MIME_PERMS", "Groupes autorisés" );
 	define( "_AM_WEBPHOTO_MIME_ALLOWED", "Mimetypes autorisés" );
@@ -335,12 +268,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 //---------------------------------------------------------
 	define( "_AM_WEBPHOTO_MANAGE_DESC", "<b>Attention</b><br>Le présent gestionnaire ne concerne que ce tableau<br>Il n'affecte pas les autres tableaux" );
 	define( "_AM_WEBPHOTO_ERR_NO_RECORD", "Il n'y a aucun enregistrement" );
-
-//---------------------------------------------------------
-// cat manager
-//---------------------------------------------------------
-//define("_AM_WEBPHOTO_DSC_CAT_IMGPATH" , "Veuillez télécharger l'image souhaitée pour la Catégorie<br>et indiquer le chemin depuis le dossier d'installation de Xoops.<br>(le premier caractère doit être '/'.)<br>Si rien n'est indiqué, l'icône figurant un dossier sera employée." ) ;
-//define("_AM_WEBPHOTO_OPT_CAT_PERM_POST_ALL" , "Tous les Groupes" ) ;
 
 //---------------------------------------------------------
 // import
@@ -510,8 +437,55 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 //---------------------------------------------------------
 // v1.50
 //---------------------------------------------------------
-	define( "_AM_WEBPHOTO_FILE_CHECK", "Vérifier la validité du fichier" );
-	define( "_AM_WEBPHOTO_FILE_CHECK_DSC", "les contrôles sont les fichiers nécessaires à la taille du fichier" );
+	define( "_AM_WEBPHOTO_FILE_CHECK", "File Valid Check" );
+	define( "_AM_WEBPHOTO_FILE_CHECK_DSC", "checks there are necessary files with file size" );
+
+//---------------------------------------------------------
+// v1.72
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_MYSQL_CONFIG", "MySQL Config" );
+	define( "_AM_WEBPHOTO_MULTIBYTE_CONFIG", "Multibyte Config" );
+
+//---------------------------------------------------------
+// v2.00
+//---------------------------------------------------------
+// invite
+	define( "_AM_WEBPHOTO_INVITE_EMAIL", "Email address of the inviting person" );
+	define( "_AM_WEBPHOTO_INVITE_NAME", "Your Name" );
+	define( "_AM_WEBPHOTO_INVITE_MESSAGE", "Message" );
+	define( "_AM_WEBPHOTO_INVITE_SUBMIT", "Invite" );
+	define( "_AM_WEBPHOTO_INVITE_EXAMPLE", "Exsample: Hello, I am John. I send an invitation at the site which was talked about. <br>Jane, too, attempt to register by all means. " );
+	define( "_AM_WEBPHOTO_INVITE_SUBJECT", "You get the invitation email. from %s to %s " );
+	define( "_AM_WEBPHOTO_INVITE_ERR_NO_NAME", "No Name" );
+
+// gperm
+	define( "_AM_WEBPHOTO_GROUP_MOD_ADMIN", "Admin group of this module" );
+	define( "_AM_WEBPHOTO_GROUP_MOD_USER", "User group of this module" );
+	define( "_AM_WEBPHOTO_GROUP_MOD_CATEGORY", "Category group of this module" );
+	define( "_AM_WEBPHOTO_GPERM_MODULE_ADMIN", "Module Admin" );
+	define( "_AM_WEBPHOTO_GPERM_MODULE_READ", "Module Access" );
+
+// item manage
+	define( "_AM_WEBPHOTO_BUTTON_REFUSE", "Refuse" );
+	define( "_AM_WEBPHOTO_ERR_NO_SELECT", "Error: Not select item" );
+
+// user list
+	define( '_AM_WEBPHOTO_USER_UID', "UID" );
+	define( '_AM_WEBPHOTO_USER_UNAME', "User Name" );
+	define( '_AM_WEBPHOTO_USER_NAME', "Real Name" );
+	define( '_AM_WEBPHOTO_USER_POSTS', "Comments/Posts" );
+	define( '_AM_WEBPHOTO_USER_LEVEL', "Level" );
+	define( '_AM_WEBPHOTO_USER_REGDATE', "Member Since" );
+	define( '_AM_WEBPHOTO_USER_LASTLOGIN', "Last Login" );
+	define( '_AM_WEBPHOTO_USER_CONTROL', "Control" );
+	define( '_AM_WEBPHOTO_USER_TOTAL', "Total of member" );
+	define( '_AM_WEBPHOTO_USER_ASSIGN', "Assign a member" );
+	define( '_AM_WEBPHOTO_USER_USER', "User" );
+
+//---------------------------------------------------------
+// v2.40
+//---------------------------------------------------------
+	define( '_AM_WEBPHOTO_PLEASE_IMPORT_MYALBUM', "Please execute the batch import from Myalbum." );
 
 // === define end ===
 }

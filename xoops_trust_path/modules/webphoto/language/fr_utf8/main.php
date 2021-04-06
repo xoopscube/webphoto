@@ -1,11 +1,4 @@
 <?php
-// $Id: main.php,v 1.2 2009/05/17 08:24:26 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
 // === define begin ===
 if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 
@@ -58,7 +51,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_TELLAFRIEND", "En parler à un(e) ami(e)" );
 	define( "_WEBPHOTO_SUBJECT4TAF", "Une photo pour vous !" );
 
-
 //---------------------------------------------------------
 // submit
 //---------------------------------------------------------
@@ -81,13 +73,12 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_SUBMIT_RECEIVED", "Votre image est téléversée. Merci !" );
 	define( "_WEBPHOTO_SUBMIT_ALLPENDING", "Toutes les photos proposées sont vérifiées avant publication." );
 
-	define( "_WEBPHOTO_ERR_MUSTREGFIRST", "Désolé, vous ne disposez pas des permissions requises pour effactuer cette action.<br>Veuillez vous identifier ou vous créer un compte." );
-	define( "_WEBPHOTO_ERR_MUSTADDCATFIRST", "Désolé, aucune Catégorie n'est disponible.<br>Veuillez créer d'abord créer une Catégorie" );
+	define( "_WEBPHOTO_ERR_MUSTREGFIRST", "Désolé, vous ne disposez pas des permissions requises pour cette action.<br>Veuillez vous identifier ou créer un compte." );
+	define( "_WEBPHOTO_ERR_MUSTADDCATFIRST", "Désolé, aucune Catégorie n'est disponible.<br>Créer d'abord une Catégorie" );
 	define( "_WEBPHOTO_ERR_NOIMAGESPECIFIED", "Aucune photo n'a été téléversée" );
 	define( "_WEBPHOTO_ERR_FILE", "Les photos sont trop volumineuses ou un problème de configuration est survenu" );
-	define( "_WEBPHOTO_ERR_FILEREAD", "Les photos ne peuvent pas être atteintes." );
+	define( "_WEBPHOTO_ERR_FILEREAD", "Les photos ne sont pas accessibles." );
 	define( "_WEBPHOTO_ERR_TITLE", "Saisir un 'Titre' " );
-
 
 //---------------------------------------------------------
 // edit
@@ -98,245 +89,20 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_DBUPDATED", "Mise à jour de la Base de données effectuée avec succès !" );
 	define( "_WEBPHOTO_DELETED", "Supprimée !" );
 
-
 //---------------------------------------------------------
 // rate
 //---------------------------------------------------------
-	define( "_WEBPHOTO_RATE_VOTEONCE", "Merci de ne pas voter pour une même ressource plus d'une fois." );
-	define( "_WEBPHOTO_RATE_RATINGSCALE", "L'échelle de notation va de 01 à 10, 10 étant la meilleure évaluation possible." );
-	define( "_WEBPHOTO_RATE_BEOBJECTIVE", "Afin de préserver la pertinence des classements, merci d'être objectif" );
-	define( "_WEBPHOTO_RATE_DONOTVOTE", "Veuillez ne pas voter pour vos propres ressources." );
-	define( "_WEBPHOTO_RATE_IT", "Noter" );
-	define( "_WEBPHOTO_RATE_VOTEAPPRE", "Votre note est enregistrée" );
-	define( "_WEBPHOTO_RATE_S_THANKURATE", "Merci d'avoir pris quelques instants pour évaluer cette ressources sur %s." );
+	define( "_WEBPHOTO_RATE_VOTEONCE", "Please do not vote for the same resource more than once." );
+	define( "_WEBPHOTO_RATE_RATINGSCALE", "The scale is 1 - 10, with 1 being poor and 10 being excellent." );
+	define( "_WEBPHOTO_RATE_BEOBJECTIVE", "Please be objective, if everyone receives a 1 or a 10, the ratings aren't very useful." );
+	define( "_WEBPHOTO_RATE_DONOTVOTE", "Do not vote for your own resource." );
+	define( "_WEBPHOTO_RATE_IT", "Rate It!" );
+	define( "_WEBPHOTO_RATE_VOTEAPPRE", "Your vote is appreciated." );
+	define( "_WEBPHOTO_RATE_S_THANKURATE", "Thank you for taking the time to rate photo video media here at %s." );
 
-	define( "_WEBPHOTO_ERR_NORATING", "Aucune note sélectionnée" );
-	define( "_WEBPHOTO_ERR_CANTVOTEOWN", "Vous n'êtes pas autorisé à voter pour vos propres ressources.<br>Toutes les évaluations sont enregistrées et contrôlées." );
-	define( "_WEBPHOTO_ERR_VOTEONCE", "Ne votez pas plus d'une fois pour la même ressources.<br>Toutes les évaluations sont enregistrées et contrôlées." );
-
-
-//---------------------------------------------------------
-// movo to admin.php
-//---------------------------------------------------------
-// New in myAlbum-P
-
-// only "Y/m/d" , "d M Y" , "M d Y" can be interpreted
-//define( "_WEBPHOTO_DTFMT_YMDHI" , "d M Y H:i" ) ;
-
-//define( "_WEBPHOTO_NEXT_BUTTON" , "Next" ) ;
-//define( "_WEBPHOTO_REDOLOOPDONE" , "Done." ) ;
-
-//define( "_WEBPHOTO_BTN_SELECTALL" , "Select All" ) ;
-//define( "_WEBPHOTO_BTN_SELECTNONE" , "Select None" ) ;
-//define( "_WEBPHOTO_BTN_SELECTRVS" , "Select Reverse" ) ;
-//define( "_WEBPHOTO_FMT_PHOTONUM" , "%s every page" ) ;
-
-//define( "_WEBPHOTO_AM_ADMISSION" , "Admit Photos" ) ;
-//define( "_WEBPHOTO_AM_ADMITTING" , "Admitted photo(s)" ) ;
-//define( "_WEBPHOTO_AM_LABEL_ADMIT" , "Admit the photos you checked" ) ;
-//define( "_WEBPHOTO_AM_BUTTON_ADMIT" , "Admit" ) ;
-//define( "_WEBPHOTO_AM_BUTTON_EXTRACT" , "extract" ) ;
-
-//define( "_WEBPHOTO_AM_PHOTOMANAGER" , "Photo Manager" ) ;
-//define( "_WEBPHOTO_AM_PHOTONAVINFO" , "Photo No. %s-%s (out of %s photos hit)" ) ;
-//define( "_WEBPHOTO_AM_LABEL_REMOVE" , "Remove the photos checked" ) ;
-//define( "_WEBPHOTO_AM_BUTTON_REMOVE" , "Remove!" ) ;
-//define( "_WEBPHOTO_AM_JS_REMOVECONFIRM" , "Remove OK?" ) ;
-//define( "_WEBPHOTO_AM_LABEL_MOVE" , "Change category of the checked photos" ) ;
-//define( "_WEBPHOTO_AM_BUTTON_MOVE" , "Move" ) ;
-//define( "_WEBPHOTO_AM_BUTTON_UPDATE" , "Modify" ) ;
-//define( "_WEBPHOTO_AM_DEADLINKMAINPHOTO" , "The main image don't exist" ) ;
-
-
-//---------------------------------------------------------
-// not use
-//---------------------------------------------------------
-// New MyAlbum 1.0.1 (and 1.2.0)
-//define("_WEBPHOTO_MOREPHOTOS","More Photos from %s");
-//define("_WEBPHOTO_REDOTHUMBS","Redo Thumbnails (<a href='redothumbs.php'>re-start</a>)");
-//define("_WEBPHOTO_REDOTHUMBS2","Rebuild Thumbnails");
-//define("_WEBPHOTO_REDOTHUMBSINFO","Too large a number may lead to server time out.");
-//define("_WEBPHOTO_REDOTHUMBSNUMBER","Number of thumbs at a time");
-//define("_WEBPHOTO_REDOING","Redoing: ");
-//define("_WEBPHOTO_BACK","Return");
-//define("_WEBPHOTO_ADDPHOTO","Add Photo");
-
-
-//---------------------------------------------------------
-// movo to admin.php
-//---------------------------------------------------------
-// New MyAlbum 1.0.0
-//define("_WEBPHOTO_PHOTOBATCHUPLOAD","Register photos uploaded to the server already");
-//define("_WEBPHOTO_PHOTOUPLOAD","Photo Upload");
-//define("_WEBPHOTO_PHOTOEDITUPLOAD","Photo Edit and Re-upload");
-//define("_WEBPHOTO_MAXPIXEL","Max pixel size");
-//define("_WEBPHOTO_MAXSIZE","Max file size(byte)");
-//define("_WEBPHOTO_PHOTOTITLE","Title");
-//define("_WEBPHOTO_PHOTOPATH","Path");
-//define("_WEBPHOTO_TEXT_DIRECTORY","Directory");
-//define("_WEBPHOTO_DESC_PHOTOPATH","Type the full path of the directory including photos to be registered");
-//define("_WEBPHOTO_MES_INVALIDDIRECTORY","Invalid directory is specified.");
-//define("_WEBPHOTO_MES_BATCHDONE","%s photo(s) have been registered.");
-//define("_WEBPHOTO_MES_BATCHNONE","No photo was detected in the directory.");
-//define("_WEBPHOTO_PHOTODESC","Description");
-//define("_WEBPHOTO_PHOTOCAT","Category");
-//define("_WEBPHOTO_SELECTFILE","Select photo");
-//define("_WEBPHOTO_NOIMAGESPECIFIED","Error: No photo was uploaded");
-//define("_WEBPHOTO_FILEERROR","Error: Photos are too big or there is a problem with the configuration");
-//define("_WEBPHOTO_FILEREADERROR","Error: Photos are not readable.");
-
-//define("_WEBPHOTO_BATCHBLANK","Leave title blank to use file names as title");
-//define("_WEBPHOTO_DELETEPHOTO","Delete?");
-//define("_WEBPHOTO_VALIDPHOTO","Valid");
-//define("_WEBPHOTO_PHOTODEL","Delete photo?");
-//define("_WEBPHOTO_DELETINGPHOTO","Deleting photo");
-//define("_WEBPHOTO_MOVINGPHOTO","Moving photo");
-
-//define("_WEBPHOTO_STORETIMESTAMP","Don't touch timestamp");
-
-//define("_WEBPHOTO_POSTERC","Poster: ");
-//define("_WEBPHOTO_DATEC","Date: ");
-//define("_WEBPHOTO_EDITNOTALLOWED","You're not allowed to edit this comment!");
-//define("_WEBPHOTO_ANONNOTALLOWED","Anonymous users are not allowed to post.");
-//define("_WEBPHOTO_THANKSFORPOST","Thanks for your submission!");
-//define("_WEBPHOTO_DELNOTALLOWED","You're not allowed to delete this comment!");
-//define("_WEBPHOTO_GOBACK","Go Back");
-//define("_WEBPHOTO_AREYOUSURE","Are you sure you want to delete this comment and all comments under it?");
-//define("_WEBPHOTO_COMMENTSDEL","Comment(s) Deleted Successfully!");
-
-// End New
-
-
-//---------------------------------------------------------
-// not use
-//---------------------------------------------------------
-//define("_WEBPHOTO_THANKSFORINFO","Thank you for the information. We'll look into your request shortly.");
-//define("_WEBPHOTO_BACKTOTOP","Back to Photo Top");
-//define("_WEBPHOTO_THANKSFORHELP","Thank you for helping to maintain this directory's integrity.");
-//define("_WEBPHOTO_FORSECURITY","For security reasons your user name and IP address will also be temporarily recorded.");
-
-//define("_WEBPHOTO_MATCH","Match");
-//define("_WEBPHOTO_ALL","ALL");
-//define("_WEBPHOTO_ANY","ANY");
-//define("_WEBPHOTO_NAME","Name");
-//define("_WEBPHOTO_DESCRIPTION","Description");
-
-//define("_WEBPHOTO_MAIN","Main");
-//define("_WEBPHOTO_NEW","New");
-//define("_WEBPHOTO_UPDATED","Updated");
-//define("_WEBPHOTO_POPULAR","Popular");
-//define("_WEBPHOTO_TOPRATED","Top Rated");
-
-//define("_WEBPHOTO_POPULARITYLTOM","Popularity (Least to Most Hits)");
-//define("_WEBPHOTO_POPULARITYMTOL","Popularity (Most to Least Hits)");
-//define("_WEBPHOTO_TITLEATOZ","Title (A to Z)");
-//define("_WEBPHOTO_TITLEZTOA","Title (Z to A)");
-//define("_WEBPHOTO_DATEOLD","Date (Old Photos Listed First)");
-//define("_WEBPHOTO_DATENEW","Date (New Photos Listed First)");
-//define("_WEBPHOTO_RATINGLTOH","Rating (Lowest Score to Highest Score)");
-//define("_WEBPHOTO_RATINGHTOL","Rating (Highest Score to Lowest Score)");
-//define("_WEBPHOTO_LIDASC","Record Number (Smaller to Bigger)");
-//define("_WEBPHOTO_LIDDESC","Record Number (Smaller is latter)");
-
-//define("_WEBPHOTO_NOSHOTS","No Screenshots Available");
-//define("_WEBPHOTO_EDITTHISPHOTO","Edit This Photo");
-
-//define("_WEBPHOTO_DESCRIPTIONC","Description");
-//define("_WEBPHOTO_EMAILC","Email");
-//define("_WEBPHOTO_CATEGORYC","Category");
-//define("_WEBPHOTO_SUBCATEGORY","Sub-category");
-//define("_WEBPHOTO_LASTUPDATEC","Last Update");
-
-//define("_WEBPHOTO_HITSC","Hits");
-//define("_WEBPHOTO_RATINGC","Rating");
-//define("_WEBPHOTO_NUMVOTES","%s votes");
-//define("_WEBPHOTO_NUMPOSTS","%s posts");
-//define("_WEBPHOTO_COMMENTSC","Comments");
-//define("_WEBPHOTO_RATETHISPHOTO","Rate it");
-//define("_WEBPHOTO_MODIFY","Modify");
-//define("_WEBPHOTO_VSCOMMENTS","View/Send Comments");
-
-//define("_WEBPHOTO_DIRECTCATSEL","SELECT A CATEGORY");
-//define("_WEBPHOTO_THEREARE","There are <b>%s</b> Images in our Database.");
-//define("_WEBPHOTO_LATESTLIST","Latest Listings");
-
-//define("_WEBPHOTO_VOTEAPPRE","Your vote is appreciated.");
-//define("_WEBPHOTO_THANKURATE","Thank you for taking the time to rate a photo here at %s.");
-//define("_WEBPHOTO_VOTEONCE","Please do not vote for the same resource more than once.");
-//define("_WEBPHOTO_RATINGSCALE","The scale is 1 - 10, with 1 being poor and 10 being excellent.");
-//define("_WEBPHOTO_BEOBJECTIVE","Please be objective, if everyone receives a 1 or a 10, the ratings aren't very useful.");
-//define("_WEBPHOTO_DONOTVOTE","Do not vote for your own resource.");
-//define("_WEBPHOTO_RATEIT","Rate It!");
-
-//define("_WEBPHOTO_RECEIVED","We received your Photo. Thank you!");
-//define("_WEBPHOTO_ALLPENDING","All photos are posted pending verification.");
-
-//define("_WEBPHOTO_RANK","Rank");
-//define("_WEBPHOTO_SUBCATEGORY","Sub-category");
-//define("_WEBPHOTO_HITS","Hits");
-//define("_WEBPHOTO_RATING","Rating");
-//define("_WEBPHOTO_VOTE","Vote");
-//define("_WEBPHOTO_TOP10","%s Top 10"); // %s is a photo category title
-
-//define("_WEBPHOTO_SORTBY","Sort by:");
-//define("_WEBPHOTO_TITLE","Title");
-//define("_WEBPHOTO_DATE","Date");
-//define("_WEBPHOTO_POPULARITY","Popularity");
-//define("_WEBPHOTO_CURSORTEDBY","Photos currently sorted by: %s");
-//define("_WEBPHOTO_FOUNDIN","Found in:");
-//define("_WEBPHOTO_PREVIOUS","Previous");
-//define("_WEBPHOTO_NEXT","Next");
-//define("_WEBPHOTO_NOMATCH","No photo matches your request");
-
-//define("_WEBPHOTO_CATEGORIES","Categories");
-//define("_WEBPHOTO_SUBMIT","Submit");
-//define("_WEBPHOTO_CANCEL","Cancel");
-
-//define("_WEBPHOTO_MUSTREGFIRST","Sorry, you don't have permission to perform this action.<br>Please register or login first!");
-//define("_WEBPHOTO_MUSTADDCATFIRST","Sorry, there are no categories to add to yet.<br>Please create a category first!");
-//define("_WEBPHOTO_NORATING","No rating selected.");
-//define("_WEBPHOTO_CANTVOTEOWN","You cannot vote on the resource you submitted.<br>All votes are logged and reviewed.");
-//define("_WEBPHOTO_VOTEONCE2","Vote for the selected resource only once.<br>All votes are logged and reviewed.");
-
-
-//---------------------------------------------------------
-// move to admin.php
-//---------------------------------------------------------
-//%%%%%%	Module Name 'MyAlbum' (Admin)	  %%%%%
-//define("_WEBPHOTO_PHOTOSWAITING","Photos Waiting for Validation");
-//define("_WEBPHOTO_PHOTOMANAGER","Photo Management");
-//define("_WEBPHOTO_CATEDIT","Add, Modify, and Delete Categories");
-//define("_WEBPHOTO_GROUPPERM_GLOBAL","Global Permissions");
-//define("_WEBPHOTO_CHECKCONFIGS","Check Configs & Environment");
-//define("_WEBPHOTO_BATCHUPLOAD","Batch Register");
-//define("_WEBPHOTO_GENERALSET","Preferences");
-//define("_WEBPHOTO_REDOTHUMBS2","Rebuild Thumbnails");
-
-//define("_WEBPHOTO_DELETE","Delete");
-//define("_WEBPHOTO_NOSUBMITTED","No New Submitted Photos.");
-//define("_WEBPHOTO_ADDMAIN","Add a MAIN Category");
-//define("_WEBPHOTO_IMGURL","Image URL (OPTIONAL Image height will be resized to 50): ");
-//define("_WEBPHOTO_ADD","Add");
-//define("_WEBPHOTO_ADDSUB","Add a SUB-Category");
-//define("_WEBPHOTO_IN","in");
-//define("_WEBPHOTO_MODCAT","Modify Category");
-
-//define("_WEBPHOTO_MODREQDELETED","Modification Request Deleted.");
-//define("_WEBPHOTO_IMGURLMAIN","Image URL (OPTIONAL and Only valid for main categories. Image height will be resized to 50): ");
-//define("_WEBPHOTO_PARENT","Parent Category:");
-//define("_WEBPHOTO_SAVE","Save Changes");
-//define("_WEBPHOTO_CATDELETED","Category Deleted.");
-//define("_WEBPHOTO_CATDEL_WARNING","WARNING: Are you sure you want to delete this Category and ALL its Photos and Comments?");
-//define("_WEBPHOTO_YES","Yes");
-//define("_WEBPHOTO_NO","No");
-//define("_WEBPHOTO_NEWCATADDED","New Category Added Successfully!");
-//define("_WEBPHOTO_ERROREXIST","ERROR: The Photo you provided is already in the database!");
-//define("_WEBPHOTO_ERRORTITLE","ERROR: You need to enter a TITLE!");
-//define("_WEBPHOTO_ERRORDESC","ERROR: You need to enter a DESCRIPTION!");
-//define("_WEBPHOTO_WEAPPROVED","We approved your link submission to the photo database.");
-//define("_WEBPHOTO_THANKSSUBMIT","Thank you for your submission!");
-//define("_WEBPHOTO_CONFUPDATED","Configuration Updated Successfully!");
-
+	define( "_WEBPHOTO_ERR_NORATING", "No rating selected." );
+	define( "_WEBPHOTO_ERR_CANTVOTEOWN", "You cannot vote on the resource you submitted.<br>All votes are logged and reviewed." );
+	define( "_WEBPHOTO_ERR_VOTEONCE", "Vote for the selected resource only once.<br>All votes are logged and reviewed." );
 
 //---------------------------------------------------------
 // move from myalbum_constants.php
@@ -347,7 +113,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_CAPTION_REFRESH", "Rafraîchir" );
 	define( "_WEBPHOTO_CAPTION_IMAGEXYT", "Dimensions (type)" );
 	define( "_WEBPHOTO_CAPTION_CATEGORY", "Catégorie" );
-
 
 //=========================================================
 // add for webphoto
@@ -473,7 +238,8 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_GICON_TIME_UPDATE", "Date de mise à jour" );
 	define( "_WEBPHOTO_GICON_TITLE", "Titre de l'icône" );
 	define( "_WEBPHOTO_GICON_IMAGE_PATH", "Chemin d'accès à l'icône" );
-	define( "_WEBPHOTO_GICON_IMAGE_NAME", "Extension de l'image" );
+	define( "_WEBPHOTO_GICON_IMAGE_NAME", "Nom de l'image" );
+	define( "_WEBPHOTO_GICON_IMAGE_EXT", "Extention de l'image" );
 	define( "_WEBPHOTO_GICON_SHADOW_PATH", "Chemin d'accès masqué" );
 	define( "_WEBPHOTO_GICON_SHADOW_NAME", "Nom caché" );
 	define( "_WEBPHOTO_GICON_SHADOW_EXT", "Extension cachée" );
@@ -500,6 +266,10 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 // added in v0.20
 	define( "_WEBPHOTO_MIME_FFMPEG", "Option ffmpeg" );
 
+// added in v1.80
+	define( "_WEBPHOTO_MIME_KIND", "File Kind" );
+	define( "_WEBPHOTO_MIME_OPTION", "Command Option" );
+
 // tag table
 	define( "_WEBPHOTO_TAG_TABLE", "Tableau des Tags" );
 	define( "_WEBPHOTO_TAG_ID", "ID du tag" );
@@ -524,7 +294,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_SYNO_WEIGHT", "Poids" );
 	define( "_WEBPHOTO_SYNO_KEY", "Clé" );
 	define( "_WEBPHOTO_SYNO_VALUE", "Synonyme" );
-
 
 //---------------------------------------------------------
 // title
@@ -601,8 +370,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_CAP_THUMB_SELECT", "Sélectionner la miniature" );
 	define( "_WEBPHOTO_DSC_THUMB_SELECT", "Créée depuis l'image principale lorsqu'aucune vignette n'est sélectionnée" );
 	define( "_WEBPHOTO_DSC_SET_DATETIME", "Indiquez la date de la photo" );
-
-//define("_WEBPHOTO_DSC_SET_TIME_UPDATE", "Set update time");
 
 	define( "_WEBPHOTO_DSC_PIXCEL_RESIZE", "Redimensionner automatiquement en cas de dépassement de la taille" );
 	define( "_WEBPHOTO_DSC_PIXCEL_REJECT", "Téléversement impossible en cas de dépassement de la taille" );
@@ -682,8 +449,8 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 // others
 //---------------------------------------------------------
 	define( "_WEBPHOTO_RANDOM_MORE", "Plus de photos aléatoires" );
-	define( "_WEBPHOTO_USAGE_PHOTO", "Au clic sur la miniature, afficher dans une Popup la photo grand format" );
-	define( "_WEBPHOTO_USAGE_TITLE", "Au clic sur le titre, déplacer la photo sur la page" );
+	define( "_WEBPHOTO_USAGE_PHOTO", "Cliquer sur la miniature pour voir la photo au grand format." );
+	define( "_WEBPHOTO_USAGE_TITLE", "Cliquer sur le titre pour la page de détails" );
 	define( "_WEBPHOTO_DATE_NOT_SET", "Ne pas indiquer de date pour la photo" );
 	define( "_WEBPHOTO_PLACE_NOT_SET", "Medias sans géolocalisation" );
 	define( "_WEBPHOTO_GOTO_ADMIN", "Administration" );
@@ -691,7 +458,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 //---------------------------------------------------------
 // search for Japanese
 //---------------------------------------------------------
-	define( "_WEBPHOTO_SR_CANDICATE", "Nomminé pour la recherche" );
+	define( "_WEBPHOTO_SR_CANDICATE", "Candidat de la recherche" );
 	define( "_WEBPHOTO_SR_ZENKAKU", "Alphabet Zenkaku" );
 	define( "_WEBPHOTO_SR_HANKAKU", "Alphabet Hanhaku" );
 
@@ -895,7 +662,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_FILE_KIND_10", "MP3" );
 
 // index
-	define( "_WEBPHOTO_MOBILE_MAILTO", "Transmettre l'URL sur téléphone mobile" );
+	define( "_WEBPHOTO_MOBILE_MAILTO", "Envoyer sur téléphone mobile" );
 
 // i.php
 	define( "_WEBPHOTO_TITLE_MAIL_JUDGE", "Evaluer l'Opérateur mobile" );
@@ -1089,50 +856,24 @@ Merci de cliquer <a href="{MODULE_URL}/i.php?op=post" rel="external">Evoyer par 
 
 // flashvar desc
 	define( "_WEBPHOTO_FLASHVAR_ID_DSC", "[Paramètres de base] <br>A utiliser pour indiquer l'idebntifiant de diffusion RTMP du lecteur.<br>L'ID sera également utilisé pour les statistiques.<br>Si vous lisez une playlist, vous pouvez indiquer un ID pour chaque élément. " );
-	define( "_WEBPHOTO_FLASHVAR_HEIGHT_DSC", "[Paramètres de base] " );
-	define( "_WEBPHOTO_FLASHVAR_WIDTH_DSC", "[Paramètres de base]  " );
 	define( "_WEBPHOTO_FLASHVAR_DISPLAYHEIGHT_DSC", "[Playlist] [mediaplayer] <br>Paramétrer une dimension inférieure à la hauteur afin de voir la playlist. <br>Si vous conservez une valeur identique à la hauteur, les commandes du lecteur seront automatiquement masquées au sommet de la vidéo. " );
 	define( "_WEBPHOTO_FLASHVAR_DISPLAYWIDTH_DSC", "[Playlist] [mediaplayer] <br>Pistes du bas :<br> Ecran = lecteur<br> Pistes latérales :<br>Ecran < au lecteur " );
 	define( "_WEBPHOTO_FLASHVAR_DISPLAY_DEFAULT", "si la valeur indiquée est 0, celle du lecteur sera utilisée." );
-	define( "_WEBPHOTO_FLASHVAR_SCREENCOLOR_DSC", "[Couleurs] <br>[imagerotator] Modifier ce paramètre couleur dans le code HTML de votre page permet d'améliorer la mise en page lorsque les images sont de tailles différentes. " );
-	define( "_WEBPHOTO_FLASHVAR_BACKCOLOR_DSC", "[Couleurs] <br>Couleur de fond des commandes" );
-	define( "_WEBPHOTO_FLASHVAR_FRONTCOLOR_DSC", "[Couleurs] <br>Couleur du texte des commandes" );
-	define( "_WEBPHOTO_FLASHVAR_LIGHTCOLOR_DSC", "[Couleurs] <br>Couleur de survol des commandes" );
 	define( "_WEBPHOTO_FLASHVAR_COLOR_DEFAULT", "Si aucune valeur n'est indiquée, celle du lecteur sera utilisée." );
 	define( "_WEBPHOTO_FLASHVAR_SEARCHBAR_DSC", "(Paramètres de base) <br>Sélectionner False pour masquer la barre de recherche sous le lecteur. <br>Vous pouvez indiquer le lien de la page de résultat en utilisant le lien de recherhce du FlashVar. " );
 	define( "_WEBPHOTO_FLASHVAR_IMAGE_SHOW_DSC", "(Paramètres de base) <br>True = l'image de prévisualisation s'affiche" );
-	define( "_WEBPHOTO_FLASHVAR_IMAGE_DSC", "(Paramètres de base) <br>Si vous lisez un son ou une vidéo, indiquez l'url de l'image de prévisualisation. <br>Si vous lisez une playlist, vous pouvez indiquer une image pour chaque élément. " );
 	define( "_WEBPHOTO_FLASHVAR_FILE_DSC", "(Paramètres de base) <br>Indiquer l'emplacement du fichier ou de la playlist à lire. <br>L'Imagerotator ne reconnaît que les playlists. " );
-	define( "_WEBPHOTO_FLASHVAR_LOGO_DSC", "(Affichage) <br>Indiquer une image qui pourra être employée comme filigrane (visible en haut à droite). <br>Pour un meilleur rendu, ne image png transparente est recommandée. " );
-	define( "_WEBPHOTO_FLASHVAR_OVERSTRETCH_DSC", "(Affichage) <br>Indiquer comment éleragir l'image ou la vidéo dans la zone de lecture. <br>false (par défaut) = la zone de lecture est entièrement utilisée. <br>true = la zone de lecture est utilisée en conservant les proportions du média. <br>fit = élargissement du média stretch sans conserver les proportions<br>none = les dimensions originales sont conservées. " );
 	define( "_WEBPHOTO_FLASHVAR_SHOWEQ_DSC", "(Affichage) <br>Sélectionner true pour afficher un égaliseur (fictif) au pied de la zone de lecture. <br>Recommandé pour la lecture de fichiers MP3. " );
-	define( "_WEBPHOTO_FLASHVAR_SHOWICONS_DSC", "(Affichage) <br>Sélectionner false afin de masquer l'icône d'activité et le bouton de lecture situé au centre de la zone de lecture. " );
-	define( "_WEBPHOTO_FLASHVAR_TRANSITION_DSC", "(Affichage) [Imagerotator] <br>Sélectionner la transition à utiliser entre les images. " );
-	define( "_WEBPHOTO_FLASHVAR_SHOWNAVIGATION_DSC", "[Barre de contrôle] <br>Sélectionner false to completely hide the controlbar. " );
 	define( "_WEBPHOTO_FLASHVAR_SHOWSTOP_DSC", "[Barre de contrôle] [mediaplayer] <br>Sélectionner true pour afficher le bouton Stop dans la barre de contrôle. " );
 	define( "_WEBPHOTO_FLASHVAR_SHOWDIGITS_DSC", "[Barre de contrôle] [mediaplayer] <br>Sélectionner false pour masquer le compteur de lecture dans la barre de contrôle. " );
 	define( "_WEBPHOTO_FLASHVAR_SHOWDOWNLOAD_DSC", "[Barre de contrôle] [mediaplayer] <br>Sélectionner true pour afficher dans la barre de contrôle le boutton permettant de relier le media à FlashVar. " );
-	define( "_WEBPHOTO_FLASHVAR_USEFULLSCREEN_DSC", "[Barre de contrôle] <br>Sélectionner false pour masquer le bouton Plein écran (le mode lecture plein écran sera également désactivé). " );
 	define( "_WEBPHOTO_FLASHVAR_AUTOSCROLL_DSC", "[Playlist] [mediaplayer] <br>Sélectionner true  pour pouvoir faire défiler verticalement le média sans recourir aux ascenseurs. " );
 	define( "_WEBPHOTO_FLASHVAR_THUMBSINPLAYLIST_DSC", "[Playlist] [mediaplayer] <br>Sélectionner false pour masquer la prévisualisation dans la zone de lecture" );
-	define( "_WEBPHOTO_FLASHVAR_AUDIO_DSC", "(Lecture) <br>Assigne un MP3 supplémentaire synchrone. <br>A utiliser pour achever une description audio, un commentaire réalisé sur fond sonore ou encore une musique associée à Imagerotator. <br>When using the mediaplayer and a playlist, you can assign audio to every entry. " );
-	define( "_WEBPHOTO_FLASHVAR_AUTOSTART_DSC", "(Lecture) <br>Sélectionner true pour lancer le média dès son chargement<br>ou sélectionner false lorsque le média est associé à Imagerotator (afin d'empêcher sa rotation automatique)." );
-	define( "_WEBPHOTO_FLASHVAR_BUFFERLENGTH_DSC", "(Lecture)  [mediaplayer] <br>Indiquer le délais (n secondes) durant lequel la vidéo devra être mise en mémoire tampon avant d'être lue.<br>Indiquer une valeur réduite pour les connections rapides ou pour les vidéos de courte durée.  " );
 	define( "_WEBPHOTO_FLASHVAR_CAPTIONS_DSC", "(Lecture) [mediaplayer] <br>Les légendes devraient être au format Timedtext. <br>Lorsque vous utiliser un lecteur, vous pouvez indiquer une légende pour chacune des ressource lue. " );
 	define( "_WEBPHOTO_FLASHVAR_FALLBACK_DSC", "(Lecture) [mediaplayer] <br>Si vous lisez un fichier MP4, indiquer l'emplacement d'un FLV. <br>Il sera automatiquement employé par un lecteur flash, qui devient alors compatible. " );
-	define( "_WEBPHOTO_FLASHVAR_REPEAT_DSC", "(Lecture) <br>Sélectionner true pour déclencher automatiquement la relecture de tous les fichiers. <br>A utiliser pour lire à nouveau en intégralité une playlist. " );
-	define( "_WEBPHOTO_FLASHVAR_ROTATETIME_DSC", "(Lecture) <br>Indiquer le nombre de secondes durant lesquelle l'image sera lue. " );
-	define( "_WEBPHOTO_FLASHVAR_SHUFFLE_DSC", "(Lecture) <br>Sélectionner true pour lire les élements d'une playlist au hasard. " );
-	define( "_WEBPHOTO_FLASHVAR_SMOOTHING_DSC", "(Lecture) [mediaplayer] <br>Sélectionner false pour désactiver la fonction de lissage de la vidéo. <br>La qualité de la vidéo sera réduite mais les performances meilleures. <br>Ce paramètre est recommandé pour les films en haute résolution ou pour les ordinateurs anciens " );
-	define( "_WEBPHOTO_FLASHVAR_VOLUME_DSC", "(Lecture) <br>Paramètre le volume initial de la lecture (sons, vidéos et fichiers musicaux). " );
 	define( "_WEBPHOTO_FLASHVAR_ENABLEJS_DSC", "(Intéraction web)<br>Sélectionner true pour autoriser l'intéraction javascript. <br>Ce paramètre ne peut fonctionner qu'avec une connection<br>L'intéraction javascript inclut le commandes de lecture, le chargement asynchrone des médias et l'affichage des informations relatives au média. " );
 	define( "_WEBPHOTO_FLASHVAR_JAVASCRIPTID_DSC", "(Intéraction web)<br>Si vous mettez en relation plusieurs lecteurs / diaporamas en javascript, utiliser le Flashvar pour les singulariser avec un ID propre. " );
 	define( "_WEBPHOTO_FLASHVAR_LINK_TYPE_DSC", "(Intéraction web)<br>Ce lien est assigné à l'affichage, au logo et au bouton Lien. <br >Lorsqu'aucune information n'est saisie, aucun lien n'est assigné. <br>Si une valeur est précisée, alors une page sera accessible. " );
-
-//define("_WEBPHOTO_FLASHVAR_LINK_DSC","(Intéraction web)<br>Set this to an external URL or downloadeable version of the file. <br>This link is assigned to the display, logo and link button. <br>With playlists, set links for every entry in the XML. ");
-
-	define( "_WEBPHOTO_FLASHVAR_LINKFROMDISPLAY_DSC", "(Intéraction web)<br>Sélectionner true pour que le clic sur le média redirige sur la page assignée par Flashvar. " );
-	define( "_WEBPHOTO_FLASHVAR_LINKTARGET_DSC", "(Intéraction web)<br>Indiquer la destination (frame) dans laquelle vous souhaitez voir s'ouvrir le lien. <br>Indiquer _blank pour ouvrir dans une nouvelle fenêtre ou _top pour ouvrir dans la fenêtre active. " );
 	define( "_WEBPHOTO_FLASHVAR_CALLBACK_DSC", "(Intéraction web)<br>Indiquer le script chargé de collecter les statistiques. <br>Le lecteur enverra une valeur à chaque déclenchement et arrêtde lecture. <br>Pour transmettre les informations à Google Analytics automatiquement, indiquer urchin ou analytics. " );
 	define( "_WEBPHOTO_FLASHVAR_RECOMMENDATIONS_DSC", "(Intéraction web)[mediaplayer] <br>Indiquez un fichier XML contenant la liste des ressources que vous souhaitez recommander <br>Les vignettes s'afficheront à l'arrêt de la vidéo (exemple sur Youtube). " );
 	define( "_WEBPHOTO_FLASHVAR_SEARCHLINK_DSC", "(Intéraction web)[mediaplayer] <br>Indiquer la destination de la page de résultat des recherches <br>Par défaut il s'agit de 'search.longtail.tv', mais vous pouvez indiquer des destinations différente. <br>Appliquer Flashvar à la barre de recherche pour la masquer totalement. " );
@@ -1178,7 +919,6 @@ Merci de cliquer <a href="{MODULE_URL}/i.php?op=post" rel="external">Evoyer par 
 	define( "_WEBPHOTO_SORT_VIEWSD", "Affichage des médias (maxi)" );
 
 // flashvar form
-	define( "_WEBPHOTO_FLASHVARS_FORM", "FlashVars" );
 	define( "_WEBPHOTO_FLASHVARS_LIST", "Liste des variables flash" );
 	define( "_WEBPHOTO_FLASHVARS_LOGO_SELECT", "Sélectionner un logo de lecteur" );
 	define( "_WEBPHOTO_FLASHVARS_LOGO_UPLOAD", "Charger un logo de lecteur" );
@@ -1339,10 +1079,355 @@ Merci de cliquer <a href="{MODULE_URL}/i.php?op=post" rel="external">Evoyer par 
 	define( "_WEBPHOTO_TIMELINE_CAUTION_IE", "Des problèmes d'affichage peuvent survenir avec vec Internet Expoler. Veuillez essayer d'autres navigateurs (Firefox, Opera, Safari)." );
 
 // item option
-	define( "_WEBPHOTO_ITEM_CODEINFO_SMALL", "Image réduite" );
+	define( "_WEBPHOTO_ITEM_CODEINFO_SMALL", "Small image" );
 
 // edit form
-	define( "_WEBPHOTO_CAP_SMALL_SELECT", "Sélectionner une image réduite" );
+	define( "_WEBPHOTO_CAP_SMALL_SELECT", "Select the small image" );
+
+//---------------------------------------------------------
+// v1.60
+//---------------------------------------------------------
+	define( "_WEBPHOTO_TITLE_SUBMIT_SELECT", "Select submit form" );
+	define( "_WEBPHOTO_TITLE_SUBMIT_SINGLE", "Registration of one photo video media" );
+	define( "_WEBPHOTO_TITLE_SUBMIT_BULK", "Batch registration of photo video media" );
+
+//---------------------------------------------------------
+// v1.80
+//---------------------------------------------------------
+// item option
+	define( "_WEBPHOTO_ITEM_CODEINFO_JPEG", "JPEG Image" );
+	define( "_WEBPHOTO_ITEM_CODEINFO_MP3", "MP3" );
+
+// form
+	define( "_WEBPHOTO_ERR_JPEG", "Cannot create JPEG" );
+	define( "_WEBPHOTO_ERR_MP3", "Cannot create MP3" );
+
+// mime option
+	define( "_WEBPHOTO_MIME_KIND_GENERAL", "Genaral" );
+	define( "_WEBPHOTO_MIME_KIND_IMAGE", "Image" );
+	define( "_WEBPHOTO_MIME_KIND_IMAGE_CONVERT", "Image convert" );
+	define( "_WEBPHOTO_MIME_KIND_VIDEO", "Video" );
+	define( "_WEBPHOTO_MIME_KIND_VIDEO_FFMPEG", "Video ffmpeg" );
+	define( "_WEBPHOTO_MIME_KIND_AUDIO", "Audio" );
+	define( "_WEBPHOTO_MIME_KIND_AUDIO_MID", "Audio midi" );
+	define( "_WEBPHOTO_MIME_KIND_AUDIO_WAV", "Audio wav" );
+	define( "_WEBPHOTO_MIME_KIND_OFFICE", "Office" );
+
+// player option
+	define( "_WEBPHOTO_PLAYER_TITLE_DEFAULT", "Undefined" );
+
+	define( "_WEBPHOTO_TITLE_IMAGE", "Images" );
+	define( "_WEBPHOTO_TITLE_VIDEO", "Videos" );
+	define( "_WEBPHOTO_TITLE_MUSIC", "Musics" );
+	define( "_WEBPHOTO_TITLE_OFFICE", "Offices" );
+
+//---------------------------------------------------------
+// v1.90
+//---------------------------------------------------------
+// menu
+	define( "_WEBPHOTO_TITLE_PICTURE", "Pictures" );
+	define( "_WEBPHOTO_TITLE_AUDIO", "Musics" );
+
+// item
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK", "Action on click the content image" );
+	define( "_WEBPHOTO_ITEM_WEIGHT", "Weight" );
+
+// item option
+	define( "_WEBPHOTO_ITEM_KIND_OFFICE", "Office (doc,xls,ppt...)" );
+	define( "_WEBPHOTO_ITEM_KIND_IMAGE_OTHER", "Image (bmp,tif,wmf...)" );
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_DEFAULT", "Default (uploaded content)" );
+
+// file
+	define( "_WEBPHOTO_FILE_KIND_CONT", "Content" );
+	define( "_WEBPHOTO_FILE_KIND_THUMB", "Thumbnail" );
+	define( "_WEBPHOTO_FILE_KIND_MIDDLE", "Middle image" );
+	define( "_WEBPHOTO_FILE_KIND_FLASH", "Flash flv" );
+	define( "_WEBPHOTO_FILE_KIND_DOCOMO", "Docomo video" );
+	define( "_WEBPHOTO_FILE_KIND_PDF", "PDF" );
+	define( "_WEBPHOTO_FILE_KIND_SWF", "Flash swf" );
+	define( "_WEBPHOTO_FILE_KIND_SMALL", "Small image" );
+	define( "_WEBPHOTO_FILE_KIND_JPEG", "JPEG" );
+	define( "_WEBPHOTO_FILE_KIND_MP3", "MP3" );
+
+// mime option
+	define( "_WEBPHOTO_MIME_KIND_OFFICE_DOC", "Office doc" );
+	define( "_WEBPHOTO_MIME_KIND_OFFICE_XLS", "Office xls" );
+	define( "_WEBPHOTO_MIME_KIND_OFFICE_PPT", "Office ppt" );
+	define( "_WEBPHOTO_MIME_KIND_OFFICE_PDF", "Office pdf" );
+
+// submit
+	define( "_WEBPHOTO_UPLOADING", "Uploading..." );
+	define( "_WEBPHOTO_EMBED_ENTER", "Enter the video id from the url" );
+	define( "_WEBPHOTO_EMBED_EXAMPLE", "Example" );
+
+// photo
+	define( "_WEBPHOTO_ICON_GROUP", "Only in group" );
+
+//---------------------------------------------------------
+// v2.00
+//---------------------------------------------------------
+// item
+	define( "_WEBPHOTO_ITEM_PERM_LEVEL", "Permission Level" );
+	define( "_WEBPHOTO_ITEM_PERM_LEVEL_PUBLIC", "Public" );
+	define( "_WEBPHOTO_ITEM_PERM_LEVEL_GROUP", "Only in group" );
+
+// cat
+	define( "_WEBPHOTO_CAT_GROUP_ID", "User Group ID" );
+
+//---------------------------------------------------------
+// v2.10
+//---------------------------------------------------------
+// item
+	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Photo Video Media Description" );
+	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL_DSC", "Enter the height of the scroll by the px unit.
+ <br>When 0, it is usual view without the scroll." );
+
+// item option
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_IMAGE", "Show photo video media in new window" );
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_LIGHTBOX", "Show photo video media with lightbox" );
+
+// submit
+	define( "_WEBPHOTO_MAIL_SUBMIT_WAITING", "Waiting Approval" );
+	define( "_WEBPHOTO_MAIL_SUBMIT_APPROVE", "Approved your photo video media" );
+	define( "_WEBPHOTO_MAIL_SUBMIT_REFUSE", "Refused your photo video media" );
+
+// edit
+	define( "_WEBPHOTO_LOOK_PHOTO", "View Media" );
+
+//---------------------------------------------------------
+// v2.11
+//---------------------------------------------------------
+// submit
+	define( "_WEBPHOTO_ITEM_KIND_GROUP_UNDEFINED", "Undefined" );
+	define( "_WEBPHOTO_ITEM_KIND_GROUP_IMAGE", "Image" );
+	define( "_WEBPHOTO_ITEM_KIND_GROUP_VIDEO", "Video" );
+	define( "_WEBPHOTO_ITEM_KIND_GROUP_AUDIO", "Audio" );
+	define( "_WEBPHOTO_ITEM_KIND_GROUP_OFFICE", "Office" );
+	define( "_WEBPHOTO_ITEM_KIND_GROUP_OTHERS", "Others" );
+
+	define( "_WEBPHOTO_CONFIRM_PHOTODEL_DSC", "All information, description comment and etc, are deleted" );
+
+// search
+	define( "_WEBPHOTO_SEARCH_KEYTOOSHORT", "Keywords must be at least <b>%s</b> characters long" );
+
+//---------------------------------------------------------
+// v2.20
+//---------------------------------------------------------
+// edit form
+	define( "_WEBPHOTO_EMBED_SUPPORT_TITLE", "The external source will provide Title" );
+	define( "_WEBPHOTO_EMBED_SUPPORT_DESCRIPTION", "The external source will provide Description" );
+	define( "_WEBPHOTO_EMBED_SUPPORT_SITEURL", "The external source will provide Site url" );
+	define( "_WEBPHOTO_EMBED_SUPPORT_DURATION", "The external source will provide Duration" );
+	define( "_WEBPHOTO_EMBED_SUPPORT_EMBED_TEXT", "The external source will provide Emded" );
+	define( "_WEBPHOTO_EMBED_SUPPORT_TAGS", "The external source will provide Tags" );
+
+//---------------------------------------------------------
+// v2.30
+//---------------------------------------------------------
+// item table
+	define( "_WEBPHOTO_ITEM_DISPLAYFILE", "Display File" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_11", "File ID: WAV" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_12", "File ID: Large" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_13", "File ID: 13" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_14", "File ID: 14" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_15", "File ID: 15" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_16", "File ID: 16" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_17", "File ID: 17" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_18", "File ID: 18" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_19", "File ID: 19" );
+	define( "_WEBPHOTO_ITEM_FILE_ID_20", "File ID: 20" );
+
+// file
+	define( "_WEBPHOTO_FILE_KIND_11", "WAVE" );
+	define( "_WEBPHOTO_FILE_KIND_12", "Large" );
+	define( "_WEBPHOTO_FILE_KIND_13", "File Kind: 13" );
+	define( "_WEBPHOTO_FILE_KIND_14", "File Kind: 14" );
+	define( "_WEBPHOTO_FILE_KIND_15", "File Kind: 15" );
+	define( "_WEBPHOTO_FILE_KIND_16", "File Kind: 16" );
+	define( "_WEBPHOTO_FILE_KIND_17", "File Kind: 17" );
+	define( "_WEBPHOTO_FILE_KIND_18", "File Kind: 18" );
+	define( "_WEBPHOTO_FILE_KIND_19", "File Kind: 19" );
+	define( "_WEBPHOTO_FILE_KIND_20", "File Kind: 20" );
+
+// item kind
+	define( "_WEBPHOTO_ITEM_KIND_IMAGE_CMYK", "Image (cmyk)" );
+	define( "_WEBPHOTO_ITEM_KIND_VIDEO_H264", "Video (H264)" );
+
+// item detail
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_DOWNLOAD", "Download" );
+
+// item codeinfo
+	define( "_WEBPHOTO_ITEM_CODEINFO_LARGE", "Large Image" );
+	define( "_WEBPHOTO_ITEM_CODEINFO_WAV", "WAVE" );
+
+// item display file
+	define( "_WEBPHOTO_ITEM_DISPLAYFILE_DEFAULT", "Default" );
+
+// photo form
+	define( "_WEBPHOTO_CAP_JPEG_SELECT", "Select the JPEG image" );
+	define( "_WEBPHOTO_FILE_JPEG_DSC", "Create the thumb image" );
+	define( "_WEBPHOTO_FILE_JPEG_DELETE_DSC", "Delete with the thumb image" );
+
+// mime option
+	define( "_WEBPHOTO_MIME_KIND_IMAGE_JPEG", "Image jpg" );
+	define( "_WEBPHOTO_MIME_KIND_VIDEO_FLV", "Video flv" );
+	define( "_WEBPHOTO_MIME_KIND_AUDIO_MP3", "Audio mp3" );
+	define( "_WEBPHOTO_MIME_KIND_AUDIO_FFMPEG", "Audio ffmpeg" );
+
+// error
+	define( "_WEBPHOTO_ERR_WAV", "Cannot create wave" );
+
+//---------------------------------------------------------
+// v2.40
+//---------------------------------------------------------
+// === redefine previous definition ===
+	define( "_WEBPHOTO_FLASHVARS_FORM", "Edit of Flash Player's Options" );
+
+// --- flashvar ---
+// common
+	define( "_WEBPHOTO_FLASHVAR_HEIGHT_DSC", "[Basics] height " );
+	define( "_WEBPHOTO_FLASHVAR_WIDTH_DSC", "[Basics] width " );
+
+	define( "_WEBPHOTO_FLASHVAR_SCREENCOLOR_DSC", "[Colors] screencolor <br>Background color of the display. <br>Is black by default." );
+	define( "_WEBPHOTO_FLASHVAR_BACKCOLOR_DSC", "[Colors]  backcolor <br>background color of the controlbar and playlist. <br>This is white by default." );
+	define( "_WEBPHOTO_FLASHVAR_FRONTCOLOR_DSC", "[Colors] frontcolor <br>color of all icons and texts in the controlbar and playlist. <br>Is black by default." );
+	define( "_WEBPHOTO_FLASHVAR_LIGHTCOLOR_DSC", "[Colors] lightcolor <br>Color of an icon or text when you rollover it with the mouse. <br>Is black by default." );
+
+	define( "_WEBPHOTO_FLASHVAR_SHUFFLE_DSC", "[Behaviour] shuffle <br>Shuffle playback of playlist items. <br>The player will randomly pick the items." );
+	define( "_WEBPHOTO_FLASHVAR_VOLUME_DSC", "[Behaviour] volume <br>This sets the smoothing of videos, so you won�ft see blocks when a video is upscaled.  <br>Set this to false to disable the feature and get performance improvements with old computers / big files. " );
+
+// player
+	define( "_WEBPHOTO_FLASHVAR_IMAGE_DSC", "[Playlist] image <br>Location of a preview (poster) image; shown in display before the video starts." );
+
+	define( "_WEBPHOTO_FLASHVAR_AUTOSTART_DSC", "[Behaviour] autostart <br>Set this to true to automatically start the player on load." );
+	define( "_WEBPHOTO_FLASHVAR_BUFFERLENGTH_DSC", "[Behaviour] bufferlength <br>Number of seconds of the file that has to be loaded before the player starts playback. <br>Set this to a low value to enable instant-start (good for fast connections) and to a high value to get less mid-stream buffering (good for slow connections)." );
+	define( "_WEBPHOTO_FLASHVAR_SMOOTHING_DSC", "[Behaviour] smoothing <br>This sets the smoothing of videos, so you won�ft see blocks when a video is upscaled.  <br>Set this to false to disable the feature and get performance improvements with old computers / big files. " );
+
+// imagetotator
+	define( "_WEBPHOTO_FLASHVAR_LOGO_DSC", "[Appearance] logo <br>Set this to an image that can be put as a watermark logo in the top right corner of the display.  <br>Transparent PNG files give the best results" );
+	define( "_WEBPHOTO_FLASHVAR_OVERSTRETCH_DSC", "[Appearance] overstretch <br>Sets how to stretch images to make them fit the display. <br>The default stretches to fit the display.  <br>Set this to true to stretch them proportionally to fill the display, fit to stretch them disproportionally and none to keep original dimensions. " );
+	define( "_WEBPHOTO_FLASHVAR_SHOWICONS_DSC", "[Appearance] showicons <br>Set this to false to hide the activity icon and play button in the middle of the display. " );
+	define( "_WEBPHOTO_FLASHVAR_SHOWNAVIGATION_DSC", "[Appearance] shownavigation <br>�RSet this to false to completely hide the navigation bar. " );
+	define( "_WEBPHOTO_FLASHVAR_TRANSITION_DSC", "[Appearance] transition <br>Sets the transition to use between images.  <br>The default, random, randomly pick a transition. To restrict to a certain transition, use these values: fade, bgfade, blocks, bubbles, circles, flash, fluids, lines or slowfade. " );
+	define( "_WEBPHOTO_FLASHVAR_USEFULLSCREEN_DSC", "[Appearance] usefullscreen <br>Set this to false to hide the fullscreen button and disable fullscreen. " );
+
+	define( "_WEBPHOTO_FLASHVAR_AUDIO_DSC", "[Behaviour] audio <br>Set this to false to completely hide the navigation bar. " );
+	define( "_WEBPHOTO_FLASHVAR_LINKFROMDISPLAY_DSC", "[Behaviour] linkfromdisplay <br>Set this to true to make a click on the display result in a jump to the webpage assigned to the link playlist metadata. " );
+	define( "_WEBPHOTO_FLASHVAR_LINKTARGET_DSC", "[Behaviour] linktarget <br>Set this to the frame you want hyperlinks to open in. Set it to _blank to open links in a new window or _top to open in the top frame. " );
+	define( "_WEBPHOTO_FLASHVAR_REPEAT_DSC", "[Behaviour] repeat <br>Set this to true to automatically repeat playback of all images.  <br>Set this to list to playback an entire playlist once. " );
+	define( "_WEBPHOTO_FLASHVAR_ROTATETIME_DSC", "[Behaviour] rotatetime <br>Sets the duration in seconds an image is shown before transitioning again." );
+
+// === new definition ===
+	define( "_WEBPHOTO_FLASHVARS_ADD", "Add Flash Player's Options" );
+
+// --- flashvar table ---
+// Playlist Properties
+	define( "_WEBPHOTO_FLASHVAR_PLAYLISTFILE", "Playlist File" );
+	define( "_WEBPHOTO_FLASHVAR_START", "Start Time" );
+	define( "_WEBPHOTO_FLASHVAR_DURATION", "Duration" );
+	define( "_WEBPHOTO_FLASHVAR_MEDIAID", "Media ID" );
+	define( "_WEBPHOTO_FLASHVAR_PROVIDER", "Provider" );
+	define( "_WEBPHOTO_FLASHVAR_STREAMER", "Streamer" );
+	define( "_WEBPHOTO_FLASHVAR_NETSTREAMBASEPATH", "Netstream Base Path" );
+
+// Layout
+	define( "_WEBPHOTO_FLASHVAR_DOCK", "Dock" );
+	define( "_WEBPHOTO_FLASHVAR_ICONS", "Icons" );
+	define( "_WEBPHOTO_FLASHVAR_SKIN", "Skin" );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_POSITION", "Controlbar Pposition" );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_IDLEHIDE", "Controlbar Iidle Hide" );
+	define( "_WEBPHOTO_FLASHVAR_DISPLAY_SHOWMUTE", "Display Show Mute " );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION", "Playlist Position " );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_SIZE", "Playlist Size" );
+
+// Behavior
+	define( "_WEBPHOTO_FLASHVAR_PLAYER_REPEAT", "Repeat" );
+	define( "_WEBPHOTO_FLASHVAR_ITEM", "Item" );
+	define( "_WEBPHOTO_FLASHVAR_MUTE", "Mute" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYERREADY", "Player Ready" );
+	define( "_WEBPHOTO_FLASHVAR_PLUGINS", "Plugins" );
+	define( "_WEBPHOTO_FLASHVAR_STRETCHING", "Stretching" );
+
+// Logo
+	define( "_WEBPHOTO_FLASHVAR_LOGO_FILE", "Logo File" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_LINK", "Logo Link" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_LINKTARGET", "Logo Link Target" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_HIDE", "Logo Hide" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_MARGIN", "Logo Margin" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_POSITION", "Logo Position" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_TIMEOUT", "Logo Timeout" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_OVER", "Logo Over" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_OUT", "Logo Out" );
+
+// --- description ---
+	define( "_WEBPHOTO_FLASHVAR_START_DSC", "[Playlist] start <br>Position in seconds where playback should start. <br>This option works for HTTP Pseudostreaming, RTMP Streaming and the MP3 and YouTube files. <br>It does not work for regular videos.)" );
+	define( "_WEBPHOTO_FLASHVAR_DURATION_DSC", "[Playlist] duration <br>Duration of the file in seconds. <br>Set this to present the duration in the controlbar before the video starts. <br>It can also be set to a shorter value than the actual file duration. <br>The player will restrict playback to only that section." );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLISTFILE_DSC", "[Playlist] playlistfile <br>Location of an XML playlist to load into the player." );
+	define( "_WEBPHOTO_FLASHVAR_MEDIAID_DSC", "[Playlist] mediaid <br>Unique string (e.g. 9Ks83JsK) used to identify this media file. <br>Is used by certain plugins, e.g. for the targeting of advertisements. <br>The player itself doesn�ft use this ID anywhere." );
+	define( "_WEBPHOTO_FLASHVAR_PROVIDER_DSC", "[Playlist] provider <br>Set this flashvar to tell the player in which format (regular/streaming) the player is. <br>By default, the provider is detected by the player based upon the file extension. <br>If there is no suiteable extension, it can be manually set. <br>The following provider strings are supported:" );
+	define( "_WEBPHOTO_FLASHVAR_STREAMER_DSC", "[Playlist] streamer <br>Location of an RTMP or HTTP server instance to use for streaming. <br>Can be an RTMP application or external PHP/ASP file. <br>See RTMP Streaming and HTTP Pseudostreaming." );
+	define( "_WEBPHOTO_FLASHVAR_NETSTREAMBASEPATH_DSC", "[Playlist] netstreambasepath  <br>The netstreambasepath should be set to a URL from which relative paths will be calculated for video files.  <br>Introduced in JW Player 5.4, this configuration parameter directs the video and http media providers to request video files relative to the specified netstreambasepath rather than relative to the player SWF.  <br>This will likely cause issues for publishers using the JW Embedder with relative file paths." );
+
+	define( "_WEBPHOTO_FLASHVAR_DOCK_DSC", "[Layout] dock <br>set this to false to show plugin buttons in controlbar. <br>By default (true), plugin buttons are shown in the display." );
+	define( "_WEBPHOTO_FLASHVAR_ICONS_DSC", "[Layout] icons <br>set this to false to hide the play button and buffering icons in the display." );
+	define( "_WEBPHOTO_FLASHVAR_SKIN_DSC", "[Layout] skin <br>Location of a skin file, containing graphics which change the look of the player. <br>There are two types of skins available:" );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_POSITION_DSC", "[Layout] controlbar.position <br>Position of the controlbar. <br>Can be set to bottom, top, over and none." );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_IDLEHIDE_DSC", "[Layout] controlbar.idlehide <br>If controlbar.position is set to over, this option determines whether the controlbar stays hidden when the player is paused or stopped." );
+	define( "_WEBPHOTO_FLASHVAR_DISPLAY_SHOWMUTE_DSC", "[Layout] display.showmute <br>Shows a mute icon in the player's display window while the player is playing. <br>Disabled by default." );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_DSC", "[Layout] playlist.position <br>Position of the playlist. <br>Can be set to bottom, top, right, left, over or none." );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_SIZE_DSC", "[Layout]  playlist.size <br>When the playlist is positioned below the display, this option can be used to change its height.  <br>When the playlist lives left or right of the display, this option represents its width. In the other cases, this option isn't needed." );
+
+	define( "_WEBPHOTO_FLASHVAR_PLAYER_REPEAT_DSC", "[Behaviour] repeat <br>What to do when the mediafile has ended. <br>none Color of an icon or text when you rollover it with the mouse. Is black by default. <br>list: play each file in the playlist once, stop at the end. <br>always: continously play the file (or all files in the playlist). <br>single: continously repeat the current file in the playlist." );
+	define( "_WEBPHOTO_FLASHVAR_ITEM_DSC", "[Behaviour] item <br>Playlist item that should start to play.  <br>Use this to start the player with a specific item instead of with the first item." );
+	define( "_WEBPHOTO_FLASHVAR_MUTE_DSC", "[Behaviour] mute <br>Mute the sounds on startup.  <br>Is saved in a cookie." );
+	define( "_WEBPHOTO_FLASHVAR_PLAYERREADY_DSC", "[Behaviour] playerready <br>By default, the player calls a playerReady() JavaScript function when it is initialized.  <br>This option is used to let the player call a different function after it�fs initialized (e.g. registerPlayer())." );
+	define( "_WEBPHOTO_FLASHVAR_PLUGINS_DSC", "[Behaviour] plugins <br>A powerful feature, this is a comma-separated list of plugins to load (e.g. hd,viral). <br>Plugins are separate JavaScript or SWF files that extend the functionality of the player, e.g. with advertising, analytics or viral sharing features. <br>Visit our addons repository to browse the long list of available plugins." );
+	define( "_WEBPHOTO_FLASHVAR_STRETCHING_DSC", "[Behaviour] stretching <br>Defines how to resize the poster image and video to fit the display." );
+
+	define( "_WEBPHOTO_FLASHVAR_LOGO_FILE_DSC", "[Logo] logo.file <br>" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_LINK_DSC", "[Logo] logo.link <br>HTTP link to jump to when the watermark image is clicked. <br>If it is not set, a click on the watermark does nothing." );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_LINKTARGET_DSC", "[Logo] logo.linktarget <br>Link target for logo click. <br>Can be _self, _blank, _parent, _top or a named frame." );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_HIDE_DSC", "[Logo] logo.hide <br>By default, the logo will automatically show when the player buffers and hide 3 seconds later. <br>When this option is set false, the logo will stay visible all the time." );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_MARGIN_DSC", "[Logo] logo.margin <br>The distance of the logo, in pixels from the sides of the player." );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_POSITION_DSC", "[Logo] logo.position <br>This sets the corner in which to display the watermark. <br>It can be one of the following:" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_TIMEOUT_DSC", "[Logo] logo.timeout <br>When logo.hide is set to true, this option sets the number of seconds the logo is visible after it appears." );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_OVER_DSC", "[Logo] logo.over <br>The alpha transparency of the logo on mouseover. <br>Can be a decimal number from 0 to 1." );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_OUT_DSC", "[Logo] logo.out <br>The default alpha transparency of the logo when not moused over.<br> Can be a decimal number from 0 to 1." );
+
+// --- options ---
+	define( "_WEBPHOTO_FLASHVAR_PLAYER_REPEAT_NONE", "none" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYER_REPEAT_LIST", "list" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYER_REPEAT_ALWAYS", "always" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYER_REPEAT_SINGLE", "single" );
+
+	define( "_WEBPHOTO_FLASHVAR_STRETCHING_NONE", "none" );
+	define( "_WEBPHOTO_FLASHVAR_STRETCHING_EXACTFIT", "exactfit" );
+	define( "_WEBPHOTO_FLASHVAR_STRETCHING_UNIFORM", "uniform" );
+	define( "_WEBPHOTO_FLASHVAR_STRETCHING_FILL", "fill" );
+
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_POSITION_BOTTOM", "bottom" );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_POSITION_TOP", "top" );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_POSITION_OVER", "over" );
+	define( "_WEBPHOTO_FLASHVAR_CONTROLBAR_POSITION_NONE", "none" );
+
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_BOTTOM", "bottom" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_TOP", "top" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_RIGHT", "right" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_LEFT", "left" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_OVER", "over" );
+	define( "_WEBPHOTO_FLASHVAR_PLAYLIST_POSITION_NONE", "none" );
+
+	define( "_WEBPHOTO_FLASHVAR_LOGO_POSITION_BOTTOM_LEFT", "bottom-left" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_POSITION_BOTTOM_RIGHT", "bottom-right" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_POSITION_TOP_LEFT", "top-left" );
+	define( "_WEBPHOTO_FLASHVAR_LOGO_POSITION_TOP_RIGHT", "top-right" );
+
+//---------------------------------------------------------
+// v2.60
+//---------------------------------------------------------
+// cat handler
+	define( "_WEBPHOTO_CAT_TIMELINE_MODE", "Timeline mode" );
+	define( "_WEBPHOTO_CAT_TIMELINE_SCALE", "Timeline scale" );
 
 // === define end ===
 }

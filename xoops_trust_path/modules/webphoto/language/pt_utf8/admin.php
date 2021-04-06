@@ -1,11 +1,4 @@
 <?php
-// $Id: admin.php,v 1.1 2008/10/13 10:16:04 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
 // === define begin ===
 if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
@@ -19,23 +12,14 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( '_AM_WEBPHOTO_MYMENU_TPLSADMIN', 'Modelos' );
 	define( '_AM_WEBPHOTO_MYMENU_BLOCKSADMIN', 'Permissoes/Blocos' );
 
-//define('_AM_WEBPHOTO_MYMENU_MYPREFERENCES','Preferences');
-
 // add for webphoto
 	define( "_AM_WEBPHOTO_MYMENU_GOTO_MODULE", "Ir ao Modulo" );
 
-
 // Index (Categories)
-//define( "_AM_WEBPHOTO_H3_FMT_CATEGORIES" , "Categories Manager (%s)" ) ;
-//define( "_AM_WEBPHOTO_CAT_TH_TITLE" , "Name" ) ;
-
 	define( "_AM_WEBPHOTO_CAT_TH_PHOTOS", "Imagens" );
 	define( "_AM_WEBPHOTO_CAT_TH_OPERATION", "Operação" );
 	define( "_AM_WEBPHOTO_CAT_TH_IMAGE", "Banner" );
 	define( "_AM_WEBPHOTO_CAT_TH_PARENT", "Categoria Pai" );
-
-//define( "_AM_WEBPHOTO_CAT_TH_IMGURL" , "URL of Banner" ) ;
-
 	define( "_AM_WEBPHOTO_CAT_MENU_NEW", "Criando uma Categoria" );
 	define( "_AM_WEBPHOTO_CAT_MENU_EDIT", "Editando uma Categoria" );
 	define( "_AM_WEBPHOTO_CAT_INSERTED", "Uma categoria foi adicionada" );
@@ -48,39 +32,18 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_CAT_FMT_NEEDADMISSION", "%s imagens são necessarias para ser admitida" );
 	define( "_AM_WEBPHOTO_CAT_FMT_CATDELCONFIRM", "%s eliminar com suas sub-categorias, imagens e comentarios. OK?" );
 
-
 // Admission
-//define( "_AM_WEBPHOTO_H3_FMT_ADMISSION" , "Admitting images (%s)" ) ;
-//define( "_AM_WEBPHOTO_TH_SUBMITTER" , "Submitter" ) ;
-//define( "_AM_WEBPHOTO_TH_TITLE" , "Title" ) ;
-//define( "_AM_WEBPHOTO_TH_DESCRIPTION" , "Description" ) ;
-//define( "_AM_WEBPHOTO_TH_CATEGORIES" , "Category" ) ;
-//define( "_AM_WEBPHOTO_TH_DATE" , "Last update" ) ;
-
-
-// Photo Manager
-//define( "_AM_WEBPHOTO_H3_FMT_PHOTOMANAGER" , "Photo Manager (%s)" ) ;
-
 	define( "_AM_WEBPHOTO_TH_BATCHUPDATE", "Checagem coletiva da atualiza��o das imagens" );
 	define( "_AM_WEBPHOTO_OPT_NOCHANGE", "- NAO ALTERE -" );
 	define( "_AM_WEBPHOTO_JS_UPDATECONFIRM", "Checagem dos itens que ser�o atualizados. OK?" );
 
-
 // Module Checker
-//define( "_AM_WEBPHOTO_H3_FMT_MODULECHECKER" , "myAlbum-P checker (%s)" ) ;
-
 	define( "_AM_WEBPHOTO_H4_ENVIRONMENT", "Ambiente de Checagem" );
 	define( "_AM_WEBPHOTO_PHPDIRECTIVE", "Diretivas do PHP" );
 	define( "_AM_WEBPHOTO_BOTHOK", "ambos ok" );
 	define( "_AM_WEBPHOTO_NEEDON", "precisam de" );
 
 	define( "_AM_WEBPHOTO_H4_TABLE", "Tabela de Checagem" );
-
-//define( "_AM_WEBPHOTO_PHOTOSTABLE" , "Photos table" ) ;
-//define( "_AM_WEBPHOTO_DESCRIPTIONTABLE" , "Descriptions table" ) ;
-//define( "_AM_WEBPHOTO_CATEGORIESTABLE" , "Categories table" ) ;
-//define( "_AM_WEBPHOTO_VOTEDATATABLE" , "Votedata table" ) ;
-
 	define( "_AM_WEBPHOTO_COMMENTSTABLE", "Tabela de Comentarios" );
 	define( "_AM_WEBPHOTO_NUMBEROFPHOTOS", "Numero de Imagens" );
 	define( "_AM_WEBPHOTO_NUMBEROFDESCRIPTIONS", "Numero de Descri��es" );
@@ -90,9 +53,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
 	define( "_AM_WEBPHOTO_H4_CONFIG", "Configuração da Checagem" );
 	define( "_AM_WEBPHOTO_PIPEFORIMAGES", "Pipe para as imagens" );
-
-//define( "_AM_WEBPHOTO_DIRECTORYFORPHOTOS" , "Directory for Photos" ) ;
-//define( "_AM_WEBPHOTO_DIRECTORYFORTHUMBS" , "Directory for Thumbnails" ) ;
 
 	define( "_AM_WEBPHOTO_ERR_LASTCHAR", "Erro: O ultimo caracter não pode ser '/'" );
 	define( "_AM_WEBPHOTO_ERR_FIRSTCHAR", "Erro: O primeiro caracter deve ser '/'" );
@@ -107,22 +67,15 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_H4_PHOTOLINK", "Checar link das Imagens e Miniaturas" );
 	define( "_AM_WEBPHOTO_NOWCHECKING", "Checando agora." );
 
-//define( "_AM_WEBPHOTO_FMT_PHOTONOTREADABLE" , "a main photo (%s) is not readable." ) ;
-//define( "_AM_WEBPHOTO_FMT_THUMBNOTREADABLE" , "a thumbnail (%s) is not readable." ) ;
-
 	define( "_AM_WEBPHOTO_FMT_NUMBEROFDEADPHOTOS", "%s Arquivo de imagem morta foi encontrado." );
 	define( "_AM_WEBPHOTO_FMT_NUMBEROFDEADTHUMBS", "%s miniaturas devem ser reconstruidas." );
 	define( "_AM_WEBPHOTO_FMT_NUMBEROFREMOVEDTMPS", "%s lixo de arquivos foram removidos." );
 	define( "_AM_WEBPHOTO_LINK_REDOTHUMBS", "reconstruir miniaturas" );
 	define( "_AM_WEBPHOTO_LINK_TABLEMAINTENANCE", "manutenção das tabelas" );
 
-
 // Redo Thumbnail
-//define( "_AM_WEBPHOTO_H3_FMT_RECORDMAINTENANCE" , "myAlbum-P photo maintenance (%s)" ) ;
-
 	define( "_AM_WEBPHOTO_FMT_CHECKING", "checando %s ..." );
 	define( "_AM_WEBPHOTO_FORM_RECORDMAINTENANCE", "manutenção das imagens como novo arranjo das miniaturas, etc." );
-
 	define( "_AM_WEBPHOTO_FAILEDREADING", "a leitura falhou." );
 	define( "_AM_WEBPHOTO_CREATEDTHUMBS", "criada uma miniatura." );
 	define( "_AM_WEBPHOTO_BIGTHUMBS", "falhou a feitura de uma miniatura. copiada." );
@@ -144,30 +97,17 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_LINK_RESTART", "reiniciado" );
 	define( "_AM_WEBPHOTO_SUBMIT_NEXT", "proximo" );
 
-
-// Batch Register
-//define( "_AM_WEBPHOTO_H3_FMT_BATCHREGISTER" , "myAlbum-P batch register (%s)" ) ;
-
-
 // GroupPerm Global
-//define( "_AM_WEBPHOTO_GROUPPERM_GLOBAL" , "Global Permissions" ) ;
-
 	define( "_AM_WEBPHOTO_GROUPPERM_GLOBALDESC", "Configurar os previlégios dos grupos para este modulo" );
 	define( "_AM_WEBPHOTO_GPERMUPDATED", "As permissoes foram mudadas com sucesso" );
-
 
 // Import
 	define( "_AM_WEBPHOTO_H3_FMT_IMPORTTO", 'Importação de imagens de outros modulo para %s' );
 	define( "_AM_WEBPHOTO_FMT_IMPORTFROMMYALBUMP", 'Importando de "%s" como modulo tipo myAlbum-P' );
 	define( "_AM_WEBPHOTO_FMT_IMPORTFROMIMAGEMANAGER", 'Importação do administrador de imagens do XOOPS' );
 
-//define( "_AM_WEBPHOTO_CB_IMPORTRECURSIVELY" , 'Importing sub-categories recursively' ) ;
-//define( "_AM_WEBPHOTO_RADIO_IMPORTCOPY" , 'Copy images (comments will not be copied)' ) ;
-//define( "_AM_WEBPHOTO_RADIO_IMPORTMOVE" , 'Move images (comments will be copied)' ) ;
-
 	define( "_AM_WEBPHOTO_IMPORTCONFIRM", 'Confirmar importação. OK?' );
 	define( "_AM_WEBPHOTO_FMT_IMPORTSUCCESS", '%s imagens importadas' );
-
 
 // Export
 	define( "_AM_WEBPHOTO_H3_FMT_EXPORTTO", 'Exportando imagens de %s para outro modulo' );
@@ -178,7 +118,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_CB_EXPORTTHUMB", 'Exportar miniaturas ao invos das imagens principais' );
 	define( "_AM_WEBPHOTO_EXPORTCONFIRM", 'Confirmar exportação. OK?' );
 	define( "_AM_WEBPHOTO_FMT_EXPORTSUCCESS", '%s imagens exportadas' );
-
 
 //---------------------------------------------------------
 // move from main.php
@@ -232,7 +171,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_MES_BATCHDONE", "%s imgem(ns) foram registradas." );
 	define( "_AM_WEBPHOTO_MES_BATCHNONE", "Nenhuma foto foi encontrada no diretorio." );
 
-
 //---------------------------------------------------------
 // move from myalbum_constants.php
 //---------------------------------------------------------
@@ -281,7 +219,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_GICON_SHADOW_DEL", 'Deletar icone da Sombra' );
 	define( "_AM_WEBPHOTO_GICON_DELCONFIRM", "Confirmar exclusão do icone %s ?" );
 
-
 //---------------------------------------------------------
 // mime type
 // modify from wfdownloads
@@ -308,10 +245,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_MIME_ICO_ONLINE", "Online" );
 	define( "_AM_WEBPHOTO_MIME_ICO_OFFLINE", "Offline" );
 
-// find mine type
-//define("_AM_WEBPHOTO_MIME_FINDMIMETYPE", "Find New Mimetype:");
-//define("_AM_WEBPHOTO_MIME_FINDIT", "Get Extension!");
-
 // added for webphoto
 	define( "_AM_WEBPHOTO_MIME_PERMS", "Grupos permitidos" );
 	define( "_AM_WEBPHOTO_MIME_ALLOWED", "Mimetype permitidos" );
@@ -335,12 +268,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 //---------------------------------------------------------
 	define( "_AM_WEBPHOTO_MANAGE_DESC", "<b>Cuidado</b><br>A administração desta tabela somente<br>Nao muda as tabelas relacionadas" );
 	define( "_AM_WEBPHOTO_ERR_NO_RECORD", "Nao ha registros" );
-
-//---------------------------------------------------------
-// cat manager
-//---------------------------------------------------------
-	define( "_AM_WEBPHOTO_DSC_CAT_IMGPATH", "Percurso do diretorio onde o XOOPS esta instaldo.<br>(O primeiro caracter deve ser '/'.)" );
-	define( "_AM_WEBPHOTO_OPT_CAT_PERM_POST_ALL", "Todos os grupos" );
 
 //---------------------------------------------------------
 // import
@@ -394,6 +321,171 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
 // checktables
 	define( "_AM_WEBPHOTO_FMT_NOT_READABLE", "%s (%s) nao é permitida a leitura." );
+
+//---------------------------------------------------------
+// v0.50
+//---------------------------------------------------------
+// config check
+	define( "_AM_WEBPHOTO_DIRECTORYFOR_UPLOADS", "Directory for Upload Files" );
+	define( "_AM_WEBPHOTO_DIRECTORYFOR_MEDIAS", "Directory for Media Files" );
+
+// item manager
+	define( "_AM_WEBPHOTO_ITEM_SELECT", "Select Item" );
+	define( "_AM_WEBPHOTO_ITEM_ADD", "Add Item" );
+	define( "_AM_WEBPHOTO_ITEM_LISTING", "View Item" );
+	define( "_AM_WEBPHOTO_VOTE_DELETED", "Vote data deleted." );
+	define( "_AM_WEBPHOTO_VOTE_STATS", "Vote Statistics" );
+	define( "_AM_WEBPHOTO_VOTE_ENTRY", "Entry Votes" );
+	define( "_AM_WEBPHOTO_VOTE_USER", "Registered User Votes" );
+	define( "_AM_WEBPHOTO_VOTE_GUEST", "Anonymous User Votes" );
+	define( "_AM_WEBPHOTO_VOTE_TOTAL", "total votes" );
+	define( "_AM_WEBPHOTO_VOTE_USERAVG", "User Average Rating" );
+	define( "_AM_WEBPHOTO_VOTE_USERVOTES", "User Total Votes" );
+	define( "_AM_WEBPHOTO_LOG_VIEW", "View Log File" );
+	define( "_AM_WEBPHOTO_LOG_EMPT", "Empty Log File" );
+	define( "_AM_WEBPHOTO_PLAYLIST_PATH", "Playlist Path" );
+	define( "_AM_WEBPHOTO_PLAYLIST_REFRESH", "Refresh Playlist Cache" );
+	define( "_AM_WEBPHOTO_STATUS_CHANGE", "Status Change" );
+	define( "_AM_WEBPHOTO_STATUS_OFFLINE", "Off Line" );
+	define( "_AM_WEBPHOTO_STATUS_ONLINE", "On Line" );
+	define( "_AM_WEBPHOTO_STATUS_AUTO", "Auto Publish" );
+
+// item form
+	define( "_AM_WEBPHOTO_TIME_NOW", "Current Time" );
+
+// playlist form
+	define( "_AM_WEBPHOTO_PLAYLIST_ADD", "Add Playlist" );
+	define( "_AM_WEBPHOTO_PLAYLIST_TYPE", "Playlist Type" );
+	define( "_AM_WEBPHOTO_PLAYLIST_FEED_DSC", "Enter the web feed URL." );
+	define( "_AM_WEBPHOTO_PLAYLIST_DIR_DSC", "Select the directory name" );
+
+// player manager
+	define( "_AM_WEBPHOTO_PLAYER_MANAGER", "Player Manager" );
+	define( "_AM_WEBPHOTO_PLAYER_ADD", "Add New Player" );
+	define( "_AM_WEBPHOTO_PLAYER_MOD", "Modify Player" );
+	define( "_AM_WEBPHOTO_PLAYER_CLONE", "Clone Player" );
+	define( "_AM_WEBPHOTO_PLAYER_ADDED", "New Player Added" );
+	define( "_AM_WEBPHOTO_PLAYER_DELETED", "Player deleted" );
+	define( "_AM_WEBPHOTO_PLAYER_MODIFIED", "Player Modified" );
+	define( "_AM_WEBPHOTO_PLAYER_PREVIEW", "Preview" );
+	define( "_AM_WEBPHOTO_PLAYER_PREVIEW_DSC", "Save your changes first!" );
+	define( "_AM_WEBPHOTO_PLAYER_PREVIEW_LINK", "Preview Source" );
+	define( "_AM_WEBPHOTO_PLAYER_NO_ITEM", "Thers are no item to play" );
+	define( "_AM_WEBPHOTO_PLAYER_WARNING", "WARNING: Are you sure you want to delete this Player? <br>Manually edit all entries using this player before deleting it." );
+	define( "_AM_WEBPHOTO_PLAYER_ERR_EXIST", "ERROR: The same title player you provided is already in the database!" );
+	define( "_AM_WEBPHOTO_BUTTON_CLONE", "Clone" );
+
+//---------------------------------------------------------
+// v0.60
+//---------------------------------------------------------
+// cat form
+	define( "_AM_WEBPHOTO_CAP_CAT_SELECT", "Select the category image" );
+	define( "_AM_WEBPHOTO_DSC_CAT_PATH", "Set Path from the directory installed XOOPS.<br>(The first character must be '/'.)" );
+	define( "_AM_WEBPHOTO_DSC_CAT_FOLDER", "Show folder icon if not set" );
+
+//---------------------------------------------------------
+// v0.70
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_RECOMMEND_OFF", "recommend off" );
+
+//---------------------------------------------------------
+// v0.80
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_TITLE_WAITING", "List of Wating to approve" );
+	define( "_AM_WEBPHOTO_TITLE_OFFLINE", "List of Offline" );
+	define( "_AM_WEBPHOTO_TITLE_EXPIRED", "List of Expired" );
+
+//---------------------------------------------------------
+// v0.81
+//---------------------------------------------------------
+// checkconfigs
+	define( "_AM_WEBPHOTO_QR_CHECK_LINK", "Check that 'QR Code' is working correctly" );
+	define( "_AM_WEBPHOTO_QR_CHECK_DSC", "If the page linked to from here doesn't display correctly, you should not use 'QR Code' " );
+	define( "_AM_WEBPHOTO_QR_CHECK_SUCCESS", "Can you see 'QR Code' correctly" );
+	define( "_AM_WEBPHOTO_QR_CHECK_SHOW", "Show Debug Info" );
+	define( "_AM_WEBPHOTO_QR_CHECK_INFO", "Debug Info" );
+
+//---------------------------------------------------------
+// v0.90
+//---------------------------------------------------------
+// cat form
+	define( "_AM_WEBPHOTO_CAT_PARENT_CAP", "Permission of Parent Category" );
+	define( "_AM_WEBPHOTO_CAT_PARENT_FMT", "Succeed to the permission of parent category ( %s )" );
+	define( "_AM_WEBPHOTO_CAT_CHILD_CAP", "Child Categories" );
+	define( "_AM_WEBPHOTO_CAT_CHILD_NUM", "Number of child categories" );
+	define( "_AM_WEBPHOTO_CAT_CHILD_PERM", "Change permission of child categories" );
+
+//---------------------------------------------------------
+// v1.00
+//---------------------------------------------------------
+// groupperm
+	define( "_AM_WEBPHOTO_GPERM_HTML", "Use HTML" );
+
+//---------------------------------------------------------
+// v1.21
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_RSS_DEBUG", "RSS Debug View" );
+	define( "_AM_WEBPHOTO_RSS_CLEAR", "RSS Cache Clear" );
+	define( "_AM_WEBPHOTO_RSS_CLEARED", "Cleared" );
+
+//---------------------------------------------------------
+// v1.40
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_TIMELINE_MODULE", "Timeline Module" );
+	define( "_AM_WEBPHOTO_MODULE_NOT_INSTALL", "Module is not installed" );
+
+//---------------------------------------------------------
+// v1.50
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_FILE_CHECK", "File Valid Check" );
+	define( "_AM_WEBPHOTO_FILE_CHECK_DSC", "checks there are necessary files with file size" );
+
+//---------------------------------------------------------
+// v1.72
+//---------------------------------------------------------
+	define( "_AM_WEBPHOTO_MYSQL_CONFIG", "MySQL Config" );
+	define( "_AM_WEBPHOTO_MULTIBYTE_CONFIG", "Multibyte Config" );
+
+//---------------------------------------------------------
+// v2.00
+//---------------------------------------------------------
+// invite
+	define( "_AM_WEBPHOTO_INVITE_EMAIL", "Email address of the inviting person" );
+	define( "_AM_WEBPHOTO_INVITE_NAME", "Your Name" );
+	define( "_AM_WEBPHOTO_INVITE_MESSAGE", "Message" );
+	define( "_AM_WEBPHOTO_INVITE_SUBMIT", "Invite" );
+	define( "_AM_WEBPHOTO_INVITE_EXAMPLE", "Exsample: Hello, I am John. I send an invitation at the site which was talked about. <br>Jane, too, attempt to register by all means. " );
+	define( "_AM_WEBPHOTO_INVITE_SUBJECT", "You get the invitation email. from %s to %s " );
+	define( "_AM_WEBPHOTO_INVITE_ERR_NO_NAME", "No Name" );
+
+// gperm
+	define( "_AM_WEBPHOTO_GROUP_MOD_ADMIN", "Admin group of this module" );
+	define( "_AM_WEBPHOTO_GROUP_MOD_USER", "User group of this module" );
+	define( "_AM_WEBPHOTO_GROUP_MOD_CATEGORY", "Category group of this module" );
+	define( "_AM_WEBPHOTO_GPERM_MODULE_ADMIN", "Module Admin" );
+	define( "_AM_WEBPHOTO_GPERM_MODULE_READ", "Module Access" );
+
+// item manage
+	define( "_AM_WEBPHOTO_BUTTON_REFUSE", "Refuse" );
+	define( "_AM_WEBPHOTO_ERR_NO_SELECT", "Error: Not select item" );
+
+// user list
+	define( '_AM_WEBPHOTO_USER_UID', "UID" );
+	define( '_AM_WEBPHOTO_USER_UNAME', "User Name" );
+	define( '_AM_WEBPHOTO_USER_NAME', "Real Name" );
+	define( '_AM_WEBPHOTO_USER_POSTS', "Comments/Posts" );
+	define( '_AM_WEBPHOTO_USER_LEVEL', "Level" );
+	define( '_AM_WEBPHOTO_USER_REGDATE', "Member Since" );
+	define( '_AM_WEBPHOTO_USER_LASTLOGIN', "Last Login" );
+	define( '_AM_WEBPHOTO_USER_CONTROL', "Control" );
+	define( '_AM_WEBPHOTO_USER_TOTAL', "Total of member" );
+	define( '_AM_WEBPHOTO_USER_ASSIGN', "Assign a member" );
+	define( '_AM_WEBPHOTO_USER_USER', "User" );
+
+//---------------------------------------------------------
+// v2.40
+//---------------------------------------------------------
+	define( '_AM_WEBPHOTO_PLEASE_IMPORT_MYALBUM', "Please execute the batch import from Myalbum." );
 
 // === define end ===
 }

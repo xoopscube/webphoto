@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_inc_oninstall extends webphoto_inc_base_ini {
+
 	public $_group_class;
 	public $_gperm_def_class;
 	public $_oninstall_item_class;
@@ -45,6 +46,7 @@ class webphoto_inc_oninstall extends webphoto_inc_base_ini {
 	public $_flag_debug = false;
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct();
 
 		$this->init_base_ini( $dirname, $trust_dirname );

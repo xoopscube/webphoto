@@ -1,20 +1,4 @@
 <?php
-// $Id: modinfo.php,v 1.25 2011/12/28 16:16:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// UFT-8 for Japanese
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-10-01 K.OHWADA
-// 写真 -> 写真・動画・メディア
-// 2010-04-04 K.OHWADA
-// remove echo
-//---------------------------------------------------------
-
 // test
 if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) {
 	$MY_DIRNAME = 'webphoto';
@@ -75,10 +59,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CFG_DESCMAKETHUMB", "「生成しない」から「生成する」に変更した時には、「サムネイルの再構築」が必要です。" );
 
 // v2.30
-//define( $constpref."CFG_WIDTH" , "最大画像幅" ) ;
-//define( $constpref."CFG_DESCWIDTH" , "画像アップロード時に自動調整されるメイン画像の最大幅。<br>GDモードでTrueColorを扱えない時には単なるサイズ制限" ) ;
-//define( $constpref."CFG_HEIGHT" , "最大画像高" ) ;
-//define( $constpref."CFG_DESCHEIGHT" , "最大幅と同じ意味です" ) ;
 	define( $constpref . "CFG_WIDTH", "ポップアップでの画像の幅" );
 	define( $constpref . "CFG_DESCWIDTH", "ポップアップしたときの画像の大きさです。<br><br>従来のバージョンではアップロード可能な画像の大きさの制限でした。<br>この制限はなくなりました。<br>2.30にて仕様が変わりました。" );
 	define( $constpref . "CFG_HEIGHT", "ポップアップでの画像の幅さ" );
@@ -117,7 +97,6 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYCAP", "このカテゴリに新たに写真・動画・メディアが登録された時に通知する" );
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYDSC", "このカテゴリに新たに写真・動画・メディアが登録された時に通知する" );
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE}: 新たに写真・動画・メディアが登録されました" );
-
 
 //=========================================================
 // add for webphoto

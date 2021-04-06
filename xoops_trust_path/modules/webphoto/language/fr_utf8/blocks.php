@@ -1,12 +1,23 @@
 <?php
-// $Id: blocks.php,v 1.2 2009/05/17 08:24:26 ohwada Exp $
+// test
+if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) {
+	$MY_DIRNAME = 'webphoto';
+}
 
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
+if ( ! isset( $MY_DIRNAME ) ) {
+// call by altsys D3LanguageManager
+	if ( isset( $mydirname ) ) {
+		$MY_DIRNAME = $mydirname;
 
-$constpref = strtoupper( '_BL_' . $GLOBALS['MY_DIRNAME'] . '_' );
+// probably error
+	} elseif ( isset( $GLOBALS['MY_DIRNAME'] ) ) {
+		$MY_DIRNAME = $GLOBALS['MY_DIRNAME'];
+	} else {
+		$MY_DIRNAME = 'webphoto';
+	}
+}
+
+$constpref = strtoupper( '_BL_' . $MY_DIRNAME . '_' );
 
 // === define begin ===
 if ( ! defined( $constpref . "LANG_LOADED" ) ) {
@@ -23,7 +34,10 @@ if ( ! defined( $constpref . "LANG_LOADED" ) ) {
 	define( $constpref . "TEXT_DISP", "Afficher" );
 	define( $constpref . "TEXT_STRLENGTH", "Longueur maximale pour le titre" );
 	define( $constpref . "TEXT_CATLIMITATION", "Filtrer par Catégorie(s)" );
+	
+// 2.30
 	define( $constpref . "TEXT_CATLIMITRECURSIVE", "Inclure les sous-catégories" );
+	
 	define( $constpref . "TEXT_BLOCK_WIDTH", "Largeur maximale" );
 	define( $constpref . "TEXT_BLOCK_WIDTH_NOTES", "(si la valeur est 0, la miniature sera affichée avec ses dimensions originales)" );
 	define( $constpref . "TEXT_RANDOMCYCLE", "Alternance des images au hasard (en secondes)" );

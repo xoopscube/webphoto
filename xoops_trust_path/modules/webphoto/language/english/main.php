@@ -1,19 +1,4 @@
 <?php
-// $Id: main.php,v 1.48 2011/12/28 16:16:15 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-10-01 K.OHWADA
-// Photo -> Photo Video Media
-// 2010-04-04 K.OHWADA
-// remove echo
-//---------------------------------------------------------
-
 // === define begin ===
 if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 
@@ -66,7 +51,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_TELLAFRIEND", "Tell a friend" );
 	define( "_WEBPHOTO_SUBJECT4TAF", "A photo video media for you" );
 
-
 //---------------------------------------------------------
 // submit
 //---------------------------------------------------------
@@ -96,7 +80,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_ERR_FILEREAD", "Photo Video Media are not readable." );
 	define( "_WEBPHOTO_ERR_TITLE", "You must enter 'Title' " );
 
-
 //---------------------------------------------------------
 // edit
 //---------------------------------------------------------
@@ -105,7 +88,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_CONFIRM_PHOTODEL", "Delete photo video media ?" );
 	define( "_WEBPHOTO_DBUPDATED", "Database Updated Successfully !" );
 	define( "_WEBPHOTO_DELETED", "Deleted !" );
-
 
 //---------------------------------------------------------
 // rate
@@ -131,7 +113,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_CAPTION_REFRESH", "Refresh" );
 	define( "_WEBPHOTO_CAPTION_IMAGEXYT", "Size(Type)" );
 	define( "_WEBPHOTO_CAPTION_CATEGORY", "Category" );
-
 
 //=========================================================
 // add for webphoto
@@ -258,7 +239,7 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_GICON_TITLE", "Icon Title" );
 	define( "_WEBPHOTO_GICON_IMAGE_PATH", "Image Path" );
 	define( "_WEBPHOTO_GICON_IMAGE_NAME", "Image Name" );
-	define( "_WEBPHOTO_GICON_IMAGE_EXT", "Image Extntion" );
+	define( "_WEBPHOTO_GICON_IMAGE_EXT", "Image Extention" );
 	define( "_WEBPHOTO_GICON_SHADOW_PATH", "Shadow Path" );
 	define( "_WEBPHOTO_GICON_SHADOW_NAME", "Shadow Name" );
 	define( "_WEBPHOTO_GICON_SHADOW_EXT", "Shadow Extention" );
@@ -313,7 +294,6 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_SYNO_WEIGHT", "Weight" );
 	define( "_WEBPHOTO_SYNO_KEY", "Key" );
 	define( "_WEBPHOTO_SYNO_VALUE", "Synonym" );
-
 
 //---------------------------------------------------------
 // title
@@ -876,48 +856,24 @@ Please click <a href="{MODULE_URL}/i.php?op=post" target="_blank">Post by Mail</
 
 // flashvar desc
 	define( "_WEBPHOTO_FLASHVAR_ID_DSC", "[Basics] <br>Use this to set the RTMP stream identifier with the mediaplayer. <br>The ID will also be sent to statistics callbacks. <br>If you play a playlist, you can set an id for every entry. " );
-//define("_WEBPHOTO_FLASHVAR_HEIGHT_DSC","[Basics] ");
-//define("_WEBPHOTO_FLASHVAR_WIDTH_DSC","[Basics]  ");
 	define( "_WEBPHOTO_FLASHVAR_DISPLAYHEIGHT_DSC", "[Playlist] [mediaplayer] <br>Set this smaller as the height to show a playlist below the display. <br>If you set it the same as the height, the controlbar will auto-hide on top of the video. " );
 	define( "_WEBPHOTO_FLASHVAR_DISPLAYWIDTH_DSC", "[Playlist] [mediaplayer] <br>Bottom tracks:<br> Screen = Player<br> Side tracks:<br>Screen < Player " );
 	define( "_WEBPHOTO_FLASHVAR_DISPLAY_DEFAULT", "when 0, use value of the player." );
-//define("_WEBPHOTO_FLASHVAR_SCREENCOLOR_DSC","[Colors] <br>[imagerotator] change this to your HTML page's color make images of different sizes blend nicely. ");
-//define("_WEBPHOTO_FLASHVAR_BACKCOLOR_DSC","[Colors] <br>Backgroundcolor of the controls");
-//define("_WEBPHOTO_FLASHVAR_FRONTCOLOR_DSC","[Colors] <br>Texts &amp; buttons color of the controls");
-//define("_WEBPHOTO_FLASHVAR_LIGHTCOLOR_DSC","[Colors] <br>Rollover color of the controls");
 	define( "_WEBPHOTO_FLASHVAR_COLOR_DEFAULT", "when blank, use value of the player." );
 	define( "_WEBPHOTO_FLASHVAR_SEARCHBAR_DSC", "[Basics] <br>Set this to false to hide the searchbar below the display. <br>You can set the search destination with the searchlink flashvar. " );
 	define( "_WEBPHOTO_FLASHVAR_IMAGE_SHOW_DSC", "[Basics] <br>true = Show preview image" );
-//define("_WEBPHOTO_FLASHVAR_IMAGE_DSC","[Basics] <br>If you play a sound or movie, set this to the url of a preview image. <br>When using a playlist, you can set an image for every entry. ");
 	define( "_WEBPHOTO_FLASHVAR_FILE_DSC", "[Basics] <br>Sets the location of the file or playlist to play. <br>The imagerotator only plays playlists. " );
-//define("_WEBPHOTO_FLASHVAR_LOGO_DSC","[Display] <br>Set this to an image that can be put as a watermark logo in the top right corner of the display. <br>Transparent PNG files give the best results. ");
-//define("_WEBPHOTO_FLASHVAR_OVERSTRETCH_DSC","[Display] <br>Sets how to stretch images/movies to make them fit the display. <br>false (default) = fit the display. <br>true = stretch them proportionally to fill the display. <br>fit = stretch them disproportionally<br>none = keep original dimensions. ");
 	define( "_WEBPHOTO_FLASHVAR_SHOWEQ_DSC", "[Display] <br>Set this to true to show a (fake) equalizer at the bottom of the display. <br>Nice for MP3 files. " );
-//define("_WEBPHOTO_FLASHVAR_SHOWICONS_DSC","[Display] <br>Set this to false to hide the activity icon and play button in the middle of the display. ");
-//define("_WEBPHOTO_FLASHVAR_TRANSITION_DSC","[Display] [imagerotator] <br>Sets the transition to use between images. ");
-//define("_WEBPHOTO_FLASHVAR_SHOWNAVIGATION_DSC","[Controlbar] <br>Set this to false to completely hide the controlbar. ");
 	define( "_WEBPHOTO_FLASHVAR_SHOWSTOP_DSC", "[Controlbar] [mediaplayer] <br>Set this to true to show a stop button in the controlbar. " );
 	define( "_WEBPHOTO_FLASHVAR_SHOWDIGITS_DSC", "[Controlbar] [mediaplayer] <br>Set this to false to hide the elapsed/remaining digits in the controlbar. " );
 	define( "_WEBPHOTO_FLASHVAR_SHOWDOWNLOAD_DSC", "[Controlbar] [mediaplayer] <br>Set this to true to show a button in the player controlbar which links to the link flashvar. " );
-//define("_WEBPHOTO_FLASHVAR_USEFULLSCREEN_DSC","[Controlbar] <br>Set this to false to hide the fullscreen button and disable fullscreen. ");
 	define( "_WEBPHOTO_FLASHVAR_AUTOSCROLL_DSC", "[Playlist] [mediaplayer] <br>Set this to true to automatically scroll through the playlist on rollover, instead of using a scrollbar. " );
 	define( "_WEBPHOTO_FLASHVAR_THUMBSINPLAYLIST_DSC", "[Playlist] [mediaplayer] <br>Set this to false to hide preview images in the display" );
-//define("_WEBPHOTO_FLASHVAR_AUDIO_DSC","[Playback] <br>Assigns an additional, synchronized MP3. <br>Use this for a closed audio description or director's comments with the mediaplayer or background music with the rotator. <br>When using the mediaplayer and a playlist, you can assign audio to every entry. ");
-//define("_WEBPHOTO_FLASHVAR_AUTOSTART_DSC","[Playback] <br>Set this to true in the player to automatically start playing when the page loads, <br>or set this to false with the rotator to prevent the automatic rotation.");
-//define("_WEBPHOTO_FLASHVAR_BUFFERLENGTH_DSC","[Playback]  [mediaplayer] <br>Sets the number of seconds a video should be buffered before the players starts playback.<br>Set this small for fast connections or short videos and big for slow connections.  ");
 	define( "_WEBPHOTO_FLASHVAR_CAPTIONS_DSC", "[Playback] [mediaplayer] <br>Captions should be in TimedText format. <br>When using a playlist, you can assign captions for every entry. " );
 	define( "_WEBPHOTO_FLASHVAR_FALLBACK_DSC", "[Playback] [mediaplayer] <br>If you play an MP4 file, set here the location of an FLV fallback. <br>It'll automatically be picked by older flash player. " );
-//define("_WEBPHOTO_FLASHVAR_REPEAT_DSC","[Playback] <br>Set this to true to automatically repeat playback of all files. <br>Set this to list to playback an entire playlist once. ");
-//define("_WEBPHOTO_FLASHVAR_ROTATETIME_DSC","[Playback] <br>Sets the number of seconds an image is played back. ");
-//define("_WEBPHOTO_FLASHVAR_SHUFFLE_DSC","[Playback] <br>Set this to true to playback a playlist in random order. ");
-//define("_WEBPHOTO_FLASHVAR_SMOOTHING_DSC","[Playback] [mediaplayer] <br>Set this to false to turn of the smoothing of video. <br>Quality will decrease, but performance will increase. <br>Good for HD files and slower computers. ");
-//define("_WEBPHOTO_FLASHVAR_VOLUME_DSC","[Playback] <br>sets the startup volume for playback of sounds, movies and audiotracks. ");
 	define( "_WEBPHOTO_FLASHVAR_ENABLEJS_DSC", "[External] <br>Set this to true to enable javascript interaction. <br>This'll only work online! <br>Javascript interaction includes playback control, asynchroneous loading of media files and return of track information. " );
 	define( "_WEBPHOTO_FLASHVAR_JAVASCRIPTID_DSC", "[External] <br>If you interact with multiple mediaplayers/rotators in javascript, use this flashvar to give each of them a unique ID. " );
 	define( "_WEBPHOTO_FLASHVAR_LINK_TYPE_DSC", "[External] <br>This link is assigned to the display, logo and link button. <br >when None, assign nothing. <br>Else, assign a webpage to open. " );
-//define("_WEBPHOTO_FLASHVAR_LINK_DSC","[External] <br>Set this to an external URL or downloadeable version of the file. <br>This link is assigned to the display, logo and link button. <br>With playlists, set links for every entry in the XML. ");
-//define("_WEBPHOTO_FLASHVAR_LINKFROMDISPLAY_DSC","[External] <br>Set this to true to make a click on the display result in a jump to the webpage assigned to the link flashvar. ");
-//define("_WEBPHOTO_FLASHVAR_LINKTARGET_DSC","[External] <br>Set this to the frame you want hyperlinks to open in. <br>Set it to _blank to open links in a new window or _top to open in the top frame. ");
 	define( "_WEBPHOTO_FLASHVAR_CALLBACK_DSC", "[External] <br>Set this to a serverside script that can process statistics. <br>The player will send it a POST every time an item starts/stops. <br>To send callbacks automatically to Google Analytics, set this to urchin or analytics. " );
 	define( "_WEBPHOTO_FLASHVAR_RECOMMENDATIONS_DSC", "[External] [mediaplayer] <br>Set this to an XML with items you want to recommend. <br>The thumbs will show up when the current movie stops playing, just like Youtube. " );
 	define( "_WEBPHOTO_FLASHVAR_SEARCHLINK_DSC", "[External] [mediaplayer] <br>Sets the destination of the searchbar. <br>The default is 'search.longtail.tv', but you can set other destinations. <br>Use the searchbar flashvar to hide the bar altogether. " );
@@ -963,7 +919,6 @@ Please click <a href="{MODULE_URL}/i.php?op=post" target="_blank">Post by Mail</
 	define( "_WEBPHOTO_SORT_VIEWSD", "Media Views (Most)" );
 
 // flashvar form
-//define("_WEBPHOTO_FLASHVARS_FORM","FlashVars");
 	define( "_WEBPHOTO_FLASHVARS_LIST", "List of Flash Variables" );
 	define( "_WEBPHOTO_FLASHVARS_LOGO_SELECT", "Select a player logo" );
 	define( "_WEBPHOTO_FLASHVARS_LOGO_UPLOAD", "Upload a player logo " );
@@ -1237,7 +1192,7 @@ Please click <a href="{MODULE_URL}/i.php?op=post" target="_blank">Post by Mail</
 	define( "_WEBPHOTO_MAIL_SUBMIT_REFUSE", "Refused your photo video media" );
 
 // edit
-	define( "_WEBPHOTO_LOOK_PHOTO", "Look Photo Video Media" );
+	define( "_WEBPHOTO_LOOK_PHOTO", "View Media" );
 
 //---------------------------------------------------------
 // v2.11
@@ -1476,4 +1431,3 @@ Please click <a href="{MODULE_URL}/i.php?op=post" target="_blank">Post by Mail</
 
 // === define end ===
 }
-

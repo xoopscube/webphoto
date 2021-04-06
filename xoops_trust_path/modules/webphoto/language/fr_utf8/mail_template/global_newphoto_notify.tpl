@@ -1,15 +1,15 @@
 Bonjour {X_UNAME},
 
-Une nouvelle photo "{PHOTO_TITLE}" a �t� ajouter dans votre site {X_SITENAME}.
+Une nouvelle photo "{PHOTO_TITLE}" ajoutée dans le site {X_SITENAME}.
 
 Vous pouvez voir cette photo ici:
 {PHOTO_URI}
 
 -----------
 
-Vous recevez ce message parce que vous avez choisi pour d'�tre inform� lorsque de nouvelles photos sont ajout�es dans cette cat�gorie.
+Vous recevez ce message parce que vous avez choisi pour d'être informé lorsque de nouvelles photos sont ajoutées dans cette catégorie.
 
-S'il s'agit d'une erreur ou vous ne souhaitez pas recevoir de telles notifications, mettez � jour votre abonnement en cliquant sur le lien ci-dessous:
+S'il s'agit d'une erreur ou vous ne souhaitez pas recevoir de telles notifications, mettez à jour votre abonnement en cliquant sur le lien ci-dessous:
 {X_UNSUBSCRIBE_URL}
 
 Ne pas r�pondre � ce message.

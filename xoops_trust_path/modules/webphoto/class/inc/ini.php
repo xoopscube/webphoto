@@ -98,7 +98,7 @@ class webphoto_inc_ini {
 		return true;
 	}
 
-	function isset_ini( $name ) {
+	public function isset_ini( $name ) {
 		if ( isset( $this->_array_ini[ $name ] ) ) {
 			return true;
 		}
@@ -106,20 +106,16 @@ class webphoto_inc_ini {
 		return false;
 	}
 
-	function get_ini( $name ) {
-		if ( isset( $this->_array_ini[ $name ] ) ) {
-			return $this->_array_ini[ $name ];
-		}
-
-		return null;
+	public function get_ini( $name ) {
+		return $this->_array_ini[ $name ] ?? null;
 	}
 
-	function explode_ini( $name, $grue = '|', $prefix = null ) {
+	public function explode_ini( $name, $grue = '|', $prefix = null ) {
 		return $this->str_to_array(
 			$this->get_ini( $name ), $grue, $prefix );
 	}
 
-	function hash_ini( $name, $grue1 = '|', $grue2 = ':' ) {
+	public function hash_ini( $name, $grue1 = '|', $grue2 = ':' ) {
 		$arr = $this->str_to_array(
 			$this->get_ini( $name ), $grue1, null );
 		if ( ! is_array( $arr ) ) {
@@ -137,7 +133,7 @@ class webphoto_inc_ini {
 		return $ret;
 	}
 
-	function str_to_array( $str, $grue, $prefix ) {
+	public function str_to_array( $str, $grue, $prefix ) {
 		$arr = explode( $grue, $str );
 		$ret = array();
 		foreach ( $arr as $a ) {
@@ -154,7 +150,7 @@ class webphoto_inc_ini {
 
 // debug
 
-	function debug_msg_read_file( $file, $debug = true ) {
+	public function debug_msg_read_file( $file, $debug = true ) {
 		$file_win = str_replace( '/', '\\', $file );
 
 		if ( $this->_DEBUG_READ && $debug ) {
@@ -162,11 +158,11 @@ class webphoto_inc_ini {
 		}
 	}
 
-	function set_debug_read( $val ) {
+	public function set_debug_read( $val ) {
 		$this->_DEBUG_READ = (bool) $val;
 	}
 
-	function set_debug_read_by_const_name( $name ) {
+	public function set_debug_read_by_const_name( $name ) {
 		$name = strtoupper( $name );
 		if ( defined( $name ) ) {
 			$this->set_debug_read( constant( $name ) );

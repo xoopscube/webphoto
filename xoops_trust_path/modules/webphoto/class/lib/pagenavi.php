@@ -152,25 +152,19 @@ class webphoto_lib_pagenavi {
 		return $navi;
 	}
 
-	function _calc_total_pages( $total, $perpage ) {
+	public function _calc_total_pages( $total, $perpage ) {
 		return ceil( $total / $perpage );
 	}
 
-	function _check_within( $page, $current, $offset ) {
-		if ( ( $page > $current - $offset ) && ( $page < $current + $offset ) ) {
-			return true;
-		}
-
-		return false;
+	public function _check_within( $page, $current, $offset ) {
+		return ( $page > $current - $offset ) && ( $page < $current + $offset );
 	}
 
-	function _position_to_page( $position, $perpage ) {
-		$page = (int) floor( ( $position + $perpage ) / $perpage );
-
-		return $page;
+	public function _position_to_page( $position, $perpage ) {
+		return (int) floor( ( $position + $perpage ) / $perpage );
 	}
 
-	function _page_to_position( $page, $perpage ) {
+	public function _page_to_position( $page, $perpage ) {
 		$pos = ( $page - 1 ) * $perpage;
 		if ( $pos < 0 ) {
 			$pos = 0;
@@ -179,7 +173,7 @@ class webphoto_lib_pagenavi {
 		return $pos;
 	}
 
-	function _check_tail_amp( $str ) {
+	public function _check_tail_amp( $str ) {
 		if ( substr( $str, - 5 ) == '&amp;' ) {
 			return true;
 		} elseif ( substr( $str, - 1 ) == '&' ) {
@@ -189,17 +183,15 @@ class webphoto_lib_pagenavi {
 		return false;
 	}
 
-	function _build_link( $extra, $name ) {
-		$str = '<a href="' . $this->_script . $extra . '" >' . $name . "</a> \n";
-
-		return $str;
+	public function _build_link( $extra, $name ) {
+		return '<a href="' . $this->_script . $extra . '" >' . $name . "</a> \n";
 	}
 
 
 // build pagenavi
 // use page (1.2.3...)
 
-	function build( $script, $page = - 1, $perpage = - 1, $total = - 1, $window = 8 ) {
+	public function build( $script, $page = - 1, $perpage = - 1, $total = - 1, $window = 8 ) {
 		$page = $this->_get_page_internal( $page );
 		if ( $page === false ) {
 			return false;
@@ -272,7 +264,7 @@ class webphoto_lib_pagenavi {
 
 		$navi = '';
 
-// prev mark
+// Build Link - Prev mark
 		if ( $prev > 0 ) {
 			$navi .= $this->_build_link( $prev, $this->_MARK_PREV );
 
@@ -301,7 +293,7 @@ class webphoto_lib_pagenavi {
 			$navi .= $this->_build_link( $page_last, '[' . $page_last . ']' );
 		}
 
-// next mark
+// Build Link - Next mark
 		if ( $page_last >= $next ) {
 			$navi .= $this->_build_link( $next, $this->_MARK_NEXT );
 		}
@@ -313,7 +305,7 @@ class webphoto_lib_pagenavi {
 // build pagenavi
 // use id (1.2.3...)
 
-	function build_id_array( $script, $id_array, $id_current, $window = 7 ) {
+	public function build_id_array( $script, $id_array, $id_current, $window = 7 ) {
 		if ( ! is_array( $id_array ) ) {
 			return '';
 		}
@@ -372,22 +364,18 @@ class webphoto_lib_pagenavi {
 		return $navi;
 	}
 
-	function build_link_id_array( $num, $name ) {
+	public function build_link_id_array( $num, $name ) {
 		return $this->_build_link( $this->_get_id_array( $num ), $name );
 	}
 
-	function _get_id_array( $num ) {
-		if ( isset( $this->_id_array[ $num ] ) ) {
-			return $this->_id_array[ $num ];
-		}
-
-		return false;
+	public function _get_id_array( $num ) {
+		return $this->_id_array[ $num ] ?? false;
 	}
 
 
 // calc start end
 
-	function calc_page( $page = - 1, $perpage = - 1, $total = - 1 ) {
+	public function calc_page( $page = - 1, $perpage = - 1, $total = - 1 ) {
 		$page = $this->_get_page_internal( $page );
 		if ( $page === false ) {
 			return false;
@@ -411,7 +399,7 @@ class webphoto_lib_pagenavi {
 		return $this->_adjust_page( $page, $total_pages );
 	}
 
-	function calc_start( $page = - 1, $perpage = - 1 ) {
+	public function calc_start( $page = - 1, $perpage = - 1 ) {
 		$page = $this->_get_page_internal( $page );
 		if ( $page === false ) {
 			return false;
@@ -425,7 +413,7 @@ class webphoto_lib_pagenavi {
 		return $this->_page_to_position( $page, $perpage );
 	}
 
-	function calc_end( $start, $perpage = - 1, $total = - 1 ) {
+	public function calc_end( $start, $perpage = - 1, $total = - 1 ) {
 		$perpage = $this->_get_perpage_internal( $perpage );
 		if ( $perpage === false ) {
 			return false;
@@ -448,19 +436,19 @@ class webphoto_lib_pagenavi {
 
 // GET paramter
 
-	function set_page_by_get() {
+	public function set_page_by_get() {
 		$this->set_page( $this->get_page_from_get() );
 	}
 
-	function set_perpage_by_get() {
+	public function set_perpage_by_get() {
 		$this->set_perpage( $this->get_perpage_from_get() );
 	}
 
-	function set_sortid_by_get() {
+	public function set_sortid_by_get() {
 		$this->set_sortid( $this->get_sortid_from_get() );
 	}
 
-	function get_page_from_get() {
+	public function get_page_from_get() {
 		$val = $this->get_get_int( $this->_PAGE_NAME );
 		if ( $val < $this->_MIN_PAGE ) {
 			$val = $this->_MIN_PAGE;
@@ -469,7 +457,7 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-	function get_perpage_from_get() {
+	public function get_perpage_from_get() {
 		$val = $this->get_get_int( $this->_PERPAGE_NAME, $this->_PERPAGE_DEFAULT );
 		if ( $val < $this->_MIN_PERPAGE ) {
 			$val = $this->_MIN_PERPAGE;
@@ -478,107 +466,105 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-	function get_sortid_from_get() {
+	public function get_sortid_from_get() {
 		$val = $this->get_get_int( $this->_SORTID_NAME, $this->_SORTID_DEFAULT );
 		$val = $this->_adjust_sortid( $val );
 
 		return $val;
 	}
 
-	function get_get_int( $key, $default = 0 ) {
-		$val = isset( $_GET[ $key ] ) ? (int) $_GET[ $key ] : intval( $default );
-
-		return $val;
+	public function get_get_int( $key, $default = 0 ) {
+		return isset( $_GET[ $key ] ) ? (int) $_GET[ $key ] : (int) $default;
 	}
 
 
 // set and get parameter
 
-	function set_total( $val ) {
+	public function set_total( $val ) {
 		$this->_total = (int) $val;
 	}
 
-	function set_page( $val ) {
+	public function set_page( $val ) {
 		$this->_page = (int) $val;
 	}
 
-	function set_perpage( $val ) {
+	public function set_perpage( $val ) {
 		$this->_perpage = (int) $val;
 	}
 
-	function set_sortid( $val ) {
+	public function set_sortid( $val ) {
 		$this->_sortid = (int) $val;
 	}
 
-	function set_perpage_default( $val ) {
+	public function set_perpage_default( $val ) {
 		$this->_PERPAGE_DEFAULT = (int) $val;
 	}
 
-	function set_sortid_default( $val ) {
+	public function set_sortid_default( $val ) {
 		$this->_SORTID_DEFAULT = (int) $val;
 	}
 
-	function set_max_sortid( $val ) {
+	public function set_max_sortid( $val ) {
 		$this->_MAX_SORTID = (int) $val;
 	}
 
-	function set_separator_path( $val ) {
+	public function set_separator_path( $val ) {
 		$this->_SEPARATOR_PATH = $val;
 	}
 
-	function set_separator_query( $val ) {
+	public function set_separator_query( $val ) {
 		$this->_SEPARATOR_QUERY = $val;
 	}
 
-	function set_mark_id_prev( $val ) {
+	public function set_mark_id_prev( $val ) {
 		$this->_MARK_ID_PREV = $val;
 	}
 
-	function set_mark_id_next( $val ) {
+	public function set_mark_id_next( $val ) {
 		$this->_MARK_ID_NEXT = $val;
 	}
 
-	function set_flag_debug_msg( $val ) {
+	public function set_flag_debug_msg( $val ) {
 		$this->_FLAG_DEBUG_MSG = (bool) $val;
 	}
 
-	function set_flag_debug_trace( $val ) {
+	public function set_flag_debug_trace( $val ) {
 		$this->_FLAG_DEBUG_TRACE = (bool) $val;
 	}
 
-	function get_total() {
+	public function get_total() {
 		return $this->_total;
 	}
 
-	function get_page() {
+	public function get_page() {
 		return $this->_page;
 	}
 
-	function get_perpage() {
+	public function get_perpage() {
 		return $this->_perpage;
 	}
 
-	function get_sortid() {
+	public function get_sortid() {
 		return $this->_sortid;
 	}
 
-	function get_perpage_default( $val ) {
+	public function get_perpage_default( $val ) {
 		$this->_PERPAGE_DEFAULT = (int) $val;
 	}
 
-	function get_max_sortid() {
+	public function get_max_sortid() {
 		return $this->_MAX_SORTID;
 	}
 
-	function get_separator_path() {
+	public function get_separator_path() {
 		return $this->_SEPARATOR_PATH;
 	}
 
-	function get_separator_query() {
+	public function get_separator_query() {
 		return $this->_SEPARATOR_QUERY;
 	}
 
-	function _get_page_internal( $val ) {
+	public function _get_page_internal( $val ) {
 		$val = (int) $val;
 		if ( $val < $this->_MIN_PAGE ) {
 			if ( $this->_page >= $this->_MIN_PAGE ) {
@@ -593,7 +579,7 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-	function _get_perpage_internal( $val ) {
+	public function _get_perpage_internal( $val ) {
 		$val = (int) $val;
 		if ( $val < $this->_MIN_PERPAGE ) {
 			if ( $this->_perpage >= $this->_MIN_PERPAGE ) {
@@ -608,7 +594,7 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-	function _get_total_internal( $val ) {
+	public function _get_total_internal( $val ) {
 		$val = (int) $val;
 		if ( $val < $this->_MIN_TOTAL ) {
 			if ( $this->_total >= $this->_MIN_TOTAL ) {
@@ -623,7 +609,7 @@ class webphoto_lib_pagenavi {
 		return $val;
 	}
 
-	function _get_sortid_internal( $val ) {
+	public function _get_sortid_internal( $val ) {
 		$val = (int) $val;
 		if ( $val < $this->_MIN_SORTID ) {
 			if ( $this->_sortid >= $this->_MIN_SORTID ) {
@@ -641,12 +627,12 @@ class webphoto_lib_pagenavi {
 
 // sort parameter
 
-	function clear_sort() {
+	public function clear_sort() {
 		$this->_MAX_SORTID = 0;
 		$this->_sort_arr   = array();
 	}
 
-	function add_sort( $title, $sort, $order = 'ASC' ) {
+	public function add_sort( $title, $sort, $order = 'ASC' ) {
 		if ( strtoupper( $order ) == 'DESC' ) {
 			$order = 'DESC';
 		} else {
@@ -662,7 +648,7 @@ class webphoto_lib_pagenavi {
 		$this->_MAX_SORTID ++;
 	}
 
-	function get_sort( $sortid = - 1 ) {
+	public function get_sort( $sortid = - 1 ) {
 		$sortid = $this->_get_sortid_internal( $val );
 		if ( $sortid === false ) {
 			return false;
@@ -673,7 +659,7 @@ class webphoto_lib_pagenavi {
 		return $this->_sort_arr[ $sortid ] ?? false;
 	}
 
-	function get_sort_value( $key, $sort_id = - 1 ) {
+	public function get_sort_value( $key, $sort_id = - 1 ) {
 		$sortid = $this->_get_sortid_internal( $val );
 		if ( $sortid === false ) {
 			return false;
@@ -681,11 +667,7 @@ class webphoto_lib_pagenavi {
 
 		$sortid = $this->_adjust_sortid( $sortid );
 
-		if ( isset( $this->_sort_arr[ $sortid ][ $key ] ) ) {
-			return $this->_sort_arr[ $sortid ][ $key ];
-		}
-
-		return false;
+		return $this->_sort_arr[ $sortid ][ $key ] ?? false;
 	}
 
 
@@ -700,7 +682,7 @@ class webphoto_lib_pagenavi {
 //   -2: dont add sortid
 //       ex) foo.php
 
-	function add_script_sortid( $script, $separator = null ) {
+	public function add_script_sortid( $script, $separator = null ) {
 		if ( $this->_sortid > $this->_MIN_SORTID ) {
 			if ( empty( $separator ) ) {
 				$separator = $this->_get_seprator_from_script( $script );
@@ -711,7 +693,7 @@ class webphoto_lib_pagenavi {
 		return $script;
 	}
 
-	function add_script_perpage( $script, $separator = null ) {
+	public function add_script_perpage( $script, $separator = null ) {
 		if ( $this->_perpage > $this->_MIN_PERPAGE ) {
 			if ( empty( $separator ) ) {
 				$separator = $this->_get_seprator_from_script( $script );
@@ -722,7 +704,7 @@ class webphoto_lib_pagenavi {
 		return $script;
 	}
 
-	function add_script_pagename( $script, $separator = null ) {
+	public function add_script_pagename( $script, $separator = null ) {
 		if ( empty( $separator ) ) {
 			$separator = $this->_get_seprator_from_script( $script );
 		}
@@ -731,11 +713,11 @@ class webphoto_lib_pagenavi {
 		return $str;
 	}
 
-	function _get_seprator_from_script( $script ) {
+	public function _get_seprator_from_script( $script ) {
 		return $this->_get_separator_from_type( $this->_analyze_script_type( $script ) );
 	}
 
-	function _get_separator_from_type( $type ) {
+	public function _get_separator_from_type( $type ) {
 		if ( $type == 1 ) {
 			$str = '';
 		} elseif ( $type == 2 ) {
@@ -755,7 +737,7 @@ class webphoto_lib_pagenavi {
 //   type 1: foo.php?
 //   type 2: foo.php?bar=abc
 
-	function _analyze_script_type( $script ) {
+	public function _analyze_script_type( $script ) {
 		$type = 0;    // foo.php
 
 // set script_type, if ? in script
@@ -774,7 +756,7 @@ class webphoto_lib_pagenavi {
 
 // adjust
 
-	function _adjust_page( $page, $total_pages ) {
+	public function _adjust_page( $page, $total_pages ) {
 		if ( $page < $this->_MIN_PAGE ) {
 			$page = $this->_MIN_PAGE;
 		} elseif ( $page > $total_pages ) {
@@ -784,8 +766,8 @@ class webphoto_lib_pagenavi {
 		return $page;
 	}
 
-	function _adjust_sortid( $val ) {
-		$val = intval( $val );
+	public function _adjust_sortid( $val ) {
+		$val = (int) $val;
 		if ( $val < $this->_MIN_SORTID ) {
 			$val = $this->_MIN_SORTID;
 		}
@@ -799,7 +781,7 @@ class webphoto_lib_pagenavi {
 
 // sanitize
 
-	function _sanitize_url( $str ) {
+	public function _sanitize_url( $str ) {
 		$str = $this->_deny_javascript( $str );
 		$str = preg_replace( '/&amp;/i', '&', $str );
 		$str = htmlspecialchars( $str, ENT_QUOTES );
@@ -808,7 +790,7 @@ class webphoto_lib_pagenavi {
 	}
 
 // Checks if Javascript are included in string
-	function _deny_javascript( $str ) {
+	public function _deny_javascript( $str ) {
 		$str = preg_replace( '/[\x00-\x1F]/', '', $str );
 		$str = preg_replace( '/[\x7F]/', '', $str );
 
@@ -828,7 +810,7 @@ class webphoto_lib_pagenavi {
 
 // debug
 
-	function _debug_msg( $msg ) {
+	public function _debug_msg( $msg ) {
 		if ( $this->_FLAG_DEBUG_MSG ) {
 			echo $msg;
 		}
@@ -838,4 +820,3 @@ class webphoto_lib_pagenavi {
 	}
 
 }
-

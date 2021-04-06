@@ -265,7 +265,7 @@ if ( ! defined( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL" ) ) {
 	define( "_WEBPHOTO_MAIL_SUBMIT_APPROVE", "Approved your photo" );
 	define( "_WEBPHOTO_MAIL_SUBMIT_REFUSE", "Refused your photo" );
 // edit
-	define( "_WEBPHOTO_LOOK_PHOTO", "Look Photo" );
+	define( "_WEBPHOTO_LOOK_PHOTO", "View Photo" );
 }
 
 //---------------------------------------------------------

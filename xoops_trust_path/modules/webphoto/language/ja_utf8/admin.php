@@ -1,18 +1,4 @@
 <?php
-// $Id: admin.php,v 1.25 2011/05/10 02:56:39 ohwada Exp $
-
-//=========================================================
-// webphoto module
-// UFT-8 for Japanese
-// 2008-04-02 K.OHWADA
-//=========================================================
-
-//---------------------------------------------------------
-// change log
-// 2010-10-01 K.OHWADA
-// 写真 -> 写真・動画・メディア
-//---------------------------------------------------------
-
 // === define begin ===
 if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
@@ -26,17 +12,15 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_MYMENU_TPLSADMIN", "テンプレート管理" );
 	define( "_AM_WEBPHOTO_MYMENU_BLOCKSADMIN", "ブロック管理/アクセス権限" );
 
-//define("_AM_WEBPHOTO_MYMENU_MYPREFERENCES","一般設定");
-
 // add for webphoto
 	define( "_AM_WEBPHOTO_MYMENU_GOTO_MODULE", "モジュールへ" );
-
 
 // Index (Categories)
 	define( "_AM_WEBPHOTO_CAT_TH_PHOTOS", "写真・動画・メディアの数" );
 	define( "_AM_WEBPHOTO_CAT_TH_OPERATION", "操作" );
 	define( "_AM_WEBPHOTO_CAT_TH_IMAGE", "イメージ" );
 	define( "_AM_WEBPHOTO_CAT_TH_PARENT", "親カテゴリー" );
+
 	define( "_AM_WEBPHOTO_CAT_MENU_NEW", "カテゴリーの新規作成" );
 	define( "_AM_WEBPHOTO_CAT_MENU_EDIT", "カテゴリーの編集" );
 	define( "_AM_WEBPHOTO_CAT_INSERTED", "カテゴリーを追加しました" );
@@ -116,7 +100,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_FINISHED", "完了" );
 	define( "_AM_WEBPHOTO_LINK_RESTART", "再スタート" );
 	define( "_AM_WEBPHOTO_SUBMIT_NEXT", "次へ" );
-
 
 // GroupPerm Global
 	define( "_AM_WEBPHOTO_GROUPPERM_GLOBALDESC", "グループ個々について、権限を設定します" );
@@ -243,7 +226,6 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_GICON_SHADOW_SEL", "アイコンシャドーの選択" );
 	define( "_AM_WEBPHOTO_GICON_SHADOW_DEL", 'アイコンシャドーを削除' );
 	define( "_AM_WEBPHOTO_GICON_DELCONFIRM", "アイコン %s を削除してよろしいですか？ " );
-
 
 //---------------------------------------------------------
 // mime type
@@ -515,4 +497,3 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
 // === define end ===
 }
-
