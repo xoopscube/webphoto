@@ -23,11 +23,9 @@ class webphoto_edit_base extends webphoto_base_this {
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_item_create_class
-			                     =& webphoto_edit_item_create::getInstance( $dirname, $trust_dirname );
-		$this->_mime_class
-			                     =& webphoto_mime::getInstance( $dirname, $trust_dirname );
-		$this->_icon_build_class =& webphoto_edit_icon_build::getInstance( $dirname );
+		$this->_item_create_class =& webphoto_edit_item_create::getInstance( $dirname, $trust_dirname );
+		$this->_mime_class		  =& webphoto_mime::getInstance( $dirname, $trust_dirname );
+		$this->_icon_build_class  =& webphoto_edit_icon_build::getInstance( $dirname );
 	}
 
 

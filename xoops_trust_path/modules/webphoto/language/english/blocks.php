@@ -28,9 +28,9 @@ if ( ! defined( $constpref . "LANG_LOADED" ) ) {
 // same as myalbum
 //=========================================================
 
-	define( $constpref . "BTITLE_TOPNEW", "Recent Photo Video Media" );
-	define( $constpref . "BTITLE_TOPHIT", "Top Photo Video Media" );
-	define( $constpref . "BTITLE_RANDOM", "Random Photo Video Media" );
+	define( $constpref . "BTITLE_TOPNEW", "Recent Media" );
+	define( $constpref . "BTITLE_TOPHIT", "Top Media" );
+	define( $constpref . "BTITLE_RANDOM", "Random Media" );
 	define( $constpref . "TEXT_DISP", "Display" );
 	define( $constpref . "TEXT_STRLENGTH", "Max length of photo's title" );
 	define( $constpref . "TEXT_CATLIMITATION", "Limit by category" );
@@ -41,7 +41,7 @@ if ( ! defined( $constpref . "LANG_LOADED" ) ) {
 	define( $constpref . "TEXT_BLOCK_WIDTH", "Displays max" );
 	define( $constpref . "TEXT_BLOCK_WIDTH_NOTES", "(if you set this to 0, the thumbnail image displays in its original size.)" );
 	define( $constpref . "TEXT_RANDOMCYCLE", "Switching cycle of random images (sec)" );
-	define( $constpref . "TEXT_COLS", "Columns of Photo Video Media" );
+	define( $constpref . "TEXT_COLS", "Columns of Media" );
 
 //---------------------------------------------------------
 // v0.20

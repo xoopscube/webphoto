@@ -45,8 +45,8 @@ class webphoto_inc_ini {
 
 
 // public
-
-	function read_main_ini( $debug = false ) {
+// Get Initial settings from include/main.ini
+	public function read_main_ini( $debug = false ) {
 		$this->read_ini( 'main.ini', $debug );
 	}
 

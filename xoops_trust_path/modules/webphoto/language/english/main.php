@@ -25,8 +25,8 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_SORT_HITSD", "Popularity (Most to Least Hits)" );
 	define( "_WEBPHOTO_SORT_TITLEA", "Title (A to Z)" );
 	define( "_WEBPHOTO_SORT_TITLED", "Title (Z to A))" );
-	define( "_WEBPHOTO_SORT_DATEA", "Updated Date (Old Photo Video Media Listed First)" );
-	define( "_WEBPHOTO_SORT_DATED", "Updated Date (New Photo Video Media Listed First)" );
+	define( "_WEBPHOTO_SORT_DATEA", "Updated Date (Old Media Listed First)" );
+	define( "_WEBPHOTO_SORT_DATED", "Updated Date (New Media Listed First)" );
 	define( "_WEBPHOTO_SORT_RATINGA", "Rating (Lowest Score to Highest Score)" );
 	define( "_WEBPHOTO_SORT_RATINGD", "Rating (Highest Score to Lowest Score)" );
 	define( "_WEBPHOTO_SORT_RANDOM", "Random" );
@@ -36,20 +36,20 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_SORT_DATE", "Updated Date" );
 	define( "_WEBPHOTO_SORT_HITS", "Popularity" );
 	define( "_WEBPHOTO_SORT_RATING", "Rating" );
-	define( "_WEBPHOTO_SORT_S_CURSORTEDBY", "Photo Video Media currently sorted by: %s" );
+	define( "_WEBPHOTO_SORT_S_CURSORTEDBY", "Media currently sorted by: %s" );
 
 	define( "_WEBPHOTO_NAVI_PREVIOUS", "Previous" );
 	define( "_WEBPHOTO_NAVI_NEXT", "Next" );
-	define( "_WEBPHOTO_S_NAVINFO", "Photo Video Media No. %s - %s (out of %s medias hit)" );
-	define( "_WEBPHOTO_S_THEREARE", "There are <b>%s</b> Photo Video Media in our Database." );
-	define( "_WEBPHOTO_S_MOREPHOTOS", "More Photo Video Media from %s" );
+	define( "_WEBPHOTO_S_NAVINFO", "Media No. %s - %s (out of %s medias hit)" );
+	define( "_WEBPHOTO_S_THEREARE", "There are <b>%s</b> Medias in our Database." );
+	define( "_WEBPHOTO_S_MOREPHOTOS", "More Medias from %s" );
 	define( "_WEBPHOTO_ONEVOTE", "1 vote" );
 	define( "_WEBPHOTO_S_NUMVOTES", "%s votes" );
 	define( "_WEBPHOTO_ONEPOST", "1 post" );
 	define( "_WEBPHOTO_S_NUMPOSTS", "%s posts" );
 	define( "_WEBPHOTO_VOTETHIS", "Vote this" );
 	define( "_WEBPHOTO_TELLAFRIEND", "Tell a friend" );
-	define( "_WEBPHOTO_SUBJECT4TAF", "A photo video media for you" );
+	define( "_WEBPHOTO_SUBJECT4TAF", "A media for you" );
 
 //---------------------------------------------------------
 // submit
@@ -57,8 +57,8 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 // only "Y/m/d" , "d M Y" , "M d Y" can be interpreted
 	define( "_WEBPHOTO_DTFMT_YMDHI", "d M Y H:i" );
 
-	define( "_WEBPHOTO_TITLE_ADDPHOTO", "Add Photo Video Media" );
-	define( "_WEBPHOTO_TITLE_PHOTOUPLOAD", "Photo Video Media Upload" );
+	define( "_WEBPHOTO_TITLE_ADDPHOTO", "Add Media" );
+	define( "_WEBPHOTO_TITLE_PHOTOUPLOAD", "Media Upload" );
 	define( "_WEBPHOTO_CAP_MAXPIXEL", "Max pixel size" );
 	define( "_WEBPHOTO_CAP_MAXSIZE", "Max file size (byte)" );
 	define( "_WEBPHOTO_CAP_VALIDPHOTO", "Valid" );
@@ -70,22 +70,22 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_RADIO_ROTATE180", "turn 180 degree" );
 	define( "_WEBPHOTO_RADIO_ROTATE270", "turn left" );
 
-	define( "_WEBPHOTO_SUBMIT_RECEIVED", "We received your Photo Video Media. Thank you!" );
-	define( "_WEBPHOTO_SUBMIT_ALLPENDING", "All photo video media are posted pending verification." );
+	define( "_WEBPHOTO_SUBMIT_RECEIVED", "We received your Media. Thank you!" );
+	define( "_WEBPHOTO_SUBMIT_ALLPENDING", "All media are posted pending verification." );
 
 	define( "_WEBPHOTO_ERR_MUSTREGFIRST", "Sorry, you don't have permission to perform this action.<br>Please register or login first!" );
 	define( "_WEBPHOTO_ERR_MUSTADDCATFIRST", "Sorry, there are no categories to add to yet.<br>Please create a category first!" );
-	define( "_WEBPHOTO_ERR_NOIMAGESPECIFIED", "No photo video media was uploaded" );
-	define( "_WEBPHOTO_ERR_FILE", "Photo Video Media are too big or there is a problem with the configuration" );
-	define( "_WEBPHOTO_ERR_FILEREAD", "Photo Video Media are not readable." );
+	define( "_WEBPHOTO_ERR_NOIMAGESPECIFIED", "No media was uploaded" );
+	define( "_WEBPHOTO_ERR_FILE", "Media size exceeds the limit or there is a problem with the configuration" );
+	define( "_WEBPHOTO_ERR_FILEREAD", "Media are not readable." );
 	define( "_WEBPHOTO_ERR_TITLE", "You must enter 'Title' " );
 
 //---------------------------------------------------------
 // edit
 //---------------------------------------------------------
-	define( "_WEBPHOTO_TITLE_EDIT", "Edit Photo Video Media" );
-	define( "_WEBPHOTO_TITLE_PHOTODEL", "Delete Photo Video Media" );
-	define( "_WEBPHOTO_CONFIRM_PHOTODEL", "Delete photo video media ?" );
+	define( "_WEBPHOTO_TITLE_EDIT", "Edit Media" );
+	define( "_WEBPHOTO_TITLE_PHOTODEL", "Delete Media" );
+	define( "_WEBPHOTO_CONFIRM_PHOTODEL", "Confirm to Delete media." );
 	define( "_WEBPHOTO_DBUPDATED", "Database Updated Successfully !" );
 	define( "_WEBPHOTO_DELETED", "Deleted !" );
 
@@ -278,11 +278,11 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_TAG_NAME", "Tag Name" );
 
 // photo-to-tag table
-	define( "_WEBPHOTO_P2T_TABLE", "Photo Video Media and Tag Relation Table" );
-	define( "_WEBPHOTO_P2T_ID", "Photo-Tag ID" );
+	define( "_WEBPHOTO_P2T_TABLE", "Media and Tag Relation Table" );
+	define( "_WEBPHOTO_P2T_ID", "Media-Tag ID" );
 	define( "_WEBPHOTO_P2T_TIME_CREATE", "Create Time" );
 	define( "_WEBPHOTO_P2T_TIME_UPDATE", "Update Time" );
-	define( "_WEBPHOTO_P2T_PHOTO_ID", "Photo ID" );
+	define( "_WEBPHOTO_P2T_PHOTO_ID", "Media ID" );
 	define( "_WEBPHOTO_P2T_TAG_ID", "Tag ID" );
 	define( "_WEBPHOTO_P2T_UID", "User ID" );
 
@@ -298,42 +298,42 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 //---------------------------------------------------------
 // title
 //---------------------------------------------------------
-	define( "_WEBPHOTO_TITLE_LATEST", "Latest" );
+	define( "_WEBPHOTO_TITLE_LATEST", "Latest Media" );
 	define( "_WEBPHOTO_TITLE_SUBMIT", "Submit" );
 	define( "_WEBPHOTO_TITLE_POPULAR", "Popular" );
-	define( "_WEBPHOTO_TITLE_HIGHRATE", "TopRated" );
-	define( "_WEBPHOTO_TITLE_MYPHOTO", "My Photo Video Media" );
-	define( "_WEBPHOTO_TITLE_RANDOM", "Random Photo Video Media" );
+	define( "_WEBPHOTO_TITLE_HIGHRATE", "Top Rated" );
+	define( "_WEBPHOTO_TITLE_MYPHOTO", "My Media" );
+	define( "_WEBPHOTO_TITLE_RANDOM", "Random Media" );
 	define( "_WEBPHOTO_TITLE_HELP", "Help" );
-	define( "_WEBPHOTO_TITLE_CATEGORY_LIST", "Category List" );
-	define( "_WEBPHOTO_TITLE_TAG_LIST", "Tag List" );
+	define( "_WEBPHOTO_TITLE_CATEGORY_LIST", "List of Categories" );
+	define( "_WEBPHOTO_TITLE_TAG_LIST", "List of Tags" );
 	define( "_WEBPHOTO_TITLE_TAGS", "Tag" );
-	define( "_WEBPHOTO_TITLE_USER_LIST", "Submitter List" );
-	define( "_WEBPHOTO_TITLE_DATE_LIST", "Photo Video Media Date list" );
-	define( "_WEBPHOTO_TITLE_PLACE_LIST", "Photo Video Media Place List" );
+	define( "_WEBPHOTO_TITLE_USER_LIST", " List of Users" );
+	define( "_WEBPHOTO_TITLE_DATE_LIST", "List by Date" );
+	define( "_WEBPHOTO_TITLE_PLACE_LIST", "List by Location" );
 	define( "_WEBPHOTO_TITLE_RSS", "RSS" );
 
-	define( "_WEBPHOTO_VIEWTYPE_LIST", "List type" );
-	define( "_WEBPHOTO_VIEWTYPE_TABLE", "Table Type" );
+	define( "_WEBPHOTO_VIEWTYPE_LIST", "Display List View" );
+	define( "_WEBPHOTO_VIEWTYPE_TABLE", "Display Grid View" );
 
 	define( "_WEBPHOTO_CATLIST_ON", "Show Category" );
 	define( "_WEBPHOTO_CATLIST_OFF", "Hide Category" );
 	define( "_WEBPHOTO_TAGCLOUD_ON", "Show Tag Cloud" );
 	define( "_WEBPHOTO_TAGCLOUD_OFF", "Hide Tag Cloud" );
-	define( "_WEBPHOTO_GMAP_ON", "Show GoogleMap" );
-	define( "_WEBPHOTO_GMAP_OFF", "Hide GoogleMap" );
+	define( "_WEBPHOTO_GMAP_ON", "Show GoogleMaps" );
+	define( "_WEBPHOTO_GMAP_OFF", "Hide GoogleMaps" );
 
-	define( "_WEBPHOTO_NO_TAG", "Not Set Tag" );
+	define( "_WEBPHOTO_NO_TAG", "Without Tag" );
 
 //---------------------------------------------------------
 // google maps
 //---------------------------------------------------------
 	define( "_WEBPHOTO_TITLE_GET_LOCATION", "Setting of Latitude and Longitude" );
 	define( "_WEBPHOTO_GMAP_DESC", "Show thumb image, when click the marker in GoogleMaps" );
-	define( "_WEBPHOTO_GMAP_ICON", "GoogleMap Icons" );
-	define( "_WEBPHOTO_GMAP_LATITUDE", "GoogleMap Latitude" );
-	define( "_WEBPHOTO_GMAP_LONGITUDE", "GoogleMap Longitude" );
-	define( "_WEBPHOTO_GMAP_ZOOM", "GoogleMap Zoom" );
+	define( "_WEBPHOTO_GMAP_ICON", "GoogleMaps Icons" );
+	define( "_WEBPHOTO_GMAP_LATITUDE", "GoogleMaps Latitude" );
+	define( "_WEBPHOTO_GMAP_LONGITUDE", "GoogleMaps Longitude" );
+	define( "_WEBPHOTO_GMAP_ZOOM", "GoogleMaps Zoom" );
 	define( "_WEBPHOTO_GMAP_ADDRESS", "Address" );
 	define( "_WEBPHOTO_GMAP_GET_LOCATION", "Get latitude and longitude" );
 	define( "_WEBPHOTO_GMAP_SEARCH_LIST", "Search list" );
@@ -448,17 +448,17 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 //---------------------------------------------------------
 // others
 //---------------------------------------------------------
-	define( "_WEBPHOTO_RANDOM_MORE", "More Photo Video Media at random" );
-	define( "_WEBPHOTO_USAGE_PHOTO", "Popup the big photo video media, when click the thumbnail image" );
-	define( "_WEBPHOTO_USAGE_TITLE", "Move to the photo video media page, when click the photo video media title" );
-	define( "_WEBPHOTO_DATE_NOT_SET", "Not set Photo Video Media Date" );
-	define( "_WEBPHOTO_PLACE_NOT_SET", "Not Set Photo Video Media Place" );
-	define( "_WEBPHOTO_GOTO_ADMIN", "Goto Admin Control" );
+	define( "_WEBPHOTO_RANDOM_MORE", "More Random Media" );
+	define( "_WEBPHOTO_USAGE_PHOTO", "Popup the large media, when click the thumbnail image" );
+	define( "_WEBPHOTO_USAGE_TITLE", "Move to the media page, when click the media title" );
+	define( "_WEBPHOTO_DATE_NOT_SET", "Media without Date" );
+	define( "_WEBPHOTO_PLACE_NOT_SET", "Media without location" );
+	define( "_WEBPHOTO_GOTO_ADMIN", "Admin Panel" );
 
 //---------------------------------------------------------
 // search for Japanese
 //---------------------------------------------------------
-	define( "_WEBPHOTO_SR_CANDICATE", "Candicate for search" );
+	define( "_WEBPHOTO_SR_CANDICATE", "Candidate for search" );
 	define( "_WEBPHOTO_SR_ZENKAKU", "Zenkaku" );
 	define( "_WEBPHOTO_SR_HANKAKU", "Hanhaku" );
 
@@ -475,7 +475,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_CAP_REDO_THUMB", "Create Thumbnail" );
 	define( "_WEBPHOTO_CAP_REDO_FLASH", "Create Flash Video" );
 	define( "_WEBPHOTO_ERR_VIDEO_FLASH", "Cannot create Flash video" );
-	define( "_WEBPHOTO_ERR_VIDEO_THUMB", "Substituted with the icon, because cannot create Thumbnail for video" );
+	define( "_WEBPHOTO_ERR_VIDEO_THUMB", "Cannot create Thumbnail for video. Replaced with Icon." );
 	define( "_WEBPHOTO_BUTTON_SELECT", "Select" );
 
 	define( "_WEBPHOTO_DSC_DOWNLOAD_PLAY", "Play after download" );
@@ -506,7 +506,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_MAILLOG_ID", "Maillog ID" );
 	define( "_WEBPHOTO_MAILLOG_TIME_CREATE", "Create Time" );
 	define( "_WEBPHOTO_MAILLOG_TIME_UPDATE", "Update Time" );
-	define( "_WEBPHOTO_MAILLOG_PHOTO_IDS", "Photo IDs" );
+	define( "_WEBPHOTO_MAILLOG_PHOTO_IDS", "Media IDs" );
 	define( "_WEBPHOTO_MAILLOG_STATUS", "Status" );
 	define( "_WEBPHOTO_MAILLOG_FROM", "Mail From Address" );
 	define( "_WEBPHOTO_MAILLOG_SUBJECT", "Subject" );
@@ -520,7 +520,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_MAIL_HELP", "Please refer 'Help' for usage" );
 	define( "_WEBPHOTO_CAT_USER", "User Name" );
 	define( "_WEBPHOTO_BUTTON_REGISTER", "REGISTER" );
-	define( "_WEBPHOTO_NOMATCH_USER", "There are no user" );
+	define( "_WEBPHOTO_NOMATCH_USER", "No user found." );
 	define( "_WEBPHOTO_ERR_MAIL_EMPTY", "You must enter 'Mail Address' " );
 	define( "_WEBPHOTO_ERR_MAIL_ILLEGAL", "Illegal format of mail address" );
 
@@ -544,7 +544,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_TITLE_MAIL_POST", "Post by Mail" );
 
 // file
-	define( "_WEBPHOTO_TITLE_SUBMIT_FILE", "Add Photo Video Media from File" );
+	define( "_WEBPHOTO_TITLE_SUBMIT_FILE", "Add Media from File" );
 	define( "_WEBPHOTO_CAP_FILE_SELECT", "Select File" );
 	define( "_WEBPHOTO_ERR_EMPTY_FILE", "You must select the file" );
 	define( "_WEBPHOTO_ERR_EMPTY_CAT", "You must select the category" );
@@ -571,7 +571,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_HELP_FILE_TEXT_FMT", '
 <b>Post photo video media</b><br>
 (1) Upload the file in FTP server<br>
-(2) Click <a href="{MODULE_URL}/index.php?fct=submit_file" target="_blank">Add Photo Video Media from File</a><br>
+(2) Click <a href="{MODULE_URL}/index.php?fct=submit_file" target="_blank">Add Media from File</a><br>
 (3) Select the uploaded file and post' );
 
 // mail check
@@ -593,9 +593,9 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_ITEM_UID", "User ID" );
 	define( "_WEBPHOTO_ITEM_KIND", "File Kind" );
 	define( "_WEBPHOTO_ITEM_EXT", "File Extention" );
-	define( "_WEBPHOTO_ITEM_DATETIME", "Photo Video Media Datetime" );
-	define( "_WEBPHOTO_ITEM_TITLE", "Photo Video Media Title" );
-	define( "_WEBPHOTO_ITEM_PLACE", "Place" );
+	define( "_WEBPHOTO_ITEM_DATETIME", "Media Datetime" );
+	define( "_WEBPHOTO_ITEM_TITLE", "Media Title" );
+	define( "_WEBPHOTO_ITEM_PLACE", "Location" );
 	define( "_WEBPHOTO_ITEM_EQUIPMENT", "Equipment" );
 	define( "_WEBPHOTO_ITEM_GMAP_LATITUDE", "GoogleMap Latitude" );
 	define( "_WEBPHOTO_ITEM_GMAP_LONGITUDE", "GoogleMap Longitude" );
@@ -606,7 +606,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 	define( "_WEBPHOTO_ITEM_HITS", "Hits" );
 	define( "_WEBPHOTO_ITEM_RATING", "Rating" );
 	define( "_WEBPHOTO_ITEM_VOTES", "Votes" );
-	define( "_WEBPHOTO_ITEM_DESCRIPTION", "Photo Video Media Description" );
+	define( "_WEBPHOTO_ITEM_DESCRIPTION", "Media Description" );
 	define( "_WEBPHOTO_ITEM_EXIF", "Exif Information" );
 	define( "_WEBPHOTO_ITEM_SEARCH", "Search" );
 	define( "_WEBPHOTO_ITEM_COMMENTS", "Comments" );
@@ -1178,18 +1178,18 @@ Please click <a href="{MODULE_URL}/i.php?op=post" target="_blank">Post by Mail</
 // v2.10
 //---------------------------------------------------------
 // item
-	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Photo Video Media Description" );
+	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Media Description" );
 	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL_DSC", "Enter the height of the scroll by the px unit.
  <br>When 0, it is usual view without the scroll." );
 
 // item option
-	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_IMAGE", "Show photo video media in new window" );
-	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_LIGHTBOX", "Show photo video media with lightbox" );
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_IMAGE", "Show media in new window" );
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_LIGHTBOX", "Show media with lightbox" );
 
 // submit
 	define( "_WEBPHOTO_MAIL_SUBMIT_WAITING", "Waiting Approval" );
-	define( "_WEBPHOTO_MAIL_SUBMIT_APPROVE", "Approved your photo video media" );
-	define( "_WEBPHOTO_MAIL_SUBMIT_REFUSE", "Refused your photo video media" );
+	define( "_WEBPHOTO_MAIL_SUBMIT_APPROVE", "Approved your media" );
+	define( "_WEBPHOTO_MAIL_SUBMIT_REFUSE", "Refused your media" );
 
 // edit
 	define( "_WEBPHOTO_LOOK_PHOTO", "View Media" );

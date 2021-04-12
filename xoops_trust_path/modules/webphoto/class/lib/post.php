@@ -34,9 +34,7 @@ class webphoto_lib_post {
 // function
 
 	public function get_post( $key, $default = null ) {
-		$str = $_POST[ $key ] ?? $default;
-
-		return $str;
+		return $_POST[ $key ] ?? $default;
 	}
 
 	public function get_post_text( $key, $default = null ) {

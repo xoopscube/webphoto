@@ -448,7 +448,7 @@ http://desktop.google.com/plugins/i/mediarssslideshow.html
 //---------------------------------------------------------
 // others
 //---------------------------------------------------------
-	define( "_WEBPHOTO_RANDOM_MORE", "Plus de photos aléatoires" );
+	define( "_WEBPHOTO_RANDOM_MORE", "Plus de medias aléatoires" );
 	define( "_WEBPHOTO_USAGE_PHOTO", "Cliquer sur la miniature pour voir la photo au grand format." );
 	define( "_WEBPHOTO_USAGE_TITLE", "Cliquer sur le titre pour la page de détails" );
 	define( "_WEBPHOTO_DATE_NOT_SET", "Ne pas indiquer de date pour la photo" );
@@ -1178,13 +1178,13 @@ Merci de cliquer <a href="{MODULE_URL}/i.php?op=post" rel="external">Evoyer par 
 // v2.10
 //---------------------------------------------------------
 // item
-	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Photo Video Media Description" );
+	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Media Description" );
 	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL_DSC", "Enter the height of the scroll by the px unit.
  <br>When 0, it is usual view without the scroll." );
 
 // item option
-	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_IMAGE", "Show photo video media in new window" );
-	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_LIGHTBOX", "Show photo video media with lightbox" );
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_IMAGE", "Show media in new window" );
+	define( "_WEBPHOTO_ITEM_DETAIL_ONCLICK_LIGHTBOX", "Show media with lightbox" );
 
 // submit
 	define( "_WEBPHOTO_MAIL_SUBMIT_WAITING", "Waiting Approval" );

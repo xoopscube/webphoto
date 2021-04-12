@@ -427,7 +427,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 	}
 
 	public function build_admin_language() {
-		$arr = array(
+		return array(
 // form
 			'lang_playlist_feed_dsc' => _AM_WEBPHOTO_PLAYLIST_FEED_DSC,
 			'lang_playlist_dir_dsc'  => _AM_WEBPHOTO_PLAYLIST_DIR_DSC,
@@ -441,8 +441,6 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 			'lang_label_admit'       => _AM_WEBPHOTO_LABEL_ADMIT,
 			'lang_button_admit'      => _AM_WEBPHOTO_BUTTON_ADMIT,
 		);
-
-		return $arr;
 	}
 
 
@@ -579,9 +577,8 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 
 	public function _build_button( $op, $value ) {
 		$onclick = "location='" . $this->_THIS_URL . "&amp;op=" . $op . "'";
-		$str     = '<input type="button" value="' . $value . '" onClick="' . $onclick . '" />' . "\n";
 
-		return $str;
+		return '<input type="button" value="' . $value . '" onClick="' . $onclick . '">' . "\n";
 	}
 
 
@@ -618,7 +615,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 		foreach ( $item_rows as $row ) {
 			$temp = $row;
 
-			list( $is_online, $status_report, $status_link, $status_icon )
+			[ $is_online, $status_report, $status_link, $status_icon ]
 				= $this->build_list_status( $row );
 			$temp['status_report'] = $status_report;
 			$temp['status_link']   = $status_link;
@@ -656,7 +653,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 			case _C_WEBPHOTO_STATUS_WAITING :
 				$report = _WEBPHOTO_ITEM_STATUS_WAITING;
 				$link   = $this->_THIS_URL . '&amp;op=list_waiting';
-				$icon   = 'waiting.png';
+				$icon   = 'pending.svg';
 				break;
 
 			case _C_WEBPHOTO_STATUS_OFFLINE :
@@ -665,20 +662,20 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 					$is_online = true;
 					$report    = _AM_WEBPHOTO_STATUS_CHANGE . ' : ' . $this->format_timestamp( $publish, 'm' );
 					$link      = $photo_url;
-					$icon      = 'online.png';
+					$icon      = 'online.svg';
 					$this->_item_handler->update_status( $item_id, _C_WEBPHOTO_STATUS_UPDATED, true );
 
 				} else {
 					$report = _AM_WEBPHOTO_STATUS_OFFLINE;
 					$link   = $this->_THIS_URL . '&amp;op=list_offline';
-					$icon   = 'offline.png';
+					$icon   = 'offline.svg';
 				}
 				break;
 
 			case _C_WEBPHOTO_STATUS_EXPIRED :
 				$report = _WEBPHOTO_ITEM_STATUS_EXPIRED . ' : ' . $this->format_timestamp( $expire, 'm' );
 				$link   = $this->_THIS_URL . '&amp;op=list_expired';
-				$icon   = 'offline.png';
+				$icon   = 'offline.svg';
 				break;
 
 			case _C_WEBPHOTO_STATUS_APPROVED :
@@ -688,7 +685,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 				if ( ( $expire > 0 ) && ( $expire < time() ) ) {
 					$report = _AM_WEBPHOTO_STATUS_CHANGE . ' : ' . $this->format_timestamp( $expire, 'm' );
 					$link   = $this->_THIS_URL . '&amp;op=list_expired';
-					$icon   = 'offline.png';
+					$icon   = 'offline.svg';
 					$this->_item_handler->update_status( $item_id, _C_WEBPHOTO_STATUS_EXPIRED, true );
 
 // online
@@ -696,7 +693,7 @@ class webphoto_admin_item_form extends webphoto_edit_photo_form {
 					$is_online = true;
 					$report    = _AM_WEBPHOTO_STATUS_ONLINE;
 					$link      = $photo_url;
-					$icon      = 'online.png';
+					$icon      = 'online.svg';
 				}
 				break;
 		}

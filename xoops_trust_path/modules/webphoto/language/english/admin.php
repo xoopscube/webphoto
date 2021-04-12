@@ -45,7 +45,7 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 
 	define( "_AM_WEBPHOTO_H4_TABLE", "Table Check" );
 	define( "_AM_WEBPHOTO_COMMENTSTABLE", "Comments table" );
-	define( "_AM_WEBPHOTO_NUMBEROFPHOTOS", "Number of Photo Video Media" );
+	define( "_AM_WEBPHOTO_NUMBEROFPHOTOS", "Number of Medias" );
 	define( "_AM_WEBPHOTO_NUMBEROFDESCRIPTIONS", "Number of Descriptions" );
 	define( "_AM_WEBPHOTO_NUMBEROFCATEGORIES", "Number of Categories" );
 	define( "_AM_WEBPHOTO_NUMBEROFVOTEDATA", "Number of Votedata" );
@@ -54,15 +54,15 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_H4_CONFIG", "Config Check" );
 	define( "_AM_WEBPHOTO_PIPEFORIMAGES", "Pipe for images" );
 
-	define( "_AM_WEBPHOTO_ERR_LASTCHAR", "Error: The last charactor should not be '/'" );
-	define( "_AM_WEBPHOTO_ERR_FIRSTCHAR", "Error: The first charactor should be '/'" );
+	define( "_AM_WEBPHOTO_ERR_LASTCHAR", "Error: The last character should not be '/'" );
+	define( "_AM_WEBPHOTO_ERR_FIRSTCHAR", "Error: The first character should be '/'" );
 	define( "_AM_WEBPHOTO_ERR_PERMISSION", "Error: You first have to create and chmod 777 this directory by ftp or shell." );
 	define( "_AM_WEBPHOTO_ERR_NOTDIRECTORY", "Error: This is not a directory." );
 	define( "_AM_WEBPHOTO_ERR_READORWRITE", "Error: This directory is not writable nor readable. You should change the permission of the directory to 777." );
-	define( "_AM_WEBPHOTO_ERR_SAMEDIR", "Error: Photo Video Media Path should not be the same as Thumbs Path" );
+	define( "_AM_WEBPHOTO_ERR_SAMEDIR", "Error: Media Path should not be the same as Thumbs Path" );
 	define( "_AM_WEBPHOTO_LNK_CHECKGD2", "Check that 'GD2'is working correctly under your GD bundled with PHP" );
-	define( "_AM_WEBPHOTO_CHECKGD2", "If the page linked to from here doesn't display correctly, you should not use your GD in truecolor mode." );
-	define( "_AM_WEBPHOTO_GD2SUCCESS", "Success!<br>Perhaps, you can use GD2 (truecolor) in this environment." );
+	define( "_AM_WEBPHOTO_CHECKGD2", "If the page linked to from here doesn't display correctly, you should not use your GD in true-color mode." );
+	define( "_AM_WEBPHOTO_GD2SUCCESS", "Success!<br>Perhaps, you can use GD2 (true-color) in this environment." );
 
 	define( "_AM_WEBPHOTO_H4_PHOTOLINK", "Photo Video Media & Thumbs Link Check" );
 	define( "_AM_WEBPHOTO_NOWCHECKING", "Now, checking ." );
@@ -127,20 +127,20 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_BTN_SELECTRVS", "Select Reverse" );
 	define( "_AM_WEBPHOTO_FMT_PHOTONUM", "%s every page" );
 
-	define( "_AM_WEBPHOTO_ADMISSION", "Admit Photo Video Media" );
-	define( "_AM_WEBPHOTO_ADMITTING", "Admitted photo(s)" );
-	define( "_AM_WEBPHOTO_LABEL_ADMIT", "Admit the photos you checked" );
+	define( "_AM_WEBPHOTO_ADMISSION", "Admit Media" );
+	define( "_AM_WEBPHOTO_ADMITTING", "Admitted media(s)" );
+	define( "_AM_WEBPHOTO_LABEL_ADMIT", "Admit the medias you checked" );
 	define( "_AM_WEBPHOTO_BUTTON_ADMIT", "Admit" );
 	define( "_AM_WEBPHOTO_BUTTON_EXTRACT", "extract" );
 
-	define( "_AM_WEBPHOTO_LABEL_REMOVE", "Remove the photos checked" );
+	define( "_AM_WEBPHOTO_LABEL_REMOVE", "Remove the medias checked" );
 	define( "_AM_WEBPHOTO_JS_REMOVECONFIRM", "Remove OK?" );
-	define( "_AM_WEBPHOTO_LABEL_MOVE", "Change category of the checked photos" );
+	define( "_AM_WEBPHOTO_LABEL_MOVE", "Change category of the checked medias" );
 	define( "_AM_WEBPHOTO_BUTTON_MOVE", "Move" );
 	define( "_AM_WEBPHOTO_BUTTON_UPDATE", "Modify" );
 	define( "_AM_WEBPHOTO_DEADLINKMAINPHOTO", "The main image don't exist" );
 
-	define( "_AM_WEBPHOTO_NOSUBMITTED", "No New Submitted Photo Video Media." );
+	define( "_AM_WEBPHOTO_NOSUBMITTED", "No New Submitted Media." );
 	define( "_AM_WEBPHOTO_ADDMAIN", "Add a MAIN Category" );
 	define( "_AM_WEBPHOTO_IMGURL", "Image URL (OPTIONAL Image height will be resized to 50): " );
 	define( "_AM_WEBPHOTO_ADD", "Add" );
@@ -153,23 +153,23 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_PARENT", "Parent Category:" );
 	define( "_AM_WEBPHOTO_SAVE", "Save Changes" );
 	define( "_AM_WEBPHOTO_CATDELETED", "Category Deleted." );
-	define( "_AM_WEBPHOTO_CATDEL_WARNING", "WARNING: Are you sure you want to delete this Category and ALL its Photo Video Media and Comments?" );
+	define( "_AM_WEBPHOTO_CATDEL_WARNING", "WARNING: Confirm to Delete this Category and ALL its Medias and Comments." );
 
 	define( "_AM_WEBPHOTO_NEWCATADDED", "New Category Added Successfully!" );
-	define( "_AM_WEBPHOTO_ERROREXIST", "ERROR: The Photo Video Media you provided is already in the database!" );
+	define( "_AM_WEBPHOTO_ERROREXIST", "ERROR: The Media submitted is already in the database!" );
 	define( "_AM_WEBPHOTO_ERRORTITLE", "ERROR: You need to enter a TITLE!" );
 	define( "_AM_WEBPHOTO_ERRORDESC", "ERROR: You need to enter a DESCRIPTION!" );
-	define( "_AM_WEBPHOTO_WEAPPROVED", "We approved your link submission to the photo database." );
+	define( "_AM_WEBPHOTO_WEAPPROVED", "We approved your link submission to the media database." );
 	define( "_AM_WEBPHOTO_THANKSSUBMIT", "Thank you for your submission!" );
 	define( "_AM_WEBPHOTO_CONFUPDATED", "Configuration Updated Successfully!" );
 
-	define( "_AM_WEBPHOTO_PHOTOBATCHUPLOAD", "Register photos uploaded to the server already" );
+	define( "_AM_WEBPHOTO_PHOTOBATCHUPLOAD", "Register medias uploaded to the server already" );
 	define( "_AM_WEBPHOTO_PHOTOPATH", "Path" );
 	define( "_AM_WEBPHOTO_TEXT_DIRECTORY", "Directory" );
-	define( "_AM_WEBPHOTO_DESC_PHOTOPATH", "Type the full path of the directory including photos to be registered" );
+	define( "_AM_WEBPHOTO_DESC_PHOTOPATH", "Type the full path of the directory including medias to be registered" );
 	define( "_AM_WEBPHOTO_MES_INVALIDDIRECTORY", "Invalid directory is specified." );
-	define( "_AM_WEBPHOTO_MES_BATCHDONE", "%s photo(s) have been registered." );
-	define( "_AM_WEBPHOTO_MES_BATCHNONE", "No photo was detected in the directory." );
+	define( "_AM_WEBPHOTO_MES_BATCHDONE", "%s media(s) have been registered." );
+	define( "_AM_WEBPHOTO_MES_BATCHNONE", "No media was detected in the directory." );
 
 //---------------------------------------------------------
 // move from myalbum_constants.php
@@ -253,21 +253,21 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 //---------------------------------------------------------
 // check config
 //---------------------------------------------------------
-	define( "_AM_WEBPHOTO_DIRECTORYFOR_PHOTOS", "Directory for Photo Video Media" );
+	define( "_AM_WEBPHOTO_DIRECTORYFOR_PHOTOS", "Directory for Medias" );
 	define( "_AM_WEBPHOTO_DIRECTORYFOR_THUMBS", "Directory for Thumbnails" );
 	define( "_AM_WEBPHOTO_DIRECTORYFOR_GICONS", "Directory for Google Icons" );
-	define( "_AM_WEBPHOTO_DIRECTORYFOR_TMP", "Directory for Tempolary" );
+	define( "_AM_WEBPHOTO_DIRECTORYFOR_TMP", "Directory for Temporary" );
 
 //---------------------------------------------------------
 // checktable
 //---------------------------------------------------------
-	define( "_AM_WEBPHOTO_NUMBEROFRECORED", "Number of recoeds" );
+	define( "_AM_WEBPHOTO_NUMBEROFRECORED", "Number of records" );
 
 //---------------------------------------------------------
 // manage
 //---------------------------------------------------------
 	define( "_AM_WEBPHOTO_MANAGE_DESC", "<b>Caution</b><br>The management of this table only<br>Do not change related tables" );
-	define( "_AM_WEBPHOTO_ERR_NO_RECORD", "There are no record" );
+	define( "_AM_WEBPHOTO_ERR_NO_RECORD", "There are no records" );
 
 //---------------------------------------------------------
 // import

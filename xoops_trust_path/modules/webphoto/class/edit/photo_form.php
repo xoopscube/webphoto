@@ -54,23 +54,17 @@ class webphoto_edit_photo_form extends webphoto_edit_form {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_gicon_handler
-			=& webphoto_gicon_handler::getInstance( $dirname, $trust_dirname );
-		$this->_player_handler
-			=& webphoto_player_handler::getInstance( $dirname, $trust_dirname );
+		$this->_gicon_handler   =& webphoto_gicon_handler::getInstance( $dirname, $trust_dirname );
+		$this->_player_handler  =& webphoto_player_handler::getInstance( $dirname, $trust_dirname );
 
-		$this->_embed_class
-			=& webphoto_embed::getInstance( $dirname, $trust_dirname );
-		$this->_editor_class
-			=& webphoto_editor::getInstance( $dirname, $trust_dirname );
-		$this->_mime_class
-			=& webphoto_mime::getInstance( $dirname, $trust_dirname );
-		$this->_tag_build_class
-			=& webphoto_tag_build::getInstance( $dirname, $trust_dirname );
-		$this->_use_item_class
-			=& webphoto_edit_use_item::getInstance( $dirname, $trust_dirname );
+		$this->_embed_class     =& webphoto_embed::getInstance( $dirname, $trust_dirname );
+		$this->_editor_class    =& webphoto_editor::getInstance( $dirname, $trust_dirname );
+		$this->_mime_class      =& webphoto_mime::getInstance( $dirname, $trust_dirname );
+		$this->_tag_build_class =& webphoto_tag_build::getInstance( $dirname, $trust_dirname );
+		$this->_use_item_class  =& webphoto_edit_use_item::getInstance( $dirname, $trust_dirname );
 
 		$this->_kind_class         =& webphoto_kind::getInstance();
 		$this->_image_create_class =& webphoto_image_create::getInstance( $dirname );
@@ -694,9 +688,7 @@ class webphoto_edit_photo_form extends webphoto_edit_form {
 	}
 
 	public function item_datetime_val_s() {
-		return $this->sanitize(
-			$this->mysql_datetime_to_str(
-				$this->get_row_by_key( 'item_datetime' ) ) );
+		return $this->sanitize( $this->mysql_datetime_to_str( $this->get_row_by_key( 'item_datetime' ) ) );
 	}
 
 	public function item_gicon_id_select_options() {

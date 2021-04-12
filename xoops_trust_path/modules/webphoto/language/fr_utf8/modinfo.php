@@ -294,11 +294,11 @@ Mot de passe: xxx<br>" );
 	define( $constpref . "CFG_ITEM_SUMMARY_DSC", "Enter the maximum number of characters of photo description in the photo list.<br>-1 is unlimited" );
 	define( $constpref . "CFG_CAT_SUMMARY", "Max characters of category description" );
 	define( $constpref . "CFG_CAT_SUMMARY_DSC", "Enter the maximum number of characters of category description in the category list.<br>-1 is unlimited" );
-	define( $constpref . "CFG_CAT_CHILD", "Show photos of subcategoies" );
-	define( $constpref . "CFG_CAT_CHILD_DSC", "Enter to show or not photos of subcategoies in category list" );
-	define( $constpref . "OPT_CAT_CHILD_NON", "Photo Video Media of this category only. Not show photos of subcategoies" );
-	define( $constpref . "OPT_CAT_CHILD_EMPTY", "When no photo in this category, show photos of subcategoies" );
-	define( $constpref . "OPT_CAT_CHILD_ALWAYS", "Show alwayas photos of subcategoies" );
+	define( $constpref . "CFG_CAT_CHILD", "Show medias of subcategories" );
+	define( $constpref . "CFG_CAT_CHILD_DSC", "Enter to show or not medias of subcategories in category list" );
+	define( $constpref . "OPT_CAT_CHILD_NON", "Media of this category only. Hide subcategories" );
+	define( $constpref . "OPT_CAT_CHILD_EMPTY", "When no media in this category, show medias of subcategories" );
+	define( $constpref . "OPT_CAT_CHILD_ALWAYS", "Show always photos of subcategories" );
 
 //---------------------------------------------------------
 // v1.80

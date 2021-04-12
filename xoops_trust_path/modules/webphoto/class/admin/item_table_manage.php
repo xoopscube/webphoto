@@ -116,7 +116,7 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 			'item_gmap_type'          => $this->_post_class->get_post_int( 'item_gmap_type' ),
 			'item_external_url'       => $this->_post_class->get_post_text( 'item_external_url' ),
 			'item_external_thumb'     => $this->_post_class->get_post_text( 'item_external_thumb' ),
-			'item_external_middle'    => $this->_post_class->get_post_text( 'item_external_middule' ),
+			'item_external_middle'    => $this->_post_class->get_post_text( 'item_external_middle' ),
 			'item_icon_name'          => $this->_post_class->get_post_text( 'item_icon_name' ),
 			'item_icon_width'         => $this->_post_class->get_post_int( 'item_icon_width' ),
 			'item_icon_height'        => $this->_post_class->get_post_int( 'item_icon_height' ),

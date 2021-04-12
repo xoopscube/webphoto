@@ -330,7 +330,7 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 	}
 
 	public function build_admin_language() {
-		$arr = [
+		return [
 			// form
 			'lang_cat_th_parent'       => _AM_WEBPHOTO_CAT_TH_PARENT,
 			'lang_cat_parent_cap'      => _AM_WEBPHOTO_CAT_PARENT_CAP,
@@ -348,8 +348,6 @@ class webphoto_admin_cat_form extends webphoto_edit_form {
 			'lang_cat_link_edit'       => _AM_WEBPHOTO_CAT_LINK_EDIT,
 			'lang_cat_link_makesubcat' => _AM_WEBPHOTO_CAT_LINK_MAKESUBCAT,
 		];
-
-		return $arr;
 	}
 
 	public function _build_prefix( $row ) {

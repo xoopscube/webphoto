@@ -16,6 +16,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_photo extends webphoto_show_photo {
+
 	public $_flash_class;
 	public $_embed_class;
 	public $_photo_navi_class;
@@ -59,27 +60,24 @@ class webphoto_photo extends webphoto_show_photo {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_flash_class
-			=& webphoto_flash_player::getInstance( $dirname, $trust_dirname );
-		$this->_embed_class
-			=& webphoto_embed::getInstance( $dirname, $trust_dirname );
-		$this->_item_public_class
-			=& webphoto_item_public::getInstance( $dirname, $trust_dirname );
-		$this->_photo_navi_class
-			=& webphoto_photo_navi::getInstance( $dirname, $trust_dirname );
-		$this->_catlist_class
-			=& webphoto_inc_catlist::getSingleton( $dirname, $trust_dirname );
-		$this->_rate_check_class
-			=& webphoto_rate_check::getInstance( $dirname, $trust_dirname );
-		$this->_public_class
-			=& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
-		$this->_uri_parse_class
-			=& webphoto_uri_parse::getInstance( $dirname, $trust_dirname );
+		$this->_flash_class       =& webphoto_flash_player::getInstance( $dirname, $trust_dirname );
+		$this->_embed_class       =& webphoto_embed::getInstance( $dirname, $trust_dirname );
+		$this->_item_public_class =& webphoto_item_public::getInstance( $dirname, $trust_dirname );
+		$this->_photo_navi_class  =& webphoto_photo_navi::getInstance( $dirname, $trust_dirname );
+		$this->_catlist_class     =& webphoto_inc_catlist::getSingleton( $dirname, $trust_dirname );
+		$this->_rate_check_class  =& webphoto_rate_check::getInstance( $dirname, $trust_dirname );
+		$this->_public_class      =& webphoto_photo_public::getInstance( $dirname, $trust_dirname );
+		$this->_uri_parse_class   =& webphoto_uri_parse::getInstance( $dirname, $trust_dirname );
 
-		$this->_photo_navi_class->set_mark_id_prev( '<b>' . $this->get_constant( 'NAVI_PREVIOUS' ) . '</b>' );
-		$this->_photo_navi_class->set_mark_id_next( '<b>' . $this->get_constant( 'NAVI_NEXT' ) . '</b>' );
+//		$this->_photo_navi_class->set_mark_id_prev( '<b>' . $this->get_constant( 'NAVI_PREVIOUS' ) . '</b>' );
+//		$this->_photo_navi_class->set_mark_id_next( '<b>' . $this->get_constant( 'NAVI_NEXT' ) . '</b>' );
+
+		$this->_photo_navi_class->set_mark_id_prev( '<img class="svg previous" src="'. XOOPS_URL . '/images/icons/nav-previous.svg" alt="' . $this->get_constant( 'NAVI_PREVIOUS' ) . '">' );
+		$this->_photo_navi_class->set_mark_id_next( '<img class="svg next" src="'. XOOPS_URL . '/images/icons/nav-next.svg" alt="' . $this->get_constant( 'NAVI_NEXT' ) . '">' );
+
 
 		$this->_comment_view_class =& webphoto_d3_comment_view::getInstance();
 		$this->_comment_view_class->init( $dirname );

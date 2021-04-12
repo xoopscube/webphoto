@@ -74,10 +74,7 @@ class webphoto_editor extends webphoto_plugin_ini {
 				$arr[ $type ] = $type;
 			}
 		}
-		if ( $flag &&
-		     is_array( $arr ) &&
-		     ( count( $arr ) == 1 ) &&
-		     isset( $arr[ _C_WEBPHOTO_EDITOR_DEFAULT ] ) ) {
+		if ( $flag && is_array( $arr ) && ( count( $arr ) == 1 ) && isset( $arr[ _C_WEBPHOTO_EDITOR_DEFAULT ] ) ) {
 			return false;
 		}
 

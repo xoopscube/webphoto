@@ -79,7 +79,7 @@ class webphoto_bin_base {
 
 	}
 
-	function _init( $dirname, $trust_dirname ) {
+	public function _init( $dirname, $trust_dirname ) {
 		$xoops_class =& webphoto_xoops_base::getInstance();
 		$LANGUAGE    = $xoops_class->get_language();
 
@@ -283,13 +283,15 @@ class webphoto_bin_base {
 
 	function get_html_header() {
 		$text = <<<END_OF_TEXT
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=$this->_CHARSET">
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="$this->_CHARSET">
+<meta http-equiv="content-type" content="text/html; charset=$this->_CHARSET">
 <title> $this->_TITLE </title>
 </head><body>
 <h3> $this->_TITLE </h3>
-<hr />
+<hr>
 END_OF_TEXT;
 
 		return $text;
@@ -300,7 +302,7 @@ END_OF_TEXT;
 
 		$text = <<<END_OF_TEXT
 <br>
-<hr />
+<hr>
 <a href="$url_admin">$this->_GOTO_ADMIN</a><br>
 </head></html>
 END_OF_TEXT;
@@ -388,7 +390,7 @@ END_OF_TEXT;
 	}
 
 	function set_mail_level( $val ) {
-		$this->_mail_level = intval( $val );
+		$this->_mail_level = (int) $val;
 	}
 
 // not include XOOPS_URL
@@ -443,8 +445,4 @@ END_OF_TEXT;
 
 		return mail( $mailto, $subject, $message );
 	}
-
-// --- class end ---
 }
-
-?>

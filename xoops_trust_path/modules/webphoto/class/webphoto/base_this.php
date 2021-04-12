@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_base_this extends webphoto_base_ini {
+
 	public $_config_class;
 	public $_item_handler;
 	public $_file_handler;
@@ -111,14 +112,10 @@ class webphoto_base_this extends webphoto_base_ini {
 
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_item_handler
-			=& webphoto_item_handler::getInstance( $dirname, $trust_dirname );
-		$this->_cat_handler
-			=& webphoto_cat_handler::getInstance( $dirname, $trust_dirname );
-		$this->_file_handler
-			=& webphoto_file_handler::getInstance( $dirname, $trust_dirname );
-		$this->_perm_class
-			=& webphoto_permission::getInstance( $dirname, $trust_dirname );
+		$this->_item_handler =& webphoto_item_handler::getInstance( $dirname, $trust_dirname );
+		$this->_cat_handler  =& webphoto_cat_handler::getInstance( $dirname, $trust_dirname );
+		$this->_file_handler =& webphoto_file_handler::getInstance( $dirname, $trust_dirname );
+		$this->_perm_class   =& webphoto_permission::getInstance( $dirname, $trust_dirname );
 
 		$this->_multibyte_class     =& webphoto_multibyte::getInstance();
 		$this->_mysql_utility_class =& webphoto_lib_mysql_utility::getInstance();
@@ -597,7 +594,7 @@ class webphoto_base_this extends webphoto_base_ini {
 	}
 
 	function build_admin_footer() {
-		$str = "<br><hr />\n";
+		$str = "<hr>\n";
 		$str .= $this->_utility_class->build_execution_time( WEBPHOTO_TIME_START );
 		$str .= $this->_utility_class->build_memory_usage();
 
@@ -613,8 +610,6 @@ class webphoto_base_this extends webphoto_base_ini {
 		if ( $has_editable && $this->is_photo_owner( $uid ) ) {
 			return true;
 		}
-
-		return false;
 	}
 
 	function is_photo_owner( $uid ) {

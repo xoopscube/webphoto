@@ -16,14 +16,15 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_photo_navi extends webphoto_lib_error {
+
 	public $_item_handler;
 	public $_image_class;
 
 	public $_script = null;
 	public $_id_array = null;
 
-	public $_MARK_ID_FIRST = '<b>[&lt;</b>';
-	public $_MARK_ID_LAST = '<b>&gt;]</b>';
+	public $_MARK_ID_FIRST = '';
+	public $_MARK_ID_LAST = '';
 	public $_MARK_ID_PREV = '<b>Prev</b>';
 	public $_MARK_ID_NEXT = '<b>Next</b>';
 

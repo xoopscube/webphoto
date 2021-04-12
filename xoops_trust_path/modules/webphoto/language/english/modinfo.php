@@ -32,14 +32,14 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "NAME", "Media Asset Manager" );
 
 // A brief description of this module
-	define( $constpref . "DESC", "Creates a photos section where users can search/submit/rate various photos." );
+	define( $constpref . "DESC", "A Media Asset Management or MAM system provides a single repository for storing and managing video and multimedia files." );
 
 // Names of blocks for this module (Not all module has blocks)
-	define( $constpref . "BNAME_RECENT", "Recent Photo Video Media" );
-	define( $constpref . "BNAME_HITS", "Top Photo Video Media" );
-	define( $constpref . "BNAME_RANDOM", "Random Photo Video Media" );
-	define( $constpref . "BNAME_RECENT_P", "Recent Photo Video Media with thumbnails" );
-	define( $constpref . "BNAME_HITS_P", "Top Photo Video Media with thumbnails" );
+	define( $constpref . "BNAME_RECENT", "Recent Media" );
+	define( $constpref . "BNAME_HITS", "Top Media" );
+	define( $constpref . "BNAME_RANDOM", "Random Media" );
+	define( $constpref . "BNAME_RECENT_P", "Recent Media with thumbnails" );
+	define( $constpref . "BNAME_HITS_P", "Top Media with thumbnails" );
 
 	define( $constpref . "CFG_IMAGINGPIPE", "Package treating images" );
 	define( $constpref . "CFG_DESCIMAGINGPIPE", "Almost all PHP environments can use GD. But GD is functionally inferior than 2 other packages.<br>It is best to use ImageMagick or NetPBM if you can." );
@@ -51,8 +51,8 @@ if ( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref . "LANG_LOADED
 	define( $constpref . "CFG_DESCNETPBMPATH", "Alhough the full path to 'pnmscale' should be written, leave it blank in most environments.<br>This configuration is significant only when using NetPBM" );
 	define( $constpref . "CFG_POPULAR", "Hits to be Popular" );
 	define( $constpref . "CFG_NEWDAYS", "Days between displaying icon of 'new'&'update'" );
-	define( $constpref . "CFG_NEWPHOTOS", "Number of Photo Video Media as New on Top Page" );
-	define( $constpref . "CFG_PERPAGE", "Displayed Photo Video Media per Page" );
+	define( $constpref . "CFG_NEWPHOTOS", "Number of Medias as New on Top Page" );
+	define( $constpref . "CFG_PERPAGE", "Displayed Medias per Page" );
 	define( $constpref . "CFG_DESCPERPAGE", "Input selectable numbers separated with '|'<br>eg) 10|20|50|100" );
 	define( $constpref . "CFG_ALLOWNOIMAGE", "Allow a submit without images" );
 	define( $constpref . "CFG_MAKETHUMB", "Make Thumbnail Image" );
@@ -85,17 +85,17 @@ define( $constpref . "CFG_COLSOFTABLE", "Number of columns in table view" );
 	define( $constpref . "GLOBAL_NOTIFYDSC", "Global notification options" );
 	define( $constpref . "CATEGORY_NOTIFY", "Category" );
 	define( $constpref . "CATEGORY_NOTIFYDSC", "Notification options that apply to the current photo category" );
-	define( $constpref . "PHOTO_NOTIFY", "Photo Video Media" );
-	define( $constpref . "PHOTO_NOTIFYDSC", "Notification options that apply to the current photo" );
+	define( $constpref . "PHOTO_NOTIFY", "Media Notification" );
+	define( $constpref . "PHOTO_NOTIFYDSC", "Notification options that apply to the current media" );
 
-	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFY", "New Photo Video Media" );
-	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFYCAP", "Notify me when any new photos are posted" );
-	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFYDSC", "Receive notification when a new photo description is posted." );
+	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFY", "New Media" );
+	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFYCAP", "Notify me when any new media is posted" );
+	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFYDSC", "Receive notification when a new media description is posted." );
 	define( $constpref . "GLOBAL_NEWPHOTO_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE}: auto-notify : New photo" );
 
-	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFY", "New Photo Video Media" );
-	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYCAP", "Notify me when a new photo is posted to the current category" );
-	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYDSC", "Receive notification when a new photo description is posted to the current category" );
+	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFY", "New Media Notification" );
+	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYCAP", "Notify me when a new media is posted to the current category" );
+	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYDSC", "Receive notification when a new media description is posted to the current category" );
 	define( $constpref . "CATEGORY_NEWPHOTO_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE}: auto-notify : New photo" );
 
 //=========================================================
@@ -110,8 +110,8 @@ define( $constpref . "CFG_COLSOFTABLE", "Number of columns in table view" );
 	define( $constpref . "OPT_SORT_HITSD", "Popularity (Most to Least Hits)" );
 	define( $constpref . "OPT_SORT_TITLEA", "Title (A to Z)" );
 	define( $constpref . "OPT_SORT_TITLED", "Title (Z to A)" );
-	define( $constpref . "OPT_SORT_DATEA", "Updated Date (Old Photo Video Media Listed First)" );
-	define( $constpref . "OPT_SORT_DATED", "Updated Date (New Photo Video Media Listed First)" );
+	define( $constpref . "OPT_SORT_DATEA", "Updated Date (Old Media Listed First)" );
+	define( $constpref . "OPT_SORT_DATED", "Updated Date (New Media Listed First)" );
 	define( $constpref . "OPT_SORT_RATINGA", "Rating (Lowest Score to Highest Score)" );
 	define( $constpref . "OPT_SORT_RATINGD", "Rating (Highest Score to Lowest Score)" );
 	define( $constpref . "OPT_SORT_RANDOM", "Random" );
@@ -135,10 +135,10 @@ define( $constpref . "CFG_COLSOFTABLE", "Number of columns in table view" );
 	define( $constpref . "SMNAME_SUBMIT", "Submit" );
 	define( $constpref . "SMNAME_POPULAR", "Popular" );
 	define( $constpref . "SMNAME_HIGHRATE", "Top Rated" );
-	define( $constpref . "SMNAME_MYPHOTO", "My Photo Video Media" );
+	define( $constpref . "SMNAME_MYPHOTO", "My Media" );
 
 // Names of admin menu items
-	define( $constpref . "ADMENU_PHOTOMANAGER", "Photo Video Media Management" );
+	define( $constpref . "ADMENU_PHOTOMANAGER", "Media Management" );
 	define( $constpref . "ADMENU_CATMANAGER", "Add/Edit Categories" );
 	define( $constpref . "ADMENU_CHECKCONFIGS", "Check Configuration" );
 	define( $constpref . "ADMENU_BATCH", "Batch Register" );
@@ -146,18 +146,18 @@ define( $constpref . "CFG_COLSOFTABLE", "Number of columns in table view" );
 	define( $constpref . "ADMENU_IMPORT", "Import Images" );
 	define( $constpref . "ADMENU_EXPORT", "Export Images" );
 
-	define( $constpref . "ADMENU_GICONMANAGER", "Google Icons Management" );
-	define( $constpref . "ADMENU_MIMETYPES", "MIME Type Management" );
+	define( $constpref . "ADMENU_GICONMANAGER", "Google Icons" );
+	define( $constpref . "ADMENU_MIMETYPES", "MIME Type" );
 	define( $constpref . "ADMENU_IMPORT_MYALBUM", "Batch Import from Myalbum" );
 	define( $constpref . "ADMENU_CHECKTABLES", "Check Tables Configuration" );
-	define( $constpref . "ADMENU_PHOTO_TABLE_MANAGE", "Photo Video Media Table Management" );
-	define( $constpref . "ADMENU_CAT_TABLE_MANAGE", "Category Table Management" );
-	define( $constpref . "ADMENU_VOTE_TABLE_MANAGE", "Vote Table Management" );
-	define( $constpref . "ADMENU_GICON_TABLE_MANAGE", "Google Icon Table Management" );
-	define( $constpref . "ADMENU_MIME_TABLE_MANAGE", "MIME Table Management" );
-	define( $constpref . "ADMENU_TAG_TABLE_MANAGE", "Tag Table Management" );
-	define( $constpref . "ADMENU_P2T_TABLE_MANAGE", "Photo Video Media-Tag Table Management" );
-	define( $constpref . "ADMENU_SYNO_TABLE_MANAGE", "Synonym Table Management" );
+	define( $constpref . "ADMENU_PHOTO_TABLE_MANAGE", "Media" );
+	define( $constpref . "ADMENU_CAT_TABLE_MANAGE", "Category" );
+	define( $constpref . "ADMENU_VOTE_TABLE_MANAGE", "Vote" );
+	define( $constpref . "ADMENU_GICON_TABLE_MANAGE", "Google Icon" );
+	define( $constpref . "ADMENU_MIME_TABLE_MANAGE", "MIME" );
+	define( $constpref . "ADMENU_TAG_TABLE_MANAGE", "Tag" );
+	define( $constpref . "ADMENU_P2T_TABLE_MANAGE", "Media-Tag" );
+	define( $constpref . "ADMENU_SYNO_TABLE_MANAGE", "Synonym" );
 
 //---------------------------------------------------------
 // v0.20
@@ -294,22 +294,22 @@ FTP Password: xxx<br>" );
 	define( $constpref . "CFG_ITEM_SUMMARY_DSC", "Enter the maximum number of characters of photo description in the photo list.<br>-1 is unlimited" );
 	define( $constpref . "CFG_CAT_SUMMARY", "Max characters of category description" );
 	define( $constpref . "CFG_CAT_SUMMARY_DSC", "Enter the maximum number of characters of category description in the category list.<br>-1 is unlimited" );
-	define( $constpref . "CFG_CAT_CHILD", "Show photos of subcategoies" );
-	define( $constpref . "CFG_CAT_CHILD_DSC", "Enter to show or not photos of subcategoies in category list" );
-	define( $constpref . "OPT_CAT_CHILD_NON", "Photo Video Media of this category only. Not show photos of subcategoies" );
-	define( $constpref . "OPT_CAT_CHILD_EMPTY", "When no photo in this category, show photos of subcategoies" );
-	define( $constpref . "OPT_CAT_CHILD_ALWAYS", "Show alwayas photos of subcategoies" );
+	define( $constpref . "CFG_CAT_CHILD", "Show photos of subcategories" );
+	define( $constpref . "CFG_CAT_CHILD_DSC", "Enter to show or not photos of subcategories in category list" );
+	define( $constpref . "OPT_CAT_CHILD_NON", "Media of this category only. Hide subcategories" );
+	define( $constpref . "OPT_CAT_CHILD_EMPTY", "When no media in this category, show medias of subcategories" );
+	define( $constpref . "OPT_CAT_CHILD_ALWAYS", "Show always medias of subcategoies" );
 
 //---------------------------------------------------------
 // v1.80
 //---------------------------------------------------------
 	define( $constpref . "CFG_USE_LAME", "Use lame" );
 	define( $constpref . "CFG_LAMEPATH", "Path to lame" );
-	define( $constpref . "CFG_LAMEPATH_DSC", "Alhough the full path to 'lame' should be written, leave it blank in most environments.<br>This configuration is significant only when using lame" );
+	define( $constpref . "CFG_LAMEPATH_DSC", "Although the full path to 'lame' should be written, leave it blank in most environments.<br>This configuration is significant only when using lame" );
 
 	define( $constpref . "CFG_USE_TIMIDITY", "Use timidity" );
 	define( $constpref . "CFG_TIMIDITYPATH", "Path to timidity" );
-	define( $constpref . "CFG_TIMIDITYPATH_DSC", "Alhough the full path to 'timidity' should be written, leave it blank in most environments.<br>This configuration is significant only when using timidity" );
+	define( $constpref . "CFG_TIMIDITYPATH_DSC", "Although the full path to 'timidity' should be written, leave it blank in most environments.<br>This configuration is significant only when using timidity" );
 
 	define( $constpref . "SMNAME_SEARCH", "Search" );
 

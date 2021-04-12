@@ -81,11 +81,10 @@ class webphoto_admin_admission_form extends webphoto_form_this {
 			}
 
 			$id          = $item_row['item_id'];
-			$title_s     = $this->sanitize( $item_row['item_title'] );
+			$title_s     = $this->sanitize( $item_row['item_title'] ); // TODO strip tags
 			$desc_disp   = $this->_item_handler->build_show_description_disp( $item_row );
 			$submitter_s = $this->get_xoops_user_name( $item_row['item_uid'] );
-			$cat_path    = $this->_cat_handler->get_nice_path_from_id(
-				$item_row['item_cat_id'], 'cat_title', $url_category, true );
+			$cat_path    = $this->_cat_handler->get_nice_path_from_id( $item_row['item_cat_id'], 'cat_title', $url_category, true );
 
 			$editbutton = '<a href="' . $url_edit . $id . '" target="_blank">';
 			$editbutton .= $img_edit;

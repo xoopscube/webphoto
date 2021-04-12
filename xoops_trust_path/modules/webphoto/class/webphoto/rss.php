@@ -218,6 +218,7 @@ class webphoto_rss extends webphoto_lib_rss {
 			$link_xml  = $this->xml_text( $this->_build_link( $row ) );
 			$title_xml = $this->xml_text( $row['item_title'] );
 			$pubdate   = date( 'r', $row['item_time_update'] );
+
 			list( $content, $summary, $desc ) = $this->_build_description( $row, $thumb_row );
 
 // georss

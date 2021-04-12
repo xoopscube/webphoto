@@ -15,11 +15,12 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_edit_pdf_create extends webphoto_edit_base_create {
+
 	public $_ext_class;
 
 	public $_param_ext = 'pdf';
 	public $_param_dir = 'pdfs';
-	var $_param_mime = 'application/pdf';
+	public $_param_mime = 'application/pdf';
 	public $_param_medium = '';
 	public $_param_kind = _C_WEBPHOTO_FILE_KIND_PDF;
 	public $_msg_created = 'create pdf';
@@ -27,6 +28,7 @@ class webphoto_edit_pdf_create extends webphoto_edit_base_create {
 
 
 	public function __construct( $dirname, $trust_dirname ) {
+
 		parent::__construct( $dirname, $trust_dirname );
 
 		$this->_ext_class =& webphoto_ext::getInstance( $dirname, $trust_dirname );

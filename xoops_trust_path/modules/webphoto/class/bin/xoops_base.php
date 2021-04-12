@@ -31,6 +31,7 @@ class webphoto_xoops_base extends webphoto_lib_handler {
 
 
 	public function __construct() {
+
 		parent::__construct();
 
 		$this->_init();
@@ -95,9 +96,7 @@ class webphoto_xoops_base extends webphoto_lib_handler {
 	}
 
 	public function _build_system_lang_file( $file, $lang ) {
-		$str = XOOPS_ROOT_PATH . '/language/' . $lang . '/' . $file;
-
-		return $str;
+		return XOOPS_ROOT_PATH . '/language/' . $lang . '/' . $file;
 	}
 
 	public function _build_legacy_lang_file( $file, $lang ) {
@@ -105,9 +104,7 @@ class webphoto_xoops_base extends webphoto_lib_handler {
 	}
 
 	public function _build_mod_lang_file( $file, $lang, $module ) {
-		$str = XOOPS_ROOT_PATH . '/modules/' . $module . '/language/' . $lang . '/' . $file;
-
-		return $str;
+		return XOOPS_ROOT_PATH . '/modules/' . $module . '/language/' . $lang . '/' . $file;
 	}
 
 	public function get_language() {
@@ -308,9 +305,7 @@ class webphoto_xoops_base extends webphoto_lib_handler {
 			return $uname;
 		}
 
-		$str = '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $uid . '">' . $uname . '</a>';
-
-		return $str;
+		return '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $uid . '">' . $uname . '</a>';
 	}
 
 

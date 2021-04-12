@@ -44,8 +44,8 @@ class webphoto_lib_pagenavi {
 	public $_MARK_PREV = '<b>&laquo;</b>';
 	public $_MARK_NEXT = '<b>&raquo;</b>';
 
-	public $_MARK_ID_FIRST = '<b>[&lt;</b>';
-	public $_MARK_ID_LAST = '<b>&gt;]</b>';
+	public $_MARK_ID_FIRST = '';
+	public $_MARK_ID_LAST = '';
 	public $_MARK_ID_PREV = '<b>Prev</b>';
 	public $_MARK_ID_NEXT = '<b>Next</b>';
 

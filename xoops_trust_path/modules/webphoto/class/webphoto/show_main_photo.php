@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_show_main_photo extends webphoto_show_main {
+
 	public $_flash_class;
 	public $_embed_class;
 	public $_photo_navi_class;
@@ -60,19 +61,14 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_flash_class
-			=& webphoto_flash_player::getInstance( $dirname, $trust_dirname );
-		$this->_embed_class
-			=& webphoto_embed::getInstance( $dirname, $trust_dirname );
-		$this->_item_public_class
-			=& webphoto_item_public::getInstance( $dirname, $trust_dirname );
-		$this->_photo_navi_class
-			=& webphoto_photo_navi::getInstance( $dirname, $trust_dirname );
-		$this->_catlist_class
-			=& webphoto_inc_catlist::getSingleton( $dirname, $trust_dirname );
+		$this->_flash_class       =& webphoto_flash_player::getInstance( $dirname, $trust_dirname );
+		$this->_embed_class       =& webphoto_embed::getInstance( $dirname, $trust_dirname );
+		$this->_item_public_class =& webphoto_item_public::getInstance( $dirname, $trust_dirname );
+		$this->_photo_navi_class  =& webphoto_photo_navi::getInstance( $dirname, $trust_dirname );
+		$this->_catlist_class     =& webphoto_inc_catlist::getSingleton( $dirname, $trust_dirname );
 
-		$this->_photo_navi_class->set_mark_id_prev( '<b>' . $this->get_constant( 'NAVI_PREVIOUS' ) . '</b>' );
-		$this->_photo_navi_class->set_mark_id_next( '<b>' . $this->get_constant( 'NAVI_NEXT' ) . '</b>' );
+		$this->_photo_navi_class->set_mark_id_prev( '<img class="svg previous" src="'. XOOPS_URL . '/images/icons/nav-previous.svg" alt="' . $this->get_constant( 'NAVI_PREVIOUS' ) . '">' );
+		$this->_photo_navi_class->set_mark_id_next( '<img class="svg next" src="'. XOOPS_URL . '/images/icons/nav-next.svg" alt="' . $this->get_constant( 'NAVI_NEXT' ) . '">' );
 
 		$this->_comment_view_class =& webphoto_d3_comment_view::getInstance();
 		$this->_comment_view_class->init( $dirname );
@@ -206,9 +202,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		$arr3 = $this->build_photo_embed_link( $row );
 		$arr4 = $this->build_photo_code( $row, $arr1, $arr2, $arr3 );
 
-		$arr = array_merge( $arr1, $arr2, $arr3, $arr4 );
-
-		return $arr;
+		return array_merge( $arr1, $arr2, $arr3, $arr4 );
 	}
 
 
@@ -236,7 +230,8 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		}
 
 		$flash = $this->_flash_class->build_movie_by_item_row( $item_row );
-		list( $embed, $js ) = $this->_flash_class->build_code_embed_by_item_row( $item_row );
+
+		[ $embed, $js ] = $this->_flash_class->build_code_embed_by_item_row( $item_row );
 
 		return array(
 			'displaytype_flash' => $flag,
@@ -278,13 +273,11 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			$can = true;
 		}
 
-		$arr = array(
+		return array(
 			'embed_can'   => $can,
 			'embed_embed' => $embed,
 			'embed_link'  => $link,
 		);
-
-		return $arr;
 	}
 
 
@@ -474,7 +467,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		$name    = 'play';
 		$caption = $this->build_photo_code_caption( $name );
 		$title   = $item_title . ' ' . $caption;
-		$icon    = $this->_MODULE_URL . '/images/icons/webfeed.png';
+		$icon    = $this->_MODULE_URL . '/images/icons/cube-web-feed.svg';
 
 // external playlist
 		if ( $this->is_playlist_feed_kind( $kind ) ) {
@@ -511,12 +504,10 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			$embed = $embed_arr['embed_embed'];
 		}
 
-		$arr = array(
+		return array(
 			'embed' => $this->build_photo_code_result_value( 'embed', $embed ),
 			'js'    => $this->build_photo_code_result_value( 'js', $js ),
 		);
-
-		return $arr;
 
 	}
 
@@ -534,7 +525,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 	public function build_photo_code_result_value( $name, $value ) {
 		$caption = $this->build_photo_code_caption( $name );
 
-		$arr = array(
+		return array(
 			'show'      => $this->is_photo_code_show_by_name( $name, $value ),
 			'name'      => $name,
 			'caption'   => $caption,
@@ -542,8 +533,6 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			'value'     => $value,
 			'value_s'   => $this->sanitize( $value ),
 		);
-
-		return $arr;
 	}
 
 	public function build_photo_code_caption( $name ) {
@@ -567,9 +556,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 	}
 
 	public function get_photo_catid_row_or_post( $row ) {
-		$cat_id = ( $row['item_cat_id'] > 0 ) ? $row['item_cat_id'] : $this->_get_cat_id;
-
-		return $cat_id;
+		return ( $row['item_cat_id'] > 0 ) ? $row['item_cat_id'] : $this->_get_cat_id;
 	}
 
 	public function build_photo_gmap_param( $row ) {
@@ -582,7 +569,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			$icons = $this->_gmap_class->build_icon_list();
 		}
 
-		$arr = array(
+		return array(
 			'show_gmap'                => $show,
 			'gmap_photo'               => $photo,
 			'gmap_icons'               => $icons,
@@ -591,8 +578,6 @@ class webphoto_show_main_photo extends webphoto_show_main {
 			'gmap_zoom'                => $row['item_gmap_zoom'],
 			'gmap_lang_not_compatible' => $this->get_constant( 'GMAP_NOT_COMPATIBLE' ),
 		);
-
-		return $arr;
 	}
 
 	public function build_photo_navi( $photo_id, $cat_id ) {
@@ -605,22 +590,18 @@ class webphoto_show_main_photo extends webphoto_show_main {
 
 	public function build_photo_tags_param( $photo_id ) {
 		if ( ! $this->_has_tagedit ) {
-			$arr = array(
+			return array(
 				'show_tagedit' => false
 			);
-
-			return $arr;
 		}
 
-		$arr = array(
+		return array(
 			'show_tagedit' => true,
 			'token_name'   => $this->get_token_name(),
 			'token_value'  => $this->get_token(),
 			'photo_id'     => $photo_id,
 			'tags'         => $this->build_photo_tags( $photo_id ),
 		);
-
-		return $arr;
 	}
 
 	public function build_photo_tags( $photo_id ) {
@@ -695,8 +676,7 @@ class webphoto_show_main_photo extends webphoto_show_main {
 		list( $photo_rows, $total, $this_sum ) =
 			$this->get_rows_total_by_catid( $cat_id, $limit, $start );
 
-		if ( ( $this_sum > 1 ) ||
-		     ( $this_sum == 0 ) && ( $total > 1 ) ) {
+		if ( ( $this_sum > 1 ) || ( ( $this_sum == 0 ) && ( $total > 1 ) ) ) {
 			$show_sort = true;
 		}
 

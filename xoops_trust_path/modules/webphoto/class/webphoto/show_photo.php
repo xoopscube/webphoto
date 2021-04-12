@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_show_photo extends webphoto_base_this {
+
 	public $_tag_build_class;
 	public $_highlight_class;
 	public $_image_class;
@@ -64,10 +65,8 @@ class webphoto_show_photo extends webphoto_base_this {
 	public function __construct( $dirname, $trust_dirname ) {
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_image_class
-			=& webphoto_show_image::getInstance( $dirname, $trust_dirname );
-		$this->_tag_build_class
-			=& webphoto_tag_build::getInstance( $dirname, $trust_dirname );
+		$this->_image_class =& webphoto_show_image::getInstance( $dirname, $trust_dirname );
+		$this->_tag_build_class =& webphoto_tag_build::getInstance( $dirname, $trust_dirname );
 
 		$this->_multibyte_class =& webphoto_multibyte::getInstance();
 
@@ -97,8 +96,8 @@ class webphoto_show_photo extends webphoto_base_this {
 		$this->_cfg_cat_sub_width    = $this->get_config_by_name( 'cat_sub_width' );
 		$this->_cfg_timeline_dirname = $this->get_config_by_name( 'timeline_dirname' );
 
-// caregory.php
-		$this->_cfg_cat_summary = $this->get_config_by_name( 'cat_summary' );
+// category.php
+		$this->_cfg_cat_summary      = $this->get_config_by_name( 'cat_summary' );
 
 // ini
 		$this->_ini_misc_array         = $this->explode_ini( 'view_photo_misc_list' );

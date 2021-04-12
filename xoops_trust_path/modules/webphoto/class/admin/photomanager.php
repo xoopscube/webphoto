@@ -38,10 +38,8 @@ class webphoto_admin_photomanager extends webphoto_edit_base {
 
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_search_class =& webphoto_edit_search_build::getInstance(
-			$dirname, $trust_dirname );
-		$this->_delete_class =& webphoto_edit_item_delete::getInstance(
-			$dirname, $trust_dirname );
+		$this->_search_class =& webphoto_edit_search_build::getInstance( $dirname, $trust_dirname );
+		$this->_delete_class =& webphoto_edit_item_delete::getInstance( $dirname, $trust_dirname );
 	}
 
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {

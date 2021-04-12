@@ -16,7 +16,6 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 class webphoto_admin_vote_table_manage extends webphoto_lib_manage {
 
-
 	public function __construct( $dirname, $trust_dirname ) {
 
 		parent::__construct( $dirname, $trust_dirname );

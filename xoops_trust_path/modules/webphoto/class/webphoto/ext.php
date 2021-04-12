@@ -104,9 +104,7 @@ class webphoto_ext extends webphoto_lib_plugin {
 			return $false;
 		}
 
-		$class = new $class_name( $this->_DIRNAME, $this->_TRUST_DIRNAME );
-
-		return $class;
+		return new $class_name( $this->_DIRNAME, $this->_TRUST_DIRNAME );
 	}
 
 }

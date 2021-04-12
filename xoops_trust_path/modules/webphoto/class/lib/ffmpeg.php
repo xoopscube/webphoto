@@ -130,7 +130,7 @@ class webphoto_lib_ffmpeg {
 		foreach ( $ret_array as $line ) {
 			if ( preg_match( "/duration.*(\d+):(\d+):(\d+)/i", $line, $match ) ) {
 				$line_duration = $line;
-				$duration      = intval( $match[1] ) * 3600 + intval( $match[2] ) * 60 + intval( $match[3] );
+				$duration      = (int) $match[1] * 3600 + (int) $match[2] * 60 + (int) $match[3];
 			}
 			if ( preg_match( "/stream.*audio:(.*)/i", $line, $match ) ) {
 				$line_audio = $line;
@@ -141,8 +141,8 @@ class webphoto_lib_ffmpeg {
 			}
 			if ( preg_match( "/stream.*video:(.*)\s(\d+)x(\d+)/i", $line, $match ) ) {
 				$line_video = $line;
-				$width      = intval( $match[2] );
-				$height     = intval( $match[3] );
+				$width      = (int) $match[2];
+				$height     = (int) $match[3];
 				$arr        = explode( ',', $match[1] );
 				if ( isset( $arr[0] ) ) {
 					$video_codec = trim( $arr[0] );

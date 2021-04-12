@@ -53,13 +53,13 @@ class webphoto_editor_xoopsdhtml extends webphoto_editor_base {
 	}
 
 	public function build_textarea( $id, $name, $value, $rows, $cols, $item_row ) {
-		$ele = new XoopsFormDhtmlTextArea(
+		$elem = new XoopsFormDhtmlTextArea(
 			$this->_caption, $name, $value, $rows, $cols, $this->_hiddentext );
 		if ( $this->isXCL22 ) {
-			$ele->setEditor( $item_row['item_description_html'] ? 'HTML' : 'BBCode' );
+			$elem->setEditor( $item_row['item_description_html'] ? 'HTML' : 'BBCode' );
 		}
 
-		return $ele->render();
+		return $elem->render();
 	}
 
 }

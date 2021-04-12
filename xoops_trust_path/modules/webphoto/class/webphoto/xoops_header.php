@@ -43,7 +43,7 @@ class webphoto_xoops_header extends webphoto_base_this {
 		$this->_header_class =& webphoto_inc_xoops_header::getSingleton( $dirname );
 
 		$this->_cfg_gmap_apikey      = $this->get_config_by_name( 'gmap_apikey' );
-		$this->_cfg_use_popbox       = $this->get_config_by_name( 'use_popbox' );
+//		$this->_cfg_use_popbox       = $this->get_config_by_name( 'use_popbox' );
 		$this->_cfg_use_lightbox     = $this->get_config_by_name( 'use_lightbox' );
 		$this->_cfg_timeline_dirname = $this->get_config_by_name( 'timeline_dirname' );
 
@@ -110,19 +110,19 @@ class webphoto_xoops_header extends webphoto_base_this {
 			$str .= $this->build_once_gmap_api();
 			$str .= $this->build_once_gmap_js();
 		}
-		if ( $this->_flag_popbox && $this->_cfg_use_popbox ) {
-			$str .= $this->build_once_popbox_js();
-		}
-		if ( $this->_flag_box ) {
-			$str .= $this->_build_header_once( 'prototype_js' );
-			$str .= $this->_build_header_once( 'cookiemanager_js' );
-			$str .= $this->_build_header_once( 'box_js' );
-		}
-		if ( $this->_flag_lightbox && $this->_cfg_use_lightbox ) {
-			$str .= $this->_build_header_once( 'prototype_js' );
-			$str .= $this->_build_header_once( 'scriptaculous_js' );
-			$str .= $this->_build_once_lightbox();
-		}
+//		if ( $this->_flag_popbox && $this->_cfg_use_popbox ) {
+//			$str .= $this->build_once_popbox_js();
+//		}
+//		if ( $this->_flag_box ) {
+//			$str .= $this->_build_header_once( 'prototype_js' );
+//			$str .= $this->_build_header_once( 'cookiemanager_js' );
+//			$str .= $this->_build_header_once( 'box_js' );
+//		}
+//		if ( $this->_flag_lightbox && $this->_cfg_use_lightbox ) {
+//			$str .= $this->_build_header_once( 'prototype_js' );
+//			$str .= $this->_build_header_once( 'scriptaculous_js' );
+//			$str .= $this->_build_once_lightbox();
+//		}
 		if ( $this->_flag_timeline && $this->_cfg_timeline_dirname ) {
 			$str .= $this->_build_once_timeline();
 		}
@@ -157,22 +157,22 @@ class webphoto_xoops_header extends webphoto_base_this {
 		return $this->build_link_css_libs( 'lightbox/lightbox.css' );
 	}
 
-	private function _build_header_prototype_js() {
-		return $this->build_script_js_libs( 'prototype.js' );
-	}
-
-	private function _build_header_cookiemanager_js() {
-		return $this->build_script_js_libs( 'cookiemanager.js' );
-	}
-
-	private function _build_header_box_js() {
-		return $this->build_script_js_libs( 'box.js' );
-	}
-
-	private function _build_header_scriptaculous_js() {
-		return $this->build_script_js_libs(
-			'scriptaculous/scriptaculous.js?load=effects,builder' );
-	}
+//	private function _build_header_prototype_js() {
+//		return $this->build_script_js_libs( 'prototype.js' );
+//	}
+//
+//	private function _build_header_cookiemanager_js() {
+//		return $this->build_script_js_libs( 'cookiemanager.js' );
+//	}
+//
+//	private function _build_header_box_js() {
+//		return $this->build_script_js_libs( 'box.js' );
+//	}
+//
+//	private function _build_header_scriptaculous_js() {
+//		return $this->build_script_js_libs(
+//			'scriptaculous/scriptaculous.js?load=effects,builder' );
+//	}
 
 	private function _build_header_rss( $mode, $param_encode, $limit ) {
 		$url = $this->_MODULE_URL . '/index.php/rss/' . $mode;
@@ -198,22 +198,18 @@ class webphoto_xoops_header extends webphoto_base_this {
 	}
 
 	function _build_timeline() {
-		$str = $this->build_envelop_js( $this->_build_timeline_extend_js() );
-
-		return $str;
+		return $this->build_envelop_js( $this->_build_timeline_extend_js() );
 	}
 
 	function _build_timeline_extend_js() {
-		$str = <<< EOF
-function webphoto_timeline_zoom( link, op, sm, sp, unit )
-{
-	public date  = timeline_get_center_date();
-	link.href = '{$this->_MODULE_URL}/index.php?op=' + op + '&sm=' + sm + '&sp=' + sp + '&unit=' + unit + '&date=' + encodeURIComponent(date) ;
-	return true;
-}
-EOF;
-
-		return $str;
+//		return <<< EOF
+//function webphoto_timeline_zoom( link, op, sm, sp, unit )
+//{
+//	public date  = timeline_get_center_date();
+//	link.href = '{$this->_MODULE_URL}/index.php?op=' + op + '&sm=' + sm + '&sp=' + sp + '&unit=' + unit + '&date=' + encodeURIComponent(date) ;
+//	return true;
+//}
+//EOF;
 	}
 
 // lightbox
@@ -272,10 +268,10 @@ EOF;
 		return $this->_header_class->build_once_gmap_js();
 	}
 
-	function build_once_popbox_js() {
-		return $this->_header_class->build_once_popbox_js(
-			$this->get_constant( 'POPBOX_REVERT' ) );
-	}
+//	function build_once_popbox_js() {
+//		return $this->_header_class->build_once_popbox_js(
+//			$this->get_constant( 'POPBOX_REVERT' ) );
+//	}
 
 	function build_link_css_libs( $file ) {
 		return $this->_header_class->build_link_css_libs( $file );

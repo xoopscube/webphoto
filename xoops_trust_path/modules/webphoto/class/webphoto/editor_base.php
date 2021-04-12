@@ -36,23 +36,23 @@ class webphoto_editor_base {
 	}
 
 	function set_display_html( $val ) {
-		$this->_display_html = intval( $val );
+		$this->_display_html = (int) $val;
 	}
 
 	function set_display_smiley( $val ) {
-		$this->_display_smiley = intval( $val );
+		$this->_display_smiley = (int) $val;
 	}
 
 	function set_display_xcode( $val ) {
-		$this->_display_xcode = intval( $val );
+		$this->_display_xcode = (int) $val;
 	}
 
 	function set_display_image( $val ) {
-		$this->_display_image = intval( $val );
+		$this->_display_image = (int) $val;
 	}
 
 	function set_display_br( $val ) {
-		$this->_display_br = intval( $val );
+		$this->_display_br = (int) $val;
 	}
 
 	function allow_in_not_has_html() {
@@ -65,15 +65,13 @@ class webphoto_editor_base {
 	}
 
 	function display_options( $has_html ) {
-		$arr = array(
+		return array(
 			'html'   => $has_html ? $this->_display_html : 0,
 			'smiley' => $this->_display_smiley,
 			'xcode'  => $this->_display_xcode,
 			'image'  => $this->_display_image,
 			'br'     => $this->_display_br
 		);
-
-		return $arr;
 	}
 
 	function exists() {

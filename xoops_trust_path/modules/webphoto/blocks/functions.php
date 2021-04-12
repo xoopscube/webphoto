@@ -127,7 +127,5 @@ function b_webphoto_timeline_edit( $options ) {
 }
 
 function b_webphoto_dirname( $options ) {
-	$val = $options[0] ?? 'webphoto';
-
-	return $val;
+	return $options[0] ?? 'webphoto';
 }

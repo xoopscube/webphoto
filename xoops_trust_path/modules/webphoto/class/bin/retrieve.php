@@ -17,6 +17,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_bin_retrieve extends webphoto_bin_base {
+
 	public $_config_class;
 	public $_retrieve_class;
 

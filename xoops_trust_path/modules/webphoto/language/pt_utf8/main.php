@@ -1178,7 +1178,7 @@ Por favor, clique <a href="{MODULE_URL}/i.php?op=post" target="_blank">Postar po
 // v2.10
 //---------------------------------------------------------
 // item
-	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Photo Video Media Description" );
+	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL", "Scroll view of Media Description" );
 	define( "_WEBPHOTO_ITEM_DESCRIPTION_SCROLL_DSC", "Enter the height of the scroll by the px unit.
  <br>When 0, it is usual view without the scroll." );
 

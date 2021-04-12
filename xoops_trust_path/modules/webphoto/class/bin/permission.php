@@ -17,6 +17,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_permission {
+
 	public $_has_insertable = true;
 	public $_has_superinsert = true;
 	public $_has_editable = true;

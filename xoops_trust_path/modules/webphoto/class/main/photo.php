@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_main_photo extends webphoto_factory {
+
 	public $_TIME_SUCCESS = 1;
 	public $_TIME_FAIL = 5;
 
@@ -62,7 +63,6 @@ class webphoto_main_photo extends webphoto_factory {
 		$photo_uid = $row['item_uid'];
 		$cat_id    = $row['item_cat_id'];
 		$title     = $this->sanitize( $row['item_title'] );
-
 // for xoops comment & notification
 		$_GET['photo_id'] = $photo_id;
 
@@ -104,8 +104,7 @@ class webphoto_main_photo extends webphoto_factory {
 		$this->set_tpl_photo_nav( $photo_id, $cat_id );
 
 		if ( $this->show_check( 'photo_list' ) ) {
-			list( $title, $total, $rows, $phpto_sum )
-				= $this->category_build_rows_for_detail( $cat_id );
+			list( $title, $total, $rows, $phpto_sum ) = $this->category_build_rows_for_detail( $cat_id );
 			$photo_list = $this->build_photo_list_for_detail( $rows );
 			$this->set_tpl_photo_list( $photo_list );
 			$this->set_tpl_total_for_detail( $mode, $total );

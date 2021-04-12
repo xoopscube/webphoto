@@ -210,9 +210,7 @@ class webphoto_edit_form extends webphoto_lib_form {
 	}
 
 	public function ele_allowed_exts( $allowed_exts ) {
-		$text = implode( ' ', $allowed_exts );
-
-		return $text;
+		return implode( ' ', $allowed_exts );
 	}
 
 	public function item_cat_id_options() {

@@ -67,7 +67,7 @@ class webphoto_inc_notification extends webphoto_inc_base_ini {
 	}
 
 	public function _get_url( $category, $id ) {
-		return $this->_uri_claas->build_full_uri_mode_param( $category, $id );
+		return $this->_uri_class->build_full_uri_mode_param( $category, $id );
 	}
 
 

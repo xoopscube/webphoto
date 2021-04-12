@@ -29,6 +29,7 @@ class mysql_database extends Database {
 
 
 	public function __construct() {
+
 		parent::__construct();
 		$this->setPrefix( XOOPS_DB_PREFIX );
 	}
@@ -119,7 +120,7 @@ class mysql_database extends Database {
 			if ( empty( $start ) ) {
 				$start = 0;
 			}
-			$sql = $sql . ' LIMIT ' . (int) $start . ', ' . (int) $limit;
+			$sql .= ' LIMIT ' . (int) $start . ', ' . (int) $limit;
 		}
 
 		$result = mysqli_query( $this->conn, $sql );

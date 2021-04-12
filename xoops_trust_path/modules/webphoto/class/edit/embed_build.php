@@ -17,6 +17,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_edit_embed_build extends webphoto_edit_base {
+
 	public $_embed_class;
 
 	public $_item_row = null;

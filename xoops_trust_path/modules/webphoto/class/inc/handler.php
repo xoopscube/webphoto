@@ -600,11 +600,9 @@ class webphoto_inc_handler {
 	}
 
 	public function is_video_mime( $mime ) {
-		if ( preg_match( '/^video/', $mime ) ) {
-			return true;
-		}
-
-		return false;
+		// !FIX replace for extended search
+		// if ( preg_match( '/^video/', $mime ) ) {
+		return 0 === strpos( $mime, "video" );
 	}
 
 	public function is_image_kind( $kind ) {

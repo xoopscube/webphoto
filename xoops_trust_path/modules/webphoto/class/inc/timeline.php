@@ -181,8 +181,7 @@ if ( ! class_exists( 'webphoto_inc_timeline' ) ) {
 		}
 
 		public function build_description( $photo ) {
-			return $this->escape_quotation(
-				$this->build_summary( $photo['description_disp'] ) );
+			return $this->escape_quotation( $this->build_summary( $photo['description_disp'] ) );
 		}
 
 		public function build_link( $photo ) {

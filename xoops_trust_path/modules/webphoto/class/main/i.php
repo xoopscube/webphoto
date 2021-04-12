@@ -240,6 +240,7 @@ class webphoto_main_i extends webphoto_imode {
 // build show
 
 	public function build_show_conv( $item_row ) {
+
 		$arr = $this->build_photo_show( $item_row );
 
 		$arr['description_conv'] = $this->conv( $arr['description_disp'] );

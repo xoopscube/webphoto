@@ -471,13 +471,10 @@ class webphoto_main_submit extends webphoto_edit_submit {
 	}
 
 	public function _build_preview_submit( $item_row, $image_info ) {
-		$show_class =& webphoto_show_photo::getInstance(
-			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
-		$photo = array_merge(
-			$show_class->build_photo_show_basic( $item_row, $this->get_tag_name_array() ),
-			$image_info
-		);
+		$show_class =& webphoto_show_photo::getInstance( $this->_DIRNAME, $this->_TRUST_DIRNAME );
+
+		$photo = array_merge( $show_class->build_photo_show_basic( $item_row, $this->get_tag_name_array() ), $image_info );
 
 		return array(
 			'photo'           => $photo,

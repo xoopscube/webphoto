@@ -36,8 +36,7 @@ class webphoto_inc_base_ini extends webphoto_inc_handler {
 		$this->_TRUST_DIRNAME = $trust_dirname;
 		$this->_TRUST_DIR     = XOOPS_TRUST_PATH . '/modules/' . $trust_dirname;
 
-		$this->_ini_class
-			=& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
+		$this->_ini_class =& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
 		$this->_ini_class->read_main_ini();
 
 		$this->set_debug_sql_by_ini_name( _C_WEBPHOTO_NAME_DEBUG_SQL );
