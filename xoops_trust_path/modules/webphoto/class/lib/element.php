@@ -721,7 +721,7 @@ class webphoto_lib_element extends webphoto_lib_error {
 		if ( $value ) {
 			$value_show = $value;
 		} else {
-			$value_show = 'http://';
+			$value_show = 'https://';
 		}
 
 		$ele = $this->build_input_text( $name, $value_show, $size );
@@ -1034,9 +1034,7 @@ class webphoto_lib_element extends webphoto_lib_error {
 		$ignore_array  = array();
 
 		if ( $keywords == '' ) {
-			$arr = array( $keyword_array, $ignore_array );
-
-			return $arr;
+			return array( $keyword_array, $ignore_array );
 		}
 
 		if ( $andor == 'exact' ) {

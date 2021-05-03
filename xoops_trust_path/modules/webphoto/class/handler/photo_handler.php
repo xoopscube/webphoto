@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_photo_handler extends webphoto_lib_handler {
+
 	public $_AREA_NS = 1.0;
 	public $_AREA_EW = 1.0;
 
@@ -115,6 +116,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 // insert
 
 	public function insert( $row, $force = false ) {
+
 		extract( $row );
 
 		$sql = 'INSERT INTO ' . $this->_table . ' (';
@@ -252,6 +254,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 	}
 
 	public function update( $row, $force = false ) {
+
 		extract( $row );
 
 		$sql = 'UPDATE ' . $this->_table . ' SET ';
@@ -541,16 +544,13 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 		return $arr;
 	}
 
-
 // get id array
-
 	function get_id_array_public_by_catid_orderby( $cat_id, $orderby, $limit = 0, $offset = 0 ) {
 		$where = $this->build_where_public();
 		$where .= ' AND photo_cat_id=' . (int) $cat_id;
 
 		return $this->get_id_array_by_where_orderby( $where, $orderby, $limit, $offset );
 	}
-
 
 // build
 	function build_search( $row ) {
@@ -569,7 +569,6 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 
 		return $text;
 	}
-
 
 // where
 	function build_where_public_by_catid( $cat_id ) {
@@ -724,9 +723,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 
 		switch ( strtolower( $andor ) ) {
 			case 'exact':
-				$where = $this->build_where_keyword_single( $keyword_array[0], $name );
-
-				return $where;
+				return $this->build_where_keyword_single( $keyword_array[0], $name );
 
 			case 'or':
 				$andor_glue = 'OR';
@@ -749,18 +746,15 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 
 		if ( is_array( $arr ) && count( $arr ) ) {
 			$glue  = ' ' . $andor_glue . ' ';
-			$where = ' ( ' . implode( $glue, $arr ) . ' ) ';
 
-			return $where;
+			return ' ( ' . implode( $glue, $arr ) . ' ) ';
 		}
 
 		return null;
 	}
 
 	function build_where_keyword_single( $str, $name = 'photo_search' ) {
-		$text = $name . " LIKE '%" . addslashes( $str ) . "%'";
-
-		return $text;
+		return $name . " LIKE '%" . addslashes( $str ) . "%'";
 	}
 
 	function build_where_by_photoid_array( $id_array ) {
@@ -828,7 +822,7 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 	}
 
 	function build_datetime_by_post( $key, $default = null ) {
-		$val = isset( $_POST[ $key ] ) ? $_POST[ $key ] : $default;
+		$val = $_POST[ $key ] ?? $default;
 
 		return $this->build_datetime( $val );
 	}
@@ -844,7 +838,10 @@ class webphoto_photo_handler extends webphoto_lib_handler {
 	function build_show_description_disp( $row ) {
 		( method_exists( 'MyTextSanitizer', 'sGetInstance' ) and $myts =& MyTextSanitizer::sGetInstance() ) || $myts =& MyTextSanitizer::getInstance();
 
-		return $myts->displayTarea( $row['photo_description'], 0, 1, 1, 1, 1 );
+		//return $myts->displayTarea( $row['photo_description'], 0, 1, 1, 1, 1 );
+		return $myts->displayTarea( $row['photo_description'], 1);
+		//return $myts->displayTarea( htmlSpecialChars($row['photo_description'], 1, 1, 1, 1, 1 ),ENT_QUOTES | ENT_IGNORE, "UTF-8");
+		//htmlSpecialChars
 	}
 
 	function build_show_cont_exif_disp( $row ) {

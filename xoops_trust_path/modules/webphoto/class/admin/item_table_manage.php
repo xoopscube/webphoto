@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -25,17 +25,13 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->set_manage_handler(
-			webphoto_item_handler::getInstance( $dirname, $trust_dirname ) );
+		$this->set_manage_handler( webphoto_item_handler::getInstance( $dirname, $trust_dirname ) );
 		$this->set_manage_title_by_name( 'ITEM_TABLE_MANAGE' );
 
-		$this->set_manage_list_column_array(
-			array( 'item_title', 'item_uid' ) );
+		$this->set_manage_list_column_array( array( 'item_title', 'item_uid' ) );
 
-		$this->_search_class
-			=& webphoto_edit_search_build::getInstance( $dirname, $trust_dirname );
-		$this->_delete_class
-			=& webphoto_edit_item_delete::getInstance( $dirname, $trust_dirname );
+		$this->_search_class =& webphoto_edit_search_build::getInstance( $dirname, $trust_dirname );
+		$this->_delete_class =& webphoto_edit_item_delete::getInstance( $dirname, $trust_dirname );
 
 	}
 
@@ -73,8 +69,7 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 
 	public function _build_row_by_post( $row = array() ) {
 		$row = array(
-			'item_datetime' => $this->_manage_handler->build_datetime_by_post( 'item_datetime' ),
-
+			'item_datetime'           => $this->_manage_handler->build_datetime_by_post( 'item_datetime' ),
 			'item_id'                 => $this->_post_class->get_post_get_int( 'item_id' ),
 			'item_time_create'        => $this->_post_class->get_post_int( 'item_time_create' ),
 			'item_time_update'        => $this->_post_class->get_post_int( 'item_time_update' ),
@@ -140,12 +135,10 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 			'item_description_image'  => $this->_post_class->get_post_int( 'item_description_image' ),
 			'item_description_br'     => $this->_post_class->get_post_int( 'item_description_br' ),
 			'item_description_scroll' => $this->_post_class->get_post_int( 'item_description_scroll' ),
-
-//		'item_rating'         => $this->_post_class->get_post_float( 'item_rating' ),
-//		'item_votes'          => $this->_post_class->get_post_int(   'item_votes' ),
-//		'item_comments'       => $this->_post_class->get_post_int(   'item_comments' ),
-//		'item_search'         => $this->_post_class->get_post_text(  'item_search' ),
-
+		//		'item_rating'         => $this->_post_class->get_post_float( 'item_rating' ),
+		//		'item_votes'          => $this->_post_class->get_post_int(   'item_votes' ),
+		//		'item_comments'       => $this->_post_class->get_post_int(   'item_comments' ),
+		//		'item_search'         => $this->_post_class->get_post_text(  'item_search' ),
 		);
 
 		for ( $i = 1; $i <= _C_WEBPHOTO_MAX_ITEM_FILE_ID; $i ++ ) {
@@ -166,10 +159,8 @@ class webphoto_admin_item_table_manage extends webphoto_lib_manage {
 
 	public function _print_form( $row ) {
 		echo $this->build_manage_form_begin( $row );
-
 		echo $this->build_table_begin();
 		echo $this->build_manage_header();
-
 		echo $this->_build_row_manage_id();
 		echo $this->build_comp_text( 'item_title' );
 		echo $this->build_comp_text( 'item_time_create' );

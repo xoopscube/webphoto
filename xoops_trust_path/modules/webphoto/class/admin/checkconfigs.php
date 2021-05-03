@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -60,26 +60,31 @@ class webphoto_admin_checkconfigs extends webphoto_base_this {
 		$on  = ' ( ' . _AM_WEBPHOTO_NEEDON . ' ) ';
 		$off = ' ( ' . _AM_WEBPHOTO_RECOMMEND_OFF . ' ) ';
 
-		echo "<h4>" . _AM_WEBPHOTO_H4_ENVIRONMENT . "</h4>\n";
+		echo "<details><summary>" . _AM_WEBPHOTO_H4_ENVIRONMENT . "</summary>\n";
 		echo $this->_server_class->build_server();
 		echo $this->_module_version();
+		echo "</details>";
 
-		echo '<h4>' . _AM_WEBPHOTO_MYSQL_CONFIG . "</h4>\n";
+
+		echo '<details><summary>' . _AM_WEBPHOTO_MYSQL_CONFIG . "</summary>\n";
 		$handler = new webphoto_lib_handler();
 		echo $handler->build_config_character();
+		echo "</details>";
 
-		echo "<h4>" . _AM_WEBPHOTO_PHPDIRECTIVE . "</h4>\n";
+		echo "<details><summary>" . _AM_WEBPHOTO_PHPDIRECTIVE . "</summary>\n";
 		echo $this->_server_class->build_php_secure( $off );
 		echo $this->_server_class->build_php_upload( $on );
 		echo $this->_server_class->build_php_etc();
 		echo $this->_server_class->build_php_exif();
+		echo "</details>";
 
-		echo '<h4>' . _AM_WEBPHOTO_MULTIBYTE_CONFIG . "</h4>\n";
+		echo '<details><summary>' . _AM_WEBPHOTO_MULTIBYTE_CONFIG . "</summary>\n";
 		echo $this->_multibyte_class->build_config_priority();
 		echo "<br>\n";
 		echo $this->_multibyte_class->build_config_mbstring();
 		echo "<br>\n";
 		echo $this->_multibyte_class->build_config_iconv();
+		echo "</details>";
 	}
 
 	public function _module_version() {
@@ -91,7 +96,7 @@ class webphoto_admin_checkconfigs extends webphoto_base_this {
 	}
 
 	public function _check_mulitibyte_link() {
-		echo '<a href="' . $this->_MODULE_URL . '/admin/index.php?fct=check_mb&amp;charset=UTF-8" target="_blank">';
+		echo '<br>111Multibyte<br><a href="' . $this->_MODULE_URL . '/admin/index.php?fct=check_mb&amp;charset=UTF-8" target="_blank">';
 		echo _AM_WEBPHOTO_MULTIBYTE_LINK;
 		echo ' (UTF-8) </a><br>' . "\n";
 		if ( $this->_is_japanese ) {
@@ -103,7 +108,7 @@ class webphoto_admin_checkconfigs extends webphoto_base_this {
 	}
 
 	public function _check_pathinfo_link() {
-		echo '<a href="' . $this->_MODULE_URL . '/admin/index.php/abc/" target="_blank">';
+		echo '<br>Path-Info-111<br><a href="' . $this->_MODULE_URL . '/admin/index.php/abc/" target="_blank">';
 		echo _AM_WEBPHOTO_PATHINFO_LINK;
 		echo '</a><br>' . "\n";
 		echo " &nbsp; " . _AM_WEBPHOTO_PATHINFO_DSC . "<br>\n";
@@ -132,7 +137,7 @@ class webphoto_admin_checkconfigs extends webphoto_base_this {
 		$cfg_timiditypath = $this->_config_class->get_dir_by_name( 'timiditypath' );
 		$cfg_xpdfpath     = $this->_config_class->get_dir_by_name( 'xpdfpath' );
 
-		echo "<h4>" . _AM_WEBPHOTO_H4_CONFIG . "</h4>\n";
+		echo '<h4><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path d="M12 19c0 .34.03.67.08 1H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1l2 4h3L8 4h2l2 4h3l-2-4h2l2 4h3l-2-4h4v8.68A6.995 6.995 0 0 0 12 19m11.8 1.4c.1 0 .1.1 0 .2l-1 1.7c-.1.1-.2.1-.3.1l-1.2-.4c-.3.2-.5.3-.8.5l-.2 1.3c0 .1-.1.2-.2.2h-2c-.1 0-.2-.1-.3-.2l-.2-1.3c-.3-.1-.6-.3-.8-.5l-1.2.5c-.1 0-.2 0-.3-.1l-1-1.7c-.1-.1 0-.2.1-.3l1.1-.8v-1l-1.1-.8c-.1-.1-.1-.2-.1-.3l1-1.7c.1-.1.2-.1.3-.1l1.2.5c.3-.2.5-.3.8-.5l.2-1.3c0-.1.1-.2.3-.2h2c.1 0 .2.1.2.2l.2 1.3c.3.1.6.3.9.5l1.2-.5c.1 0 .3 0 .3.1l1 1.7c.1.1 0 .2-.1.3l-1.1.8v1l1.1.8M20.5 19c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5s.7 1.5 1.5 1.5s1.5-.7 1.5-1.5z" fill="currentColor"/></svg>' . _AM_WEBPHOTO_H4_CONFIG . "</h4>\n";
 
 		echo "<b>" . _AM_WEBPHOTO_PIPEFORIMAGES . " : </b><br><br>\n";
 

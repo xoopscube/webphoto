@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -304,9 +304,7 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 		switch ( strtolower( $andor ) ) {
 			case 'exact':
-				$where = $this->_build_where_search_single( $keyword_array[0] );
-
-				return $where;
+				return $this->build_where_search_single( $keyword_array[0] );
 
 			case 'or':
 				$andor_glue = 'OR';
@@ -329,18 +327,15 @@ class webphoto_inc_public extends webphoto_inc_base_ini {
 
 		if ( is_array( $arr ) && count( $arr ) ) {
 			$glue  = ' ' . $andor_glue . ' ';
-			$where = ' ( ' . implode( $glue, $arr ) . ' ) ';
 
-			return $where;
+			return ' ( ' . implode( $glue, $arr ) . ' ) ';
 		}
 
 		return null;
 	}
 
 	public function build_where_search_single( $str ) {
-		$text = "item_search LIKE '%" . addslashes( $str ) . "%'";
-
-		return $text;
+		return "item_search LIKE '%" . addslashes( $str ) . "%'";
 	}
 
 

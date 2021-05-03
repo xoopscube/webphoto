@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_editor_xoopsdhtml extends webphoto_editor_base {
+
 	public $_caption = '';
 	public $_hiddentext = 'xoopsHiddenText';
 	private $isXCL22;

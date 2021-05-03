@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -230,15 +230,11 @@ class webphoto_inc_gmap_info {
 	}
 
 	public function build_uri_edit( $item_id ) {
-		$str = $this->_MODULE_URL . '/index.php?fct=edit&amp;photo_id=' . $item_id;
-
-		return $str;
+		return $this->_MODULE_URL . '/index.php?fct=edit&amp;photo_id=' . $item_id;
 	}
 
 	public function build_img_edit() {
-		$str = '<img src="' . $this->_ICONS_URL . '/edit.png" width="18" height="15" border="0" alt="' . $this->_lang_title_edit . '" title="' . $this->_lang_title_edit . '" />';
-
-		return $str;
+		return '<img src="' . $this->_ICONS_URL . '/edit.png" width="18" height="15" border="0" alt="' . $this->_lang_title_edit . '" title="' . $this->_lang_title_edit . '" />';
 	}
 
 

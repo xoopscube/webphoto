@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'WEBPHOTO_TRUST_PATH' ) ) {
@@ -164,9 +164,8 @@ class webphoto_admin_invite extends webphoto_base_this {
 
 		$this->_mail_template_class->init_tag_array();
 		$this->_mail_template_class->assign( $tags );
-		$str = $this->_mail_template_class->replace_tag_array_by_template( $this->_MAIL_TEMPLATE );
 
-		return $str;
+		return $this->_mail_template_class->replace_tag_array_by_template( $this->_MAIL_TEMPLATE );
 	}
 
 
@@ -208,9 +207,7 @@ class webphoto_admin_invite extends webphoto_base_this {
 	}
 
 	public function build_form_template( $name ) {
-		$str = 'db:' . $this->_DIRNAME . '_' . $name;
-
-		return $str;
+		return 'db:' . $this->_DIRNAME . '_' . $name;
 	}
 
 

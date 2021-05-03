@@ -133,7 +133,6 @@
 /libs/lightbox/index.html : 0 : 0
 /libs/lightbox/lightbox.css : 1648 : 27
 /libs/lightbox/lightbox.js : 18389 : 497
-/libs/code.js : 259 : 10
 /libs/popbox/readme_jp.txt : 1175 : 49
 /libs/popbox/index.html : 0 : 0
 /libs/popbox/Styles.css : 542 : 28

@@ -133,11 +133,12 @@ class webphoto_lib_form extends webphoto_lib_element {
 	}
 
 
-// for admin
-
+	/**
+	 * Build Administration Menu
+	 * @return string
+	 */
 	public function build_admin_menu() {
-		$menu_class =& webphoto_lib_admin_menu::getInstance(
-			$this->_DIRNAME, $this->_TRUST_DIRNAME );
+		$menu_class =& webphoto_lib_admin_menu::getInstance( $this->_DIRNAME, $this->_TRUST_DIRNAME );
 
 		return $menu_class->build_menu_with_sub( $this->_FLAG_ADMIN_SUB_MENU );
 	}

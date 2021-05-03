@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_admin_index extends webphoto_base_this {
+
 	public $_checkconfig_class;
 	public $_update_check_class;
 	public $_workdir_class;
@@ -42,6 +43,7 @@ class webphoto_admin_index extends webphoto_base_this {
 		$this->_FILE_INSTALL = $this->_TRUST_DIR . '/uploads/install.txt';
 	}
 
+
 	public static function &getInstance( $dirname = null, $trust_dirname = null ) {
 		static $instance;
 		if ( ! isset( $instance ) ) {
@@ -61,13 +63,19 @@ class webphoto_admin_index extends webphoto_base_this {
 			echo _AM_WEBPHOTO_PATHINFO_SUCCESS . "<br>\n";
 			echo 'PATH_INFO : ' . $_SERVER["PATH_INFO"];
 			echo "<br><br>\n";
-			echo '<input class="formButton" value="' . _CLOSE . '" type="button" onclick="javascript:window.close();" />';
+			echo '<input class="ui-btn formButton" value="' . _CLOSE . '" type="button" onclick="javascript:window.close();" />';
 			xoops_cp_footer();
 			exit();
 		}
 
 		echo $this->build_admin_menu();
-		echo $this->build_admin_title( 'CHECKCONFIGS' );
+
+		$check_config_title ='<h2><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+									<path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9v2m0 8h1v-2H9v2m0 8h1v-2H9v2M5 3v2h2V3H5m0 8v2h2v-2H5m0 8v2h2v-2H5z" fill="currentColor"/>
+									</svg>';
+		$check_config_title .= _AM_WEBPHOTO_H4_ENVIRONMENT . "</h2>";
+		echo $check_config_title;
+		//echo $this->build_admin_title( 'CHECKCONFIGS' );
 
 		$this->_print_check();
 		$this->_checkconfig_class->check();
@@ -83,6 +91,7 @@ class webphoto_admin_index extends webphoto_base_this {
 // check permission
 
 	public function _print_check() {
+
 		echo $this->_make_dir( $this->_UPLOADS_DIR );
 		echo $this->_make_dir( $this->_PHOTOS_DIR );
 		echo $this->_make_dir( $this->_THUMBS_DIR );
@@ -141,7 +150,7 @@ class webphoto_admin_index extends webphoto_base_this {
 		$ver1 = $this->_xoops_class->get_my_module_version();
 		$ver2 = $this->_xoops_class->get_module_info_version_by_dirname( $this->_DIRNAME, true );
 
-		if ( (int) $ver1 >= intval( $ver2 ) ) {
+		if ( (int) $ver1 >= (int) $ver2 ) {
 			return true;
 		}
 
@@ -182,12 +191,9 @@ class webphoto_admin_index extends webphoto_base_this {
 
 		$ret = chmod( $dir, $this->_MKDIR_MODE );
 		if ( ! $ret ) {
-			return $this->highlight( 'can not change mode directory : <b>' . $dir . '</b> ', $this->_MKDIR_MODE ) . "<br>\n";
-		}
+			return $this->highlight( 'can not change mode directory : <b>' . $dir . '</b> ', $this->_MKDIR_MODE ) . "<br>\n";}
 
-		$msg = 'create directory: <b>' . $dir . '</b>' . "<br>\n";
-
-		return $msg;
+		return 'create directory: <b>' . $dir . '</b>' . "<br>\n";
 	}
 
 	function _workdir_file() {
@@ -224,21 +230,20 @@ class webphoto_admin_index extends webphoto_base_this {
 	public function _print_file_check() {
 		$url = $this->_MODULE_URL . '/admin/index.php?fct=check_file';
 
-		echo "<h4>" . _AM_WEBPHOTO_FILE_CHECK . "</h4>\n";
-		echo _AM_WEBPHOTO_FILE_CHECK_DSC . "<br><br>\n";
+		echo '<h4><img class="svg tools" src="' . XOOPS_URL .'/images/icons/tools.svg"> ' . _AM_WEBPHOTO_FILE_CHECK . "</h4>\n";
+		echo '<div class="tips">'._AM_WEBPHOTO_FILE_CHECK_DSC . "<br>\n";
 		echo '<a href="' . $url . '">';
 		echo _AM_WEBPHOTO_FILE_CHECK;
-		echo "</a><br><br>\n";
+		echo "</a></div>\n";
 	}
 
 	public function _print_timeline() {
 		$timeline_dirname = $this->get_config_by_name( 'timeline_dirname' );
 		$TIMELINE_DIR     = XOOPS_TRUST_PATH . '/modules/' . $timeline_dirname;
 		$version_file     = $TIMELINE_DIR . '/include/version.php';
-		$isactive         = $this->_xoops_class->get_module_value_by_dirname(
-			$timeline_dirname, 'isactive' );
+		$isactive         = $this->_xoops_class->get_module_value_by_dirname( $timeline_dirname, 'isactive' );
 
-		echo '<h4>' . _AM_WEBPHOTO_TIMELINE_MODULE . "</h4>\n";
+		echo '<h4><img class="svg timeline" src="' . XOOPS_URL .'/images/icons/timeline.svg"> ' . _AM_WEBPHOTO_TIMELINE_MODULE . "</h4>\n";
 		echo 'dirname : ' . $timeline_dirname . "<br>\n";
 
 // installed

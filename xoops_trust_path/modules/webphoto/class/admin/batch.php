@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -81,27 +81,30 @@ class webphoto_admin_batch extends webphoto_edit_submit {
 	}
 
 	public function _print_title() {
+
 		$title = $this->get_admin_title( 'BATCH' );
 
 		echo $this->build_admin_bread_crumb( $title, $this->_THIS_URL );
-		echo "<h3>" . $title . "</h3>\n";
+
+		echo "<h2>" . $title . "</h2>\n";
 	}
 
 // submit
 	public function _submit() {
+
 		xoops_cp_header();
+
 		$this->_print_title();
 
 		$this->_exec_submit();
 
 		if ( $this->has_error() ) {
 			echo $this->get_format_error( false, true );
-			echo "<br>\n";
+			echo "<hr>\n";
 		}
 
-		echo "<br><hr>\n";
 		echo "<h4>" . _AM_WEBPHOTO_FINISHED . "</h4>\n";
-		echo '<a href="index.php">GOTO Admin Menu</a>' . "<br>\n";
+		echo '<a class="ui-btn" href="index.php">GOTO Admin Menu</a>' . "<br>\n";
 
 		xoops_cp_footer();
 	}

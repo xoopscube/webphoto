@@ -25,8 +25,7 @@ class webphoto_main_search extends webphoto_show_list {
 		$this->_search_class =& webphoto_lib_search::getInstance();
 		$this->_search_class->set_lang_zenkaku( $this->get_constant( 'SR_ZENKAKU' ) );
 		$this->_search_class->set_lang_hankaku( $this->get_constant( 'SR_HANKAKU' ) );
-		$this->_search_class->set_min_keyword(
-			$this->_search_class->get_xoops_config_search_keyword_min() );
+		$this->_search_class->set_min_keyword( $this->_search_class->get_xoops_config_search_keyword_min() );
 		$this->_search_class->set_is_japanese( $this->_is_japanese );
 
 		$this->init_preload();

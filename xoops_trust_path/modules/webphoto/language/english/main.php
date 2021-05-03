@@ -10,7 +10,7 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 
 	define( "_WEBPHOTO_CATEGORY", "Category" );
 	define( "_WEBPHOTO_SUBMITTER", "Submitter" );
-	define( "_WEBPHOTO_NOMATCH_PHOTO", "No photo video media matches your request" );
+	define( "_WEBPHOTO_NOMATCH_PHOTO", "No media matches the request." );
 
 	define( "_WEBPHOTO_ICON_NEW", "New" );
 	define( "_WEBPHOTO_ICON_UPDATE", "Updated" );
@@ -369,7 +369,7 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_WEBPHOTO_CAP_PHOTO_SELECT", "Select the photo video media" );
 	define( "_WEBPHOTO_CAP_THUMB_SELECT", "Select the thumb image" );
 	define( "_WEBPHOTO_DSC_THUMB_SELECT", "create the thumb image from the photo video media, when not select" );
-	define( "_WEBPHOTO_DSC_SET_DATETIME", "Set photo video media datetime" );
+	define( "_WEBPHOTO_DSC_SET_DATETIME", "Set media datetime" );
 
 	define( "_WEBPHOTO_DSC_PIXCEL_RESIZE", "Resize automatically if bigger than this size" );
 	define( "_WEBPHOTO_DSC_PIXCEL_REJECT", "Cannot upload if bigger than this size" );

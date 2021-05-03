@@ -47,32 +47,46 @@ class webphoto_lib_admin_menu {
 		return $instance;
 	}
 
+	/**
+	 * Render nav-bar with UL dropdown menu (line 260)
+	 * $menu_array as $menuitem customized by
+	 * /webphoto/include/main.ini
+	 * @param bool $flag_sub
+	 *
+	 * @return string
+	 */
 	public function build_menu_with_sub( $flag_sub = true ) {
-		$str = $this->build_menu( ! $flag_sub, false );
+
+		$str ='<nav class="webphoto-menu" style="display: inline-flex;justify-content: space-between">';
+		$str .='<ul class="nav"><li><a href="#">Module</a>';
+
+		$str .= $this->build_menu( ! $flag_sub );
+
+		$str .= '</li></ul>';
+		$str .= '<ul class="nav"><li><a href="#">Table</a>';
 
 		if ( $flag_sub ) {
-			$str .= "<br>\n";
-			$str .= $this->build_sub_menu( true, false );
+			$str .= $this->build_sub_table();
+			$str .= '</li></ul><ul class="nav"><li><a href="#">Check</a>';
+			$str .= $this->build_sub_check();
+			$str .= '</li></ul><ul class="nav"><li><a href="#">Tools</a>';
+			$str .= $this->build_sub_tools();
 		}
-
-		$str .= $this->build_hr( true );
+		$str .= "</li></ul></nav>";
 
 		return $str;
 	}
 
-	public function build_menu( $flag_default = true, $flag_hr = true ) {
+	public function build_menu( $flag_default = true ) {
 
+		$admin_menu_class =& webphoto_inc_admin_menu::getSingleton( $this->_DIRNAME, $this->_TRUST_DIRNAME );
 
-		$admin_menu_class
-			        =& webphoto_inc_admin_menu::getSingleton(
-			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 		$admin_menu = $admin_menu_class->build_menu();
 
-		$add_menu = $this->_build_additinal_menu();
+		$add_menu = $this->_build_additional_menu();
 
 		$menu_array = null;
-		if ( is_array( $admin_menu ) && count( $admin_menu ) &&
-		     is_array( $add_menu ) && count( $add_menu ) ) {
+		if ( is_array( $admin_menu ) && count( $admin_menu ) && is_array( $add_menu ) && count( $add_menu ) ) {
 			$menu_array = array_merge( $admin_menu, $add_menu );
 		} elseif ( is_array( $admin_menu ) && count( $admin_menu ) ) {
 			$menu_array = $admin_menu;
@@ -81,43 +95,77 @@ class webphoto_lib_admin_menu {
 		}
 
 		if ( is_array( $menu_array ) && count( $menu_array ) ) {
-			$str = $this->_build_highlight( $menu_array, $flag_default );
-			$str .= $this->build_hr( $flag_hr );
 
-			return $str;
+			return $this->_build_highlight( $menu_array, $flag_default );
 		}
 
 		return null;
 	}
 
-	public function build_sub_menu( $flag_default = true, $flag_hr = true ) {
-		$admin_menu_class
-			        =& webphoto_inc_admin_menu::getSingleton(
-			$this->_DIRNAME, $this->_TRUST_DIRNAME );
-		$menu_array = $admin_menu_class->build_sub_menu();
+
+	/**
+	 * Customize admin_sub_table
+	 * /webphoto/include/main.ini
+	 * @param bool $flag_default
+	 *
+	 * @return string|null
+	 */
+	public function build_sub_table( $flag_default = true ) {
+		$admin_menu_class =& webphoto_inc_admin_menu::getSingleton( $this->_DIRNAME, $this->_TRUST_DIRNAME );
+		$menu_array = $admin_menu_class->build_sub_table();
 
 		if ( is_array( $menu_array ) && count( $menu_array ) ) {
-			$str = $this->_build_highlight( $menu_array, $flag_default );
-			$str .= $this->build_hr( $flag_hr );
-
-			return $str;
+			return $this->_build_highlight( $menu_array, $flag_default );
 		}
 
 		return null;
 	}
 
-	public function build_hr( $flag_hr = true ) {
-		if ( $flag_hr ) {
-			$str = "<hr>\n";
 
-			return $str;
+	/**
+	 * Customize admin_sub_table
+	 * /webphoto/include/main.ini
+	 * @param bool $flag_default
+	 *
+	 * @return string|null
+	 */
+	public function build_sub_check( $flag_default = true ) {
+		$admin_menu_class =& webphoto_inc_admin_menu::getSingleton( $this->_DIRNAME, $this->_TRUST_DIRNAME );
+
+		$menu_array = $admin_menu_class->build_sub_check();
+
+		if ( is_array( $menu_array ) && count( $menu_array ) ) {
+
+			return $this->_build_highlight( $menu_array, $flag_default );
 		}
 
 		return null;
 	}
 
-	public function _build_additinal_menu() {
-		// with XOOPS_TRUST_PATH and altsys
+	/**
+	 * Customize admin_sub_table
+	 * /webphoto/include/main.ini
+	 * @param bool $flag_default
+	 *
+	 * @return string|null
+	 */
+	public function build_sub_tools( $flag_default = true ) {
+		$admin_menu_class =& webphoto_inc_admin_menu::getSingleton(
+			$this->_DIRNAME, $this->_TRUST_DIRNAME );
+
+		$menu_array = $admin_menu_class->build_sub_tools();
+
+		if ( is_array( $menu_array ) && count( $menu_array ) ) {
+
+			return $this->_build_highlight( $menu_array, $flag_default );
+		}
+
+		return null;
+	}
+
+	/* Altsys admin links */
+	public function _build_additional_menu() {
+	// with XOOPS_TRUST_PATH and altsys
 
 		$flag_preferences = false;
 
@@ -125,7 +173,7 @@ class webphoto_lib_admin_menu {
 
 		if ( $this->is_installed_altsys() ) {
 
-// mytplsadmin (TODO check if this module has tplfile)
+		// mytplsadmin (TODO check if this module has tplfile)
 			if ( file_exists( XOOPS_TRUST_PATH . '/libs/altsys/mytplsadmin.php' ) ) {
 				$menu_array[] = array(
 					'title' => $this->get_title( 'tplsadmin' ),
@@ -159,10 +207,6 @@ class webphoto_lib_admin_menu {
 			// XOOPS Cube 2.1
 			if ( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 				$link = XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $this->_MODULE_ID;
-
-				// XOOPS 2.0
-			} else {
-				$link = XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $this->_MODULE_ID;
 			}
 
 			$menu_array[] = array(
@@ -179,7 +223,9 @@ class webphoto_lib_admin_menu {
 		return $menu_array;
 	}
 
+
 	public function _build_highlight( $menu_array, $flag_default = true ) {
+
 		$mymenu_uri  = $_SERVER['REQUEST_URI'];
 		$mymenu_link = substr( strstr( $mymenu_uri, '/admin/' ), 1 );
 
@@ -188,7 +234,7 @@ class webphoto_lib_admin_menu {
 // set gray all
 		foreach ( array_keys( $menu_array ) as $i ) {
 			//$menu_array[$i]['color'] = '#DDDDDD' ;
-			$menu_array[ $i ]['color'] = '';
+			$menu_array[ $i ]['color'] = 'green';
 		}
 
 		$post_fct = $_POST['fct'] ?? null;
@@ -200,7 +246,7 @@ class webphoto_lib_admin_menu {
 			foreach ( array_keys( $menu_array ) as $i ) {
 				if ( $uri_fct == $menu_array[ $i ]['link'] ) {
 					//$menu_array[$i]['color'] = '#FFCCCC' ;
-					$menu_array[ $i ]['color'] = '';
+					$menu_array[ $i ]['color'] = 'red';
 					$flag_highlight            = true;
 					break;
 				}
@@ -257,19 +303,20 @@ class webphoto_lib_admin_menu {
 			}
 		}
 
-		// display
-		$text = "<div style='text-align:left;width:98%;'>\n";
+		/**
+		 * Render an ul dropdown menu within nav-bar
+		 * Customized by function build_menu_with_sub, line 52
+		*/
+		$text ='<ul class="dropdown">';
 
 		foreach ( $menu_array as $menuitem ) {
-			//$text .= "<div style='float:left;height:1.5em;'>";
-			$text .= "<a href='" . $this->sanitize( $menuitem['link'] ) . "' style='border-bottom:2px solid; border-bottom-color:" . $menuitem['color'] . "; color:" . $menuitem['color'] . ";margin:0 .25em'>";
+			$text .= "<li>";
+			$text .= "<a href='" . $this->sanitize( $menuitem['link'] ) . "' style='border-bottom:1px solid " . $menuitem['color'] . "; color:" . $menuitem['color'] . "'>";
 			$text .= $this->sanitize( $menuitem['title'] );
-			$text .= "</a>";
-			//| </div>\n";
+			$text .= '</a></li>';
 		}
 
-		$text .= "</div>\n";
-		$text .= "<br>\n";
+		$text .= "</ul>\n";
 
 		return $text;
 	}
@@ -286,9 +333,8 @@ class webphoto_lib_admin_menu {
 
 	public function get_title( $name ) {
 		$const_name = strtoupper( '_AM_' . $this->_TRUST_DIRNAME . '_MYMENU_' . $name );
-		$title      = defined( $const_name ) ? constant( $const_name ) : $name;
 
-		return $title;
+		return defined( $const_name ) ? constant( $const_name ) : $name;
 	}
 
 

@@ -227,11 +227,7 @@ class webphoto_lib_handler extends webphoto_lib_error {
 // count
 
 	function exists_record() {
-		if ( $this->get_count_all() > 0 ) {
-			return true;
-		}
-
-		return false;
+		return $this->get_count_all() > 0;
 	}
 
 	function get_count_by_id( $id ) {
@@ -525,9 +521,7 @@ class webphoto_lib_handler extends webphoto_lib_error {
 
 		switch ( strtolower( $andor ) ) {
 			case 'exact':
-				$where = $this->build_where_keyword_single( $keyword_array[0], $name );
-
-				return $where;
+				return $this->build_where_keyword_single( $keyword_array[0], $name );
 
 			case 'or':
 				$andor_glue = 'OR';
@@ -550,18 +544,15 @@ class webphoto_lib_handler extends webphoto_lib_error {
 
 		if ( is_array( $arr ) && count( $arr ) ) {
 			$glue  = ' ' . $andor_glue . ' ';
-			$where = ' ( ' . implode( $glue, $arr ) . ' ) ';
 
-			return $where;
+			return ' ( ' . implode( $glue, $arr ) . ' ) ';
 		}
 
 		return null;
 	}
 
 	function build_where_keyword_single( $str, $name ) {
-		$text = $name . " LIKE '%" . addslashes( $str ) . "%'";
-
-		return $text;
+		return $name . " LIKE '%" . addslashes( $str ) . "%'";
 	}
 
 

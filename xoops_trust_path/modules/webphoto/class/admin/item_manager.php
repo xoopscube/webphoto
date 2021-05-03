@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -358,7 +358,9 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		$total = $this->_item_create_class->get_count_status( $status );
 
 		xoops_cp_header();
+
 		echo $this->_build_bread_crumb();
+
 		echo $this->build_admin_title( $mode );
 
 		if ( $total == 0 ) {
@@ -381,6 +383,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		$mode = 'admin_submit';
 
 		xoops_cp_header();
+
 		echo $this->_build_bread_crumb();
 
 		$item_row = $this->create_item_row_default();
@@ -392,13 +395,15 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		$this->_print_form_admin( $mode, $item_row );
 
 		echo $this->build_admin_footer();
+
 		xoops_cp_footer();
+
 		exit();
 	}
 
 	public function _build_bread_crumb() {
-		return $this->build_admin_bread_crumb(
-			$this->get_admin_title( 'ITEM_MANAGER' ), $this->_THIS_URL );
+
+		return $this->build_admin_bread_crumb( $this->get_admin_title( 'ITEM_MANAGER' ), $this->_THIS_URL );
 	}
 
 
@@ -413,11 +418,12 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		$item_row = $this->_get_item_row_or_redirect();
 
 		xoops_cp_header();
+
 		echo $this->_build_bread_crumb();
 
 		$this->set_param_modify_default( $item_row );
 
-// BUG: not show tag
+	// TEST : is this a BUG or not - displays tag !?
 		$this->_init_form();
 
 		$item_id     = $item_row['item_id'];
@@ -520,9 +526,11 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		xoops_cp_header();
 
 		echo $this->_build_bread_crumb();
+
 		echo $this->build_form_delete_confirm_with_template( $item_row );
 
 		xoops_cp_footer();
+
 		exit();
 	}
 
@@ -547,16 +555,17 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		}
 
 		xoops_cp_header();
+
 		echo $this->_build_bread_crumb();
 
 		switch ( $ret ) {
-// video form
+		// video form
 			case _C_WEBPHOTO_RET_VIDEO_FORM :
 				$this->_print_form_video_thumb(
 					'admin_submit', $this->get_created_row() );
 				break;
 
-// error
+		// error
 			case _C_WEBPHOTO_RET_ERROR :
 				echo $this->get_format_error();
 				$this->_print_form_admin(
@@ -565,6 +574,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		}
 
 		xoops_cp_footer();
+
 		exit();
 	}
 
@@ -615,9 +625,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 	}
 
 	public function _build_modify_form_url( $item_id ) {
-		$url = $this->_THIS_URL . '&amp;op=modify_form&amp;item_id=' . $item_id;
-
-		return $url;
+		return $this->_THIS_URL . '&amp;op=modify_form&amp;item_id=' . $item_id;
 	}
 
 
@@ -643,13 +651,13 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		echo $this->_build_bread_crumb();
 
 		switch ( $ret ) {
-// video form
+		// video form
 			case _C_WEBPHOTO_RET_VIDEO_FORM :
 				$this->_print_form_video_thumb(
 					'admin_modify', $this->get_updated_row() );
 				break;
 
-// error
+		// error
 			case _C_WEBPHOTO_RET_ERROR :
 				echo $this->get_format_error();
 				echo "<br>\n";
@@ -792,12 +800,12 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		echo $this->_build_bread_crumb();
 
 		switch ( $ret ) {
-// video form
+		// video form
 			case _C_WEBPHOTO_RET_VIDEO_FORM :
 				$this->_print_form_video_thumb( 'admin_modify', $item_row );
 				break;
 
-// error
+		// error
 			case _C_WEBPHOTO_RET_ERROR :
 				echo $this->get_format_error();
 				echo "<br>\n";
@@ -864,10 +872,12 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 	}
 
 
-// flashvar form
+	// flashvar form
 
 	public function _flashvar_form() {
+
 		xoops_cp_header();
+
 		echo $this->_build_bread_crumb();
 
 		$item_id       = $this->_post_class->get_get_int( 'item_id' );
@@ -882,7 +892,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 			$flashvar_row                     = $this->_flashvar_handler->create( true );
 			$flashvar_row['flashvar_item_id'] = $item_id;
 
-// set always if playlist
+	// set always if playlist
 			$item_row = $this->_item_handler->get_row_by_id( $item_id );
 			if ( isset( $item_row['item_kind'] ) &&
 			     $this->is_playlist_kind( $item_row['item_kind'] ) ) {
@@ -1007,13 +1017,14 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 	}
 
 
-// vote stats
+	// vote stats
 
 	function _vote_stats() {
 		$show_class =& webphoto_show_photo::getInstance(
 			$this->_DIRNAME, $this->_TRUST_DIRNAME );
 
 		xoops_cp_header();
+
 		echo $this->_build_bread_crumb();
 
 		$item_id   = $this->_post_class->get_get_int( 'item_id' );
@@ -1026,7 +1037,8 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 			}
 		}
 
-		echo '<h3>' . _AM_WEBPHOTO_VOTE_STATS . '</h3>' . "\n";
+		echo '<h2>' . _AM_WEBPHOTO_VOTE_STATS . '</h2>' . "\n";
+		echo '<h3 class="ui-card-small-title"><a href="#" id="open-help">'._HELP.'</a></h3> ';
 
 		if ( ! $flag_item ) {
 			$location = $this->_THIS_URL . "&amp;op=vote_stats&amp;item_id=";
@@ -1063,8 +1075,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 		}
 
 		if ( $flag_item ) {
-			echo $this->build_preview_template(
-				$show_class->build_photo_show( $item_row, $this->get_tag_name_array() ) );
+			echo $this->build_preview_template( $show_class->build_photo_show( $item_row, $this->get_tag_name_array() ) );
 		}
 
 		echo $this->_vote_build_title( _AM_WEBPHOTO_VOTE_ENTRY, $total_all );
@@ -1119,7 +1130,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 			echo "</tr>\n";
 		}
 
-		echo "</table><br><br>\n";
+		echo "</table><hr>\n";
 	}
 
 	function _vote_print_guest_table( $item_id, $guest_rows ) {
@@ -1145,7 +1156,7 @@ class webphoto_admin_item_manager extends webphoto_edit_action {
 
 		}
 
-		echo "</table><br><br>\n";
+		echo "</table><hr>\n";
 	}
 
 	function _vote_build_title( $title, $total ) {

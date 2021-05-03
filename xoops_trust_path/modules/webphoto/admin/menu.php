@@ -12,6 +12,5 @@ webphoto_include_once( 'class/inc/ini.php', $MY_DIRNAME );
 webphoto_include_once( 'class/inc/admin_menu.php', $MY_DIRNAME );
 webphoto_include_language( 'modinfo.php', $MY_DIRNAME );
 
-$manager   =& webphoto_inc_admin_menu::getSingleton(
-	$MY_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
+$manager   =& webphoto_inc_admin_menu::getSingleton( $MY_DIRNAME, WEBPHOTO_TRUST_DIRNAME );
 $adminmenu = $manager->build_menu();

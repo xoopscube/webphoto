@@ -31,10 +31,10 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	public $_PAEPAGE_DEFAULT = 50;
 	public $_MAX_SORTID = 2;
 
-	public $_LANG_SHOW_LIST = 'show list';
-	public $_LANG_ADD_RECORD = 'add record';
-	public $_LANG_NO_RECORD = 'there are no record';
-	public $_LANG_THERE_ARE = 'there are %s records';
+	public $_LANG_SHOW_LIST = 'Show list';
+	public $_LANG_ADD_RECORD = 'Add record';
+	public $_LANG_NO_RECORD = 'There are no record';
+	public $_LANG_THERE_ARE = 'There are %s records';
 
 
 	public function __construct( $dirname, $trust_dirname ) {
@@ -126,7 +126,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 			$row = $this->_row;
 		}
 		if ( isset( $row[ $this->_manage_id_name ] ) ) {
-			return intval( $row[ $this->_manage_id_name ] );
+			return (int) $row[ $this->_manage_id_name ];
 		}
 
 		return false;
@@ -136,6 +136,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 // list
 
 	function manage_list() {
+
 		$this->_pagenavi_class->set_page_by_get();
 		$this->_pagenavi_class->set_perpage_by_get();
 		$this->_pagenavi_class->set_sortid_by_get();
@@ -176,6 +177,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function build_sub_title() {
+
 		$title = $this->get_sub_title_by_num( $this->pagenavi_get_sortid() );
 		if ( $title ) {
 			$text = '<h4>' . $title . "</h4>\n";
@@ -187,19 +189,19 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function build_sub_title_list() {
-		$text = '<ul>' . "\n";
+
+		$text = '<section class="sort" style="margin:0 auto 1em">' . "\n";
 
 		$count = $this->get_sub_title_count();
 		for ( $i = 0; $i < $count; $i ++ ) {
-			$text .= '<li><a href="' . $this->_THIS_FCT_URL . '&amp;sortid=' . $i . '">';
+			$text .= '<a href="' . $this->_THIS_FCT_URL . '&amp;sortid=' . $i . '">';
 			$text .= $this->get_sub_title_by_num( $i );
 			$text .= '</a> (';
 			$text .= $this->_get_count_by_sortid( $i );
-			$text .= ') </li>' . "\n";
+			$text .= ') ' . "\n";
 		}
 
-		$text .= '</ul>' . "\n";
-		$text .= "<br>\n";
+		$text .= '</section>' . "\n";
 
 		return $text;
 	}
@@ -213,11 +215,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function get_sub_title_by_num( $num ) {
-		if ( isset( $this->_manage_sub_title_array[ $num ] ) ) {
-			return $this->_manage_sub_title_array[ $num ];
-		}
-
-		return false;
+		return $this->_manage_sub_title_array[ $num ] ?? false;
 	}
 
 	function get_total_all() {
@@ -257,7 +255,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 
 		echo '<tr>';
 		echo '<td class="head">';
-		echo '<input type="submit" name="delete_all" value="' . _DELETE . '" />';
+		echo '<input type="submit" name="delete_all" value="' . _DELETE . '">';
 		echo '</td>';
 		echo '<td class="head" colspan="' . $this->get_manage_list_submit_colspan() . '"></td>';
 		echo "</tr>\n";
@@ -288,7 +286,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 
 	function build_manage_list_columns( $row ) {
 		$arr = $this->get_manage_list_column_array();
-		$id  = intval( $row[ $this->_manage_id_name ] );
+		$id  = (int) $row[ $this->_manage_id_name ];
 
 		$text = $this->build_manage_line_js_checkbox( $id );
 		$text .= $this->build_manage_line_id( $id );
@@ -301,9 +299,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function get_manage_list_submit_colspan() {
-		$ret = $this->get_manage_list_column_count() + 1;
-
-		return $ret;
+		return $this->get_manage_list_column_count() + 1;
 	}
 
 	function get_manage_list_column_count() {
@@ -385,9 +381,8 @@ class webphoto_lib_manage extends webphoto_lib_form {
 		if ( empty( $id ) ) {
 			$id = $this->get_post_id();
 		}
-		$url = $this->_THIS_FCT_URL . '&amp;op=form&amp;id=' . (int) $id;
 
-		return $url;
+		return $this->_THIS_FCT_URL . '&amp;op=form&amp;id=' . (int) $id;
 	}
 
 
@@ -524,13 +519,12 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function build_show_title() {
-		$text = "<h3>" . $this->_manage_title . "</h3>\n";
-
-		return $text;
+		return "<h2>" . $this->_manage_title . "</h2>\n";
 	}
 
 	function build_show_desc() {
 		if ( $this->_manage_desc ) {
+
 			$text = $this->_manage_desc . "<br><br>\n";
 
 			return $text;
@@ -540,14 +534,17 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function build_manage_bread_crumb() {
-		$text = '<a href="index.php">';
+		$text ='<nav class="adminnavi">';
+		$text .= '<a href="'.XOOPS_URL.'/admin.php">Dashboard</a> »» ';
+		$text .= '<a href="index.php">';
 		$text .= $this->sanitize( $this->_MODULE_NAME );
 		$text .= '</a>';
-		$text .= ' &gt;&gt; ';
+		$text .= ' »» ';
 		$text .= '<a href="' . $this->_THIS_FCT_URL . '">';
+		$text .= '<span class="adminnaviTitle" aria-current="page">';
 		$text .= $this->sanitize( $this->_manage_title );
-		$text .= '</a>';
-		$text .= "<br><br>\n";
+		$text .= '</span></a>';
+		$text .= "</nav>\n";
 
 		return $text;
 	}
@@ -577,27 +574,25 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	}
 
 	function build_show_list() {
-		$text = '<a href="' . $this->_THIS_FCT_URL . '">';
+		$text = '<a class="ui-btn" href="' . $this->_THIS_FCT_URL . '">';
 		$text .= $this->_LANG_SHOW_LIST;
-		$text .= '</a>';
-		$text .= "<br><br >\n";
-
-		return $text;
-	}
-
-	function build_show_add_record() {
-		$text = '<a href="' . $this->_THIS_FCT_URL . '&amp;op=form">';
-		$text .= $this->_LANG_ADD_RECORD;
 		$text .= '</a>';
 		$text .= "<br><br>\n";
 
 		return $text;
 	}
 
-	function build_show_there_are( $total ) {
-		$text = sprintf( $this->_LANG_THERE_ARE, $total ) . "<br><br>\n";
+	function build_show_add_record() {
+		$text = '<a class="ui-btn" href="' . $this->_THIS_FCT_URL . '&amp;op=form">';
+		$text .= '<img class="svg sort-numeric" src="' . XOOPS_URL . '/images/icons/edit-box.svg" width="18px" alt="sort-numeric">';
+		$text .= $this->_LANG_ADD_RECORD;
+		$text .= '</a>';
 
 		return $text;
+	}
+
+	function build_show_there_are( $total ) {
+		return sprintf( $this->_LANG_THERE_ARE, $total ) . "<br><br>\n";
 	}
 
 	function get_manage_total() {
@@ -650,7 +645,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 
 		$text = '';
 		if ( $navi ) {
-			$text .= '<div align="center">';
+			$text .= '<div style="text-align:center">';
 			$text .= $navi;
 			$text .= "</div><br>\n";
 		}
@@ -692,7 +687,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 	function build_manage_form_begin( $row ) {
 		$this->set_row( $row );
 
-		$op      = isset( $row['op'] ) ? $row['op'] : null;
+		$op      = $row['op'] ?? null;
 		$id      = $this->get_manage_id( $row );
 		$get_fct = $this->_post_class->get_get_text( 'fct' );
 
@@ -737,9 +732,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 // complement caption by name
 
 	function build_comp_td( $name ) {
-		$str = '<th>' . $this->get_constant( $name ) . '</th>';
-
-		return $str;
+		return '<th>' . $this->get_constant( $name ) . '</th>';
 	}
 
 
@@ -769,7 +762,7 @@ class webphoto_lib_manage extends webphoto_lib_form {
 // footer
 
 	function build_admin_footer() {
-		$text = "<br><hr />\n";
+		$text = "<br><hr>\n";
 		$text .= $this->_utility_class->build_execution_time( $this->_manage_start_time );
 		$text .= $this->_utility_class->build_memory_usage();
 

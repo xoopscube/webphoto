@@ -20,10 +20,10 @@ class webphoto_lib_error {
 	public $_errors = array();
 
 // color: red;
-	public $_SPAN_STYLE_ERROR = 'color: #ff0000;';
+	public $_SPAN_STYLE_ERROR = 'error';
 
 // color: red;  background-color: lightyellow;  border: gray;
-	public $_DIV_STYLE_ERROR = 'color: #ff0000; background-color: #ffffe0; border: #808080 1px dotted; padding: 3px 3px 3px 3px;';
+	public $_DIV_STYLE_ERROR = 'error';
 
 
 	public function __construct() {
@@ -137,15 +137,15 @@ class webphoto_lib_error {
 	}
 
 	public function highlight( $msg ) {
-		$str = '<span style="' . $this->_SPAN_STYLE_ERROR . '">';
+		$str = '<div class="' . $this->_SPAN_STYLE_ERROR . '"><p>';
 		$str .= $msg;
-		$str .= "</span>\n";
+		$str .= "</p></div>\n";
 
 		return $str;
 	}
 
 	public function error_in_box( $msg ) {
-		$str = '<div style="' . $this->_DIV_STYLE_ERROR . '">';
+		$str = '<div class="' . $this->_DIV_STYLE_ERROR . '">';
 		$str .= $msg;
 		$str .= "</div>\n";
 

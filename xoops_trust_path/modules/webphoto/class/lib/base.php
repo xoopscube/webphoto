@@ -116,21 +116,22 @@ class webphoto_lib_base extends webphoto_lib_error {
 // for admin
 
 	public function build_admin_bread_crumb( $title, $url ) {
-		$text = '<a href="' . $this->_MODULE_URL . '/admin/index.php">';
+		$text = '<div class="adminnavi" aria-label="breadcrumb">';
+		$text .= '<a href="' . $this->_MODULE_URL . '/admin/index.php">123456';
 		$text .= $this->sanitize( $this->_MODULE_NAME );
 		$text .= '</a>';
-		$text .= ' &gt;&gt; ';
-		$text .= '<a href="' . $url . '">';
+		$text .= ' »» ';
+		$text .= '<a href="' . $url . '" class="adminnaviTitle" aria-current="page">';
 		$text .= $this->sanitize( $title );
 		$text .= '</a>';
-		$text .= "<br><br>\n";
+		$text .= "</div>\n";
 
 		return $text;
 	}
 
+
 	public function build_admin_menu() {
-		$menu_class =& webphoto_lib_admin_menu::getInstance(
-			$this->_DIRNAME, $this->_TRUST_DIRNAME );
+		$menu_class =& webphoto_lib_admin_menu::getInstance( $this->_DIRNAME, $this->_TRUST_DIRNAME );
 
 		return $menu_class->build_menu_with_sub( $this->_FLAG_ADMIN_SUB_MENU );
 	}
@@ -138,7 +139,7 @@ class webphoto_lib_base extends webphoto_lib_error {
 	public function build_admin_title( $name, $format = true ) {
 		$str = $this->get_admin_title( $name );
 		if ( $format ) {
-			$str = "<h3>" . $str . "</h3>\n";
+			$str = "<h2>" . $str . "</h2>\n";
 		}
 
 		return $str;
@@ -385,15 +386,11 @@ class webphoto_lib_base extends webphoto_lib_error {
 	}
 
 	function build_html_body_begin() {
-		$text = '<body>' . "\n";
-
-		return $text;
+		return '<body>' . "\n";
 	}
 
 	function build_html_body_end() {
-		$text = '</body></html>' . "\n";
-
-		return $text;
+		return '</body></html>' . "\n";
 	}
 
 

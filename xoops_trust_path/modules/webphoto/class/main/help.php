@@ -172,13 +172,9 @@ class webphoto_main_help extends webphoto_base_this {
 
 	public function _assign_xoops_header() {
 // Fatal error: Call to undefined method webphoto_inc_xoops_header::assign_for_main() 
-		$header_class
-			=& webphoto_xoops_header::getInstance( $this->_DIRNAME, $this->_TRUST_DIRNAME );
+		$header_class =& webphoto_xoops_header::getInstance( $this->_DIRNAME, $this->_TRUST_DIRNAME );
 		$header_class->set_flag_css( true );
 		$header_class->assign_for_main();
 	}
 
-// --- class end ---
 }
-
-?>

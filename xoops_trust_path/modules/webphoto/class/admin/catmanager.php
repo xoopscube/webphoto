@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -49,10 +49,8 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 
 		parent::__construct( $dirname, $trust_dirname );
 
-		$this->_delete_class
-			=& webphoto_edit_item_delete::getInstance( $dirname, $trust_dirname );
-		$this->_upload_class
-			=& webphoto_upload::getInstance( $dirname, $trust_dirname );
+		$this->_delete_class =& webphoto_edit_item_delete::getInstance( $dirname, $trust_dirname );
+		$this->_upload_class =& webphoto_upload::getInstance( $dirname, $trust_dirname );
 
 		$this->_image_create_class =& webphoto_image_create::getInstance( $dirname );
 
@@ -206,7 +204,8 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 		$newid = $this->_cat_handler->insert( $row_insert );
 		if ( ! $newid ) {
 			$msg = "DB Error: insert category";
-			$msg .= '<br>' . $this->get_format_error();
+			$msg .= '<div class="error">' . $this->get_format_error();
+			$msg .= '</div>';
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $msg );
 			exit();
 		}
@@ -227,8 +226,7 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 
 			if ( $group_id ) {
 				$this->_group_class->create_gperm_module_read( $group_id );
-				$this->_group_class->create_gperm_webphoto_groupid(
-					$group_id, $this->_gperm_def_class->get_perms_user() );
+				$this->_group_class->create_gperm_webphoto_groupid( $group_id, $this->_gperm_def_class->get_perms_user() );
 				$row_update['cat_group_id']  = $group_id;
 				$row_update['cat_perm_post'] = $this->_build_cat_perm_post( $group_id );
 				$flag_update                 = true;
@@ -241,8 +239,9 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 
 		if ( $this->_error_upload ) {
 			$msg = $this->get_format_error();
-			$msg .= "<br>\n";
+			$msg .= '<div class="error">';
 			$msg .= _AM_WEBPHOTO_CAT_INSERTED;
+			$msg .= '</div>';
 			redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $msg );
 			exit();
 		}
@@ -412,9 +411,8 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 
 	public function _build_cat_perm_post( $group_id ) {
 		$arr = array( XOOPS_GROUP_ADMIN, $group_id );
-		$val = $this->_utility_class->array_to_perm( $arr, _C_WEBPHOTO_PERM_SEPARATOR );
 
-		return $val;
+		return $this->_utility_class->array_to_perm( $arr, _C_WEBPHOTO_PERM_SEPARATOR );
 	}
 
 // update
@@ -436,7 +434,7 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 
 			foreach ( $children as $child ) {
 				if ( $child == $post_pid ) {
-					$msg = "category looping has occurred";
+					$msg = '<div class="error">category looping has occurred</div>';
 					redirect_header( $this->_THIS_URL, $this->_TIME_FAIL, $msg );
 					exit();
 				}
@@ -687,15 +685,15 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 			exit();
 		}
 
-		$img_catadd = '<img src="' . $this->_ICONS_URL . '/cat_add.png" width="18" height="15" alt="' . _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT . '" title="' . _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT . '" />' . "\n";
+//		$img_catadd = '<img src="' . $this->_ICONS_URL . '/cat_add.png" width="18" height="15" alt="' . _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT . '" title="' . _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT . '" />' . "\n";
+		$img_catadd = '<img class="svg folder-plus" src="' . XOOPS_URL . '/images/icons/folder-plus.svg" alt="' . _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT . '">' . "\n";
 
 		// Top links
-		echo '<p><a href="' . $this->_THIS_URL . '&amp;disp=new">';
-		echo _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT;
-		echo ' ';
+		echo '<p><a class="ui-btn" href="' . $this->_THIS_URL . '&amp;disp=new">';
 		echo $img_catadd;
-		echo "</a> &nbsp; ";
-		echo '</p>' . "\n";
+		echo _AM_WEBPHOTO_CAT_LINK_MAKETOPCAT;
+		echo "</a></p>";
+//		echo '</p>' . "\n";
 
 		$this->_print_cat_list( $cat_tree_array );
 	}
@@ -714,8 +712,11 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 	}
 
 	function _print_del_confirm() {
+
 		xoops_cp_header();
+
 		echo $this->build_bread_crumb( $this->get_admin_title( 'CATMANAGER' ), $this->_THIS_URL );
+
 		echo $this->build_admin_title( 'CATMANAGER' );
 
 		$get_catid = $this->get_post_int( 'cat_id' );
@@ -758,7 +759,7 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 	}
 
 	function get_user_lang() {
-		$arr = array(
+		return array(
 			'lang_user_uid'       => _AM_WEBPHOTO_USER_UID,
 			'lang_user_uname'     => _AM_WEBPHOTO_USER_UNAME,
 			'lang_user_name'      => _AM_WEBPHOTO_USER_NAME,
@@ -772,8 +773,6 @@ class webphoto_admin_catmanager extends webphoto_edit_base {
 			'lang_user_user'      => _AM_WEBPHOTO_USER_USER,
 			'lang_user_edit'      => _EDIT,
 		);
-
-		return $arr;
 	}
 
 }

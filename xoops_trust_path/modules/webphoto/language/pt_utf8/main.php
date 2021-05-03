@@ -10,7 +10,7 @@ if ( ! defined( "_MB_WEBPHOTO_LANG_LOADED" ) ) {
 
 	define( "_WEBPHOTO_CATEGORY", "Categoria" );
 	define( "_WEBPHOTO_SUBMITTER", "Enviar" );
-	define( "_WEBPHOTO_NOMATCH_PHOTO", "Nao ha imagem correspondente a seu pedido" );
+	define( "_WEBPHOTO_NOMATCH_PHOTO", "Nenhum media corresponde à pesquisa." );
 
 	define( "_WEBPHOTO_ICON_NEW", "Novo" );
 	define( "_WEBPHOTO_ICON_UPDATE", "Atualizado" );

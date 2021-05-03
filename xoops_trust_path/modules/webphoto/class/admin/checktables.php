@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -263,8 +263,8 @@ class webphoto_admin_checktables extends webphoto_base_this {
 
 	public function _build_form_redo_thumbs() {
 		$text = '<form action="' . $this->_ADMIN_INDEX_PHP . '" method="post">' . "\n";
-		$text .= '<input type="hidden" name="fct" value="redothumbs" />' . "\n";
-		$text .= '<input type="submit" value="' . _AM_WEBPHOTO_LINK_REDOTHUMBS . '" />' . "\n";
+		$text .= '<input type="hidden" name="fct" value="redothumbs">' . "\n";
+		$text .= '<input type="submit" value="' . _AM_WEBPHOTO_LINK_REDOTHUMBS . '">' . "\n";
 		$text .= "</form>\n";
 
 		return $text;
@@ -272,9 +272,9 @@ class webphoto_admin_checktables extends webphoto_base_this {
 
 	public function _build_form_remove_rec() {
 		$text = '<form action="' . $this->_ADMIN_INDEX_PHP . '" method="post">' . "\n";
-		$text .= '<input type="hidden" name="fct" value="redothumbs" />' . "\n";
-		$text .= '<input type="hidden" name="removerec" value="1" />' . "\n";
-		$text .= '<input type="submit" value="' . _AM_WEBPHOTO_LINK_TABLEMAINTENANCE . '" />' . "\n";
+		$text .= '<input type="hidden" name="fct" value="redothumbs">' . "\n";
+		$text .= '<input type="hidden" name="removerec" value="1">' . "\n";
+		$text .= '<input type="submit" value="' . _AM_WEBPHOTO_LINK_TABLEMAINTENANCE . '">' . "\n";
 		$text .= "</form>\n";
 
 		return $text;
@@ -295,6 +295,7 @@ class webphoto_admin_checktables extends webphoto_base_this {
 	}
 
 	function _print_green( $str ) {
-		echo '<span style="color:#FF0000"><b>' . $str . '</b></span>' . "<br>\n";
+		echo '<span style="color:#00ff22"><b>' . $str . '</b></span>' . "<br>
+";
 	}
 }

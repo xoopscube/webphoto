@@ -55,7 +55,7 @@ class webphoto_lib_search {
 	public $_post_showcontext;
 
 // input param
-	public $_min_keyword = 5;
+	public $_min_keyword = 3;
 	public $_flag_candidate = true;
 	public $_flag_candidate_once = false;
 

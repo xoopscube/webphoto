@@ -48,7 +48,7 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_NUMBEROFPHOTOS", "Number of Medias" );
 	define( "_AM_WEBPHOTO_NUMBEROFDESCRIPTIONS", "Number of Descriptions" );
 	define( "_AM_WEBPHOTO_NUMBEROFCATEGORIES", "Number of Categories" );
-	define( "_AM_WEBPHOTO_NUMBEROFVOTEDATA", "Number of Votedata" );
+	define( "_AM_WEBPHOTO_NUMBEROFVOTEDATA", "Number of Vote data" );
 	define( "_AM_WEBPHOTO_NUMBEROFCOMMENTS", "Number of Comments" );
 
 	define( "_AM_WEBPHOTO_H4_CONFIG", "Config Check" );
@@ -78,7 +78,7 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_FORM_RECORDMAINTENANCE", "maintenance of photos like remaking thumbnails etc." );
 	define( "_AM_WEBPHOTO_FAILEDREADING", "failed reading." );
 	define( "_AM_WEBPHOTO_CREATEDTHUMBS", "created a thumbnail." );
-	define( "_AM_WEBPHOTO_BIGTHUMBS", "failed making a thumnail. copied." );
+	define( "_AM_WEBPHOTO_BIGTHUMBS", "failed making a thumbnail. copied." );
 	define( "_AM_WEBPHOTO_SKIPPED", "skipped." );
 	define( "_AM_WEBPHOTO_SIZEREPAIRED", "(repaired size fields of the record.)" );
 	define( "_AM_WEBPHOTO_RECREMOVED", "this record has been removed." );
@@ -98,20 +98,20 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 	define( "_AM_WEBPHOTO_SUBMIT_NEXT", "next" );
 
 // GroupPerm Global
-	define( "_AM_WEBPHOTO_GROUPPERM_GLOBALDESC", "Configure group's priviledges for this module" );
+	define( "_AM_WEBPHOTO_GROUPPERM_GLOBALDESC", "Configure group's privileges for this module" );
 	define( "_AM_WEBPHOTO_GPERMUPDATED", "Permissions have been changed successfully" );
 
 // Import
 	define( "_AM_WEBPHOTO_H3_FMT_IMPORTTO", 'Importing images from another module to %s' );
 	define( "_AM_WEBPHOTO_FMT_IMPORTFROMMYALBUMP", 'Importing from "%s" as module type of myAlbum-P' );
-	define( "_AM_WEBPHOTO_FMT_IMPORTFROMIMAGEMANAGER", 'Importing from image manager in XOOPS' );
+	define( "_AM_WEBPHOTO_FMT_IMPORTFROMIMAGEMANAGER", 'Importing from the Image Manager' );
 
 	define( "_AM_WEBPHOTO_IMPORTCONFIRM", 'Confirm import. OK?' );
 	define( "_AM_WEBPHOTO_FMT_IMPORTSUCCESS", 'You have imported %s images' );
 
 // Export
 	define( "_AM_WEBPHOTO_H3_FMT_EXPORTTO", 'Exporting images from %s to another module' );
-	define( "_AM_WEBPHOTO_FMT_EXPORTTOIMAGEMANAGER", 'Exporting to image manager in XOOPS' );
+	define( "_AM_WEBPHOTO_FMT_EXPORTTOIMAGEMANAGER", 'Exporting to the Image Manager' );
 	define( "_AM_WEBPHOTO_FMT_EXPORTIMSRCCAT", 'Source' );
 	define( "_AM_WEBPHOTO_FMT_EXPORTIMDSTCAT", 'Destination' );
 	define( "_AM_WEBPHOTO_CB_EXPORTRECURSIVELY", 'with images in its sub-category' );
@@ -266,7 +266,7 @@ if ( ! defined( "_AM_WEBPHOTO_LANG_LOADED" ) ) {
 //---------------------------------------------------------
 // manage
 //---------------------------------------------------------
-	define( "_AM_WEBPHOTO_MANAGE_DESC", "<b>Caution</b><br>The management of this table only<br>Do not change related tables" );
+	define( "_AM_WEBPHOTO_MANAGE_DESC", '<div class="error"><b>Caution</b><br>Manage only this table. Do not modify related tables!</div>' );
 	define( "_AM_WEBPHOTO_ERR_NO_RECORD", "There are no records" );
 
 //---------------------------------------------------------

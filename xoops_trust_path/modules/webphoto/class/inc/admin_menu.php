@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  * @brief class webphoto_inc_admin_menu
  * caller webphoto_lib_admin_menu admin/menu.php
  */
@@ -17,17 +17,19 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_inc_admin_menu {
+
 	public $_ini_class;
 
 	public $_DIRNAME;
+
 	public $_TRUST_DIR;
+
 
 	public function __construct( $dirname, $trust_dirname ) {
 		$this->_DIRNAME   = $dirname;
 		$this->_TRUST_DIR = XOOPS_TRUST_PATH . '/modules/' . $trust_dirname;
 
-		$this->_ini_class
-			=& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
+		$this->_ini_class =& webphoto_inc_ini::getSingleton( $dirname, $trust_dirname );
 		$this->_ini_class->read_main_ini();
 
 	}
@@ -42,13 +44,25 @@ class webphoto_inc_admin_menu {
 	}
 
 	public function build_menu() {
-		$menu_array = $this->explode_ini( 'admin_menu_list' );
+		$menu_array = $this->explode_ini( 'admin_menu_module' );
 
 		return $this->build_menu_array( $menu_array );
 	}
 
-	public function build_sub_menu() {
-		$menu_array = $this->explode_ini( 'admin_sub_menu_list' );
+	public function build_sub_check() {
+		$menu_array = $this->explode_ini( 'admin_menu_check' );
+
+		return $this->build_menu_array( $menu_array );
+	}
+
+	public function build_sub_table() {
+		$menu_array = $this->explode_ini( 'admin_sub_table' );
+
+		return $this->build_menu_array( $menu_array );
+	}
+
+	public function build_sub_tools() {
+		$menu_array = $this->explode_ini( 'admin_menu_tools' );
 
 		return $this->build_menu_array( $menu_array );
 	}

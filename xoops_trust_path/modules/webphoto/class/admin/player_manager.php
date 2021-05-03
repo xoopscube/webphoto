@@ -1,12 +1,12 @@
 <?php
 /**
  * WebPhoto module for XCL
- * @package Webphoto
- * @version 2.31 (XCL)
- * @author Gigamaster, 2021-04-02 XCL PHP7
- * @author K. OHWADA, 2008-04-02
- * @copyright Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube>
- * @license https://github.com/xoopscube/xcl/blob/master/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @package    Webphoto
+ * @version    2.3
+ * @author     Gigamaster, 2021-04-02 XCL PHP7
+ * @author     K. OHWADA, 2008-04-02
+ * @copyright  Copyright 2005-2021 XOOPS Cube Project  <https://github.com/xoopscube/legacy>
+ * @license    https://github.com/xoopscube/legacy/blob/master/docs/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
  */
 
 if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
@@ -15,6 +15,7 @@ if ( ! defined( 'XOOPS_TRUST_PATH' ) ) {
 
 
 class webphoto_admin_player_manager extends webphoto_base_this {
+
 	public $_player_handler;
 	public $_flashvar_handler;
 	public $_playlist_class;
@@ -457,8 +458,8 @@ class webphoto_admin_player_manager extends webphoto_base_this {
 	}
 
 	function _build_bread_crumb() {
-		return $this->build_admin_bread_crumb(
-			$this->get_admin_title( 'PLAYER_MANAGER' ), $this->_THIS_URL );
+
+		return $this->build_admin_bread_crumb( $this->get_admin_title( 'PLAYER_MANAGER' ), $this->_THIS_URL );
 	}
 
 
